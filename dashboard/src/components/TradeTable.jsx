@@ -1,6 +1,6 @@
 import { fmt$ } from '../utils'
 
-export default function TradeTable({ trades, showStock }) {
+export default function TradeTable({ trades, showStock, showScore }) {
   const sorted = [...trades].reverse()
   return (
     <div style={{ maxHeight: 500, overflowY: 'auto' }}>
@@ -10,6 +10,7 @@ export default function TradeTable({ trades, showStock }) {
             <th>#</th>
             {showStock && <th>Stock</th>}
             <th>Dir</th>
+            {showScore && <th>Score</th>}
             <th>Entry Date</th>
             <th>Entry $</th>
             <th>Exit Date</th>
@@ -26,6 +27,7 @@ export default function TradeTable({ trades, showStock }) {
               <td>{trades.length - i}</td>
               {showStock && <td>{t.stock}</td>}
               <td style={{ color: t.dir === 'LONG' ? '#00c853' : '#ff1744' }}>{t.dir}</td>
+              {showScore && <td><strong>{t.score > 0 ? '+' : ''}{t.score}</strong></td>}
               <td>{t.entryDate}</td>
               <td>${t.entryPrice.toFixed(2)}</td>
               <td>{t.exitDate}</td>

@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom'
-import { computeMetrics, buildEquityCurve, buildDrawdownSeries, buildConsecutive, fmt$ } from '../utils'
+import { computeMetrics, buildEquityCurve, buildDrawdownSeries, buildConsecutive, buildMonthlyReturns, fmt$ } from '../utils'
 import KpiCard from '../components/KpiCard'
 import EquityChart from '../components/EquityChart'
 import DrawdownChart from '../components/DrawdownChart'
+import MonthlyChart from '../components/MonthlyChart'
 import PriceChart from '../components/PriceChart'
 import QuarterlyTable from '../components/QuarterlyTable'
 import TradeTable from '../components/TradeTable'
@@ -50,6 +51,11 @@ export default function StockPage({ data, strategy }) {
       <div className="card">
         <h3>Drawdown</h3>
         <DrawdownChart data={dd.series} />
+      </div>
+
+      <div className="card">
+        <h3>Monthly Returns</h3>
+        <MonthlyChart data={buildMonthlyReturns(trades)} />
       </div>
 
       <div className="card">

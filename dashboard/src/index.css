@@ -11,6 +11,24 @@
   --orange: #ff9100;
   --cyan: #18ffff;
 }
+
+[data-theme="light"] {
+  --bg: #f5f6fa;
+  --card: #ffffff;
+  --border: #e0e2e8;
+  --text: #1a1d28;
+  --muted: #6b7280;
+  --green: #16a34a;
+  --red: #dc2626;
+  --blue: #2563eb;
+  --purple: #7c3aed;
+  --orange: #ea580c;
+  --cyan: #0891b2;
+}
+[data-theme="light"] tr:hover { background:rgba(0,0,0,.03); }
+[data-theme="light"] .strategy-link:hover, [data-theme="light"] .strategy-link.active { background:rgba(37,99,235,.1); color:var(--blue); }
+[data-theme="light"] .sidebar a:hover, [data-theme="light"] .sidebar a.active { background:rgba(37,99,235,.08); }
+[data-theme="light"] .tab-bar button.active { background:var(--blue); border-color:var(--blue); color:#fff; }
 * { margin:0; padding:0; box-sizing:border-box; }
 body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, sans-serif; font-size: 18px; }
 a { color: var(--blue); text-decoration: none; }
@@ -21,6 +39,7 @@ a:hover { text-decoration: underline; }
 .sidebar-section { padding:16px 0 8px; border-bottom:1px solid var(--border); }
 .sidebar-label { padding:4px 20px 8px; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; font-weight:600; }
 .strategy-link { display:block; padding:8px 20px; font-size:15px; font-weight:700; color:var(--blue); transition:background .15s; }
+.strategy-link.sub-link { padding-left:32px; font-size:14px; font-weight:500; }
 .strategy-link:hover, .strategy-link.active { background:rgba(68,138,255,.15); color:var(--cyan); text-decoration:none; }
 .sidebar a { display:block; padding:8px 20px; color:var(--text); font-size:15px; transition:background .15s; }
 .sidebar a:hover, .sidebar a.active { background:rgba(68,138,255,.15); color:var(--blue); text-decoration:none; }
@@ -76,6 +95,10 @@ tr:hover { background:rgba(255,255,255,.02); }
 table tfoot td { background: var(--card); }
 td.big-diff { outline: 2px solid #ffffff; outline-offset: -2px; border-radius: 3px; }
 .row-baseline td { background: rgba(68,138,255,0.08); }
+
+/* ── Theme toggle ── */
+.theme-toggle { position:fixed; top:12px; right:16px; z-index:1001; background:var(--card); border:1px solid var(--border); color:var(--text); font-size:18px; width:38px; height:38px; border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s, border-color .2s; }
+.theme-toggle:hover { border-color:var(--blue); }
 
 /* ── Hamburger toggle (mobile) ── */
 .sidebar-toggle { display:none; position:fixed; top:12px; left:12px; z-index:1001; background:var(--card); border:1px solid var(--border); color:var(--text); font-size:22px; width:40px; height:40px; border-radius:8px; cursor:pointer; line-height:1; }

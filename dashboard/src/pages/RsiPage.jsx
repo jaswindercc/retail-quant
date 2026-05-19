@@ -1,5 +1,8 @@
-import { computeMetrics, buildDrawdownSeries, fmt$ } from '../utils'
+import { computeMetrics, buildEquityCurve, buildDrawdownSeries, buildMonthlyReturns, fmt$ } from '../utils'
 import KpiCard from '../components/KpiCard'
+import EquityChart from '../components/EquityChart'
+import DrawdownChart from '../components/DrawdownChart'
+import MonthlyChart from '../components/MonthlyChart'
 import { NavLink } from 'react-router-dom'
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
@@ -54,6 +57,21 @@ export default function RsiPage({ data, strategyName }) {
         <KpiCard label="Avg Win Rate" value={`${avgWR.toFixed(1)}%`} />
         <KpiCard label="Best Stock" value={bestStock.symbol} sub={fmt$(bestStock.totalPnl)} className="win" />
         <KpiCard label="Worst Stock" value={worstStock.symbol} sub={fmt$(worstStock.totalPnl)} className={worstStock.totalPnl >= 0 ? 'win' : 'loss'} />
+      </div>
+
+      <div className="card">
+        <h3>Equity Curve (All Stocks Combined)</h3>
+        <EquityChart data={buildEquityCurve(Object.values(data.stocks).flatMap(s => s.trades.filter(t => t.exitDate)).sort((a,b) => a.exitDate.localeCompare(b.exitDate)))} />
+      </div>
+
+      <div className="card">
+        <h3>Drawdown (All Stocks Combined)</h3>
+        <DrawdownChart data={buildDrawdownSeries(Object.values(data.stocks).flatMap(s => s.trades.filter(t => t.exitDate)).sort((a,b) => a.exitDate.localeCompare(b.exitDate))).series} />
+      </div>
+
+      <div className="card">
+        <h3>Monthly Returns (All Stocks Combined)</h3>
+        <MonthlyChart data={buildMonthlyReturns(Object.values(data.stocks).flatMap(s => s.trades.filter(t => t.exitDate)))} />
       </div>
 
       <div className="card">

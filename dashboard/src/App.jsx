@@ -14,6 +14,9 @@ import ComparePage from './pages/ComparePage'
 import FilterLabPage from './pages/FilterLabPage'
 import MasterLearningsPage from './pages/MasterLearningsPage'
 import TrailStudyPage from './pages/TrailStudyPage'
+import SpxOvernightPage from './pages/SpxOvernightPage'
+import SpyOvernightPage from './pages/SpyOvernightPage'
+import QqqOvernightPage from './pages/QqqOvernightPage'
 import StockPage from './pages/StockPage'
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
@@ -42,8 +45,18 @@ export default function App() {
   const [fvgData, setFvgData] = useState(null)
   const [vcpData, setVcpData] = useState(null)
   const [volData, setVolData] = useState(null)
+  const [onData, setOnData] = useState(null)
+  const [spyOnData, setSpyOnData] = useState(null)
+  const [qqqOnData, setQqqOnData] = useState(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark')
   const location = useLocation()
+
+  // Apply theme to document
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('theme', theme)
+  }, [theme])
 
   // Close sidebar on route change (mobile)
   useEffect(() => { setSidebarOpen(false) }, [location.pathname])
@@ -59,6 +72,9 @@ export default function App() {
     fetch('/fvg_data.json').then(r => r.json()).then(setFvgData)
     fetch('/vcp_data.json').then(r => r.json()).then(setVcpData)
     fetch('/volume_data.json').then(r => r.json()).then(setVolData)
+    fetch('/overnight_data.json').then(r => r.json()).then(setOnData)
+    fetch('/spy_overnight_data.json').then(r => r.json()).then(setSpyOnData)
+    fetch('/qqq_overnight_data.json').then(r => r.json()).then(setQqqOnData)
   }, [])
 
   if (!trData || !bnData || !brData || !rsiData || !mrData || !tlData || !srData || !fvgData || !vcpData || !volData) return <div className="loading">Loading…</div>
@@ -71,6 +87,9 @@ export default function App() {
     <div className="app">
       <button className="sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
         {sidebarOpen ? '✕' : '☰'}
+      </button>
+      <button className="theme-toggle" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+        {theme === 'dark' ? '☀️' : '🌙'}
       </button>
       <nav className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-section">
@@ -86,6 +105,17 @@ export default function App() {
           <NavLink to="/skip-analysis" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`}>
             🧪 Trade Skip Analysis
           </NavLink>
+          <div className="sidebar-label" style={{ marginTop: '0.75rem' }}>Overnight Strategies</div>
+          <NavLink to="/overnight" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+            SPX Overnight
+          </NavLink>
+          <NavLink to="/spy-overnight" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+            SPY Overnight
+          </NavLink>
+          <NavLink to="/qqq-overnight" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+            QQQ Overnight
+          </NavLink>
+          <div className="sidebar-label" style={{ marginTop: '0.75rem' }}>Tools</div>
           <NavLink to="/trail-study" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`}>
             🔬 Trail Stop Study (MA Bounce)
           </NavLink>
@@ -128,6 +158,9 @@ export default function App() {
           <Route path="/vcp/stock/:symbol" element={<StockPage data={vcpData} strategy="VCP v1" />} />
           <Route path="/volume" element={<VolumePage data={volData} strategyName="Volume v1" />} />
           <Route path="/volume/stock/:symbol" element={<StockPage data={volData} strategy="Volume v1" />} />
+          <Route path="/overnight" element={<SpxOvernightPage data={onData} />} />
+          <Route path="/spy-overnight" element={<SpyOvernightPage data={spyOnData} />} />
+          <Route path="/qqq-overnight" element={<QqqOvernightPage data={qqqOnData} />} />
           <Route path="/skip-analysis" element={<FilterLabPage bnData={bnData} />} />
           <Route path="/trail-study" element={<TrailStudyPage />} />
           <Route path="/learnings" element={<MasterLearningsPage />} />
