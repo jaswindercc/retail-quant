@@ -82,6 +82,44 @@ export default function StrategyPage({ data, strategyName }) {
         <KpiCard label="Best → Worst" value={`${bestStock.symbol} → ${worstStock.symbol}`} />
       </div>
 
+      {(() => {
+        const allTrades = Object.values(data.stocks).flatMap(s => s.trades.filter(t => t.exitDate))
+        const longs = allTrades.filter(t => t.dir === 'LONG')
+        const shorts = allTrades.filter(t => t.dir === 'SHORT')
+        const longWins = longs.filter(t => t.pnlDollar > 0)
+        const shortWins = shorts.filter(t => t.pnlDollar > 0)
+        const longPnl = longs.reduce((s, t) => s + t.pnlDollar, 0)
+        const shortPnl = shorts.reduce((s, t) => s + t.pnlDollar, 0)
+        const longAvgR = longs.length ? (longs.reduce((s, t) => s + t.pnlR, 0) / longs.length).toFixed(2) : '0'
+        const shortAvgR = shorts.length ? (shorts.reduce((s, t) => s + t.pnlR, 0) / shorts.length).toFixed(2) : '0'
+        return (
+          <div className="card">
+            <h3>Direction Breakdown</h3>
+            <table>
+              <thead>
+                <tr><th>Direction</th><th>Trades</th><th>Win%</th><th>P&L</th><th>Avg R</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>LONG</strong></td>
+                  <td>{longs.length}</td>
+                  <td>{longs.length ? (longWins.length / longs.length * 100).toFixed(1) : '0'}%</td>
+                  <td className={longPnl >= 0 ? 'win' : 'loss'}>{fmt$(longPnl)}</td>
+                  <td className={+longAvgR >= 0 ? 'win' : 'loss'}>{longAvgR}R</td>
+                </tr>
+                <tr>
+                  <td><strong>SHORT</strong></td>
+                  <td>{shorts.length}</td>
+                  <td>{shorts.length ? (shortWins.length / shorts.length * 100).toFixed(1) : '0'}%</td>
+                  <td className={shortPnl >= 0 ? 'win' : 'loss'}>{fmt$(shortPnl)}</td>
+                  <td className={+shortAvgR >= 0 ? 'win' : 'loss'}>{shortAvgR}R</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )
+      })()}
+
       <div className="card">
         <h3>Equity Curve (All Stocks Combined)</h3>
         <EquityChart data={buildEquityCurve(Object.values(data.stocks).flatMap(s => s.trades.filter(t => t.exitDate)).sort((a,b) => a.exitDate.localeCompare(b.exitDate)))} />

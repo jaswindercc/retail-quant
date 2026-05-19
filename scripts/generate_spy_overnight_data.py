@@ -220,10 +220,8 @@ def backtest_overnight(spy_df, vix_df):
         direction = None
         if score >= MIN_SCORE_LONG:
             direction = 'LONG'
-        elif score <= MIN_SCORE_SHORT:
-            direction = 'SHORT'
         else:
-            continue
+            continue  # Long only — shorts removed (no edge)
 
         entry_price = row['Close']
         next_row = merged.iloc[i + 1]

@@ -342,12 +342,10 @@ def backtest_overnight(spy_df, vix_df):
             'vix': round(row['Close_vix'], 2),
         })
         
-        # ─── Trade decision ───
+        # ─── Trade decision (LONG ONLY — shorts removed, no edge) ───
         direction = None
         if score >= MIN_SCORE_LONG:
             direction = 'LONG'
-        elif score <= MIN_SCORE_SHORT:
-            direction = 'SHORT'
         else:
             continue  # No trade — insufficient conviction
         

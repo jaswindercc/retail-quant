@@ -16,16 +16,6 @@ export default function SpxOvernightPage({ data }) {
   const settings = data.settings || {}
   const scoreAnalysis = data.scoreAnalysis || {}
 
-  // Long/Short breakdown
-  const longs = trades.filter(t => t.dir === 'LONG')
-  const shorts = trades.filter(t => t.dir === 'SHORT')
-  const longWins = longs.filter(t => t.pnlDollar > 0)
-  const shortWins = shorts.filter(t => t.pnlDollar > 0)
-  const longWR = longs.length ? (longWins.length / longs.length * 100).toFixed(1) : '0'
-  const shortWR = shorts.length ? (shortWins.length / shorts.length * 100).toFixed(1) : '0'
-  const longPnl = longs.reduce((s, t) => s + t.pnlDollar, 0)
-  const shortPnl = shorts.reduce((s, t) => s + t.pnlDollar, 0)
-
   // Score breakdown for table
   const scoreRows = Object.entries(scoreAnalysis)
     .map(([score, info]) => ({ score: +score, ...info }))
@@ -128,32 +118,6 @@ export default function SpxOvernightPage({ data }) {
           <KpiCard label="Max DD" value={fmt$(dd.maxDD)} cls="red" />
           <KpiCard label="Max Consec Wins" value={consec.maxConsecWin} cls="green" />
           <KpiCard label="Max Consec Losses" value={consec.maxConsecLoss} cls="red" />
-        </div>
-
-        {/* Long/Short Breakdown */}
-        <div className="card">
-          <h3>Direction Breakdown</h3>
-          <table>
-            <thead>
-              <tr><th>Direction</th><th>Trades</th><th>Win%</th><th>P&L</th><th>Avg R</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>LONG</strong></td>
-                <td>{longs.length}</td>
-                <td>{longWR}%</td>
-                <td className={longPnl >= 0 ? 'win' : 'loss'}>{fmt$(longPnl)}</td>
-                <td className={longPnl >= 0 ? 'win' : 'loss'}>{longs.length ? (longs.reduce((s, t) => s + t.pnlR, 0) / longs.length).toFixed(2) : '0'}R</td>
-              </tr>
-              <tr>
-                <td><strong>SHORT</strong></td>
-                <td>{shorts.length}</td>
-                <td>{shortWR}%</td>
-                <td className={shortPnl >= 0 ? 'win' : 'loss'}>{fmt$(shortPnl)}</td>
-                <td className={shortPnl >= 0 ? 'win' : 'loss'}>{shorts.length ? (shorts.reduce((s, t) => s + t.pnlR, 0) / shorts.length).toFixed(2) : '0'}R</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
 
         {/* Score Analysis */}
