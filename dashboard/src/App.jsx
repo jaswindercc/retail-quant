@@ -17,6 +17,8 @@ import TrailStudyPage from './pages/TrailStudyPage'
 import SpxOvernightPage from './pages/SpxOvernightPage'
 import SpyOvernightPage from './pages/SpyOvernightPage'
 import QqqOvernightPage from './pages/QqqOvernightPage'
+import OvernightTrailStudyPage from './pages/OvernightTrailStudyPage'
+import MacroOvernightPage from './pages/MacroOvernightPage'
 import StockPage from './pages/StockPage'
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
@@ -48,6 +50,8 @@ export default function App() {
   const [onData, setOnData] = useState(null)
   const [spyOnData, setSpyOnData] = useState(null)
   const [qqqOnData, setQqqOnData] = useState(null)
+  const [onTrailData, setOnTrailData] = useState(null)
+  const [macroOnData, setMacroOnData] = useState(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark')
   const location = useLocation()
@@ -75,6 +79,8 @@ export default function App() {
     fetch('/overnight_data.json').then(r => r.json()).then(setOnData)
     fetch('/spy_overnight_data.json').then(r => r.json()).then(setSpyOnData)
     fetch('/qqq_overnight_data.json').then(r => r.json()).then(setQqqOnData)
+    fetch('/overnight_trail_study.json').then(r => r.json()).then(setOnTrailData)
+    fetch('/macro_overnight_data.json').then(r => r.json()).then(setMacroOnData)
   }, [])
 
   if (!trData || !bnData || !brData || !rsiData || !mrData || !tlData || !srData || !fvgData || !vcpData || !volData) return <div className="loading">Loading…</div>
@@ -114,6 +120,12 @@ export default function App() {
           </NavLink>
           <NavLink to="/qqq-overnight" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
             QQQ Overnight
+          </NavLink>
+          <NavLink to="/overnight-trail-study" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+            🔬 Trail Stop Study
+          </NavLink>
+          <NavLink to="/overnight-macro" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+            🌐 Macro Study
           </NavLink>
           <div className="sidebar-label" style={{ marginTop: '0.75rem' }}>Tools</div>
           <NavLink to="/trail-study" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`}>
@@ -161,6 +173,8 @@ export default function App() {
           <Route path="/overnight" element={<SpxOvernightPage data={onData} />} />
           <Route path="/spy-overnight" element={<SpyOvernightPage data={spyOnData} />} />
           <Route path="/qqq-overnight" element={<QqqOvernightPage data={qqqOnData} />} />
+          <Route path="/overnight-trail-study" element={<OvernightTrailStudyPage data={onTrailData} />} />
+          <Route path="/overnight-macro" element={<MacroOvernightPage data={macroOnData} />} />
           <Route path="/skip-analysis" element={<FilterLabPage bnData={bnData} />} />
           <Route path="/trail-study" element={<TrailStudyPage />} />
           <Route path="/learnings" element={<MasterLearningsPage />} />
