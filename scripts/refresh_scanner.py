@@ -488,9 +488,10 @@ def run_scanner_for_instrument(instrument_key, price_csv, vix_df):
 
 
 def main():
-    now_utc = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
+    from zoneinfo import ZoneInfo
+    now_et = datetime.now(ZoneInfo('America/New_York')).strftime('%Y-%m-%d %I:%M %p ET')
     print("=" * 60)
-    print(f"OVERNIGHT SCANNER — REFRESH @ {now_utc}")
+    print(f"OVERNIGHT SCANNER — REFRESH @ {now_et}")
     print("=" * 60)
 
     # Step 1: Fetch from Google Sheets
@@ -533,7 +534,7 @@ def main():
     print("\n[3/3] Saving scanner data...")
     output = {
         'instruments': results,
-        'lastFetched': now_utc,
+        'lastFetched': now_et,
         'nextRefresh': '3:20 PM ET (Mon-Fri)',
         'fetchSuccess': fetch_success,
     }
@@ -543,7 +544,7 @@ def main():
 
     print(f"\n{'=' * 60}")
     print(f"✅ Saved to {OUT}")
-    print(f"   Last fetched: {now_utc}")
+    print(f"   Last fetched: {now_et}")
     for inst_key, r in results.items():
         t = r['today']
         print(f"   {inst_key}: Score={t['score']} | {t['date']} | Forever: {t['configs']['forever']['status']}")
