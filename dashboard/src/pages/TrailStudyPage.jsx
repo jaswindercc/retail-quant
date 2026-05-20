@@ -145,7 +145,7 @@ export default function TrailStudyPage() {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    fetch('/trail_study_data.json').then(r => r.json()).then(setData)
+    fetch(`${import.meta.env.BASE_URL}trail_study_data.json`).then(r => r.json()).then(setData)
   }, [])
 
   if (!data) return <div className="loading">Loading trail study…</div>
