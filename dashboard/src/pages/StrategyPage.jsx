@@ -15,6 +15,11 @@ export default function StrategyPage({ data, strategyName }) {
     const st = t.filter(t => t.dir === 'SHORT')
     const m = computeMetrics(t)
     const d = buildDrawdownSeries(t)
+    const prices = data.stocks[s]?.prices || []
+    const firstP = prices[0]?.close
+    const lastP = prices[prices.length - 1]?.close
+    const stockReturn = firstP ? (lastP - firstP) / firstP : 0
+    const buyHold = (t.length * 100) * stockReturn
     return {
       symbol: s,
       trades: t.length,
@@ -25,6 +30,7 @@ export default function StrategyPage({ data, strategyName }) {
       maxDD: d.maxDD,
       profitFactor: m?.profitFactor ?? '-',
       avgR: m?.avgR ?? 0,
+      buyHold,
     }
   }).sort((a, b) => b.totalPnl - a.totalPnl)
 
@@ -139,7 +145,7 @@ export default function StrategyPage({ data, strategyName }) {
         <h3>Per-Stock Performance <span style={{color:'#8e8e9a', fontWeight:400, fontSize:14, textTransform:'none'}}>(sorted by P&L — you trade one stock at a time)</span></h3>
         <table>
           <thead>
-            <tr><th>Stock</th><th>Trades</th><th>L</th><th>S</th><th>Win%</th><th>P&L</th><th>Max DD</th><th>PF</th><th>Avg R</th></tr>
+            <tr><th>Stock</th><th>Trades</th><th>L</th><th>S</th><th>Win%</th><th>P&L</th><th>B&H</th><th>Max DD</th><th>PF</th><th>Avg R</th></tr>
           </thead>
           <tbody>
             {stockRows.map(s => (
@@ -150,6 +156,7 @@ export default function StrategyPage({ data, strategyName }) {
                 <td>{s.shorts}</td>
                 <td>{s.winRate}%</td>
                 <td className={s.totalPnl >= 0 ? 'win' : 'loss'}>{fmt$(s.totalPnl)}</td>
+                <td style={{color: s.buyHold >= 0 ? '#4ade80' : '#ef4444'}}>{fmt$(s.buyHold)}</td>
                 <td className="loss">{fmt$(s.maxDD)}</td>
                 <td>{s.profitFactor}</td>
                 <td className={s.avgR >= 0 ? 'win' : 'loss'}>{s.avgR}R</td>

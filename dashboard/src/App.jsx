@@ -22,21 +22,36 @@ import QqqTrailStudyPage from './pages/QqqTrailStudyPage'
 import MacroOvernightPage from './pages/MacroOvernightPage'
 import ScannerPage from './pages/ScannerPage'
 import StockPage from './pages/StockPage'
+import StocksOverviewPage from './pages/StocksOverviewPage'
+import SwingScannersPage from './pages/SwingScannersPage'
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
 
 const STRATS = [
-  { path: '/trend-rider', label: 'Trend Rider v1', prefix: 'trend-rider' },
   { path: '/bounce', label: 'MA Bounce v1', prefix: 'bounce' },
   { path: '/breakout', label: 'Breakout v1', prefix: 'breakout' },
-  { path: '/rsi', label: 'RSI Trend v1', prefix: 'rsi' },
-  { path: '/meanrev', label: 'Mean Rev v1', prefix: 'meanrev' },
   { path: '/trendline', label: 'Trendline v1', prefix: 'trendline' },
+  { path: '/rsi', label: 'RSI Trend v1', prefix: 'rsi' },
   { path: '/sr', label: 'S/R Bounce v1', prefix: 'sr' },
   { path: '/fvg', label: 'FVG v1', prefix: 'fvg' },
-  { path: '/vcp', label: 'VCP v1', prefix: 'vcp' },
+  { path: '/trend-rider', label: 'Trend Rider v1', prefix: 'trend-rider' },
   { path: '/volume', label: 'Volume v1', prefix: 'volume' },
+  { path: '/vcp', label: 'VCP v1', prefix: 'vcp' },
+  { path: '/meanrev', label: 'Mean Rev v1', prefix: 'meanrev' },
 ]
+
+function NavGroup({ label, icon, children, defaultOpen = false }) {
+  const [open, setOpen] = useState(true)
+  return (
+    <div className="nav-group">
+      <button className={`nav-group-toggle ${open ? 'open' : ''}`} onClick={() => setOpen(!open)}>
+        <span>{icon} {label}</span>
+        <span className="nav-chevron">{open ? '▾' : '▸'}</span>
+      </button>
+      {open && <div className="nav-group-items">{children}</div>}
+    </div>
+  )
+}
 
 export default function App() {
   const [trData, setTrData] = useState(null)
@@ -97,6 +112,11 @@ export default function App() {
   const active = STRATS.find(s => location.pathname.startsWith(s.path)) || null
   const stockBase = active ? `/${active.prefix}/stock` : '/trend-rider/stock'
 
+  // Auto-open nav groups based on current route
+  const isOvernightRoute = ['/overnight', '/spy-overnight', '/qqq-overnight', '/overnight-trail-study', '/qqq-trail-study', '/overnight-macro', '/scanner'].some(p => location.pathname.startsWith(p))
+  const isSwingRoute = STRATS.some(s => location.pathname.startsWith(s.path)) || location.pathname === '/' || location.pathname === '/stocks' || location.pathname === '/swing-scanners'
+  const isResearchRoute = ['/trail-study', '/skip-analysis'].some(p => location.pathname.startsWith(p))
+
   return (
     <div className="app">
       <button className="sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
@@ -107,59 +127,74 @@ export default function App() {
       </button>
       <nav className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-section">
-          <NavLink to="/" end className={({isActive}) => `strategy-link summary-link ${isActive ? 'active' : ''}`}>
-            📊 Summary
-          </NavLink>
-          <div className="sidebar-label" style={{ marginTop: '0.75rem' }}>Strategies</div>
-          {STRATS.map(s => (
-            <NavLink key={s.path} to={s.path} end className={({isActive}) =>
-              `strategy-link ${isActive ? 'active' : ''}`
-            }>{s.label}</NavLink>
-          ))}
-          <NavLink to="/skip-analysis" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`}>
-            🧪 Trade Skip Analysis
-          </NavLink>
-          <div className="sidebar-label" style={{ marginTop: '0.75rem' }}>Scanner</div>
-          <NavLink to="/scanner" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`}>
-            📡 Overnight Scanner
-          </NavLink>
-          <div className="sidebar-label" style={{ marginTop: '0.75rem' }}>Overnight Strategies</div>
-          <NavLink to="/overnight" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
-            SPX Overnight
-          </NavLink>
-          <NavLink to="/spy-overnight" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
-            SPY Overnight
-          </NavLink>
-          <NavLink to="/qqq-overnight" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
-            QQQ Overnight
-          </NavLink>
-          <NavLink to="/overnight-trail-study" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
-            🔬 SPX Trail Study
-          </NavLink>
-          <NavLink to="/qqq-trail-study" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
-            🔬 QQQ Trail Study
-          </NavLink>
-          <NavLink to="/overnight-macro" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
-            🌐 Macro Study
-          </NavLink>
-          <div className="sidebar-label" style={{ marginTop: '0.75rem' }}>Tools</div>
-          <NavLink to="/trail-study" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`}>
-            🔬 Trail Stop Study (MA Bounce)
-          </NavLink>
-          <NavLink to="/learnings" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`}>
+
+          <NavGroup label="Overnight" icon="🌙" defaultOpen={isOvernightRoute}>
+            <div className="nav-sub-label">Scanner</div>
+            <NavLink to="/scanner" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              📡 Overnight Scanner
+            </NavLink>
+            <div className="nav-sub-label">Backtests</div>
+            <NavLink to="/overnight" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              SPX Overnight
+            </NavLink>
+            <NavLink to="/spy-overnight" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              SPY Overnight
+            </NavLink>
+            <NavLink to="/qqq-overnight" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              QQQ Overnight
+            </NavLink>
+            <div className="nav-sub-label">Research</div>
+            <NavLink to="/overnight-trail-study" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              🔬 SPX Trail Study
+            </NavLink>
+            <NavLink to="/qqq-trail-study" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              🔬 QQQ Trail Study
+            </NavLink>
+            <NavLink to="/overnight-macro" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              🌐 Macro Study
+            </NavLink>
+          </NavGroup>
+
+          <NavGroup label="Swing Strategies" icon="📈" defaultOpen={isSwingRoute}>
+            <NavLink to="/" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              📊 Swing Summary
+            </NavLink>
+            <NavLink to="/stocks" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              🏷️ Stock Universe
+            </NavLink>
+            <NavLink to="/swing-scanners" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              📡 Swing Scanners
+            </NavLink>
+            {STRATS.map(s => (
+              <NavLink key={s.path} to={s.path} end className={({isActive}) =>
+                `strategy-link sub-link ${isActive ? 'active' : ''}`
+              }>{s.label}</NavLink>
+            ))}
+          </NavGroup>
+
+          {active && (
+            <NavGroup label={`Stocks · ${active.label}`} icon="🏷️" defaultOpen={true}>
+              {STOCKS.map(s => (
+                <NavLink key={s} to={`${stockBase}/${s}`} className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+                  {s}
+                </NavLink>
+              ))}
+            </NavGroup>
+          )}
+
+          <NavGroup label="Research" icon="🧪" defaultOpen={isResearchRoute}>
+            <NavLink to="/trail-study" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              🔬 Trail Stop Study
+            </NavLink>
+            <NavLink to="/skip-analysis" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              🧪 Trade Skip Analysis
+            </NavLink>
+          </NavGroup>
+
+          <NavLink to="/learnings" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`} style={{marginTop:'0.5rem'}}>
             📖 Master Learnings
           </NavLink>
         </div>
-        {active && (
-        <div className="sidebar-section">
-          <div className="sidebar-label">Stocks ({active.label})</div>
-          {STOCKS.map(s => (
-            <NavLink key={s} to={`${stockBase}/${s}`} className={({isActive}) => isActive ? 'active' : ''}>
-              {s}
-            </NavLink>
-          ))}
-        </div>
-        )}
       </nav>
       {sidebarOpen && <div className="sidebar-overlay show" onClick={() => setSidebarOpen(false)} />}
       <div className="main">
@@ -193,6 +228,8 @@ export default function App() {
           <Route path="/overnight-macro" element={<MacroOvernightPage data={macroOnData} />} />
           <Route path="/scanner" element={<ScannerPage data={scannerData} />} />
           <Route path="/skip-analysis" element={<FilterLabPage bnData={bnData} />} />
+          <Route path="/stocks" element={<StocksOverviewPage data={trData} allData={{tr:trData,bn:bnData,br:brData,rsi:rsiData,mr:mrData,tl:tlData,sr:srData,fvg:fvgData,vcp:vcpData,vol:volData}} />} />
+          <Route path="/swing-scanners" element={<SwingScannersPage />} />
           <Route path="/trail-study" element={<TrailStudyPage />} />
           <Route path="/learnings" element={<MasterLearningsPage />} />
         </Routes>

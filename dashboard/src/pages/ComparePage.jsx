@@ -1,29 +1,35 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { computeMetrics, buildDrawdownSeries, fmt$ } from '../utils'
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
 
 const STRATS = [
-  { key: 'tr', label: 'Trend Rider', color: '#4caf50', icon: '🟢', desc: 'SMA crossover → ride the trend' },
-  { key: 'bn', label: 'MA Bounce', color: '#2196f3', icon: '🔵', desc: 'Pullback to EMA20 in uptrend' },
-  { key: 'br', label: 'Breakout', color: '#ff9800', icon: '🟡', desc: 'Price breaks above recent high' },
-  { key: 'rsi', label: 'RSI Trend', color: '#e040fb', icon: '🟣', desc: 'RSI oversold bounce in uptrend' },
-  { key: 'mr', label: 'Mean Rev', color: '#ff5252', icon: '🔴', desc: 'Bollinger Band mean reversion' },
-  { key: 'tl', label: 'Trendline', color: '#00bcd4', icon: '🩵', desc: 'Rising trendline bounce' },
-  { key: 'sr', label: 'S/R Bounce', color: '#8bc34a', icon: '💚', desc: 'Horizontal support bounce' },
-  { key: 'fvg', label: 'FVG', color: '#ffeb3b', icon: '💛', desc: 'Fair Value Gap pullback' },
-  { key: 'vcp', label: 'VCP', color: '#9c27b0', icon: '💜', desc: 'Volatility contraction breakout' },
-  { key: 'vol', label: 'Volume', color: '#ff7043', icon: '🧡', desc: 'Volume spike breakout' },
+  { key: 'tr', label: 'Trend Rider', color: '#4caf50', icon: '🟢', desc: 'SMA crossover → ride the trend', path: '/trend-rider', dir: 'Long + Short', stop: '1× ATR', exit: 'EMA20 trail at 2.5R (longs) · 3R fixed TP (shorts)' },
+  { key: 'bn', label: 'MA Bounce', color: '#2196f3', icon: '🔵', desc: 'Pullback to EMA20 in uptrend', path: '/bounce', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 trail at 2.5R' },
+  { key: 'br', label: 'Breakout', color: '#ff9800', icon: '🟡', desc: 'Price breaks above recent high', path: '/breakout', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 trail at 2.5R' },
+  { key: 'rsi', label: 'RSI Trend', color: '#e040fb', icon: '🟣', desc: 'RSI oversold bounce in uptrend', path: '/rsi', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 trail at 2.5R' },
+  { key: 'mr', label: 'Mean Rev', color: '#ff5252', icon: '🔴', desc: 'Bollinger Band mean reversion', path: '/meanrev', dir: 'Long only', stop: '1.5× ATR', exit: 'EMA20 trail at 2.5R' },
+  { key: 'tl', label: 'Trendline', color: '#00bcd4', icon: '🩵', desc: 'Rising trendline bounce', path: '/trendline', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 trail at 2.5R' },
+  { key: 'sr', label: 'S/R Bounce', color: '#8bc34a', icon: '💚', desc: 'Horizontal support bounce', path: '/sr', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 trail at 2.5R' },
+  { key: 'fvg', label: 'FVG', color: '#ffeb3b', icon: '💛', desc: 'Fair Value Gap pullback', path: '/fvg', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 trail at 2.5R' },
+  { key: 'vcp', label: 'VCP', color: '#9c27b0', icon: '💜', desc: 'Volatility contraction breakout', path: '/vcp', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 trail at 2.5R' },
+  { key: 'vol', label: 'Volume', color: '#ff7043', icon: '🧡', desc: 'Volume spike breakout', path: '/volume', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 trail at 2.5R' },
 ]
 
 function getFullStats(data, symbol) {
   const t = (data.stocks[symbol]?.trades || []).filter(t => t.exitDate)
   const m = computeMetrics(t)
   const d = buildDrawdownSeries(t)
+  const prices = data.stocks[symbol]?.prices || []
+  const firstP = prices[0]?.close
+  const lastP = prices[prices.length - 1]?.close
+  const stockReturn = firstP ? (lastP - firstP) / firstP : 0
+  const buyHold = (t.length * 100) * stockReturn
   return {
     pnl: m?.totalPnl ?? 0, trades: t.length, wr: m?.winRate ?? 0,
     avgR: m?.avgR ?? 0, pf: m?.profitFactor ?? 0, maxDD: d.maxDD ?? 0,
-    avgDur: m?.avgDuration ?? 0
+    avgDur: m?.avgDuration ?? 0, buyHold
   }
 }
 
@@ -40,10 +46,12 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
     })
     const profitable = stockPnls.filter(s => s.pnl > 0).length
     const totalDD = stockPnls.reduce((s, r) => s + r.maxDD, 0)
+    const totalPnl = m?.totalPnl ?? 0
     return {
       ...st,
       trades: allTrades.length,
-      totalPnl: m?.totalPnl ?? 0,
+      totalPnl,
+      avgPnl: totalPnl / STOCKS.length,
       wr: m?.winRate ?? 0,
       avgR: m?.avgR ?? 0,
       pf: m?.profitFactor ?? 0,
@@ -52,7 +60,7 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
       avgDD: totalDD / STOCKS.length,
       stockPnls
     }
-  }).sort((a, b) => b.totalPnl - a.totalPnl)
+  }).sort((a, b) => b.avgPnl - a.avgPnl)
 
   // Per-stock comparison rows
   const stockRows = STOCKS.map(s => {
@@ -82,12 +90,12 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
         <h2 style={{ color: '#00e676', margin: '0 0 1rem 0', fontSize: 'clamp(1.1rem, 4vw, 1.5rem)' }}>The Bottom Line</h2>
         <div style={{ fontSize: 'clamp(0.9rem, 2.5vw, 1.1rem)', lineHeight: '1.8', color: '#e0e0e0' }}>
           <p style={{ margin: '0 0 1rem 0' }}>
-            <strong style={{ color: '#fff', fontSize: 'clamp(1rem, 3vw, 1.3rem)' }}>{winner.icon} {winner.label} is #1</strong> — made <strong style={{ color: '#00e676' }}>{fmt$(winner.totalPnl)}</strong> across
-            12 stocks with {winner.trades} trades. Profitable on <strong>{winner.profitable}/12</strong> stocks.
+            <Link to={winner.path} style={{textDecoration:'none'}}><strong style={{ color: '#fff', fontSize: 'clamp(1rem, 3vw, 1.3rem)' }}>{winner.icon} {winner.label} is #1</strong></Link> — avg <strong style={{ color: '#00e676' }}>{fmt$(winner.avgPnl)}</strong> per stock
+            with {winner.trades} trades. Profitable on <strong>{winner.profitable}/12</strong> stocks.
           </p>
           <p style={{ margin: '0 0 1rem 0' }}>
-            <strong style={{ color: '#fff' }}>{runner.icon} {runner.label} is #2</strong> — made <strong style={{ color: '#00e676' }}>{fmt$(runner.totalPnl)}</strong> with
-            {' '}{runner.trades} trades. Higher win rate ({runner.wr}%) but fewer total dollars.
+            <Link to={runner.path} style={{textDecoration:'none'}}><strong style={{ color: '#fff' }}>{runner.icon} {runner.label} is #2</strong></Link> — avg <strong style={{ color: '#00e676' }}>{fmt$(runner.avgPnl)}</strong> per stock with
+            {' '}{runner.trades} trades. Higher win rate ({runner.wr}%) but fewer dollars per stock.
           </p>
           <p style={{ margin: '0 0 1rem 0', color: '#ffab40' }}>
             All 10 strategies are profitable. The trailing EMA exit works with every entry method.
@@ -99,26 +107,55 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
         </div>
       </div>
 
+      {/* ── STRATEGY RULES ── */}
+      <div className="card" style={{ marginTop: '1.5rem' }}>
+        <h3>Strategy Rules <span style={{ color: '#8e8e9a', fontWeight: 400, fontSize: 14 }}>direction, stop loss & exit for each strategy</span></h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Strategy</th><th>Direction</th><th>Stop Loss</th><th>Exit / Trail</th>
+            </tr>
+          </thead>
+          <tbody>
+            {STRATS.map(st => (
+              <tr key={st.key}>
+                <td><Link to={st.path} style={{color: st.color, textDecoration:'none', fontWeight:600}}>{st.icon} {st.label}</Link></td>
+                <td><span style={{
+                  fontSize: 13, fontWeight: 600, padding: '2px 8px', borderRadius: 4,
+                  background: st.dir === 'Long + Short' ? 'rgba(168,85,247,0.15)' : 'rgba(74,222,128,0.15)',
+                  color: st.dir === 'Long + Short' ? '#a78bfa' : '#4ade80'
+                }}>{st.dir}</span></td>
+                <td>{st.stop}</td>
+                <td style={{ fontSize: 13 }}>{st.exit}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div style={{ marginTop: 14, padding: '12px 16px', background: 'rgba(255,255,255,0.03)', borderRadius: 8, fontSize: 14, color: '#94a3b8', lineHeight: 1.7 }}>
+          <strong style={{ color: '#d1d1d8' }}>How the exit works:</strong> Initial stop is set at entry − ATR. Once the trade reaches +2.5R profit, the stop switches to <strong>EMA(20) − 1×ATR</strong> (trailing, only moves up). This lets winners run while protecting gains. Risk per trade: $100.
+        </div>
+      </div>
+
       {/* ── RANKING TABLE ── */}
       <div className="card" style={{ marginTop: '1.5rem' }}>
-        <h3>Final Ranking <span style={{ color: '#8e8e9a', fontWeight: 400, fontSize: 14 }}>sorted by total P&L across all 12 stocks</span></h3>
+        <h3>Final Ranking <span style={{ color: '#8e8e9a', fontWeight: 400, fontSize: 14 }}>sorted by avg P&L per stock</span></h3>
         <table>
           <thead>
             <tr>
               <th>#</th><th>Strategy</th><th>Entry Type</th><th>Trades</th><th>Win%</th>
-              <th>Avg R</th><th>Total P&L</th><th>PF</th><th>Avg Days</th><th>Stocks +</th>
+              <th>Avg R</th><th>Avg P&L / Stock</th><th>PF</th><th>Avg Days</th><th>Stocks +</th>
             </tr>
           </thead>
           <tbody>
             {stratStats.map((st, i) => (
               <tr key={st.key} style={i === 0 ? { background: 'rgba(0,230,118,0.08)' } : {}}>
                 <td><strong style={i === 0 ? { color: '#00e676', fontSize: '1.1rem' } : {}}>{i === 0 ? '👑' : i + 1}</strong></td>
-                <td><strong>{st.icon} {st.label}</strong></td>
+                <td><Link to={st.path} style={{color:'inherit',textDecoration:'none'}}><strong>{st.icon} {st.label}</strong></Link></td>
                 <td style={{ color: '#8e8e9a', fontSize: '0.85rem' }}>{st.desc}</td>
                 <td>{st.trades}</td>
                 <td>{st.wr}%</td>
                 <td className={st.avgR >= 0 ? 'win' : 'loss'}>{st.avgR}R</td>
-                <td className={st.totalPnl >= 0 ? 'win' : 'loss'}><strong>{fmt$(st.totalPnl)}</strong></td>
+                <td className={st.avgPnl >= 0 ? 'win' : 'loss'}><strong>{fmt$(st.avgPnl)}</strong></td>
                 <td>{st.pf}</td>
                 <td>{st.avgDur}d</td>
                 <td>{st.profitable}/12</td>
@@ -136,7 +173,7 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
             <strong style={{ color: '#2196f3' }}>Entry matters less than you think</strong>
             <p style={{ margin: '0.5rem 0 0', color: '#ccc', fontSize: '0.9rem' }}>
               All 10 strategies are profitable. The same exit (EMA20 trail at 2.5R) makes every entry method work.
-              The spread between #1 and #10 is only {fmt$(stratStats[0].totalPnl - stratStats[stratStats.length-1].totalPnl)}.
+              The spread between #1 and #10 is only {fmt$(stratStats[0].avgPnl - stratStats[stratStats.length-1].avgPnl)} per stock.
             </p>
           </div>
           <div style={{ padding: '1rem', background: 'rgba(0,230,118,0.08)', borderRadius: '8px', borderLeft: '3px solid #00e676' }}>
@@ -179,19 +216,19 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
 
       {/* ── HEAD-TO-HEAD TABLE ── */}
       <div className="card" style={{ marginTop: '1.5rem', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
-        <h3>Head-to-Head by Stock <span style={{ color: '#8e8e9a', fontWeight: 400, fontSize: 14 }}>P&L per stock — who wins where?</span></h3>
-        <table style={{ fontSize: '0.8rem', minWidth: '900px' }}>
+        <h3>Head-to-Head by Stock <span style={{ color: '#8e8e9a', fontWeight: 400, fontSize: 14 }}>P&L, B&H & WR per stock — who wins where?</span></h3>
+        <table style={{ fontSize: '0.8rem', minWidth: '1400px' }}>
           <thead>
             <tr>
               <th rowSpan={2}>Stock</th>
               {STRATS.map(st => (
-                <th key={st.key} colSpan={2} style={{ textAlign: 'center', borderBottom: `2px solid ${st.color}` }}>{st.label}</th>
+                <th key={st.key} colSpan={3} style={{ textAlign: 'center', borderBottom: `2px solid ${st.color}` }}><Link to={st.path} style={{color:'inherit',textDecoration:'none'}}>{st.label}</Link></th>
               ))}
               <th rowSpan={2}>Winner</th>
             </tr>
             <tr>
               {STRATS.map(st => (
-                <React.Fragment key={st.key}><th>P&L</th><th>WR</th></React.Fragment>
+                <React.Fragment key={st.key}><th>P&L</th><th>B&H</th><th>WR</th></React.Fragment>
               ))}
             </tr>
           </thead>
@@ -199,12 +236,17 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
             {stockRows.sort((a, b) => b.bestPnl - a.bestPnl).map(r => (
               <tr key={r.symbol}>
                 <td><strong>{r.symbol}</strong></td>
-                {STRATS.map(st => (
-                  <React.Fragment key={st.key}>
-                    <td className={r[st.key].pnl >= 0 ? 'win' : 'loss'}>{fmt$(r[st.key].pnl)}</td>
-                    <td>{r[st.key].wr.toFixed(0)}%</td>
-                  </React.Fragment>
-                ))}
+                {STRATS.map(st => {
+                  const pnl = r[st.key].pnl
+                  const highBorder = pnl >= 5000 ? '2px solid rgba(74,222,128,0.45)' : pnl >= 3000 ? '2px solid rgba(74,222,128,0.25)' : 'none'
+                  return (
+                    <React.Fragment key={st.key}>
+                      <td className={pnl >= 0 ? 'win' : 'loss'} style={{ border: highBorder }}>{fmt$(pnl)}</td>
+                      <td style={{color: r[st.key].buyHold >= 0 ? '#4ade80' : '#ef4444'}}>{fmt$(r[st.key].buyHold)}</td>
+                      <td>{r[st.key].wr.toFixed(0)}%</td>
+                    </React.Fragment>
+                  )
+                })}
                 <td>{r.winners.map(w => stratInfo[w]?.icon).join(' ')}
                   {' '}{r.winners.length > 1 ? 'Tie' : stratInfo[r.winners[0]]?.label}
                 </td>

@@ -103,7 +103,32 @@ export default function ScannerPage({ data }) {
         </div>
       </div>
 
-      {/* Entry Rules */}
+      {/* How to Read */}
+      <div className="card" style={{background:'#0f172a', border:'1px solid #1e293b'}}>
+        <h3 style={{margin:'0 0 12px'}}>❓ How to Read This</h3>
+        <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(220px, 1fr))', gap:16, fontSize:13, color:'#d1d1d8', lineHeight:1.8}}>
+          <div>
+            <div style={{fontWeight:700, color:'#4ade80', marginBottom:4}}>🟢 BUY AT CLOSE</div>
+            Score ≥ 3 and all filters pass. Enter at today's closing price (MOC order).
+          </div>
+          <div>
+            <div style={{fontWeight:700, color:'#ef4444', marginBottom:4}}>🔴 NO TRADE</div>
+            Score is below 3 — not enough bullish signals. Do nothing. Wait for next day.
+          </div>
+          <div>
+            <div style={{fontWeight:700, color:'#f59e0b', marginBottom:4}}>⚠️ BLOCKED</div>
+            Score ≥ 3 but a filter blocks entry (below SMA50, or paused after 2 losses).
+          </div>
+          <div>
+            <div style={{fontWeight:700, color:'#3b82f6', marginBottom:4}}>📈 IN POSITION</div>
+            Already holding from a previous signal. Monitoring trail stop for exit.
+          </div>
+        </div>
+        <div style={{marginTop:16, padding:'12px 16px', background:'rgba(255,255,255,0.03)', borderRadius:8, fontSize:13, color:'#94a3b8'}}>
+          <strong style={{color:'#d1d1d8'}}>Score explained:</strong> Each day is scored using 10+ factors (VIX spike, RSI oversold, consecutive down days, dip-in-uptrend, etc.).
+          Each factor adds +1 or +2 points. Bearish factors subtract points. <strong>Score ≥ 3 = bullish enough to trade.</strong> Score of 1 means only 1 weak signal fired — not enough conviction.
+        </div>
+      </div>
       <div className="card">
         <h3 style={{color: CONFIG_COLORS[configTab]}}>Entry Rules — {CONFIG_LABELS[configTab]}</h3>
         <table>

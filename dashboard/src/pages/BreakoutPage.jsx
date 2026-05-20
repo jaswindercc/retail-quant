@@ -14,6 +14,11 @@ export default function BreakoutPage({ data, strategyName }) {
     const st = t.filter(t => t.dir === 'SHORT')
     const m = computeMetrics(t)
     const d = buildDrawdownSeries(t)
+    const prices = data.stocks[s]?.prices || []
+    const firstP = prices[0]?.close
+    const lastP = prices[prices.length - 1]?.close
+    const stockReturn = firstP ? (lastP - firstP) / firstP : 0
+    const buyHold = (t.length * 100) * stockReturn
     return {
       symbol: s,
       trades: t.length,
@@ -24,6 +29,7 @@ export default function BreakoutPage({ data, strategyName }) {
       maxDD: d.maxDD,
       profitFactor: m?.profitFactor ?? '-',
       avgR: m?.avgR ?? 0,
+      buyHold,
     }
   }).sort((a, b) => b.totalPnl - a.totalPnl)
 
@@ -39,7 +45,7 @@ export default function BreakoutPage({ data, strategyName }) {
 
   return (
     <div>
-      <h1 className="page-title">{strategyName} <span>Donchian 20-day high breakout · SMA50 trend filter · EMA20 trailing stop</span></h1>
+      <h1 className="page-title">{strategyName} <span>Donchian 20-day high breakout · SMA50 trend filter · EMA20 trail at 2.5R · Long only</span></h1>
 
       <div className="card strategy-summary">
         <h3>The System</h3>
@@ -92,7 +98,7 @@ export default function BreakoutPage({ data, strategyName }) {
         <h2>Per-Stock Breakdown</h2>
         <table>
           <thead>
-            <tr><th>Stock</th><th>Trades</th><th>L / S</th><th>Win %</th><th>P&L</th><th>Max DD</th><th>PF</th><th>Avg R</th></tr>
+            <tr><th>Stock</th><th>Trades</th><th>L / S</th><th>Win %</th><th>P&L</th><th>B&H</th><th>Max DD</th><th>PF</th><th>Avg R</th></tr>
           </thead>
           <tbody>
             {stockRows.map(r => (
@@ -102,6 +108,7 @@ export default function BreakoutPage({ data, strategyName }) {
                 <td>{r.longs} / {r.shorts}</td>
                 <td>{r.winRate.toFixed(1)}%</td>
                 <td className={r.totalPnl >= 0 ? 'win' : 'loss'}>{fmt$(r.totalPnl)}</td>
+                <td style={{color: r.buyHold >= 0 ? '#4ade80' : '#ef4444'}}>{fmt$(r.buyHold)}</td>
                 <td className="loss">{fmt$(r.maxDD)}</td>
                 <td>{r.profitFactor === Infinity ? '∞' : typeof r.profitFactor === 'number' ? r.profitFactor.toFixed(2) : r.profitFactor}</td>
                 <td className={r.avgR >= 0 ? 'win' : 'loss'}>{r.avgR.toFixed(2)}</td>
