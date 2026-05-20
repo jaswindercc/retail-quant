@@ -24,6 +24,7 @@ import ScannerPage from './pages/ScannerPage'
 import StockPage from './pages/StockPage'
 import StocksOverviewPage from './pages/StocksOverviewPage'
 import SwingScannersPage from './pages/SwingScannersPage'
+import StratCandlePage from './pages/StratCandlePage'
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
 
@@ -182,6 +183,10 @@ export default function App() {
             </NavGroup>
           )}
 
+          <NavLink to="/the-strat" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`} style={{marginTop:'0.5rem'}}>
+            🕯️ The STRAT
+          </NavLink>
+
           <NavGroup label="Research" icon="🧪" defaultOpen={isResearchRoute}>
             <NavLink to="/trail-study" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
               🔬 Trail Stop Study
@@ -230,6 +235,7 @@ export default function App() {
           <Route path="/skip-analysis" element={<FilterLabPage bnData={bnData} />} />
           <Route path="/stocks" element={<StocksOverviewPage data={trData} allData={{tr:trData,bn:bnData,br:brData,rsi:rsiData,mr:mrData,tl:tlData,sr:srData,fvg:fvgData,vcp:vcpData,vol:volData}} />} />
           <Route path="/swing-scanners" element={<SwingScannersPage />} />
+          <Route path="/the-strat" element={<StratCandlePage />} />
           <Route path="/trail-study" element={<TrailStudyPage />} />
           <Route path="/learnings" element={<MasterLearningsPage />} />
         </Routes>

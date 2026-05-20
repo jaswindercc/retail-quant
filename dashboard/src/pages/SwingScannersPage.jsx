@@ -15,12 +15,12 @@ const SCANNERS = [
       'Close − EMA(20) ≤ 3×ATR(14) — not over-extended',
     ],
     tvScreener: [
-      'Close > Simple Moving Average (50)',
-      'Low[1] ≤ Exponential Moving Average (20) × 1.02',
-      'Close > Exponential Moving Average (20)',
-      'Close − Exponential Moving Average (20) < Average True Range (14) × 3',
+      'Simple Moving Average (50) < Price',
+      'Exponential Moving Average (20) ≥ Low',
+      'Exponential Moving Average (20) < Price',
     ],
-    tvAlert: 'EMA(20) on Daily chart. Set alert: "Crossing Up" on EMA(20). Filter: Close > SMA(50).',
+    tvNote: 'The backtest uses "Low ≤ EMA20 + 0.5×ATR" (a tolerance buffer so near-misses count too) and checks yesterday\'s bar. The screener can\'t do math between indicators or look back 1 bar — so we use today\'s Low ≤ EMA(20) instead. This is stricter (only catches real touches) which is fine. The "not over-extended" filter also needs math — skip it, eyeball the chart.',
+    tvAlert: 'Add EMA(20) to a Daily chart → Create Alert → Condition: Price → Crossing Up → EMA(20).',
   },
   {
     key: 'breakout',
@@ -35,11 +35,12 @@ const SCANNERS = [
       'Bar range (H−L) ≤ 2.5×ATR(14) — no blow-off candle',
     ],
     tvScreener: [
-      'Close > Simple Moving Average (50)',
-      'Close > Donchian Channel Upper (20)',
-      'Close − Simple Moving Average (50) < Average True Range (14) × 4',
+      'Simple Moving Average (50) < Price',
+      'Donchian Channels (20) Upper Line < Price',
+      'Change % > 0',
     ],
-    tvAlert: 'Donchian Channel (20) on Daily chart. Set alert: "Crossing Up" on Donchian Upper. Filter: Close > SMA(50).',
+    tvNote: 'The "not over-extended" and "no blow-off candle" filters need math between indicators (e.g. Close − SMA ≤ 4×ATR). The screener can\'t do this. Skip them — just avoid stocks that gapped 5%+ on earnings or look obviously extended. These filters only remove ~3% of signals.',
+    tvAlert: 'Add Donchian Channel (20) to Daily chart → Create Alert → Condition: Price → Crossing Up → DC Upper Band.',
   },
   {
     key: 'trendline',
@@ -54,10 +55,11 @@ const SCANNERS = [
       'Today Close bounced above the trendline',
     ],
     tvScreener: [
-      'Close > Simple Moving Average (50)',
-      '⚠️ No native TradingView screener for trendlines — use visual scan or Pine indicator',
+      'Simple Moving Average (50) < Price',
     ],
-    tvAlert: 'Use a Pine Script indicator that draws auto-trendlines and alerts on touch. Apply to Daily chart. Filter: Close > SMA(50).',
+    tvNote: 'Trendlines are diagonal lines connecting pivot lows — no screener can detect them. Use filter #1 to get your uptrending stock list, then flip through charts looking for price touching a rising trendline. This strategy requires chart reading.',
+    cantScan: true,
+    tvAlert: 'Draw trendlines manually on charts → Set Price Alert at the trendline level → Confirm bounce when triggered.',
   },
   {
     key: 'rsi',
@@ -72,11 +74,11 @@ const SCANNERS = [
       'Bar range (H−L) ≤ 2.5×ATR(14) — normal bar',
     ],
     tvScreener: [
-      'Close > Simple Moving Average (50)',
-      'RSI (14) > 50',
-      'RSI (14) [1 bar ago] < 50',
+      'Simple Moving Average (50) < Price',
+      'Relative Strength Index (14) Crossing Up 50',
     ],
-    tvAlert: 'RSI(14) on Daily chart. Set alert: "Crossing Up" on level 50. Filter: Close > SMA(50).',
+    tvNote: 'This scans perfectly with just 2 filters! The "not over-extended" and "normal bar" filters need ATR math — skip them, they only filter out ~5% of signals on extreme gap days.',
+    tvAlert: 'Add RSI(14) to Daily chart → Create Alert → Condition: RSI(14) → Crossing Up → 50.',
   },
   {
     key: 'sr',
@@ -91,10 +93,11 @@ const SCANNERS = [
       'Today Close bounced above the support level',
     ],
     tvScreener: [
-      'Close > Simple Moving Average (50)',
-      '⚠️ No native screener for pivot-based S/R — use visual scan or Pine indicator',
+      'Simple Moving Average (50) < Price',
     ],
-    tvAlert: 'Mark horizontal support levels manually on Daily chart. Set price alert at each level. Filter: Close > SMA(50).',
+    tvNote: 'Support levels are previous pivot lows — the screener doesn\'t know where these are. Use filter #1 to get uptrending stocks, then visually scan for pullbacks to obvious horizontal price floors.',
+    cantScan: true,
+    tvAlert: 'Mark support levels on your charts → Set Price Alert at each level → Check for bounce candle when triggered.',
   },
   {
     key: 'fvg',
@@ -110,10 +113,11 @@ const SCANNERS = [
       'FVG is < 30 bars old and not filled',
     ],
     tvScreener: [
-      'Close > Simple Moving Average (50)',
-      '⚠️ No native screener for FVG — use a Fair Value Gap Pine indicator with alerts',
+      'Simple Moving Average (50) < Price',
     ],
-    tvAlert: 'Use a Pine FVG indicator (many free ones on TradingView). Set alert on "Bullish FVG Pullback". Filter: Close > SMA(50).',
+    tvNote: 'Fair Value Gaps need multi-bar comparison (bar[i-2].High vs bar[i].Low) — no screener supports this. Use filter #1 for uptrend list, add a free "FVG" community indicator to charts, visually find pullbacks into unfilled gaps.',
+    cantScan: true,
+    tvAlert: 'Add a community "Fair Value Gap" indicator → Some have alerts for "price entering bullish FVG."',
   },
   {
     key: 'tr',
@@ -128,11 +132,12 @@ const SCANNERS = [
       'SHORT: SMA(10) crosses below SMA(50) + Close < SMA(200) + ATR contracting',
     ],
     tvScreener: [
-      'SMA (10) > SMA (50) — for longs',
-      'SMA (10) [1 bar ago] < SMA (50) [1 bar ago] — confirms crossover just happened',
-      'For shorts: add SMA (10) < SMA (50) AND Close < SMA (200)',
+      'Simple Moving Average (10) Crossing Up Simple Moving Average (50) — LONG',
+      'Simple Moving Average (10) Crossing Down Simple Moving Average (50) — SHORT',
+      'Simple Moving Average (200) > Price — add for SHORT only',
     ],
-    tvAlert: 'Add SMA(10) and SMA(50) to Daily chart. Set alert: SMA(10) "Crossing Up" SMA(50) for longs. "Crossing Down" for shorts (add SMA 200 filter).',
+    tvNote: 'The MA crossover scans perfectly! The "distance ≤ 3×ATR" and "bar range" filters need math — skip them. They just prevent entries on wild gap days (rare). If the crossover candle looks normal, the signal is valid.',
+    tvAlert: 'Add SMA(10) + SMA(50) to Daily chart → Create Alert → Condition: SMA(10) → Crossing Up → SMA(50) for longs.',
   },
   {
     key: 'vol',
@@ -147,12 +152,12 @@ const SCANNERS = [
       'Close ≥ 98% of 20-bar highest high — near highs',
     ],
     tvScreener: [
-      'Close > Simple Moving Average (50)',
-      'Volume > Volume Moving Average (20) × 1.5',
-      'Change > 0 (up day)',
-      'Close near Highest High (20) — within 2%',
+      'Simple Moving Average (50) < Price',
+      'Relative Volume > 1.5',
+      'Change % > 0',
     ],
-    tvAlert: 'Set volume alert: Volume "Greater Than" 1.5× its 20-bar SMA. Filter: Close > SMA(50), green candle, near 20-bar high.',
+    tvNote: 'The "near 20-bar high" condition needs math (Close ≥ 0.98 × Highest High 20). Skip it — you\'ll get more results but the core signal (volume spike + up day + uptrend) works. Eyeball: is the stock near recent highs? If yes, valid.',
+    tvAlert: 'Create Alert → Condition: Volume → Greater Than → 1.5× its 20-period MA.',
   },
   {
     key: 'vcp',
@@ -169,11 +174,12 @@ const SCANNERS = [
       'Volume ≥ 0.8× 20-bar avg volume — decent participation',
     ],
     tvScreener: [
-      'Close > Simple Moving Average (50)',
-      'Average True Range (14) < its own 20-bar SMA (hard to do natively — use Pine)',
-      '⚠️ Full VCP is best scanned with a custom Pine indicator',
+      'Simple Moving Average (50) < Price',
+      'Price to 52 Week High % between -10% and 0%',
+      'Volatility (Week) < Volatility (Month)',
     ],
-    tvAlert: 'Use a VCP/Contraction Pine indicator. Alert on breakout above 10-bar high. Filter: Close > SMA(50), ATR declining.',
+    tvNote: 'VCP is the hardest to scan. The screener gets you "uptrending + near highs + low volatility" but can\'t detect ATR contraction or range-tightening. Use these as a starting list, then visually look for tight sideways bases under resistance. Add a community VCP indicator for better detection.',
+    tvAlert: 'Use a community VCP/Contraction indicator with alerts. Or watch for tight bases near 52w highs.',
   },
   {
     key: 'meanrev',
@@ -187,12 +193,13 @@ const SCANNERS = [
       'Bar range (H−L) ≤ 3×ATR(14) — no crash bar',
     ],
     tvScreener: [
-      'Close > Simple Moving Average (50)',
-      'Change < 0 (today)',
-      'Change [1 bar ago] < 0',
-      'Change [2 bars ago] < 0',
+      'Simple Moving Average (50) < Price',
+      'Change % < 0',
+      'Change % 1 Bar Ago < 0 — if plan supports lookback',
+      'Change % 2 Bars Ago < 0 — if plan supports lookback',
     ],
-    tvAlert: 'No single alert works. Scan daily after close: filter for Close > SMA(50) and 3 consecutive red candles. Easy in screener.',
+    tvNote: 'If your plan doesn\'t support "X bars ago" lookback, just use filter #1 + #2 (uptrend + red today), then visually confirm 2 more red candles on the chart. The "no crash bar" filter needs math — skip it, avoid stocks down 8%+ in a day (obvious).',
+    tvAlert: 'No single alert works. Run this scan daily after close — takes 30 seconds.',
   },
 ]
 
@@ -207,12 +214,10 @@ export default function SwingScannersPage() {
       <div className="card">
         <h3>How to Use</h3>
         <div style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.8 }}>
-          <p style={{ margin: '0 0 12px' }}>Each strategy below has specific entry conditions you can scan for in TradingView. Two approaches:</p>
-          <ol style={{ margin: 0, paddingLeft: 20 }}>
-            <li><strong>TradingView Screener</strong> — use the Stock Screener (bottom panel) with the filters listed below. Won't catch every condition but gets you 80% there.</li>
-            <li><strong>Pine Script Alert</strong> — add the indicators to a chart and set crossing alerts. More precise, fires automatically.</li>
-          </ol>
-          <p style={{ margin: '12px 0 0', color: '#f59e0b' }}>⚠️ All strategies use <strong>Daily timeframe</strong>. Scan after market close, enter at next day's open or set MOC orders.</p>
+          <p style={{ margin: '0 0 12px' }}>Each strategy below shows the exact filters to set in <strong>TradingView → Stock Screener</strong> (bottom panel).</p>
+          <p style={{ margin: '0 0 12px' }}>The table shows exactly what to click: <strong>Filter</strong> (left dropdown) → <strong>Condition</strong> (middle) → <strong>Value</strong> (right dropdown or number).</p>
+          <p style={{ margin: '0 0 12px', color: '#f59e0b' }}>⚠️ Some backtest conditions can't be replicated in the screener (they need math between indicators or lookback bars). These are explained below each table — they're usually safety filters, not the core signal.</p>
+          <p style={{ margin: 0, color: '#4ade80' }}>✅ All strategies use <strong>Daily timeframe</strong>. Set screener to "1D" timeframe. Scan after market close.</p>
         </div>
       </div>
 
@@ -235,27 +240,41 @@ export default function SwingScannersPage() {
           </div>
           <p style={{ margin: '0 0 16px', fontSize: 15, color: 'var(--text)', lineHeight: 1.6 }}>{active.description}</p>
 
-          {/* Entry Conditions */}
+          {active.cantScan && (
+            <div style={{ marginBottom: 16, padding: '10px 14px', background: 'rgba(245,158,11,0.1)', borderRadius: 8, fontSize: 14, color: '#f59e0b' }}>
+              ⚠️ This strategy requires visual chart analysis — the screener can only pre-filter for uptrending stocks.
+            </div>
+          )}
+
+          {/* Entry Conditions (from backtest) */}
           <div style={{ marginBottom: 20 }}>
-            <h4 style={{ margin: '0 0 8px', fontSize: 15, color: '#4ade80' }}>Entry Conditions</h4>
+            <h4 style={{ margin: '0 0 8px', fontSize: 15, color: '#4ade80' }}>Entry Conditions (backtest logic)</h4>
             <ul style={{ margin: 0, paddingLeft: 20, fontSize: 14, lineHeight: 2 }}>
               {active.conditions.map((c, i) => <li key={i}>{c}</li>)}
             </ul>
           </div>
 
-          {/* TradingView Screener Setup */}
+          {/* TradingView Screener Filters */}
           <div style={{ marginBottom: 20, padding: 16, background: 'rgba(68,138,255,0.06)', borderRadius: 8, borderLeft: '3px solid var(--blue)' }}>
-            <h4 style={{ margin: '0 0 8px', fontSize: 15, color: 'var(--blue)' }}>📊 TradingView Screener Filters</h4>
-            <ol style={{ margin: 0, paddingLeft: 20, fontSize: 14, lineHeight: 2, color: 'var(--text)' }}>
+            <h4 style={{ margin: '0 0 12px', fontSize: 15, color: 'var(--blue)' }}>📊 TradingView Screener — Exact Filters</h4>
+            <ol style={{ margin: 0, paddingLeft: 20, fontSize: 15, lineHeight: 2.2, color: 'var(--text)' }}>
               {active.tvScreener.map((s, i) => (
-                <li key={i} style={s.startsWith('⚠️') ? { color: '#f59e0b' } : {}}>{s}</li>
+                <li key={i} style={{ fontFamily: 'monospace', letterSpacing: '-0.3px' }}>{s}</li>
               ))}
             </ol>
           </div>
 
+          {/* Why some filters are skipped */}
+          {active.tvNote && (
+            <div style={{ marginBottom: 20, padding: 16, background: 'rgba(245,158,11,0.06)', borderRadius: 8, borderLeft: '3px solid #f59e0b' }}>
+              <h4 style={{ margin: '0 0 8px', fontSize: 15, color: '#f59e0b' }}>💡 What the screener can't do & why it's OK</h4>
+              <p style={{ margin: 0, fontSize: 14, lineHeight: 1.8, color: 'var(--text)' }}>{active.tvNote}</p>
+            </div>
+          )}
+
           {/* Alert Setup */}
           <div style={{ padding: 16, background: 'rgba(0,230,118,0.06)', borderRadius: 8, borderLeft: '3px solid #00e676' }}>
-            <h4 style={{ margin: '0 0 8px', fontSize: 15, color: '#00e676' }}>🔔 Alert Setup</h4>
+            <h4 style={{ margin: '0 0 8px', fontSize: 15, color: '#00e676' }}>🔔 Alert Setup (alternative to screener)</h4>
             <p style={{ margin: 0, fontSize: 14, lineHeight: 1.7 }}>{active.tvAlert}</p>
           </div>
 
@@ -271,18 +290,18 @@ export default function SwingScannersPage() {
         <h3>Quick Reference — All Strategies</h3>
         <table>
           <thead>
-            <tr><th>Strategy</th><th>Core Signal</th><th>Screener Difficulty</th><th>Best Approach</th></tr>
+            <tr><th>Strategy</th><th># Filters</th><th>Scannable?</th><th>Best Approach</th></tr>
           </thead>
           <tbody>
             {SCANNERS.map(s => (
               <tr key={s.key}>
                 <td><Link to={s.path} style={{ fontWeight: 600 }}>{s.label}</Link></td>
-                <td style={{ fontSize: 13 }}>{s.conditions[s.conditions.length > 2 ? 1 : 0]}</td>
-                <td>{s.tvScreener.some(x => x.startsWith('⚠️'))
-                  ? <span style={{ color: '#f59e0b' }}>🟡 Needs Pine</span>
-                  : <span style={{ color: '#4ade80' }}>🟢 Native</span>
+                <td>{s.tvScreener.length}</td>
+                <td>{s.cantScan
+                  ? <span style={{ color: '#f59e0b' }}>🟡 Visual scan only</span>
+                  : <span style={{ color: '#4ade80' }}>🟢 Yes — Screener works</span>
                 }</td>
-                <td style={{ fontSize: 13 }}>{s.tvScreener.some(x => x.startsWith('⚠️')) ? 'Pine indicator + alert' : 'Stock Screener'}</td>
+                <td style={{ fontSize: 13 }}>{s.cantScan ? 'Filter uptrend → check charts' : 'Stock Screener filters above'}</td>
               </tr>
             ))}
           </tbody>
