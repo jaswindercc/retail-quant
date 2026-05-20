@@ -633,11 +633,9 @@ def main():
     # 3. Trail Forever (Act=1.5R, Dist=1.5×ATR, no time limit, SMA50+pause)
     # ══════════════════════════════════════════════════════════
     
-    # Vanilla: 1-day hold (no trail, just exit next close)
+    # Vanilla: 1-day hold, NO filters (raw entries — baseline)
     vanilla_trades = simulate_trailing_stop(merged, entries, 0, 99.0, 1)
-    vanilla_sorted = sorted(vanilla_trades, key=lambda t: t['entryDate'])
-    vanilla_sma = apply_sma_filter(vanilla_sorted, sma50_map)
-    vanilla_final = apply_pause_filter(vanilla_sma, 2)
+    vanilla_final = sorted(vanilla_trades, key=lambda t: t['entryDate'])
     vanilla_stats = filter_stats(vanilla_final)
     vanilla_stats['avgDuration'] = round(sum(t['durationDays'] for t in vanilla_final) / len(vanilla_final), 1) if vanilla_final else 0
     
@@ -686,7 +684,7 @@ def main():
             {
                 'key': 'vanilla',
                 'name': 'Vanilla (1-day hold)',
-                'description': 'Exit at next day close. No trailing stop.',
+                'description': 'Exit at next day close. No filters, no trailing stop.',
                 'stats': vanilla_stats,
                 'trades': vanilla_final,
             },

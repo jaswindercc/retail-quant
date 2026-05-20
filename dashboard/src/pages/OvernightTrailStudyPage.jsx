@@ -52,7 +52,7 @@ export default function OvernightTrailStudyPage({ data }) {
     <div>
       <h2>SPX Overnight — Trail Stop Study</h2>
       <p style={{color:'#b0b0b8', marginBottom:16}}>
-        All configs: SPX {'>'} SMA(50) + pause after 2 losses. Trail: activate at +1.5R, distance 1.5×ATR.
+        Vanilla = unfiltered baseline. Trail configs add SMA50 + pause filter + trailing stop.
       </p>
 
       {/* Toggle Buttons */}
@@ -68,6 +68,25 @@ export default function OvernightTrailStudyPage({ data }) {
             {LABELS[cfg.key] || cfg.name}
           </button>
         ))}
+      </div>
+
+      {/* Strategy Rules — changes with selected config */}
+      <div className="card">
+        <h3 style={{color: COLORS[selected]}}>Strategy Rules — {LABELS[selected]}</h3>
+        <table>
+          <thead><tr><th>Rule</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Entry Signal</strong></td><td>Score ≥ 3 (multi-factor bullish)</td></tr>
+            {selected !== 'vanilla' && <tr><td><strong>Regime Filter</strong></td><td>SPX {'>'} SMA(50) — only trade in uptrends</td></tr>}
+            {selected !== 'vanilla' && <tr><td><strong>Pause Filter</strong></td><td>After 2 consecutive losses, skip until next win</td></tr>}
+            {selected !== 'vanilla' && <tr><td><strong>Trail Activation</strong></td><td>After +1.5R profit reached</td></tr>}
+            {selected !== 'vanilla' && <tr><td><strong>Trail Distance</strong></td><td>1.5 × ATR(14) from highest close</td></tr>}
+            {selected === 'vanilla' && <tr><td><strong>Exit</strong></td><td>Next day close (1-day hold)</td></tr>}
+            {selected === 'trail3d' && <tr><td><strong>Exit</strong></td><td>Trail stop hit OR 3-day time exit (whichever first)</td></tr>}
+            {selected === 'forever' && <tr><td><strong>Exit</strong></td><td>Trail stop only — no time limit</td></tr>}
+            <tr><td><strong>Risk</strong></td><td>$100 per trade (0.5×ATR stop distance)</td></tr>
+          </tbody>
+        </table>
       </div>
 
       {/* Comparison Table */}
@@ -190,23 +209,6 @@ export default function OvernightTrailStudyPage({ data }) {
             </tbody>
           </table>
         </div>
-      </div>
-
-      {/* Strategy Rules */}
-      <div className="card">
-        <h3>Strategy Rules</h3>
-        <table>
-          <thead><tr><th>Rule</th><th>Value</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Entry</strong></td><td>Score ≥ 3 + SPX {'>'} SMA(50) + not paused</td></tr>
-            <tr><td><strong>Trail Activation</strong></td><td>After +1.5R profit reached</td></tr>
-            <tr><td><strong>Trail Distance</strong></td><td>1.5 × ATR(14) from highest close</td></tr>
-            <tr><td><strong>Max Hold (Forever)</strong></td><td>No limit — trail stop is the only exit</td></tr>
-            <tr><td><strong>Max Hold (3d)</strong></td><td>Exit at day 3 close if trail not hit</td></tr>
-            <tr><td><strong>Pause</strong></td><td>After 2 consecutive losses, skip until next hypothetical win</td></tr>
-            <tr><td><strong>Risk</strong></td><td>$100 per trade (0.5×ATR stop distance)</td></tr>
-          </tbody>
-        </table>
       </div>
 
       {/* Learnings */}
