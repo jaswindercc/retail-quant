@@ -1,96 +1,145 @@
-# Trend Rider v1 — Asymmetric Long-Biased SMA Crossover
+# 📈 retail-quant
 
-A mechanical trend-following strategy on the **daily timeframe**. Long-biased with filtered shorts.
-Backtested across 12 stocks: SPY, AAPL, NVDA, TSLA, META, GOOGL, AMD, ADBE, BA, CRM, MSFT, SNOW (Jan 2021 – May 2026).
+**Open-source quantitative trading system built by a retail trader, for retail traders.**
 
----
-
-## Strategy Summary
-
-| | Long | Short |
-|---|---|---|
-| **Entry** | SMA(10) crosses above SMA(50) | SMA(10) crosses below SMA(50) + price < SMA(200) + ATR contracting |
-| **Stop** | 1.0 × ATR below entry | 1.0 × ATR above entry |
-| **Exit** | EMA(20) trailing stop at 2.5R | Fixed TP at 3R |
-| **Risk** | $100 per trade | $100 per trade |
+No black boxes. No $500/month subscriptions. Just data, backtests, and a live scanner you can run yourself.
 
 ---
 
-## Entry Rules
+## What is this?
 
-- **Long:** SMA(10) crosses above SMA(50)
-- **Short:** SMA(10) crosses below SMA(50), price below SMA(200), ATR < SMA(ATR, 20)
-- Price within 3.0 × ATR of fast SMA (don't chase)
-- Bar range ≤ 2.0 × ATR (skip gap/news bars)
-- One cross = one trade (need opposite cross before same direction fires again)
+A complete trading research platform:
 
----
-
-## Exit Rules
-
-- **Longs:** Trailing EMA(20) − 1.0×ATR stop, activates at 2.5R. No cap on upside.
-- **Shorts:** Fixed take profit at 3R. Stop loss only, no trailing.
-- If stopped before trail/TP: lose exactly $100 (−1R)
+- **10 backtested strategies** across 12 stocks (2021–2026)
+- **Overnight scanner** — live signals for SPX, SPY, QQQ with auto-refresh
+- **Trailing stop research** — Trail Forever beats everything (19× return/DD ratio)
+- **Interactive dashboard** — equity curves, drawdowns, monthly returns, trade logs
+- **GitHub Actions** — auto-fetches market data daily at 3:20 PM ET
 
 ---
 
-## Position Sizing
+## 🚀 The Overnight Edge
 
-- Risk $100 per trade
-- Stop = 1.0 × ATR(14)
-- Quantity = $100 ÷ stop distance (min 1 share)
+Our best discovery: **buying overnight dips with a trailing stop and never selling** until the trail is hit.
 
----
+| Config | Trades | Win% | P&L | Max DD | Return/DD |
+|--------|--------|------|-----|--------|-----------|
+| Vanilla (1d hold) | 264 | 56% | $7,894 | $1,151 | 6.9× |
+| Trail 3d | 94 | 69% | $10,084 | $1,087 | 9.3× |
+| **Trail Forever** | **90** | **67%** | **$20,193** | **$1,045** | **19.3×** |
 
-## Settings
-
-| Setting | Value |
-|---------|-------|
-| Fast SMA | 10 |
-| Slow SMA | 50 |
-| SMA 200 (short filter) | 200 |
-| ATR Contraction SMA | 20 |
-| Stop Loss | 1.0 × ATR |
-| Trail EMA | 20 |
-| Trail ATR Buffer | 1.0 |
-| Trail Starts At | 2.5R |
-| Short TP | 3.0R |
-| Risk Per Trade | $100 |
+> Trail Forever: Let winners run. $20K profit on $100 risk per trade. Max drawdown under $1,100.
 
 ---
 
-## Project Structure
+## 📡 Live Scanner
+
+The scanner tells you **one thing**: should I buy at today's close?
+
+- Scores each day using 10+ signals (VIX panic, RSI oversold, dip-in-uptrend, etc.)
+- Score ≥ 3 + SPX > SMA(50) = **BUY**
+- Runs on **SPX, SPY, and QQQ** simultaneously
+- Auto-refreshes daily via GitHub Actions (fetches from Google Sheets)
 
 ```
-├── pine_trend_rider_v1       # TradingView PineScript v5 strategy
+3:20 PM ET → Data auto-refreshes
+3:25 PM ET → Check scanner page
+3:50 PM ET → Place MOC order if signal is green
+```
+
+---
+
+## 📊 Strategies Included
+
+| # | Strategy | Type | Edge |
+|---|----------|------|------|
+| 1 | Trend Rider | SMA crossover + trailing stop | Ride trends, cut losers fast |
+| 2 | MA Bounce | Mean reversion at moving averages | Buy dips in uptrends |
+| 3 | Breakout | Range breakout + volume confirm | Momentum entries |
+| 4 | RSI Trend | RSI + trend alignment | Oversold in uptrend |
+| 5 | Mean Reversion | Statistical mean reversion | Rubber band snaps back |
+| 6 | Trendline | Trendline bounce detection | Support holds |
+| 7 | S/R Bounce | Support/resistance levels | Key levels matter |
+| 8 | FVG | Fair value gap fills | Imbalance trading |
+| 9 | VCP | Volatility contraction pattern | Breakout setup |
+| 10 | Volume | Volume profile analysis | Smart money footprint |
+
+---
+
+## 🏗 Project Structure
+
+```
+├── dashboard/                 # React + Vite + Recharts
+│   ├── src/pages/             # Strategy pages, scanner, trail study
+│   ├── src/components/        # Charts, tables, KPI cards
+│   └── public/                # Generated JSON data
 ├── scripts/
-│   ├── generate_data.py      # Backtest data generator → data.json
-│   ├── atr_short_filter_analysis.py  # ATR analysis (10-part)
-│   └── compare_atr_filter.py # A/B: baseline vs ATR contraction filter
-├── dashboard/                # React dashboard (Vite + Recharts)
-│   ├── src/pages/            # Strategy overview + per-stock pages
-│   ├── src/components/       # Charts, tables, KPI cards
-│   └── public/data.json      # Generated backtest data
-├── data/                     # Daily OHLCV CSVs (2021-2026)
-└── README.md
+│   ├── refresh_scanner.py     # Fetches Google Sheets → runs scanner
+│   ├── generate_*.py          # Backtest data generators
+│   └── research/              # Exploratory / one-off research scripts
+├── data/                      # OHLCV CSVs (SPX, VIX, SPY, QQQ, 12 stocks)
+├── .github/workflows/         # Auto-refresh cron job
+├── scripts/pinescript/        # TradingView PineScript strategies
+└── requirements.txt           # Python dependencies
 ```
 
 ---
 
-## Dashboard
+## ⚡ Quick Start
 
 ```bash
-# Generate data
-python3 scripts/generate_data.py
+# 1. Generate backtest data
+python scripts/generate_data.py
 
-# Run dashboard
+# 2. Run dashboard
 cd dashboard && npm install && npm run dev
-```
 
-Per-stock pages with equity curves, drawdown charts, price charts with trade markers, quarterly/monthly/yearly breakdowns, and full trade logs.
+# 3. Run scanner (fetches live data from Google Sheets)
+python scripts/refresh_scanner.py
+```
 
 ---
 
-## Disclaimer
+## 🔧 Scanner Setup (Google Sheets → Auto-refresh)
 
-For **educational and research purposes only**. Past backtest results do not guarantee future performance. Trading involves risk of loss.
+1. Create Google Sheets with `=GOOGLEFINANCE()` formulas for SPX, VIX, SPY, QQQ
+2. Share sheets as "Anyone with the link"
+3. URLs are already configured in `scripts/refresh_scanner.py`
+4. GitHub Action runs Mon-Fri at 3:20 PM ET automatically
+5. Or trigger manually: Actions tab → Run workflow
+
+---
+
+## 🧠 Key Research Findings
+
+- **Trail Forever is king** — letting winners run indefinitely with a trailing stop beats every fixed holding period
+- **SMA(50) filter is non-negotiable** — without regime filtering, trailing stops amplify bear market losses
+- **Pause after 2 losses** — stops bleeding during hostile regimes
+- **Bonds don't help** — macro indicators (TLT, IEF, BND) add nothing beyond SPX > SMA(50)
+- **The only regime to avoid** — when BOTH stocks AND bonds fall simultaneously (SPX < SMA50 catches this)
+
+---
+
+## 📝 Philosophy
+
+1. **Backtest everything** — no hunches, no guru calls
+2. **Keep it simple** — if you need a PhD to understand it, it's overfit
+3. **Risk first** — return/drawdown ratio matters more than total return
+4. **Open source** — share what works, learn from the community
+5. **Retail edge is real** — small size, patience, and discipline beat institutions
+
+---
+
+## ⚠️ Disclaimer
+
+For **educational and research purposes only**. Past backtest results do not guarantee future performance. Trading involves substantial risk of loss. This is not financial advice.
+
+---
+
+## Contributing
+
+Found a bug? Have a strategy idea? Open an issue or PR. This is a community project.
+
+## License
+
+MIT

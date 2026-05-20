@@ -1,1 +1,21 @@
+# Python
 __pycache__/
+*.pyc
+*.pyo
+.env
+venv/
+.venv/
+
+# Node / Dashboard
+node_modules/
+dist/
+.DS_Store
+
+# IDE
+.vscode/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store

@@ -23,7 +23,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install pandas numpy requests
+        run: pip install -r requirements.txt
 
       - name: Run scanner refresh
         run: python scripts/refresh_scanner.py
