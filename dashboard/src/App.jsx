@@ -18,6 +18,7 @@ import SpxOvernightPage from './pages/SpxOvernightPage'
 import SpyOvernightPage from './pages/SpyOvernightPage'
 import QqqOvernightPage from './pages/QqqOvernightPage'
 import OvernightTrailStudyPage from './pages/OvernightTrailStudyPage'
+import QqqTrailStudyPage from './pages/QqqTrailStudyPage'
 import MacroOvernightPage from './pages/MacroOvernightPage'
 import ScannerPage from './pages/ScannerPage'
 import StockPage from './pages/StockPage'
@@ -52,6 +53,7 @@ export default function App() {
   const [spyOnData, setSpyOnData] = useState(null)
   const [qqqOnData, setQqqOnData] = useState(null)
   const [onTrailData, setOnTrailData] = useState(null)
+  const [qqqTrailData, setQqqTrailData] = useState(null)
   const [macroOnData, setMacroOnData] = useState(null)
   const [scannerData, setScannerData] = useState(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -84,6 +86,7 @@ export default function App() {
     load('spy_overnight_data.json', setSpyOnData)
     load('qqq_overnight_data.json', setQqqOnData)
     load('overnight_trail_study.json', setOnTrailData)
+    load('qqq_trail_study.json', setQqqTrailData)
     load('macro_overnight_data.json', setMacroOnData)
     load('scanner_data.json', setScannerData)
   }, [])
@@ -131,7 +134,10 @@ export default function App() {
             QQQ Overnight
           </NavLink>
           <NavLink to="/overnight-trail-study" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
-            🔬 Trail Stop Study
+            🔬 SPX Trail Study
+          </NavLink>
+          <NavLink to="/qqq-trail-study" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+            🔬 QQQ Trail Study
           </NavLink>
           <NavLink to="/overnight-macro" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
             🌐 Macro Study
@@ -183,6 +189,7 @@ export default function App() {
           <Route path="/spy-overnight" element={<SpyOvernightPage data={spyOnData} />} />
           <Route path="/qqq-overnight" element={<QqqOvernightPage data={qqqOnData} />} />
           <Route path="/overnight-trail-study" element={<OvernightTrailStudyPage data={onTrailData} />} />
+          <Route path="/qqq-trail-study" element={<QqqTrailStudyPage data={qqqTrailData} />} />
           <Route path="/overnight-macro" element={<MacroOvernightPage data={macroOnData} />} />
           <Route path="/scanner" element={<ScannerPage data={scannerData} />} />
           <Route path="/skip-analysis" element={<FilterLabPage bnData={bnData} />} />
