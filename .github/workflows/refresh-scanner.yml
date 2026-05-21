@@ -1,4 +1,4 @@
-name: Refresh Scanner Data
+name: Market Data Fetcher
 
 on:
   # Run Mon-Fri at 3:20 PM ET (19:20 UTC in EDT / 20:20 UTC in EST)

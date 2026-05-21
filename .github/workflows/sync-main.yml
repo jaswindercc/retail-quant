@@ -1,0 +1,21 @@
+name: Sync codespaces → main
+
+on:
+  push:
+    branches:
+      - codespaces
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codespaces
+          fetch-depth: 0
+
+      - name: Push to main
+        run: git push origin codespaces:main --force
