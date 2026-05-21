@@ -25,6 +25,7 @@ import StockPage from './pages/StockPage'
 import StocksOverviewPage from './pages/StocksOverviewPage'
 import SwingScannersPage from './pages/SwingScannersPage'
 import StratCandlePage from './pages/StratCandlePage'
+import StratStockPage from './pages/StratStockPage'
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
 
@@ -117,6 +118,7 @@ export default function App() {
   const isOvernightRoute = ['/overnight', '/spy-overnight', '/qqq-overnight', '/overnight-trail-study', '/qqq-trail-study', '/overnight-macro', '/scanner'].some(p => location.pathname.startsWith(p))
   const isSwingRoute = STRATS.some(s => location.pathname.startsWith(s.path)) || location.pathname === '/' || location.pathname === '/stocks' || location.pathname === '/swing-scanners'
   const isResearchRoute = ['/trail-study', '/skip-analysis'].some(p => location.pathname.startsWith(p))
+  const isStratRoute = location.pathname.startsWith('/the-strat')
 
   return (
     <div className="app">
@@ -183,9 +185,17 @@ export default function App() {
             </NavGroup>
           )}
 
-          <NavLink to="/the-strat" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`} style={{marginTop:'0.5rem'}}>
-            🕯️ The STRAT
-          </NavLink>
+          <NavGroup label="The STRAT" icon="🕯️" defaultOpen={isStratRoute}>
+            <NavLink to="/the-strat" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              📊 STRAT Overview
+            </NavLink>
+            <div className="nav-sub-label">Per Stock</div>
+            {['SPY','QQQ','AAPL','NVDA','META','MSFT','GOOGL','AMD','TSLA','CRM','ADBE','BA','SNOW','SPX','VIX','TLT','IEF','BND','USTTENT'].map(s => (
+              <NavLink key={s} to={`/the-strat/stock/${s}`} className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+                {s}
+              </NavLink>
+            ))}
+          </NavGroup>
 
           <NavGroup label="Research" icon="🧪" defaultOpen={isResearchRoute}>
             <NavLink to="/trail-study" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
@@ -236,6 +246,7 @@ export default function App() {
           <Route path="/stocks" element={<StocksOverviewPage data={trData} allData={{tr:trData,bn:bnData,br:brData,rsi:rsiData,mr:mrData,tl:tlData,sr:srData,fvg:fvgData,vcp:vcpData,vol:volData}} />} />
           <Route path="/swing-scanners" element={<SwingScannersPage />} />
           <Route path="/the-strat" element={<StratCandlePage />} />
+          <Route path="/the-strat/stock/:symbol" element={<StratStockPage />} />
           <Route path="/trail-study" element={<TrailStudyPage />} />
           <Route path="/learnings" element={<MasterLearningsPage />} />
         </Routes>
