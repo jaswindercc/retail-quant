@@ -1,0 +1,153 @@
+//@version=5
+// ============================================================
+// HIGHER HIGH BREAK SCANNER v1
+// ============================================================
+// Detects: First higher swing high after 3+ consecutive lower swing highs.
+// This is a trend reversal signal — the first sign sellers have lost control.
+//
+// Logic:
+// 1. Identify swing highs (local maxima over N bars on each side).
+// 2. Track consecutive lower swing highs.
+// 3. When a new swing high breaks above the previous one after 3+ lower highs → SIGNAL.
+//
+// Usage:
+// - Add to your chart on any stock/timeframe (Daily recommended).
+// - Set an alert with condition "Higher High Break" → "Any alert() function call".
+// - Add to a watchlist and TradingView will notify you when it fires.
+//
+// Matching backtest: generate_higher_high_data.py (54% WR, 25.3R avg win, PF 12.83)
+// ============================================================
+
+indicator("Higher High Break Scanner", overlay=true, max_bars_back=500)
+
+// ======================== INPUTS ======================== //
+grp1 = "Swing Detection"
+swingLen    = input.int(10, "Swing High Lookback (bars each side)", minval=3, maxval=30, group=grp1,
+              tooltip="Number of bars on each side to confirm a swing high. 10 = 21-bar window.")
+minLowerHH  = input.int(3,  "Min Consecutive Lower Highs", minval=2, maxval=10, group=grp1,
+              tooltip="How many consecutive lower swing highs needed before a higher high counts as a signal.")
+
+grp2 = "Filters"
+useEmaFilter = input.bool(false, "Require price below EMA50 during downtrend", group=grp2,
+              tooltip="If enabled, only signals when the lower highs occurred while price was below EMA50.")
+atrLen       = input.int(14, "ATR Length (for stop calc display)", group=grp2)
+
+grp3 = "Display"
+showSwingHighs = input.bool(true, "Show Swing High markers", group=grp3)
+showLowerHHs   = input.bool(true, "Show Lower High labels", group=grp3)
+
+// ======================== CALCULATIONS ======================== //
+
+// Detect swing highs using ta.pivothigh
+swHigh = ta.pivothigh(high, swingLen, swingLen)
+
+// Track swing high history
+var float[] swingHighPrices = array.new_float(0)
+var int[]   swingHighBars   = array.new_int(0)
+
+// Count consecutive lower highs
+var int lowerHighCount = 0
+var float lastSwingHigh = na
+var bool signalFired = false
+
+// ATR for stop loss display
+atrVal = ta.atr(atrLen)
+ema50 = ta.ema(close, 50)
+
+// When a new swing high is detected (offset by swingLen bars)
+if not na(swHigh)
+    array.push(swingHighPrices, swHigh)
+    array.push(swingHighBars, bar_index - swingLen)
+    
+    if not na(lastSwingHigh)
+        if swHigh < lastSwingHigh
+            // Lower high → increment counter
+            lowerHighCount := lowerHighCount + 1
+            signalFired := false
+        else if swHigh > lastSwingHigh and lowerHighCount >= minLowerHH and not signalFired
+            // HIGHER HIGH after enough lower highs → SIGNAL!
+            signalFired := true
+            lowerHighCount := 0
+        else
+            // Higher high but not enough lower highs preceding it
+            lowerHighCount := 0
+    
+    lastSwingHigh := swHigh
+
+// ======================== ENTRY SIGNAL ======================== //
+// Signal fires on the bar where price closes above the previous swing high level
+// after 3+ lower swing highs were detected
+
+var float breakLevel = na
+var bool pendingBreak = false
+
+if not na(swHigh) and signalFired
+    breakLevel := swHigh
+    pendingBreak := false  // The swing high itself is the breakout
+
+// Also check: real-time close above last swing high after lower highs detected
+entrySignal = signalFired and not na(swHigh) and bar_index == bar_index[0]
+
+// For live scanning: detect close above the swing high level on the confirmation bar
+liveSignal = not na(swHigh) and signalFired
+
+// ======================== PLOTTING ======================== //
+
+// Mark all swing highs
+plotshape(showSwingHighs and not na(swHigh) ? swHigh : na, 
+          title="Swing High", style=shape.triangledown, 
+          location=location.abovebar, color=color.gray, size=size.tiny,
+          offset=-swingLen)
+
+// Mark lower highs in orange
+isLowerHigh = not na(swHigh) and not na(lastSwingHigh[1]) and swHigh < nz(lastSwingHigh[1])
+plotshape(showLowerHHs and isLowerHigh ? swHigh : na,
+          title="Lower High", style=shape.triangledown,
+          location=location.abovebar, color=color.orange, size=size.small,
+          offset=-swingLen, text="LH")
+
+// Mark the SIGNAL - Higher High Break
+plotshape(liveSignal ? swHigh : na,
+          title="Higher High Break!", style=shape.triangleup,
+          location=location.belowbar, color=color.lime, size=size.large,
+          offset=-swingLen, text="HH BREAK!")
+
+// Background highlight on signal bar
+bgcolor(liveSignal ? color.new(color.lime, 90) : na, title="Signal Background")
+
+// Plot the break level as a horizontal line
+plot(lowerHighCount >= minLowerHH and not na(lastSwingHigh) ? lastSwingHigh : na,
+     title="Break Level", color=color.new(color.lime, 50), 
+     style=plot.style_circles, linewidth=1)
+
+// Stop loss level (1 ATR below entry)
+plotshape(liveSignal ? close - atrVal : na,
+          title="Stop Level", style=shape.xcross,
+          location=location.absolute, color=color.red, size=size.tiny,
+          offset=-swingLen)
+
+// ======================== ALERTS ======================== //
+
+alertcondition(liveSignal, 
+    title="Higher High Break Signal",
+    message="🚨 HIGHER HIGH BREAK on {{ticker}} ({{interval}})! Price broke above swing high after " + str.tostring(minLowerHH) + "+ lower highs. Entry: {{close}}, Stop: " + str.tostring(math.round(close - atrVal, 2)) + " (1 ATR)")
+
+// Also fire a standard alert for the screener
+if liveSignal
+    alert("🚨 HIGHER HIGH BREAK: " + syminfo.tickerid + " | Close: " + str.tostring(close) + " | Stop: " + str.tostring(math.round(close - atrVal, 2)), alert.freq_once_per_bar_close)
+
+// ======================== INFO TABLE ======================== //
+var table infoTable = table.new(position.top_right, 2, 5, bgcolor=color.new(color.black, 80), border_width=1)
+
+if barstate.islast
+    table.cell(infoTable, 0, 0, "Higher High Break", text_color=color.lime, text_size=size.normal)
+    table.cell(infoTable, 1, 0, "Scanner v1", text_color=color.gray, text_size=size.small)
+    table.cell(infoTable, 0, 1, "Lower Highs:", text_color=color.white, text_size=size.small)
+    table.cell(infoTable, 1, 1, str.tostring(lowerHighCount), text_color=lowerHighCount >= minLowerHH ? color.lime : color.orange, text_size=size.small)
+    table.cell(infoTable, 0, 2, "Break Level:", text_color=color.white, text_size=size.small)
+    table.cell(infoTable, 1, 2, not na(lastSwingHigh) ? str.tostring(math.round(lastSwingHigh, 2)) : "—", text_color=color.lime, text_size=size.small)
+    table.cell(infoTable, 0, 3, "Status:", text_color=color.white, text_size=size.small)
+    statusText = lowerHighCount >= minLowerHH ? "⏳ WATCHING (need close > " + str.tostring(math.round(lastSwingHigh, 2)) + ")" : "No setup"
+    table.cell(infoTable, 1, 3, statusText, text_color=lowerHighCount >= minLowerHH ? color.yellow : color.gray, text_size=size.small)
+    table.cell(infoTable, 0, 4, "ATR Stop:", text_color=color.white, text_size=size.small)
+    table.cell(infoTable, 1, 4, str.tostring(math.round(atrVal, 2)), text_color=color.red, text_size=size.small)

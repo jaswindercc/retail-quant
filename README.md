@@ -38,18 +38,9 @@ python scripts/refresh_scanner.py
 ├── dashboard/          # React + Vite + Recharts (deployed to GitHub Pages)
 ├── scripts/            # Python backtests & scanner
 ├── data/               # OHLCV CSVs
-├── .github/workflows/  # CI/CD workflows
+├── .github/workflows/  # Auto-refresh + auto-deploy
 └── requirements.txt    # Python deps
 ```
-
----
-
-## CI / Automation
-
-| Workflow | Trigger | What it does |
-|----------|---------|-------------|
-| **Market Data Fetcher** | Mon–Fri 3:20 PM ET | Runs `refresh_scanner.py`, commits updated `scanner_data.json` + market data to `main` |
-| **Sync codespaces → main** | Push to `codespaces` | Auto-syncs dev branch to `main` so live site always matches latest code |
 
 ---
 

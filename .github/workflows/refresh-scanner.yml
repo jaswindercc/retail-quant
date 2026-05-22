@@ -1,9 +1,9 @@
-name: Market Data Fetcher
+name: Refresh Scanner Data
 
 on:
-  # Run Mon-Fri at 3:20 PM ET (19:20 UTC in EDT / 20:20 UTC in EST)
+  # Run Mon-Fri at 3:15 PM Toronto (19:15 UTC in EDT / 20:15 UTC in EST)
   schedule:
-    - cron: '20 19 * * 1-5'
+    - cron: '15 19 * * 1-5'
   # Manual trigger
   workflow_dispatch:
 
@@ -32,8 +32,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add dashboard/public/scanner_data.json
-          git add data/
+          git add -f dashboard/public/scanner_data.json
           # Only commit if there are changes
-          git diff --cached --quiet || git commit -m "🤖 Auto-refresh scanner data $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git diff --cached --quiet || git commit -m "🤖 Scanner refresh $(TZ='America/Toronto' date '+%Y-%m-%d %I:%M %p ET')"
           git push

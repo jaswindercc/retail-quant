@@ -24,8 +24,18 @@ import ScannerPage from './pages/ScannerPage'
 import StockPage from './pages/StockPage'
 import StocksOverviewPage from './pages/StocksOverviewPage'
 import SwingScannersPage from './pages/SwingScannersPage'
+import FiftyTwoWeekHighPage from './pages/FiftyTwoWeekHighPage'
+import BottomPickerPage from './pages/BottomPickerPage'
+import HigherHighBreakPage from './pages/HigherHighBreakPage'
+import RareScannerPage from './pages/RareScannerPage'
+import HHScannerPage from './pages/HHScannerPage'
+import LiveScannerPage from './pages/LiveScannerPage'
 import StratCandlePage from './pages/StratCandlePage'
+import StratSummaryPage from './pages/StratSummaryPage'
 import StratStockPage from './pages/StratStockPage'
+import Strat2D12UPage from './pages/Strat2D12UPage'
+import Strat32D12UPage from './pages/Strat32D12UPage'
+import StratComboDetailPage from './pages/StratComboDetailPage'
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
 
@@ -40,7 +50,18 @@ const STRATS = [
   { path: '/volume', label: 'Volume v1', prefix: 'volume' },
   { path: '/vcp', label: 'VCP v1', prefix: 'vcp' },
   { path: '/meanrev', label: 'Mean Rev v1', prefix: 'meanrev' },
+  { path: '/52wk-high', label: '52-Wk High Break', prefix: '52wk-high' },
+  { path: '/bottom-picker', label: 'Bottom Picker', prefix: 'bottom-picker' },
+  { path: '/higher-high', label: 'Higher High Break', prefix: 'higher-high' },
 ]
+
+const RARE_STRATS = [
+  { path: '/52wk-high', label: '52-Wk High Break', prefix: '52wk-high' },
+  { path: '/bottom-picker', label: 'Bottom Picker', prefix: 'bottom-picker' },
+  { path: '/higher-high', label: '⭐ Higher High Break', prefix: 'higher-high' },
+]
+
+const CORE_STRATS = STRATS.filter(s => !RARE_STRATS.some(r => r.path === s.path))
 
 function NavGroup({ label, icon, children, defaultOpen = false }) {
   const [open, setOpen] = useState(true)
@@ -73,6 +94,9 @@ export default function App() {
   const [qqqTrailData, setQqqTrailData] = useState(null)
   const [macroOnData, setMacroOnData] = useState(null)
   const [scannerData, setScannerData] = useState(null)
+  const [wk52Data, setWk52Data] = useState(null)
+  const [bpData, setBpData] = useState(null)
+  const [hhData, setHhData] = useState(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark')
   const location = useLocation()
@@ -106,9 +130,12 @@ export default function App() {
     load('qqq_trail_study.json', setQqqTrailData)
     load('macro_overnight_data.json', setMacroOnData)
     load('scanner_data.json', setScannerData)
+    load('52wk_high_data.json', setWk52Data)
+    load('bottom_picker_data.json', setBpData)
+    load('higher_high_data.json', setHhData)
   }, [])
 
-  if (!trData || !bnData || !brData || !rsiData || !mrData || !tlData || !srData || !fvgData || !vcpData || !volData) return <div className="loading">Loading…</div>
+  if (!trData || !bnData || !brData || !rsiData || !mrData || !tlData || !srData || !fvgData || !vcpData || !volData || !wk52Data || !bpData || !hhData) return <div className="loading">Loading…</div>
 
   // Detect active strategy from URL
   const active = STRATS.find(s => location.pathname.startsWith(s.path)) || null
@@ -116,9 +143,10 @@ export default function App() {
 
   // Auto-open nav groups based on current route
   const isOvernightRoute = ['/overnight', '/spy-overnight', '/qqq-overnight', '/overnight-trail-study', '/qqq-trail-study', '/overnight-macro', '/scanner'].some(p => location.pathname.startsWith(p))
-  const isSwingRoute = STRATS.some(s => location.pathname.startsWith(s.path)) || location.pathname === '/' || location.pathname === '/stocks' || location.pathname === '/swing-scanners'
-  const isResearchRoute = ['/trail-study', '/skip-analysis'].some(p => location.pathname.startsWith(p))
+  const isSwingRoute = CORE_STRATS.some(s => location.pathname.startsWith(s.path)) || location.pathname === '/' || location.pathname === '/stocks' || location.pathname === '/swing-scanners' || location.pathname === '/live-scanner'
+  const isRareRoute = RARE_STRATS.some(s => location.pathname.startsWith(s.path)) || location.pathname === '/rare-scanner' || location.pathname === '/hh-scanner'
   const isStratRoute = location.pathname.startsWith('/the-strat')
+  const isResearchRoute = ['/trail-study', '/skip-analysis'].some(p => location.pathname.startsWith(p))
 
   return (
     <div className="app">
@@ -159,6 +187,9 @@ export default function App() {
           </NavGroup>
 
           <NavGroup label="Swing Strategies" icon="📈" defaultOpen={isSwingRoute}>
+            <NavLink to="/live-scanner" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: isActive ? '#ffd700' : '#ffd700', fontWeight: 700 })}>
+              🔴 Live Scanner
+            </NavLink>
             <NavLink to="/" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
               📊 Swing Summary
             </NavLink>
@@ -166,9 +197,23 @@ export default function App() {
               🏷️ Stock Universe
             </NavLink>
             <NavLink to="/swing-scanners" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
-              📡 Swing Scanners
+              📡 Strategy Rules
             </NavLink>
-            {STRATS.map(s => (
+            {CORE_STRATS.map(s => (
+              <NavLink key={s.path} to={s.path} end className={({isActive}) =>
+                `strategy-link sub-link ${isActive ? 'active' : ''}`
+              }>{s.label}</NavLink>
+            ))}
+          </NavGroup>
+
+          <NavGroup label="Rare Patterns" icon="⚡" defaultOpen={isRareRoute}>
+            <NavLink to="/rare-scanner" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              📡 Rare Pattern Scanner
+            </NavLink>
+            <NavLink to="/hh-scanner" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              📐 Higher High Scanner
+            </NavLink>
+            {RARE_STRATS.map(s => (
               <NavLink key={s.path} to={s.path} end className={({isActive}) =>
                 `strategy-link sub-link ${isActive ? 'active' : ''}`
               }>{s.label}</NavLink>
@@ -187,14 +232,17 @@ export default function App() {
 
           <NavGroup label="The STRAT" icon="🕯️" defaultOpen={isStratRoute}>
             <NavLink to="/the-strat" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
-              📊 STRAT Overview
+              📊 Candle Combos
             </NavLink>
-            <div className="nav-sub-label">Per Stock</div>
-            {['SPY','QQQ','AAPL','NVDA','META','MSFT','GOOGL','AMD','TSLA','CRM','ADBE','BA','SNOW','SPX','VIX','TLT','IEF','BND','USTTENT'].map(s => (
-              <NavLink key={s} to={`/the-strat/stock/${s}`} className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
-                {s}
-              </NavLink>
-            ))}
+            <NavLink to="/the-strat/summary" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              📋 Summary
+            </NavLink>
+            <NavLink to="/the-strat/2d-1-2u" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              🔄 2D-1-2U
+            </NavLink>
+            <NavLink to="/the-strat/3-2d-1-2u" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              🔄 3-2D-1-2U
+            </NavLink>
           </NavGroup>
 
           <NavGroup label="Research" icon="🧪" defaultOpen={isResearchRoute}>
@@ -214,7 +262,7 @@ export default function App() {
       {sidebarOpen && <div className="sidebar-overlay show" onClick={() => setSidebarOpen(false)} />}
       <div className="main">
         <Routes>
-          <Route path="/" element={<ComparePage trData={trData} bnData={bnData} brData={brData} rsiData={rsiData} mrData={mrData} tlData={tlData} srData={srData} fvgData={fvgData} vcpData={vcpData} volData={volData} />} />
+          <Route path="/" element={<ComparePage trData={trData} bnData={bnData} brData={brData} rsiData={rsiData} mrData={mrData} tlData={tlData} srData={srData} fvgData={fvgData} vcpData={vcpData} volData={volData} wk52Data={wk52Data} bpData={bpData} hhData={hhData} />} />
           <Route path="/trend-rider" element={<StrategyPage data={trData} strategyName="Trend Rider v1" />} />
           <Route path="/trend-rider/stock/:symbol" element={<StockPage data={trData} strategy="Trend Rider v1" />} />
           <Route path="/bounce" element={<BouncePage data={bnData} strategyName="MA Bounce v1" />} />
@@ -235,6 +283,15 @@ export default function App() {
           <Route path="/vcp/stock/:symbol" element={<StockPage data={vcpData} strategy="VCP v1" />} />
           <Route path="/volume" element={<VolumePage data={volData} strategyName="Volume v1" />} />
           <Route path="/volume/stock/:symbol" element={<StockPage data={volData} strategy="Volume v1" />} />
+          <Route path="/52wk-high" element={<FiftyTwoWeekHighPage data={wk52Data} strategyName="52-Week High Break" />} />
+          <Route path="/52wk-high/stock/:symbol" element={<StockPage data={wk52Data} strategy="52-Week High Break" />} />
+          <Route path="/bottom-picker" element={<BottomPickerPage data={bpData} strategyName="Bottom Picker" />} />
+          <Route path="/bottom-picker/stock/:symbol" element={<StockPage data={bpData} strategy="Bottom Picker" />} />
+          <Route path="/higher-high" element={<HigherHighBreakPage data={hhData} strategyName="Higher High Break" />} />
+          <Route path="/higher-high/stock/:symbol" element={<StockPage data={hhData} strategy="Higher High Break" />} />
+          <Route path="/rare-scanner" element={<RareScannerPage />} />
+          <Route path="/hh-scanner" element={<HHScannerPage />} />
+          <Route path="/live-scanner" element={<LiveScannerPage />} />
           <Route path="/overnight" element={<SpxOvernightPage data={onData} />} />
           <Route path="/spy-overnight" element={<SpyOvernightPage data={spyOnData} />} />
           <Route path="/qqq-overnight" element={<QqqOvernightPage data={qqqOnData} />} />
@@ -246,7 +303,11 @@ export default function App() {
           <Route path="/stocks" element={<StocksOverviewPage data={trData} allData={{tr:trData,bn:bnData,br:brData,rsi:rsiData,mr:mrData,tl:tlData,sr:srData,fvg:fvgData,vcp:vcpData,vol:volData}} />} />
           <Route path="/swing-scanners" element={<SwingScannersPage />} />
           <Route path="/the-strat" element={<StratCandlePage />} />
+          <Route path="/the-strat/summary" element={<StratSummaryPage />} />
           <Route path="/the-strat/stock/:symbol" element={<StratStockPage />} />
+          <Route path="/the-strat/2d-1-2u" element={<Strat2D12UPage />} />
+          <Route path="/the-strat/3-2d-1-2u" element={<Strat32D12UPage />} />
+          <Route path="/the-strat/combo/:combo/:stock" element={<StratComboDetailPage />} />
           <Route path="/trail-study" element={<TrailStudyPage />} />
           <Route path="/learnings" element={<MasterLearningsPage />} />
         </Routes>

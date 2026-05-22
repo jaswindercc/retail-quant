@@ -15,6 +15,9 @@ const STRATS = [
   { key: 'fvg', label: 'FVG', color: '#ffeb3b', icon: '💛', desc: 'Fair Value Gap pullback', path: '/fvg', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 trail at 2.5R' },
   { key: 'vcp', label: 'VCP', color: '#9c27b0', icon: '💜', desc: 'Volatility contraction breakout', path: '/vcp', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 trail at 2.5R' },
   { key: 'vol', label: 'Volume', color: '#ff7043', icon: '🧡', desc: 'Volume spike breakout', path: '/volume', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 trail at 2.5R' },
+  { key: 'wk52', label: '52-Wk High', color: '#26c6da', icon: '🏔️', desc: 'Break above 252-day high', path: '/52wk-high', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 trail at 2.5R', rare: true },
+  { key: 'bp', label: 'Bottom Picker', color: '#ef5350', icon: '🎣', desc: '20%+ crash → RSI<35 → first green bar', path: '/bottom-picker', dir: 'Long only', stop: '1.5× ATR', exit: 'EMA20 trail at 2.5R', rare: true },
+  { key: 'hh', label: 'Higher High', color: '#ab47bc', icon: '📐', desc: 'First HH after 3+ lower highs', path: '/higher-high', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 trail at 2.5R', featured: true },
 ]
 
 function getFullStats(data, symbol) {
@@ -33,8 +36,8 @@ function getFullStats(data, symbol) {
   }
 }
 
-export default function ComparePage({ trData, bnData, brData, rsiData, mrData, tlData, srData, fvgData, vcpData, volData }) {
-  const dataMap = { tr: trData, bn: bnData, br: brData, rsi: rsiData, mr: mrData, tl: tlData, sr: srData, fvg: fvgData, vcp: vcpData, vol: volData }
+export default function ComparePage({ trData, bnData, brData, rsiData, mrData, tlData, srData, fvgData, vcpData, volData, wk52Data, bpData, hhData }) {
+  const dataMap = { tr: trData, bn: bnData, br: brData, rsi: rsiData, mr: mrData, tl: tlData, sr: srData, fvg: fvgData, vcp: vcpData, vol: volData, wk52: wk52Data, bp: bpData, hh: hhData }
 
   // Build full stats per strategy
   const stratStats = STRATS.map(st => {
@@ -83,27 +86,69 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
 
   return (
     <div>
-      <h1 className="page-title">Strategy Summary <span>10 Strategies · 12 Stocks · Jan 2021 – Present · $100 risk/trade</span></h1>
+      <h1 className="page-title">Strategy Summary <span>13 Strategies · 12 Stocks · Jan 2021 – Present · $100 risk/trade</span></h1>
 
-      {/* ── THE ANSWER ── */}
-      <div className="card" style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)', border: '2px solid #00e676', padding: '1.5rem' }}>
-        <h2 style={{ color: '#00e676', margin: '0 0 1rem 0', fontSize: 'clamp(1.1rem, 4vw, 1.5rem)' }}>The Bottom Line</h2>
-        <div style={{ fontSize: 'clamp(0.9rem, 2.5vw, 1.1rem)', lineHeight: '1.8', color: '#e0e0e0' }}>
-          <p style={{ margin: '0 0 1rem 0' }}>
-            <Link to={winner.path} style={{textDecoration:'none'}}><strong style={{ color: '#fff', fontSize: 'clamp(1rem, 3vw, 1.3rem)' }}>{winner.icon} {winner.label} is #1</strong></Link> — avg <strong style={{ color: '#00e676' }}>{fmt$(winner.avgPnl)}</strong> per stock
-            with {winner.trades} trades. Profitable on <strong>{winner.profitable}/12</strong> stocks.
-          </p>
-          <p style={{ margin: '0 0 1rem 0' }}>
-            <Link to={runner.path} style={{textDecoration:'none'}}><strong style={{ color: '#fff' }}>{runner.icon} {runner.label} is #2</strong></Link> — avg <strong style={{ color: '#00e676' }}>{fmt$(runner.avgPnl)}</strong> per stock with
-            {' '}{runner.trades} trades. Higher win rate ({runner.wr}%) but fewer dollars per stock.
-          </p>
-          <p style={{ margin: '0 0 1rem 0', color: '#ffab40' }}>
-            All 10 strategies are profitable. The trailing EMA exit works with every entry method.
-            The difference is how OFTEN you get in (trade count) and how BIG the winners run (avg R).
-          </p>
-          <p style={{ margin: 0, padding: '0.75rem', background: 'rgba(0,230,118,0.1)', borderRadius: '8px', borderLeft: '3px solid #00e676' }}>
-            <strong>If you trade one strategy:</strong> {winner.label}. <strong>If you want quality over quantity:</strong> {stratStats.find(s => s.key === 'br')?.label || runner.label} (best avg R + win rate combo).
-          </p>
+      {/* ── TOP STRATEGIES ── */}
+      <div className="card" style={{ background: 'linear-gradient(135deg, #0d1b2a 0%, #1b2838 100%)', border: '2px solid #ffd700', padding: '1.5rem' }}>
+        <h2 style={{ color: '#ffd700', margin: '0 0 0.5rem 0', fontSize: 'clamp(1.1rem, 4vw, 1.5rem)' }}>🏆 Top Strategies — The Only Ones You Need</h2>
+        <p style={{ color: '#aaa', fontSize: '0.85rem', margin: '0 0 1.5rem' }}>Selected based on: profit factor, consistency across stocks, avg R per trade, and total P&L.</p>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '1.25rem' }}>
+          {/* Higher High */}
+          <div style={{ padding: '1.25rem', background: '#1a1a2e', borderRadius: '12px', border: '2px solid #ab47bc' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+              <span style={{ fontSize: '1.5rem' }}>📐</span>
+              <span style={{ background: '#ffd70022', color: '#ffd700', padding: '2px 10px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 700 }}>BEST R:R</span>
+            </div>
+            <h3 style={{ margin: '0 0 0.5rem', color: '#ab47bc' }}><Link to="/higher-high" style={{color:'inherit',textDecoration:'none'}}>Higher High Break</Link></h3>
+            <p style={{ color: '#ccc', fontSize: '0.85rem', margin: '0 0 0.75rem' }}>First higher high after 3+ lower highs. Catches trend reversals at the start.</p>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem' }}>
+              <div><span style={{ color: '#888' }}>Win Rate:</span> <strong style={{ color: '#00e676' }}>54%</strong></div>
+              <div><span style={{ color: '#888' }}>Avg Win:</span> <strong style={{ color: '#00e676' }}>25.3R</strong></div>
+              <div><span style={{ color: '#888' }}>PF:</span> <strong style={{ color: '#00e676' }}>12.83</strong></div>
+              <div><span style={{ color: '#888' }}>$/Stock:</span> <strong style={{ color: '#00e676' }}>$4,280</strong></div>
+            </div>
+            <p style={{ color: '#ff9800', fontSize: '0.75rem', margin: '0.75rem 0 0', fontStyle: 'italic' }}>⚡ Rare (41 trades) but when it fires → massive. Use the scanner to catch signals.</p>
+          </div>
+
+          {/* MA Bounce */}
+          <div style={{ padding: '1.25rem', background: '#1a1a2e', borderRadius: '12px', border: '2px solid #2196f3' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+              <span style={{ fontSize: '1.5rem' }}>🔵</span>
+              <span style={{ background: '#2196f322', color: '#64b5f6', padding: '2px 10px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 700 }}>WORKHORSE</span>
+            </div>
+            <h3 style={{ margin: '0 0 0.5rem', color: '#2196f3' }}><Link to="/bounce" style={{color:'inherit',textDecoration:'none'}}>MA Bounce</Link></h3>
+            <p style={{ color: '#ccc', fontSize: '0.85rem', margin: '0 0 0.75rem' }}>Pullback to EMA20 in uptrend. Most frequent setup — fires constantly in trending markets.</p>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem' }}>
+              <div><span style={{ color: '#888' }}>Win Rate:</span> <strong>29%</strong></div>
+              <div><span style={{ color: '#888' }}>Avg Win:</span> <strong>5.1R</strong></div>
+              <div><span style={{ color: '#888' }}>PF:</span> <strong>2.11</strong></div>
+              <div><span style={{ color: '#888' }}>$/Stock:</span> <strong style={{ color: '#00e676' }}>$3,290</strong></div>
+            </div>
+            <p style={{ color: '#64b5f6', fontSize: '0.75rem', margin: '0.75rem 0 0', fontStyle: 'italic' }}>📈 512 trades · 11/12 stocks profitable. Your bread and butter — trade this every day.</p>
+          </div>
+
+          {/* Breakout */}
+          <div style={{ padding: '1.25rem', background: '#1a1a2e', borderRadius: '12px', border: '2px solid #ff9800' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+              <span style={{ fontSize: '1.5rem' }}>🟡</span>
+              <span style={{ background: '#ff980022', color: '#ffb74d', padding: '2px 10px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 700 }}>BEST EDGE</span>
+            </div>
+            <h3 style={{ margin: '0 0 0.5rem', color: '#ff9800' }}><Link to="/breakout" style={{color:'inherit',textDecoration:'none'}}>Breakout</Link></h3>
+            <p style={{ color: '#ccc', fontSize: '0.85rem', margin: '0 0 0.75rem' }}>Price breaks above 20-day high. Best profit factor of all core strategies.</p>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem' }}>
+              <div><span style={{ color: '#888' }}>Win Rate:</span> <strong>34%</strong></div>
+              <div><span style={{ color: '#888' }}>Avg Win:</span> <strong>5.5R</strong></div>
+              <div><span style={{ color: '#888' }}>PF:</span> <strong style={{ color: '#00e676' }}>2.80</strong></div>
+              <div><span style={{ color: '#888' }}>$/Stock:</span> <strong style={{ color: '#00e676' }}>$2,922</strong></div>
+            </div>
+            <p style={{ color: '#ffb74d', fontSize: '0.75rem', margin: '0.75rem 0 0', fontStyle: 'italic' }}>🎯 297 trades · 11/12 profitable. Highest win rate + PF of core. Quality over quantity.</p>
+          </div>
+        </div>
+
+        <div style={{ marginTop: '1.25rem', padding: '1rem', background: 'rgba(255,215,0,0.06)', borderRadius: '8px', borderLeft: '3px solid #ffd700' }}>
+          <strong style={{ color: '#ffd700' }}>The Playbook:</strong>
+          <span style={{ color: '#ccc', fontSize: '0.9rem' }}> Trade MA Bounce + Breakout daily (high frequency). Watch the scanner for Higher High Break signals (rare but life-changing R:R). That's it.</span>
         </div>
       </div>
 
@@ -138,7 +183,7 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
 
       {/* ── RANKING TABLE ── */}
       <div className="card" style={{ marginTop: '1.5rem' }}>
-        <h3>Final Ranking <span style={{ color: '#8e8e9a', fontWeight: 400, fontSize: 14 }}>sorted by avg P&L per stock</span></h3>
+        <h3>Core Strategies Ranking <span style={{ color: '#8e8e9a', fontWeight: 400, fontSize: 14 }}>30+ trades/stock · sorted by avg P&L per stock</span></h3>
         <table>
           <thead>
             <tr>
@@ -147,7 +192,7 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
             </tr>
           </thead>
           <tbody>
-            {stratStats.map((st, i) => (
+            {stratStats.filter(s => !s.rare && !s.featured).map((st, i) => (
               <tr key={st.key} style={i === 0 ? { background: 'rgba(0,230,118,0.08)' } : {}}>
                 <td><strong style={i === 0 ? { color: '#00e676', fontSize: '1.1rem' } : {}}>{i === 0 ? '👑' : i + 1}</strong></td>
                 <td><Link to={st.path} style={{color:'inherit',textDecoration:'none'}}><strong>{st.icon} {st.label}</strong></Link></td>
@@ -165,6 +210,37 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
         </table>
       </div>
 
+      {/* ── RARE PATTERNS TABLE ── */}
+      <div className="card" style={{ marginTop: '1.5rem', border: '1px solid #ff9800' }}>
+        <h3>Rare Patterns <span style={{ color: '#ff9800', fontWeight: 400, fontSize: 14 }}>⚠️ Low sample size (~3-8 trades/stock) — treat as exploration, not confirmed edge</span></h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Strategy</th><th>Entry Type</th><th>Trades</th><th>Win%</th>
+              <th>Avg R</th><th>Avg P&L / Stock</th><th>PF</th><th>Avg Days</th><th>Stocks +</th>
+            </tr>
+          </thead>
+          <tbody>
+            {stratStats.filter(s => s.rare).map((st) => (
+              <tr key={st.key}>
+                <td><Link to={st.path} style={{color:'inherit',textDecoration:'none'}}><strong>{st.icon} {st.label}</strong></Link></td>
+                <td style={{ color: '#8e8e9a', fontSize: '0.85rem' }}>{st.desc}</td>
+                <td>{st.trades}</td>
+                <td>{st.wr}%</td>
+                <td className={st.avgR >= 0 ? 'win' : 'loss'}>{st.avgR}R</td>
+                <td className={st.avgPnl >= 0 ? 'win' : 'loss'}><strong>{fmt$(st.avgPnl)}</strong></td>
+                <td>{st.pf}</td>
+                <td>{st.avgDur}d</td>
+                <td>{st.profitable}/12</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p style={{ color: '#aaa', fontSize: '0.8rem', margin: '0.75rem 0 0' }}>
+          These fire rarely by nature (52-wk highs, crashes). Need 10+ years of data to validate. Shown for awareness, not for ranking.
+        </p>
+      </div>
+
       {/* ── KEY INSIGHTS ── */}
       <div className="card" style={{ marginTop: '1.5rem' }}>
         <h3>Key Insights From This Study</h3>
@@ -172,8 +248,8 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
           <div style={{ padding: '1rem', background: 'rgba(33,150,243,0.08)', borderRadius: '8px', borderLeft: '3px solid #2196f3' }}>
             <strong style={{ color: '#2196f3' }}>Entry matters less than you think</strong>
             <p style={{ margin: '0.5rem 0 0', color: '#ccc', fontSize: '0.9rem' }}>
-              All 10 strategies are profitable. The same exit (EMA20 trail at 2.5R) makes every entry method work.
-              The spread between #1 and #10 is only {fmt$(stratStats[0].avgPnl - stratStats[stratStats.length-1].avgPnl)} per stock.
+              All 10 core strategies are profitable. The same exit (EMA20 trail at 2.5R) makes every entry method work.
+              The spread between #1 and #10 is only {fmt$(stratStats.filter(s => !s.rare)[0]?.avgPnl - stratStats.filter(s => !s.rare).slice(-1)[0]?.avgPnl)} per stock.
             </p>
           </div>
           <div style={{ padding: '1rem', background: 'rgba(0,230,118,0.08)', borderRadius: '8px', borderLeft: '3px solid #00e676' }}>
@@ -207,7 +283,7 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
           <div style={{ padding: '1rem', background: 'rgba(0,188,212,0.08)', borderRadius: '8px', borderLeft: '3px solid #00bcd4' }}>
             <strong style={{ color: '#00bcd4' }}>The exit IS the strategy</strong>
             <p style={{ margin: '0.5rem 0 0', color: '#ccc', fontSize: '0.9rem' }}>
-              All 10 strategies use the same exit: 1×ATR stop, EMA20 trail at 2.5R. That's why they're ALL profitable.
+              All 13 strategies use the same exit: 1×ATR stop, EMA20 trail at 2.5R. That's why they're ALL profitable.
               Change the exit and everything changes. The trailing stop does the heavy lifting.
             </p>
           </div>
