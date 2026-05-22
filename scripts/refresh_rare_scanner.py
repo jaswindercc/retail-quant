@@ -7,7 +7,7 @@ from pathlib import Path
 from datetime import datetime
 
 DATA_DIR = Path("/workspaces/jas/data")
-OUT = Path("/workspaces/jas/dashboard/public/rare_scanner_data.json")
+OUT = Path(__file__).resolve().parent.parent / "data" / "rare_scanner_data.json"
 EXCLUDE = ['TLT', 'IEF', 'BND', 'USTTENT', 'VIX']
 
 def load(fp):

@@ -29,6 +29,9 @@ jobs:
       - name: Install dependencies
         run: cd dashboard && npm ci
 
+      - name: Copy data JSONs to public for build
+        run: cp data/*.json dashboard/public/ 2>/dev/null || true
+
       - name: Build
         run: cd dashboard && npm run build
 

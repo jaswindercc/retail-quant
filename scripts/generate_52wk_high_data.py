@@ -7,7 +7,7 @@ import pandas as pd, numpy as np, json
 from pathlib import Path
 
 DATA_DIR = Path("/workspaces/jas/data")
-OUT = Path("/workspaces/jas/dashboard/public/52wk_high_data.json")
+OUT = Path(__file__).resolve().parent.parent / "data" / "52wk_high_data.json"
 RISK = 100.0
 EXCLUDE = ['TLT', 'IEF', 'BND', 'USTTENT', 'VIX']
 

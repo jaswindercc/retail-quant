@@ -1,0 +1,87 @@
+{
+  "scanDate": "2026-05-22 16:38",
+  "universe": "custom",
+  "stocksScanned": 2,
+  "totalSignals": 3,
+  "signals": [
+    {
+      "ticker": "NVDA",
+      "strategy": "MA Bounce",
+      "date": "2026-05-22",
+      "entry": 216.95,
+      "stop": 208.69,
+      "risk_per_share": 8.26,
+      "details": "Bounced off EMA20 ($214.78) in uptrend (SMA50=$196.84)",
+      "strength": "STRONG",
+      "bars_ago": 0
+    },
+    {
+      "ticker": "AAPL",
+      "strategy": "Breakout",
+      "date": "2026-05-22",
+      "entry": 309.61,
+      "stop": 303.86,
+      "risk_per_share": 5.74,
+      "details": "Broke 20d high $305.54, above SMA50 ($270.37)",
+      "strength": "NORMAL",
+      "bars_ago": 0
+    },
+    {
+      "ticker": "AAPL",
+      "strategy": "Breakout",
+      "date": "2026-05-21",
+      "entry": 304.99,
+      "stop": 299.29,
+      "risk_per_share": 5.7,
+      "details": "Broke 20d high $303.20, above SMA50 ($269.29)",
+      "strength": "NORMAL",
+      "bars_ago": 1
+    }
+  ],
+  "byStrategy": {
+    "MA Bounce": [
+      {
+        "ticker": "NVDA",
+        "strategy": "MA Bounce",
+        "date": "2026-05-22",
+        "entry": 216.95,
+        "stop": 208.69,
+        "risk_per_share": 8.26,
+        "details": "Bounced off EMA20 ($214.78) in uptrend (SMA50=$196.84)",
+        "strength": "STRONG",
+        "bars_ago": 0
+      }
+    ],
+    "Breakout": [
+      {
+        "ticker": "AAPL",
+        "strategy": "Breakout",
+        "date": "2026-05-22",
+        "entry": 309.61,
+        "stop": 303.86,
+        "risk_per_share": 5.74,
+        "details": "Broke 20d high $305.54, above SMA50 ($270.37)",
+        "strength": "NORMAL",
+        "bars_ago": 0
+      },
+      {
+        "ticker": "AAPL",
+        "strategy": "Breakout",
+        "date": "2026-05-21",
+        "entry": 304.99,
+        "stop": 299.29,
+        "risk_per_share": 5.7,
+        "details": "Broke 20d high $303.20, above SMA50 ($269.29)",
+        "strength": "NORMAL",
+        "bars_ago": 1
+      }
+    ],
+    "Higher High": []
+  },
+  "confluence": [],
+  "summary": {
+    "MA Bounce": 1,
+    "Breakout": 2,
+    "Higher High": 0
+  }
+}

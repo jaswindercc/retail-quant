@@ -25,7 +25,7 @@ import numpy as np
 import pandas as pd
 import yfinance as yf
 
-OUT = Path(__file__).resolve().parent.parent / "dashboard" / "public" / "hh_scanner_results.json"
+OUT = Path(__file__).resolve().parent.parent / "data" / "hh_scanner_results.json"
 
 # ── Stock Universes ──
 SP500_URL = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
