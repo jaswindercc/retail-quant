@@ -6,8 +6,8 @@ __pycache__/
 venv/
 .venv/
 
-# Data — only ignore CSVs (JSONs are tracked and used by dashboard)
-data/*.csv
+# Data (all generated — scanner JSONs, CSVs, universe)
+data/
 
 # Node / Dashboard
 node_modules/

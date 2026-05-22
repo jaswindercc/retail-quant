@@ -1,11 +1,8 @@
 name: Live Scanner (Daily)
 
 on:
-  # Run Mon-Fri at 10:00 AM Toronto (14:00 UTC in EDT / 15:00 UTC in EST)
-  # 10 AM is optimal: opening noise has settled, trends established, signals actionable for rest of day
   schedule:
-    - cron: '0 14 * * 1-5'
-  # Manual trigger
+    - cron: '0 14 * * 1-5'  # Mon-Fri 10 AM Toronto (14:00 UTC EDT)
   workflow_dispatch:
     inputs:
       universe:
@@ -19,10 +16,16 @@ on:
           - swing
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
-  scan:
+  scan-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,23 +36,39 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
           pip install -r requirements.txt
           pip install yfinance lxml html5lib
 
-      - name: Build stock universe (NYSE/NASDAQ/CBOE, >$2)
+      - name: Build stock universe
         run: python scripts/build_universe.py
 
-      - name: Run live scanner (top 3 strategies)
-        run: |
-          python scripts/scan_live.py --universe ${{ github.event.inputs.universe || 'universe' }} --lookback 3 --hh-lookback 30
+      - name: Run live scanner
+        run: python scripts/scan_live.py --universe ${{ github.event.inputs.universe || 'universe' }} --lookback 3 --hh-lookback 30
 
-      - name: Commit scanner results
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/live_scanner_data.json data/stock_universe.json
-          # Only commit if there are changes
-          git diff --cached --quiet || git commit -m "🔴 Live scanner $(TZ='America/Toronto' date '+%Y-%m-%d %I:%M %p ET')"
-          git push
+      - name: Copy data to dashboard public
+        run: cp data/*.json dashboard/public/ 2>/dev/null || true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: dashboard/package-lock.json
+
+      - name: Install & build dashboard
+        run: cd dashboard && npm ci && npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dashboard/dist
+
+  deploy:
+    needs: scan-and-deploy
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
