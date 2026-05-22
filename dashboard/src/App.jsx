@@ -97,6 +97,7 @@ export default function App() {
   const [wk52Data, setWk52Data] = useState(null)
   const [bpData, setBpData] = useState(null)
   const [hhData, setHhData] = useState(null)
+  const [loadErrors, setLoadErrors] = useState([])
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark')
   const location = useLocation()
@@ -112,7 +113,10 @@ export default function App() {
 
   useEffect(() => {
     const base = import.meta.env.BASE_URL
-    const load = (file, setter) => fetch(`${base}${file}`).then(r => r.json()).then(setter).catch(e => console.error(`Failed to load ${file}:`, e))
+    const load = (file, setter) => fetch(`${base}${file}`)
+      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() })
+      .then(setter)
+      .catch(e => setLoadErrors(prev => [...prev, `${file}: ${e.message}`]))
     load('data.json', setTrData)
     load('bounce_data.json', setBnData)
     load('breakout_data.json', setBrData)
@@ -135,7 +139,23 @@ export default function App() {
     load('higher_high_data.json', setHhData)
   }, [])
 
-  if (!trData || !bnData || !brData || !rsiData || !mrData || !tlData || !srData || !fvgData || !vcpData || !volData || !wk52Data || !bpData || !hhData) return <div className="loading">Loading…</div>
+  if (!trData || !bnData || !brData || !rsiData || !mrData || !tlData || !srData || !fvgData || !vcpData || !volData || !wk52Data || !bpData || !hhData) {
+    if (loadErrors.length > 0) {
+      return (
+        <div style={{padding: 40, maxWidth: 600, margin: '0 auto', fontFamily: 'monospace'}}>
+          <h2 style={{color: '#f87171', marginBottom: 16}}>⚠️ Failed to load data</h2>
+          <p style={{color: '#a1a1aa', marginBottom: 12}}>The following files are missing or corrupted:</p>
+          <ul style={{color: '#fbbf24', fontSize: 14, lineHeight: 2}}>
+            {loadErrors.map((e, i) => <li key={i}>{e}</li>)}
+          </ul>
+          <p style={{color: '#a1a1aa', marginTop: 20, fontSize: 13}}>
+            Check that these JSON files exist in <code>dashboard/public/</code> and are valid JSON.
+          </p>
+        </div>
+      )
+    }
+    return <div className="loading">Loading…</div>
+  }
 
   // Detect active strategy from URL
   const active = STRATS.find(s => location.pathname.startsWith(s.path)) || null
