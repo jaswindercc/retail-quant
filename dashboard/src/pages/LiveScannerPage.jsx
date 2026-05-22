@@ -12,65 +12,94 @@ const STRENGTH_COLORS = { STRONG: '#00e676', NORMAL: '#64b5f6' }
 export default function LiveScannerPage() {
   const [data, setData] = useState(null)
   const [filter, setFilter] = useState('all') // 'all' | 'MA Bounce' | 'Breakout' | 'Higher High'
-  const [dateFilter, setDateFilter] = useState('latest') // 'latest' | 'all'
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}live_scanner_data.json`)
-      .then(r => r.json()).then(setData).catch(console.error)
+      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() })
+      .then(setData)
+      .catch(e => setData({ error: e.message }))
   }, [])
 
   if (!data) return <div><p className="loading">Loading scanner…</p></div>
+  if (data.error) return (
+    <div style={{padding: 40, maxWidth: 520, margin: '60px auto', textAlign: 'center'}}>
+      <div style={{fontSize: 48, marginBottom: 16}}>📡</div>
+      <h2 style={{color: '#e2e8f0', fontWeight: 600, marginBottom: 8}}>Scanner data not available yet</h2>
+      <p style={{color: '#a1a1aa', fontSize: 14, lineHeight: 1.6}}>
+        The live scanner runs automatically every weekday at <strong style={{color: '#4ade80'}}>10:00 AM ET</strong> via GitHub Actions.
+        If this is a fresh deploy, the first scan hasn't completed yet.
+      </p>
+      <p style={{color: '#71717a', fontSize: 12, marginTop: 16}}>
+        File: live_scanner_data.json · Next run: Mon–Fri 10 AM ET
+      </p>
+    </div>
+  )
 
-  const { scanDate, universe, stocksScanned, totalSignals, signals, confluence, summary } = data
+  const { scanDate, universe, stocksScanned, totalSignals, signals } = data
 
   // Get latest date
   const latestDate = signals.length > 0 ? signals[0].date : ''
 
-  // Filter signals
-  let filtered = signals
-  if (filter !== 'all') filtered = filtered.filter(s => s.strategy === filter)
-  if (dateFilter === 'latest') filtered = filtered.filter(s => s.date === latestDate)
+  // Today's signals only
+  const todaySignals = signals.filter(s => s.date === latestDate)
+  const todaySummary = {
+    'MA Bounce': todaySignals.filter(s => s.strategy === 'MA Bounce').length,
+    'Breakout': todaySignals.filter(s => s.strategy === 'Breakout').length,
+    'Higher High': todaySignals.filter(s => s.strategy === 'Higher High').length,
+  }
+  const todayConfluence = []
+  const tMap = {}
+  todaySignals.forEach(s => { if (!tMap[s.ticker]) tMap[s.ticker] = []; tMap[s.ticker].push(s.strategy) })
+  Object.entries(tMap).forEach(([ticker, strats]) => { if (strats.length > 1) todayConfluence.push({ ticker, strategies: strats }) })
 
-  // Group by ticker for confluence view
-  const tickerMap = {}
-  signals.forEach(s => {
-    if (!tickerMap[s.ticker]) tickerMap[s.ticker] = []
-    tickerMap[s.ticker].push(s)
-  })
+  // Filter signals
+  let filtered = todaySignals
+  if (filter !== 'all') filtered = filtered.filter(s => s.strategy === filter)
 
   return (
     <div>
-      <h1 className="page-title">Live Scanner <span>{stocksScanned} stocks · {scanDate}</span></h1>
+      <h1 className="page-title">Live Scanner <span>{latestDate} · {stocksScanned} stocks scanned</span></h1>
 
-      {/* Hero stats */}
+      {/* Data freshness banner */}
+      <div className="card" style={{padding: '10px 16px', marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, borderLeft: '3px solid #4ade80'}}>
+        <div style={{fontSize: 13, color: '#a1a1aa'}}>
+          <span>📡 Data fetched: </span>
+          <strong style={{color: '#4ade80'}}>{scanDate}</strong>
+        </div>
+        <div style={{fontSize: 12, color: '#71717a'}}>
+          ⏰ Best time to check: <strong style={{color: '#fbbf24'}}>10:05 AM ET</strong> (right after scan completes)
+        </div>
+      </div>
+
+      {/* Hero stats — today only */}
       <div className="kpi-grid">
         <div className="kpi" style={{ borderTop: '3px solid #2196f3' }}>
           <div className="label">🔵 MA Bounce</div>
-          <div className="value green">{summary['MA Bounce']}</div>
+          <div className="value green">{todaySummary['MA Bounce']}</div>
         </div>
         <div className="kpi" style={{ borderTop: '3px solid #ff9800' }}>
           <div className="label">🟡 Breakout</div>
-          <div className="value green">{summary['Breakout']}</div>
+          <div className="value green">{todaySummary['Breakout']}</div>
         </div>
         <div className="kpi" style={{ borderTop: '3px solid #ab47bc' }}>
           <div className="label">📐 Higher High</div>
-          <div className="value green">{summary['Higher High']}</div>
+          <div className="value green">{todaySummary['Higher High']}</div>
         </div>
         <div className="kpi" style={{ borderTop: '3px solid #ffd700' }}>
           <div className="label">⭐ Confluence</div>
-          <div className="value green">{confluence.length}</div>
+          <div className="value green">{todayConfluence.length}</div>
         </div>
       </div>
 
       {/* Confluence section */}
-      {confluence.length > 0 && (
+      {todayConfluence.length > 0 && (
         <div className="card" style={{ border: '2px solid #ffd700', background: 'linear-gradient(135deg, #1a1a2e 0%, #1b2838 100%)' }}>
           <h3 style={{ color: '#ffd700', textTransform: 'none', letterSpacing: 0 }}>⭐ Confluence — Picked by Multiple Strategies</h3>
           <p style={{ color: '#aaa', fontSize: '0.8rem', margin: '-8px 0 1rem' }}>
-            These stocks triggered signals from 2+ strategies. Higher conviction.
+            These stocks triggered signals from 2+ strategies today. Higher conviction.
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '0.75rem' }}>
-            {confluence.map(c => (
+            {todayConfluence.map(c => (
               <div key={c.ticker} style={{ padding: '0.75rem', background: '#0d1b2a', borderRadius: 8, border: '1px solid #ffd70044' }}>
                 <strong style={{ fontSize: '1.1rem' }}>{c.ticker}</strong>
                 <div style={{ marginTop: '0.25rem', display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
@@ -97,16 +126,6 @@ export default function LiveScannerPage() {
               {f === 'all' ? 'All Strategies' : `${STRAT_META[f]?.icon} ${f}`}
             </button>
           ))}
-        </div>
-        <div style={{ marginLeft: 'auto' }}>
-          <div className="tab-bar" style={{ margin: 0 }}>
-            <button className={dateFilter === 'latest' ? 'active' : ''} onClick={() => setDateFilter('latest')}>
-              Latest ({latestDate})
-            </button>
-            <button className={dateFilter === 'all' ? 'active' : ''} onClick={() => setDateFilter('all')}>
-              All Dates
-            </button>
-          </div>
         </div>
       </div>
 
@@ -135,7 +154,7 @@ export default function LiveScannerPage() {
                 const meta = STRAT_META[s.strategy] || {}
                 return (
                   <tr key={i}>
-                    <td><strong>{s.ticker}</strong>{confluence.some(c => c.ticker === s.ticker) && <span style={{ color: '#ffd700', marginLeft: 4 }}>⭐</span>}</td>
+                    <td><strong>{s.ticker}</strong>{todayConfluence.some(c => c.ticker === s.ticker) && <span style={{ color: '#ffd700', marginLeft: 4 }}>⭐</span>}</td>
                     <td>
                       <Link to={meta.path || '/'} style={{ textDecoration: 'none', color: meta.color || '#ccc', fontSize: '0.85rem', fontWeight: 600 }}>
                         {meta.icon} {s.strategy}
@@ -161,14 +180,13 @@ export default function LiveScannerPage() {
         ) : (
           <p style={{ color: '#888', textAlign: 'center', padding: '2rem' }}>No signals for this filter.</p>
         )}
-        {filtered.length > 50 && <p style={{ color: '#888', fontSize: '0.8rem', marginTop: 8 }}>Showing 50 of {filtered.length}. Switch to "All Dates" for full history.</p>}
+        {filtered.length > 50 && <p style={{ color: '#888', fontSize: '0.8rem', marginTop: 8 }}>Showing 50 of {filtered.length}.</p>}
       </div>
 
       {/* Strategy breakdown cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '1rem', marginTop: '1rem' }}>
         {Object.entries(STRAT_META).map(([name, meta]) => {
-          const stSignals = signals.filter(s => s.strategy === name)
-          const todaySignals = stSignals.filter(s => s.date === latestDate)
+          const stSignals = todaySignals.filter(s => s.strategy === name)
           return (
             <div key={name} className="card" style={{ border: `1px solid ${meta.color}44` }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
@@ -177,18 +195,17 @@ export default function LiveScannerPage() {
                 </h3>
                 <span style={{ padding: '2px 8px', borderRadius: 12, fontSize: '0.7rem', fontWeight: 700, background: `${meta.color}22`, color: meta.color }}>{meta.tag}</span>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem', marginBottom: '0.75rem' }}>
-                <div><span style={{ color: '#888' }}>Today:</span> <strong style={{ color: '#00e676' }}>{todaySignals.length}</strong></div>
-                <div><span style={{ color: '#888' }}>Total:</span> <strong>{stSignals.length}</strong></div>
+              <div style={{ fontSize: '0.85rem', marginBottom: '0.75rem' }}>
+                <span style={{ color: '#888' }}>Today:</span> <strong style={{ color: '#00e676' }}>{stSignals.length}</strong> signals
               </div>
-              {todaySignals.length > 0 && (
+              {stSignals.length > 0 && (
                 <div style={{ fontSize: '0.8rem', color: '#ccc' }}>
-                  {todaySignals.slice(0, 5).map(s => (
+                  {stSignals.slice(0, 5).map(s => (
                     <div key={s.ticker} style={{ padding: '3px 0', borderBottom: '1px solid #ffffff08' }}>
                       <strong>{s.ticker}</strong> ${s.entry} <span style={{ color: '#888' }}>stop ${s.stop}</span>
                     </div>
                   ))}
-                  {todaySignals.length > 5 && <div style={{ color: '#888', marginTop: 4 }}>+{todaySignals.length - 5} more</div>}
+                  {stSignals.length > 5 && <div style={{ color: '#888', marginTop: 4 }}>+{stSignals.length - 5} more</div>}
                 </div>
               )}
             </div>

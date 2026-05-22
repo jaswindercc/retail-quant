@@ -40,6 +40,16 @@ export default function RareScannerPage() {
     <div>
       <h1 className="page-title">Rare Pattern Scanner <span>Last scan: {scanDate} · {signals.length} signals found</span></h1>
 
+      {/* Timing guidance */}
+      <div className="card" style={{padding: '10px 16px', marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, borderLeft: '3px solid #26c6da'}}>
+        <div style={{fontSize: 13, color: '#a1a1aa'}}>
+          📡 Last scan: <strong style={{color: '#26c6da'}}>{scanDate}</strong>
+        </div>
+        <div style={{fontSize: 12, color: '#71717a'}}>
+          ⏰ Best time to check: <strong style={{color: '#fbbf24'}}>10:05 AM ET</strong> (Mon–Fri after auto-scan)
+        </div>
+      </div>
+
       {/* Summary cards */}
       <div className="kpi-grid">
         {Object.entries(summary.byPattern).map(([pattern, count]) => (

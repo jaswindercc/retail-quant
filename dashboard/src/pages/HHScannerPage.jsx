@@ -19,6 +19,16 @@ export default function HHScannerPage() {
     <div>
       <h1 className="page-title">Higher High Scanner <span>Live scan · {stocksScanned} stocks · {scanDate}</span></h1>
 
+      {/* Timing guidance */}
+      <div className="card" style={{padding: '10px 16px', marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, borderLeft: '3px solid #ab47bc'}}>
+        <div style={{fontSize: 13, color: '#a1a1aa'}}>
+          📡 Last scan: <strong style={{color: '#ab47bc'}}>{scanDate}</strong>
+        </div>
+        <div style={{fontSize: 12, color: '#71717a'}}>
+          ⏰ Best time to check: <strong style={{color: '#fbbf24'}}>10:05 AM ET</strong> (Mon–Fri after auto-scan)
+        </div>
+      </div>
+
       {/* Info banner */}
       <div className="card" style={{ background: '#1a0d2e', border: '2px solid #ab47bc', padding: '1.25rem', marginBottom: '1.5rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
