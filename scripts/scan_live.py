@@ -19,7 +19,7 @@ import numpy as np
 import pandas as pd
 import yfinance as yf
 
-OUT = Path(__file__).resolve().parent.parent / "dashboard" / "public" / "live_scanner_data.json"
+OUT = Path(__file__).resolve().parent.parent / "data" / "live_scanner_data.json"
 
 # ── Stock Universes ──
 SWING_STOCKS = [
