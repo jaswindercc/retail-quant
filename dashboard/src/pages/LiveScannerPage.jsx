@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
 const STRAT_META = {
@@ -9,9 +9,26 @@ const STRAT_META = {
 
 const STRENGTH_COLORS = { STRONG: '#00e676', NORMAL: '#64b5f6' }
 
+function utcToNY(utcStr) {
+  try {
+    const d = new Date(utcStr + ' UTC')
+    return d.toLocaleString('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' })
+  } catch { return utcStr }
+}
+
+function fmtCap(val) {
+  if (!val) return '—'
+  if (val >= 1e12) return `$${(val / 1e12).toFixed(1)}T`
+  if (val >= 1e9) return `$${(val / 1e9).toFixed(1)}B`
+  if (val >= 1e6) return `$${(val / 1e6).toFixed(0)}M`
+  return `$${val.toLocaleString()}`
+}
+
 export default function LiveScannerPage() {
   const [data, setData] = useState(null)
-  const [filter, setFilter] = useState('all') // 'all' | 'MA Bounce' | 'Breakout' | 'Higher High'
+  const [filter, setFilter] = useState('all') // 'all' | 'MA Bounce' | 'Breakout' | 'Higher High' | 'Confluence'
+  const [sortCol, setSortCol] = useState(null)
+  const [sortDir, setSortDir] = useState('asc')
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}live_scanner_data.json`)
@@ -19,6 +36,38 @@ export default function LiveScannerPage() {
       .then(setData)
       .catch(e => setData({ error: e.message }))
   }, [])
+
+  const handleSort = (col) => {
+    if (sortCol === col) { setSortDir(d => d === 'asc' ? 'desc' : 'asc') }
+    else { setSortCol(col); setSortDir('asc') }
+  }
+
+  const sorted = useMemo(() => {
+    if (!data || data.error) return []
+    const signals = data.signals || []
+    const latestDate = signals.length > 0 ? signals[0].date : ''
+    const todaySignals = signals.filter(s => s.date === latestDate)
+
+    const tMap = {}
+    todaySignals.forEach(s => { if (!tMap[s.ticker]) tMap[s.ticker] = []; tMap[s.ticker].push(s.strategy) })
+    const confluenceTickers = new Set(Object.entries(tMap).filter(([, strats]) => strats.length > 1).map(([t]) => t))
+
+    let filtered = todaySignals
+    if (filter === 'Confluence') {
+      filtered = filtered.filter(s => confluenceTickers.has(s.ticker))
+    } else if (filter !== 'all') {
+      filtered = filtered.filter(s => s.strategy === filter)
+    }
+
+    if (!sortCol) return filtered
+    return [...filtered].sort((a, b) => {
+      let va = a[sortCol], vb = b[sortCol]
+      if (va == null) va = ''
+      if (vb == null) vb = ''
+      if (typeof va === 'number' && typeof vb === 'number') return sortDir === 'asc' ? va - vb : vb - va
+      return sortDir === 'asc' ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va))
+    })
+  }, [data, filter, sortCol, sortDir])
 
   if (!data) return <div><p className="loading">Loading scanner…</p></div>
   if (data.error) return (
@@ -52,10 +101,6 @@ export default function LiveScannerPage() {
   todaySignals.forEach(s => { if (!tMap[s.ticker]) tMap[s.ticker] = []; tMap[s.ticker].push(s.strategy) })
   Object.entries(tMap).forEach(([ticker, strats]) => { if (strats.length > 1) todayConfluence.push({ ticker, strategies: strats }) })
 
-  // Filter signals
-  let filtered = todaySignals
-  if (filter !== 'all') filtered = filtered.filter(s => s.strategy === filter)
-
   return (
     <div>
       <h1 className="page-title">Live Scanner <span>{latestDate} · {stocksScanned} stocks scanned</span></h1>
@@ -64,7 +109,7 @@ export default function LiveScannerPage() {
       <div className="card" style={{padding: '10px 16px', marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, borderLeft: '3px solid #4ade80'}}>
         <div style={{fontSize: 13, color: '#a1a1aa'}}>
           <span>📡 Data fetched: </span>
-          <strong style={{color: '#4ade80'}}>{scanDate}</strong>
+          <strong style={{color: '#4ade80'}}>{utcToNY(scanDate)}</strong>
         </div>
         <div style={{fontSize: 12, color: '#71717a'}}>
           ⏰ Best time to check: <strong style={{color: '#fbbf24'}}>10:05 AM ET</strong> (right after scan completes)
@@ -121,9 +166,9 @@ export default function LiveScannerPage() {
       <div className="card" style={{ padding: '12px 16px', display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
         <span style={{ color: '#888', fontSize: '0.85rem', marginRight: 8 }}>Filter:</span>
         <div className="tab-bar" style={{ margin: 0 }}>
-          {['all', 'MA Bounce', 'Breakout', 'Higher High'].map(f => (
+          {['all', 'MA Bounce', 'Breakout', 'Higher High', 'Confluence'].map(f => (
             <button key={f} className={filter === f ? 'active' : ''} onClick={() => setFilter(f)}>
-              {f === 'all' ? 'All Strategies' : `${STRAT_META[f]?.icon} ${f}`}
+              {f === 'all' ? 'All Strategies' : f === 'Confluence' ? '⭐ Confluence' : `${STRAT_META[f]?.icon} ${f}`}
             </button>
           ))}
         </div>
@@ -132,25 +177,32 @@ export default function LiveScannerPage() {
       {/* Main signals table */}
       <div className="card">
         <h3 style={{ textTransform: 'none', letterSpacing: 0 }}>
-          {filter === 'all' ? 'All Signals' : `${STRAT_META[filter]?.icon} ${filter} Signals`}
-          {' '}<span style={{ color: '#888', fontSize: '0.85rem', fontWeight: 400 }}>({filtered.length})</span>
+          {filter === 'all' ? 'All Signals' : filter === 'Confluence' ? '⭐ Confluence Signals' : `${STRAT_META[filter]?.icon} ${filter} Signals`}
+          {' '}<span style={{ color: '#888', fontSize: '0.85rem', fontWeight: 400 }}>({sorted.length})</span>
         </h3>
-        {filtered.length > 0 ? (
+        {sorted.length > 0 ? (
           <table>
             <thead>
               <tr>
-                <th>Ticker</th>
-                <th>Strategy</th>
-                <th>Date</th>
-                <th>Entry</th>
-                <th>Stop</th>
-                <th>Risk/sh</th>
-                <th>Strength</th>
-                <th>Details</th>
+                {[
+                  { key: 'ticker', label: 'Ticker' },
+                  { key: 'strategy', label: 'Strategy' },
+                  { key: 'market_cap', label: 'Mkt Cap' },
+                  { key: 'date', label: 'Date' },
+                  { key: 'entry', label: 'Entry' },
+                  { key: 'stop', label: 'Stop' },
+                  { key: 'risk_per_share', label: 'Risk/sh' },
+                  { key: 'strength', label: 'Strength' },
+                  { key: 'details', label: 'Details' },
+                ].map(col => (
+                  <th key={col.key} onClick={() => handleSort(col.key)} style={{ cursor: 'pointer', userSelect: 'none' }}>
+                    {col.label}{sortCol === col.key ? (sortDir === 'asc' ? ' ▲' : ' ▼') : ''}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              {filtered.slice(0, 50).map((s, i) => {
+              {sorted.map((s, i) => {
                 const meta = STRAT_META[s.strategy] || {}
                 return (
                   <tr key={i}>
@@ -160,6 +212,7 @@ export default function LiveScannerPage() {
                         {meta.icon} {s.strategy}
                       </Link>
                     </td>
+                    <td style={{ whiteSpace: 'nowrap', fontSize: '0.85rem' }}>{fmtCap(s.market_cap)}</td>
                     <td style={{ whiteSpace: 'nowrap', fontSize: '0.85rem' }}>{s.date}</td>
                     <td><strong>${s.entry}</strong></td>
                     <td style={{ color: '#ef5350' }}>${s.stop}</td>
@@ -180,7 +233,6 @@ export default function LiveScannerPage() {
         ) : (
           <p style={{ color: '#888', textAlign: 'center', padding: '2rem' }}>No signals for this filter.</p>
         )}
-        {filtered.length > 50 && <p style={{ color: '#888', fontSize: '0.8rem', marginTop: 8 }}>Showing 50 of {filtered.length}.</p>}
       </div>
 
       {/* Strategy breakdown cards */}

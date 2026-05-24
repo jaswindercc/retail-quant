@@ -383,6 +383,18 @@ def main():
     print(f"\n  🔍 Scanning...")
     all_signals = []
 
+    # Fetch market caps
+    print(f"  📊 Fetching market caps...")
+    market_caps = {}
+    for ticker in data.keys():
+        try:
+            info = yf.Ticker(ticker).fast_info
+            mc = getattr(info, 'market_cap', None)
+            if mc:
+                market_caps[ticker] = mc
+        except Exception:
+            pass
+
     for ticker, df in data.items():
         df = normalize_df(df)
         if 'High' not in df.columns or 'Close' not in df.columns:
@@ -392,6 +404,10 @@ def main():
         all_signals.extend(scan_ma_bounce(df, ticker, lookback=args.lookback))
         all_signals.extend(scan_breakout(df, ticker, lookback=args.lookback))
         all_signals.extend(scan_higher_high(df, ticker, lookback=args.hh_lookback))
+
+    # Attach market cap to each signal
+    for s in all_signals:
+        s['market_cap'] = market_caps.get(s['ticker'])
 
     # Deduplicate: if same ticker has multiple signals on same day for same strategy, keep latest
     seen = set()
