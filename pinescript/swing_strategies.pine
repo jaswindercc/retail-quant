@@ -1,0 +1,221 @@
+// This Pine Script™ is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © Jaswinder
+
+//@version=6
+strategy("Swing 3-in-1 [MA Bounce | Breakout | Higher High]", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=100, initial_capital=10000)
+
+// ─── STRATEGY SELECTION ──────────────────────────────────────────────────────
+stratChoice = input.string("MA Bounce", title="Strategy", options=["MA Bounce", "Breakout", "Higher High"], group="Strategy Selection")
+
+// ─── DATE RANGE ──────────────────────────────────────────────────────────────
+startDate = input.time(timestamp("2024-01-01"), title="Start Date", group="Date Range")
+endDate   = input.time(timestamp("2030-12-31"), title="End Date", group="Date Range")
+inDateRange = time >= startDate and time <= endDate
+
+// ─── RISK / REWARD ───────────────────────────────────────────────────────────
+atrLen       = input.int(14, title="ATR Length", minval=1, group="Risk Management")
+slAtrMult    = input.float(1.0, title="Stop Loss (ATR multiple)", minval=0.1, step=0.1, group="Risk Management")
+useFixedTP   = input.bool(false, title="Use Fixed Take Profit", group="Risk Management")
+tpRR         = input.float(3.0, title="Take Profit R:R", minval=0.5, step=0.5, group="Risk Management")
+
+// ─── TRAILING STOP ───────────────────────────────────────────────────────────
+useTrail      = input.bool(true, title="Use Trailing Stop", group="Trailing Stop")
+trailStartR   = input.float(2.5, title="Trail Activation (R multiple)", minval=0.5, step=0.5, group="Trailing Stop")
+trailEmaLen   = input.int(20, title="Trail EMA Length", minval=5, group="Trailing Stop")
+trailAtrBuf   = input.float(1.0, title="Trail Buffer (ATR below EMA)", minval=0.1, step=0.1, group="Trailing Stop")
+
+// ─── MA BOUNCE SETTINGS ──────────────────────────────────────────────────────
+emaLen   = input.int(20, title="EMA Length", minval=5, group="MA Bounce")
+smaLen   = input.int(50, title="SMA Length (Trend)", minval=10, group="MA Bounce")
+maxExt   = input.float(3.0, title="Max Extension (ATR above EMA)", minval=1.0, step=0.5, group="MA Bounce")
+touchTol = input.float(0.5, title="Touch Tolerance (ATR)", minval=0.1, step=0.1, group="MA Bounce")
+
+// ─── BREAKOUT SETTINGS ───────────────────────────────────────────────────────
+donchianLen  = input.int(20, title="Donchian Length (High break)", minval=5, group="Breakout")
+brkSmaLen    = input.int(50, title="SMA Length (Trend)", minval=10, group="Breakout")
+maxAboveSma  = input.float(4.0, title="Max Distance Above SMA (ATR)", minval=1.0, step=0.5, group="Breakout")
+
+// ─── HIGHER HIGH SETTINGS ────────────────────────────────────────────────────
+swingWindow  = input.int(10, title="Swing High Window", minval=3, group="Higher High")
+minLowerHH   = input.int(3, title="Min Consecutive Lower Highs", minval=2, group="Higher High")
+
+// ─── VISUALS ─────────────────────────────────────────────────────────────────
+showEma      = input.bool(true, title="Show EMA", group="Visuals")
+showSma      = input.bool(true, title="Show SMA", group="Visuals")
+showSignals  = input.bool(true, title="Show Entry Signals", group="Visuals")
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// INDICATORS
+// ═══════════════════════════════════════════════════════════════════════════════
+atr = ta.atr(atrLen)
+
+// MA Bounce indicators
+ema = ta.ema(close, emaLen)
+sma = ta.sma(close, smaLen)
+
+// Breakout indicators
+donchianHigh = ta.highest(high, donchianLen)[1]  // prior N-bar high
+brkSma = ta.sma(close, brkSmaLen)
+
+// Trail EMA
+trailEma = ta.ema(close, trailEmaLen)
+
+// Plot indicators conditionally
+plot(showEma and (stratChoice == "MA Bounce" or stratChoice == "Higher High") ? ema : na, "EMA", color=color.new(#2196f3, 30), linewidth=1)
+plot(showSma and (stratChoice == "MA Bounce") ? sma : na, "SMA", color=color.new(#ff9800, 30), linewidth=1)
+plot(showSma and (stratChoice == "Breakout") ? brkSma : na, "SMA (Breakout)", color=color.new(#ff9800, 30), linewidth=1)
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// STRATEGY 1: MA BOUNCE
+// ═══════════════════════════════════════════════════════════════════════════════
+maBounceCond = false
+if stratChoice == "MA Bounce" and inDateRange and not na(sma) and not na(ema) and not na(atr) and atr > 0
+    // Uptrend: close above SMA
+    uptrend = close > sma
+    // Previous bar touched EMA (low within tolerance)
+    prevTouched = low[1] <= ema[1] + touchTol * atr[1]
+    // Current close above EMA
+    aboveEma = close > ema
+    // Not overextended
+    notExtended = close <= ema + maxExt * atr
+    // Bar range filter
+    barOk = (high - low) <= 2.0 * atr
+    maBounceCond := uptrend and prevTouched and aboveEma and notExtended and barOk
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// STRATEGY 2: BREAKOUT
+// ═══════════════════════════════════════════════════════════════════════════════
+breakoutCond = false
+if stratChoice == "Breakout" and inDateRange and not na(brkSma) and not na(donchianHigh) and not na(atr) and atr > 0
+    // Above trend SMA
+    aboveSma = close > brkSma
+    // Close breaks above prior donchian high
+    breakAbove = close > donchianHigh
+    // Not too far above SMA
+    notTooFar = close <= brkSma + maxAboveSma * atr
+    // Bar range filter
+    barOk2 = (high - low) <= 2.5 * atr
+    breakoutCond := aboveSma and breakAbove and notTooFar and barOk2
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// STRATEGY 3: HIGHER HIGH
+// ═══════════════════════════════════════════════════════════════════════════════
+// Detect swing highs
+isSwingHigh(idx, win) =>
+    result = true
+    for j = 1 to win
+        if high[idx] < high[idx + j] or high[idx] < high[idx - j]
+            result := false
+            break
+    result
+
+// Store recent swing highs in arrays
+var float[] swHighPrices = array.new_float(0)
+var int[]   swHighBars   = array.new_int(0)
+
+higherHighCond = false
+if stratChoice == "Higher High" and inDateRange and bar_index > swingWindow * 2
+    // Check if bar at offset=swingWindow is a swing high
+    if isSwingHigh(swingWindow, swingWindow)
+        shPrice = high[swingWindow]
+        shBar = bar_index - swingWindow
+        // Only add if spaced enough from last
+        addIt = true
+        if array.size(swHighBars) > 0
+            lastBar = array.get(swHighBars, array.size(swHighBars) - 1)
+            if shBar - lastBar < swingWindow
+                addIt := false
+        if addIt
+            array.push(swHighPrices, shPrice)
+            array.push(swHighBars, shBar)
+            // Keep max 20 swing highs
+            if array.size(swHighPrices) > 20
+                array.shift(swHighPrices)
+                array.shift(swHighBars)
+
+    // Check for higher high pattern
+    sz = array.size(swHighPrices)
+    if sz >= minLowerHH + 1
+        // Count consecutive lower highs ending at second-to-last
+        lowerCount = 0
+        for k = sz - 2 to 1
+            if array.get(swHighPrices, k) < array.get(swHighPrices, k - 1)
+                lowerCount += 1
+            else
+                break
+        // Current (latest) swing high must be higher than previous
+        currSH = array.get(swHighPrices, sz - 1)
+        prevSH = array.get(swHighPrices, sz - 2)
+        currBar = array.get(swHighBars, sz - 1)
+
+        if lowerCount >= minLowerHH and currSH > prevSH
+            // Signal on the bar after swing high confirmation (current bar)
+            barsAgo = bar_index - currBar
+            if barsAgo == swingWindow  // fires once when swing high is confirmed
+                higherHighCond := true
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// ENTRY LOGIC
+// ═══════════════════════════════════════════════════════════════════════════════
+enterLong = (stratChoice == "MA Bounce" and maBounceCond) or (stratChoice == "Breakout" and breakoutCond) or (stratChoice == "Higher High" and higherHighCond)
+
+if enterLong and strategy.position_size == 0
+    strategy.entry("Long", strategy.long)
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// EXIT LOGIC — STOP, TRAIL, TP
+// ═══════════════════════════════════════════════════════════════════════════════
+var float entryPrice = na
+var float initStop = na
+var float trailStop = na
+var bool  trailActive = na
+
+if strategy.position_size > 0 and strategy.position_size[1] == 0
+    entryPrice := strategy.opentrades.entry_price(0)
+    initStop := entryPrice - slAtrMult * atr
+    trailStop := initStop
+    trailActive := false
+
+if strategy.position_size > 0
+    risk = entryPrice - initStop
+    currentR = risk > 0 ? (close - entryPrice) / risk : 0.0
+
+    // Trailing stop activation
+    if useTrail and currentR >= trailStartR
+        trailActive := true
+
+    if trailActive
+        newTrail = trailEma - trailAtrBuf * atr
+        if newTrail > trailStop
+            trailStop := newTrail
+
+    // Determine active stop level
+    activeStop = trailActive ? trailStop : initStop
+
+    // Stop loss exit
+    if low <= activeStop
+        strategy.close("Long", comment="Stop")
+
+    // Fixed TP exit
+    if useFixedTP and risk > 0
+        tpPrice = entryPrice + tpRR * risk
+        if high >= tpPrice
+            strategy.close("Long", comment="TP " + str.tostring(tpRR) + "R")
+
+if strategy.position_size == 0
+    entryPrice := na
+    initStop := na
+    trailStop := na
+    trailActive := false
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// VISUALS
+// ═══════════════════════════════════════════════════════════════════════════════
+// Entry signals
+plotshape(showSignals and enterLong and strategy.position_size == 0, title="Entry", location=location.belowbar, style=shape.triangleup, size=size.small, color=color.new(#00e676, 0))
+
+// Stop line
+plot(strategy.position_size > 0 ? (trailActive ? trailStop : initStop) : na, "Stop", color=color.new(#ef5350, 0), linewidth=2, style=plot.style_linebr)
+
+// TP line
+plot(strategy.position_size > 0 and useFixedTP and not na(entryPrice) and not na(initStop) ? entryPrice + tpRR * (entryPrice - initStop) : na, "TP Target", color=color.new(#4ade80, 0), linewidth=1, style=plot.style_linebr)
