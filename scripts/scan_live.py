@@ -119,8 +119,16 @@ def download_data(tickers, period='1y'):
 
 def normalize_df(df):
     """Normalize column names from yfinance output."""
-    if 'Date' not in df.columns and df.index.name == 'Date':
-        df = df.reset_index()
+    # Handle DatetimeIndex regardless of name
+    if 'Date' not in df.columns:
+        if df.index.name and str(df.index.name).lower() == 'date':
+            df = df.reset_index()
+        elif hasattr(df.index, 'dtype') and pd.api.types.is_datetime64_any_dtype(df.index):
+            df = df.reset_index()
+    # Detect datetime column named 'index' (from reset_index() when index had no name)
+    if 'Date' not in df.columns and 'index' in df.columns:
+        if pd.api.types.is_datetime64_any_dtype(df['index']):
+            df = df.rename(columns={'index': 'Date'})
     col_map = {}
     for c in df.columns:
         cl = str(c).lower()
