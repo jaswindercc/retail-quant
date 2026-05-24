@@ -8,11 +8,12 @@ strategy("Swing 3-in-1 [MA Bounce | Breakout | Higher High]", overlay=true, defa
 stratChoice = input.string("MA Bounce", title="Strategy", options=["MA Bounce", "Breakout", "Higher High"], group="Strategy Selection")
 
 // ─── DATE RANGE ──────────────────────────────────────────────────────────────
-startDate = input.time(timestamp("2024-01-01"), title="Start Date", group="Date Range")
+startDate = input.time(timestamp("2021-01-01"), title="Start Date", group="Date Range")
 endDate   = input.time(timestamp("2030-12-31"), title="End Date", group="Date Range")
 inDateRange = time >= startDate and time <= endDate
 
 // ─── RISK / REWARD ───────────────────────────────────────────────────────────
+maxRiskDollar = input.float(100.0, title="Max Risk Per Trade ($)", minval=1.0, step=10.0, group="Risk Management")
 atrLen       = input.int(14, title="ATR Length", minval=1, group="Risk Management")
 slAtrMult    = input.float(1.0, title="Stop Loss (ATR multiple)", minval=0.1, step=0.1, group="Risk Management")
 useFixedTP   = input.bool(false, title="Use Fixed Take Profit", group="Risk Management")
@@ -160,7 +161,10 @@ if stratChoice == "Higher High" and inDateRange and bar_index > swingWindow * 2
 enterLong = (stratChoice == "MA Bounce" and maBounceCond) or (stratChoice == "Breakout" and breakoutCond) or (stratChoice == "Higher High" and higherHighCond)
 
 if enterLong and strategy.position_size == 0
-    strategy.entry("Long", strategy.long)
+    riskPerShare = slAtrMult * atr
+    qty = riskPerShare > 0 ? math.floor(maxRiskDollar / riskPerShare) : 1
+    if qty > 0
+        strategy.entry("Long", strategy.long, qty=qty)
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // EXIT LOGIC — STOP, TRAIL, TP
@@ -168,7 +172,7 @@ if enterLong and strategy.position_size == 0
 var float entryPrice = na
 var float initStop = na
 var float trailStop = na
-var bool  trailActive = na
+var bool  trailActive = false
 
 if strategy.position_size > 0 and strategy.position_size[1] == 0
     entryPrice := strategy.opentrades.entry_price(0)
