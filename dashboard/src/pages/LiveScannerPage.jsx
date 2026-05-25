@@ -54,7 +54,18 @@ export default function LiveScannerPage() {
 
     let filtered = todaySignals
     if (filter === 'Confluence') {
-      filtered = filtered.filter(s => confluenceTickers.has(s.ticker))
+      // One row per ticker — merge strategies into first signal
+      const seen = {}
+      filtered = filtered.filter(s => {
+        if (!confluenceTickers.has(s.ticker)) return false
+        if (seen[s.ticker]) {
+          seen[s.ticker].mergedStrategies.push(s.strategy)
+          return false
+        }
+        s.mergedStrategies = [s.strategy]
+        seen[s.ticker] = s
+        return true
+      })
     } else if (filter !== 'all') {
       filtered = filtered.filter(s => s.strategy === filter)
     }
@@ -204,13 +215,23 @@ export default function LiveScannerPage() {
             <tbody>
               {sorted.map((s, i) => {
                 const meta = STRAT_META[s.strategy] || {}
+                const strategies = s.mergedStrategies || [s.strategy]
                 return (
                   <tr key={i}>
                     <td><strong>{s.ticker}</strong>{todayConfluence.some(c => c.ticker === s.ticker) && <span style={{ color: '#ffd700', marginLeft: 4 }}>⭐</span>}</td>
                     <td>
-                      <Link to={meta.path || '/'} style={{ textDecoration: 'none', color: meta.color || '#ccc', fontSize: '0.85rem', fontWeight: 600 }}>
-                        {meta.icon} {s.strategy}
-                      </Link>
+                      {strategies.length > 1 ? (
+                        <span style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                          {strategies.map(st => {
+                            const m = STRAT_META[st] || {}
+                            return <Link key={st} to={m.path || '/'} style={{ textDecoration: 'none', color: m.color || '#ccc', fontSize: '0.8rem', fontWeight: 600 }}>{m.icon} {st}</Link>
+                          })}
+                        </span>
+                      ) : (
+                        <Link to={meta.path || '/'} style={{ textDecoration: 'none', color: meta.color || '#ccc', fontSize: '0.85rem', fontWeight: 600 }}>
+                          {meta.icon} {s.strategy}
+                        </Link>
+                      )}
                     </td>
                     <td style={{ whiteSpace: 'nowrap', fontSize: '0.85rem' }}>{fmtCap(s.market_cap)}</td>
                     <td style={{ whiteSpace: 'nowrap', fontSize: '0.85rem' }}>{s.date}</td>
