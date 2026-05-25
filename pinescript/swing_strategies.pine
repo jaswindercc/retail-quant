@@ -2,7 +2,7 @@
 // © Jaswinder
 
 //@version=6
-strategy("Swing 3-in-1 [MA Bounce | Breakout | Higher High]", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=100, initial_capital=10000)
+strategy("Swing 3-in-1 [MA Bounce | Breakout | Higher High]", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=100, initial_capital=10000, process_orders_on_close=true)
 
 // ─── STRATEGY SELECTION ──────────────────────────────────────────────────────
 stratChoice = input.string("MA Bounce", title="Strategy", options=["MA Bounce", "Breakout", "Higher High"], group="Strategy Selection")
@@ -21,9 +21,9 @@ tpRR         = input.float(3.0, title="Take Profit R:R", minval=0.5, step=0.5, g
 
 // ─── TRAILING STOP ───────────────────────────────────────────────────────────
 useTrail      = input.bool(true, title="Use Trailing Stop", group="Trailing Stop")
-trailStartR   = input.float(2.5, title="Trail Activation (R multiple)", minval=0.5, step=0.5, group="Trailing Stop")
+trailStartR   = input.float(3.0, title="Trail Activation (R multiple)", minval=0.5, step=0.5, group="Trailing Stop")
 trailEmaLen   = input.int(20, title="Trail EMA Length", minval=5, group="Trailing Stop")
-trailAtrBuf   = input.float(1.0, title="Trail Buffer (ATR below EMA)", minval=0.1, step=0.1, group="Trailing Stop")
+trailAtrBuf   = input.float(2.0, title="Trail Buffer (ATR below EMA)", minval=0.1, step=0.1, group="Trailing Stop")
 
 // ─── MA BOUNCE SETTINGS ──────────────────────────────────────────────────────
 emaLen   = input.int(20, title="EMA Length", minval=5, group="MA Bounce")
@@ -39,6 +39,7 @@ maxAboveSma  = input.float(4.0, title="Max Distance Above SMA (ATR)", minval=1.0
 // ─── HIGHER HIGH SETTINGS ────────────────────────────────────────────────────
 swingWindow  = input.int(10, title="Swing High Window", minval=3, group="Higher High")
 minLowerHH   = input.int(3, title="Min Consecutive Lower Highs", minval=2, group="Higher High")
+hhCooldown   = input.int(20, title="Min Bars Between Signals", minval=5, group="Higher High")
 
 // ─── VISUALS ─────────────────────────────────────────────────────────────────
 showEma      = input.bool(true, title="Show EMA", group="Visuals")
@@ -101,7 +102,7 @@ if stratChoice == "Breakout" and inDateRange and not na(brkSma) and not na(donch
 // ═══════════════════════════════════════════════════════════════════════════════
 // STRATEGY 3: HIGHER HIGH
 // ═══════════════════════════════════════════════════════════════════════════════
-// Detect swing highs
+// Detect swing highs (matches Python: highest in +/- window)
 isSwingHigh(idx, win) =>
     result = true
     for j = 1 to win
@@ -113,14 +114,16 @@ isSwingHigh(idx, win) =>
 // Store recent swing highs in arrays
 var float[] swHighPrices = array.new_float(0)
 var int[]   swHighBars   = array.new_int(0)
+var float breakoutLevel = na  // level to break above for entry
+var int lastSignalBar = -50
 
 higherHighCond = false
-if stratChoice == "Higher High" and inDateRange and bar_index > swingWindow * 2
-    // Check if bar at offset=swingWindow is a swing high
+if stratChoice == "Higher High" and bar_index > swingWindow * 2
+    // Check if bar at offset=swingWindow is a swing high (confirmed after window bars pass)
     if isSwingHigh(swingWindow, swingWindow)
         shPrice = high[swingWindow]
         shBar = bar_index - swingWindow
-        // Only add if spaced enough from last
+        // Only add if spaced enough from last swing high
         addIt = true
         if array.size(swHighBars) > 0
             lastBar = array.get(swHighBars, array.size(swHighBars) - 1)
@@ -129,31 +132,37 @@ if stratChoice == "Higher High" and inDateRange and bar_index > swingWindow * 2
         if addIt
             array.push(swHighPrices, shPrice)
             array.push(swHighBars, shBar)
-            // Keep max 20 swing highs
             if array.size(swHighPrices) > 20
                 array.shift(swHighPrices)
                 array.shift(swHighBars)
 
-    // Check for higher high pattern
+    // Check for setup: minLowerHH consecutive lower swing highs
+    // Then entry = first close above the LAST swing high level (breakout)
+    // Python: "3 consecutive lower highs" = 3 points descending = 2 decrease steps
     sz = array.size(swHighPrices)
     if sz >= minLowerHH + 1
-        // Count consecutive lower highs ending at second-to-last
+        // Count consecutive decrease steps from end of array
         lowerCount = 0
-        for k = sz - 2 to 1
+        for k = sz - 1 to 1
             if array.get(swHighPrices, k) < array.get(swHighPrices, k - 1)
                 lowerCount += 1
             else
                 break
-        // Current (latest) swing high must be higher than previous
-        currSH = array.get(swHighPrices, sz - 1)
-        prevSH = array.get(swHighPrices, sz - 2)
-        currBar = array.get(swHighBars, sz - 1)
+        // minLowerHH points descending = (minLowerHH - 1) decrease steps
+        if lowerCount >= minLowerHH - 1
+            breakoutLevel := array.get(swHighPrices, sz - 1)
+        else
+            breakoutLevel := na  // pattern broken, clear level
 
-        if lowerCount >= minLowerHH and currSH > prevSH
-            // Signal on the bar after swing high confirmation (current bar)
-            barsAgo = bar_index - currBar
-            if barsAgo == swingWindow  // fires once when swing high is confirmed
+    // Entry: close breaks above the last (lowest) swing high in the lower sequence
+    if inDateRange and not na(breakoutLevel) and close > breakoutLevel and not na(atr) and atr > 0
+        // Bar range filter (not a crazy gap bar)
+        if (high - low) <= 3.0 * atr
+            // Cooldown check
+            if bar_index - lastSignalBar >= hhCooldown
                 higherHighCond := true
+                lastSignalBar := bar_index
+                breakoutLevel := na  // consumed
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // ENTRY LOGIC
@@ -180,7 +189,7 @@ if strategy.position_size > 0 and strategy.position_size[1] == 0
     trailStop := initStop
     trailActive := false
 
-if strategy.position_size > 0
+if strategy.position_size > 0 and strategy.position_size[1] > 0
     risk = entryPrice - initStop
     currentR = risk > 0 ? (close - entryPrice) / risk : 0.0
 

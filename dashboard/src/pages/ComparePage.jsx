@@ -17,7 +17,7 @@ const STRATS = [
   { key: 'vol', label: 'Volume', color: '#ff7043', icon: '🧡', desc: 'Volume spike breakout', path: '/volume', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 trail at 2.5R' },
   { key: 'wk52', label: '52-Wk High', color: '#26c6da', icon: '🏔️', desc: 'Break above 252-day high', path: '/52wk-high', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 trail at 2.5R', rare: true },
   { key: 'bp', label: 'Bottom Picker', color: '#ef5350', icon: '🎣', desc: '20%+ crash → RSI<35 → first green bar', path: '/bottom-picker', dir: 'Long only', stop: '1.5× ATR', exit: 'EMA20 trail at 2.5R', rare: true },
-  { key: 'hh', label: 'Higher High', color: '#ab47bc', icon: '📐', desc: 'First HH after 3+ lower highs', path: '/higher-high', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 trail at 2.5R', featured: true },
+  { key: 'hh', label: 'Higher High', color: '#ab47bc', icon: '📐', desc: 'First HH after 3+ lower highs', path: '/higher-high', dir: 'Long only', stop: '1× ATR', exit: 'EMA20 - 2×ATR trail at 3R', featured: true },
 ]
 
 function getFullStats(data, symbol) {

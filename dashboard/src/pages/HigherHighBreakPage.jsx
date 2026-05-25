@@ -41,7 +41,7 @@ export default function HigherHighBreakPage({ data, strategyName }) {
 
   return (
     <div>
-      <h1 className="page-title">{strategyName} <span>First higher high after 3+ lower highs · Trend reversal · Trail EMA at 2.5R</span></h1>
+      <h1 className="page-title">{strategyName} <span>First higher high after 3+ lower highs · Trend reversal · Trail EMA at 3R</span></h1>
 
       <div className="card" style={{ background: '#1a0d2e', border: '2px solid #ffd700', padding: '1rem', marginBottom: '1.5rem' }}>
         <strong style={{ color: '#ffd700' }}>🏆 Top Strategy — Best Risk:Reward in Portfolio</strong>
@@ -61,7 +61,7 @@ export default function HigherHighBreakPage({ data, strategyName }) {
           <li style={{paddingLeft: '1rem'}}>3. Price makes first HIGHER swing high → breakout signal</li>
           <li style={{paddingLeft: '1rem'}}>4. Enter on close above previous swing high level</li>
           <li><strong>Stop:</strong> 1× ATR below entry</li>
-          <li><strong>Exit:</strong> EMA(20) trailing stop at 2.5R</li>
+          <li><strong>Exit:</strong> EMA(20) − 2×ATR trailing stop, activates at 3R</li>
           <li><strong>Risk:</strong> $100 per trade</li>
         </ul>
 
