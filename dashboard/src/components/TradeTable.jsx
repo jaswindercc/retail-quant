@@ -35,7 +35,7 @@ export default function TradeTable({ trades, showStock, showScore, showVariation
               <td>{t.exitDate}</td>
               <td>${t.exitPrice.toFixed(2)}</td>
               <td className={t.pnlDollar >= 0 ? 'win' : 'loss'}>
-                {t.pnlDollar >= 0 ? '+' : '-'}{fmt$(t.pnlDollar)}
+                {fmt$(t.pnlDollar)}
               </td>
               <td className={t.pnlR >= 0 ? 'win' : 'loss'}>
                 {t.pnlR >= 0 ? '+' : ''}{t.pnlR.toFixed(1)}R

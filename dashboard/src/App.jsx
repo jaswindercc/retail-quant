@@ -36,6 +36,7 @@ import StratStockPage from './pages/StratStockPage'
 import Strat2D12UPage from './pages/Strat2D12UPage'
 import Strat32D12UPage from './pages/Strat32D12UPage'
 import StratComboDetailPage from './pages/StratComboDetailPage'
+import MarkovPage from './pages/MarkovPage'
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
 
@@ -64,7 +65,7 @@ const RARE_STRATS = [
 const CORE_STRATS = STRATS.filter(s => !RARE_STRATS.some(r => r.path === s.path))
 
 function NavGroup({ label, icon, children, defaultOpen = false }) {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(defaultOpen)
   return (
     <div className="nav-group">
       <button className={`nav-group-toggle ${open ? 'open' : ''}`} onClick={() => setOpen(!open)}>
@@ -162,7 +163,7 @@ export default function App() {
   const stockBase = active ? `/${active.prefix}/stock` : '/trend-rider/stock'
 
   // Auto-open nav groups based on current route
-  const isOvernightRoute = ['/overnight', '/spy-overnight', '/qqq-overnight', '/overnight-trail-study', '/qqq-trail-study', '/overnight-macro', '/scanner'].some(p => location.pathname.startsWith(p))
+  const isOvernightRoute = ['/overnight', '/spy-overnight', '/qqq-overnight', '/overnight-trail-study', '/qqq-trail-study', '/overnight-macro', '/scanner', '/markov'].some(p => location.pathname.startsWith(p))
   const isSwingRoute = CORE_STRATS.some(s => location.pathname.startsWith(s.path)) || location.pathname === '/' || location.pathname === '/stocks' || location.pathname === '/swing-scanners' || location.pathname === '/live-scanner'
   const isRareRoute = RARE_STRATS.some(s => location.pathname.startsWith(s.path)) || location.pathname === '/rare-scanner' || location.pathname === '/hh-scanner'
   const isStratRoute = location.pathname.startsWith('/the-strat')
@@ -203,6 +204,9 @@ export default function App() {
             </NavLink>
             <NavLink to="/overnight-macro" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
               🌐 Macro Study
+            </NavLink>
+            <NavLink to="/markov" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              🔗 Markov Chain
             </NavLink>
           </NavGroup>
 
@@ -329,6 +333,7 @@ export default function App() {
           <Route path="/the-strat/3-2d-1-2u" element={<Strat32D12UPage />} />
           <Route path="/the-strat/combo/:combo/:stock" element={<StratComboDetailPage />} />
           <Route path="/trail-study" element={<TrailStudyPage />} />
+          <Route path="/markov" element={<MarkovPage />} />
           <Route path="/learnings" element={<MasterLearningsPage />} />
         </Routes>
       </div>

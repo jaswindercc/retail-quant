@@ -62,10 +62,10 @@ export default function LiveScannerPage() {
           seen[s.ticker].mergedStrategies.push(s.strategy)
           return false
         }
-        s.mergedStrategies = [s.strategy]
-        seen[s.ticker] = s
+        const clone = { ...s, mergedStrategies: [s.strategy] }
+        seen[s.ticker] = clone
         return true
-      })
+      }).map(s => seen[s.ticker] || s)
     } else if (filter !== 'all') {
       filtered = filtered.filter(s => s.strategy === filter)
     }

@@ -66,7 +66,7 @@ def backtest_volume(df, name):
     df = add_indicators(df)
     trades = []
     pos = 0
-    ep = er = tsl = 0.0
+    ep = er = tsl = initial_sl = 0.0
     last_entry_bar = -100
 
     for i in range(1, len(df)):
@@ -84,17 +84,19 @@ def backtest_volume(df, name):
             xp = 0.0
             reason = ''
 
+            # Check stop against level set from PREVIOUS bars (EOD manual workflow)
             if r['Low'] <= tsl:
-                xp = tsl; hit_sl = True; reason = 'SL'
+                xp = min(r['Open'], tsl)  # gap-adjusted fill
+                hit_sl = True
+                reason = 'Trail' if tsl > initial_sl else 'SL'
 
+            # If alive, update trail for NEXT bar using today's close
             if not hit_sl:
                 curr_r = (r['Close'] - ep) / er if er > 0 else 0
                 if curr_r >= TRAIL_START_R:
                     ema_trail = r['ema_trail'] - TRAIL_ATR_BUF * atr
                     if ema_trail > tsl:
                         tsl = ema_trail
-                if r['Low'] <= tsl:
-                    xp = tsl; hit_sl = True; reason = 'Trail'
 
             if hit_sl:
                 t = trades[-1]
@@ -146,6 +148,7 @@ def backtest_volume(df, name):
         ep = r['Close']
         er = rk
         tsl = sl
+        initial_sl = sl
         last_entry_bar = i
 
         trades.append({

@@ -79,10 +79,10 @@ def backtest(df, name):
             continue
 
         entry_level = prev_sh[1]
-        # Earliest bar we can enter: prev_sh + 5 (allow some spacing)
-        earliest_bar = prev_sh[0] + 5
-        # Latest bar for this signal: curr_sh + 5
-        latest_bar = curr_sh[0] + 5
+        # Earliest bar we can enter: after curr_sh is CONFIRMED (need 'window' bars after it)
+        earliest_bar = curr_sh[0] + 10  # swing high confirmed after 10 bars
+        # Latest bar for this signal: give 20-bar entry window
+        latest_bar = earliest_bar + 20
 
         if earliest_bar - last_signal_idx < 20:
             continue
@@ -95,6 +95,7 @@ def backtest(df, name):
     pos = 0
     ep = er = tsl = 0.0
     trail_active = False
+    initial_sl = 0.0
     signal_idx = 0  # which signal we're looking at
 
     for i in range(50, len(df)):  # start after indicators warm up
@@ -109,10 +110,13 @@ def backtest(df, name):
             xp = 0.0
             reason = ''
 
+            # Check stop against level set from PREVIOUS bars (EOD manual workflow)
             if r['Low'] <= tsl:
-                xp = tsl; hit_sl = True
+                xp = min(r['Open'], tsl)  # gap-adjusted fill
+                hit_sl = True
                 reason = 'Trail' if trail_active else 'SL'
 
+            # If alive, update trail for NEXT bar using today's close
             if not hit_sl:
                 curr_r = (r['Close'] - ep) / er if er > 0 else 0
                 if curr_r >= TRAIL_START_R:
@@ -121,8 +125,6 @@ def backtest(df, name):
                     ema_trail = r['ema_trail'] - TRAIL_ATR_BUF * atr
                     if ema_trail > tsl:
                         tsl = ema_trail
-                if r['Low'] <= tsl:
-                    xp = tsl; hit_sl = True; reason = 'Trail'
 
             if hit_sl:
                 t = trades[-1]
@@ -172,6 +174,7 @@ def backtest(df, name):
             ep = r['Close']
             er = rk
             tsl = sl
+            initial_sl = sl
             trail_active = False
             signal_idx += 1  # consume this signal
             trades.append({
