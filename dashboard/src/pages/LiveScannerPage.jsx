@@ -8,6 +8,7 @@ const STRAT_META = {
 }
 
 const STRENGTH_COLORS = { STRONG: '#00e676', NORMAL: '#64b5f6' }
+const DEFAULT_RISK_DOLLARS = 200
 
 function utcToNY(utcStr) {
   try {
@@ -22,6 +23,12 @@ function fmtCap(val) {
   if (val >= 1e9) return `$${(val / 1e9).toFixed(1)}B`
   if (val >= 1e6) return `$${(val / 1e6).toFixed(0)}M`
   return `$${val.toLocaleString()}`
+}
+
+function calcShares(riskPerShare, riskBudget = DEFAULT_RISK_DOLLARS) {
+  const risk = Number(riskPerShare)
+  if (!Number.isFinite(risk) || risk <= 0) return 0
+  return Math.floor(riskBudget / risk)
 }
 
 export default function LiveScannerPage() {
@@ -69,6 +76,11 @@ export default function LiveScannerPage() {
     } else if (filter !== 'all') {
       filtered = filtered.filter(s => s.strategy === filter)
     }
+
+    filtered = filtered.map(s => ({
+      ...s,
+      shares: calcShares(s.risk_per_share),
+    }))
 
     if (!sortCol) return filtered
     return [...filtered].sort((a, b) => {
@@ -124,7 +136,7 @@ export default function LiveScannerPage() {
           <strong style={{color: '#4ade80'}}>{displayScanDate}</strong>
         </div>
         <div style={{fontSize: 12, color: '#71717a'}}>
-          ⏰ Best time to check: <strong style={{color: '#fbbf24'}}>10:05 AM ET</strong> (right after scan completes)
+          ⏰ Best time to check: <strong style={{color: '#fbbf24'}}>10:05 AM ET</strong> · Position sizing uses <strong style={{ color: '#4ade80' }}>$200 risk/trade</strong>
         </div>
       </div>
 
@@ -202,7 +214,8 @@ export default function LiveScannerPage() {
                   { key: 'market_cap', label: 'Mkt Cap' },
                   { key: 'date', label: 'Date' },
                   { key: 'entry', label: 'Entry' },
-                  { key: 'stop', label: 'Stop' },
+                  { key: 'shares', label: 'Shares' },
+                  { key: 'stop', label: 'SL' },
                   { key: 'risk_per_share', label: 'Risk/sh' },
                   { key: 'strength', label: 'Strength' },
                   { key: 'details', label: 'Details' },
@@ -237,7 +250,8 @@ export default function LiveScannerPage() {
                     <td style={{ whiteSpace: 'nowrap', fontSize: '0.85rem' }}>{fmtCap(s.market_cap)}</td>
                     <td style={{ whiteSpace: 'nowrap', fontSize: '0.85rem' }}>{s.date}</td>
                     <td><strong>${s.entry}</strong></td>
-                    <td style={{ color: '#ef5350' }}>${s.stop}</td>
+                    <td><strong>{s.shares.toLocaleString()}</strong></td>
+                    <td style={{ color: '#ef5350' }}><strong>${s.stop}</strong></td>
                     <td>${s.risk_per_share}</td>
                     <td>
                       <span style={{
