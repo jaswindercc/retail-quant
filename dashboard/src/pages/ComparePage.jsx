@@ -36,6 +36,59 @@ function getFullStats(data, symbol) {
   }
 }
 
+function buildStableRanking(strategies) {
+  // Ignore small metric differences so rankings do not reshuffle on tiny moves.
+  const TIE_BANDS = {
+    totalPnl: 1500,
+    pf: 0.12,
+    avgR: 0.12,
+    avgDD: 150,
+  }
+
+  const sorted = [...strategies].sort((a, b) => {
+    if (b.totalPnl !== a.totalPnl) return b.totalPnl - a.totalPnl
+    if (b.pf !== a.pf) return b.pf - a.pf
+    if (b.avgR !== a.avgR) return b.avgR - a.avgR
+    return a.avgDD - b.avgDD
+  })
+
+  const isNearTie = (a, b) => (
+    Math.abs(a.totalPnl - b.totalPnl) <= TIE_BANDS.totalPnl &&
+    Math.abs(a.pf - b.pf) <= TIE_BANDS.pf &&
+    Math.abs(a.avgR - b.avgR) <= TIE_BANDS.avgR &&
+    Math.abs(a.avgDD - b.avgDD) <= TIE_BANDS.avgDD
+  )
+
+  const groups = []
+  for (const st of sorted) {
+    const last = groups[groups.length - 1]
+    if (last && last.items.some(x => isNearTie(x, st))) {
+      last.items.push(st)
+    } else {
+      groups.push({ items: [st] })
+    }
+  }
+
+  let rank = 1
+  groups.forEach(g => {
+    g.rank = rank
+    rank += g.items.length
+  })
+
+  return { groups, tieBands: TIE_BANDS }
+}
+
+function getRankingAsOfDate(strategies) {
+  // Use source allTrades dates to anchor ranking to the latest closed trade snapshot.
+  const latestExit = strategies
+    .flatMap(s => s._allTrades || [])
+    .map(t => t.exitDate)
+    .filter(Boolean)
+    .sort()
+    .slice(-1)[0]
+  return latestExit || 'N/A'
+}
+
 export default function ComparePage({ trData, bnData, brData, rsiData, mrData, tlData, srData, fvgData, vcpData, volData, wk52Data, bpData, hhData }) {
   const dataMap = { tr: trData, bn: bnData, br: brData, rsi: rsiData, mr: mrData, tl: tlData, sr: srData, fvg: fvgData, vcp: vcpData, vol: volData, wk52: wk52Data, bp: bpData, hh: hhData }
 
@@ -52,6 +105,7 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
     const totalPnl = m?.totalPnl ?? 0
     return {
       ...st,
+      _allTrades: allTrades,
       trades: allTrades.length,
       totalPnl,
       avgPnl: totalPnl / STOCKS.length,
@@ -88,6 +142,9 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
   const byDD = [...coreStats].sort((a, b) => a.avgDD - b.avgDD)[0]
   const bestWinRate = [...stratStats].sort((a, b) => b.wr - a.wr)[0]
   const bestRarePF = rareStats.length ? [...rareStats].sort((a, b) => b.pf - a.pf)[0] : null
+  const liveRankPool = stratStats.filter(s => !s.rare)
+  const { groups: stableRankGroups, tieBands } = buildStableRanking(liveRankPool)
+  const rankingAsOf = getRankingAsOfDate(liveRankPool)
   const coreTop = coreStats[0]
   const coreBottom = coreStats[coreStats.length - 1]
   const pnlSpread = coreTop && coreBottom ? coreTop.avgPnl - coreBottom.avgPnl : 0
@@ -189,6 +246,48 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
         <div style={{ marginTop: 14, padding: '12px 16px', background: 'rgba(255,255,255,0.03)', borderRadius: 8, fontSize: 14, color: '#94a3b8', lineHeight: 1.7 }}>
           <strong style={{ color: '#d1d1d8' }}>How the exit works:</strong> Initial stop is set at entry − ATR. Once the trade reaches +2.5R profit, the stop switches to <strong>EMA(20) − 1×ATR</strong> (trailing, only moves up). This lets winners run while protecting gains. Risk per trade: $100.
         </div>
+      </div>
+
+      {/* ── LIVE RANKING (STABLE) ── */}
+      <div className="card" style={{ marginTop: '1.5rem', border: '1px solid #64b5f6' }}>
+        <h3>Live Ranking (Stability-Aware)
+          <span style={{ color: '#8e8e9a', fontWeight: 400, fontSize: 14 }}> sorted by total P&amp;L, then PF, avg R, then lower drawdown</span>
+        </h3>
+        <p style={{ color: '#8e8e9a', fontSize: '0.8rem', marginTop: '-0.25rem' }}>
+          As of: <strong style={{ color: '#cfd8dc' }}>{rankingAsOf}</strong>
+        </p>
+        <p style={{ color: '#9fb3c8', fontSize: '0.85rem', marginTop: '-0.25rem' }}>
+          Near ties are grouped to ignore small changes. Tie bands: Total {fmt$(tieBands.totalPnl)}, PF ±{tieBands.pf}, Avg R ±{tieBands.avgR}, Avg DD ±{fmt$(tieBands.avgDD)}.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th><th>Strategy</th><th>Total P&amp;L</th><th>PF</th><th>Avg R</th><th>Avg DD</th><th>Tie Group</th>
+            </tr>
+          </thead>
+          <tbody>
+            {stableRankGroups.map(group => (
+              group.items.map((st, idx) => (
+                <tr key={`${group.rank}-${st.key}`} style={idx === 0 ? { borderTop: '1px solid #ffffff22' } : {}}>
+                  <td>{idx === 0 ? <strong>#{group.rank}</strong> : ''}</td>
+                  <td>
+                    <Link to={st.path} style={{ color: 'inherit', textDecoration: 'none', fontWeight: 600 }}>
+                      {st.icon} {st.label}
+                    </Link>
+                  </td>
+                  <td className={st.totalPnl >= 0 ? 'win' : 'loss'}>{fmt$(st.totalPnl)}</td>
+                  <td>{st.pf}</td>
+                  <td className={st.avgR >= 0 ? 'win' : 'loss'}>{st.avgR}R</td>
+                  <td>{fmt$(st.avgDD)}</td>
+                  <td>{group.items.length > 1 ? `Tie (${group.items.length})` : '—'}</td>
+                </tr>
+              ))
+            ))}
+          </tbody>
+        </table>
+        <p style={{ color: '#8e8e9a', fontSize: '0.8rem', marginTop: '0.75rem' }}>
+          Includes core + featured strategies (excludes rare-pattern strategies because sample size is much smaller).
+        </p>
       </div>
 
       {/* ── RANKING TABLE ── */}
