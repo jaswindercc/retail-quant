@@ -30,6 +30,7 @@ Author: Quant backtest engine
 """
 import pandas as pd, numpy as np, json, itertools
 from pathlib import Path
+from backtest_execution import gap_stop_fill_long
 
 DATA_DIR = Path("/workspaces/jas/data")
 OUT = Path("/workspaces/jas/dashboard/public/trail_study_data.json")
@@ -108,7 +109,7 @@ def backtest(df, name, params):
 
             # Check initial/trailing SL
             if r['Low'] <= tsl:
-                xp = tsl
+                xp = gap_stop_fill_long(r['Open'], tsl)
                 hit_exit = True
                 reason = 'SL' if exit_mode == 'sl_only' else 'SL'
 
@@ -123,11 +124,6 @@ def backtest(df, name, params):
                             ema_trail = ema_val - trail_buf * atr
                             if ema_trail > tsl:
                                 tsl = ema_trail
-                    # Check if trail was hit
-                    if r['Low'] <= tsl:
-                        xp = tsl
-                        hit_exit = True
-                        reason = 'Trail'
 
                 elif exit_mode == 'fixed_tp':
                     # Fixed take profit at target R

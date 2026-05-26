@@ -20,6 +20,11 @@ Configs tested:
 
 import pandas as pd, numpy as np, json
 from pathlib import Path
+from backtest_execution import (
+    gap_stop_fill_long,
+    calc_pnl_with_costs,
+    apply_portfolio_constraints,
+)
 
 DATA_DIR = Path("/workspaces/jas/data")
 OUT = Path("/workspaces/jas/dashboard/public/macro_overnight_data.json")
@@ -32,6 +37,17 @@ VIX_SMA_LEN = 20
 SPY_SMA50_LEN = 50
 SPY_SMA200_LEN = 200
 VOL_SMA_LEN = 20
+
+# Execution-cost controls (configurable)
+SLIPPAGE_BPS = 0.0
+COMMISSION_PER_SHARE = 0.0
+MIN_COMMISSION_PER_ORDER = 0.0
+
+# Portfolio-level constraints (configurable)
+PORTFOLIO_START_EQUITY = 100000.0
+PORTFOLIO_MAX_POSITIONS = 5
+PORTFOLIO_MAX_RISK_PCT = 0.02
+PORTFOLIO_MAX_GROSS_EXPOSURE_PCT = 1.5
 
 
 def load(fp):
@@ -229,13 +245,30 @@ def main():
 
         entry_price = row['Close']
         next_row = m.iloc[i + 1]
-        exit_price = next_row['Close']
 
         risk_dist = RISK_ATR_MULT * row['atr']
         if risk_dist <= 0:
             continue
         qty = max(1, round(RISK / risk_dist))
-        pnl_dollar = qty * (exit_price - entry_price)
+
+        sl = entry_price - risk_dist
+        if next_row['Low'] <= sl:
+            exit_price = gap_stop_fill_long(next_row['Open'], sl)
+            exit_reason = 'SL'
+        else:
+            exit_price = next_row['Close']
+            exit_reason = 'Close'
+
+        pnl = calc_pnl_with_costs(
+            direction='LONG',
+            entry_price=entry_price,
+            exit_price=exit_price,
+            qty=qty,
+            slippage_bps=SLIPPAGE_BPS,
+            commission_per_share=COMMISSION_PER_SHARE,
+            min_commission_per_order=MIN_COMMISSION_PER_ORDER,
+        )
+        pnl_dollar = pnl['netPnl']
         pnl_r = pnl_dollar / RISK
 
         # Macro conditions for this trade
@@ -249,8 +282,16 @@ def main():
             'exitDate': next_row['Date'].strftime('%Y-%m-%d'),
             'entryPrice': round(entry_price, 2),
             'exitPrice': round(exit_price, 2),
+            'sl': round(sl, 2),
+            'risk': round(risk_dist, 2),
+            'qty': qty,
             'pnlDollar': round(pnl_dollar, 2),
+            'grossPnlDollar': round(pnl['grossPnl'], 2),
+            'costsDollar': round(pnl['costs'], 2),
+            'entryFill': round(pnl['entryFill'], 4),
+            'exitFill': round(pnl['exitFill'], 4),
             'pnlR': round(pnl_r, 2),
+            'exitReason': exit_reason,
             'score': score,
             'reasons': reasons,
             'spx_above_sma50': spx_above_sma50,
@@ -321,7 +362,14 @@ def main():
 
     output_configs = []
     for key, cfg in configs.items():
-        s = compute_stats(cfg['trades'])
+        constrained_trades, portfolio_meta = apply_portfolio_constraints(
+            cfg['trades'],
+            max_positions=PORTFOLIO_MAX_POSITIONS,
+            max_risk_pct=PORTFOLIO_MAX_RISK_PCT,
+            max_gross_exposure_pct=PORTFOLIO_MAX_GROSS_EXPOSURE_PCT,
+            starting_equity=PORTFOLIO_START_EQUITY,
+        )
+        s = compute_stats(constrained_trades)
         cfg['stats'] = s
         print(f"{cfg['name']:<40} {s['trades']:<5} {s['winRate']:<7.1f} {s['profitFactor']:<6.2f} ${s['totalPnl']:>7,.0f}  ${s['maxDrawdown']:>6,.0f}  {s['avgR']:<7.3f} {s['returnToDD']:.1f}x")
 
@@ -330,7 +378,8 @@ def main():
             'key': cfg['key'],
             'rule': cfg['rule'],
             'stats': s,
-            'trades': sorted(cfg['trades'], key=lambda t: t['entryDate']),
+            'portfolioMeta': portfolio_meta,
+            'trades': sorted(constrained_trades, key=lambda t: t['entryDate']),
         })
 
     # SPX prices for chart overlay
@@ -359,6 +408,15 @@ def main():
         'configs': output_configs,
         'spxPrices': spx_prices,
         'iefPrices': ief_prices,
+        'settings': {
+            'slippageBps': SLIPPAGE_BPS,
+            'commissionPerShare': COMMISSION_PER_SHARE,
+            'minCommissionPerOrder': MIN_COMMISSION_PER_ORDER,
+            'portfolioStartEquity': PORTFOLIO_START_EQUITY,
+            'portfolioMaxPositions': PORTFOLIO_MAX_POSITIONS,
+            'portfolioMaxRiskPct': PORTFOLIO_MAX_RISK_PCT,
+            'portfolioMaxGrossExposurePct': PORTFOLIO_MAX_GROSS_EXPOSURE_PCT,
+        },
     }
 
     with open(OUT, 'w') as f:

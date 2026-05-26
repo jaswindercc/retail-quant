@@ -7,6 +7,7 @@ QQQ is more volatile than SPY so the overnight mean-reversion edge can be strong
 
 import pandas as pd, numpy as np, json
 from pathlib import Path
+from backtest_execution import gap_stop_fill_long, calc_pnl_with_costs, apply_portfolio_constraints
 
 DATA_DIR = Path("/workspaces/jas/data")
 OUT = Path("/workspaces/jas/dashboard/public/qqq_overnight_data.json")
@@ -22,6 +23,17 @@ VIX_SMA_LEN = 20
 SMA50_LEN = 50
 SMA200_LEN = 200
 VOL_SMA_LEN = 20
+
+# Execution-cost controls (configurable)
+SLIPPAGE_BPS = 0.0
+COMMISSION_PER_SHARE = 0.0
+MIN_COMMISSION_PER_ORDER = 0.0
+
+# Portfolio-level constraints (configurable)
+PORTFOLIO_START_EQUITY = 100000.0
+PORTFOLIO_MAX_POSITIONS = 5
+PORTFOLIO_MAX_RISK_PCT = 0.02
+PORTFOLIO_MAX_GROSS_EXPOSURE_PCT = 1.5
 
 
 def load(fp):
@@ -222,24 +234,31 @@ def backtest_overnight(qqq_df, vix_df):
 
         entry_price = row['Close']
         next_row = merged.iloc[i + 1]
-        exit_price = next_row['Close']
 
         risk_dist = RISK_ATR_MULT * atr
         if risk_dist <= 0:
             continue
         qty = max(1, round(RISK / risk_dist))
 
-        if direction == 'LONG':
-            pnl_dollar = qty * (exit_price - entry_price)
+        sl = entry_price - risk_dist
+        if next_row['Low'] <= sl:
+            exit_price = gap_stop_fill_long(next_row['Open'], sl)
+            exit_reason = 'SL'
         else:
-            pnl_dollar = qty * (entry_price - exit_price)
+            exit_price = next_row['Close']
+            exit_reason = 'Close'
 
+        pnl = calc_pnl_with_costs(
+            direction='LONG',
+            entry_price=entry_price,
+            exit_price=exit_price,
+            qty=qty,
+            slippage_bps=SLIPPAGE_BPS,
+            commission_per_share=COMMISSION_PER_SHARE,
+            min_commission_per_order=MIN_COMMISSION_PER_ORDER,
+        )
+        pnl_dollar = pnl['netPnl']
         pnl_r = pnl_dollar / RISK
-
-        if direction == 'LONG':
-            sl = entry_price - risk_dist
-        else:
-            sl = entry_price + risk_dist
 
         trades.append({
             'stock': 'QQQ',
@@ -253,7 +272,11 @@ def backtest_overnight(qqq_df, vix_df):
             'qty': qty,
             'pnlR': round(pnl_r, 2),
             'pnlDollar': round(pnl_dollar, 2),
-            'exitReason': 'Close',
+            'grossPnlDollar': round(pnl['grossPnl'], 2),
+            'costsDollar': round(pnl['costs'], 2),
+            'entryFill': round(pnl['entryFill'], 4),
+            'exitFill': round(pnl['exitFill'], 4),
+            'exitReason': exit_reason,
             'durationDays': 1,
             'score': score,
             'reasonsBull': reasons_bull,
@@ -286,6 +309,14 @@ print(f"  VIX: {len(vix_df)} bars ({vix_df['Date'].min().strftime('%Y-%m-%d')} t
 
 print("\nRunning QQQ overnight prediction backtest...")
 trades, prices, scores = backtest_overnight(qqq_df, vix_df)
+
+trades, portfolio_meta = apply_portfolio_constraints(
+    trades,
+    max_positions=PORTFOLIO_MAX_POSITIONS,
+    max_risk_pct=PORTFOLIO_MAX_RISK_PCT,
+    max_gross_exposure_pct=PORTFOLIO_MAX_GROSS_EXPOSURE_PCT,
+    starting_equity=PORTFOLIO_START_EQUITY,
+)
 
 if trades:
     closed = [t for t in trades if t['exitDate']]
@@ -347,6 +378,15 @@ all_data = {
         'riskAtrMult': RISK_ATR_MULT,
         'minScoreLong': MIN_SCORE_LONG,
         'minScoreShort': MIN_SCORE_SHORT,
+        'slippageBps': SLIPPAGE_BPS,
+        'commissionPerShare': COMMISSION_PER_SHARE,
+        'minCommissionPerOrder': MIN_COMMISSION_PER_ORDER,
+        'portfolioStartEquity': PORTFOLIO_START_EQUITY,
+        'portfolioMaxPositions': PORTFOLIO_MAX_POSITIONS,
+        'portfolioMaxRiskPct': PORTFOLIO_MAX_RISK_PCT,
+        'portfolioMaxGrossExposurePct': PORTFOLIO_MAX_GROSS_EXPOSURE_PCT,
+        'portfolioAcceptedTrades': portfolio_meta['accepted'],
+        'portfolioRejectedTrades': portfolio_meta['rejected'],
     }
 }
 

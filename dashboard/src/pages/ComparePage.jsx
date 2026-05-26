@@ -81,6 +81,16 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
 
   const winner = stratStats[0]
   const runner = stratStats[1]
+  const coreStats = stratStats.filter(s => !s.rare && !s.featured)
+  const rareStats = stratStats.filter(s => s.rare)
+  const byPF = [...coreStats].sort((a, b) => b.pf - a.pf)[0]
+  const byTotal = [...coreStats].sort((a, b) => b.totalPnl - a.totalPnl)[0]
+  const byDD = [...coreStats].sort((a, b) => a.avgDD - b.avgDD)[0]
+  const bestWinRate = [...stratStats].sort((a, b) => b.wr - a.wr)[0]
+  const bestRarePF = rareStats.length ? [...rareStats].sort((a, b) => b.pf - a.pf)[0] : null
+  const coreTop = coreStats[0]
+  const coreBottom = coreStats[coreStats.length - 1]
+  const pnlSpread = coreTop && coreBottom ? coreTop.avgPnl - coreBottom.avgPnl : 0
   const stratInfo = Object.fromEntries(STRATS.map(s => [s.key, s]))
   const wins = (key) => stockRows.filter(r => r.winners.includes(key)).length
 
@@ -90,65 +100,65 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
 
       {/* ── TOP STRATEGIES ── */}
       <div className="card" style={{ background: 'linear-gradient(135deg, #0d1b2a 0%, #1b2838 100%)', border: '2px solid #ffd700', padding: '1.5rem' }}>
-        <h2 style={{ color: '#ffd700', margin: '0 0 0.5rem 0', fontSize: 'clamp(1.1rem, 4vw, 1.5rem)' }}>🏆 Top Strategies — The Only Ones You Need</h2>
+        <h2 style={{ color: '#ffd700', margin: '0 0 0.5rem 0', fontSize: 'clamp(1.1rem, 4vw, 1.5rem)' }}>🏆 Top Strategies — Live Metrics</h2>
         <p style={{ color: '#aaa', fontSize: '0.85rem', margin: '0 0 1.5rem' }}>Selected based on: profit factor, consistency across stocks, avg R per trade, and total P&L.</p>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '1.25rem' }}>
-          {/* Higher High */}
-          <div style={{ padding: '1.25rem', background: '#1a1a2e', borderRadius: '12px', border: '2px solid #ab47bc' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-              <span style={{ fontSize: '1.5rem' }}>📐</span>
-              <span style={{ background: '#ffd70022', color: '#ffd700', padding: '2px 10px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 700 }}>BEST R:R</span>
-            </div>
-            <h3 style={{ margin: '0 0 0.5rem', color: '#ab47bc' }}><Link to="/higher-high" style={{color:'inherit',textDecoration:'none'}}>Higher High Break</Link></h3>
-            <p style={{ color: '#ccc', fontSize: '0.85rem', margin: '0 0 0.75rem' }}>First higher high after 3+ lower highs. Catches trend reversals at the start.</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem' }}>
-              <div><span style={{ color: '#888' }}>Win Rate:</span> <strong style={{ color: '#00e676' }}>54%</strong></div>
-              <div><span style={{ color: '#888' }}>Avg Win:</span> <strong style={{ color: '#00e676' }}>25.3R</strong></div>
-              <div><span style={{ color: '#888' }}>PF:</span> <strong style={{ color: '#00e676' }}>12.83</strong></div>
-              <div><span style={{ color: '#888' }}>$/Stock:</span> <strong style={{ color: '#00e676' }}>$4,280</strong></div>
-            </div>
-            <p style={{ color: '#ff9800', fontSize: '0.75rem', margin: '0.75rem 0 0', fontStyle: 'italic' }}>⚡ Rare (41 trades) but when it fires → massive. Use the scanner to catch signals.</p>
-          </div>
-
-          {/* MA Bounce */}
-          <div style={{ padding: '1.25rem', background: '#1a1a2e', borderRadius: '12px', border: '2px solid #2196f3' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-              <span style={{ fontSize: '1.5rem' }}>🔵</span>
-              <span style={{ background: '#2196f322', color: '#64b5f6', padding: '2px 10px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 700 }}>WORKHORSE</span>
-            </div>
-            <h3 style={{ margin: '0 0 0.5rem', color: '#2196f3' }}><Link to="/bounce" style={{color:'inherit',textDecoration:'none'}}>MA Bounce</Link></h3>
-            <p style={{ color: '#ccc', fontSize: '0.85rem', margin: '0 0 0.75rem' }}>Pullback to EMA20 in uptrend. Most frequent setup — fires constantly in trending markets.</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem' }}>
-              <div><span style={{ color: '#888' }}>Win Rate:</span> <strong>29%</strong></div>
-              <div><span style={{ color: '#888' }}>Avg Win:</span> <strong>5.1R</strong></div>
-              <div><span style={{ color: '#888' }}>PF:</span> <strong>2.11</strong></div>
-              <div><span style={{ color: '#888' }}>$/Stock:</span> <strong style={{ color: '#00e676' }}>$3,290</strong></div>
-            </div>
-            <p style={{ color: '#64b5f6', fontSize: '0.75rem', margin: '0.75rem 0 0', fontStyle: 'italic' }}>📈 512 trades · 11/12 stocks profitable. Your bread and butter — trade this every day.</p>
-          </div>
-
-          {/* Breakout */}
+          {/* Best PF */}
           <div style={{ padding: '1.25rem', background: '#1a1a2e', borderRadius: '12px', border: '2px solid #ff9800' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-              <span style={{ fontSize: '1.5rem' }}>🟡</span>
+              <span style={{ fontSize: '1.5rem' }}>{byPF.icon}</span>
               <span style={{ background: '#ff980022', color: '#ffb74d', padding: '2px 10px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 700 }}>BEST EDGE</span>
             </div>
-            <h3 style={{ margin: '0 0 0.5rem', color: '#ff9800' }}><Link to="/breakout" style={{color:'inherit',textDecoration:'none'}}>Breakout</Link></h3>
-            <p style={{ color: '#ccc', fontSize: '0.85rem', margin: '0 0 0.75rem' }}>Price breaks above 20-day high. Best profit factor of all core strategies.</p>
+            <h3 style={{ margin: '0 0 0.5rem', color: '#ff9800' }}><Link to={byPF.path} style={{color:'inherit',textDecoration:'none'}}>{byPF.label}</Link></h3>
+            <p style={{ color: '#ccc', fontSize: '0.85rem', margin: '0 0 0.75rem' }}>{byPF.desc}. Highest profit factor in core strategies.</p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem' }}>
-              <div><span style={{ color: '#888' }}>Win Rate:</span> <strong>34%</strong></div>
-              <div><span style={{ color: '#888' }}>Avg Win:</span> <strong>5.5R</strong></div>
-              <div><span style={{ color: '#888' }}>PF:</span> <strong style={{ color: '#00e676' }}>2.80</strong></div>
-              <div><span style={{ color: '#888' }}>$/Stock:</span> <strong style={{ color: '#00e676' }}>$2,922</strong></div>
+              <div><span style={{ color: '#888' }}>Win Rate:</span> <strong style={{ color: '#00e676' }}>{byPF.wr}%</strong></div>
+              <div><span style={{ color: '#888' }}>Avg R:</span> <strong style={{ color: '#00e676' }}>{byPF.avgR}R</strong></div>
+              <div><span style={{ color: '#888' }}>PF:</span> <strong style={{ color: '#00e676' }}>{byPF.pf}</strong></div>
+              <div><span style={{ color: '#888' }}>Total:</span> <strong style={{ color: '#00e676' }}>{fmt$(byPF.totalPnl)}</strong></div>
             </div>
-            <p style={{ color: '#ffb74d', fontSize: '0.75rem', margin: '0.75rem 0 0', fontStyle: 'italic' }}>🎯 297 trades · 11/12 profitable. Highest win rate + PF of core. Quality over quantity.</p>
+            <p style={{ color: '#ffb74d', fontSize: '0.75rem', margin: '0.75rem 0 0', fontStyle: 'italic' }}>🎯 {byPF.trades} trades · Highest PF in live data.</p>
+          </div>
+
+          {/* Highest Total PnL */}
+          <div style={{ padding: '1.25rem', background: '#1a1a2e', borderRadius: '12px', border: '2px solid #2196f3' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+              <span style={{ fontSize: '1.5rem' }}>{byTotal.icon}</span>
+              <span style={{ background: '#2196f322', color: '#64b5f6', padding: '2px 10px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 700 }}>WORKHORSE</span>
+            </div>
+            <h3 style={{ margin: '0 0 0.5rem', color: '#2196f3' }}><Link to={byTotal.path} style={{color:'inherit',textDecoration:'none'}}>{byTotal.label}</Link></h3>
+            <p style={{ color: '#ccc', fontSize: '0.85rem', margin: '0 0 0.75rem' }}>{byTotal.desc}. Highest total P&L in core strategies.</p>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem' }}>
+              <div><span style={{ color: '#888' }}>Win Rate:</span> <strong>{byTotal.wr}%</strong></div>
+              <div><span style={{ color: '#888' }}>Avg R:</span> <strong>{byTotal.avgR}R</strong></div>
+              <div><span style={{ color: '#888' }}>PF:</span> <strong>{byTotal.pf}</strong></div>
+              <div><span style={{ color: '#888' }}>Total:</span> <strong style={{ color: '#00e676' }}>{fmt$(byTotal.totalPnl)}</strong></div>
+            </div>
+            <p style={{ color: '#64b5f6', fontSize: '0.75rem', margin: '0.75rem 0 0', fontStyle: 'italic' }}>📈 {byTotal.trades} trades · Highest total P&L in live data.</p>
+          </div>
+
+          {/* Lowest Drawdown */}
+          <div style={{ padding: '1.25rem', background: '#1a1a2e', borderRadius: '12px', border: '2px solid #4caf50' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+              <span style={{ fontSize: '1.5rem' }}>{byDD.icon}</span>
+              <span style={{ background: '#4caf5022', color: '#81c784', padding: '2px 10px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 700 }}>LOWEST DD</span>
+            </div>
+            <h3 style={{ margin: '0 0 0.5rem', color: '#4caf50' }}><Link to={byDD.path} style={{color:'inherit',textDecoration:'none'}}>{byDD.label}</Link></h3>
+            <p style={{ color: '#ccc', fontSize: '0.85rem', margin: '0 0 0.75rem' }}>{byDD.desc}. Lowest average drawdown across tracked stocks.</p>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem' }}>
+              <div><span style={{ color: '#888' }}>Win Rate:</span> <strong>{byDD.wr}%</strong></div>
+              <div><span style={{ color: '#888' }}>Avg R:</span> <strong>{byDD.avgR}R</strong></div>
+              <div><span style={{ color: '#888' }}>PF:</span> <strong style={{ color: '#00e676' }}>{byDD.pf}</strong></div>
+              <div><span style={{ color: '#888' }}>Total:</span> <strong style={{ color: '#00e676' }}>{fmt$(byDD.totalPnl)}</strong></div>
+            </div>
+            <p style={{ color: '#81c784', fontSize: '0.75rem', margin: '0.75rem 0 0', fontStyle: 'italic' }}>🛡️ {byDD.trades} trades · Avg DD {fmt$(byDD.avgDD)}.</p>
           </div>
         </div>
 
         <div style={{ marginTop: '1.25rem', padding: '1rem', background: 'rgba(255,215,0,0.06)', borderRadius: '8px', borderLeft: '3px solid #ffd700' }}>
           <strong style={{ color: '#ffd700' }}>The Playbook:</strong>
-          <span style={{ color: '#ccc', fontSize: '0.9rem' }}> Trade MA Bounce + Breakout daily (high frequency). Watch the scanner for Higher High Break signals (rare but life-changing R:R). That's it.</span>
+          <span style={{ color: '#ccc', fontSize: '0.9rem' }}> Trade {byTotal.label} for throughput, {byPF.label} for edge quality, and {byDD.label} for lower drawdown diversification. Scanner at 3:15 PM, orders by close.</span>
         </div>
       </div>
 
@@ -255,22 +265,22 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
           <div style={{ padding: '1rem', background: 'rgba(0,230,118,0.08)', borderRadius: '8px', borderLeft: '3px solid #00e676' }}>
             <strong style={{ color: '#00e676' }}>More trades = more money</strong>
             <p style={{ margin: '0.5rem 0 0', color: '#ccc', fontSize: '0.9rem' }}>
-              MA Bounce wins because it fires the most ({winner.trades} trades). Even with a lower win rate,
+              MA Bounce wins on total PnL because it fires the most ({winner.trades} trades). Even with a lower win rate,
               the volume of trades × positive expectancy = highest total profit.
             </p>
           </div>
           <div style={{ padding: '1rem', background: 'rgba(255,171,64,0.08)', borderRadius: '8px', borderLeft: '3px solid #ffab40' }}>
             <strong style={{ color: '#ffab40' }}>Win rate doesn't pick the winner</strong>
             <p style={{ margin: '0.5rem 0 0', color: '#ccc', fontSize: '0.9rem' }}>
-              Breakout has the best win rate (33.7%) but finishes #2. Mean Rev has 32.8% win rate but finishes last.
-              What matters: avg R × trade count × win rate.
+              {bestWinRate?.label} has the best win rate ({bestWinRate?.wr}%) but not necessarily the highest total P&L.
+              What matters most is expectancy (avg R) multiplied by trade count.
             </p>
           </div>
           <div style={{ padding: '1rem', background: 'rgba(156,39,176,0.08)', borderRadius: '8px', borderLeft: '3px solid #9c27b0' }}>
             <strong style={{ color: '#9c27b0' }}>Rare patterns have great edges but less profit</strong>
             <p style={{ margin: '0.5rem 0 0', color: '#ccc', fontSize: '0.9rem' }}>
-              VCP and Volume have the highest profit factors (2.6 and 2.53) but rank #9 and #8.
-              Fewer trades = less total P&L even with a sharper edge per trade.
+              {bestRarePF ? `${bestRarePF.label} has the sharpest rare-pattern edge (PF ${bestRarePF.pf})` : 'Rare patterns can show strong edges'}.
+              They usually fire less often, so total P&L may trail more frequent strategies.
             </p>
           </div>
           <div style={{ padding: '1rem', background: 'rgba(255,82,82,0.08)', borderRadius: '8px', borderLeft: '3px solid #ff5252' }}>

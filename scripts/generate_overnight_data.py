@@ -41,11 +41,17 @@ Risk Management:
   - Risk distance = 0.5 × ATR(14)  (expected overnight range)
   - Position size: qty = $100 / risk_distance
   - P&L = qty × (exit - entry) for longs, qty × (entry - exit) for shorts
-  - No intraday stop (hold to next close), but cap loss at 2R for risk calcs
+    - Gap-aware overnight stop at 0.5×ATR risk distance, otherwise exit next close
 """
 
 import pandas as pd, numpy as np, json
 from pathlib import Path
+from backtest_execution import (
+    gap_stop_fill_long,
+    gap_stop_fill_short,
+    calc_pnl_with_costs,
+    apply_portfolio_constraints,
+)
 
 DATA_DIR = Path("/workspaces/jas/data")
 OUT = Path("/workspaces/jas/dashboard/public/overnight_data.json")
@@ -61,6 +67,17 @@ VIX_SMA_LEN = 20        # VIX moving average length
 SPY_SMA50_LEN = 50
 SPY_SMA200_LEN = 200
 VOL_SMA_LEN = 20
+
+# Execution-cost controls (configurable)
+SLIPPAGE_BPS = 0.0
+COMMISSION_PER_SHARE = 0.0
+MIN_COMMISSION_PER_ORDER = 0.0
+
+# Portfolio-level constraints (configurable)
+PORTFOLIO_START_EQUITY = 100000.0
+PORTFOLIO_MAX_POSITIONS = 5
+PORTFOLIO_MAX_RISK_PCT = 0.02
+PORTFOLIO_MAX_GROSS_EXPOSURE_PCT = 1.5
 
 
 def load(fp):
@@ -349,10 +366,9 @@ def backtest_overnight(spy_df, vix_df):
         else:
             continue  # No trade — insufficient conviction
         
-        # Entry at today's close, exit at tomorrow's close
+        # Entry at today's close, exit at tomorrow's close (or stop if hit)
         entry_price = row['Close']
         next_row = merged.iloc[i + 1]
-        exit_price = next_row['Close']
         
         # Risk distance = 0.5 × ATR
         risk_dist = RISK_ATR_MULT * atr
@@ -360,19 +376,38 @@ def backtest_overnight(spy_df, vix_df):
             continue
         qty = max(1, round(RISK / risk_dist))
         
-        # PnL
-        if direction == 'LONG':
-            pnl_dollar = qty * (exit_price - entry_price)
-        else:
-            pnl_dollar = qty * (entry_price - exit_price)
-        
-        pnl_r = pnl_dollar / RISK  # R-multiple (relative to $100 risk)
-        
-        # Stop level (theoretical — not enforced intraday with daily data)
+        # Stop level
         if direction == 'LONG':
             sl = entry_price - risk_dist
         else:
             sl = entry_price + risk_dist
+        
+        # Check if stopped out intraday (gap-adjusted fill)
+        exit_reason = 'Close'
+        if direction == 'LONG':
+            if next_row['Low'] <= sl:
+                exit_price = gap_stop_fill_long(next_row['Open'], sl)
+                exit_reason = 'SL'
+            else:
+                exit_price = next_row['Close']
+        else:
+            if next_row['High'] >= sl:
+                exit_price = gap_stop_fill_short(next_row['Open'], sl)
+                exit_reason = 'SL'
+            else:
+                exit_price = next_row['Close']
+        pnl = calc_pnl_with_costs(
+            direction=direction,
+            entry_price=entry_price,
+            exit_price=exit_price,
+            qty=qty,
+            slippage_bps=SLIPPAGE_BPS,
+            commission_per_share=COMMISSION_PER_SHARE,
+            min_commission_per_order=MIN_COMMISSION_PER_ORDER,
+        )
+        pnl_dollar = pnl['netPnl']
+        
+        pnl_r = pnl_dollar / RISK  # R-multiple (relative to $100 risk)
         
         trades.append({
             'stock': 'SPY',
@@ -386,7 +421,11 @@ def backtest_overnight(spy_df, vix_df):
             'qty': qty,
             'pnlR': round(pnl_r, 2),
             'pnlDollar': round(pnl_dollar, 2),
-            'exitReason': 'Close',
+            'grossPnlDollar': round(pnl['grossPnl'], 2),
+            'costsDollar': round(pnl['costs'], 2),
+            'entryFill': round(pnl['entryFill'], 4),
+            'exitFill': round(pnl['exitFill'], 4),
+            'exitReason': exit_reason,
             'durationDays': 1,
             'score': score,
             'reasonsBull': reasons_bull,
@@ -420,6 +459,14 @@ print(f"  VIX: {len(vix_df)} bars ({vix_df['Date'].min().strftime('%Y-%m-%d')} t
 
 print("\nRunning overnight prediction backtest...")
 trades, prices, scores = backtest_overnight(spy_df, vix_df)
+
+trades, portfolio_meta = apply_portfolio_constraints(
+    trades,
+    max_positions=PORTFOLIO_MAX_POSITIONS,
+    max_risk_pct=PORTFOLIO_MAX_RISK_PCT,
+    max_gross_exposure_pct=PORTFOLIO_MAX_GROSS_EXPOSURE_PCT,
+    starting_equity=PORTFOLIO_START_EQUITY,
+)
 
 # Compute summary stats
 if trades:
@@ -491,6 +538,15 @@ all_data = {
         'riskAtrMult': RISK_ATR_MULT,
         'minScoreLong': MIN_SCORE_LONG,
         'minScoreShort': MIN_SCORE_SHORT,
+        'slippageBps': SLIPPAGE_BPS,
+        'commissionPerShare': COMMISSION_PER_SHARE,
+        'minCommissionPerOrder': MIN_COMMISSION_PER_ORDER,
+        'portfolioStartEquity': PORTFOLIO_START_EQUITY,
+        'portfolioMaxPositions': PORTFOLIO_MAX_POSITIONS,
+        'portfolioMaxRiskPct': PORTFOLIO_MAX_RISK_PCT,
+        'portfolioMaxGrossExposurePct': PORTFOLIO_MAX_GROSS_EXPOSURE_PCT,
+        'portfolioAcceptedTrades': portfolio_meta['accepted'],
+        'portfolioRejectedTrades': portfolio_meta['rejected'],
         'factors': {
             'bullish_strong': [
                 'VIX panic spike >12% (+2)',
