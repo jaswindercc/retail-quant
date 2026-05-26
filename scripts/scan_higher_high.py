@@ -18,7 +18,8 @@ Output:
 """
 import argparse
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 import numpy as np
@@ -26,6 +27,7 @@ import pandas as pd
 import yfinance as yf
 
 OUT = Path(__file__).resolve().parent.parent / "data" / "hh_scanner_results.json"
+NY_TZ = ZoneInfo("America/New_York")
 
 # ── Stock Universes ──
 SP500_URL = "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
@@ -300,7 +302,9 @@ def main():
     print("=" * 60)
     print("  📐 HIGHER HIGH BREAK — Daily Scanner")
     print("=" * 60)
-    print(f"  Date: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+    now_ny = datetime.now(NY_TZ)
+    now_utc = datetime.now(timezone.utc)
+    print(f"  Date (NY): {now_ny.strftime('%Y-%m-%d %I:%M %p %Z')}")
     print(f"  Pattern: First higher swing high after 3+ lower swing highs")
     print(f"  Lookback: {args.lookback} bars")
     print()
@@ -405,7 +409,10 @@ def main():
     if args.json or True:  # Always save
         import json
         output = {
-            'scanDate': datetime.now().strftime('%Y-%m-%d %H:%M'),
+            'scanDate': now_ny.strftime('%Y-%m-%d %I:%M %p %Z'),
+            'scanDateNY': now_ny.strftime('%Y-%m-%d %I:%M %p %Z'),
+            'scanDateUTC': now_utc.strftime('%Y-%m-%d %H:%M UTC'),
+            'scanTimezone': 'America/New_York',
             'universe': args.universe if not args.tickers else 'custom',
             'stocksScanned': len(data),
             'signals': all_signals,

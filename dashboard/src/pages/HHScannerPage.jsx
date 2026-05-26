@@ -13,16 +13,17 @@ export default function HHScannerPage() {
 
   if (!data) return <div><p className="loading">Loading scanner…</p></div>
 
-  const { scanDate, universe, stocksScanned, signals, watchlist, pattern } = data
+  const { scanDate, scanDateNY, universe, stocksScanned, signals, watchlist, pattern } = data
+  const displayScanDate = scanDateNY || scanDate
 
   return (
     <div>
-      <h1 className="page-title">Higher High Scanner <span>Live scan · {stocksScanned} stocks · {scanDate}</span></h1>
+      <h1 className="page-title">Higher High Scanner <span>Live scan · {stocksScanned} stocks · {displayScanDate}</span></h1>
 
       {/* Timing guidance */}
       <div className="card" style={{padding: '10px 16px', marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, borderLeft: '3px solid #ab47bc'}}>
         <div style={{fontSize: 13, color: '#a1a1aa'}}>
-          📡 Last scan: <strong style={{color: '#ab47bc'}}>{scanDate}</strong>
+          📡 Last scan: <strong style={{color: '#ab47bc'}}>{displayScanDate}</strong>
         </div>
         <div style={{fontSize: 12, color: '#71717a'}}>
           ⏰ Best time to check: <strong style={{color: '#fbbf24'}}>10:05 AM ET</strong> (Mon–Fri after auto-scan)
@@ -64,7 +65,7 @@ export default function HHScannerPage() {
         </div>
         <div className="kpi">
           <div className="label">Last Scan</div>
-          <div className="value" style={{ fontSize: '1rem' }}>{scanDate}</div>
+          <div className="value" style={{ fontSize: '1rem' }}>{displayScanDate}</div>
         </div>
       </div>
 

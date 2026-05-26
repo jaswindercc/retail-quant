@@ -2,7 +2,7 @@ name: Live Scanner (Daily)
 
 on:
   schedule:
-    - cron: '0 14 * * 1-5'  # Mon-Fri 10 AM Toronto (14:00 UTC EDT)
+    - cron: '0 14 * * 1-5'  # Mon-Fri 10:00 AM New York (ET) during DST (EDT)
   workflow_dispatch:
 
 permissions:

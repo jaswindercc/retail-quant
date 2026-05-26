@@ -12,7 +12,8 @@ Usage:
 """
 import argparse
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 import numpy as np
@@ -20,6 +21,7 @@ import pandas as pd
 import yfinance as yf
 
 OUT = Path(__file__).resolve().parent.parent / "data" / "live_scanner_data.json"
+NY_TZ = ZoneInfo("America/New_York")
 
 # ── Stock Universes ──
 SWING_STOCKS = [
@@ -357,7 +359,9 @@ def main():
     print("=" * 60)
     print("  🔴🔵🟡 LIVE SCANNER — Top 3 Swing Strategies")
     print("=" * 60)
-    print(f"  Date: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+    now_ny = datetime.now(NY_TZ)
+    now_utc = datetime.now(timezone.utc)
+    print(f"  Date (NY): {now_ny.strftime('%Y-%m-%d %I:%M %p %Z')}")
     print(f"  Strategies: MA Bounce | Breakout | Higher High Break")
     print(f"  Lookback: {args.lookback} bars (bounce/breakout), {args.hh_lookback} bars (higher high)")
     print()
@@ -466,7 +470,10 @@ def main():
     # Save JSON
     import json
     output = {
-        'scanDate': datetime.now().strftime('%Y-%m-%d %H:%M'),
+        'scanDate': now_ny.strftime('%Y-%m-%d %I:%M %p %Z'),
+        'scanDateNY': now_ny.strftime('%Y-%m-%d %I:%M %p %Z'),
+        'scanDateUTC': now_utc.strftime('%Y-%m-%d %H:%M UTC'),
+        'scanTimezone': 'America/New_York',
         'universe': args.universe if not args.tickers else 'custom',
         'stocksScanned': len(data),
         'totalSignals': len(all_signals),

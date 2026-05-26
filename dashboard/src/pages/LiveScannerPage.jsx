@@ -11,7 +11,7 @@ const STRENGTH_COLORS = { STRONG: '#00e676', NORMAL: '#64b5f6' }
 
 function utcToNY(utcStr) {
   try {
-    const d = new Date(utcStr + ' UTC')
+    const d = new Date(utcStr.includes('UTC') ? utcStr : `${utcStr} UTC`)
     return d.toLocaleString('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' })
   } catch { return utcStr }
 }
@@ -95,7 +95,8 @@ export default function LiveScannerPage() {
     </div>
   )
 
-  const { scanDate, universe, stocksScanned, totalSignals, signals } = data
+  const { scanDate, scanDateNY, universe, stocksScanned, totalSignals, signals } = data
+  const displayScanDate = scanDateNY || utcToNY(scanDate)
 
   // Get latest date
   const latestDate = signals.length > 0 ? signals[0].date : ''
@@ -120,7 +121,7 @@ export default function LiveScannerPage() {
       <div className="card" style={{padding: '10px 16px', marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, borderLeft: '3px solid #4ade80'}}>
         <div style={{fontSize: 13, color: '#a1a1aa'}}>
           <span>📡 Data fetched: </span>
-          <strong style={{color: '#4ade80'}}>{utcToNY(scanDate)}</strong>
+          <strong style={{color: '#4ade80'}}>{displayScanDate}</strong>
         </div>
         <div style={{fontSize: 12, color: '#71717a'}}>
           ⏰ Best time to check: <strong style={{color: '#fbbf24'}}>10:05 AM ET</strong> (right after scan completes)
