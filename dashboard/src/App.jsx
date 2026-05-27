@@ -37,6 +37,7 @@ import Strat2D12UPage from './pages/Strat2D12UPage'
 import Strat32D12UPage from './pages/Strat32D12UPage'
 import StratComboDetailPage from './pages/StratComboDetailPage'
 import MarkovPage from './pages/MarkovPage'
+import PositionTrackerPage from './pages/PositionTrackerPage'
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
 
@@ -164,7 +165,7 @@ export default function App() {
 
   // Auto-open nav groups based on current route
   const isOvernightRoute = ['/overnight', '/spy-overnight', '/qqq-overnight', '/overnight-trail-study', '/qqq-trail-study', '/overnight-macro', '/scanner', '/markov'].some(p => location.pathname.startsWith(p))
-  const isSwingRoute = CORE_STRATS.some(s => location.pathname.startsWith(s.path)) || location.pathname === '/' || location.pathname === '/stocks' || location.pathname === '/swing-scanners' || location.pathname === '/live-scanner'
+  const isSwingRoute = CORE_STRATS.some(s => location.pathname.startsWith(s.path)) || location.pathname === '/' || location.pathname === '/stocks' || location.pathname === '/swing-scanners' || location.pathname === '/live-scanner' || location.pathname === '/tracker'
   const isRareRoute = RARE_STRATS.some(s => location.pathname.startsWith(s.path)) || location.pathname === '/rare-scanner' || location.pathname === '/hh-scanner'
   const isStratRoute = location.pathname.startsWith('/the-strat')
   const isResearchRoute = ['/trail-study', '/skip-analysis'].some(p => location.pathname.startsWith(p))
@@ -213,6 +214,9 @@ export default function App() {
           <NavGroup label="Swing Strategies" icon="📈" defaultOpen={isSwingRoute}>
             <NavLink to="/live-scanner" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: isActive ? '#ffd700' : '#ffd700', fontWeight: 700 })}>
               🔴 Live Scanner
+            </NavLink>
+            <NavLink to="/tracker" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: isActive ? '#4ade80' : '#4ade80', fontWeight: 700 })}>
+              📋 Position Tracker
             </NavLink>
             <NavLink to="/" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
               📊 Swing Summary
@@ -316,6 +320,7 @@ export default function App() {
           <Route path="/rare-scanner" element={<RareScannerPage />} />
           <Route path="/hh-scanner" element={<HHScannerPage />} />
           <Route path="/live-scanner" element={<LiveScannerPage />} />
+          <Route path="/tracker" element={<PositionTrackerPage />} />
           <Route path="/overnight" element={<SpxOvernightPage data={onData} />} />
           <Route path="/spy-overnight" element={<SpyOvernightPage data={spyOnData} />} />
           <Route path="/qqq-overnight" element={<QqqOvernightPage data={qqqOnData} />} />
