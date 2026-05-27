@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 const STRAT_META = {
   'MA Bounce': { icon: '🔵', color: '#2196f3', path: '/bounce', tag: 'WORKHORSE' },
   'Breakout': { icon: '🟡', color: '#ff9800', path: '/breakout', tag: 'BEST EDGE' },
+  'RSI Trend': { icon: '🟣', color: '#e040fb', path: '/rsi', tag: 'TOP 3' },
   'Higher High': { icon: '📐', color: '#ab47bc', path: '/higher-high', tag: 'BEST R:R' },
 }
 
@@ -129,6 +130,7 @@ export default function LiveScannerPage() {
   const todaySummary = {
     'MA Bounce': todaySignals.filter(s => s.strategy === 'MA Bounce').length,
     'Breakout': todaySignals.filter(s => s.strategy === 'Breakout').length,
+    'RSI Trend': todaySignals.filter(s => s.strategy === 'RSI Trend').length,
     'Higher High': todaySignals.filter(s => s.strategy === 'Higher High').length,
   }
   const todayConfluence = []
@@ -160,6 +162,10 @@ export default function LiveScannerPage() {
         <div className="kpi" style={{ borderTop: '3px solid #ff9800' }}>
           <div className="label">🟡 Breakout</div>
           <div className="value green">{todaySummary['Breakout']}</div>
+        </div>
+        <div className="kpi" style={{ borderTop: '3px solid #e040fb' }}>
+          <div className="label">🟣 RSI Trend</div>
+          <div className="value green">{todaySummary['RSI Trend']}</div>
         </div>
         <div className="kpi" style={{ borderTop: '3px solid #ab47bc' }}>
           <div className="label">📐 Higher High</div>
@@ -201,7 +207,7 @@ export default function LiveScannerPage() {
       <div className="card" style={{ padding: '12px 16px', display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
         <span style={{ color: '#888', fontSize: '0.85rem', marginRight: 8 }}>Filter:</span>
         <div className="tab-bar" style={{ margin: 0 }}>
-          {['all', 'MA Bounce', 'Breakout', 'Higher High', 'Confluence'].map(f => (
+          {['all', 'MA Bounce', 'Breakout', 'RSI Trend', 'Higher High', 'Confluence'].map(f => (
             <button key={f} className={filter === f ? 'active' : ''} onClick={() => setFilter(f)}>
               {f === 'all' ? 'All Strategies' : f === 'Confluence' ? '⭐ Confluence' : `${STRAT_META[f]?.icon} ${f}`}
             </button>

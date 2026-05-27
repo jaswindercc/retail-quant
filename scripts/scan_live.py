@@ -145,7 +145,7 @@ def normalize_df(df):
 
 
 def add_indicators(df):
-    """Add all indicators needed for the 3 strategies."""
+    """Add all indicators needed for the scanner strategies."""
     df = df.copy()
     df['ema20'] = df['Close'].ewm(span=20, adjust=False).mean()
     df['sma50'] = df['Close'].rolling(50).mean()
@@ -158,6 +158,15 @@ def add_indicators(df):
 
     # 20-day high (for Breakout)
     df['high_20'] = df['High'].rolling(20).max().shift(1)
+
+    # RSI(14)
+    delta = df['Close'].diff()
+    gain = delta.where(delta > 0, 0.0)
+    loss = (-delta).where(delta < 0, 0.0)
+    avg_gain = gain.ewm(alpha=1/14, min_periods=14, adjust=False).mean()
+    avg_loss = loss.ewm(alpha=1/14, min_periods=14, adjust=False).mean()
+    rs = avg_gain / avg_loss.replace(0, np.nan)
+    df['rsi'] = 100 - (100 / (1 + rs))
 
     return df
 
@@ -175,6 +184,60 @@ def find_swing_highs(df, window=10):
         if not filtered or h[0] - filtered[-1][0] >= window:
             filtered.append(h)
     return filtered
+
+
+def scan_rsi_trend(df, ticker, lookback=5):
+    """RSI Trend: RSI(14) crosses above 50 from below + price above SMA50."""
+    signals = []
+    n = len(df)
+
+    for i in range(max(50, n - lookback), n):
+        row = df.iloc[i]
+        prev = df.iloc[i - 1]
+
+        if pd.isna(row['sma50']) or pd.isna(row['rsi']) or pd.isna(prev['rsi']) or pd.isna(row['atr']):
+            continue
+
+        atr = row['atr']
+        if atr <= 0:
+            continue
+
+        # Entry conditions:
+        # 1. RSI crosses above 50 from below
+        if not (prev['rsi'] < 50 and row['rsi'] >= 50):
+            continue
+
+        # 2. Price above SMA50 (uptrend)
+        if row['Close'] <= row['sma50']:
+            continue
+
+        # 3. Not overextended (close not > 4 ATR above SMA50)
+        if row['Close'] - row['sma50'] > 4.0 * atr:
+            continue
+
+        # 4. Not a huge bar
+        bar_range = row['High'] - row['Low']
+        if bar_range > 2.5 * atr:
+            continue
+
+        entry = row['Close']
+        stop = entry - atr
+        risk = entry - stop
+        date_str = row['Date'].strftime('%Y-%m-%d') if hasattr(row['Date'], 'strftime') else str(row['Date'])[:10]
+
+        signals.append({
+            'ticker': ticker,
+            'strategy': 'RSI Trend',
+            'date': date_str,
+            'entry': round(entry, 2),
+            'stop': round(stop, 2),
+            'risk_per_share': round(risk, 2),
+            'details': f"RSI crossed 50 (prev {prev['rsi']:.1f} → {row['rsi']:.1f}), above SMA50 (${row['sma50']:.2f})",
+            'strength': 'STRONG' if row['rsi'] >= 55 else 'NORMAL',
+            'bars_ago': n - 1 - i,
+        })
+
+    return signals
 
 
 def scan_ma_bounce(df, ticker, lookback=5):
@@ -362,7 +425,7 @@ def main():
     now_ny = datetime.now(NY_TZ)
     now_utc = datetime.now(timezone.utc)
     print(f"  Date (NY): {now_ny.strftime('%Y-%m-%d %I:%M %p %Z')}")
-    print(f"  Strategies: MA Bounce | Breakout | Higher High Break")
+    print(f"  Strategies: MA Bounce | Breakout | RSI Trend | Higher High Break")
     print(f"  Lookback: {args.lookback} bars (bounce/breakout), {args.hh_lookback} bars (higher high)")
     print()
 
@@ -407,6 +470,7 @@ def main():
 
         all_signals.extend(scan_ma_bounce(df, ticker, lookback=args.lookback))
         all_signals.extend(scan_breakout(df, ticker, lookback=args.lookback))
+        all_signals.extend(scan_rsi_trend(df, ticker, lookback=args.lookback))
         all_signals.extend(scan_higher_high(df, ticker, lookback=args.hh_lookback))
 
     # Attach market cap to each signal
@@ -437,7 +501,7 @@ def main():
     print("=" * 60)
 
     for strat_name, strat_signals in sorted(by_strat.items()):
-        icon = {'MA Bounce': '🔵', 'Breakout': '🟡', 'Higher High': '📐'}[strat_name]
+        icon = {'MA Bounce': '🔵', 'Breakout': '🟡', 'RSI Trend': '🟣', 'Higher High': '📐'}[strat_name]
         print(f"\n  {icon} {strat_name} — {len(strat_signals)} signals")
         print(f"  {'─' * 50}")
         print(f"  {'Ticker':<8} {'Date':<12} {'Entry':>8} {'Stop':>8} {'Risk':>7} {'Str':<7}")
@@ -454,7 +518,7 @@ def main():
             print(f"\n  🎯 LATEST SIGNALS ({latest_date}): {len(todays)} picks")
             print(f"  {'─' * 50}")
             for s in todays:
-                icon = {'MA Bounce': '🔵', 'Breakout': '🟡', 'Higher High': '📐'}[s['strategy']]
+                icon = {'MA Bounce': '🔵', 'Breakout': '🟡', 'RSI Trend': '🟣', 'Higher High': '📐'}[s['strategy']]
                 print(f"  {icon} {s['ticker']:<8} {s['strategy']:<14} Entry ${s['entry']} | Stop ${s['stop']} | Risk ${s['risk_per_share']}")
 
     # Stocks picked by multiple strategies
@@ -481,6 +545,7 @@ def main():
         'byStrategy': {
             'MA Bounce': [s for s in all_signals if s['strategy'] == 'MA Bounce'],
             'Breakout': [s for s in all_signals if s['strategy'] == 'Breakout'],
+            'RSI Trend': [s for s in all_signals if s['strategy'] == 'RSI Trend'],
             'Higher High': [s for s in all_signals if s['strategy'] == 'Higher High'],
         },
         'confluence': [
@@ -490,6 +555,7 @@ def main():
         'summary': {
             'MA Bounce': len(by_strat.get('MA Bounce', [])),
             'Breakout': len(by_strat.get('Breakout', [])),
+            'RSI Trend': len(by_strat.get('RSI Trend', [])),
             'Higher High': len(by_strat.get('Higher High', [])),
         }
     }
