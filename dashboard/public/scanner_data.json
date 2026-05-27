@@ -2,18 +2,23 @@
   "instruments": {
     "SPX": {
       "today": {
-        "date": "2026-05-21",
-        "close": 7445.72,
-        "sma50": 6958.8,
-        "atr": 77.7,
-        "rsi5": 62.2,
-        "vix": 16.76,
-        "score": 1,
+        "date": "2026-05-22",
+        "close": 7473.47,
+        "sma50": 6959.35,
+        "atr": 80.58,
+        "rsi5": 65.8,
+        "vix": 16.7,
+        "score": 0,
         "signals": [
           {
             "name": "Above SMA200",
             "points": 1,
             "type": "bull"
+          },
+          {
+            "name": "Big Up Day",
+            "points": -1,
+            "type": "bear"
           }
         ],
         "aboveSma50": true,
@@ -23,7 +28,7 @@
             "status": "no_signal",
             "paused": false,
             "totalTrades": 266,
-            "totalPnl": 8123.36,
+            "totalPnl": 8206.61,
             "winRate": 56.0
           },
           "trail3d": {
@@ -3158,18 +3163,23 @@
           }
         },
         {
-          "date": "2026-05-21",
-          "close": 7445.72,
-          "sma50": 6958.8,
-          "atr": 77.7,
-          "rsi5": 62.2,
-          "vix": 16.76,
-          "score": 1,
+          "date": "2026-05-22",
+          "close": 7473.47,
+          "sma50": 6959.35,
+          "atr": 80.58,
+          "rsi5": 65.8,
+          "vix": 16.7,
+          "score": 0,
           "signals": [
             {
               "name": "Above SMA200",
               "points": 1,
               "type": "bull"
+            },
+            {
+              "name": "Big Up Day",
+              "points": -1,
+              "type": "bear"
             }
           ],
           "aboveSma50": true,
@@ -3179,7 +3189,7 @@
               "status": "no_signal",
               "paused": false,
               "totalTrades": 266,
-              "totalPnl": 8123.36,
+              "totalPnl": 8206.61,
               "winRate": 56.0
             },
             "trail3d": {
@@ -3203,14 +3213,14 @@
         "vanilla": {
           "totalTrades": 266,
           "winRate": 56.0,
-          "totalPnl": 8123.36,
+          "totalPnl": 8206.61,
           "lastTrade": {
             "entryDate": "2026-05-19",
-            "exitDate": "2026-05-21",
+            "exitDate": "2026-05-22",
             "entryPrice": 7353.61,
-            "exitPrice": 7445.72,
-            "pnl": 276.33,
-            "pnlR": 2.76,
+            "exitPrice": 7473.47,
+            "pnl": 359.58,
+            "pnlR": 3.6,
             "daysHeld": 1,
             "exitReason": "max_1d"
           }
@@ -3250,18 +3260,28 @@
     },
     "SPY": {
       "today": {
-        "date": "2026-05-21",
-        "close": 742.72,
-        "sma50": 691.08,
-        "atr": 7.2,
-        "rsi5": 72.5,
-        "vix": 16.76,
-        "score": 1,
+        "date": "2026-05-22",
+        "close": 745.64,
+        "sma50": 691.14,
+        "atr": 7.49,
+        "rsi5": 75.9,
+        "vix": 16.7,
+        "score": -1,
         "signals": [
           {
             "name": "Above SMA200",
             "points": 1,
             "type": "bull"
+          },
+          {
+            "name": "RSI(5) > 75",
+            "points": -1,
+            "type": "bear"
+          },
+          {
+            "name": "Big Up Day",
+            "points": -1,
+            "type": "bear"
           }
         ],
         "aboveSma50": true,
@@ -6391,18 +6411,28 @@
           }
         },
         {
-          "date": "2026-05-21",
-          "close": 742.72,
-          "sma50": 691.08,
-          "atr": 7.2,
-          "rsi5": 72.5,
-          "vix": 16.76,
-          "score": 1,
+          "date": "2026-05-22",
+          "close": 745.64,
+          "sma50": 691.14,
+          "atr": 7.49,
+          "rsi5": 75.9,
+          "vix": 16.7,
+          "score": -1,
           "signals": [
             {
               "name": "Above SMA200",
               "points": 1,
               "type": "bull"
+            },
+            {
+              "name": "RSI(5) > 75",
+              "points": -1,
+              "type": "bear"
+            },
+            {
+              "name": "Big Up Day",
+              "points": -1,
+              "type": "bear"
             }
           ],
           "aboveSma50": true,
@@ -6483,12 +6513,12 @@
     },
     "QQQ": {
       "today": {
-        "date": "2026-05-21",
-        "close": 714.51,
-        "sma50": 637.59,
-        "atr": 11.59,
-        "rsi5": 65.0,
-        "vix": 16.76,
+        "date": "2026-05-22",
+        "close": 717.54,
+        "sma50": 637.65,
+        "atr": 11.95,
+        "rsi5": 67.6,
+        "vix": 16.7,
         "score": 0,
         "signals": [
           {
@@ -6509,7 +6539,7 @@
             "status": "no_signal",
             "paused": false,
             "totalTrades": 281,
-            "totalPnl": 8180.47,
+            "totalPnl": 8235.01,
             "winRate": 57.7
           },
           "trail3d": {
@@ -9684,12 +9714,12 @@
           }
         },
         {
-          "date": "2026-05-21",
-          "close": 714.51,
-          "sma50": 637.59,
-          "atr": 11.59,
-          "rsi5": 65.0,
-          "vix": 16.76,
+          "date": "2026-05-22",
+          "close": 717.54,
+          "sma50": 637.65,
+          "atr": 11.95,
+          "rsi5": 67.6,
+          "vix": 16.7,
           "score": 0,
           "signals": [
             {
@@ -9710,7 +9740,7 @@
               "status": "no_signal",
               "paused": false,
               "totalTrades": 281,
-              "totalPnl": 8180.47,
+              "totalPnl": 8235.01,
               "winRate": 57.7
             },
             "trail3d": {
@@ -9734,14 +9764,14 @@
         "vanilla": {
           "totalTrades": 281,
           "winRate": 57.7,
-          "totalPnl": 8180.47,
+          "totalPnl": 8235.01,
           "lastTrade": {
             "entryDate": "2026-05-19",
-            "exitDate": "2026-05-21",
+            "exitDate": "2026-05-22",
             "entryPrice": 701.53,
-            "exitPrice": 714.51,
-            "pnl": 233.64,
-            "pnlR": 2.34,
+            "exitPrice": 717.54,
+            "pnl": 288.18,
+            "pnlR": 2.88,
             "daysHeld": 1,
             "exitReason": "max_1d"
           }
@@ -9780,7 +9810,7 @@
       "label": "QQQ ETF"
     }
   },
-  "lastFetched": "2026-05-26 05:00 PM ET",
+  "lastFetched": "2026-05-27 05:10 PM ET",
   "nextRefresh": "3:20 PM ET (Mon-Fri)",
   "fetchSuccess": true
 }
