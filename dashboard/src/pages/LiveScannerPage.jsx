@@ -31,6 +31,11 @@ function calcShares(riskPerShare, riskBudget = DEFAULT_RISK_DOLLARS) {
   return Math.floor(riskBudget / risk)
 }
 
+function fmtMoney(v) {
+  if (!Number.isFinite(v)) return '$0.00'
+  return `$${v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+}
+
 export default function LiveScannerPage() {
   const [data, setData] = useState(null)
   const [filter, setFilter] = useState('all') // 'all' | 'MA Bounce' | 'Breakout' | 'Higher High' | 'Confluence'
@@ -77,10 +82,16 @@ export default function LiveScannerPage() {
       filtered = filtered.filter(s => s.strategy === filter)
     }
 
-    filtered = filtered.map(s => ({
-      ...s,
-      shares: calcShares(s.risk_per_share),
-    }))
+    filtered = filtered.map(s => {
+      const shares = calcShares(s.risk_per_share)
+      const entry = Number(s.entry)
+      const position_size = Number.isFinite(entry) ? +(shares * entry).toFixed(2) : 0
+      return {
+        ...s,
+        shares,
+        position_size,
+      }
+    })
 
     if (!sortCol) return filtered
     return [...filtered].sort((a, b) => {
@@ -215,6 +226,7 @@ export default function LiveScannerPage() {
                   { key: 'date', label: 'Date' },
                   { key: 'entry', label: 'Entry' },
                   { key: 'shares', label: 'Shares' },
+                  { key: 'position_size', label: 'Position Size ($)' },
                   { key: 'stop', label: 'SL' },
                   { key: 'risk_per_share', label: 'Risk/sh' },
                   { key: 'strength', label: 'Strength' },
@@ -251,6 +263,7 @@ export default function LiveScannerPage() {
                     <td style={{ whiteSpace: 'nowrap', fontSize: '0.85rem' }}>{s.date}</td>
                     <td><strong>${s.entry}</strong></td>
                     <td><strong>{s.shares.toLocaleString()}</strong></td>
+                    <td><strong>{fmtMoney(s.position_size)}</strong></td>
                     <td style={{ color: '#ef5350' }}><strong>${s.stop}</strong></td>
                     <td>${s.risk_per_share}</td>
                     <td>
