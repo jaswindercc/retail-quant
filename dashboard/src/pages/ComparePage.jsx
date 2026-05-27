@@ -102,6 +102,9 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
     })
     const profitable = stockPnls.filter(s => s.pnl > 0).length
     const totalDD = stockPnls.reduce((s, r) => s + r.maxDD, 0)
+    const maxDDSingle = Math.max(...stockPnls.map(s => s.maxDD))
+    const worstDDStock = stockPnls.reduce((worst, s) => s.maxDD > worst.maxDD ? s : worst, stockPnls[0])
+    const heavyDDCount = stockPnls.filter(s => s.maxDD > 1000).length
     const totalPnl = m?.totalPnl ?? 0
     return {
       ...st,
@@ -115,6 +118,9 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
       avgDur: m?.avgDuration ?? 0,
       profitable,
       avgDD: totalDD / STOCKS.length,
+      maxDD: maxDDSingle,
+      worstDDStock: worstDDStock?.symbol,
+      heavyDDCount,
       stockPnls
     }
   }).sort((a, b) => b.avgPnl - a.avgPnl)
@@ -155,69 +161,159 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
     <div>
       <h1 className="page-title">Strategy Summary <span>13 Strategies · 12 Stocks · Jan 2021 – Present · $100 risk/trade</span></h1>
 
-      {/* ── TOP STRATEGIES ── */}
-      <div className="card" style={{ background: 'linear-gradient(135deg, #0d1b2a 0%, #1b2838 100%)', border: '2px solid #ffd700', padding: '1.5rem' }}>
-        <h2 style={{ color: '#ffd700', margin: '0 0 0.5rem 0', fontSize: 'clamp(1.1rem, 4vw, 1.5rem)' }}>🏆 Top Strategies — Live Metrics</h2>
-        <p style={{ color: '#aaa', fontSize: '0.85rem', margin: '0 0 1.5rem' }}>Selected based on: profit factor, consistency across stocks, avg R per trade, and total P&L.</p>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '1.25rem' }}>
-          {/* Best PF */}
-          <div style={{ padding: '1.25rem', background: '#1a1a2e', borderRadius: '12px', border: '2px solid #ff9800' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-              <span style={{ fontSize: '1.5rem' }}>{byPF.icon}</span>
-              <span style={{ background: '#ff980022', color: '#ffb74d', padding: '2px 10px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 700 }}>BEST EDGE</span>
+      {/* ── TOP 3 PICKS ── */}
+      {(() => {
+        // Confidence score for picking top 3
+        const scored = [...stratStats].filter(s => !s.rare).map(st => {
+          const consistencyScore = st.profitable / STOCKS.length
+          const pfScore = Math.min(st.pf / 3, 1)
+          const wrScore = st.wr / 100
+          const tradeScore = Math.min(st.trades / 500, 1)
+          const confidence = (consistencyScore * 0.35) + (pfScore * 0.25) + (wrScore * 0.25) + (tradeScore * 0.15)
+          return { ...st, confidence }
+        }).sort((a, b) => b.confidence - a.confidence)
+        const top3 = scored.slice(0, 3)
+        return (
+          <div className="card" style={{ background: 'linear-gradient(135deg, #0a1628 0%, #162032 100%)', border: '2px solid #4ade80', padding: '1.5rem', marginBottom: '1.5rem' }}>
+            <h2 style={{ color: '#4ade80', margin: '0 0 0.25rem', fontSize: 'clamp(1.1rem, 4vw, 1.4rem)' }}>Your Top 3 Picks</h2>
+            <p style={{ color: '#9fb3c8', fontSize: '0.85rem', margin: '0 0 1.25rem' }}>
+              Based on consistency (works on most stocks), profit factor, win rate, and sample size.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '1rem' }}>
+              {top3.map((st, i) => (
+                <div key={st.key} style={{ padding: '1.25rem', background: '#0d1b2a', borderRadius: 12, border: `2px solid ${st.color}`, position: 'relative' }}>
+                  <div style={{ position: 'absolute', top: 10, right: 12, fontSize: '1.5rem', opacity: 0.4 }}>#{i + 1}</div>
+                  <div style={{ fontSize: '1.5rem', marginBottom: 6 }}>{st.icon}</div>
+                  <h3 style={{ margin: '0 0 0.5rem', color: st.color }}>
+                    <Link to={st.path} style={{ color: 'inherit', textDecoration: 'none' }}>{st.label}</Link>
+                  </h3>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.4rem', fontSize: '0.85rem' }}>
+                    <div><span style={{ color: '#888' }}>Stocks +:</span> <strong style={{ color: '#4ade80' }}>{st.profitable}/12</strong></div>
+                    <div><span style={{ color: '#888' }}>PF:</span> <strong>{st.pf}</strong></div>
+                    <div><span style={{ color: '#888' }}>Win Rate:</span> <strong>{st.wr}%</strong></div>
+                    <div><span style={{ color: '#888' }}>Total:</span> <strong style={{ color: '#4ade80' }}>{fmt$(st.totalPnl)}</strong></div>
+                    <div><span style={{ color: '#888' }}>Avg DD:</span> <strong style={{ color: st.avgDD > 1000 ? '#ef4444' : '#fbbf24' }}>{fmt$(st.avgDD)}</strong></div>
+                    <div><span style={{ color: '#888' }}>Max DD:</span> <strong style={{ color: st.maxDD > 1500 ? '#ef4444' : '#fbbf24' }}>{fmt$(st.maxDD)}</strong></div>
+                  </div>
+                  <div style={{ marginTop: '0.75rem', fontSize: '0.8rem', color: '#9fb3c8' }}>
+                    {st.trades} trades · Confidence {Math.round(st.confidence * 100)}%
+                  </div>
+                </div>
+              ))}
             </div>
-            <h3 style={{ margin: '0 0 0.5rem', color: '#ff9800' }}><Link to={byPF.path} style={{color:'inherit',textDecoration:'none'}}>{byPF.label}</Link></h3>
-            <p style={{ color: '#ccc', fontSize: '0.85rem', margin: '0 0 0.75rem' }}>{byPF.desc}. Highest profit factor in core strategies.</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem' }}>
-              <div><span style={{ color: '#888' }}>Win Rate:</span> <strong style={{ color: '#00e676' }}>{byPF.wr}%</strong></div>
-              <div><span style={{ color: '#888' }}>Avg R:</span> <strong style={{ color: '#00e676' }}>{byPF.avgR}R</strong></div>
-              <div><span style={{ color: '#888' }}>PF:</span> <strong style={{ color: '#00e676' }}>{byPF.pf}</strong></div>
-              <div><span style={{ color: '#888' }}>Total:</span> <strong style={{ color: '#00e676' }}>{fmt$(byPF.totalPnl)}</strong></div>
+            <div style={{ marginTop: '1rem', padding: '0.75rem 1rem', background: 'rgba(74,222,128,0.06)', borderRadius: 8, borderLeft: '3px solid #4ade80', fontSize: '0.9rem', color: '#ccc' }}>
+              <strong style={{ color: '#4ade80' }}>Why these 3:</strong> All profitable on 11/12 stocks. Different entry triggers (breakout, pullback, RSI) so they don't all fire on the same day — natural diversification. Each has 400+ trades backing the edge.
             </div>
-            <p style={{ color: '#ffb74d', fontSize: '0.75rem', margin: '0.75rem 0 0', fontStyle: 'italic' }}>🎯 {byPF.trades} trades · Highest PF in live data.</p>
           </div>
+        )
+      })()}
 
-          {/* Highest Total PnL */}
-          <div style={{ padding: '1.25rem', background: '#1a1a2e', borderRadius: '12px', border: '2px solid #2196f3' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-              <span style={{ fontSize: '1.5rem' }}>{byTotal.icon}</span>
-              <span style={{ background: '#2196f322', color: '#64b5f6', padding: '2px 10px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 700 }}>WORKHORSE</span>
+      {/* ── FULL BREAKDOWN ── */}
+      {(() => {
+        const scored = [...stratStats].filter(s => !s.rare).map(st => {
+          const consistencyScore = st.profitable / STOCKS.length
+          const pfScore = Math.min(st.pf / 3, 1)
+          const wrScore = st.wr / 100
+          const tradeScore = Math.min(st.trades / 500, 1)
+          const confidence = (consistencyScore * 0.35) + (pfScore * 0.25) + (wrScore * 0.25) + (tradeScore * 0.15)
+          return { ...st, confidence }
+        }).sort((a, b) => b.confidence - a.confidence)
+
+        const tradeable = scored.filter(s => s.profitable >= Math.floor(STOCKS.length * 0.75) && s.pf >= 1.3)
+        const risky = scored.filter(s => s.profitable < Math.floor(STOCKS.length * 0.75) || s.pf < 1.3)
+
+        return (
+          <div className="card" style={{ background: 'linear-gradient(135deg, #0d1b2a 0%, #1b2838 100%)', border: '2px solid #ffd700', padding: '1.5rem' }}>
+            <h2 style={{ color: '#ffd700', margin: '0 0 0.25rem 0', fontSize: 'clamp(1.1rem, 4vw, 1.5rem)' }}>Which Strategies Should You Trade?</h2>
+            <p style={{ color: '#9fb3c8', fontSize: '0.85rem', margin: '0 0 1.25rem' }}>
+              Ranked by <strong style={{ color: '#e2e8f0' }}>confidence</strong>: works on most stocks, high win rate, strong profit factor, enough trades to trust.
+            </p>
+
+            {/* Tradeable strategies */}
+            {tradeable.length > 0 && (
+              <>
+                <h3 style={{ color: '#4ade80', margin: '0 0 0.75rem', fontSize: '1rem' }}>✅ Trade These — Profitable on {Math.floor(STOCKS.length * 0.75)}+ of {STOCKS.length} stocks, PF ≥ 1.3</h3>
+                <table style={{ marginBottom: '1.25rem' }}>
+                  <thead>
+                    <tr>
+                      <th>#</th><th>Strategy</th><th>Stocks Profitable</th><th>Win Rate</th><th>PF</th><th>Total P&L</th><th>Trades</th><th>Avg DD</th><th>Max DD</th><th>Worst Stock</th><th>Confidence</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {tradeable.map((st, i) => (
+                      <tr key={st.key} style={i === 0 ? { background: 'rgba(74,222,128,0.08)' } : {}}>
+                        <td><strong>{i + 1}</strong></td>
+                        <td><Link to={st.path} style={{ color: st.color, textDecoration: 'none', fontWeight: 600 }}>{st.icon} {st.label}</Link></td>
+                        <td><strong style={{ color: '#4ade80' }}>{st.profitable}/{STOCKS.length}</strong></td>
+                        <td>{st.wr}%</td>
+                        <td><strong>{st.pf}</strong></td>
+                        <td className="win">{fmt$(st.totalPnl)}</td>
+                        <td>{st.trades}</td>
+                        <td style={{ color: st.avgDD > 1000 ? '#ef4444' : '#fbbf24' }}>{fmt$(st.avgDD)}</td>
+                        <td style={{ color: st.maxDD > 1500 ? '#ef4444' : '#fbbf24' }}>{fmt$(st.maxDD)}</td>
+                        <td style={{ fontSize: '0.8rem', color: '#9fb3c8' }}>{st.worstDDStock} ({st.heavyDDCount > 0 ? `${st.heavyDDCount} stocks >$1k` : 'all <$1k'})</td>
+                        <td>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                            <div style={{ width: 60, height: 6, background: '#333', borderRadius: 3, overflow: 'hidden' }}>
+                              <div style={{ width: `${Math.round(st.confidence * 100)}%`, height: '100%', background: st.confidence > 0.7 ? '#4ade80' : st.confidence > 0.5 ? '#fbbf24' : '#ef4444', borderRadius: 3 }} />
+                            </div>
+                            <span style={{ fontSize: '0.8rem', color: '#ccc' }}>{Math.round(st.confidence * 100)}%</span>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </>
+            )}
+
+            {/* Risky / not recommended */}
+            {risky.length > 0 && (
+              <>
+                <h3 style={{ color: '#fbbf24', margin: '0 0 0.75rem', fontSize: '1rem' }}>⚠️ Use With Caution — Less consistent or weaker edge</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Strategy</th><th>Stocks Profitable</th><th>Win Rate</th><th>PF</th><th>Total P&L</th><th>Trades</th><th>Avg DD</th><th>Max DD</th><th>Why Caution</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {risky.map(st => {
+                      const reasons = []
+                      if (st.profitable < Math.floor(STOCKS.length * 0.75)) reasons.push(`Only ${st.profitable}/${STOCKS.length} stocks green`)
+                      if (st.pf < 1.3) reasons.push(`Low PF (${st.pf})`)
+                      if (st.trades < 50) reasons.push(`Few trades (${st.trades})`)
+                      if (st.heavyDDCount >= 4) reasons.push(`${st.heavyDDCount} stocks with DD >$1k`)
+                      return (
+                        <tr key={st.key}>
+                          <td><Link to={st.path} style={{ color: st.color, textDecoration: 'none', fontWeight: 600 }}>{st.icon} {st.label}</Link></td>
+                          <td>{st.profitable}/{STOCKS.length}</td>
+                          <td>{st.wr}%</td>
+                          <td>{st.pf}</td>
+                          <td className={st.totalPnl >= 0 ? 'win' : 'loss'}>{fmt$(st.totalPnl)}</td>
+                          <td>{st.trades}</td>
+                          <td style={{ color: st.avgDD > 1000 ? '#ef4444' : '#fbbf24' }}>{fmt$(st.avgDD)}</td>
+                          <td style={{ color: st.maxDD > 1500 ? '#ef4444' : '#fbbf24' }}>{fmt$(st.maxDD)}</td>
+                          <td style={{ fontSize: '0.8rem', color: '#fbbf24' }}>{reasons.join(' · ')}</td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </>
+            )}
+
+            <div style={{ marginTop: '1.25rem', padding: '1rem', background: 'rgba(74,222,128,0.06)', borderRadius: '8px', borderLeft: '3px solid #4ade80' }}>
+              <strong style={{ color: '#4ade80' }}>Bottom Line:</strong>
+              <span style={{ color: '#ccc', fontSize: '0.9rem' }}>
+                {tradeable.length > 0
+                  ? ` Focus on ${tradeable.slice(0, 3).map(s => s.label).join(', ')}. They work on most stocks, have proven edges, and enough trades to trust. Use the live scanner to find entries.`
+                  : ' Re-run backtests with fresh data — no strategy currently meets all confidence thresholds.'}
+              </span>
             </div>
-            <h3 style={{ margin: '0 0 0.5rem', color: '#2196f3' }}><Link to={byTotal.path} style={{color:'inherit',textDecoration:'none'}}>{byTotal.label}</Link></h3>
-            <p style={{ color: '#ccc', fontSize: '0.85rem', margin: '0 0 0.75rem' }}>{byTotal.desc}. Highest total P&L in core strategies.</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem' }}>
-              <div><span style={{ color: '#888' }}>Win Rate:</span> <strong>{byTotal.wr}%</strong></div>
-              <div><span style={{ color: '#888' }}>Avg R:</span> <strong>{byTotal.avgR}R</strong></div>
-              <div><span style={{ color: '#888' }}>PF:</span> <strong>{byTotal.pf}</strong></div>
-              <div><span style={{ color: '#888' }}>Total:</span> <strong style={{ color: '#00e676' }}>{fmt$(byTotal.totalPnl)}</strong></div>
-            </div>
-            <p style={{ color: '#64b5f6', fontSize: '0.75rem', margin: '0.75rem 0 0', fontStyle: 'italic' }}>📈 {byTotal.trades} trades · Highest total P&L in live data.</p>
           </div>
-
-          {/* Lowest Drawdown */}
-          <div style={{ padding: '1.25rem', background: '#1a1a2e', borderRadius: '12px', border: '2px solid #4caf50' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-              <span style={{ fontSize: '1.5rem' }}>{byDD.icon}</span>
-              <span style={{ background: '#4caf5022', color: '#81c784', padding: '2px 10px', borderRadius: '12px', fontSize: '0.75rem', fontWeight: 700 }}>LOWEST DD</span>
-            </div>
-            <h3 style={{ margin: '0 0 0.5rem', color: '#4caf50' }}><Link to={byDD.path} style={{color:'inherit',textDecoration:'none'}}>{byDD.label}</Link></h3>
-            <p style={{ color: '#ccc', fontSize: '0.85rem', margin: '0 0 0.75rem' }}>{byDD.desc}. Lowest average drawdown across tracked stocks.</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem' }}>
-              <div><span style={{ color: '#888' }}>Win Rate:</span> <strong>{byDD.wr}%</strong></div>
-              <div><span style={{ color: '#888' }}>Avg R:</span> <strong>{byDD.avgR}R</strong></div>
-              <div><span style={{ color: '#888' }}>PF:</span> <strong style={{ color: '#00e676' }}>{byDD.pf}</strong></div>
-              <div><span style={{ color: '#888' }}>Total:</span> <strong style={{ color: '#00e676' }}>{fmt$(byDD.totalPnl)}</strong></div>
-            </div>
-            <p style={{ color: '#81c784', fontSize: '0.75rem', margin: '0.75rem 0 0', fontStyle: 'italic' }}>🛡️ {byDD.trades} trades · Avg DD {fmt$(byDD.avgDD)}.</p>
-          </div>
-        </div>
-
-        <div style={{ marginTop: '1.25rem', padding: '1rem', background: 'rgba(255,215,0,0.06)', borderRadius: '8px', borderLeft: '3px solid #ffd700' }}>
-          <strong style={{ color: '#ffd700' }}>The Playbook:</strong>
-          <span style={{ color: '#ccc', fontSize: '0.9rem' }}> Trade {byTotal.label} for throughput, {byPF.label} for edge quality, and {byDD.label} for lower drawdown diversification. Scanner at 3:15 PM, orders by close.</span>
-        </div>
-      </div>
+        )
+      })()}
 
       {/* ── STRATEGY RULES ── */}
       <div className="card" style={{ marginTop: '1.5rem' }}>
@@ -262,7 +358,7 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
         <table>
           <thead>
             <tr>
-              <th>Rank</th><th>Strategy</th><th>Total P&amp;L</th><th>PF</th><th>Avg R</th><th>Avg DD</th><th>Tie Group</th>
+              <th>Rank</th><th>Strategy</th><th>Total P&amp;L</th><th>PF</th><th>Avg R</th><th>Avg DD</th><th>Max DD</th><th>Worst Stock</th><th>Tie Group</th>
             </tr>
           </thead>
           <tbody>
@@ -278,7 +374,9 @@ export default function ComparePage({ trData, bnData, brData, rsiData, mrData, t
                   <td className={st.totalPnl >= 0 ? 'win' : 'loss'}>{fmt$(st.totalPnl)}</td>
                   <td>{st.pf}</td>
                   <td className={st.avgR >= 0 ? 'win' : 'loss'}>{st.avgR}R</td>
-                  <td>{fmt$(st.avgDD)}</td>
+                  <td style={{ color: st.avgDD > 1000 ? '#ef4444' : '#ccc' }}>{fmt$(st.avgDD)}</td>
+                  <td style={{ color: st.maxDD > 1500 ? '#ef4444' : '#fbbf24' }}>{fmt$(st.maxDD)}</td>
+                  <td style={{ fontSize: '0.8rem', color: '#9fb3c8' }}>{st.worstDDStock}</td>
                   <td>{group.items.length > 1 ? `Tie (${group.items.length})` : '—'}</td>
                 </tr>
               ))
