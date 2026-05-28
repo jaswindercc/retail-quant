@@ -1,4 +1,4 @@
-name: Refresh Scanner Data
+name: Overnight Scanner
 
 on:
   # Run Mon-Fri at 3:15 PM New York (ET)

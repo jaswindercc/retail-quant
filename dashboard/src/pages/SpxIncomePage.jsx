@@ -114,24 +114,48 @@ export default function SpxIncomePage() {
 
   return (
     <div>
-      <h1 className="page-title">SPX Income Strategy Backtest <span>{params.dataRange} · European-style · Cash-settled</span></h1>
+      <h1 className="page-title">SPX Income Strategy <span>Put Spread 30Δ · {params.dataRange} · Cash-settled</span></h1>
 
-      {/* Key insight banner */}
-      <div className="card" style={{ marginBottom: 20, padding: '20px 24px', border: '2px solid #4ade80', background: 'rgba(74,222,128,0.08)', borderRadius: 8 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-          <span style={{ fontSize: '1.5rem' }}>✅</span>
-          <strong style={{ color: '#4ade80', fontSize: '1.1rem', letterSpacing: '0.5px' }}>SPX = NO ASSIGNMENT RISK (European-style, Cash-settled)</strong>
+      {/* === ACTION BOX — FIRST THING YOU SEE === */}
+      {nextTrade && (
+        <div className="card" style={{ marginBottom: 20, padding: '20px 24px', border: `2px solid ${nextTrade.canTrade ? '#4ade80' : '#fbbf24'}`, background: nextTrade.canTrade ? 'rgba(74,222,128,0.08)' : 'rgba(251,191,36,0.06)', borderRadius: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+            <span style={{ fontSize: '1.5rem' }}>{nextTrade.canTrade ? '🟢' : '⏸️'}</span>
+            <strong style={{ color: nextTrade.canTrade ? '#4ade80' : '#fbbf24', fontSize: '1.2rem' }}>
+              {nextTrade.canTrade
+                ? `NEXT ENTRY: Monday ${nextTrade.nextMonday}`
+                : `PAUSED — ${nextTrade.openPositions}/${nextTrade.maxPos} positions full`}
+            </strong>
+          </div>
+          {nextTrade.canTrade && (
+            <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 6, padding: '14px 18px', marginBottom: 12 }}>
+              <p style={{ color: '#e2e8f0', fontSize: '0.95rem', margin: '0 0 8px', fontWeight: 700 }}>What to do:</p>
+              <div style={{ fontSize: '0.88rem', color: '#cbd5e1', lineHeight: 2.2 }}>
+                <p style={{ margin: 0 }}>1. Open broker → SPX options → <strong style={{ color: '#4ade80' }}>standard monthly expiry (3rd Friday)</strong> closest to 45 DTE</p>
+                <p style={{ margin: 0 }}>2. Find the <strong style={{ color: '#fbbf24' }}>30-delta put</strong> (~2-3% below current SPX)</p>
+                <p style={{ margin: 0 }}>3. Sell that put, buy the put $5 below → <strong>Bull Put Spread</strong></p>
+                <p style={{ margin: 0 }}>4. Collect ~$1.50-$1.70 credit. Max risk = $3.30-$3.50 ($500 total)</p>
+                <p style={{ margin: 0 }}>5. Set alerts: <strong style={{ color: '#4ade80' }}>close at 50% profit</strong> · <strong style={{ color: '#ef4444' }}>close at 2× loss</strong></p>
+              </div>
+            </div>
+          )}
+          <div style={{ fontSize: '0.82rem', color: '#aaa', display: 'flex', gap: 20, flexWrap: 'wrap' }}>
+            <span>Open positions: <strong style={{ color: nextTrade.openPositions >= nextTrade.maxPos ? '#ef4444' : '#4ade80' }}>{nextTrade.openPositions}/{nextTrade.maxPos}</strong></span>
+            <span>Last entry: <strong>{nextTrade.lastEntry}</strong></span>
+            <span>Last exit: <strong>{nextTrade.lastExit}</strong></span>
+          </div>
         </div>
-        <p style={{ color: '#f1f5f9', margin: '0 0 10px', fontSize: '0.9rem', lineHeight: 1.7 }}>
-          Unlike stock options, SPX options <strong>cannot be exercised early</strong>. Only the price at expiration matters.
-          Price can breach your short strike intraday and recover — you still win.
-        </p>
-        <div style={{ padding: '10px 14px', background: 'rgba(100,181,246,0.08)', borderRadius: 6, border: '1px solid rgba(100,181,246,0.2)' }}>
-          <p style={{ color: '#64b5f6', margin: '0 0 6px', fontSize: '0.85rem', fontWeight: 700 }}>🎯 EXPIRY: Pick monthly (3rd Friday), 35-50 DTE — NOT random weeklies</p>
-          <p style={{ color: '#cbd5e1', margin: 0, fontSize: '0.8rem', lineHeight: 1.8 }}>
-            Monthly = thousands of OI, tight $0.10 spreads. Tue/Thu weeklies at 45 DTE = dead (2 contracts, no fills). 
-            <strong style={{ color: '#fbbf24' }}> Alt: SPY</strong> — 1/10th size, massive volume everywhere, trade 10 contracts = 1 SPX.
-          </p>
+      )}
+
+      {/* SPX = No Assignment + Expiry tip */}
+      <div className="card" style={{ marginBottom: 16, padding: '12px 18px', border: '1px solid #4ade80', background: 'rgba(74,222,128,0.04)', borderRadius: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.88rem' }}>
+          <span>✅</span>
+          <strong style={{ color: '#4ade80' }}>SPX = NO ASSIGNMENT RISK</strong>
+          <span style={{ color: '#888' }}>·</span>
+          <span style={{ color: '#cbd5e1' }}>European-style, cash-settled. Pick <strong style={{ color: '#64b5f6' }}>monthly expiry (3rd Friday)</strong> for liquidity.</span>
+          <span style={{ color: '#888' }}>·</span>
+          <span style={{ color: '#fbbf24', fontSize: '0.8rem' }}>Alt: SPY (1/10th size, 10 contracts = 1 SPX)</span>
         </div>
       </div>
 
@@ -195,26 +219,6 @@ export default function SpxIncomePage() {
           <div className="value">{stats.totalTrades}</div>
         </div>
       </div>
-
-      {/* Next Trade Highlight */}
-      {nextTrade && (
-        <div className="card" style={{ marginBottom: 16, padding: '16px 20px', border: `2px solid ${nextTrade.canTrade ? '#4ade80' : '#fbbf24'}`, background: nextTrade.canTrade ? 'rgba(74,222,128,0.06)' : 'rgba(251,191,36,0.06)', borderRadius: 8 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-            <span style={{ fontSize: '1.3rem' }}>{nextTrade.canTrade ? '🟢' : '⏸️'}</span>
-            <strong style={{ color: nextTrade.canTrade ? '#4ade80' : '#fbbf24', fontSize: '1rem' }}>
-              {nextTrade.canTrade
-                ? `NEXT TRADE: Monday ${nextTrade.nextMonday}`
-                : `WAITING — ${nextTrade.openPositions}/${nextTrade.maxPos} positions open`}
-            </strong>
-          </div>
-          <div style={{ fontSize: '0.85rem', color: '#ccc', display: 'flex', gap: 20, flexWrap: 'wrap' }}>
-            <span>Last entry: <strong>{nextTrade.lastEntry}</strong></span>
-            <span>Last exit: <strong>{nextTrade.lastExit}</strong></span>
-            <span>Open positions: <strong style={{ color: nextTrade.openPositions >= nextTrade.maxPos ? '#ef4444' : '#4ade80' }}>{nextTrade.openPositions}/{nextTrade.maxPos}</strong></span>
-            {nextTrade.canTrade && <span style={{ color: '#4ade80' }}>→ Sell {config.sell_delta ? `${config.sell_delta*100}Δ` : 'ATM'} {config.type?.replace('_',' ')}, {config.dte} DTE</span>}
-          </div>
-        </div>
-      )}
 
       {/* Exit reason breakdown */}
       <div className="card" style={{ padding: '12px 16px', marginBottom: 16, display: 'flex', gap: 20, flexWrap: 'wrap', fontSize: '0.82rem' }}>

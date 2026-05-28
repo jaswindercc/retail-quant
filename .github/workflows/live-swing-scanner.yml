@@ -1,4 +1,4 @@
-name: Live Scanner (Daily)
+name: Live Swing Scanner
 
 on:
   schedule:
