@@ -51,6 +51,41 @@ export default function SpxIncomePage() {
     }))
   }, [trades, config.width])
 
+  // Monthly breakdown
+  const monthlyData = useMemo(() => {
+    const months = {}
+    trades.forEach(t => {
+      const m = t.entryDate.slice(0, 7) // YYYY-MM
+      if (!months[m]) months[m] = { wins: 0, losses: 0, pnl: 0, trades: 0 }
+      months[m].trades++
+      months[m].pnl += t.pnl
+      if (t.outcome === 'WIN') months[m].wins++
+      else months[m].losses++
+    })
+    return Object.entries(months).sort().map(([month, d]) => ({
+      month, ...d,
+      wr: d.trades ? (d.wins / d.trades * 100).toFixed(1) : 0,
+    }))
+  }, [trades])
+
+  // Next trade calculation
+  const nextTrade = useMemo(() => {
+    if (!trades.length) return null
+    const lastTrade = trades[trades.length - 1]
+    const lastExit = new Date(lastTrade.exitDate)
+    const today = new Date()
+    // Find next Monday from today
+    const nextMonday = new Date(today)
+    const dayOfWeek = nextMonday.getDay()
+    const daysUntilMonday = dayOfWeek === 0 ? 1 : dayOfWeek === 1 ? 0 : 8 - dayOfWeek
+    nextMonday.setDate(nextMonday.getDate() + daysUntilMonday)
+    // Count open positions today
+    const openPositions = trades.filter(t => new Date(t.exitDate) > today).length
+    const maxPos = data?.params?.maxPositions || 1
+    const canTrade = openPositions < maxPos
+    return { nextMonday: nextMonday.toISOString().slice(0, 10), openPositions, maxPos, canTrade, lastEntry: lastTrade.entryDate, lastExit: lastTrade.exitDate }
+  }, [trades, data])
+
   if (!data) return <div className="loading">Loading SPX backtest…</div>
   if (data.error) return (
     <div style={{ padding: 40, maxWidth: 520, margin: '60px auto', textAlign: 'center' }}>
@@ -145,6 +180,26 @@ export default function SpxIncomePage() {
         </div>
       </div>
 
+      {/* Next Trade Highlight */}
+      {nextTrade && (
+        <div className="card" style={{ marginBottom: 16, padding: '16px 20px', border: `2px solid ${nextTrade.canTrade ? '#4ade80' : '#fbbf24'}`, background: nextTrade.canTrade ? 'rgba(74,222,128,0.06)' : 'rgba(251,191,36,0.06)', borderRadius: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+            <span style={{ fontSize: '1.3rem' }}>{nextTrade.canTrade ? '🟢' : '⏸️'}</span>
+            <strong style={{ color: nextTrade.canTrade ? '#4ade80' : '#fbbf24', fontSize: '1rem' }}>
+              {nextTrade.canTrade
+                ? `NEXT TRADE: Monday ${nextTrade.nextMonday}`
+                : `WAITING — ${nextTrade.openPositions}/${nextTrade.maxPos} positions open`}
+            </strong>
+          </div>
+          <div style={{ fontSize: '0.85rem', color: '#ccc', display: 'flex', gap: 20, flexWrap: 'wrap' }}>
+            <span>Last entry: <strong>{nextTrade.lastEntry}</strong></span>
+            <span>Last exit: <strong>{nextTrade.lastExit}</strong></span>
+            <span>Open positions: <strong style={{ color: nextTrade.openPositions >= nextTrade.maxPos ? '#ef4444' : '#4ade80' }}>{nextTrade.openPositions}/{nextTrade.maxPos}</strong></span>
+            {nextTrade.canTrade && <span style={{ color: '#4ade80' }}>→ Sell {config.sell_delta ? `${config.sell_delta*100}Δ` : 'ATM'} {config.type?.replace('_',' ')}, {config.dte} DTE</span>}
+          </div>
+        </div>
+      )}
+
       {/* Exit reason breakdown */}
       <div className="card" style={{ padding: '12px 16px', marginBottom: 16, display: 'flex', gap: 20, flexWrap: 'wrap', fontSize: '0.82rem' }}>
         <span style={{ color: '#888' }}>Exit Reasons:</span>
@@ -200,6 +255,100 @@ export default function SpxIncomePage() {
         </div>
       </div>
 
+      {/* SPX vs Strategy Correlation Chart */}
+      {data?.priceData && trades.length > 0 && (() => {
+        const priceData = data.priceData
+        const priceDates = priceData.dates
+        const prices = priceData.prices
+        
+        // Build equity timeline aligned to trade exit dates
+        const eqTimeline = []
+        let cumPnl = 0
+        trades.forEach(t => {
+          cumPnl += t.pnl * 100
+          eqTimeline.push({ date: t.exitDate, equity: cumPnl })
+        })
+        
+        // Find date range overlap
+        const firstTradeDate = trades[0].entryDate
+        const lastTradeDate = eqTimeline[eqTimeline.length - 1].date
+        
+        // Filter price data to trade period
+        const filteredPrices = []
+        priceDates.forEach((d, i) => {
+          if (d >= firstTradeDate && d <= lastTradeDate) {
+            filteredPrices.push({ date: d, price: prices[i] })
+          }
+        })
+        
+        if (filteredPrices.length < 2) return null
+        
+        // Normalize SPX to 0-100% range for chart
+        const spxMin = Math.min(...filteredPrices.map(p => p.price))
+        const spxMax = Math.max(...filteredPrices.map(p => p.price))
+        const spxRange = spxMax - spxMin || 1
+        
+        const eqMin = Math.min(...eqTimeline.map(e => e.equity), 0)
+        const eqMax = Math.max(...eqTimeline.map(e => e.equity), 1)
+        const eqRange2 = eqMax - eqMin || 1
+        
+        // Create unified x-axis based on dates
+        const startDate = new Date(firstTradeDate).getTime()
+        const endDate = new Date(lastTradeDate).getTime()
+        const dateRange = endDate - startDate || 1
+        
+        const chartW = 800
+        const chartH = 250
+        
+        // SPX line points
+        const spxPoints = filteredPrices.map(p => {
+          const x = ((new Date(p.date).getTime() - startDate) / dateRange) * chartW
+          const y = chartH - ((p.price - spxMin) / spxRange) * (chartH - 20)
+          return `${x},${y}`
+        }).join(' ')
+        
+        // Equity line points (step function)
+        const eqPoints = eqTimeline.map(e => {
+          const x = ((new Date(e.date).getTime() - startDate) / dateRange) * chartW
+          const y = chartH - ((e.equity - eqMin) / eqRange2) * (chartH - 20)
+          return `${x},${y}`
+        }).join(' ')
+        
+        // Mark losing trades
+        const lossTrades = trades.filter(t => t.outcome === 'LOSS')
+        
+        return (
+          <div className="card" style={{ marginTop: '1rem' }}>
+            <h3 style={{ textTransform: 'none', letterSpacing: 0 }}>SPX Price vs {config.label} Equity — Correlation</h3>
+            <div style={{ display: 'flex', gap: 16, marginBottom: 8, fontSize: '0.75rem' }}>
+              <span><span style={{ display: 'inline-block', width: 16, height: 3, background: '#64b5f6', marginRight: 4, verticalAlign: 'middle' }}></span>SPX ({Math.round(spxMin).toLocaleString()} – {Math.round(spxMax).toLocaleString()})</span>
+              <span><span style={{ display: 'inline-block', width: 16, height: 3, background: STRAT_COLORS[selectedStrat], marginRight: 4, verticalAlign: 'middle' }}></span>{config.label} Equity ({fmtMoney(eqMin)} – {fmtMoney(eqMax)})</span>
+              <span><span style={{ display: 'inline-block', width: 8, height: 8, background: '#ef4444', borderRadius: '50%', marginRight: 4, verticalAlign: 'middle' }}></span>Loss trades</span>
+            </div>
+            <div style={{ width: '100%', height: chartH + 30, position: 'relative', overflowX: 'auto' }}>
+              <svg viewBox={`0 0 ${chartW} ${chartH + 10}`} preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
+                {/* Zero line for equity */}
+                <line x1="0" y1={chartH - ((0 - eqMin) / eqRange2) * (chartH - 20)} x2={chartW} y2={chartH - ((0 - eqMin) / eqRange2) * (chartH - 20)} stroke="#333" strokeWidth="0.5" strokeDasharray="4"/>
+                {/* SPX price line */}
+                <polyline fill="none" stroke="#64b5f6" strokeWidth="1.2" opacity="0.6" points={spxPoints} />
+                {/* Strategy equity line */}
+                <polyline fill="none" stroke={STRAT_COLORS[selectedStrat]} strokeWidth="2" points={eqPoints} />
+                {/* Loss trade markers */}
+                {lossTrades.map((t, i) => {
+                  const x = ((new Date(t.exitDate).getTime() - startDate) / dateRange) * chartW
+                  return <circle key={i} cx={x} cy={10} r="3" fill="#ef4444" opacity="0.8" />
+                })}
+              </svg>
+            </div>
+            <div style={{ fontSize: '0.78rem', color: '#888', marginTop: 8 }}>
+              <strong style={{ color: '#ccc' }}>Key insight:</strong> Losses cluster during sharp SPX selloffs (red dots). 
+              The strategy recovers quickly because each loss is capped at 2× credit (~${Math.round((stats.avgCreditPerContract || 160) * 2)}).
+              {lossTrades.length > 0 && <span> Biggest drawdown periods: {lossTrades.slice(-3).map(t => t.exitDate.slice(0,7)).join(', ')}</span>}
+            </div>
+          </div>
+        )
+      })()}
+
       {/* All strategies comparison */}
       <div className="card" style={{ marginTop: '1rem' }}>
         <h3 style={{ textTransform: 'none', letterSpacing: 0 }}>All Strategies Compared</h3>
@@ -253,6 +402,67 @@ export default function SpxIncomePage() {
         </table>
       </div>
 
+      {/* Monthly P&L Bar Chart */}
+      <div className="card" style={{ marginTop: '1rem' }}>
+        <h3 style={{ textTransform: 'none', letterSpacing: 0 }}>Monthly P&L — {config.label}</h3>
+        {monthlyData.length > 0 && (() => {
+          const maxPnl = Math.max(...monthlyData.map(m => Math.abs(m.pnl * 100)), 1)
+          const barWidth = Math.max(100 / monthlyData.length, 1)
+          return (
+            <div>
+              <div style={{ width: '100%', overflowX: 'auto' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-end', height: 200, minWidth: monthlyData.length * 28, borderBottom: '1px solid #333', position: 'relative' }}>
+                  {/* Zero line */}
+                  <div style={{ position: 'absolute', left: 0, right: 0, top: '50%', borderTop: '1px dashed #555' }} />
+                  {monthlyData.map((m, i) => {
+                    const pnlDollars = m.pnl * 100
+                    const barHeight = Math.abs(pnlDollars) / maxPnl * 90
+                    const isPositive = pnlDollars >= 0
+                    return (
+                      <div key={m.month} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, minWidth: 24, position: 'relative', height: '100%', justifyContent: 'center' }}>
+                        {isPositive ? (
+                          <div style={{ position: 'absolute', bottom: '50%', width: '60%', maxWidth: 20, height: `${barHeight}%`, background: '#4ade80', borderRadius: '2px 2px 0 0', opacity: 0.85 }} title={`${m.month}: ${fmtMoney(pnlDollars)}`} />
+                        ) : (
+                          <div style={{ position: 'absolute', top: '50%', width: '60%', maxWidth: 20, height: `${barHeight}%`, background: '#ef4444', borderRadius: '0 0 2px 2px', opacity: 0.85 }} title={`${m.month}: ${fmtMoney(pnlDollars)}`} />
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+                {/* X-axis labels */}
+                <div style={{ display: 'flex', minWidth: monthlyData.length * 28 }}>
+                  {monthlyData.map((m, i) => (
+                    <div key={m.month} style={{ flex: 1, minWidth: 24, textAlign: 'center', fontSize: '0.6rem', color: '#888', paddingTop: 4, transform: 'rotate(-45deg)', transformOrigin: 'top center' }}>
+                      {m.month.slice(2)}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* Monthly table */}
+              <div style={{ overflowX: 'auto', marginTop: 16, maxHeight: 400 }}>
+                <table style={{ fontSize: '0.78rem' }}>
+                  <thead>
+                    <tr><th>Month</th><th>Trades</th><th>Wins</th><th>Losses</th><th>WR</th><th>P&L/Contract</th></tr>
+                  </thead>
+                  <tbody>
+                    {[...monthlyData].reverse().map(m => (
+                      <tr key={m.month}>
+                        <td><strong>{m.month}</strong></td>
+                        <td>{m.trades}</td>
+                        <td style={{ color: '#4ade80' }}>{m.wins}</td>
+                        <td style={{ color: '#ef4444' }}>{m.losses}</td>
+                        <td>{m.wr}%</td>
+                        <td className={m.pnl >= 0 ? 'win' : 'loss'}><strong>{fmtMoney(m.pnl * 100)}</strong></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )
+        })()}
+      </div>
+
       {/* All trades */}
       <div className="card" style={{ marginTop: '1rem' }}>
         <h3 style={{ textTransform: 'none', letterSpacing: 0 }}>Full Trade Log — {trades.length} trades ({config.label})</h3>
@@ -260,13 +470,16 @@ export default function SpxIncomePage() {
           <table style={{ fontSize: '0.78rem' }}>
             <thead>
               <tr>
-                <th>Entry</th><th>Exit</th><th>SPX</th><th>Qty</th><th>SELL Put</th><th>BUY Put</th>{config.type !== 'put_spread' && <><th>SELL Call</th><th>BUY Call</th></>}<th>Delta</th><th>Credit</th><th>Max Risk</th><th>R:R</th><th>P&L</th><th>Days</th><th>Exit</th>
+                <th>Entry</th><th>Day</th><th>Exit</th><th>SPX</th><th>Qty</th><th>SELL Put</th><th>BUY Put</th>{config.type !== 'put_spread' && <><th>SELL Call</th><th>BUY Call</th></>}<th>Delta</th><th>Credit</th><th>Max Risk</th><th>R:R</th><th>P&L</th><th>Days</th><th>Exit</th>
               </tr>
             </thead>
             <tbody>
-              {[...trades].reverse().map((t, i) => (
+              {[...trades].reverse().map((t, i) => {
+                const weekday = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date(t.entryDate + 'T12:00:00').getDay()]
+                return (
                 <tr key={i}>
                   <td style={{ whiteSpace: 'nowrap' }}>{t.entryDate}</td>
+                  <td style={{ whiteSpace: 'nowrap', color: '#a78bfa' }}>{weekday}</td>
                   <td style={{ whiteSpace: 'nowrap' }}>{t.exitDate}</td>
                   <td>{Math.round(t.entryPrice).toLocaleString()}</td>
                   <td><strong>1</strong></td>
@@ -291,7 +504,7 @@ export default function SpxIncomePage() {
                     }}>{t.exitReason?.replace('_', ' ')}</span>
                   </td>
                 </tr>
-              ))}
+              )})}
             </tbody>
           </table>
         </div>
@@ -390,6 +603,57 @@ export default function SpxIncomePage() {
           <li>Commissions not deducted (~$1.30/contract on most brokers = negligible)</li>
           <li>Data: {params.totalBars} trading days of ^GSPC</li>
         </ul>
+      </div>
+
+      {/* DATA RELIABILITY DISCLAIMER */}
+      <div className="card" style={{ marginTop: '1rem', borderLeft: '3px solid #ef4444', background: 'rgba(239,68,68,0.04)' }}>
+        <h3 style={{ textTransform: 'none', letterSpacing: 0, fontSize: '0.9rem', color: '#ef4444' }}>⚠️ DATA RELIABILITY — SYNTHETIC, NOT REAL OPTIONS DATA</h3>
+        <p style={{ fontSize: '0.85rem', color: '#ccc', lineHeight: 1.8, margin: '8px 0' }}>
+          This backtest uses <strong style={{ color: '#fbbf24' }}>theoretical Black-Scholes pricing</strong>, NOT real historical options data. 
+          Credits, P&L, and win rates are approximations based on stock price movement — not actual bid/ask fills.
+        </p>
+        <table style={{ fontSize: '0.8rem', width: '100%', marginBottom: 12 }}>
+          <thead>
+            <tr><th style={{ textAlign: 'left', color: '#4ade80' }}>✓ What's Real</th><th style={{ textAlign: 'left', color: '#ef4444' }}>✕ What's Synthetic</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>SPX daily close prices (Yahoo Finance)</td>
+              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>Option premiums (Black-Scholes formula)</td>
+            </tr>
+            <tr>
+              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>Historical price moves & crashes</td>
+              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>Implied volatility (estimated as 1.3× realized vol)</td>
+            </tr>
+            <tr>
+              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>Trade timing (Monday entries, DTE)</td>
+              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>No vol skew or term structure</td>
+            </tr>
+            <tr>
+              <td style={{ color: '#aaa', padding: '4px 8px' }}></td>
+              <td style={{ color: '#aaa', padding: '4px 8px' }}>No bid-ask spread or slippage</td>
+            </tr>
+            <tr>
+              <td style={{ color: '#aaa', padding: '4px 8px' }}></td>
+              <td style={{ color: '#aaa', padding: '4px 8px' }}>No real fill quality during crashes</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style={{ fontSize: '0.82rem', color: '#999', lineHeight: 1.8, margin: '8px 0 0' }}>
+          <strong style={{ color: '#fbbf24' }}>Bottom line:</strong> Use this to understand strategy structure and relative performance between strategies. 
+          Do NOT treat exact $ numbers as guaranteed returns. Real results will differ due to IV surface, fill quality, and market microstructure.
+        </p>
+        <div style={{ marginTop: 12, padding: '10px 14px', background: 'rgba(0,0,0,0.2)', borderRadius: 6 }}>
+          <p style={{ fontSize: '0.8rem', color: '#888', margin: '0 0 6px' }}><strong style={{ color: '#a78bfa' }}>📊 For real options data backtesting:</strong></p>
+          <ul style={{ fontSize: '0.78rem', color: '#888', lineHeight: 2, paddingLeft: '1.25rem', margin: 0 }}>
+            <li><strong>CBOE DataShop</strong> — official SPX options history (~$1,000+/yr)</li>
+            <li><strong>ORATS</strong> — options analytics + historical data API</li>
+            <li><strong>Tastytrade/Tastylive</strong> — free backtesting on their platform with real fills</li>
+            <li><strong>OptionMetrics (IvyDB)</strong> — academic-grade options data (institutional pricing)</li>
+            <li><strong>Polygon.io</strong> — options snapshots API (affordable, ~$30/mo)</li>
+            <li><strong>ThetaData</strong> — historical options quotes from $20/mo</li>
+          </ul>
+        </div>
       </div>
     </div>
   )
