@@ -122,13 +122,17 @@ export default function SpxIncomePage() {
           <span style={{ fontSize: '1.5rem' }}>✅</span>
           <strong style={{ color: '#4ade80', fontSize: '1.1rem', letterSpacing: '0.5px' }}>SPX = NO ASSIGNMENT RISK (European-style, Cash-settled)</strong>
         </div>
-        <p style={{ color: '#f1f5f9', margin: '0 0 8px', fontSize: '0.9rem', lineHeight: 1.7 }}>
+        <p style={{ color: '#f1f5f9', margin: '0 0 10px', fontSize: '0.9rem', lineHeight: 1.7 }}>
           Unlike stock options, SPX options <strong>cannot be exercised early</strong>. Only the price at expiration matters.
-          Price can breach your short strike intraday and recover — you still win. This is why SPX put spreads work as an income strategy.
+          Price can breach your short strike intraday and recover — you still win.
         </p>
-        <p style={{ color: '#a1a1aa', margin: 0, fontSize: '0.82rem' }}>
-          Inspired by: Tastytrade research, r/thetagang, Seth Freudberg/SMB Capital, Ron Bertino (Predicting Alpha), CBOE put-writing index research.
-        </p>
+        <div style={{ padding: '10px 14px', background: 'rgba(100,181,246,0.08)', borderRadius: 6, border: '1px solid rgba(100,181,246,0.2)' }}>
+          <p style={{ color: '#64b5f6', margin: '0 0 6px', fontSize: '0.85rem', fontWeight: 700 }}>🎯 EXPIRY: Pick monthly (3rd Friday), 35-50 DTE — NOT random weeklies</p>
+          <p style={{ color: '#cbd5e1', margin: 0, fontSize: '0.8rem', lineHeight: 1.8 }}>
+            Monthly = thousands of OI, tight $0.10 spreads. Tue/Thu weeklies at 45 DTE = dead (2 contracts, no fills). 
+            <strong style={{ color: '#fbbf24' }}> Alt: SPY</strong> — 1/10th size, massive volume everywhere, trade 10 contracts = 1 SPX.
+          </p>
+        </div>
       </div>
 
       {/* Strategy selector — sorted best to worst */}

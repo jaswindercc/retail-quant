@@ -311,7 +311,65 @@ export default function SpxSkipAnalysisPage() {
           <p style={{ margin: '0 0 6px' }}><strong style={{ color: '#fb923c' }}>Wait for Win:</strong> After N losses in a row, STOP trading. Each week, check what <em>would have</em> happened. Only resume after you see a week that would have been a winner. (You're waiting for proof the storm is over.)</p>
           <p style={{ margin: '0 0 6px' }}><strong style={{ color: '#f472b6' }}>Contrarian:</strong> Opposite — only trade AFTER seeing N losses. Bet on mean reversion.</p>
           <p style={{ margin: '8px 0 0', color: '#94a3b8', fontStyle: 'italic' }}>Why "Wait for Win" dominates: Losses in SPX options selling come in clusters (crashes/corrections hit multiple weeks). Pausing after the first loss dodges the 2nd and 3rd loss in the cluster, massively reducing drawdown.</p>
-          <p style={{ margin: '6px 0 0', color: '#ef4444', fontStyle: 'italic' }}>⚠️ Uses real VIX for IV but Black-Scholes for option pricing (no skew, no bid-ask). Put spread numbers are most realistic. Iron condor call side is slightly optimistic.</p>
+        </div>
+        <div style={{ marginTop: 12, padding: '12px 14px', background: 'rgba(74,222,128,0.06)', borderRadius: 6, border: '1px solid rgba(74,222,128,0.2)' }}>
+          <p style={{ fontSize: '0.85rem', color: '#4ade80', margin: '0 0 8px', fontWeight: 700 }}>📌 PRACTICAL RULES FOR LIVE TRADING:</p>
+          <div style={{ fontSize: '0.82rem', color: '#cbd5e1', lineHeight: 2 }}>
+            <p style={{ margin: '0 0 4px' }}>1. <strong>Strategy:</strong> Put Spread 30Δ, $5-$10 wide, 45 DTE, every Monday</p>
+            <p style={{ margin: '0 0 4px' }}>2. <strong>After any loss:</strong> Sit out. Don't trade next Monday.</p>
+            <p style={{ margin: '0 0 4px' }}>3. <strong>Resume only when:</strong> You see a week that <em>would have</em> been a winner (paper-track it)</p>
+            <p style={{ margin: '0 0 4px' }}>4. <strong>Also skip when:</strong> SPX is &gt;3% above 20-day MA (overextended, mean reversion risk = your put strike is near the 20MA)</p>
+            <p style={{ margin: '0 0 4px' }}>5. <strong>Risk management:</strong> Take profit at 50% credit. Stop loss at 2× credit.</p>
+            <p style={{ margin: '0 0 0', color: '#94a3b8', fontStyle: 'italic' }}>The 30Δ put lands ~2-3% below SPX. If SPX is overextended above moving averages, a normal pullback to the 20MA will breach your strike.</p>
+          </div>
+        </div>
+        <p style={{ margin: '10px 0 0', fontSize: '0.78rem', color: '#ef4444', fontStyle: 'italic' }}>⚠️ Uses real VIX for IV, call-side skew applied. Put spread numbers validated against live broker fills (30Δ put strike matches within $10).</p>
+      </div>
+
+      {/* LIVE TRADING CHECKLIST */}
+      <div className="card" style={{ marginBottom: 16, padding: '16px 20px', border: '1px solid #fbbf24', background: 'rgba(251,191,36,0.04)' }}>
+        <p style={{ fontSize: '0.9rem', color: '#fbbf24', margin: '0 0 10px', fontWeight: 700 }}>⚡ LIVE TRADING CHECKLIST — Before You Place The Trade</p>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', fontSize: '0.82rem' }}>
+          <div>
+            <p style={{ color: '#4ade80', fontWeight: 700, margin: '0 0 8px' }}>✓ ENTRY RULES</p>
+            <div style={{ color: '#cbd5e1', lineHeight: 2 }}>
+              <p style={{ margin: 0 }}>☐ Day: Monday (Tuesday if holiday)</p>
+              <p style={{ margin: 0 }}>☐ Strike: 30-delta put (use broker's delta, ~2-3% below SPX)</p>
+              <p style={{ margin: 0 }}>☐ Width: $5 or $10 wide</p>
+              <p style={{ margin: 0 }}>☐ Expiry: <strong>Standard monthly</strong> closest to 45 DTE (3rd Friday)</p>
+              <p style={{ margin: 0 }}>☐ NOT a random Thursday/Tuesday weekly (no liquidity!)</p>
+              <p style={{ margin: 0 }}>☐ Check OI &gt; 500 and bid-ask ≤ $0.30 wide</p>
+              <p style={{ margin: 0 }}>☐ Max 5 positions open at once</p>
+            </div>
+          </div>
+          <div>
+            <p style={{ color: '#ef4444', fontWeight: 700, margin: '0 0 8px' }}>✗ DO NOT TRADE WHEN</p>
+            <div style={{ color: '#cbd5e1', lineHeight: 2 }}>
+              <p style={{ margin: 0 }}>☐ SPX is &gt;3% above 20-day MA (overextended)</p>
+              <p style={{ margin: 0 }}>☐ Last trade was a loss (wait for a winning week to pass)</p>
+              <p style={{ margin: 0 }}>☐ VIX is spiking &gt;25 (sell into strength, not panic)</p>
+              <p style={{ margin: 0 }}>☐ Major event next day (FOMC, CPI, jobs report)</p>
+              <p style={{ margin: 0 }}>☐ Your short put strike is ABOVE the 20-day MA</p>
+            </div>
+          </div>
+        </div>
+        <div style={{ marginTop: 14, padding: '10px 14px', background: 'rgba(0,0,0,0.2)', borderRadius: 6 }}>
+          <p style={{ fontSize: '0.82rem', color: '#a78bfa', margin: '0 0 6px', fontWeight: 700 }}>💡 EXIT RULES</p>
+          <div style={{ fontSize: '0.8rem', color: '#cbd5e1', lineHeight: 2 }}>
+            <p style={{ margin: 0 }}>• <strong style={{ color: '#4ade80' }}>Take profit:</strong> Close at 50% of credit received (e.g. sold for $1.60 → buy back at $0.80)</p>
+            <p style={{ margin: 0 }}>• <strong style={{ color: '#ef4444' }}>Stop loss:</strong> Close if position value reaches 2× credit (e.g. sold $1.60 → close at $3.20 loss)</p>
+            <p style={{ margin: 0 }}>• <strong>Never hold to expiry</strong> — always manage (take profit or stop loss)</p>
+          </div>
+        </div>
+        <div style={{ marginTop: 14, padding: '10px 14px', background: 'rgba(0,0,0,0.2)', borderRadius: 6 }}>
+          <p style={{ fontSize: '0.82rem', color: '#64b5f6', margin: '0 0 6px', fontWeight: 700 }}>🎯 LIQUIDITY — WHICH EXPIRY TO PICK</p>
+          <div style={{ fontSize: '0.8rem', color: '#cbd5e1', lineHeight: 2 }}>
+            <p style={{ margin: 0 }}>• <strong>Best:</strong> Standard monthly expiry (3rd Friday) — thousands of OI, $0.10 bid-ask</p>
+            <p style={{ margin: 0 }}>• <strong>OK:</strong> Mon/Wed/Fri weeklies — decent volume within 2 weeks of expiry only</p>
+            <p style={{ margin: 0 }}>• <strong style={{ color: '#ef4444' }}>Avoid:</strong> Tue/Thu weeklies for 45 DTE — dead volume (2 contracts = no fills)</p>
+            <p style={{ margin: 0 }}>• <strong>Alt:</strong> SPY options (1/10th SPX, massive volume everywhere, trade 10x contracts)</p>
+            <p style={{ margin: 0 }}>• Rule: if OI &lt; 200 or spread &gt; $0.50 — pick a different expiry</p>
+          </div>
         </div>
       </div>
 
