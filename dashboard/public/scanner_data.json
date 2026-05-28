@@ -2,13 +2,13 @@
   "instruments": {
     "SPX": {
       "today": {
-        "date": "2026-05-22",
-        "close": 7473.47,
-        "sma50": 6959.35,
-        "atr": 80.58,
-        "rsi5": 65.8,
-        "vix": 16.7,
-        "score": 0,
+        "date": "2026-05-27",
+        "close": 7520.36,
+        "sma50": 7022.12,
+        "atr": 69.63,
+        "rsi5": 75.1,
+        "vix": 16.29,
+        "score": -1,
         "signals": [
           {
             "name": "Above SMA200",
@@ -16,7 +16,12 @@
             "type": "bull"
           },
           {
-            "name": "Big Up Day",
+            "name": "RSI(5) > 75",
+            "points": -1,
+            "type": "bear"
+          },
+          {
+            "name": "Extended Up",
             "points": -1,
             "type": "bear"
           }
@@ -27,9 +32,9 @@
           "vanilla": {
             "status": "no_signal",
             "paused": false,
-            "totalTrades": 266,
-            "totalPnl": 8206.61,
-            "winRate": 56.0
+            "totalTrades": 265,
+            "totalPnl": 8192.47,
+            "winRate": 56.2
           },
           "trail3d": {
             "status": "no_signal",
@@ -49,183 +54,9 @@
       },
       "history": [
         {
-          "date": "2026-02-25",
-          "close": 6946.13,
-          "sma50": 6895.47,
-          "atr": 87.09,
-          "rsi5": 64.3,
-          "vix": 17.93,
-          "score": 1,
-          "signals": [
-            {
-              "name": "Above SMA200",
-              "points": 1,
-              "type": "bull"
-            }
-          ],
-          "aboveSma50": true,
-          "entrySignal": false,
-          "configs": {
-            "vanilla": {
-              "status": "no_signal",
-              "paused": false,
-              "totalTrades": 254,
-              "totalPnl": 7558.22,
-              "winRate": 56.3
-            },
-            "trail3d": {
-              "status": "no_signal",
-              "paused": true,
-              "totalTrades": 2,
-              "totalPnl": -394.47,
-              "winRate": 0.0
-            },
-            "forever": {
-              "status": "no_signal",
-              "paused": true,
-              "totalTrades": 17,
-              "totalPnl": 3610.53,
-              "winRate": 82.4
-            }
-          }
-        },
-        {
-          "date": "2026-02-26",
-          "close": 6908.86,
-          "sma50": 6895.62,
-          "atr": 86.01,
-          "rsi5": 53.7,
-          "vix": 18.63,
-          "score": 1,
-          "signals": [
-            {
-              "name": "Above SMA200",
-              "points": 1,
-              "type": "bull"
-            }
-          ],
-          "aboveSma50": true,
-          "entrySignal": false,
-          "configs": {
-            "vanilla": {
-              "status": "no_signal",
-              "paused": false,
-              "totalTrades": 254,
-              "totalPnl": 7558.22,
-              "winRate": 56.3
-            },
-            "trail3d": {
-              "status": "no_signal",
-              "paused": true,
-              "totalTrades": 2,
-              "totalPnl": -394.47,
-              "winRate": 0.0
-            },
-            "forever": {
-              "status": "no_signal",
-              "paused": true,
-              "totalTrades": 17,
-              "totalPnl": 3610.53,
-              "winRate": 82.4
-            }
-          }
-        },
-        {
-          "date": "2026-02-27",
-          "close": 6878.88,
-          "sma50": 6896.65,
-          "atr": 81.05,
-          "rsi5": 46.1,
-          "vix": 19.86,
-          "score": 2,
-          "signals": [
-            {
-              "name": "VIX > SMA20",
-              "points": 1,
-              "type": "bull"
-            },
-            {
-              "name": "Above SMA200",
-              "points": 1,
-              "type": "bull"
-            }
-          ],
-          "aboveSma50": false,
-          "entrySignal": false,
-          "configs": {
-            "vanilla": {
-              "status": "no_signal",
-              "paused": false,
-              "totalTrades": 254,
-              "totalPnl": 7558.22,
-              "winRate": 56.3
-            },
-            "trail3d": {
-              "status": "no_signal",
-              "paused": true,
-              "totalTrades": 2,
-              "totalPnl": -394.47,
-              "winRate": 0.0
-            },
-            "forever": {
-              "status": "no_signal",
-              "paused": true,
-              "totalTrades": 17,
-              "totalPnl": 3610.53,
-              "winRate": 82.4
-            }
-          }
-        },
-        {
-          "date": "2026-03-02",
-          "close": 6881.62,
-          "sma50": 6897.96,
-          "atr": 83.19,
-          "rsi5": 46.9,
-          "vix": 21.44,
-          "score": 2,
-          "signals": [
-            {
-              "name": "VIX > SMA20",
-              "points": 1,
-              "type": "bull"
-            },
-            {
-              "name": "Above SMA200",
-              "points": 1,
-              "type": "bull"
-            }
-          ],
-          "aboveSma50": false,
-          "entrySignal": false,
-          "configs": {
-            "vanilla": {
-              "status": "no_signal",
-              "paused": false,
-              "totalTrades": 254,
-              "totalPnl": 7558.22,
-              "winRate": 56.3
-            },
-            "trail3d": {
-              "status": "no_signal",
-              "paused": true,
-              "totalTrades": 2,
-              "totalPnl": -394.47,
-              "winRate": 0.0
-            },
-            "forever": {
-              "status": "no_signal",
-              "paused": true,
-              "totalTrades": 17,
-              "totalPnl": 3610.53,
-              "winRate": 82.4
-            }
-          }
-        },
-        {
           "date": "2026-03-03",
           "close": 6816.63,
-          "sma50": 6898.28,
+          "sma50": 6903.4,
           "atr": 91.9,
           "rsi5": 31.8,
           "vix": 23.57,
@@ -263,9 +94,9 @@
                 "currentR": 0.0,
                 "activationLevel": 6885.55
               },
-              "totalTrades": 254,
-              "totalPnl": 7558.22,
-              "winRate": 56.3
+              "totalTrades": 253,
+              "totalPnl": 7665.58,
+              "winRate": 56.5
             },
             "trail3d": {
               "status": "blocked: SPX < SMA50",
@@ -286,7 +117,7 @@
         {
           "date": "2026-03-04",
           "close": 6869.5,
-          "sma50": 6901.24,
+          "sma50": 6905.3,
           "atr": 91.38,
           "rsi5": 48.6,
           "vix": 21.15,
@@ -314,9 +145,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 255,
-              "totalPnl": 7663.96,
-              "winRate": 56.5
+              "totalTrades": 254,
+              "totalPnl": 7771.32,
+              "winRate": 56.7
             },
             "trail3d": {
               "status": "no_signal",
@@ -337,7 +168,7 @@
         {
           "date": "2026-03-05",
           "close": 6830.71,
-          "sma50": 6902.36,
+          "sma50": 6905.22,
           "atr": 87.85,
           "rsi5": 39.7,
           "vix": 23.75,
@@ -375,9 +206,9 @@
                 "currentR": 0.0,
                 "activationLevel": 6896.59
               },
-              "totalTrades": 255,
-              "totalPnl": 7663.96,
-              "winRate": 56.5
+              "totalTrades": 254,
+              "totalPnl": 7771.32,
+              "winRate": 56.7
             },
             "trail3d": {
               "status": "blocked: SPX < SMA50",
@@ -398,7 +229,7 @@
         {
           "date": "2026-03-06",
           "close": 6740.02,
-          "sma50": 6900.47,
+          "sma50": 6902.45,
           "atr": 90.11,
           "rsi5": 25.8,
           "vix": 29.49,
@@ -451,9 +282,9 @@
                 "currentR": 0.0,
                 "activationLevel": 6807.61
               },
-              "totalTrades": 256,
-              "totalPnl": 7482.58,
-              "winRate": 56.2
+              "totalTrades": 255,
+              "totalPnl": 7589.94,
+              "winRate": 56.5
             },
             "trail3d": {
               "status": "blocked: SPX < SMA50",
@@ -474,7 +305,7 @@
         {
           "date": "2026-03-09",
           "close": 6795.99,
-          "sma50": 6898.82,
+          "sma50": 6900.17,
           "atr": 96.04,
           "rsi5": 41.6,
           "vix": 25.5,
@@ -507,9 +338,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 257,
-              "totalPnl": 7594.52,
-              "winRate": 56.4
+              "totalTrades": 256,
+              "totalPnl": 7701.88,
+              "winRate": 56.6
             },
             "trail3d": {
               "status": "no_signal",
@@ -530,7 +361,7 @@
         {
           "date": "2026-03-10",
           "close": 6781.48,
-          "sma50": 6896.26,
+          "sma50": 6897.16,
           "atr": 97.42,
           "rsi5": 38.9,
           "vix": 24.93,
@@ -553,9 +384,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 257,
-              "totalPnl": 7594.52,
-              "winRate": 56.4
+              "totalTrades": 256,
+              "totalPnl": 7701.88,
+              "winRate": 56.6
             },
             "trail3d": {
               "status": "no_signal",
@@ -576,7 +407,7 @@
         {
           "date": "2026-03-11",
           "close": 6775.8,
-          "sma50": 6893.13,
+          "sma50": 6894.08,
           "atr": 98.66,
           "rsi5": 37.7,
           "vix": 24.23,
@@ -599,9 +430,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 257,
-              "totalPnl": 7594.52,
-              "winRate": 56.4
+              "totalTrades": 256,
+              "totalPnl": 7701.88,
+              "winRate": 56.6
             },
             "trail3d": {
               "status": "no_signal",
@@ -622,7 +453,7 @@
         {
           "date": "2026-03-12",
           "close": 6672.62,
-          "sma50": 6887.99,
+          "sma50": 6889.42,
           "atr": 100.51,
           "rsi5": 22.2,
           "vix": 27.29,
@@ -685,9 +516,9 @@
                 "currentR": 0.0,
                 "activationLevel": 6748.0
               },
-              "totalTrades": 257,
-              "totalPnl": 7594.52,
-              "winRate": 56.4
+              "totalTrades": 256,
+              "totalPnl": 7701.88,
+              "winRate": 56.6
             },
             "trail3d": {
               "status": "blocked: SPX < SMA50",
@@ -708,7 +539,7 @@
         {
           "date": "2026-03-13",
           "close": 6632.19,
-          "sma50": 6882.52,
+          "sma50": 6884.14,
           "atr": 101.38,
           "rsi5": 18.5,
           "vix": 27.19,
@@ -761,9 +592,9 @@
                 "currentR": 0.0,
                 "activationLevel": 6708.23
               },
-              "totalTrades": 258,
-              "totalPnl": 7513.66,
-              "winRate": 56.2
+              "totalTrades": 257,
+              "totalPnl": 7621.02,
+              "winRate": 56.4
             },
             "trail3d": {
               "status": "blocked: SPX < SMA50",
@@ -784,7 +615,7 @@
         {
           "date": "2026-03-16",
           "close": 6699.38,
-          "sma50": 6878.58,
+          "sma50": 6881.21,
           "atr": 102.37,
           "rsi5": 39.5,
           "vix": 23.51,
@@ -812,9 +643,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 259,
-              "totalPnl": 7648.04,
-              "winRate": 56.4
+              "totalTrades": 258,
+              "totalPnl": 7755.4,
+              "winRate": 56.6
             },
             "trail3d": {
               "status": "no_signal",
@@ -835,7 +666,7 @@
         {
           "date": "2026-03-17",
           "close": 6716.09,
-          "sma50": 6875.99,
+          "sma50": 6878.37,
           "atr": 101.84,
           "rsi5": 44.0,
           "vix": 22.37,
@@ -858,9 +689,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 259,
-              "totalPnl": 7648.04,
-              "winRate": 56.4
+              "totalTrades": 258,
+              "totalPnl": 7755.4,
+              "winRate": 56.6
             },
             "trail3d": {
               "status": "no_signal",
@@ -881,7 +712,7 @@
         {
           "date": "2026-03-18",
           "close": 6624.7,
-          "sma50": 6871.32,
+          "sma50": 6872.82,
           "atr": 102.33,
           "rsi5": 29.2,
           "vix": 25.09,
@@ -939,9 +770,9 @@
                 "currentR": 0.0,
                 "activationLevel": 6701.45
               },
-              "totalTrades": 259,
-              "totalPnl": 7648.04,
-              "winRate": 56.4
+              "totalTrades": 258,
+              "totalPnl": 7755.4,
+              "winRate": 56.6
             },
             "trail3d": {
               "status": "blocked: SPX < SMA50",
@@ -962,7 +793,7 @@
         {
           "date": "2026-03-19",
           "close": 6606.49,
-          "sma50": 6865.4,
+          "sma50": 6866.05,
           "atr": 102.46,
           "rsi5": 26.9,
           "vix": 24.06,
@@ -990,9 +821,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 260,
-              "totalPnl": 7611.62,
-              "winRate": 56.2
+              "totalTrades": 259,
+              "totalPnl": 7718.98,
+              "winRate": 56.4
             },
             "trail3d": {
               "status": "no_signal",
@@ -1013,7 +844,7 @@
         {
           "date": "2026-03-20",
           "close": 6506.48,
-          "sma50": 6856.64,
+          "sma50": 6857.76,
           "atr": 104.52,
           "rsi5": 17.6,
           "vix": 26.78,
@@ -1061,9 +892,9 @@
                 "currentR": 0.0,
                 "activationLevel": 6584.87
               },
-              "totalTrades": 260,
-              "totalPnl": 7611.62,
-              "winRate": 56.2
+              "totalTrades": 259,
+              "totalPnl": 7718.98,
+              "winRate": 56.4
             },
             "trail3d": {
               "status": "blocked: SPX < SMA50",
@@ -1084,7 +915,7 @@
         {
           "date": "2026-03-23",
           "close": 6581.0,
-          "sma50": 6849.84,
+          "sma50": 6850.95,
           "atr": 102.65,
           "rsi5": 37.7,
           "vix": 26.15,
@@ -1117,9 +948,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 261,
-              "totalPnl": 7760.66,
-              "winRate": 56.3
+              "totalTrades": 260,
+              "totalPnl": 7868.02,
+              "winRate": 56.5
             },
             "trail3d": {
               "status": "no_signal",
@@ -1140,7 +971,7 @@
         {
           "date": "2026-03-24",
           "close": 6556.37,
-          "sma50": 6842.54,
+          "sma50": 6842.76,
           "atr": 102.39,
           "rsi5": 34.3,
           "vix": 26.95,
@@ -1173,9 +1004,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 261,
-              "totalPnl": 7760.66,
-              "winRate": 56.3
+              "totalTrades": 260,
+              "totalPnl": 7868.02,
+              "winRate": 56.5
             },
             "trail3d": {
               "status": "no_signal",
@@ -1224,9 +1055,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 261,
-              "totalPnl": 7760.66,
-              "winRate": 56.3
+              "totalTrades": 260,
+              "totalPnl": 7868.02,
+              "winRate": 56.5
             },
             "trail3d": {
               "status": "no_signal",
@@ -1295,9 +1126,9 @@
                 "currentR": 0.0,
                 "activationLevel": 6552.72
               },
-              "totalTrades": 261,
-              "totalPnl": 7760.66,
-              "winRate": 56.3
+              "totalTrades": 260,
+              "totalPnl": 7868.02,
+              "winRate": 56.5
             },
             "trail3d": {
               "status": "blocked: SPX < SMA50",
@@ -1371,9 +1202,9 @@
                 "currentR": 0.0,
                 "activationLevel": 6441.55
               },
-              "totalTrades": 262,
-              "totalPnl": 7544.04,
-              "winRate": 56.1
+              "totalTrades": 261,
+              "totalPnl": 7651.4,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "blocked: SPX < SMA50",
@@ -1442,9 +1273,9 @@
                 "currentR": 0.0,
                 "activationLevel": 6417.76
               },
-              "totalTrades": 263,
-              "totalPnl": 7493.78,
-              "winRate": 55.9
+              "totalTrades": 262,
+              "totalPnl": 7601.14,
+              "winRate": 56.1
             },
             "trail3d": {
               "status": "blocked: SPX < SMA50",
@@ -1498,9 +1329,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -1539,9 +1370,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -1563,7 +1394,7 @@
           "date": "2026-04-02",
           "close": 6582.69,
           "sma50": 6783.63,
-          "atr": 107.51,
+          "atr": 107.52,
           "rsi5": 59.2,
           "vix": 23.87,
           "score": -1,
@@ -1580,9 +1411,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -1604,7 +1435,7 @@
           "date": "2026-04-06",
           "close": 6611.83,
           "sma50": 6777.6,
-          "atr": 103.28,
+          "atr": 103.29,
           "rsi5": 63.4,
           "vix": 24.17,
           "score": -1,
@@ -1621,9 +1452,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -1667,9 +1498,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -1691,7 +1522,7 @@
           "date": "2026-04-08",
           "close": 6782.81,
           "sma50": 6768.27,
-          "atr": 111.21,
+          "atr": 111.22,
           "rsi5": 80.9,
           "vix": 21.04,
           "score": -3,
@@ -1728,9 +1559,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -1752,7 +1583,7 @@
           "date": "2026-04-09",
           "close": 6824.66,
           "sma50": 6765.2,
-          "atr": 110.84,
+          "atr": 110.85,
           "rsi5": 83.4,
           "vix": 19.49,
           "score": -1,
@@ -1779,9 +1610,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -1803,7 +1634,7 @@
           "date": "2026-04-10",
           "close": 6816.89,
           "sma50": 6761.97,
-          "atr": 104.01,
+          "atr": 104.02,
           "rsi5": 81.0,
           "vix": 19.23,
           "score": -1,
@@ -1830,9 +1661,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -1854,7 +1685,7 @@
           "date": "2026-04-13",
           "close": 6886.24,
           "sma50": 6760.32,
-          "atr": 100.57,
+          "atr": 100.58,
           "rsi5": 85.6,
           "vix": 19.12,
           "score": -1,
@@ -1881,9 +1712,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -1932,9 +1763,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -1983,9 +1814,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2007,7 +1838,7 @@
           "date": "2026-04-16",
           "close": 7041.28,
           "sma50": 6764.28,
-          "atr": 94.76,
+          "atr": 94.77,
           "rsi5": 92.0,
           "vix": 17.94,
           "score": -3,
@@ -2039,9 +1870,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2063,7 +1894,7 @@
           "date": "2026-04-17",
           "close": 7126.06,
           "sma50": 6769.15,
-          "atr": 93.7,
+          "atr": 93.71,
           "rsi5": 94.3,
           "vix": 17.48,
           "score": -3,
@@ -2095,9 +1926,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2119,7 +1950,7 @@
           "date": "2026-04-20",
           "close": 7109.14,
           "sma50": 6775.37,
-          "atr": 88.79,
+          "atr": 88.8,
           "rsi5": 87.9,
           "vix": 18.87,
           "score": -1,
@@ -2146,9 +1977,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2192,9 +2023,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2216,7 +2047,7 @@
           "date": "2026-04-22",
           "close": 7137.9,
           "sma50": 6781.46,
-          "atr": 80.59,
+          "atr": 80.6,
           "rsi5": 79.5,
           "vix": 18.92,
           "score": -1,
@@ -2243,9 +2074,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2284,9 +2115,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2330,9 +2161,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2376,9 +2207,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2417,9 +2248,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2458,9 +2289,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2509,9 +2340,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2560,9 +2391,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2601,9 +2432,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2647,9 +2478,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2693,9 +2524,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2739,9 +2570,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2785,9 +2616,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2836,9 +2667,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2882,9 +2713,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2928,9 +2759,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -2974,9 +2805,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "no_signal",
@@ -3040,9 +2871,9 @@
                 "currentR": 0.0,
                 "activationLevel": 7462.9
               },
-              "totalTrades": 264,
-              "totalPnl": 7863.38,
-              "winRate": 56.1
+              "totalTrades": 263,
+              "totalPnl": 7970.74,
+              "winRate": 56.3
             },
             "trail3d": {
               "status": "blocked: Paused (2 losses)",
@@ -3081,9 +2912,9 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 265,
-              "totalPnl": 7847.03,
-              "winRate": 55.8
+              "totalTrades": 264,
+              "totalPnl": 7954.39,
+              "winRate": 56.1
             },
             "trail3d": {
               "status": "no_signal",
@@ -3142,9 +2973,9 @@
                 "currentR": 0.0,
                 "activationLevel": 7410.88
               },
-              "totalTrades": 265,
-              "totalPnl": 7847.03,
-              "winRate": 55.8
+              "totalTrades": 264,
+              "totalPnl": 7954.39,
+              "winRate": 56.1
             },
             "trail3d": {
               "status": "blocked: Paused (2 losses)",
@@ -3163,12 +2994,135 @@
           }
         },
         {
+          "date": "2026-05-20",
+          "close": 7432.97,
+          "sma50": 6958.54,
+          "atr": 75.54,
+          "rsi5": 60.4,
+          "vix": 17.44,
+          "score": 1,
+          "signals": [
+            {
+              "name": "Above SMA200",
+              "points": 1,
+              "type": "bull"
+            }
+          ],
+          "aboveSma50": true,
+          "entrySignal": false,
+          "configs": {
+            "vanilla": {
+              "status": "no_signal",
+              "paused": false,
+              "totalTrades": 265,
+              "totalPnl": 8192.47,
+              "winRate": 56.2
+            },
+            "trail3d": {
+              "status": "no_signal",
+              "paused": true,
+              "totalTrades": 2,
+              "totalPnl": -394.47,
+              "winRate": 0.0
+            },
+            "forever": {
+              "status": "no_signal",
+              "paused": true,
+              "totalTrades": 17,
+              "totalPnl": 3610.53,
+              "winRate": 82.4
+            }
+          }
+        },
+        {
+          "date": "2026-05-21",
+          "close": 7445.72,
+          "sma50": 6971.94,
+          "atr": 76.46,
+          "rsi5": 62.7,
+          "vix": 16.76,
+          "score": 1,
+          "signals": [
+            {
+              "name": "Above SMA200",
+              "points": 1,
+              "type": "bull"
+            }
+          ],
+          "aboveSma50": true,
+          "entrySignal": false,
+          "configs": {
+            "vanilla": {
+              "status": "no_signal",
+              "paused": false,
+              "totalTrades": 265,
+              "totalPnl": 8192.47,
+              "winRate": 56.2
+            },
+            "trail3d": {
+              "status": "no_signal",
+              "paused": true,
+              "totalTrades": 2,
+              "totalPnl": -394.47,
+              "winRate": 0.0
+            },
+            "forever": {
+              "status": "no_signal",
+              "paused": true,
+              "totalTrades": 17,
+              "totalPnl": 3610.53,
+              "winRate": 82.4
+            }
+          }
+        },
+        {
           "date": "2026-05-22",
           "close": 7473.47,
-          "sma50": 6959.35,
-          "atr": 80.58,
-          "rsi5": 65.8,
+          "sma50": 6987.96,
+          "atr": 75.76,
+          "rsi5": 67.8,
           "vix": 16.7,
+          "score": 1,
+          "signals": [
+            {
+              "name": "Above SMA200",
+              "points": 1,
+              "type": "bull"
+            }
+          ],
+          "aboveSma50": true,
+          "entrySignal": false,
+          "configs": {
+            "vanilla": {
+              "status": "no_signal",
+              "paused": false,
+              "totalTrades": 265,
+              "totalPnl": 8192.47,
+              "winRate": 56.2
+            },
+            "trail3d": {
+              "status": "no_signal",
+              "paused": true,
+              "totalTrades": 2,
+              "totalPnl": -394.47,
+              "winRate": 0.0
+            },
+            "forever": {
+              "status": "no_signal",
+              "paused": true,
+              "totalTrades": 17,
+              "totalPnl": 3610.53,
+              "winRate": 82.4
+            }
+          }
+        },
+        {
+          "date": "2026-05-26",
+          "close": 7519.12,
+          "sma50": 7005.7,
+          "atr": 75.27,
+          "rsi5": 74.9,
+          "vix": 17.01,
           "score": 0,
           "signals": [
             {
@@ -3177,7 +3131,7 @@
               "type": "bull"
             },
             {
-              "name": "Big Up Day",
+              "name": "Extended Up",
               "points": -1,
               "type": "bear"
             }
@@ -3188,9 +3142,60 @@
             "vanilla": {
               "status": "no_signal",
               "paused": false,
-              "totalTrades": 266,
-              "totalPnl": 8206.61,
-              "winRate": 56.0
+              "totalTrades": 265,
+              "totalPnl": 8192.47,
+              "winRate": 56.2
+            },
+            "trail3d": {
+              "status": "no_signal",
+              "paused": true,
+              "totalTrades": 2,
+              "totalPnl": -394.47,
+              "winRate": 0.0
+            },
+            "forever": {
+              "status": "no_signal",
+              "paused": true,
+              "totalTrades": 17,
+              "totalPnl": 3610.53,
+              "winRate": 82.4
+            }
+          }
+        },
+        {
+          "date": "2026-05-27",
+          "close": 7520.36,
+          "sma50": 7022.12,
+          "atr": 69.63,
+          "rsi5": 75.1,
+          "vix": 16.29,
+          "score": -1,
+          "signals": [
+            {
+              "name": "Above SMA200",
+              "points": 1,
+              "type": "bull"
+            },
+            {
+              "name": "RSI(5) > 75",
+              "points": -1,
+              "type": "bear"
+            },
+            {
+              "name": "Extended Up",
+              "points": -1,
+              "type": "bear"
+            }
+          ],
+          "aboveSma50": true,
+          "entrySignal": false,
+          "configs": {
+            "vanilla": {
+              "status": "no_signal",
+              "paused": false,
+              "totalTrades": 265,
+              "totalPnl": 8192.47,
+              "winRate": 56.2
             },
             "trail3d": {
               "status": "no_signal",
@@ -3211,16 +3216,16 @@
       ],
       "configSummaries": {
         "vanilla": {
-          "totalTrades": 266,
-          "winRate": 56.0,
-          "totalPnl": 8206.61,
+          "totalTrades": 265,
+          "winRate": 56.2,
+          "totalPnl": 8192.47,
           "lastTrade": {
             "entryDate": "2026-05-19",
-            "exitDate": "2026-05-22",
+            "exitDate": "2026-05-20",
             "entryPrice": 7353.61,
-            "exitPrice": 7473.47,
-            "pnl": 359.58,
-            "pnlR": 3.6,
+            "exitPrice": 7432.97,
+            "pnl": 238.08,
+            "pnlR": 2.38,
             "daysHeld": 1,
             "exitReason": "max_1d"
           }
@@ -3260,13 +3265,13 @@
     },
     "SPY": {
       "today": {
-        "date": "2026-05-22",
-        "close": 745.64,
-        "sma50": 691.14,
-        "atr": 7.49,
-        "rsi5": 75.9,
-        "vix": 16.7,
-        "score": -1,
+        "date": "2026-05-27",
+        "close": 750.46,
+        "sma50": 692.69,
+        "atr": 7.67,
+        "rsi5": 79.5,
+        "vix": 16.29,
+        "score": 0,
         "signals": [
           {
             "name": "Above SMA200",
@@ -3275,11 +3280,6 @@
           },
           {
             "name": "RSI(5) > 75",
-            "points": -1,
-            "type": "bear"
-          },
-          {
-            "name": "Big Up Day",
             "points": -1,
             "type": "bear"
           }
@@ -3311,67 +3311,6 @@
         }
       },
       "history": [
-        {
-          "date": "2026-02-23",
-          "close": 682.39,
-          "sma50": 687.45,
-          "atr": 9.29,
-          "rsi5": 39.9,
-          "vix": 21.01,
-          "score": 3,
-          "signals": [
-            {
-              "name": "VIX > SMA20",
-              "points": 1,
-              "type": "bull"
-            },
-            {
-              "name": "Dip in Uptrend",
-              "points": 1,
-              "type": "bull"
-            },
-            {
-              "name": "Above SMA200",
-              "points": 1,
-              "type": "bull"
-            }
-          ],
-          "aboveSma50": false,
-          "entrySignal": true,
-          "configs": {
-            "vanilla": {
-              "status": "entered",
-              "paused": false,
-              "position": {
-                "entryDate": "2026-02-23",
-                "entryPrice": 682.39,
-                "daysHeld": 0,
-                "trailActive": false,
-                "highestClose": 682.39,
-                "trailStop": null,
-                "currentR": 0.0,
-                "activationLevel": 689.35
-              },
-              "totalTrades": 249,
-              "totalPnl": 7106.55,
-              "winRate": 55.4
-            },
-            "trail3d": {
-              "status": "blocked: SPX < SMA50",
-              "paused": true,
-              "totalTrades": 2,
-              "totalPnl": -444.38,
-              "winRate": 0.0
-            },
-            "forever": {
-              "status": "blocked: SPX < SMA50",
-              "paused": true,
-              "totalTrades": 11,
-              "totalPnl": 1258.14,
-              "winRate": 63.6
-            }
-          }
-        },
         {
           "date": "2026-02-24",
           "close": 687.35,
@@ -6411,12 +6350,12 @@
           }
         },
         {
-          "date": "2026-05-22",
-          "close": 745.64,
-          "sma50": 691.14,
-          "atr": 7.49,
-          "rsi5": 75.9,
-          "vix": 16.7,
+          "date": "2026-05-26",
+          "close": 750.59,
+          "sma50": 691.24,
+          "atr": 7.72,
+          "rsi5": 80.0,
+          "vix": 17.01,
           "score": -1,
           "signals": [
             {
@@ -6431,6 +6370,52 @@
             },
             {
               "name": "Big Up Day",
+              "points": -1,
+              "type": "bear"
+            }
+          ],
+          "aboveSma50": true,
+          "entrySignal": false,
+          "configs": {
+            "vanilla": {
+              "status": "no_signal",
+              "paused": false,
+              "totalTrades": 260,
+              "totalPnl": 7506.65,
+              "winRate": 55.4
+            },
+            "trail3d": {
+              "status": "no_signal",
+              "paused": true,
+              "totalTrades": 2,
+              "totalPnl": -444.38,
+              "winRate": 0.0
+            },
+            "forever": {
+              "status": "no_signal",
+              "paused": true,
+              "totalTrades": 11,
+              "totalPnl": 1258.14,
+              "winRate": 63.6
+            }
+          }
+        },
+        {
+          "date": "2026-05-27",
+          "close": 750.46,
+          "sma50": 692.69,
+          "atr": 7.67,
+          "rsi5": 79.5,
+          "vix": 16.29,
+          "score": 0,
+          "signals": [
+            {
+              "name": "Above SMA200",
+              "points": 1,
+              "type": "bull"
+            },
+            {
+              "name": "RSI(5) > 75",
               "points": -1,
               "type": "bear"
             }
@@ -6513,13 +6498,13 @@
     },
     "QQQ": {
       "today": {
-        "date": "2026-05-22",
-        "close": 717.54,
-        "sma50": 637.65,
-        "atr": 11.95,
-        "rsi5": 67.6,
-        "vix": 16.7,
-        "score": 0,
+        "date": "2026-05-26",
+        "close": 730.28,
+        "sma50": 637.91,
+        "atr": 12.59,
+        "rsi5": 75.4,
+        "vix": 17.01,
+        "score": -2,
         "signals": [
           {
             "name": "Above SMA200",
@@ -6527,7 +6512,12 @@
             "type": "bull"
           },
           {
-            "name": "Big Up Day",
+            "name": "Huge Rally",
+            "points": -2,
+            "type": "bear"
+          },
+          {
+            "name": "RSI(5) > 75",
             "points": -1,
             "type": "bear"
           }
@@ -6539,7 +6529,7 @@
             "status": "no_signal",
             "paused": false,
             "totalTrades": 281,
-            "totalPnl": 8235.01,
+            "totalPnl": 8464.33,
             "winRate": 57.7
           },
           "trail3d": {
@@ -9714,13 +9704,13 @@
           }
         },
         {
-          "date": "2026-05-22",
-          "close": 717.54,
-          "sma50": 637.65,
-          "atr": 11.95,
-          "rsi5": 67.6,
-          "vix": 16.7,
-          "score": 0,
+          "date": "2026-05-26",
+          "close": 730.28,
+          "sma50": 637.91,
+          "atr": 12.59,
+          "rsi5": 75.4,
+          "vix": 17.01,
+          "score": -2,
           "signals": [
             {
               "name": "Above SMA200",
@@ -9728,7 +9718,12 @@
               "type": "bull"
             },
             {
-              "name": "Big Up Day",
+              "name": "Huge Rally",
+              "points": -2,
+              "type": "bear"
+            },
+            {
+              "name": "RSI(5) > 75",
               "points": -1,
               "type": "bear"
             }
@@ -9740,7 +9735,7 @@
               "status": "no_signal",
               "paused": false,
               "totalTrades": 281,
-              "totalPnl": 8235.01,
+              "totalPnl": 8464.33,
               "winRate": 57.7
             },
             "trail3d": {
@@ -9764,14 +9759,14 @@
         "vanilla": {
           "totalTrades": 281,
           "winRate": 57.7,
-          "totalPnl": 8235.01,
+          "totalPnl": 8464.33,
           "lastTrade": {
             "entryDate": "2026-05-19",
-            "exitDate": "2026-05-22",
+            "exitDate": "2026-05-26",
             "entryPrice": 701.53,
-            "exitPrice": 717.54,
-            "pnl": 288.18,
-            "pnlR": 2.88,
+            "exitPrice": 730.28,
+            "pnl": 517.5,
+            "pnlR": 5.18,
             "daysHeld": 1,
             "exitReason": "max_1d"
           }
@@ -9810,7 +9805,7 @@
       "label": "QQQ ETF"
     }
   },
-  "lastFetched": "2026-05-27 05:10 PM ET",
+  "lastFetched": "2026-05-28 06:05 PM ET",
   "nextRefresh": "3:20 PM ET (Mon-Fri)",
   "fetchSuccess": true
 }
