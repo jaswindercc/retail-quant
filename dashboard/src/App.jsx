@@ -40,6 +40,7 @@ import MarkovPage from './pages/MarkovPage'
 import PositionTrackerPage from './pages/PositionTrackerPage'
 import SpreadBacktestPage from './pages/SpreadBacktestPage'
 import SpxIncomePage from './pages/SpxIncomePage'
+import SpxSkipAnalysisPage from './pages/SpxSkipAnalysisPage'
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
 
@@ -238,6 +239,9 @@ export default function App() {
             <NavLink to="/options/spx" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
               SPX Bull Put Spread
             </NavLink>
+            <NavLink to="/options/spx/skip-analysis" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              SPX Skip Analysis
+            </NavLink>
             <NavLink to="/options/qqq" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
               QQQ Bull Put Spread
             </NavLink>
@@ -353,6 +357,7 @@ export default function App() {
           <Route path="/options/tsla" element={<SpreadBacktestPage dataFile="spread_data_tsla.json" findings="TSLA is too volatile for bull put spreads with strict assignment-risk management. Even at 10% OTM, the short strike is touched 40% of the time. With exit-on-touch rule, all OTM levels are net losers. TSLA's high IV gives good premiums but the whipsaw makes it unviable." />} />
           <Route path="/options/qqq" element={<SpreadBacktestPage dataFile="spread_data_qqq.json" findings="QQQ is calmer than TSLA but still net-negative with strict exit-on-touch. At 10% OTM, 89% win rate but tiny credits ($0.38) can't overcome the max-loss exits. The 10.8% touch rate is manageable, but the risk/reward doesn't justify the capital at risk." />} />
           <Route path="/options/spx" element={<SpxIncomePage />} />
+          <Route path="/options/spx/skip-analysis" element={<SpxSkipAnalysisPage />} />
           <Route path="/markov" element={<MarkovPage />} />
           <Route path="/learnings" element={<MasterLearningsPage />} />
         </Routes>

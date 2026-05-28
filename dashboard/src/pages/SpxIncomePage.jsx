@@ -17,16 +17,25 @@ function fmtMoney(v) {
 
 export default function SpxIncomePage() {
   const [data, setData] = useState(null)
-  const [selectedStrat, setSelectedStrat] = useState('iron_condor_20d')
+  const [selectedStrat, setSelectedStrat] = useState(null)
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}spread_data_spx.json`)
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() })
-      .then(setData)
+      .then(d => {
+        setData(d)
+        // Default to best strategy by annual return
+        const sorted = Object.entries(d?.strategies || {}).sort((a, b) => (b[1].stats?.annualReturnPct || 0) - (a[1].stats?.annualReturnPct || 0))
+        if (sorted.length && !selectedStrat) setSelectedStrat(sorted[0][0])
+      })
       .catch(e => setData({ error: e.message }))
   }, [])
 
   const strategies = data?.strategies || {}
+  // Sort strategies by annual return (best to worst)
+  const sortedStratKeys = useMemo(() => {
+    return Object.entries(strategies).sort((a, b) => (b[1].stats?.annualReturnPct || 0) - (a[1].stats?.annualReturnPct || 0)).map(([key]) => key)
+  }, [strategies])
   const strat = strategies[selectedStrat]
   const config = strat?.config || {}
   const stats = strat?.stats || {}
@@ -122,16 +131,19 @@ export default function SpxIncomePage() {
         </p>
       </div>
 
-      {/* Strategy selector */}
+      {/* Strategy selector — sorted best to worst */}
       <div className="card" style={{ padding: '12px 16px', marginBottom: 16 }}>
-        <span style={{ color: '#888', fontSize: '0.85rem', display: 'block', marginBottom: 8 }}>Strategy:</span>
+        <span style={{ color: '#888', fontSize: '0.85rem', display: 'block', marginBottom: 8 }}>Strategy (best → worst by annual return):</span>
         <div className="tab-bar" style={{ margin: 0, flexWrap: 'wrap' }}>
-          {Object.entries(strategies).map(([key, s]) => (
-            <button key={key} className={selectedStrat === key ? 'active' : ''} onClick={() => setSelectedStrat(key)}
-              style={selectedStrat === key ? { borderColor: STRAT_COLORS[key], color: STRAT_COLORS[key], fontSize: '0.78rem' } : { fontSize: '0.78rem' }}>
-              {s.config.label}
-            </button>
-          ))}
+          {sortedStratKeys.map((key, idx) => {
+            const s = strategies[key]
+            return (
+              <button key={key} className={selectedStrat === key ? 'active' : ''} onClick={() => setSelectedStrat(key)}
+                style={selectedStrat === key ? { borderColor: STRAT_COLORS[key], color: STRAT_COLORS[key], fontSize: '0.78rem' } : { fontSize: '0.78rem' }}>
+                {idx + 1}. {s.config.label} ({s.stats?.annualReturnPct}%)
+              </button>
+            )
+          })}
         </div>
         {config.desc && <p style={{ color: '#888', fontSize: '0.8rem', margin: '8px 0 0' }}>{config.desc}</p>}
       </div>
@@ -360,7 +372,7 @@ export default function SpxIncomePage() {
               </tr>
             </thead>
             <tbody>
-              {Object.entries(strategies).map(([key, s]) => (
+              {sortedStratKeys.map((key) => { const s = strategies[key]; return (
                 <tr key={key} style={key === selectedStrat ? { background: `${STRAT_COLORS[key]}11` } : {}}>
                   <td><strong style={{ color: STRAT_COLORS[key] }}>{s.config.label}</strong></td>
                   <td>{s.config.type?.replace('_', ' ')}</td>
@@ -374,7 +386,7 @@ export default function SpxIncomePage() {
                   <td>{s.stats.avgDaysHeld}d</td>
                   <td>{fmtMoney(s.stats.avgCreditPerContract)}</td>
                 </tr>
-              ))}
+              )})}
             </tbody>
           </table>
         </div>
@@ -419,11 +431,17 @@ export default function SpxIncomePage() {
                     const barHeight = Math.abs(pnlDollars) / maxPnl * 90
                     const isPositive = pnlDollars >= 0
                     return (
-                      <div key={m.month} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, minWidth: 24, position: 'relative', height: '100%', justifyContent: 'center' }}>
+                      <div key={m.month} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, minWidth: 28, position: 'relative', height: '100%', justifyContent: 'center' }}>
                         {isPositive ? (
-                          <div style={{ position: 'absolute', bottom: '50%', width: '60%', maxWidth: 20, height: `${barHeight}%`, background: '#4ade80', borderRadius: '2px 2px 0 0', opacity: 0.85 }} title={`${m.month}: ${fmtMoney(pnlDollars)}`} />
+                          <>
+                            <div style={{ position: 'absolute', bottom: `calc(50% + ${barHeight}% + 2px)`, fontSize: '0.6rem', color: '#4ade80', whiteSpace: 'nowrap' }}>{fmtMoney(pnlDollars)}</div>
+                            <div style={{ position: 'absolute', bottom: '50%', width: '60%', maxWidth: 20, height: `${barHeight}%`, background: '#4ade80', borderRadius: '2px 2px 0 0', opacity: 0.85 }} title={`${m.month}: ${fmtMoney(pnlDollars)}`} />
+                          </>
                         ) : (
-                          <div style={{ position: 'absolute', top: '50%', width: '60%', maxWidth: 20, height: `${barHeight}%`, background: '#ef4444', borderRadius: '0 0 2px 2px', opacity: 0.85 }} title={`${m.month}: ${fmtMoney(pnlDollars)}`} />
+                          <>
+                            <div style={{ position: 'absolute', top: `calc(50% + ${barHeight}% + 2px)`, fontSize: '0.6rem', color: '#ef4444', whiteSpace: 'nowrap' }}>{fmtMoney(pnlDollars)}</div>
+                            <div style={{ position: 'absolute', top: '50%', width: '60%', maxWidth: 20, height: `${barHeight}%`, background: '#ef4444', borderRadius: '0 0 2px 2px', opacity: 0.85 }} title={`${m.month}: ${fmtMoney(pnlDollars)}`} />
+                          </>
                         )}
                       </div>
                     )
@@ -466,45 +484,61 @@ export default function SpxIncomePage() {
       {/* All trades */}
       <div className="card" style={{ marginTop: '1rem' }}>
         <h3 style={{ textTransform: 'none', letterSpacing: 0 }}>Full Trade Log — {trades.length} trades ({config.label})</h3>
+
         <div style={{ overflowX: 'auto', maxHeight: 600 }}>
           <table style={{ fontSize: '0.78rem' }}>
             <thead>
               <tr>
-                <th>Entry</th><th>Day</th><th>Exit</th><th>SPX</th><th>Qty</th><th>SELL Put</th><th>BUY Put</th>{config.type !== 'put_spread' && <><th>SELL Call</th><th>BUY Call</th></>}<th>Delta</th><th>Credit</th><th>Max Risk</th><th>R:R</th><th>P&L</th><th>Days</th><th>Exit</th>
+                <th>#</th><th>Entry</th><th>Day</th><th>Exit</th><th title="Other positions still open when this trade was entered (not counting this one)">Others Open</th><th>SPX</th><th>Qty</th><th>SELL Put</th><th>BUY Put</th>{config.type !== 'put_spread' && <><th>SELL Call</th><th>BUY Call</th></>}<th>Delta</th><th>Credit</th><th>Max Risk</th><th>R:R</th><th>P&L</th><th>Days</th><th>Exit</th>
               </tr>
             </thead>
             <tbody>
-              {[...trades].reverse().map((t, i) => {
-                const weekday = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date(t.entryDate + 'T12:00:00').getDay()]
-                return (
-                <tr key={i}>
-                  <td style={{ whiteSpace: 'nowrap' }}>{t.entryDate}</td>
-                  <td style={{ whiteSpace: 'nowrap', color: '#a78bfa' }}>{weekday}</td>
-                  <td style={{ whiteSpace: 'nowrap' }}>{t.exitDate}</td>
-                  <td>{Math.round(t.entryPrice).toLocaleString()}</td>
-                  <td><strong>1</strong></td>
-                  <td style={{ color: '#ef4444' }}>{t.shortPutK?.toLocaleString()}</td>
-                  <td style={{ color: '#4ade80' }}>{t.longPutK?.toLocaleString()}</td>
-                  {config.type !== 'put_spread' && <><td style={{ color: '#ef4444' }}>{t.shortCallK?.toLocaleString()}</td><td style={{ color: '#4ade80' }}>{t.longCallK?.toLocaleString()}</td></>}
-                  <td style={{ color: '#a78bfa' }}>{t.delta}Δ</td>
-                  <td style={{ color: '#4ade80' }}>{fmtMoney(t.creditDollars)}</td>
-                  <td style={{ color: '#ef4444' }}>{fmtMoney(t.maxLossDollars)}</td>
-                  <td style={{ color: '#fbbf24' }}>{t.creditDollars > 0 ? `${Math.round(t.maxLossDollars / t.creditDollars)}:1` : '-'}</td>
-                  <td className={t.pnlDollars >= 0 ? 'win' : 'loss'}><strong>{fmtMoney(t.pnlDollars)}</strong></td>
-                  <td>{t.daysHeld}d</td>
-                  <td>
-                    <span style={{
-                      padding: '2px 6px', borderRadius: 4, fontSize: '0.7rem', fontWeight: 600,
-                      background: t.exitReason === 'TAKE_PROFIT' ? 'rgba(74,222,128,0.15)' :
-                                  t.exitReason === 'EXPIRED_OTM' ? 'rgba(100,181,246,0.15)' :
-                                  t.exitReason === 'STOP_LOSS' ? 'rgba(251,191,36,0.15)' : 'rgba(239,68,68,0.2)',
-                      color: t.exitReason === 'TAKE_PROFIT' ? '#4ade80' :
-                             t.exitReason === 'EXPIRED_OTM' ? '#64b5f6' :
-                             t.exitReason === 'STOP_LOSS' ? '#fbbf24' : '#ef4444'
-                    }}>{t.exitReason?.replace('_', ' ')}</span>
-                  </td>
-                </tr>
-              )})}
+              {(() => {
+                const reversed = [...trades].reverse()
+                return reversed.map((t, i) => {
+                  const weekday = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date(t.entryDate + 'T12:00:00').getDay()]
+                  // Count how many OTHER trades were still open when this trade was entered
+                  const tEntry = new Date(t.entryDate).getTime()
+                  const othersOpen = trades.filter(other => {
+                    if (other === t) return false
+                    const oEntry = new Date(other.entryDate).getTime()
+                    const oExit = new Date(other.exitDate).getTime()
+                    return oEntry < tEntry && oExit > tEntry
+                  }).length
+                  const isOverlap = othersOpen > 0
+                  return (
+                    <tr key={i} style={isOverlap ? { borderLeft: '3px solid #fbbf24', background: 'rgba(251,191,36,0.04)' } : {}}>
+                      <td style={{ color: '#666' }}>{trades.length - i}</td>
+                      <td style={{ whiteSpace: 'nowrap' }}>{t.entryDate}</td>
+                      <td style={{ whiteSpace: 'nowrap', color: '#a78bfa' }}>{weekday}</td>
+                      <td style={{ whiteSpace: 'nowrap' }}>{t.exitDate}</td>
+                      <td style={{ color: isOverlap ? '#fbbf24' : '#4ade80', fontWeight: isOverlap ? 700 : 400 }}>{othersOpen === 0 ? '—' : othersOpen}</td>
+                      <td>{Math.round(t.entryPrice).toLocaleString()}</td>
+                      <td><strong>1</strong></td>
+                      <td style={{ color: '#ef4444' }}>{t.shortPutK?.toLocaleString()}</td>
+                      <td style={{ color: '#4ade80' }}>{t.longPutK?.toLocaleString()}</td>
+                      {config.type !== 'put_spread' && <><td style={{ color: '#ef4444' }}>{t.shortCallK?.toLocaleString()}</td><td style={{ color: '#4ade80' }}>{t.longCallK?.toLocaleString()}</td></>}
+                      <td style={{ color: '#a78bfa' }}>{t.delta}Δ</td>
+                      <td style={{ color: '#4ade80' }}>{fmtMoney(t.creditDollars)}</td>
+                      <td style={{ color: '#ef4444' }}>{fmtMoney(t.maxLossDollars)}</td>
+                      <td style={{ color: '#fbbf24' }}>{t.creditDollars > 0 ? `${Math.round(t.maxLossDollars / t.creditDollars)}:1` : '-'}</td>
+                      <td className={t.pnlDollars >= 0 ? 'win' : 'loss'}><strong>{fmtMoney(t.pnlDollars)}</strong></td>
+                      <td>{t.daysHeld}d</td>
+                      <td>
+                        <span style={{
+                          padding: '2px 6px', borderRadius: 4, fontSize: '0.7rem', fontWeight: 600,
+                          background: t.exitReason === 'TAKE_PROFIT' ? 'rgba(74,222,128,0.15)' :
+                                      t.exitReason === 'EXPIRED_OTM' ? 'rgba(100,181,246,0.15)' :
+                                      t.exitReason === 'STOP_LOSS' ? 'rgba(251,191,36,0.15)' : 'rgba(239,68,68,0.2)',
+                          color: t.exitReason === 'TAKE_PROFIT' ? '#4ade80' :
+                                 t.exitReason === 'EXPIRED_OTM' ? '#64b5f6' :
+                                 t.exitReason === 'STOP_LOSS' ? '#fbbf24' : '#ef4444'
+                        }}>{t.exitReason?.replace('_', ' ')}</span>
+                      </td>
+                    </tr>
+                  )
+                })
+              })()}
             </tbody>
           </table>
         </div>
@@ -525,7 +559,7 @@ export default function SpxIncomePage() {
             <tbody>
               <tr><td style={{ color: '#888', width: 120, padding: '6px 0' }}>Instrument</td><td><strong>SPX options</strong> (not SPY — SPX is cash-settled, no assignment risk)</td></tr>
               <tr><td style={{ color: '#888', padding: '6px 0' }}>Strategy</td><td><strong>{config.label}</strong> ({config.type === 'put_spread' ? 'sell higher put, buy lower put' : config.type === 'iron_condor' ? 'sell put spread + call spread' : 'sell ATM straddle, buy wings'})</td></tr>
-              <tr><td style={{ color: '#888', padding: '6px 0' }}>Entry Day</td><td><strong>Monday</strong> — open a new trade each Monday if below max positions ({params.maxPositions || 1}). If Monday is a holiday, skip to next Monday.</td></tr>
+              <tr><td style={{ color: '#888', padding: '6px 0' }}>Entry Day</td><td><strong>Monday</strong> — open a new trade each Monday if below max positions ({params.maxPositions || 1}). If Monday is a holiday, enter on Tuesday instead.</td></tr>
               <tr><td style={{ color: '#888', padding: '6px 0' }}>Max Positions</td><td><strong>{params.maxPositions || 1} at a time</strong> — skip Monday if already at limit</td></tr>
               <tr><td style={{ color: '#888', padding: '6px 0' }}>DTE at Entry</td><td><strong>{config.dte} days to expiration</strong></td></tr>
               <tr><td style={{ color: '#888', padding: '6px 0' }}>Short Strike</td><td><strong>{config.sell_delta ? `${config.sell_delta * 100}Δ` : 'ATM (50Δ)'}</strong> — binary-searched to match target delta exactly</td></tr>
@@ -597,63 +631,50 @@ export default function SpxIncomePage() {
         <h3 style={{ textTransform: 'none', letterSpacing: 0, fontSize: '0.9rem', color: '#888' }}>⚙️ Backtest Assumptions</h3>
         <ul style={{ fontSize: '0.82rem', color: '#999', lineHeight: 2, paddingLeft: '1.25rem' }}>
           <li>1 contract per trade (scale with account size)</li>
-          <li>IV estimated as 1.3× realized vol (conservative — real IV is often higher = more credit)</li>
+          <li><strong style={{ color: '#4ade80' }}>IV = Real VIX</strong> (actual market implied vol, not synthetic)</li>
           <li>No slippage modeled (SPX is extremely liquid, tight spreads)</li>
           <li>Daily close prices used for management checks (no intraday)</li>
           <li>Commissions not deducted (~$1.30/contract on most brokers = negligible)</li>
-          <li>Data: {params.totalBars} trading days of ^GSPC</li>
+          <li>No vol skew — flat IV across all strikes (call side slightly too far OTM as a result)</li>
+          <li>Data: {params.totalBars} trading days of ^GSPC + VIX</li>
         </ul>
       </div>
 
       {/* DATA RELIABILITY DISCLAIMER */}
       <div className="card" style={{ marginTop: '1rem', borderLeft: '3px solid #ef4444', background: 'rgba(239,68,68,0.04)' }}>
-        <h3 style={{ textTransform: 'none', letterSpacing: 0, fontSize: '0.9rem', color: '#ef4444' }}>⚠️ DATA RELIABILITY — SYNTHETIC, NOT REAL OPTIONS DATA</h3>
+        <h3 style={{ textTransform: 'none', letterSpacing: 0, fontSize: '0.9rem', color: '#ef4444' }}>⚠️ DATA RELIABILITY — REAL VIX, SYNTHETIC OPTION PRICES</h3>
         <p style={{ fontSize: '0.85rem', color: '#ccc', lineHeight: 1.8, margin: '8px 0' }}>
-          This backtest uses <strong style={{ color: '#fbbf24' }}>theoretical Black-Scholes pricing</strong>, NOT real historical options data. 
-          Credits, P&L, and win rates are approximations based on stock price movement — not actual bid/ask fills.
+          This backtest uses <strong style={{ color: '#4ade80' }}>real VIX data</strong> for strike placement (IV) and <strong style={{ color: '#4ade80' }}>real SPX prices</strong> — 
+          but option credits are still Black-Scholes theoretical. No real bid/ask fills.
         </p>
         <table style={{ fontSize: '0.8rem', width: '100%', marginBottom: 12 }}>
           <thead>
-            <tr><th style={{ textAlign: 'left', color: '#4ade80' }}>✓ What's Real</th><th style={{ textAlign: 'left', color: '#ef4444' }}>✕ What's Synthetic</th></tr>
+            <tr><th style={{ textAlign: 'left', color: '#4ade80' }}>✓ What's Real</th><th style={{ textAlign: 'left', color: '#ef4444' }}>✕ What's Still Synthetic</th></tr>
           </thead>
           <tbody>
             <tr>
-              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>SPX daily close prices (Yahoo Finance)</td>
+              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>SPX daily prices (Yahoo Finance)</td>
               <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>Option premiums (Black-Scholes formula)</td>
             </tr>
             <tr>
-              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>Historical price moves & crashes</td>
-              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>Implied volatility (estimated as 1.3× realized vol)</td>
+              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>VIX as implied volatility (real market IV)</td>
+              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>No vol skew (flat IV across strikes)</td>
             </tr>
             <tr>
-              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>Trade timing (Monday entries, DTE)</td>
-              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>No vol skew or term structure</td>
+              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>Strike placement realistic (~5-7% OTM for 20Δ)</td>
+              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>Call side slightly too far (skew makes real 20Δ calls closer)</td>
             </tr>
             <tr>
-              <td style={{ color: '#aaa', padding: '4px 8px' }}></td>
-              <td style={{ color: '#aaa', padding: '4px 8px' }}>No bid-ask spread or slippage</td>
-            </tr>
-            <tr>
-              <td style={{ color: '#aaa', padding: '4px 8px' }}></td>
-              <td style={{ color: '#aaa', padding: '4px 8px' }}>No real fill quality during crashes</td>
+              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>Trade timing (Monday entries, 45 DTE)</td>
+              <td style={{ color: '#aaa', verticalAlign: 'top', padding: '4px 8px' }}>No bid-ask spread or slippage</td>
             </tr>
           </tbody>
         </table>
         <p style={{ fontSize: '0.82rem', color: '#999', lineHeight: 1.8, margin: '8px 0 0' }}>
-          <strong style={{ color: '#fbbf24' }}>Bottom line:</strong> Use this to understand strategy structure and relative performance between strategies. 
-          Do NOT treat exact $ numbers as guaranteed returns. Real results will differ due to IV surface, fill quality, and market microstructure.
+          <strong style={{ color: '#fbbf24' }}>Bottom line:</strong> Put spreads are most realistic here (real VIX overstates put-side IV = conservative). 
+          Iron condor call side is slightly optimistic (real skew puts 20Δ calls ~4% away, model uses ~6%). 
+          Use for relative comparison between strategies — don't treat exact $ as guaranteed.
         </p>
-        <div style={{ marginTop: 12, padding: '10px 14px', background: 'rgba(0,0,0,0.2)', borderRadius: 6 }}>
-          <p style={{ fontSize: '0.8rem', color: '#888', margin: '0 0 6px' }}><strong style={{ color: '#a78bfa' }}>📊 For real options data backtesting:</strong></p>
-          <ul style={{ fontSize: '0.78rem', color: '#888', lineHeight: 2, paddingLeft: '1.25rem', margin: 0 }}>
-            <li><strong>CBOE DataShop</strong> — official SPX options history (~$1,000+/yr)</li>
-            <li><strong>ORATS</strong> — options analytics + historical data API</li>
-            <li><strong>Tastytrade/Tastylive</strong> — free backtesting on their platform with real fills</li>
-            <li><strong>OptionMetrics (IvyDB)</strong> — academic-grade options data (institutional pricing)</li>
-            <li><strong>Polygon.io</strong> — options snapshots API (affordable, ~$30/mo)</li>
-            <li><strong>ThetaData</strong> — historical options quotes from $20/mo</li>
-          </ul>
-        </div>
       </div>
     </div>
   )
