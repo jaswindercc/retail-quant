@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 const STRATEGIES = ['MA Bounce', 'Breakout', 'RSI Trend', 'Higher High', 'Other']
 const STRAT_COLORS = {
@@ -10,10 +10,7 @@ const STRAT_ICONS = {
   'Higher High': '📐', 'Other': '⚪'
 }
 const RISK_PER_TRADE = 200
-const REPO_OWNER = 'jaswindercc'
-const REPO_NAME = 'retail-quant'
-const FILE_PATH = 'data/positions.json'
-const TOKEN_KEY = 'rq_gh_token'
+const STORAGE_KEY = 'rq_positions'
 
 function today() { return new Date().toISOString().slice(0, 10) }
 
@@ -27,35 +24,13 @@ function fmtMoney(v) {
   return `$${v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
 }
 
-// ─── GitHub API helpers ───
-
-async function ghRead(token) {
-  const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
-    headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' }
-  })
-  if (!res.ok) throw new Error(`GitHub read failed: ${res.status}`)
-  const data = await res.json()
-  const content = JSON.parse(atob(data.content))
-  return { content, sha: data.sha }
+function loadPositions() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [] }
+  catch { return [] }
 }
 
-async function ghWrite(token, positions, sha) {
-  const body = JSON.stringify({ positions, lastUpdated: today() }, null, 2) + '\n'
-  const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
-    method: 'PUT',
-    headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      message: `Update positions (${positions.filter(p => p.status === 'OPEN').length} open)`,
-      content: btoa(unescape(encodeURIComponent(body))),
-      sha
-    })
-  })
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}))
-    throw new Error(err.message || `GitHub write failed: ${res.status}`)
-  }
-  const result = await res.json()
-  return result.content.sha
+function savePositions(positions) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(positions))
 }
 
 function computeTrailingStop(pos) {
@@ -79,15 +54,7 @@ function computeTrailingStop(pos) {
 }
 
 export default function PositionTrackerPage() {
-  const [positions, setPositions] = useState([])
-  const [sha, setSha] = useState(null)
-  const [token, setToken] = useState(() => sessionStorage.getItem(TOKEN_KEY) || '')
-  const [tokenInput, setTokenInput] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [saving, setSaving] = useState(false)
-  const [error, setError] = useState(null)
-  const [dirty, setDirty] = useState(false)
-
+  const [positions, setPositions] = useState(loadPositions)
   const [scannerData, setScannerData] = useState(null)
   const [showForm, setShowForm] = useState(false)
   const [editId, setEditId] = useState(null)
@@ -101,56 +68,8 @@ export default function PositionTrackerPage() {
       .catch(() => {})
   }, [])
 
-  // Load positions from GitHub when token is set
-  const loadPositions = useCallback(async () => {
-    if (!token) return
-    setLoading(true)
-    setError(null)
-    try {
-      const { content, sha: fileSha } = await ghRead(token)
-      setPositions(content.positions || [])
-      setSha(fileSha)
-      setDirty(false)
-    } catch (e) {
-      setError(e.message)
-    } finally {
-      setLoading(false)
-    }
-  }, [token])
-
-  useEffect(() => { loadPositions() }, [loadPositions])
-
-  // Save to GitHub
-  const savePositions = async (newPositions) => {
-    if (!token || !sha) return
-    setSaving(true)
-    setError(null)
-    try {
-      const newSha = await ghWrite(token, newPositions, sha)
-      setSha(newSha)
-      setDirty(false)
-    } catch (e) {
-      setError(`Save failed: ${e.message}`)
-    } finally {
-      setSaving(false)
-    }
-  }
-
-  // Connect token
-  const handleConnect = (e) => {
-    e.preventDefault()
-    if (!tokenInput.trim()) return
-    sessionStorage.setItem(TOKEN_KEY, tokenInput.trim())
-    setToken(tokenInput.trim())
-    setTokenInput('')
-  }
-
-  const disconnect = () => {
-    sessionStorage.removeItem(TOKEN_KEY)
-    setToken('')
-    setPositions([])
-    setSha(null)
-  }
+  // Persist on every change
+  useEffect(() => { savePositions(positions) }, [positions])
 
   // Auto-fill from scanner
   const handleTickerBlur = () => {
@@ -170,7 +89,7 @@ export default function PositionTrackerPage() {
     }
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     const entry = parseFloat(form.entry)
     const qty = parseInt(form.quantity)
@@ -192,31 +111,23 @@ export default function PositionTrackerPage() {
       status: 'OPEN',
     }
 
-    let updated
     if (editId) {
-      updated = positions.map(p => p.id === editId ? position : p)
+      setPositions(prev => prev.map(p => p.id === editId ? position : p))
     } else {
-      updated = [position, ...positions]
+      setPositions(prev => [position, ...prev])
     }
-    setPositions(updated)
-    await savePositions(updated)
-
     setForm({ ticker: '', entry: '', quantity: '', strategy: '', stop: '', comment: '', date: today(), highest_since_entry: '' })
     setShowForm(false)
     setEditId(null)
   }
 
-  const closePosition = async (id) => {
-    const updated = positions.map(p => p.id === id ? { ...p, status: 'CLOSED', closeDate: today() } : p)
-    setPositions(updated)
-    await savePositions(updated)
+  const closePosition = (id) => {
+    setPositions(prev => prev.map(p => p.id === id ? { ...p, status: 'CLOSED', closeDate: today() } : p))
   }
 
-  const deletePosition = async (id) => {
+  const deletePosition = (id) => {
     if (!confirm('Delete this position?')) return
-    const updated = positions.filter(p => p.id !== id)
-    setPositions(updated)
-    await savePositions(updated)
+    setPositions(prev => prev.filter(p => p.id !== id))
   }
 
   const editPosition = (pos) => {
@@ -236,14 +147,38 @@ export default function PositionTrackerPage() {
 
   const updateHigh = (id, high) => {
     const val = parseFloat(high)
-    if (isNaN(val)) return
-    const updated = positions.map(p => p.id === id ? { ...p, highest_since_entry: val } : p)
-    setPositions(updated)
-    setDirty(true)
+    if (!isNaN(val)) {
+      setPositions(prev => prev.map(p => p.id === id ? { ...p, highest_since_entry: val } : p))
+    }
   }
 
-  const saveAll = async () => {
-    await savePositions(positions)
+  // Export/Import for backup
+  const exportData = () => {
+    const blob = new Blob([JSON.stringify(positions, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `positions_${today()}.json`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  const importData = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = (ev) => {
+      try {
+        const data = JSON.parse(ev.target.result)
+        if (Array.isArray(data)) {
+          setPositions(data)
+        } else if (data.positions) {
+          setPositions(data.positions)
+        }
+      } catch { alert('Invalid JSON file') }
+    }
+    reader.readAsText(file)
+    e.target.value = ''
   }
 
   const openPositions = positions.filter(p => p.status === 'OPEN')
@@ -257,67 +192,9 @@ export default function PositionTrackerPage() {
     return { totalCapital, totalRisk, count: openPositions.length, byStrategy }
   }, [openPositions])
 
-  // ─── No token: show connect screen ───
-  if (!token) {
-    return (
-      <div style={{ padding: 40, maxWidth: 480, margin: '60px auto', textAlign: 'center' }}>
-        <div style={{ fontSize: 48, marginBottom: 16 }}>📋</div>
-        <h2 style={{ color: '#e2e8f0', fontWeight: 600, marginBottom: 8 }}>Position Tracker</h2>
-        <p style={{ color: '#a1a1aa', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: 24 }}>
-          Positions are stored in <code style={{ background: '#1a1a2e', padding: '2px 6px', borderRadius: 4 }}>data/positions.json</code> in your repo.
-          Enter your GitHub PAT to connect (stored only in this browser session).
-        </p>
-        <form onSubmit={handleConnect} style={{ display: 'flex', gap: 8 }}>
-          <input
-            type="password"
-            value={tokenInput}
-            onChange={e => setTokenInput(e.target.value)}
-            placeholder="ghp_xxxxxxxxxxxxx"
-            style={{ flex: 1, padding: '10px 14px', background: '#0d1b2a', border: '1px solid #333', borderRadius: 8, color: '#fff', fontSize: '0.9rem' }}
-          />
-          <button type="submit" style={{ padding: '10px 20px', background: '#4ade80', color: '#000', border: 'none', borderRadius: 8, fontWeight: 700, cursor: 'pointer' }}>
-            Connect
-          </button>
-        </form>
-        <p style={{ color: '#71717a', fontSize: '0.75rem', marginTop: 16 }}>
-          Need a token? GitHub → Settings → Developer Settings → Fine-grained tokens → Create with "Contents: Read &amp; Write" on this repo.
-        </p>
-      </div>
-    )
-  }
-
-  if (loading) return <div className="loading">Loading positions from GitHub…</div>
-
   return (
     <div>
       <h1 className="page-title">Position Tracker <span>{summary.count} open · {fmtMoney(summary.totalCapital)} deployed</span></h1>
-
-      {/* Status bar */}
-      <div className="card" style={{ padding: '8px 16px', marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
-        <div style={{ fontSize: '0.8rem', color: '#4ade80' }}>
-          ✓ Connected to GitHub · <code style={{ fontSize: '0.75rem' }}>{FILE_PATH}</code>
-          {saving && <span style={{ color: '#fbbf24', marginLeft: 8 }}>saving…</span>}
-        </div>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          {dirty && (
-            <button onClick={saveAll} style={{ padding: '4px 12px', background: '#fbbf24', color: '#000', border: 'none', borderRadius: 6, fontWeight: 600, fontSize: '0.8rem', cursor: 'pointer' }}>
-              Save Changes
-            </button>
-          )}
-          <button onClick={loadPositions} style={{ padding: '4px 12px', background: '#1a1a2e', border: '1px solid #333', borderRadius: 6, color: '#ccc', fontSize: '0.8rem', cursor: 'pointer' }}>
-            ↻ Refresh
-          </button>
-          <button onClick={disconnect} style={{ padding: '4px 12px', background: 'rgba(239,68,68,0.15)', border: 'none', borderRadius: 6, color: '#ef4444', fontSize: '0.8rem', cursor: 'pointer' }}>
-            Disconnect
-          </button>
-        </div>
-      </div>
-
-      {error && (
-        <div style={{ padding: '10px 16px', background: 'rgba(239,68,68,0.1)', border: '1px solid #ef4444', borderRadius: 8, marginBottom: 16, color: '#ef4444', fontSize: '0.85rem' }}>
-          ⚠️ {error}
-        </div>
-      )}
 
       {/* Summary KPIs */}
       <div className="kpi-grid">
@@ -351,12 +228,19 @@ export default function PositionTrackerPage() {
         </div>
       )}
 
-      {/* Add Position Button */}
-      <div style={{ marginBottom: '1rem' }}>
+      {/* Action bar */}
+      <div style={{ marginBottom: '1rem', display: 'flex', gap: 8, flexWrap: 'wrap' }}>
         <button onClick={() => { setShowForm(!showForm); setEditId(null); setForm({ ticker: '', entry: '', quantity: '', strategy: '', stop: '', comment: '', date: today(), highest_since_entry: '' }) }}
           style={{ padding: '10px 20px', background: '#4ade80', color: '#000', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer' }}>
           {showForm ? '✕ Cancel' : '+ New Position'}
         </button>
+        <button onClick={exportData} style={{ padding: '10px 16px', background: '#1a1a2e', border: '1px solid #333', borderRadius: 8, color: '#ccc', fontSize: '0.85rem', cursor: 'pointer' }}>
+          📥 Export JSON
+        </button>
+        <label style={{ padding: '10px 16px', background: '#1a1a2e', border: '1px solid #333', borderRadius: 8, color: '#ccc', fontSize: '0.85rem', cursor: 'pointer' }}>
+          📤 Import JSON
+          <input type="file" accept=".json" onChange={importData} style={{ display: 'none' }} />
+        </label>
       </div>
 
       {/* Entry Form */}
@@ -400,13 +284,13 @@ export default function PositionTrackerPage() {
               <input style={inputStyle} value={form.comment} onChange={e => setForm({ ...form, comment: e.target.value })} placeholder="Notes..." />
             </div>
             <div style={{ display: 'flex', alignItems: 'end' }}>
-              <button type="submit" disabled={saving} style={{ padding: '10px 20px', background: saving ? '#666' : '#4ade80', color: '#000', border: 'none', borderRadius: 8, fontWeight: 700, cursor: 'pointer', width: '100%' }}>
-                {saving ? 'Saving…' : editId ? 'Update' : 'Add Position'}
+              <button type="submit" style={{ padding: '10px 20px', background: '#4ade80', color: '#000', border: 'none', borderRadius: 8, fontWeight: 700, cursor: 'pointer', width: '100%' }}>
+                {editId ? 'Update' : 'Add Position'}
               </button>
             </div>
           </form>
           <p style={{ color: '#888', fontSize: '0.75rem', marginTop: '0.75rem', marginBottom: 0 }}>
-            💡 Enter the ticker first — if it's in today's scanner, strategy &amp; stop auto-fill. Saves instantly to GitHub.
+            💡 Enter the ticker first — if it's in today's scanner, strategy &amp; stop auto-fill.
           </p>
         </div>
       )}
@@ -483,13 +367,6 @@ export default function PositionTrackerPage() {
               </tbody>
             </table>
           </div>
-          {dirty && (
-            <div style={{ marginTop: 12, textAlign: 'right' }}>
-              <button onClick={saveAll} disabled={saving} style={{ padding: '8px 16px', background: '#fbbf24', color: '#000', border: 'none', borderRadius: 6, fontWeight: 700, cursor: 'pointer' }}>
-                {saving ? 'Saving…' : '💾 Save Highest Updates'}
-              </button>
-            </div>
-          )}
         </div>
       )}
 
@@ -530,6 +407,9 @@ export default function PositionTrackerPage() {
           <div style={{ fontSize: 48, marginBottom: 16 }}>📋</div>
           <h2 style={{ color: '#e2e8f0', fontWeight: 600 }}>No positions yet</h2>
           <p style={{ color: '#a1a1aa', fontSize: '0.9rem' }}>Click "+ New Position" to start tracking your trades.</p>
+          <p style={{ color: '#71717a', fontSize: '0.8rem', marginTop: 12 }}>
+            Data saved in browser. Use Export/Import to backup or move between devices.
+          </p>
         </div>
       )}
 

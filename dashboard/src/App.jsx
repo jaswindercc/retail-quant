@@ -38,6 +38,8 @@ import Strat32D12UPage from './pages/Strat32D12UPage'
 import StratComboDetailPage from './pages/StratComboDetailPage'
 import MarkovPage from './pages/MarkovPage'
 import PositionTrackerPage from './pages/PositionTrackerPage'
+import SpreadBacktestPage from './pages/SpreadBacktestPage'
+import SpxIncomePage from './pages/SpxIncomePage'
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
 
@@ -165,9 +167,10 @@ export default function App() {
 
   // Auto-open nav groups based on current route
   const isOvernightRoute = ['/overnight', '/spy-overnight', '/qqq-overnight', '/overnight-trail-study', '/qqq-trail-study', '/overnight-macro', '/scanner', '/markov'].some(p => location.pathname.startsWith(p))
-  const isSwingRoute = CORE_STRATS.some(s => location.pathname.startsWith(s.path)) || location.pathname === '/' || location.pathname === '/stocks' || location.pathname === '/swing-scanners' || location.pathname === '/live-scanner' || location.pathname === '/tracker'
+  const isSwingRoute = CORE_STRATS.some(s => location.pathname.startsWith(s.path)) || location.pathname === '/' || location.pathname === '/stocks' || location.pathname === '/swing-scanners' || location.pathname === '/live-scanner'
   const isRareRoute = RARE_STRATS.some(s => location.pathname.startsWith(s.path)) || location.pathname === '/rare-scanner' || location.pathname === '/hh-scanner'
   const isStratRoute = location.pathname.startsWith('/the-strat')
+  const isOptionsRoute = ['/options/tsla', '/options/qqq', '/options/spx'].some(p => location.pathname.startsWith(p))
   const isResearchRoute = ['/trail-study', '/skip-analysis'].some(p => location.pathname.startsWith(p))
 
   return (
@@ -215,9 +218,6 @@ export default function App() {
             <NavLink to="/live-scanner" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: isActive ? '#ffd700' : '#ffd700', fontWeight: 700 })}>
               🔴 Live Scanner
             </NavLink>
-            <NavLink to="/tracker" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: isActive ? '#4ade80' : '#4ade80', fontWeight: 700 })}>
-              📋 Position Tracker
-            </NavLink>
             <NavLink to="/" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
               📊 Swing Summary
             </NavLink>
@@ -232,6 +232,18 @@ export default function App() {
                 `strategy-link sub-link ${isActive ? 'active' : ''}`
               }>{s.label}</NavLink>
             ))}
+          </NavGroup>
+
+          <NavGroup label="Options" icon="🔻" defaultOpen={isOptionsRoute}>
+            <NavLink to="/options/spx" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              SPX Bull Put Spread
+            </NavLink>
+            <NavLink to="/options/qqq" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              QQQ Bull Put Spread
+            </NavLink>
+            <NavLink to="/options/tsla" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              TSLA Bull Put Spread
+            </NavLink>
           </NavGroup>
 
           <NavGroup label="Rare Patterns" icon="⚡" defaultOpen={isRareRoute}>
@@ -338,6 +350,9 @@ export default function App() {
           <Route path="/the-strat/3-2d-1-2u" element={<Strat32D12UPage />} />
           <Route path="/the-strat/combo/:combo/:stock" element={<StratComboDetailPage />} />
           <Route path="/trail-study" element={<TrailStudyPage />} />
+          <Route path="/options/tsla" element={<SpreadBacktestPage dataFile="spread_data_tsla.json" findings="TSLA is too volatile for bull put spreads with strict assignment-risk management. Even at 10% OTM, the short strike is touched 40% of the time. With exit-on-touch rule, all OTM levels are net losers. TSLA's high IV gives good premiums but the whipsaw makes it unviable." />} />
+          <Route path="/options/qqq" element={<SpreadBacktestPage dataFile="spread_data_qqq.json" findings="QQQ is calmer than TSLA but still net-negative with strict exit-on-touch. At 10% OTM, 89% win rate but tiny credits ($0.38) can't overcome the max-loss exits. The 10.8% touch rate is manageable, but the risk/reward doesn't justify the capital at risk." />} />
+          <Route path="/options/spx" element={<SpxIncomePage />} />
           <Route path="/markov" element={<MarkovPage />} />
           <Route path="/learnings" element={<MasterLearningsPage />} />
         </Routes>

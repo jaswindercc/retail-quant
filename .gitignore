@@ -8,7 +8,6 @@ venv/
 
 # Data (all generated — scanner JSONs, CSVs, universe)
 data/
-!data/positions.json
 
 # Node / Dashboard
 node_modules/

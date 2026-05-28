@@ -110,11 +110,11 @@ export default function LiveScannerPage() {
       <div style={{fontSize: 48, marginBottom: 16}}>📡</div>
       <h2 style={{color: '#e2e8f0', fontWeight: 600, marginBottom: 8}}>Scanner data not available yet</h2>
       <p style={{color: '#a1a1aa', fontSize: 14, lineHeight: 1.6}}>
-        The live scanner runs automatically every weekday at <strong style={{color: '#4ade80'}}>10:00 AM ET</strong> via GitHub Actions.
+        The live scanner runs automatically every weekday at <strong style={{color: '#4ade80'}}>4:00 PM ET</strong> (market close) via GitHub Actions.
         If this is a fresh deploy, the first scan hasn't completed yet.
       </p>
       <p style={{color: '#71717a', fontSize: 12, marginTop: 16}}>
-        File: live_scanner_data.json · Next run: Mon–Fri 10 AM ET
+        File: live_scanner_data.json · Next run: Mon–Fri 4 PM ET
       </p>
     </div>
   )
@@ -149,7 +149,7 @@ export default function LiveScannerPage() {
           <strong style={{color: '#4ade80'}}>{displayScanDate}</strong>
         </div>
         <div style={{fontSize: 12, color: '#71717a'}}>
-          ⏰ Best time to check: <strong style={{color: '#fbbf24'}}>10:05 AM ET</strong> · Position sizing uses <strong style={{ color: '#4ade80' }}>$200 risk/trade</strong>
+          ⏰ Best time to check: <strong style={{color: '#fbbf24'}}>After 4:05 PM ET</strong> · Position sizing uses <strong style={{ color: '#4ade80' }}>$200 risk/trade</strong>
         </div>
       </div>
 
