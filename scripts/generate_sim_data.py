@@ -246,12 +246,20 @@ def simulate_position(entry_date, ticker, entry_price, initial_sl, strategy, qty
     max_r = (max_price - entry_price) / risk if risk > 0 else 0
     days_held = len(trade_bars) - 1  # Exclude entry day
 
+    # Last known price and its date
+    last_bar_date = trade_bars.index[-1]
+    last_price = float(trade_bars.iloc[-1]["Close"])
+    price_age_days = (pd.Timestamp(datetime.now(NY_TZ).date()) - last_bar_date).days
+
     return {
         "ticker": ticker,
         "entry_date": entry_date.strftime("%Y-%m-%d"),
         "entry_price": round(entry_price, 2),
         "initial_sl": round(initial_sl, 2),
         "current_sl": round(current_sl, 2),
+        "last_price": round(last_price, 2),
+        "last_price_date": last_bar_date.strftime("%Y-%m-%d"),
+        "price_age_days": price_age_days,
         "status": status,
         "reason": reason,
         "exit_date": exit_date.strftime("%Y-%m-%d") if exit_date else None,

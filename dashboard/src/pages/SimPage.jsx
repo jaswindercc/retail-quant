@@ -59,6 +59,7 @@ export default function SimPage() {
                   <th>Ticker</th>
                   <th>Entry Date</th>
                   <th>Entry $</th>
+                  <th>Last Price</th>
                   <th>Initial SL</th>
                   <th>Current SL</th>
                   <th>Trail?</th>
@@ -74,6 +75,10 @@ export default function SimPage() {
                     <td style={{ fontWeight: 700, color: '#e2e8f0' }}>{p.ticker}</td>
                     <td>{p.entry_date}</td>
                     <td>${p.entry_price}</td>
+                    <td>
+                      <span style={{ color: '#e2e8f0' }}>${p.last_price}</span>
+                      {p.price_age_days > 0 && <span style={{ color: '#888', fontSize: '0.7rem', marginLeft: 4 }}>({p.price_age_days}d ago)</span>}
+                    </td>
                     <td style={{ color: '#f87171' }}>${p.initial_sl}</td>
                     <td style={{ color: p.trail_activated ? '#fbbf24' : '#f87171' }}>${p.current_sl}</td>
                     <td>{p.trail_activated ? '🟡 YES' : '—'}</td>

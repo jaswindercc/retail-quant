@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-28 02:31 PM EDT",
+  "lastUpdated": "2026-05-28 02:47 PM EDT",
   "summary": {
     "total_positions": 1,
     "open": 1,
@@ -20,6 +20,9 @@
       "entry_price": 412.6,
       "initial_sl": 392,
       "current_sl": 392,
+      "last_price": 412.67,
+      "last_price_date": "2026-05-27",
+      "price_age_days": 1,
       "status": "OPEN",
       "reason": "Still holding",
       "exit_date": null,
