@@ -20,6 +20,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Fetch live scanner data from current deployment
+        run: |
+          curl -sSf "https://jaswinder.cc/retail-quant/live_scanner_data.json" -o dashboard/public/live_scanner_data.json || echo "No existing live scanner data"
+          curl -sSf "https://jaswinder.cc/retail-quant/sim_data.json" -o dashboard/public/sim_data.json || echo "No existing sim data"
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
