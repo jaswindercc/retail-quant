@@ -1,0 +1,55 @@
+{
+  "lastUpdated": "2026-05-28 02:22 PM EDT",
+  "summary": {
+    "total_positions": 1,
+    "open": 1,
+    "closed": 0,
+    "winners": 0,
+    "losers": 0,
+    "win_rate": 0,
+    "total_pnl": 0,
+    "avg_r": 0,
+    "best_trade": 0,
+    "worst_trade": 0,
+    "avg_days_held": 0
+  },
+  "positions": [
+    {
+      "ticker": "MSFT",
+      "entry_date": "2026-05-27",
+      "entry_price": 412.6,
+      "initial_sl": 392,
+      "current_sl": 392,
+      "status": "OPEN",
+      "reason": "Still holding",
+      "exit_date": null,
+      "exit_price": 412.67,
+      "pnl": 0.35,
+      "pnl_per_share": 0.07,
+      "r_multiple": 0.0,
+      "max_r": 0.0,
+      "risk_per_share": 20.6,
+      "days_held": 0,
+      "trail_activated": false,
+      "strategy": "MA Bounce",
+      "qty": 5,
+      "trail_params": {
+        "trail_start_r": 2.5,
+        "trail_atr_buf": 1.0
+      },
+      "daily_log": [
+        {
+          "date": "2026-05-27",
+          "close": 412.67,
+          "sl": 392,
+          "trail_active": false,
+          "note": "Entry day"
+        }
+      ]
+    }
+  ],
+  "trailRules": {
+    "MA Bounce / Breakout / RSI Trend": "Trail activates at 2.5R, trail = EMA20 - 1\u00d7ATR (ratchets up only)",
+    "Higher High": "Trail activates at 3.0R, trail = EMA20 - 2\u00d7ATR (ratchets up only)"
+  }
+}

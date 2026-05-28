@@ -41,6 +41,7 @@ import PositionTrackerPage from './pages/PositionTrackerPage'
 import SpreadBacktestPage from './pages/SpreadBacktestPage'
 import SpxIncomePage from './pages/SpxIncomePage'
 import SpxSkipAnalysisPage from './pages/SpxSkipAnalysisPage'
+import SimPage from './pages/SimPage'
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
 
@@ -172,6 +173,7 @@ export default function App() {
   const isRareRoute = RARE_STRATS.some(s => location.pathname.startsWith(s.path)) || location.pathname === '/rare-scanner' || location.pathname === '/hh-scanner'
   const isStratRoute = location.pathname.startsWith('/the-strat')
   const isOptionsRoute = ['/options/tsla', '/options/qqq', '/options/spx'].some(p => location.pathname.startsWith(p))
+  const isSimRoute = location.pathname === '/sim'
   const isResearchRoute = ['/trail-study', '/skip-analysis'].some(p => location.pathname.startsWith(p))
 
   return (
@@ -214,6 +216,10 @@ export default function App() {
               🔗 Markov Chain
             </NavLink>
           </NavGroup>
+
+          <NavLink to="/sim" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: '#ffd700', fontWeight: 700, marginBottom: '0.5rem', display: 'block' })}>
+            🎮 SIM — Paper Trading
+          </NavLink>
 
           <NavGroup label="Swing Strategies" icon="📈" defaultOpen={isSwingRoute}>
             <NavLink to="/live-scanner" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: isActive ? '#ffd700' : '#ffd700', fontWeight: 700 })}>
@@ -358,6 +364,7 @@ export default function App() {
           <Route path="/options/qqq" element={<SpreadBacktestPage dataFile="spread_data_qqq.json" findings="QQQ is calmer than TSLA but still net-negative with strict exit-on-touch. At 10% OTM, 89% win rate but tiny credits ($0.38) can't overcome the max-loss exits. The 10.8% touch rate is manageable, but the risk/reward doesn't justify the capital at risk." />} />
           <Route path="/options/spx" element={<SpxIncomePage />} />
           <Route path="/options/spx/skip-analysis" element={<SpxSkipAnalysisPage />} />
+          <Route path="/sim" element={<SimPage />} />
           <Route path="/markov" element={<MarkovPage />} />
           <Route path="/learnings" element={<MasterLearningsPage />} />
         </Routes>
