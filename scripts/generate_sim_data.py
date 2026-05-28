@@ -58,6 +58,16 @@ def read_sheet():
     df["Qty"] = pd.to_numeric(df.get("Qty", 1), errors="coerce").fillna(1).astype(int)
     df["Strategy"] = df.get("Strategy", "default").fillna("default").astype(str).str.strip()
 
+    # Optional manual exit columns
+    if "Stop Price" in df.columns:
+        df["Stop Price"] = pd.to_numeric(df["Stop Price"], errors="coerce")
+    else:
+        df["Stop Price"] = float("nan")
+    if "Stop Date" in df.columns:
+        df["Stop Date"] = pd.to_datetime(df["Stop Date"], format="mixed", dayfirst=False, errors="coerce")
+    else:
+        df["Stop Date"] = pd.NaT
+
     # Drop rows with missing critical data
     df = df.dropna(subset=["Date", "Buy", "INITIALSL", "Ticket"])
     df["Ticket"] = df["Ticket"].str.strip().str.upper()
@@ -305,12 +315,47 @@ def main():
         initial_sl = row["INITIALSL"]
         strategy = row["Strategy"]
         qty = int(row["Qty"])
+        manual_stop_price = row["Stop Price"] if pd.notna(row["Stop Price"]) else None
+        manual_stop_date = row["Stop Date"] if pd.notna(row["Stop Date"]) else None
 
         print(f"  🔄 {ticker} | Entry ${entry_price:.2f} | SL ${initial_sl:.2f} | {strategy}")
-        result = simulate_position(entry_date, ticker, entry_price, initial_sl, strategy, qty)
+
+        # If manually closed (Stop Price + Stop Date filled), skip simulation
+        if manual_stop_price is not None and manual_stop_date is not None:
+            risk = entry_price - initial_sl
+            pnl_per_share = manual_stop_price - entry_price
+            result = {
+                "ticker": ticker,
+                "entry_date": entry_date.strftime("%Y-%m-%d"),
+                "entry_price": round(entry_price, 2),
+                "initial_sl": round(initial_sl, 2),
+                "current_sl": round(initial_sl, 2),
+                "last_price": round(manual_stop_price, 2),
+                "last_price_date": manual_stop_date.strftime("%Y-%m-%d"),
+                "price_age_days": (pd.Timestamp(datetime.now(NY_TZ).date()) - pd.Timestamp(manual_stop_date)).days,
+                "status": "CLOSED",
+                "reason": "Manual exit",
+                "exit_date": manual_stop_date.strftime("%Y-%m-%d"),
+                "exit_price": round(manual_stop_price, 2),
+                "pnl": round(pnl_per_share * qty, 2),
+                "pnl_per_share": round(pnl_per_share, 2),
+                "r_multiple": round(pnl_per_share / risk, 2) if risk > 0 else 0,
+                "max_r": 0,
+                "risk_per_share": round(risk, 2),
+                "days_held": (pd.Timestamp(manual_stop_date) - pd.Timestamp(entry_date)).days,
+                "trail_activated": False,
+                "strategy": strategy,
+                "qty": qty,
+                "trail_params": get_trail_params(strategy),
+                "daily_log": []
+            }
+            print(f"     📝 MANUAL EXIT: ${manual_stop_price:.2f} on {manual_stop_date.strftime('%Y-%m-%d')} | R={result['r_multiple']:.1f} | PnL ${result['pnl']:.2f}")
+        else:
+            result = simulate_position(entry_date, ticker, entry_price, initial_sl, strategy, qty)
+            status_icon = {"OPEN": "🟢", "CLOSED": "🔴", "ERROR": "⚠️"}[result["status"]]
+            print(f"     {status_icon} {result['status']}: {result['reason']} | R={result['r_multiple']:.1f} | PnL ${result['pnl']:.2f}")
+
         results.append(result)
-        status_icon = {"OPEN": "🟢", "CLOSED": "🔴", "ERROR": "⚠️"}[result["status"]]
-        print(f"     {status_icon} {result['status']}: {result['reason']} | R={result['r_multiple']:.1f} | PnL ${result['pnl']:.2f}")
 
     # Summary stats
     closed = [r for r in results if r["status"] == "CLOSED"]
