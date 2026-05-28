@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-28 02:22 PM EDT",
+  "lastUpdated": "2026-05-28 02:31 PM EDT",
   "summary": {
     "total_positions": 1,
     "open": 1,
@@ -49,7 +49,6 @@
     }
   ],
   "trailRules": {
-    "MA Bounce / Breakout / RSI Trend": "Trail activates at 2.5R, trail = EMA20 - 1\u00d7ATR (ratchets up only)",
-    "Higher High": "Trail activates at 3.0R, trail = EMA20 - 2\u00d7ATR (ratchets up only)"
+    "All strategies": "Trail activates at 2.5R, trail = EMA20 - 1\u00d7ATR (ratchets up only)"
   }
 }

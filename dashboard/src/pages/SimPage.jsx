@@ -171,11 +171,9 @@ export default function SimPage() {
 
       {/* Trail Rules Reference */}
       <div className="card" style={{ marginBottom: 20, padding: '16px 20px', border: '1px solid #334155' }}>
-        <h4 style={{ color: '#94a3b8', marginBottom: 8 }}>📐 Trailing Stop Rules (from backtests)</h4>
+        <h4 style={{ color: '#94a3b8', marginBottom: 8 }}>📐 Trailing Stop Rule</h4>
         <div style={{ fontSize: '0.82rem', color: '#cbd5e1', lineHeight: 2 }}>
-          {Object.entries(trailRules).map(([strat, rule]) => (
-            <p key={strat} style={{ margin: 0 }}><strong style={{ color: '#fbbf24' }}>{strat}:</strong> {rule}</p>
-          ))}
+          <p style={{ margin: 0 }}><strong style={{ color: '#fbbf24' }}>All strategies:</strong> Trail activates at 2.5R, trail = EMA20 − 1×ATR (ratchets up only)</p>
           <p style={{ margin: '8px 0 0', color: '#888' }}>Trail only ratchets UP — never moves down. Gap fills at open price.</p>
         </div>
       </div>

@@ -26,13 +26,9 @@ NY_TZ = ZoneInfo("America/New_York")
 SHEET_ID = "1-Y1lz2LRYb_NpLBDdhWDOJF6xS4MYjQ8IeNHOKyx-O0"
 SHEET_CSV_URL = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv"
 
-# Trail parameters per strategy
+# Trail parameters — single rule for all strategies
 TRAIL_PARAMS = {
-    "MA Bounce":    {"trail_start_r": 2.5, "trail_atr_buf": 1.0},
-    "Breakout":     {"trail_start_r": 2.5, "trail_atr_buf": 1.0},
-    "Higher High":  {"trail_start_r": 3.0, "trail_atr_buf": 2.0},
-    "RSI Trend":    {"trail_start_r": 2.5, "trail_atr_buf": 1.0},
-    "default":      {"trail_start_r": 2.5, "trail_atr_buf": 1.0},
+    "default": {"trail_start_r": 2.5, "trail_atr_buf": 1.0},
 }
 
 
@@ -70,10 +66,7 @@ def read_sheet():
 
 
 def get_trail_params(strategy):
-    """Get trailing stop parameters for a strategy."""
-    for key, params in TRAIL_PARAMS.items():
-        if key.lower() in strategy.lower():
-            return params
+    """Get trailing stop parameters — single rule for all."""
     return TRAIL_PARAMS["default"]
 
 
@@ -350,8 +343,7 @@ def main():
         },
         "positions": results,
         "trailRules": {
-            "MA Bounce / Breakout / RSI Trend": "Trail activates at 2.5R, trail = EMA20 - 1×ATR (ratchets up only)",
-            "Higher High": "Trail activates at 3.0R, trail = EMA20 - 2×ATR (ratchets up only)",
+            "All strategies": "Trail activates at 2.5R, trail = EMA20 - 1×ATR (ratchets up only)",
         }
     }
 
