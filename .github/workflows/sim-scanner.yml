@@ -6,9 +6,10 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
+  actions: write
 
 concurrency:
   group: pages
@@ -34,13 +35,23 @@ jobs:
       - name: Run simulator
         run: python scripts/generate_sim_data.py
 
-      - name: Commit sim data
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f data/sim_data.json dashboard/public/sim_data.json
-          git diff --cached --quiet || git commit -m "🎮 Sim update [skip ci]"
-          git push
+      - name: Restore live scanner data from cache
+        uses: actions/cache/restore@v4
+        with:
+          path: dashboard/public/live_scanner_data.json
+          key: live-scanner-data
+
+      - name: Cache sim data for deploy workflow
+        uses: actions/cache/save@v4
+        with:
+          path: dashboard/public/sim_data.json
+          key: sim-data
+
+      - name: Restore overnight scanner data from cache
+        uses: actions/cache/restore@v4
+        with:
+          path: dashboard/public/scanner_data.json
+          key: overnight-scanner-data
 
       - uses: actions/setup-node@v4
         with:

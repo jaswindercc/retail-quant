@@ -21,6 +21,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Restore live scanner data from cache
+        uses: actions/cache/restore@v4
+        with:
+          path: dashboard/public/live_scanner_data.json
+          key: live-scanner-data
+
+      - name: Restore sim data from cache
+        uses: actions/cache/restore@v4
+        with:
+          path: dashboard/public/sim_data.json
+          key: sim-data
+
+      - name: Restore overnight scanner data from cache
+        uses: actions/cache/restore@v4
+        with:
+          path: dashboard/public/scanner_data.json
+          key: overnight-scanner-data
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'

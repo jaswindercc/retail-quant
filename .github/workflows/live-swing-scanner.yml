@@ -6,9 +6,10 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
+  actions: write
 
 concurrency:
   group: pages
@@ -40,13 +41,23 @@ jobs:
       - name: Copy data to dashboard public
         run: cp data/*.json dashboard/public/ 2>/dev/null || true
 
-      - name: Commit live scanner data to repo
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f dashboard/public/live_scanner_data.json
-          git diff --cached --quiet || git commit -m "🔴 Live scanner update [skip ci]"
-          git push
+      - name: Cache scanner data for deploy workflow
+        uses: actions/cache/save@v4
+        with:
+          path: dashboard/public/live_scanner_data.json
+          key: live-scanner-data
+
+      - name: Restore sim data from cache
+        uses: actions/cache/restore@v4
+        with:
+          path: dashboard/public/sim_data.json
+          key: sim-data
+
+      - name: Restore overnight scanner data from cache
+        uses: actions/cache/restore@v4
+        with:
+          path: dashboard/public/scanner_data.json
+          key: overnight-scanner-data
 
       - uses: actions/setup-node@v4
         with:
