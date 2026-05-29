@@ -71,13 +71,13 @@ export default function LivePlanPage() {
         )}
 
         {/* HONESTY BOX */}
-        <div style={{ background: '#2a2a1a', border: '1px solid #ca8a04', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
-          <h2 style={{ color: '#fbbf24', fontSize: 15, marginBottom: '0.75rem' }}>⚠️ Survivorship Bias — How We Fixed It</h2>
+        <div style={{ background: '#0a1f2a', border: '2px solid #38bdf8', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
+          <h2 style={{ color: '#38bdf8', fontSize: 15, marginBottom: '0.75rem' }}>✅ This Backtest Is Honest</h2>
           <div style={{ fontSize: 13, color: '#d4d4d8', lineHeight: 1.7 }}>
-            <p style={{ marginBottom: 8 }}><strong>The Problem:</strong> Picking NVDA/AAPL/META after they already went 10× is hindsight bias. Of course it works.</p>
-            <p style={{ marginBottom: 8 }}><strong>The Fix:</strong> Dynamic monthly rotation — pick top 10 by 6-month momentum from a pool of 30 mega-caps. Stocks rotate IN and OUT. No future knowledge used.</p>
-            <p style={{ marginBottom: 8 }}><strong>The Result:</strong> Still profitable (PF {s.profit_factor}), but streak goes to {s.max_losing_streak} during 2022 bear because momentum rotation picks hot stocks about to roll over.</p>
-            <p style={{ marginBottom: 0, color: '#fbbf24' }}><strong>Reality Check:</strong> The 2022 bear created an 18-loss streak. If you quit at trade 12, you'd miss the $19k recovery.</p>
+            <p style={{ marginBottom: 8 }}><strong>Pool fixed:</strong> Removed SNOW (IPO Sep 2020), ABNB (IPO Dec 2020), COIN (IPO Apr 2021), PLTR (IPO Sep 2020), SQ (delisted). Added ZM, DOCU, TWLO, WDAY, EA — all were large-cap tech in 2020.</p>
+            <p style={{ marginBottom: 8 }}><strong>Disaster stocks included:</strong> ZM ($400→$65, -84%) and DOCU ($310→$50, -84%) are in the pool. The rotation picked ZM in Feb-Mar 2021 (top momentum at the time).</p>
+            <p style={{ marginBottom: 8 }}><strong>Result:</strong> PF {s.profit_factor}, streak {s.max_losing_streak} during 2022 bear. Strategy survived real losses.</p>
+            <p style={{ marginBottom: 0, color: '#38bdf8' }}><strong>Note:</strong> All 30 stocks in the pool were publicly traded and liquid by January 2020. No look-ahead bias in pool construction.</p>
           </div>
         </div>
 
@@ -227,7 +227,7 @@ export default function LivePlanPage() {
       <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
         <h2 style={{ color: '#fbbf24', fontSize: 15, marginBottom: '1rem' }}>📏 Trading Rules (Exactly As Backtested)</h2>
         <div style={{ fontSize: 13, color: '#e4e4e7' }}>
-          <div style={ruleStyle}><span style={numStyle}>1</span><span><strong>Pool:</strong> 30 mega-cap tech/growth stocks (NVDA, AAPL, MSFT, GOOGL, AMZN, META, TSLA, AMD, CRM, NFLX, AVGO, ADBE, ORCL, QCOM, INTC, CSCO, NOW, UBER, SHOP, SNOW, PYPL, ABNB, COIN, MRVL, PANW, CRWD, PLTR, MU, ANET, SQ).</span></div>
+          <div style={ruleStyle}><span style={numStyle}>1</span><span><strong>Pool:</strong> 30 mega/large-cap tech stocks, all liquid by Jan 2020 (NVDA, AAPL, MSFT, GOOGL, AMZN, META, TSLA, AMD, CRM, NFLX, AVGO, ADBE, ORCL, QCOM, INTC, CSCO, NOW, UBER, SHOP, PYPL, MRVL, PANW, CRWD, MU, ANET, ZM, DOCU, TWLO, WDAY, EA).</span></div>
           <div style={ruleStyle}><span style={numStyle}>2</span><span><strong>Monthly Rotation:</strong> On the 1st trading day of each month, rank the pool by 6-month return. Your watchlist = top 10.</span></div>
           <div style={ruleStyle}><span style={numStyle}>3</span><span><strong>Regime Check:</strong> SPY must be above its 200-day SMA. If not → 100% cash.</span></div>
           <div style={ruleStyle}><span style={numStyle}>4</span><span><strong>Entry Signal:</strong> Stock closes above its 20-day high + volume ≥ 1.2× 20-day avg volume + close {'>'} 50 SMA.</span></div>

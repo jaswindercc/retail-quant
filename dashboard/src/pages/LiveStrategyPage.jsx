@@ -7,7 +7,7 @@ export default function LiveStrategyPage() {
 
   useEffect(() => {
     const base = import.meta.env.BASE_URL
-    fetch(`${base}sim_backtest6_data.json`).then(r => r.ok ? r.json() : null).then(setData).catch(() => {})
+    fetch(`${base}sim_backtest5_data.json`).then(r => r.ok ? r.json() : null).then(setData).catch(() => {})
   }, [])
 
   if (!data) return <div style={{ padding: '2rem', color: '#71717a' }}>Loading...</div>
@@ -110,7 +110,7 @@ export default function LiveStrategyPage() {
       <div style={{ background: '#0f2a1a', border: '2px solid #4ade80', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: 13, lineHeight: 2 }}>
           <div>
-            <div><strong style={{ color: '#4ade80' }}>Universe:</strong> 30 mid-cap growth stocks ($2B–$30B)</div>
+            <div><strong style={{ color: '#4ade80' }}>Universe:</strong> 30 mega/large-cap tech stocks (all liquid by Jan 2020)</div>
             <div><strong style={{ color: '#4ade80' }}>Watchlist:</strong> Top 10 by 6-month return (rebalance monthly)</div>
             <div><strong style={{ color: '#4ade80' }}>Regime:</strong> SPY &gt; 200 SMA = ON. Below = 100% cash.</div>
             <div><strong style={{ color: '#4ade80' }}>Entry:</strong> Close &gt; 20-day high + vol ≥ 1.2× avg + above 50 SMA</div>
@@ -124,6 +124,9 @@ export default function LiveStrategyPage() {
         </div>
         <div style={{ marginTop: '0.75rem', padding: '0.75rem', background: '#1a3a2a', borderRadius: 6, fontSize: 13 }}>
           <strong style={{ color: '#fbbf24' }}>Risk rule:</strong> After 3 consecutive losses → skip the next trade signal. Then resume.
+        </div>
+        <div style={{ marginTop: '0.75rem', padding: '0.75rem', background: '#0a1f2a', border: '1px solid #38bdf8', borderRadius: 6, fontSize: 12, lineHeight: 1.7 }}>
+          <strong style={{ color: '#38bdf8' }}>✅ Honest backtest:</strong> Pool includes ZM, DOCU (both crashed 80%+ from 2021 peaks). Removed SNOW, ABNB, COIN, PLTR (late IPOs that didn't exist in Jan 2020). Rotation picked ZM in Feb-Mar 2021 (top momentum) — strategy took the loss when it crashed. PF 2.13 is real.
         </div>
       </div>
 

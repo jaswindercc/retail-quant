@@ -2,16 +2,16 @@
 """
 Live Plan Backtest: Breakout-only on systematically-rotated mega-caps + Regime filter
 
-KEY DIFFERENCE from previous backtests:
-- NOT cherry-picked stocks. Uses DYNAMIC rotation: every month, pick the top 10
-  mega-caps by 6-month relative strength from a pool of 30.
-- This prevents survivorship bias — stocks rotate IN and OUT of the watchlist.
+SURVIVORSHIP BIAS FIX:
+- Pool: 30 mega-cap/large-cap tech stocks that were ALL publicly traded and
+  liquid in early 2020. No late IPOs (removed SNOW, ABNB, COIN, PLTR).
+- Includes ZM, DOCU which later crashed 80%+ (honest inclusion).
 
 Rules:
-- Universe Pool: 30 mega-cap tech/growth leaders
+- Universe Pool: 30 mega/large-cap tech/growth leaders (all liquid by Jan 2020)
 - Dynamic Watchlist: Top 10 by 6-month momentum, re-evaluated monthly
 - Regime Filter: SPY > 200-day SMA (if not, 100% cash)
-- Entry: Close above 20-day high + volume ≥ 1.2× avg 20-day volume
+- Entry: Close above 20-day high + volume ≥ 1.2× avg 20-day volume + above 50 SMA
 - Stop Loss: 1 × ATR(14) below entry
 - Position Size: $200 risk per trade (shares = floor($200 / ATR))
 - Max Capital: $40,000
@@ -39,14 +39,17 @@ LOOKBACK_MONTHS = 6       # Momentum lookback for rotation
 ROTATION_DAY = 1          # Re-evaluate watchlist on first trading day of month
 TOP_N = 10                # Pick top N by momentum
 
-# Pool of 30 mega-cap tech/growth stocks (market leaders, highly liquid)
+# Pool of 30 mega/large-cap tech/growth stocks (ALL liquid by Jan 2020)
+# Replaced SNOW (IPO Sep 2020), ABNB (IPO Dec 2020), COIN (IPO Apr 2021),
+# PLTR (IPO Sep 2020), SQ (delisted/renamed) with ZM, DOCU, TWLO, WDAY, EA
+# NOTE: ZM and DOCU were $400+ in 2020 then crashed 80% — honest inclusion
 MEGA_POOL = [
     'NVDA', 'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'META', 'TSLA', 'AMD', 'CRM', 'NFLX',
-    'AVGO', 'ADBE', 'ORCL', 'QCOM', 'INTC', 'CSCO', 'NOW', 'UBER', 'SHOP', 'SQ',
-    'SNOW', 'PYPL', 'ABNB', 'COIN', 'MRVL', 'PANW', 'CRWD', 'PLTR', 'MU', 'ANET',
+    'AVGO', 'ADBE', 'ORCL', 'QCOM', 'INTC', 'CSCO', 'NOW', 'UBER', 'SHOP', 'PYPL',
+    'MRVL', 'PANW', 'CRWD', 'MU', 'ANET', 'ZM', 'DOCU', 'TWLO', 'WDAY', 'EA',
 ]
 
-START_DATE = '2020-06-01'  # Extra 6 months for momentum lookback
+START_DATE = '2019-06-01'  # Extra time so all stocks have 6mo lookback by Jan 2021
 END_DATE = '2026-05-29'
 TRADE_START = '2021-01-01'  # Actual trading starts here
 
@@ -248,6 +251,8 @@ def simulate(stock_data, bull_dates):
                 if pd.isna(row['Close']) or pd.isna(row.get('high_20')) or pd.isna(row.get('atr')):
                     continue
                 if row['atr'] <= 0:
+                    continue
+                if row['Close'] < 15:
                     continue
 
                 # ── BREAKOUT SIGNAL ──
@@ -470,7 +475,7 @@ def main():
     for t in output['trades']:
         t.pop('watchlist', None)
 
-    out_path = Path(__file__).resolve().parent.parent / 'dashboard' / 'public' / 'live_plan_data.json'
+    out_path = Path(__file__).resolve().parent.parent / 'dashboard' / 'public' / 'sim_backtest5_data.json'
     with open(out_path, 'w') as f:
         json.dump(output, f, indent=2)
 

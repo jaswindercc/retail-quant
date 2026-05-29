@@ -246,6 +246,8 @@ def find_daily_signals(all_data):
                     date_str = str(date_val)[:10]
 
                 entry = float(row['Close'])
+                if entry < 15:
+                    continue
                 stop = entry - atr
                 risk = entry - stop
 

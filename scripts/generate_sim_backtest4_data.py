@@ -125,6 +125,8 @@ def find_confluence_for_subset(all_data, ticker_subset):
                     date_str = str(date_val)[:10]
 
                 entry = float(row['Close'])
+                if entry < 15:
+                    continue
                 stop = entry - atr
                 risk = entry - stop
 

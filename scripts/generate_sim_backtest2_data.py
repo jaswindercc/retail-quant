@@ -85,6 +85,8 @@ def find_single_strategy_signals(all_data, strategy_name, check_type, check_fn):
                     date_str = str(date_val)[:10]
 
                 entry = float(row['Close'])
+                if entry < 15:
+                    continue
                 stop = entry - atr
                 risk = entry - stop
 

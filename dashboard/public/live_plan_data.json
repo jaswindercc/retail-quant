@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-29 22:54",
+  "lastUpdated": "2026-05-29 22:43",
   "params": {
     "pool": [
       "NVDA",
@@ -156,12 +156,12 @@
       },
       "CSCO": {
         "trades": 6,
-        "pnl": 249.18999999999994,
+        "pnl": 249.20000000000005,
         "wins": 2
       },
       "ORCL": {
         "trades": 6,
-        "pnl": 359.14000000000004,
+        "pnl": 359.13000000000005,
         "wins": 2
       },
       "CRWD": {
@@ -1398,7 +1398,7 @@
       "exitDate": "2021-09-08",
       "exitPrice": 82.64,
       "pnlR": 1.43,
-      "pnlDollar": 286.92,
+      "pnlDollar": 286.91,
       "exitReason": "Trail",
       "durationDays": 63
     },
@@ -1412,7 +1412,7 @@
       "exitDate": "2021-09-15",
       "exitPrice": 50.14,
       "pnlR": 0.21,
-      "pnlDollar": 42.11,
+      "pnlDollar": 42.12,
       "exitReason": "Trail",
       "durationDays": 27
     },
@@ -2872,7 +2872,7 @@
     },
     {
       "date": "2021-01-27",
-      "pnl": -1378.1,
+      "pnl": -1378.09,
       "open_positions": 1
     },
     {
@@ -3372,42 +3372,42 @@
     },
     {
       "date": "2021-06-21",
-      "pnl": -3318.01,
+      "pnl": -3318.0,
       "open_positions": 2
     },
     {
       "date": "2021-06-22",
-      "pnl": -3318.01,
+      "pnl": -3318.0,
       "open_positions": 3
     },
     {
       "date": "2021-06-23",
-      "pnl": -3318.01,
+      "pnl": -3318.0,
       "open_positions": 3
     },
     {
       "date": "2021-06-24",
-      "pnl": -3318.01,
+      "pnl": -3318.0,
       "open_positions": 3
     },
     {
       "date": "2021-06-25",
-      "pnl": -3318.01,
+      "pnl": -3318.0,
       "open_positions": 3
     },
     {
       "date": "2021-06-28",
-      "pnl": -3318.01,
+      "pnl": -3318.0,
       "open_positions": 3
     },
     {
       "date": "2021-06-29",
-      "pnl": -3318.01,
+      "pnl": -3318.0,
       "open_positions": 3
     },
     {
       "date": "2021-06-30",
-      "pnl": -3318.01,
+      "pnl": -3318.0,
       "open_positions": 3
     },
     {
@@ -3467,32 +3467,32 @@
     },
     {
       "date": "2021-07-19",
-      "pnl": -2172.22,
+      "pnl": -2172.21,
       "open_positions": 1
     },
     {
       "date": "2021-07-20",
-      "pnl": -2172.22,
+      "pnl": -2172.21,
       "open_positions": 2
     },
     {
       "date": "2021-07-21",
-      "pnl": -2172.22,
+      "pnl": -2172.21,
       "open_positions": 2
     },
     {
       "date": "2021-07-22",
-      "pnl": -2172.22,
+      "pnl": -2172.21,
       "open_positions": 3
     },
     {
       "date": "2021-07-23",
-      "pnl": -2172.22,
+      "pnl": -2172.21,
       "open_positions": 3
     },
     {
       "date": "2021-07-26",
-      "pnl": -2172.22,
+      "pnl": -2172.21,
       "open_positions": 3
     },
     {
@@ -3687,202 +3687,202 @@
     },
     {
       "date": "2021-09-20",
-      "pnl": -2831.74,
+      "pnl": -2831.73,
       "open_positions": 0
     },
     {
       "date": "2021-09-21",
-      "pnl": -2831.74,
+      "pnl": -2831.73,
       "open_positions": 0
     },
     {
       "date": "2021-09-22",
-      "pnl": -2831.74,
+      "pnl": -2831.73,
       "open_positions": 0
     },
     {
       "date": "2021-09-23",
-      "pnl": -2831.74,
+      "pnl": -2831.73,
       "open_positions": 0
     },
     {
       "date": "2021-09-24",
-      "pnl": -2831.74,
+      "pnl": -2831.73,
       "open_positions": 0
     },
     {
       "date": "2021-09-27",
-      "pnl": -2831.74,
+      "pnl": -2831.73,
       "open_positions": 0
     },
     {
       "date": "2021-09-28",
-      "pnl": -2831.74,
+      "pnl": -2831.73,
       "open_positions": 0
     },
     {
       "date": "2021-09-29",
-      "pnl": -2831.74,
+      "pnl": -2831.73,
       "open_positions": 0
     },
     {
       "date": "2021-09-30",
-      "pnl": -2831.74,
+      "pnl": -2831.73,
       "open_positions": 0
     },
     {
       "date": "2021-10-01",
-      "pnl": -2831.74,
+      "pnl": -2831.73,
       "open_positions": 0
     },
     {
       "date": "2021-10-04",
-      "pnl": -2831.74,
+      "pnl": -2831.73,
       "open_positions": 0
     },
     {
       "date": "2021-10-05",
-      "pnl": -2831.74,
+      "pnl": -2831.73,
       "open_positions": 0
     },
     {
       "date": "2021-10-06",
-      "pnl": -2831.74,
+      "pnl": -2831.73,
       "open_positions": 0
     },
     {
       "date": "2021-10-07",
-      "pnl": -2831.74,
+      "pnl": -2831.73,
       "open_positions": 1
     },
     {
       "date": "2021-10-08",
-      "pnl": -2831.74,
+      "pnl": -2831.73,
       "open_positions": 1
     },
     {
       "date": "2021-10-11",
-      "pnl": -2831.74,
+      "pnl": -2831.73,
       "open_positions": 1
     },
     {
       "date": "2021-10-12",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 0
     },
     {
       "date": "2021-10-13",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 2
     },
     {
       "date": "2021-10-14",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 2
     },
     {
       "date": "2021-10-15",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 2
     },
     {
       "date": "2021-10-18",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 2
     },
     {
       "date": "2021-10-19",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-10-20",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-10-21",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-10-22",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-10-25",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-10-26",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-10-27",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-10-28",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-10-29",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-11-01",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-11-02",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-11-03",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-11-04",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-11-05",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-11-08",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-11-09",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-11-10",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-11-11",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
       "date": "2021-11-12",
-      "pnl": -3030.07,
+      "pnl": -3030.06,
       "open_positions": 3
     },
     {
@@ -3997,62 +3997,62 @@
     },
     {
       "date": "2021-12-16",
-      "pnl": -1808.19,
+      "pnl": -1808.18,
       "open_positions": 2
     },
     {
       "date": "2021-12-17",
-      "pnl": -1808.19,
+      "pnl": -1808.18,
       "open_positions": 2
     },
     {
       "date": "2021-12-20",
-      "pnl": -1808.19,
+      "pnl": -1808.18,
       "open_positions": 2
     },
     {
       "date": "2021-12-21",
-      "pnl": -1808.19,
+      "pnl": -1808.18,
       "open_positions": 2
     },
     {
       "date": "2021-12-22",
-      "pnl": -1808.19,
+      "pnl": -1808.18,
       "open_positions": 2
     },
     {
       "date": "2021-12-23",
-      "pnl": -1808.19,
+      "pnl": -1808.18,
       "open_positions": 2
     },
     {
       "date": "2021-12-27",
-      "pnl": -1808.19,
+      "pnl": -1808.18,
       "open_positions": 2
     },
     {
       "date": "2021-12-28",
-      "pnl": -1808.19,
+      "pnl": -1808.18,
       "open_positions": 2
     },
     {
       "date": "2021-12-29",
-      "pnl": -1808.19,
+      "pnl": -1808.18,
       "open_positions": 2
     },
     {
       "date": "2021-12-30",
-      "pnl": -1808.19,
+      "pnl": -1808.18,
       "open_positions": 2
     },
     {
       "date": "2021-12-31",
-      "pnl": -1808.19,
+      "pnl": -1808.18,
       "open_positions": 2
     },
     {
       "date": "2022-01-03",
-      "pnl": -1808.19,
+      "pnl": -1808.18,
       "open_positions": 3
     },
     {
@@ -4107,272 +4107,272 @@
     },
     {
       "date": "2022-01-19",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-01-20",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-01-21",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-01-24",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-01-25",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-01-26",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-01-27",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-01-28",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-01-31",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-01",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-02",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-03",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-04",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-07",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-08",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-09",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-10",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-11",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-14",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-15",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-16",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-17",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-18",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-22",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-23",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-24",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-25",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-02-28",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-03-01",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-03-02",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-03-03",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-03-04",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-03-07",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-03-08",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-03-09",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-03-10",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-03-11",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-03-14",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-03-15",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-03-16",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-03-17",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 0
     },
     {
       "date": "2022-03-18",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 2
     },
     {
       "date": "2022-03-21",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 2
     },
     {
       "date": "2022-03-22",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 3
     },
     {
       "date": "2022-03-23",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 3
     },
     {
       "date": "2022-03-24",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 3
     },
     {
       "date": "2022-03-25",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 3
     },
     {
       "date": "2022-03-28",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 3
     },
     {
       "date": "2022-03-29",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 3
     },
     {
       "date": "2022-03-30",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 3
     },
     {
       "date": "2022-03-31",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 3
     },
     {
       "date": "2022-04-01",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 3
     },
     {
       "date": "2022-04-04",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 3
     },
     {
       "date": "2022-04-05",
-      "pnl": -2392.22,
+      "pnl": -2392.21,
       "open_positions": 3
     },
     {
@@ -4392,447 +4392,447 @@
     },
     {
       "date": "2022-04-11",
-      "pnl": -2791.43,
+      "pnl": -2791.42,
       "open_positions": 1
     },
     {
       "date": "2022-04-12",
-      "pnl": -2791.43,
+      "pnl": -2791.42,
       "open_positions": 1
     },
     {
       "date": "2022-04-13",
-      "pnl": -2791.43,
+      "pnl": -2791.42,
       "open_positions": 1
     },
     {
       "date": "2022-04-14",
-      "pnl": -2791.43,
+      "pnl": -2791.42,
       "open_positions": 1
     },
     {
       "date": "2022-04-18",
-      "pnl": -2791.43,
+      "pnl": -2791.42,
       "open_positions": 1
     },
     {
       "date": "2022-04-19",
-      "pnl": -2791.43,
+      "pnl": -2791.42,
       "open_positions": 1
     },
     {
       "date": "2022-04-20",
-      "pnl": -2791.43,
+      "pnl": -2791.42,
       "open_positions": 1
     },
     {
       "date": "2022-04-21",
-      "pnl": -2791.43,
+      "pnl": -2791.42,
       "open_positions": 1
     },
     {
       "date": "2022-04-22",
-      "pnl": -2791.43,
+      "pnl": -2791.42,
       "open_positions": 1
     },
     {
       "date": "2022-04-25",
-      "pnl": -2791.43,
+      "pnl": -2791.42,
       "open_positions": 1
     },
     {
       "date": "2022-04-26",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-04-27",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-04-28",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-04-29",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-02",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-03",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-04",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-05",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-06",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-09",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-10",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-11",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-12",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-13",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-16",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-17",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-18",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-19",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-20",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-23",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-24",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-25",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-26",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-27",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-05-31",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-01",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-02",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-03",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-06",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-07",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-08",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-09",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-10",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-13",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-14",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-15",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-16",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-17",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-21",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-22",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-23",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-24",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-27",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-28",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-29",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-06-30",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-01",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-05",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-06",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-07",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-08",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-11",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-12",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-13",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-14",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-15",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-18",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-19",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-20",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-21",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-22",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-25",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-26",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-27",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-28",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-07-29",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-08-01",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-08-02",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-08-03",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-08-04",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-08-05",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-08-08",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-08-09",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-08-10",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-08-11",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-08-12",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-08-15",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 0
     },
     {
       "date": "2022-08-16",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 1
     },
     {
       "date": "2022-08-17",
-      "pnl": -2919.02,
+      "pnl": -2919.01,
       "open_positions": 1
     },
     {
@@ -5507,32 +5507,32 @@
     },
     {
       "date": "2023-03-02",
-      "pnl": -4589.09,
+      "pnl": -4589.08,
       "open_positions": 1
     },
     {
       "date": "2023-03-03",
-      "pnl": -4589.09,
+      "pnl": -4589.08,
       "open_positions": 2
     },
     {
       "date": "2023-03-06",
-      "pnl": -4589.09,
+      "pnl": -4589.08,
       "open_positions": 2
     },
     {
       "date": "2023-03-07",
-      "pnl": -4589.09,
+      "pnl": -4589.08,
       "open_positions": 2
     },
     {
       "date": "2023-03-08",
-      "pnl": -4589.09,
+      "pnl": -4589.08,
       "open_positions": 3
     },
     {
       "date": "2023-03-09",
-      "pnl": -4589.09,
+      "pnl": -4589.08,
       "open_positions": 3
     },
     {
@@ -5542,132 +5542,132 @@
     },
     {
       "date": "2023-03-13",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 0
     },
     {
       "date": "2023-03-14",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 2
     },
     {
       "date": "2023-03-15",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 2
     },
     {
       "date": "2023-03-16",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 2
     },
     {
       "date": "2023-03-17",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-03-20",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-03-21",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-03-22",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-03-23",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-03-24",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-03-27",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-03-28",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-03-29",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-03-30",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-03-31",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-04-03",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-04-04",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-04-05",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-04-06",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-04-10",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-04-11",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-04-12",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-04-13",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-04-14",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-04-17",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
       "date": "2023-04-18",
-      "pnl": -5182.83,
+      "pnl": -5182.82,
       "open_positions": 3
     },
     {
@@ -6142,47 +6142,47 @@
     },
     {
       "date": "2023-09-01",
-      "pnl": 2362.94,
+      "pnl": 2362.95,
       "open_positions": 3
     },
     {
       "date": "2023-09-05",
-      "pnl": 2362.94,
+      "pnl": 2362.95,
       "open_positions": 3
     },
     {
       "date": "2023-09-06",
-      "pnl": 2362.94,
+      "pnl": 2362.95,
       "open_positions": 3
     },
     {
       "date": "2023-09-07",
-      "pnl": 2362.94,
+      "pnl": 2362.95,
       "open_positions": 3
     },
     {
       "date": "2023-09-08",
-      "pnl": 2362.94,
+      "pnl": 2362.95,
       "open_positions": 3
     },
     {
       "date": "2023-09-11",
-      "pnl": 2362.94,
+      "pnl": 2362.95,
       "open_positions": 3
     },
     {
       "date": "2023-09-12",
-      "pnl": 2168.42,
+      "pnl": 2168.43,
       "open_positions": 2
     },
     {
       "date": "2023-09-13",
-      "pnl": 2168.42,
+      "pnl": 2168.43,
       "open_positions": 3
     },
     {
       "date": "2023-09-14",
-      "pnl": 2168.42,
+      "pnl": 2168.43,
       "open_positions": 3
     },
     {
@@ -6607,97 +6607,97 @@
     },
     {
       "date": "2024-01-17",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-01-18",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-01-19",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-01-22",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-01-23",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-01-24",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-01-25",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-01-26",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-01-29",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-01-30",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-01-31",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-02-01",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-02-02",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-02-05",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-02-06",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-02-07",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-02-08",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-02-09",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
       "date": "2024-02-12",
-      "pnl": 2203.93,
+      "pnl": 2203.94,
       "open_positions": 3
     },
     {
@@ -6727,67 +6727,67 @@
     },
     {
       "date": "2024-02-21",
-      "pnl": 3830.71,
+      "pnl": 3830.72,
       "open_positions": 0
     },
     {
       "date": "2024-02-22",
-      "pnl": 3830.71,
+      "pnl": 3830.72,
       "open_positions": 2
     },
     {
       "date": "2024-02-23",
-      "pnl": 3830.71,
+      "pnl": 3830.72,
       "open_positions": 2
     },
     {
       "date": "2024-02-26",
-      "pnl": 3830.71,
+      "pnl": 3830.72,
       "open_positions": 3
     },
     {
       "date": "2024-02-27",
-      "pnl": 3830.71,
+      "pnl": 3830.72,
       "open_positions": 3
     },
     {
       "date": "2024-02-28",
-      "pnl": 3830.71,
+      "pnl": 3830.72,
       "open_positions": 3
     },
     {
       "date": "2024-02-29",
-      "pnl": 3830.71,
+      "pnl": 3830.72,
       "open_positions": 3
     },
     {
       "date": "2024-03-01",
-      "pnl": 3830.71,
+      "pnl": 3830.72,
       "open_positions": 3
     },
     {
       "date": "2024-03-04",
-      "pnl": 3830.71,
+      "pnl": 3830.72,
       "open_positions": 3
     },
     {
       "date": "2024-03-05",
-      "pnl": 3830.71,
+      "pnl": 3830.72,
       "open_positions": 3
     },
     {
       "date": "2024-03-06",
-      "pnl": 3830.71,
+      "pnl": 3830.72,
       "open_positions": 3
     },
     {
       "date": "2024-03-07",
-      "pnl": 3830.71,
+      "pnl": 3830.72,
       "open_positions": 3
     },
     {
       "date": "2024-03-08",
-      "pnl": 3830.71,
+      "pnl": 3830.72,
       "open_positions": 3
     },
     {
@@ -6877,17 +6877,17 @@
     },
     {
       "date": "2024-04-04",
-      "pnl": 3240.13,
+      "pnl": 3240.14,
       "open_positions": 2
     },
     {
       "date": "2024-04-05",
-      "pnl": 3240.13,
+      "pnl": 3240.14,
       "open_positions": 2
     },
     {
       "date": "2024-04-08",
-      "pnl": 3240.13,
+      "pnl": 3240.14,
       "open_positions": 2
     },
     {
@@ -6997,77 +6997,77 @@
     },
     {
       "date": "2024-05-08",
-      "pnl": 3209.74,
+      "pnl": 3209.75,
       "open_positions": 1
     },
     {
       "date": "2024-05-09",
-      "pnl": 3209.74,
+      "pnl": 3209.75,
       "open_positions": 1
     },
     {
       "date": "2024-05-10",
-      "pnl": 3209.74,
+      "pnl": 3209.75,
       "open_positions": 1
     },
     {
       "date": "2024-05-13",
-      "pnl": 3209.74,
+      "pnl": 3209.75,
       "open_positions": 1
     },
     {
       "date": "2024-05-14",
-      "pnl": 3209.74,
+      "pnl": 3209.75,
       "open_positions": 1
     },
     {
       "date": "2024-05-15",
-      "pnl": 3209.74,
+      "pnl": 3209.75,
       "open_positions": 3
     },
     {
       "date": "2024-05-16",
-      "pnl": 3209.74,
+      "pnl": 3209.75,
       "open_positions": 3
     },
     {
       "date": "2024-05-17",
-      "pnl": 3010.42,
+      "pnl": 3010.43,
       "open_positions": 2
     },
     {
       "date": "2024-05-20",
-      "pnl": 3010.42,
+      "pnl": 3010.43,
       "open_positions": 2
     },
     {
       "date": "2024-05-21",
-      "pnl": 3010.42,
+      "pnl": 3010.43,
       "open_positions": 2
     },
     {
       "date": "2024-05-22",
-      "pnl": 3010.42,
+      "pnl": 3010.43,
       "open_positions": 2
     },
     {
       "date": "2024-05-23",
-      "pnl": 3010.42,
+      "pnl": 3010.43,
       "open_positions": 3
     },
     {
       "date": "2024-05-24",
-      "pnl": 3010.42,
+      "pnl": 3010.43,
       "open_positions": 3
     },
     {
       "date": "2024-05-28",
-      "pnl": 3010.42,
+      "pnl": 3010.43,
       "open_positions": 3
     },
     {
       "date": "2024-05-29",
-      "pnl": 3010.42,
+      "pnl": 3010.43,
       "open_positions": 3
     },
     {
@@ -7397,17 +7397,17 @@
     },
     {
       "date": "2024-09-03",
-      "pnl": 4259.16,
+      "pnl": 4259.17,
       "open_positions": 0
     },
     {
       "date": "2024-09-04",
-      "pnl": 4259.16,
+      "pnl": 4259.17,
       "open_positions": 0
     },
     {
       "date": "2024-09-05",
-      "pnl": 4259.16,
+      "pnl": 4259.17,
       "open_positions": 2
     },
     {
@@ -7597,12 +7597,12 @@
     },
     {
       "date": "2024-10-29",
-      "pnl": 3524.23,
+      "pnl": 3524.24,
       "open_positions": 2
     },
     {
       "date": "2024-10-30",
-      "pnl": 3524.23,
+      "pnl": 3524.24,
       "open_positions": 2
     },
     {
@@ -8537,67 +8537,67 @@
     },
     {
       "date": "2025-08-01",
-      "pnl": 7578.1,
+      "pnl": 7578.11,
       "open_positions": 1
     },
     {
       "date": "2025-08-04",
-      "pnl": 7578.1,
+      "pnl": 7578.11,
       "open_positions": 1
     },
     {
       "date": "2025-08-05",
-      "pnl": 7578.1,
+      "pnl": 7578.11,
       "open_positions": 1
     },
     {
       "date": "2025-08-06",
-      "pnl": 7578.1,
+      "pnl": 7578.11,
       "open_positions": 1
     },
     {
       "date": "2025-08-07",
-      "pnl": 7578.1,
+      "pnl": 7578.11,
       "open_positions": 1
     },
     {
       "date": "2025-08-08",
-      "pnl": 7578.1,
+      "pnl": 7578.11,
       "open_positions": 2
     },
     {
       "date": "2025-08-11",
-      "pnl": 7578.1,
+      "pnl": 7578.11,
       "open_positions": 3
     },
     {
       "date": "2025-08-12",
-      "pnl": 7578.1,
+      "pnl": 7578.11,
       "open_positions": 3
     },
     {
       "date": "2025-08-13",
-      "pnl": 7578.1,
+      "pnl": 7578.11,
       "open_positions": 3
     },
     {
       "date": "2025-08-14",
-      "pnl": 7578.1,
+      "pnl": 7578.11,
       "open_positions": 3
     },
     {
       "date": "2025-08-15",
-      "pnl": 7578.1,
+      "pnl": 7578.11,
       "open_positions": 3
     },
     {
       "date": "2025-08-18",
-      "pnl": 7578.1,
+      "pnl": 7578.11,
       "open_positions": 3
     },
     {
       "date": "2025-08-19",
-      "pnl": 7578.1,
+      "pnl": 7578.11,
       "open_positions": 3
     },
     {
@@ -8967,17 +8967,17 @@
     },
     {
       "date": "2025-12-03",
-      "pnl": 12279.55,
+      "pnl": 12279.54,
       "open_positions": 3
     },
     {
       "date": "2025-12-04",
-      "pnl": 12279.55,
+      "pnl": 12279.54,
       "open_positions": 3
     },
     {
       "date": "2025-12-05",
-      "pnl": 12279.55,
+      "pnl": 12279.54,
       "open_positions": 3
     },
     {
@@ -9077,67 +9077,67 @@
     },
     {
       "date": "2026-01-06",
-      "pnl": 12589.68,
+      "pnl": 12589.67,
       "open_positions": 2
     },
     {
       "date": "2026-01-07",
-      "pnl": 12589.68,
+      "pnl": 12589.67,
       "open_positions": 3
     },
     {
       "date": "2026-01-08",
-      "pnl": 12391.32,
+      "pnl": 12391.31,
       "open_positions": 2
     },
     {
       "date": "2026-01-09",
-      "pnl": 12391.32,
+      "pnl": 12391.31,
       "open_positions": 3
     },
     {
       "date": "2026-01-12",
-      "pnl": 12391.32,
+      "pnl": 12391.31,
       "open_positions": 3
     },
     {
       "date": "2026-01-13",
-      "pnl": 12391.32,
+      "pnl": 12391.31,
       "open_positions": 3
     },
     {
       "date": "2026-01-14",
-      "pnl": 12391.32,
+      "pnl": 12391.31,
       "open_positions": 3
     },
     {
       "date": "2026-01-15",
-      "pnl": 12391.32,
+      "pnl": 12391.31,
       "open_positions": 3
     },
     {
       "date": "2026-01-16",
-      "pnl": 12391.32,
+      "pnl": 12391.31,
       "open_positions": 3
     },
     {
       "date": "2026-01-20",
-      "pnl": 12391.32,
+      "pnl": 12391.31,
       "open_positions": 3
     },
     {
       "date": "2026-01-21",
-      "pnl": 12391.32,
+      "pnl": 12391.31,
       "open_positions": 3
     },
     {
       "date": "2026-01-22",
-      "pnl": 12391.32,
+      "pnl": 12391.31,
       "open_positions": 3
     },
     {
       "date": "2026-01-23",
-      "pnl": 12391.32,
+      "pnl": 12391.31,
       "open_positions": 3
     },
     {

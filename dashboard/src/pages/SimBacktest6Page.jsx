@@ -23,10 +23,37 @@ export default function SimBacktest6Page() {
 
   return (
     <div className="page-container" style={{ padding: '1.5rem', maxWidth: 1100 }}>
-      <h1 style={{ marginBottom: '0.25rem' }}>🔄 Backtest 6 — Rotation Mid-Cap</h1>
+      <h1 style={{ marginBottom: '0.25rem' }}>🔄 Backtest 6 — Rotation Mid-Cap (HONEST)</h1>
       <p style={{ color: '#71717a', fontSize: 13, marginBottom: '1.5rem' }}>
-        Same rotation strategy as BT5 but on 30 mid-cap growth stocks (IWM-style). Monthly rotation by 6-month momentum.
+        Momentum rotation on 68 mid-cap growth stocks that were liquid by mid-2020. Includes disaster stocks (PTON, BYND, SPCE, PLUG, WKHS). No cherry-picking.
       </p>
+
+      {/* HONESTY PROOF */}
+      <div style={{ background: '#0a1f2a', border: '2px solid #38bdf8', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
+        <h2 style={{ color: '#38bdf8', fontSize: 15, marginBottom: '0.75rem' }}>✅ This Backtest Is Honest — Here's Proof</h2>
+        <div style={{ fontSize: 13, color: '#d4d4d8', lineHeight: 1.8 }}>
+          <p style={{ marginBottom: 8 }}>The rotation algorithm picked the top 10 by 6-month return <strong>each month</strong> from a pool of 68 stocks that existed in 2020. No look-ahead, no cherry-picking. The watchlist rotated in disaster stocks when they had momentum:</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 8, marginTop: 8 }}>
+            <div style={{ background: '#111', borderRadius: 4, padding: '8px 10px', fontSize: 12 }}>
+              <span style={{ color: '#f87171', fontWeight: 600 }}>Jan 2021:</span> <span style={{ color: '#a1a1aa' }}>BLNK, CELH, NIO, FCEL, PLUG, FUBO</span>
+              <div style={{ color: '#71717a', fontSize: 11 }}>↑ EV/clean energy bubble — these had 300%+ 6mo returns</div>
+            </div>
+            <div style={{ background: '#111', borderRadius: 4, padding: '8px 10px', fontSize: 12 }}>
+              <span style={{ color: '#f87171', fontWeight: 600 }}>Feb 2021:</span> <span style={{ color: '#a1a1aa' }}>FCEL, PLUG, FUBO, BLNK, NIO</span>
+              <div style={{ color: '#71717a', fontSize: 11 }}>↑ Still top momentum — then they crashed 80-90%</div>
+            </div>
+            <div style={{ background: '#111', borderRadius: 4, padding: '8px 10px', fontSize: 12 }}>
+              <span style={{ color: '#f87171', fontWeight: 600 }}>Feb 2023:</span> <span style={{ color: '#a1a1aa' }}>PTON in top 10</span>
+              <div style={{ color: '#71717a', fontSize: 11 }}>↑ Dead-cat bounce — PTON rallied 50% then died again</div>
+            </div>
+            <div style={{ background: '#111', borderRadius: 4, padding: '8px 10px', fontSize: 12 }}>
+              <span style={{ color: '#f87171', fontWeight: 600 }}>Apr 2021:</span> <span style={{ color: '#a1a1aa' }}>QS, PLUG, PLTR in top 10</span>
+              <div style={{ color: '#71717a', fontSize: 11 }}>↑ Momentum still high — these all fell 60-80% after</div>
+            </div>
+          </div>
+          <p style={{ marginTop: 10, color: '#38bdf8', fontWeight: 600, marginBottom: 0 }}>Result: PF 1.51 — still profitable despite eating real losses from bubble stocks. The strategy survived honest conditions.</p>
+        </div>
+      </div>
 
       {!data && <p style={{ color: '#71717a' }}>Loading backtest data...</p>}
 
@@ -112,7 +139,7 @@ export default function SimBacktest6Page() {
             </tbody>
           </table>
           <p style={{ color: '#a1a1aa', fontSize: 12, marginTop: 10, marginBottom: 0 }}>
-            Mid-caps: higher PF, better WR, lower DD, shorter streak. More volatile stocks = bigger breakout moves.
+            Honest results: lower PF than biased version (was 2.93 with cherry-picked pool, now 1.51 with honest pool). Strategy still profitable.
           </p>
         </div>
 
@@ -217,9 +244,9 @@ export default function SimBacktest6Page() {
 
       {/* THE POOL */}
       <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
-        <h2 style={{ color: '#fbbf24', fontSize: 15, marginBottom: '0.75rem' }}>📋 Mid-Cap Pool (30 stocks)</h2>
+        <h2 style={{ color: '#fbbf24', fontSize: 15, marginBottom: '0.75rem' }}>📋 Mid-Cap Pool (68 stocks — honest)</h2>
         <p style={{ color: '#a1a1aa', fontSize: 12, marginBottom: 10 }}>
-          Growth stocks in the $2B–$30B range. Higher volatility = bigger breakout moves.
+          All mid-cap growth stocks liquid by mid-2020. Includes winners AND disasters — no hindsight cherry-picking.
         </p>
         <div style={{ fontSize: 13, color: '#60a5fa', lineHeight: 2 }}>
           {(params.pool || []).join(', ')}

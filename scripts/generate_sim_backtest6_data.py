@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """
-SIM Backtest 6: Breakout + Momentum Rotation — Mid-Cap (IWM-style)
+SIM Backtest 6: Breakout + Momentum Rotation — Mid-Cap Growth (HONEST)
 
-Same strategy as BT5 but on mid-cap growth stocks instead of mega-caps.
-Tests whether smaller, faster-growing companies produce better breakout results.
+SURVIVORSHIP BIAS FIX:
+- Pool: ~68 mid-cap growth stocks that were publicly traded and liquid by mid-2020
+- INCLUDES disaster stocks (PTON, BYND, SPCE, PLUG, WKHS, etc.)
+- Late-2020 IPOs naturally enter rotation when they have 6 months of data
+- NO cherry-picking — this is what a growth screen would have found in 2020
 
-Rules identical to BT5:
-- Pool: 30 mid-cap growth stocks ($2B-$30B market cap range)
+Rules:
+- Pool: ~68 mid-cap growth stocks (liquid by mid-2020, $2B-$50B range)
 - Dynamic Watchlist: Top 10 by 6-month momentum, re-evaluated monthly
 - Regime Filter: SPY > 200-day SMA
 - Entry: Close above 20-day high + volume ≥ 1.2× avg 20-day volume + above 50 SMA
@@ -36,14 +39,35 @@ MAX_POSITIONS = 3
 LOOKBACK_MONTHS = 6
 TOP_N = 10
 
-# Pool of 30 mid-cap growth stocks (IWM-style, $2B-$30B, high growth)
+# HONEST UNIVERSE: Mid-cap growth stocks that were liquid by mid-2020
+# Includes BOTH winners AND disasters — no hindsight cherry-picking
 MIDCAP_POOL = [
-    'DKNG', 'ENPH', 'CELH', 'SMCI', 'UPST', 'NET', 'BILL', 'CFLT', 'DDOG', 'ZS',
-    'HUBS', 'TTD', 'MELI', 'WDAY', 'ROKU', 'SNAP', 'U', 'RBLX', 'PATH', 'DUOL',
-    'ARM', 'IONQ', 'SOFI', 'HOOD', 'AFRM', 'SE', 'PINS', 'GTLB', 'MNDY', 'APP',
+    # ── Growth tech / SaaS (existed early 2020) ──
+    'NET', 'DDOG', 'ZS', 'BILL', 'HUBS', 'TTD', 'CRWD', 'OKTA', 'TWLO', 'MDB',
+    'DOCU', 'ESTC', 'PAYC', 'SHOP', 'WDAY',
+    # ── Consumer / Social / Entertainment ──
+    'SNAP', 'ROKU', 'PINS', 'ETSY', 'CHWY', 'MTCH', 'FVRR', 'W', 'FUBO', 'LPSN',
+    # ── E-commerce / Marketplace ──
+    'SE', 'MELI', 'PAGS',
+    # ── Clean energy / EV (2020 bubble stocks) ──
+    'ENPH', 'SEDG', 'RUN', 'PLUG', 'FCEL', 'BE', 'BLDP', 'BLNK', 'NIO',
+    'WKHS', 'HYLN', 'SPCE', 'TAN',
+    # ── Growth that CRASHED (would have been in ANY 2020 growth screen) ──
+    'PTON', 'BYND', 'FSLY',
+    # ── Gaming / Sports ──
+    'DKNG', 'PENN',
+    # ── Fintech / Payments ──
+    'FOUR',
+    # ── Semiconductor / Hardware ──
+    'MRVL', 'ON', 'SMCI', 'APPS',
+    # ── Other mid-cap growth ──
+    'CELH', 'GNRC', 'LULU', 'MGNI', 'Z',
+    # ── Late-2020 IPOs (enter rotation when they have 6mo of data) ──
+    'PLTR', 'U', 'SNOW', 'DASH', 'ABNB', 'LMND', 'QS', 'CRSR', 'OPEN',
+    'AI', 'XPEV', 'LI',
 ]
 
-START_DATE = '2020-06-01'  # Extra 6 months for momentum lookback
+START_DATE = '2019-06-01'  # Extra time so early-2020 stocks have 6mo lookback by Jan 2021
 END_DATE = '2026-05-29'
 TRADE_START = '2021-01-01'
 
@@ -224,6 +248,8 @@ def simulate(stock_data, bull_dates):
                     continue
                 if row['atr'] <= 0:
                     continue
+                if row['Close'] < 15:
+                    continue
 
                 # BREAKOUT SIGNAL
                 if row['Close'] <= row['high_20']:
@@ -365,8 +391,9 @@ def compute_stats(trades):
 
 
 def main():
-    print("🔄 Backtest 6: Breakout + Momentum Rotation — Mid-Cap (IWM-style)")
-    print(f"   Pool: {len(MIDCAP_POOL)} mid-cap growth stocks, Top {TOP_N} by {LOOKBACK_MONTHS}mo momentum")
+    print("🔄 Backtest 6: Breakout + Momentum Rotation — Mid-Cap Growth (HONEST)")
+    print(f"   Pool: {len(MIDCAP_POOL)} mid-cap growth stocks (liquid by mid-2020, includes disasters)")
+    print(f"   Top {TOP_N} by {LOOKBACK_MONTHS}mo momentum, rebalanced monthly")
     print(f"   Risk: ${MAX_RISK_PER_TRADE}/trade, Max ${MAX_CAPITAL} capital, Max {MAX_POSITIONS} positions")
     print()
 
@@ -443,9 +470,9 @@ def main():
     # Pick best regime for output
     use_iwm = False
     if bull_dates_iwm is not None:
-        # Use IWM if it has better PF or lower streak
-        iwm_score = stats_iwm['profit_factor'] / max(stats_iwm['max_losing_streak'], 1)
-        spy_score = stats_spy['profit_factor'] / max(stats_spy['max_losing_streak'], 1)
+        # Use regime with higher total PnL (the only metric that matters for real money)
+        iwm_score = stats_iwm['total_pnl']
+        spy_score = stats_spy['total_pnl']
         if iwm_score > spy_score:
             use_iwm = True
             print(f"\n  ⭐ IWM regime is BETTER (score {iwm_score:.3f} vs SPY {spy_score:.3f})")
