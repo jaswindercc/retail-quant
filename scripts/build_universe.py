@@ -196,8 +196,8 @@ def main():
     print(f"\n  Total unique tickers to check: {len(all_tickers)}")
     
     # Filter by price
-    valid = filter_by_price_and_exchange(all_tickers, min_price=2.0)
-    print(f"  After price filter (> $2): {len(valid)}")
+    valid = filter_by_price_and_exchange(all_tickers, min_price=10.0)
+    print(f"  After price filter (> $10): {len(valid)}")
     
     # Verify exchange
     final = verify_exchange(valid)
@@ -211,7 +211,7 @@ def main():
         'generatedAt': datetime.now().strftime('%Y-%m-%d %H:%M'),
         'filters': {
             'exchanges': ['NYSE', 'NASDAQ', 'CBOE'],
-            'minPrice': 2.0,
+            'minPrice': 10.0,
             'sources': ['S&P 500', 'Nasdaq 100', 'Popular Mid/Small Caps']
         },
         'count': len(final),
