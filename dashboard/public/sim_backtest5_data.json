@@ -1,0 +1,9604 @@
+{
+  "lastUpdated": "2026-05-29 19:58",
+  "params": {
+    "pool": [
+      "NVDA",
+      "AAPL",
+      "MSFT",
+      "GOOGL",
+      "AMZN",
+      "META",
+      "TSLA",
+      "AMD",
+      "CRM",
+      "NFLX",
+      "AVGO",
+      "ADBE",
+      "ORCL",
+      "QCOM",
+      "INTC",
+      "CSCO",
+      "NOW",
+      "UBER",
+      "SHOP",
+      "SQ",
+      "SNOW",
+      "PYPL",
+      "ABNB",
+      "COIN",
+      "MRVL",
+      "PANW",
+      "CRWD",
+      "PLTR",
+      "MU",
+      "ANET"
+    ],
+    "top_n": 10,
+    "lookback_months": 6,
+    "max_risk": 200.0,
+    "max_capital": 40000.0,
+    "max_positions": 3,
+    "trail_start_r": 2.5,
+    "trail_atr_buf": 1.0,
+    "period": "2021-01-01 to 2026-05-29"
+  },
+  "summary": {
+    "total_trades": 132,
+    "win_rate": 25.757575757575758,
+    "total_pnl": 19263.15,
+    "profit_factor": 2.02,
+    "max_losing_streak": 18,
+    "max_drawdown": 3558.79,
+    "avg_winner": 1120.7,
+    "avg_loser": 192.25,
+    "avg_r_winner": 5.6,
+    "best_trade": 3840.28,
+    "worst_trade": -199.99,
+    "avg_duration_days": 23.1,
+    "monthly_pnl": {
+      "2021-03": -199.83,
+      "2021-04": -198.72,
+      "2021-05": 112.18999999999997,
+      "2021-06": -392.59,
+      "2021-07": 746.53,
+      "2021-08": -396.56,
+      "2021-09": 132.20000000000002,
+      "2021-10": -198.33,
+      "2021-11": -596.26,
+      "2021-12": 1618.74,
+      "2022-01": -584.04,
+      "2022-02": -199.01,
+      "2022-04": -526.8000000000001,
+      "2022-12": -798.13,
+      "2023-01": -399.18,
+      "2023-02": -552.33,
+      "2023-03": 448.2200000000001,
+      "2023-04": 202.26,
+      "2023-07": 2816.19,
+      "2023-08": 4725.67,
+      "2023-09": -796.82,
+      "2023-10": -120.86000000000001,
+      "2023-12": -585.22,
+      "2024-01": 631.79,
+      "2024-02": 1675.39,
+      "2024-03": -396.15,
+      "2024-04": 680.8299999999999,
+      "2024-05": -788.29,
+      "2024-06": 794.4,
+      "2024-07": 644.4300000000001,
+      "2024-09": -598.9000000000001,
+      "2024-10": 1900.67,
+      "2024-12": -221.57,
+      "2025-01": 2992.9799999999996,
+      "2025-02": -846.2799999999999,
+      "2025-07": 734.89,
+      "2025-08": 1581.73,
+      "2025-09": -1173.71,
+      "2025-10": -320.28,
+      "2025-11": 274.13,
+      "2025-12": -955.15,
+      "2026-01": -792.5,
+      "2026-02": -393.18,
+      "2026-03": 1158.33,
+      "2026-05": 8422.27
+    },
+    "stock_breakdown": {
+      "ANET": {
+        "trades": 11,
+        "pnl": 127.71000000000001,
+        "wins": 3
+      },
+      "TSLA": {
+        "trades": 5,
+        "pnl": 674.3699999999999,
+        "wins": 1
+      },
+      "GOOGL": {
+        "trades": 4,
+        "pnl": -77.78000000000003,
+        "wins": 1
+      },
+      "CSCO": {
+        "trades": 5,
+        "pnl": -756.0500000000001,
+        "wins": 1
+      },
+      "ORCL": {
+        "trades": 8,
+        "pnl": -30.97999999999996,
+        "wins": 2
+      },
+      "CRWD": {
+        "trades": 7,
+        "pnl": 11.080000000000098,
+        "wins": 2
+      },
+      "NVDA": {
+        "trades": 9,
+        "pnl": 4943.8,
+        "wins": 4
+      },
+      "SHOP": {
+        "trades": 7,
+        "pnl": -721.49,
+        "wins": 1
+      },
+      "AMD": {
+        "trades": 4,
+        "pnl": 1567.6700000000003,
+        "wins": 2
+      },
+      "MSFT": {
+        "trades": 1,
+        "pnl": -196.83,
+        "wins": 0
+      },
+      "MRVL": {
+        "trades": 6,
+        "pnl": 1906.8899999999996,
+        "wins": 1
+      },
+      "NOW": {
+        "trades": 4,
+        "pnl": 239.55000000000007,
+        "wins": 1
+      },
+      "SNOW": {
+        "trades": 4,
+        "pnl": 340.68999999999994,
+        "wins": 1
+      },
+      "AAPL": {
+        "trades": 2,
+        "pnl": -390.7,
+        "wins": 0
+      },
+      "ABNB": {
+        "trades": 2,
+        "pnl": 847.1800000000001,
+        "wins": 1
+      },
+      "AVGO": {
+        "trades": 10,
+        "pnl": 68.32,
+        "wins": 1
+      },
+      "NFLX": {
+        "trades": 4,
+        "pnl": -460.6700000000001,
+        "wins": 1
+      },
+      "UBER": {
+        "trades": 3,
+        "pnl": 821.59,
+        "wins": 1
+      },
+      "META": {
+        "trades": 3,
+        "pnl": 2435.4,
+        "wins": 1
+      },
+      "AMZN": {
+        "trades": 2,
+        "pnl": 1488.4,
+        "wins": 1
+      },
+      "INTC": {
+        "trades": 7,
+        "pnl": 2644.6800000000003,
+        "wins": 1
+      },
+      "PLTR": {
+        "trades": 10,
+        "pnl": 1554.2300000000002,
+        "wins": 2
+      },
+      "ADBE": {
+        "trades": 2,
+        "pnl": -383.24,
+        "wins": 0
+      },
+      "COIN": {
+        "trades": 3,
+        "pnl": 125.76999999999998,
+        "wins": 1
+      },
+      "MU": {
+        "trades": 6,
+        "pnl": 1732.39,
+        "wins": 2
+      },
+      "QCOM": {
+        "trades": 1,
+        "pnl": 884.73,
+        "wins": 1
+      },
+      "PYPL": {
+        "trades": 1,
+        "pnl": 61.8,
+        "wins": 1
+      },
+      "CRM": {
+        "trades": 1,
+        "pnl": -195.36,
+        "wins": 0
+      }
+    },
+    "rotation_log": [
+      {
+        "month": "2021-03",
+        "watchlist": [
+          "MU",
+          "CRWD",
+          "TSLA",
+          "UBER",
+          "AVGO",
+          "PANW",
+          "PYPL",
+          "MRVL",
+          "ANET",
+          "INTC"
+        ]
+      },
+      {
+        "month": "2021-04",
+        "watchlist": [
+          "PLTR",
+          "MU",
+          "UBER",
+          "ANET",
+          "TSLA",
+          "GOOGL",
+          "CSCO",
+          "AVGO",
+          "PANW",
+          "CRWD"
+        ]
+      },
+      {
+        "month": "2021-05",
+        "watchlist": [
+          "PLTR",
+          "TSLA",
+          "MU",
+          "CRWD",
+          "UBER",
+          "PANW",
+          "ANET",
+          "GOOGL",
+          "CSCO",
+          "PYPL"
+        ]
+      },
+      {
+        "month": "2021-06",
+        "watchlist": [
+          "CRWD",
+          "ORCL",
+          "GOOGL",
+          "MU",
+          "CSCO",
+          "ANET",
+          "PANW",
+          "NVDA",
+          "PYPL",
+          "INTC"
+        ]
+      },
+      {
+        "month": "2021-07",
+        "watchlist": [
+          "NVDA",
+          "GOOGL",
+          "META",
+          "SHOP",
+          "ANET",
+          "ORCL",
+          "PYPL",
+          "MSFT",
+          "CSCO",
+          "MRVL"
+        ]
+      },
+      {
+        "month": "2021-08",
+        "watchlist": [
+          "NVDA",
+          "ORCL",
+          "GOOGL",
+          "META",
+          "ADBE",
+          "SHOP",
+          "CSCO",
+          "AMD",
+          "MSFT",
+          "ANET"
+        ]
+      },
+      {
+        "month": "2021-10",
+        "watchlist": [
+          "NVDA",
+          "PANW",
+          "SNOW",
+          "CRWD",
+          "AMD",
+          "CRM",
+          "NOW",
+          "GOOGL",
+          "ORCL",
+          "MRVL"
+        ]
+      },
+      {
+        "month": "2021-11",
+        "watchlist": [
+          "TSLA",
+          "NVDA",
+          "SNOW",
+          "AMD",
+          "MRVL",
+          "PANW",
+          "NOW",
+          "CRM",
+          "CRWD",
+          "NFLX"
+        ]
+      },
+      {
+        "month": "2021-12",
+        "watchlist": [
+          "TSLA",
+          "AMD",
+          "NVDA",
+          "PANW",
+          "MRVL",
+          "ANET",
+          "MSFT",
+          "QCOM",
+          "AAPL",
+          "ADBE"
+        ]
+      },
+      {
+        "month": "2022-01",
+        "watchlist": [
+          "TSLA",
+          "AMD",
+          "MRVL",
+          "ANET",
+          "NVDA",
+          "AVGO",
+          "PANW",
+          "QCOM",
+          "SNOW",
+          "AAPL"
+        ]
+      },
+      {
+        "month": "2022-02",
+        "watchlist": [
+          "TSLA",
+          "ANET",
+          "PANW",
+          "AVGO",
+          "NVDA",
+          "QCOM",
+          "AAPL",
+          "MRVL",
+          "MSFT",
+          "ABNB"
+        ]
+      },
+      {
+        "month": "2022-03",
+        "watchlist": [
+          "ANET",
+          "PANW",
+          "TSLA",
+          "MU",
+          "AVGO",
+          "QCOM",
+          "AAPL",
+          "MRVL",
+          "NVDA",
+          "AMD"
+        ]
+      },
+      {
+        "month": "2022-11",
+        "watchlist": [
+          "NFLX",
+          "ANET",
+          "UBER",
+          "ORCL",
+          "PANW",
+          "AAPL",
+          "CSCO",
+          "PYPL",
+          "CRM",
+          "SNOW"
+        ]
+      },
+      {
+        "month": "2022-12",
+        "watchlist": [
+          "NFLX",
+          "ANET",
+          "SHOP",
+          "SNOW",
+          "ORCL",
+          "UBER",
+          "CSCO",
+          "PANW",
+          "AAPL",
+          "AVGO"
+        ]
+      },
+      {
+        "month": "2023-01",
+        "watchlist": [
+          "NFLX",
+          "ANET",
+          "ORCL",
+          "UBER",
+          "AVGO",
+          "CSCO",
+          "SHOP",
+          "PYPL",
+          "NVDA",
+          "ABNB"
+        ]
+      },
+      {
+        "month": "2023-02",
+        "watchlist": [
+          "NFLX",
+          "SHOP",
+          "ORCL",
+          "AVGO",
+          "NVDA",
+          "CSCO",
+          "ANET",
+          "UBER",
+          "SNOW",
+          "NOW"
+        ]
+      },
+      {
+        "month": "2023-03",
+        "watchlist": [
+          "NVDA",
+          "NFLX",
+          "SHOP",
+          "AVGO",
+          "ORCL",
+          "UBER",
+          "ANET",
+          "META",
+          "CSCO",
+          "ABNB"
+        ]
+      },
+      {
+        "month": "2023-07",
+        "watchlist": [
+          "NVDA",
+          "PLTR",
+          "META",
+          "TSLA",
+          "COIN",
+          "SHOP",
+          "PANW",
+          "AMD",
+          "UBER",
+          "MRVL"
+        ]
+      },
+      {
+        "month": "2023-05",
+        "watchlist": [
+          "META",
+          "NVDA",
+          "AMD",
+          "SHOP",
+          "AVGO",
+          "ANET",
+          "MSFT",
+          "ORCL",
+          "CRM",
+          "UBER"
+        ]
+      },
+      {
+        "month": "2023-08",
+        "watchlist": [
+          "PLTR",
+          "NVDA",
+          "META",
+          "COIN",
+          "PANW",
+          "AVGO",
+          "CRWD",
+          "AMD",
+          "MRVL",
+          "UBER"
+        ]
+      },
+      {
+        "month": "2023-09",
+        "watchlist": [
+          "NVDA",
+          "PLTR",
+          "ADBE",
+          "META",
+          "SHOP",
+          "AMZN",
+          "GOOGL",
+          "INTC",
+          "NFLX",
+          "AVGO"
+        ]
+      },
+      {
+        "month": "2023-10",
+        "watchlist": [
+          "PLTR",
+          "NVDA",
+          "UBER",
+          "META",
+          "ADBE",
+          "AVGO",
+          "MRVL",
+          "TSLA",
+          "GOOGL",
+          "AMZN"
+        ]
+      },
+      {
+        "month": "2023-11",
+        "watchlist": [
+          "PLTR",
+          "ADBE",
+          "COIN",
+          "ANET",
+          "NVDA",
+          "CRWD",
+          "AVGO",
+          "NOW",
+          "PANW",
+          "META"
+        ]
+      },
+      {
+        "month": "2023-12",
+        "watchlist": [
+          "COIN",
+          "CRWD",
+          "INTC",
+          "UBER",
+          "ADBE",
+          "ANET",
+          "PLTR",
+          "PANW",
+          "NOW",
+          "CRM"
+        ]
+      },
+      {
+        "month": "2024-01",
+        "watchlist": [
+          "COIN",
+          "CRWD",
+          "INTC",
+          "ANET",
+          "UBER",
+          "MU",
+          "AVGO",
+          "AMD",
+          "NOW",
+          "QCOM"
+        ]
+      },
+      {
+        "month": "2024-02",
+        "watchlist": [
+          "CRWD",
+          "AMD",
+          "ANET",
+          "UBER",
+          "PANW",
+          "COIN",
+          "NVDA",
+          "NOW",
+          "AVGO",
+          "NFLX"
+        ]
+      },
+      {
+        "month": "2024-03",
+        "watchlist": [
+          "COIN",
+          "CRWD",
+          "AMD",
+          "UBER",
+          "META",
+          "NVDA",
+          "PLTR",
+          "AVGO",
+          "ANET",
+          "QCOM"
+        ]
+      },
+      {
+        "month": "2024-04",
+        "watchlist": [
+          "COIN",
+          "NVDA",
+          "CRWD",
+          "MU",
+          "AMD",
+          "UBER",
+          "AVGO",
+          "META",
+          "ANET",
+          "NFLX"
+        ]
+      },
+      {
+        "month": "2024-05",
+        "watchlist": [
+          "COIN",
+          "NVDA",
+          "CRWD",
+          "MU",
+          "UBER",
+          "QCOM",
+          "PLTR",
+          "SHOP",
+          "AVGO",
+          "AMD"
+        ]
+      },
+      {
+        "month": "2024-06",
+        "watchlist": [
+          "NVDA",
+          "COIN",
+          "MU",
+          "QCOM",
+          "META",
+          "AVGO",
+          "ANET",
+          "NFLX",
+          "AMD",
+          "CRWD"
+        ]
+      },
+      {
+        "month": "2024-07",
+        "watchlist": [
+          "NVDA",
+          "MU",
+          "CRWD",
+          "ANET",
+          "PLTR",
+          "AVGO",
+          "META",
+          "QCOM",
+          "NFLX",
+          "ORCL"
+        ]
+      },
+      {
+        "month": "2024-08",
+        "watchlist": [
+          "NVDA",
+          "COIN",
+          "PLTR",
+          "ANET",
+          "META",
+          "AVGO",
+          "GOOGL",
+          "ORCL",
+          "MU",
+          "QCOM"
+        ]
+      },
+      {
+        "month": "2024-09",
+        "watchlist": [
+          "AAPL",
+          "PLTR",
+          "ORCL",
+          "NVDA",
+          "PYPL",
+          "PANW",
+          "GOOGL",
+          "TSLA",
+          "ANET",
+          "AVGO"
+        ]
+      },
+      {
+        "month": "2024-11",
+        "watchlist": [
+          "PLTR",
+          "NVDA",
+          "ORCL",
+          "ANET",
+          "TSLA",
+          "NOW",
+          "AVGO",
+          "NFLX",
+          "AAPL",
+          "META"
+        ]
+      },
+      {
+        "month": "2024-12",
+        "watchlist": [
+          "PLTR",
+          "TSLA",
+          "SHOP",
+          "NOW",
+          "ORCL",
+          "MRVL",
+          "NFLX",
+          "CRM",
+          "ANET",
+          "PYPL"
+        ]
+      },
+      {
+        "month": "2025-01",
+        "watchlist": [
+          "PLTR",
+          "SHOP",
+          "MRVL",
+          "TSLA",
+          "PYPL",
+          "AVGO",
+          "NOW",
+          "NFLX",
+          "CSCO",
+          "CRM"
+        ]
+      },
+      {
+        "month": "2025-02",
+        "watchlist": [
+          "PLTR",
+          "SHOP",
+          "MRVL",
+          "TSLA",
+          "CRWD",
+          "NFLX",
+          "SNOW",
+          "AVGO",
+          "PYPL",
+          "META"
+        ]
+      },
+      {
+        "month": "2025-05",
+        "watchlist": [
+          "PLTR",
+          "NFLX",
+          "SNOW",
+          "CRWD",
+          "SHOP",
+          "AVGO",
+          "TSLA",
+          "CSCO",
+          "UBER",
+          "PANW"
+        ]
+      },
+      {
+        "month": "2025-07",
+        "watchlist": [
+          "PLTR",
+          "UBER",
+          "NFLX",
+          "CRWD",
+          "MU",
+          "SNOW",
+          "ORCL",
+          "COIN",
+          "META",
+          "CSCO"
+        ]
+      },
+      {
+        "month": "2025-08",
+        "watchlist": [
+          "PLTR",
+          "AMD",
+          "NVDA",
+          "ORCL",
+          "AVGO",
+          "UBER",
+          "MSFT",
+          "NFLX",
+          "MU",
+          "SNOW"
+        ]
+      },
+      {
+        "month": "2025-09",
+        "watchlist": [
+          "PLTR",
+          "AMD",
+          "AVGO",
+          "ANET",
+          "NVDA",
+          "ORCL",
+          "COIN",
+          "SHOP",
+          "SNOW",
+          "MSFT"
+        ]
+      },
+      {
+        "month": "2025-10",
+        "watchlist": [
+          "PLTR",
+          "MU",
+          "ORCL",
+          "AVGO",
+          "COIN",
+          "ANET",
+          "NVDA",
+          "INTC",
+          "TSLA",
+          "AMD"
+        ]
+      },
+      {
+        "month": "2025-11",
+        "watchlist": [
+          "MU",
+          "AMD",
+          "INTC",
+          "PLTR",
+          "SHOP",
+          "NVDA",
+          "AVGO",
+          "ORCL",
+          "GOOGL",
+          "ANET"
+        ]
+      },
+      {
+        "month": "2025-12",
+        "watchlist": [
+          "MU",
+          "INTC",
+          "GOOGL",
+          "AMD",
+          "AVGO",
+          "MRVL",
+          "SHOP",
+          "AAPL",
+          "ANET",
+          "NVDA"
+        ]
+      },
+      {
+        "month": "2026-01",
+        "watchlist": [
+          "MU",
+          "INTC",
+          "GOOGL",
+          "AMD",
+          "TSLA",
+          "SHOP",
+          "ANET",
+          "AAPL",
+          "AVGO",
+          "MRVL"
+        ]
+      },
+      {
+        "month": "2026-02",
+        "watchlist": [
+          "MU",
+          "INTC",
+          "GOOGL",
+          "AMD",
+          "TSLA",
+          "AAPL",
+          "CSCO",
+          "ANET",
+          "AMZN",
+          "AVGO"
+        ]
+      },
+      {
+        "month": "2026-03",
+        "watchlist": [
+          "MU",
+          "INTC",
+          "GOOGL",
+          "MRVL",
+          "AMD",
+          "TSLA",
+          "CSCO",
+          "AAPL",
+          "AVGO",
+          "NVDA"
+        ]
+      },
+      {
+        "month": "2026-04",
+        "watchlist": [
+          "MU",
+          "INTC",
+          "AMD",
+          "MRVL",
+          "GOOGL",
+          "CSCO",
+          "ABNB",
+          "AAPL",
+          "AMZN",
+          "AVGO"
+        ]
+      }
+    ],
+    "total_wins": 34,
+    "total_losses": 98
+  },
+  "trades": [
+    {
+      "stock": "ANET",
+      "entryDate": "2021-03-26",
+      "entryPrice": 19.45,
+      "sl": 18.92,
+      "risk": 0.53,
+      "qty": 375,
+      "exitDate": "2021-03-30",
+      "exitPrice": 18.92,
+      "pnlR": -1.0,
+      "pnlDollar": -199.83,
+      "exitReason": "SL",
+      "durationDays": 4
+    },
+    {
+      "stock": "TSLA",
+      "entryDate": "2021-04-13",
+      "entryPrice": 254.11,
+      "sl": 243.07,
+      "risk": 11.04,
+      "qty": 18,
+      "exitDate": "2021-04-14",
+      "exitPrice": 243.07,
+      "pnlR": -0.99,
+      "pnlDollar": -198.72,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "GOOGL",
+      "entryDate": "2021-04-01",
+      "entryPrice": 105.62,
+      "sl": 103.43,
+      "risk": 2.18,
+      "qty": 91,
+      "exitDate": "2021-05-11",
+      "exitPrice": 111.23,
+      "pnlR": 2.56,
+      "pnlDollar": 511.09,
+      "exitReason": "Trail",
+      "durationDays": 40
+    },
+    {
+      "stock": "ANET",
+      "entryDate": "2021-05-06",
+      "entryPrice": 20.45,
+      "sl": 19.99,
+      "risk": 0.47,
+      "qty": 427,
+      "exitDate": "2021-05-11",
+      "exitPrice": 19.99,
+      "pnlR": -1.0,
+      "pnlDollar": -199.55,
+      "exitReason": "SL",
+      "durationDays": 5
+    },
+    {
+      "stock": "CSCO",
+      "entryDate": "2021-05-07",
+      "entryPrice": 46.31,
+      "sl": 45.56,
+      "risk": 0.75,
+      "qty": 267,
+      "exitDate": "2021-05-11",
+      "exitPrice": 45.56,
+      "pnlR": -1.0,
+      "pnlDollar": -199.35,
+      "exitReason": "SL",
+      "durationDays": 4
+    },
+    {
+      "stock": "ORCL",
+      "entryDate": "2021-06-04",
+      "entryPrice": 77.47,
+      "sl": 76.35,
+      "risk": 1.12,
+      "qty": 178,
+      "exitDate": "2021-06-15",
+      "exitPrice": 76.35,
+      "pnlR": -1.0,
+      "pnlDollar": -199.64,
+      "exitReason": "SL",
+      "durationDays": 11
+    },
+    {
+      "stock": "CRWD",
+      "entryDate": "2021-06-17",
+      "entryPrice": 241.31,
+      "sl": 232.92,
+      "risk": 8.39,
+      "qty": 23,
+      "exitDate": "2021-06-21",
+      "exitPrice": 232.92,
+      "pnlR": -0.96,
+      "pnlDollar": -192.95,
+      "exitReason": "SL",
+      "durationDays": 4
+    },
+    {
+      "stock": "CRWD",
+      "entryDate": "2021-06-22",
+      "entryPrice": 256.61,
+      "sl": 246.48,
+      "risk": 10.13,
+      "qty": 19,
+      "exitDate": "2021-07-01",
+      "exitPrice": 246.48,
+      "pnlR": -0.96,
+      "pnlDollar": -192.44,
+      "exitReason": "SL",
+      "durationDays": 9
+    },
+    {
+      "stock": "NVDA",
+      "entryDate": "2021-06-02",
+      "entryPrice": 16.74,
+      "sl": 16.21,
+      "risk": 0.53,
+      "qty": 380,
+      "exitDate": "2021-07-15",
+      "exitPrice": 18.94,
+      "pnlR": 4.2,
+      "pnlDollar": 839.03,
+      "exitReason": "Trail",
+      "durationDays": 43
+    },
+    {
+      "stock": "ANET",
+      "entryDate": "2021-05-20",
+      "entryPrice": 21.0,
+      "sl": 20.4,
+      "risk": 0.6,
+      "qty": 336,
+      "exitDate": "2021-07-19",
+      "exitPrice": 22.48,
+      "pnlR": 2.5,
+      "pnlDollar": 499.2,
+      "exitReason": "Trail",
+      "durationDays": 60
+    },
+    {
+      "stock": "SHOP",
+      "entryDate": "2021-07-22",
+      "entryPrice": 159.41,
+      "sl": 153.36,
+      "risk": 6.05,
+      "qty": 33,
+      "exitDate": "2021-07-27",
+      "exitPrice": 153.36,
+      "pnlR": -1.0,
+      "pnlDollar": -199.63,
+      "exitReason": "SL",
+      "durationDays": 5
+    },
+    {
+      "stock": "GOOGL",
+      "entryDate": "2021-07-23",
+      "entryPrice": 131.92,
+      "sl": 129.87,
+      "risk": 2.06,
+      "qty": 97,
+      "exitDate": "2021-07-27",
+      "exitPrice": 129.87,
+      "pnlR": -1.0,
+      "pnlDollar": -199.63,
+      "exitReason": "SL",
+      "durationDays": 4
+    },
+    {
+      "stock": "GOOGL",
+      "entryDate": "2021-07-28",
+      "entryPrice": 134.98,
+      "sl": 132.41,
+      "risk": 2.57,
+      "qty": 77,
+      "exitDate": "2021-08-03",
+      "exitPrice": 132.41,
+      "pnlR": -0.99,
+      "pnlDollar": -197.74,
+      "exitReason": "SL",
+      "durationDays": 6
+    },
+    {
+      "stock": "AMD",
+      "entryDate": "2021-08-02",
+      "entryPrice": 108.63,
+      "sl": 104.49,
+      "risk": 4.14,
+      "qty": 48,
+      "exitDate": "2021-08-10",
+      "exitPrice": 104.49,
+      "pnlR": -0.99,
+      "pnlDollar": -198.82,
+      "exitReason": "SL",
+      "durationDays": 8
+    },
+    {
+      "stock": "ORCL",
+      "entryDate": "2021-07-07",
+      "entryPrice": 80.46,
+      "sl": 78.95,
+      "risk": 1.51,
+      "qty": 132,
+      "exitDate": "2021-09-08",
+      "exitPrice": 82.64,
+      "pnlR": 1.43,
+      "pnlDollar": 286.92,
+      "exitReason": "Trail",
+      "durationDays": 63
+    },
+    {
+      "stock": "CSCO",
+      "entryDate": "2021-08-19",
+      "entryPrice": 49.98,
+      "sl": 49.25,
+      "risk": 0.74,
+      "qty": 270,
+      "exitDate": "2021-09-15",
+      "exitPrice": 50.14,
+      "pnlR": 0.21,
+      "pnlDollar": 42.11,
+      "exitReason": "Trail",
+      "durationDays": 27
+    },
+    {
+      "stock": "MSFT",
+      "entryDate": "2021-08-19",
+      "entryPrice": 285.35,
+      "sl": 281.64,
+      "risk": 3.71,
+      "qty": 53,
+      "exitDate": "2021-09-20",
+      "exitPrice": 281.64,
+      "pnlR": -0.98,
+      "pnlDollar": -196.83,
+      "exitReason": "SL",
+      "durationDays": 32
+    },
+    {
+      "stock": "MRVL",
+      "entryDate": "2021-10-07",
+      "entryPrice": 64.03,
+      "sl": 61.72,
+      "risk": 2.31,
+      "qty": 86,
+      "exitDate": "2021-10-12",
+      "exitPrice": 61.72,
+      "pnlR": -0.99,
+      "pnlDollar": -198.33,
+      "exitReason": "SL",
+      "durationDays": 5
+    },
+    {
+      "stock": "CRWD",
+      "entryDate": "2021-10-13",
+      "entryPrice": 270.44,
+      "sl": 260.46,
+      "risk": 9.98,
+      "qty": 20,
+      "exitDate": "2021-11-15",
+      "exitPrice": 260.46,
+      "pnlR": -1.0,
+      "pnlDollar": -199.69,
+      "exitReason": "SL",
+      "durationDays": 33
+    },
+    {
+      "stock": "NOW",
+      "entryDate": "2021-10-19",
+      "entryPrice": 136.05,
+      "sl": 132.47,
+      "risk": 3.58,
+      "qty": 55,
+      "exitDate": "2021-11-22",
+      "exitPrice": 132.47,
+      "pnlR": -0.99,
+      "pnlDollar": -197.17,
+      "exitReason": "SL",
+      "durationDays": 34
+    },
+    {
+      "stock": "SNOW",
+      "entryDate": "2021-11-15",
+      "entryPrice": 393.7,
+      "sl": 382.62,
+      "risk": 11.08,
+      "qty": 18,
+      "exitDate": "2021-11-22",
+      "exitPrice": 382.62,
+      "pnlR": -1.0,
+      "pnlDollar": -199.4,
+      "exitReason": "SL",
+      "durationDays": 7
+    },
+    {
+      "stock": "AMD",
+      "entryDate": "2021-10-13",
+      "entryPrice": 109.16,
+      "sl": 105.77,
+      "risk": 3.39,
+      "qty": 58,
+      "exitDate": "2021-12-06",
+      "exitPrice": 140.5,
+      "pnlR": 9.09,
+      "pnlDollar": 1817.95,
+      "exitReason": "Trail",
+      "durationDays": 54
+    },
+    {
+      "stock": "ANET",
+      "entryDate": "2021-12-15",
+      "entryPrice": 34.67,
+      "sl": 33.64,
+      "risk": 1.03,
+      "qty": 194,
+      "exitDate": "2021-12-16",
+      "exitPrice": 33.64,
+      "pnlR": -1.0,
+      "pnlDollar": -199.21,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "TSLA",
+      "entryDate": "2022-01-03",
+      "entryPrice": 399.93,
+      "sl": 380.85,
+      "risk": 19.08,
+      "qty": 10,
+      "exitDate": "2022-01-04",
+      "exitPrice": 380.85,
+      "pnlR": -0.95,
+      "pnlDollar": -190.79,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "MRVL",
+      "entryDate": "2021-12-03",
+      "entryPrice": 82.15,
+      "sl": 78.51,
+      "risk": 3.64,
+      "qty": 54,
+      "exitDate": "2022-01-10",
+      "exitPrice": 78.51,
+      "pnlR": -0.98,
+      "pnlDollar": -196.74,
+      "exitReason": "SL",
+      "durationDays": 38
+    },
+    {
+      "stock": "AAPL",
+      "entryDate": "2021-12-07",
+      "entryPrice": 167.35,
+      "sl": 162.44,
+      "risk": 4.91,
+      "qty": 40,
+      "exitDate": "2022-01-19",
+      "exitPrice": 162.44,
+      "pnlR": -0.98,
+      "pnlDollar": -196.51,
+      "exitReason": "SL",
+      "durationDays": 43
+    },
+    {
+      "stock": "ABNB",
+      "entryDate": "2022-02-15",
+      "entryPrice": 180.07,
+      "sl": 171.78,
+      "risk": 8.29,
+      "qty": 24,
+      "exitDate": "2022-02-22",
+      "exitPrice": 171.78,
+      "pnlR": -1.0,
+      "pnlDollar": -199.01,
+      "exitReason": "SL",
+      "durationDays": 7
+    },
+    {
+      "stock": "NVDA",
+      "entryDate": "2022-03-18",
+      "entryPrice": 26.4,
+      "sl": 25.05,
+      "risk": 1.36,
+      "qty": 147,
+      "exitDate": "2022-04-06",
+      "exitPrice": 25.05,
+      "pnlR": -1.0,
+      "pnlDollar": -199.38,
+      "exitReason": "SL",
+      "durationDays": 19
+    },
+    {
+      "stock": "AVGO",
+      "entryDate": "2022-03-18",
+      "entryPrice": 56.43,
+      "sl": 54.39,
+      "risk": 2.04,
+      "qty": 98,
+      "exitDate": "2022-04-11",
+      "exitPrice": 54.39,
+      "pnlR": -1.0,
+      "pnlDollar": -199.83,
+      "exitReason": "SL",
+      "durationDays": 24
+    },
+    {
+      "stock": "TSLA",
+      "entryDate": "2022-03-22",
+      "entryPrice": 331.33,
+      "sl": 314.99,
+      "risk": 16.34,
+      "qty": 12,
+      "exitDate": "2022-04-26",
+      "exitPrice": 320.69,
+      "pnlR": -0.64,
+      "pnlDollar": -127.59,
+      "exitReason": "Trail",
+      "durationDays": 35
+    },
+    {
+      "stock": "ANET",
+      "entryDate": "2022-11-30",
+      "entryPrice": 34.83,
+      "sl": 33.81,
+      "risk": 1.01,
+      "qty": 197,
+      "exitDate": "2022-12-02",
+      "exitPrice": 33.81,
+      "pnlR": -1.0,
+      "pnlDollar": -199.48,
+      "exitReason": "SL",
+      "durationDays": 2
+    },
+    {
+      "stock": "CSCO",
+      "entryDate": "2022-11-30",
+      "entryPrice": 45.06,
+      "sl": 44.05,
+      "risk": 1.01,
+      "qty": 197,
+      "exitDate": "2022-12-06",
+      "exitPrice": 44.05,
+      "pnlR": -1.0,
+      "pnlDollar": -199.83,
+      "exitReason": "SL",
+      "durationDays": 6
+    },
+    {
+      "stock": "NFLX",
+      "entryDate": "2022-12-01",
+      "entryPrice": 31.69,
+      "sl": 30.38,
+      "risk": 1.31,
+      "qty": 152,
+      "exitDate": "2022-12-06",
+      "exitPrice": 30.38,
+      "pnlR": -1.0,
+      "pnlDollar": -199.55,
+      "exitReason": "SL",
+      "durationDays": 5
+    },
+    {
+      "stock": "AVGO",
+      "entryDate": "2022-12-13",
+      "entryPrice": 54.03,
+      "sl": 52.59,
+      "risk": 1.44,
+      "qty": 138,
+      "exitDate": "2022-12-16",
+      "exitPrice": 52.59,
+      "pnlR": -1.0,
+      "pnlDollar": -199.27,
+      "exitReason": "SL",
+      "durationDays": 3
+    },
+    {
+      "stock": "NVDA",
+      "entryDate": "2023-01-17",
+      "entryPrice": 17.68,
+      "sl": 16.93,
+      "risk": 0.75,
+      "qty": 265,
+      "exitDate": "2023-01-19",
+      "exitPrice": 16.93,
+      "pnlR": -1.0,
+      "pnlDollar": -199.35,
+      "exitReason": "SL",
+      "durationDays": 2
+    },
+    {
+      "stock": "UBER",
+      "entryDate": "2023-01-20",
+      "entryPrice": 30.36,
+      "sl": 29.4,
+      "risk": 0.96,
+      "qty": 208,
+      "exitDate": "2023-01-24",
+      "exitPrice": 29.4,
+      "pnlR": -1.0,
+      "pnlDollar": -199.83,
+      "exitReason": "SL",
+      "durationDays": 4
+    },
+    {
+      "stock": "SHOP",
+      "entryDate": "2023-01-25",
+      "entryPrice": 47.33,
+      "sl": 44.82,
+      "risk": 2.51,
+      "qty": 79,
+      "exitDate": "2023-02-16",
+      "exitPrice": 45.4,
+      "pnlR": -0.76,
+      "pnlDollar": -152.72,
+      "exitReason": "Trail",
+      "durationDays": 22
+    },
+    {
+      "stock": "CSCO",
+      "entryDate": "2023-02-16",
+      "entryPrice": 46.58,
+      "sl": 45.57,
+      "risk": 1.01,
+      "qty": 198,
+      "exitDate": "2023-02-21",
+      "exitPrice": 45.57,
+      "pnlR": -1.0,
+      "pnlDollar": -199.99,
+      "exitReason": "SL",
+      "durationDays": 5
+    },
+    {
+      "stock": "NFLX",
+      "entryDate": "2023-01-20",
+      "entryPrice": 34.25,
+      "sl": 33.03,
+      "risk": 1.22,
+      "qty": 163,
+      "exitDate": "2023-02-23",
+      "exitPrice": 33.03,
+      "pnlR": -1.0,
+      "pnlDollar": -199.62,
+      "exitReason": "SL",
+      "durationDays": 34
+    },
+    {
+      "stock": "NVDA",
+      "entryDate": "2023-02-23",
+      "entryPrice": 23.64,
+      "sl": 22.47,
+      "risk": 1.17,
+      "qty": 170,
+      "exitDate": "2023-03-02",
+      "exitPrice": 22.47,
+      "pnlR": -0.99,
+      "pnlDollar": -198.9,
+      "exitReason": "SL",
+      "durationDays": 7
+    },
+    {
+      "stock": "ABNB",
+      "entryDate": "2023-01-13",
+      "entryPrice": 100.37,
+      "sl": 97.06,
+      "risk": 3.31,
+      "qty": 60,
+      "exitDate": "2023-03-10",
+      "exitPrice": 117.81,
+      "pnlR": 5.23,
+      "pnlDollar": 1046.19,
+      "exitReason": "Trail",
+      "durationDays": 56
+    },
+    {
+      "stock": "AVGO",
+      "entryDate": "2023-03-03",
+      "entryPrice": 60.37,
+      "sl": 59.1,
+      "risk": 1.28,
+      "qty": 156,
+      "exitDate": "2023-03-10",
+      "exitPrice": 59.1,
+      "pnlR": -1.0,
+      "pnlDollar": -199.13,
+      "exitReason": "SL",
+      "durationDays": 7
+    },
+    {
+      "stock": "ANET",
+      "entryDate": "2023-03-08",
+      "entryPrice": 37.1,
+      "sl": 36.11,
+      "risk": 0.99,
+      "qty": 202,
+      "exitDate": "2023-03-13",
+      "exitPrice": 36.11,
+      "pnlR": -1.0,
+      "pnlDollar": -199.94,
+      "exitReason": "SL",
+      "durationDays": 5
+    },
+    {
+      "stock": "ANET",
+      "entryDate": "2023-03-14",
+      "entryPrice": 38.29,
+      "sl": 37.2,
+      "risk": 1.09,
+      "qty": 183,
+      "exitDate": "2023-04-19",
+      "exitPrice": 39.39,
+      "pnlR": 1.01,
+      "pnlDollar": 202.26,
+      "exitReason": "Trail",
+      "durationDays": 36
+    },
+    {
+      "stock": "META",
+      "entryDate": "2023-03-14",
+      "entryPrice": 192.51,
+      "sl": 185.88,
+      "risk": 6.63,
+      "qty": 30,
+      "exitDate": "2023-07-24",
+      "exitPrice": 286.38,
+      "pnlR": 14.08,
+      "pnlDollar": 2816.19,
+      "exitReason": "Trail",
+      "durationDays": 132
+    },
+    {
+      "stock": "META",
+      "entryDate": "2023-07-28",
+      "entryPrice": 322.95,
+      "sl": 312.27,
+      "risk": 10.68,
+      "qty": 18,
+      "exitDate": "2023-08-01",
+      "exitPrice": 312.27,
+      "pnlR": -0.96,
+      "pnlDollar": -192.25,
+      "exitReason": "SL",
+      "durationDays": 4
+    },
+    {
+      "stock": "UBER",
+      "entryDate": "2023-05-02",
+      "entryPrice": 36.52,
+      "sl": 35.19,
+      "risk": 1.33,
+      "qty": 150,
+      "exitDate": "2023-08-07",
+      "exitPrice": 44.65,
+      "pnlR": 6.1,
+      "pnlDollar": 1219.93,
+      "exitReason": "Trail",
+      "durationDays": 97
+    },
+    {
+      "stock": "NVDA",
+      "entryDate": "2023-03-17",
+      "entryPrice": 25.7,
+      "sl": 24.75,
+      "risk": 0.95,
+      "qty": 209,
+      "exitDate": "2023-08-09",
+      "exitPrice": 43.4,
+      "pnlR": 18.49,
+      "pnlDollar": 3697.99,
+      "exitReason": "Trail",
+      "durationDays": 145
+    },
+    {
+      "stock": "AVGO",
+      "entryDate": "2023-08-31",
+      "entryPrice": 89.16,
+      "sl": 86.52,
+      "risk": 2.64,
+      "qty": 75,
+      "exitDate": "2023-09-01",
+      "exitPrice": 86.52,
+      "pnlR": -0.99,
+      "pnlDollar": -198.35,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "NFLX",
+      "entryDate": "2023-09-05",
+      "entryPrice": 44.87,
+      "sl": 43.62,
+      "risk": 1.25,
+      "qty": 160,
+      "exitDate": "2023-09-12",
+      "exitPrice": 43.62,
+      "pnlR": -1.0,
+      "pnlDollar": -199.74,
+      "exitReason": "SL",
+      "durationDays": 7
+    },
+    {
+      "stock": "AMZN",
+      "entryDate": "2023-09-13",
+      "entryPrice": 144.85,
+      "sl": 141.63,
+      "risk": 3.22,
+      "qty": 62,
+      "exitDate": "2023-09-15",
+      "exitPrice": 141.63,
+      "pnlR": -1.0,
+      "pnlDollar": -199.6,
+      "exitReason": "SL",
+      "durationDays": 2
+    },
+    {
+      "stock": "INTC",
+      "entryDate": "2023-09-01",
+      "entryPrice": 36.01,
+      "sl": 34.91,
+      "risk": 1.1,
+      "qty": 181,
+      "exitDate": "2023-09-20",
+      "exitPrice": 34.91,
+      "pnlR": -1.0,
+      "pnlDollar": -199.13,
+      "exitReason": "SL",
+      "durationDays": 19
+    },
+    {
+      "stock": "PLTR",
+      "entryDate": "2023-10-09",
+      "entryPrice": 17.61,
+      "sl": 16.75,
+      "risk": 0.86,
+      "qty": 232,
+      "exitDate": "2023-10-16",
+      "exitPrice": 16.75,
+      "pnlR": -1.0,
+      "pnlDollar": -199.97,
+      "exitReason": "SL",
+      "durationDays": 7
+    },
+    {
+      "stock": "ADBE",
+      "entryDate": "2023-10-12",
+      "entryPrice": 559.63,
+      "sl": 545.97,
+      "risk": 13.66,
+      "qty": 14,
+      "exitDate": "2023-10-16",
+      "exitPrice": 545.97,
+      "pnlR": -0.96,
+      "pnlDollar": -191.22,
+      "exitReason": "SL",
+      "durationDays": 4
+    },
+    {
+      "stock": "CRWD",
+      "entryDate": "2023-08-31",
+      "entryPrice": 163.03,
+      "sl": 156.6,
+      "risk": 6.43,
+      "qty": 31,
+      "exitDate": "2023-10-26",
+      "exitPrice": 171.75,
+      "pnlR": 1.35,
+      "pnlDollar": 270.33,
+      "exitReason": "Trail",
+      "durationDays": 56
+    },
+    {
+      "stock": "PLTR",
+      "entryDate": "2023-11-03",
+      "entryPrice": 18.89,
+      "sl": 17.83,
+      "risk": 1.06,
+      "qty": 189,
+      "exitDate": "2023-12-06",
+      "exitPrice": 17.83,
+      "pnlR": -1.0,
+      "pnlDollar": -199.79,
+      "exitReason": "SL",
+      "durationDays": 33
+    },
+    {
+      "stock": "ADBE",
+      "entryDate": "2023-12-12",
+      "entryPrice": 633.66,
+      "sl": 620.86,
+      "risk": 12.8,
+      "qty": 15,
+      "exitDate": "2023-12-13",
+      "exitPrice": 620.86,
+      "pnlR": -0.96,
+      "pnlDollar": -192.02,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "CRWD",
+      "entryDate": "2023-12-15",
+      "entryPrice": 260.08,
+      "sl": 251.67,
+      "risk": 8.41,
+      "qty": 23,
+      "exitDate": "2023-12-21",
+      "exitPrice": 251.67,
+      "pnlR": -0.97,
+      "pnlDollar": -193.41,
+      "exitReason": "SL",
+      "durationDays": 6
+    },
+    {
+      "stock": "NOW",
+      "entryDate": "2023-11-01",
+      "entryPrice": 118.7,
+      "sl": 114.61,
+      "risk": 4.09,
+      "qty": 48,
+      "exitDate": "2024-01-02",
+      "exitPrice": 136.01,
+      "pnlR": 4.16,
+      "pnlDollar": 831.23,
+      "exitReason": "Trail",
+      "durationDays": 62
+    },
+    {
+      "stock": "INTC",
+      "entryDate": "2023-12-26",
+      "entryPrice": 49.83,
+      "sl": 48.36,
+      "risk": 1.48,
+      "qty": 135,
+      "exitDate": "2024-01-02",
+      "exitPrice": 48.36,
+      "pnlR": -1.0,
+      "pnlDollar": -199.44,
+      "exitReason": "SL",
+      "durationDays": 7
+    },
+    {
+      "stock": "ANET",
+      "entryDate": "2023-11-01",
+      "entryPrice": 52.71,
+      "sl": 50.46,
+      "risk": 2.25,
+      "qty": 88,
+      "exitDate": "2024-02-13",
+      "exitPrice": 64.31,
+      "pnlR": 5.1,
+      "pnlDollar": 1020.58,
+      "exitReason": "Trail",
+      "durationDays": 104
+    },
+    {
+      "stock": "AMD",
+      "entryDate": "2024-01-16",
+      "entryPrice": 158.74,
+      "sl": 153.0,
+      "risk": 5.74,
+      "qty": 34,
+      "exitDate": "2024-02-20",
+      "exitPrice": 162.97,
+      "pnlR": 0.72,
+      "pnlDollar": 143.88,
+      "exitReason": "Trail",
+      "durationDays": 35
+    },
+    {
+      "stock": "UBER",
+      "entryDate": "2024-02-14",
+      "entryPrice": 79.15,
+      "sl": 76.39,
+      "risk": 2.76,
+      "qty": 72,
+      "exitDate": "2024-02-20",
+      "exitPrice": 76.39,
+      "pnlR": -0.99,
+      "pnlDollar": -198.51,
+      "exitReason": "SL",
+      "durationDays": 6
+    },
+    {
+      "stock": "CRWD",
+      "entryDate": "2024-01-09",
+      "entryPrice": 273.77,
+      "sl": 266.77,
+      "risk": 7.0,
+      "qty": 28,
+      "exitDate": "2024-02-21",
+      "exitPrice": 299.11,
+      "pnlR": 3.55,
+      "pnlDollar": 709.44,
+      "exitReason": "Trail",
+      "durationDays": 43
+    },
+    {
+      "stock": "AVGO",
+      "entryDate": "2024-02-22",
+      "entryPrice": 127.34,
+      "sl": 123.54,
+      "risk": 3.79,
+      "qty": 52,
+      "exitDate": "2024-03-11",
+      "exitPrice": 123.54,
+      "pnlR": -0.99,
+      "pnlDollar": -197.15,
+      "exitReason": "Trail",
+      "durationDays": 18
+    },
+    {
+      "stock": "ANET",
+      "entryDate": "2024-03-20",
+      "entryPrice": 74.14,
+      "sl": 71.72,
+      "risk": 2.43,
+      "qty": 82,
+      "exitDate": "2024-03-27",
+      "exitPrice": 71.72,
+      "pnlR": -0.99,
+      "pnlDollar": -199.0,
+      "exitReason": "SL",
+      "durationDays": 7
+    },
+    {
+      "stock": "NVDA",
+      "entryDate": "2024-02-22",
+      "entryPrice": 78.49,
+      "sl": 74.99,
+      "risk": 3.5,
+      "qty": 57,
+      "exitDate": "2024-04-09",
+      "exitPrice": 84.96,
+      "pnlR": 1.85,
+      "pnlDollar": 369.05,
+      "exitReason": "Trail",
+      "durationDays": 47
+    },
+    {
+      "stock": "COIN",
+      "entryDate": "2024-02-26",
+      "entryPrice": 193.94,
+      "sl": 179.7,
+      "risk": 14.24,
+      "qty": 14,
+      "exitDate": "2024-04-15",
+      "exitPrice": 230.48,
+      "pnlR": 2.56,
+      "pnlDollar": 511.58,
+      "exitReason": "Trail",
+      "durationDays": 49
+    },
+    {
+      "stock": "MU",
+      "entryDate": "2024-04-01",
+      "entryPrice": 123.43,
+      "sl": 117.88,
+      "risk": 5.55,
+      "qty": 36,
+      "exitDate": "2024-04-16",
+      "exitPrice": 117.88,
+      "pnlR": -1.0,
+      "pnlDollar": -199.8,
+      "exitReason": "SL",
+      "durationDays": 15
+    },
+    {
+      "stock": "PLTR",
+      "entryDate": "2024-05-06",
+      "entryPrice": 25.21,
+      "sl": 24.21,
+      "risk": 1.0,
+      "qty": 200,
+      "exitDate": "2024-05-07",
+      "exitPrice": 24.21,
+      "pnlR": -1.0,
+      "pnlDollar": -199.14,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "SHOP",
+      "entryDate": "2024-05-06",
+      "entryPrice": 77.37,
+      "sl": 74.52,
+      "risk": 2.85,
+      "qty": 70,
+      "exitDate": "2024-05-08",
+      "exitPrice": 74.52,
+      "pnlR": -1.0,
+      "pnlDollar": -199.63,
+      "exitReason": "SL",
+      "durationDays": 2
+    },
+    {
+      "stock": "AVGO",
+      "entryDate": "2024-05-15",
+      "entryPrice": 140.74,
+      "sl": 136.5,
+      "risk": 4.24,
+      "qty": 47,
+      "exitDate": "2024-05-17",
+      "exitPrice": 136.5,
+      "pnlR": -1.0,
+      "pnlDollar": -199.32,
+      "exitReason": "SL",
+      "durationDays": 2
+    },
+    {
+      "stock": "CRWD",
+      "entryDate": "2024-05-15",
+      "entryPrice": 343.12,
+      "sl": 331.93,
+      "risk": 11.19,
+      "qty": 17,
+      "exitDate": "2024-05-30",
+      "exitPrice": 331.93,
+      "pnlR": -0.95,
+      "pnlDollar": -190.2,
+      "exitReason": "SL",
+      "durationDays": 15
+    },
+    {
+      "stock": "QCOM",
+      "entryDate": "2024-05-02",
+      "entryPrice": 172.52,
+      "sl": 167.48,
+      "risk": 5.04,
+      "qty": 39,
+      "exitDate": "2024-06-24",
+      "exitPrice": 195.21,
+      "pnlR": 4.42,
+      "pnlDollar": 884.73,
+      "exitReason": "Trail",
+      "durationDays": 53
+    },
+    {
+      "stock": "MU",
+      "entryDate": "2024-06-05",
+      "entryPrice": 132.78,
+      "sl": 128.09,
+      "risk": 4.69,
+      "qty": 42,
+      "exitDate": "2024-06-27",
+      "exitPrice": 130.63,
+      "pnlR": -0.45,
+      "pnlDollar": -90.33,
+      "exitReason": "Trail",
+      "durationDays": 22
+    },
+    {
+      "stock": "META",
+      "entryDate": "2024-07-05",
+      "entryPrice": 536.81,
+      "sl": 524.24,
+      "risk": 12.57,
+      "qty": 15,
+      "exitDate": "2024-07-08",
+      "exitPrice": 524.24,
+      "pnlR": -0.94,
+      "pnlDollar": -188.54,
+      "exitReason": "SL",
+      "durationDays": 3
+    },
+    {
+      "stock": "NVDA",
+      "entryDate": "2024-05-23",
+      "entryPrice": 103.74,
+      "sl": 100.44,
+      "risk": 3.3,
+      "qty": 60,
+      "exitDate": "2024-07-17",
+      "exitPrice": 120.95,
+      "pnlR": 5.16,
+      "pnlDollar": 1032.79,
+      "exitReason": "Trail",
+      "durationDays": 55
+    },
+    {
+      "stock": "PLTR",
+      "entryDate": "2024-07-08",
+      "entryPrice": 27.7,
+      "sl": 26.58,
+      "risk": 1.12,
+      "qty": 178,
+      "exitDate": "2024-07-25",
+      "exitPrice": 26.58,
+      "pnlR": -1.0,
+      "pnlDollar": -199.82,
+      "exitReason": "SL",
+      "durationDays": 17
+    },
+    {
+      "stock": "ORCL",
+      "entryDate": "2024-08-30",
+      "entryPrice": 138.73,
+      "sl": 136.72,
+      "risk": 2.02,
+      "qty": 99,
+      "exitDate": "2024-09-03",
+      "exitPrice": 136.72,
+      "pnlR": -1.0,
+      "pnlDollar": -199.69,
+      "exitReason": "SL",
+      "durationDays": 4
+    },
+    {
+      "stock": "ORCL",
+      "entryDate": "2024-09-05",
+      "entryPrice": 140.03,
+      "sl": 137.74,
+      "risk": 2.29,
+      "qty": 87,
+      "exitDate": "2024-09-06",
+      "exitPrice": 137.74,
+      "pnlR": -1.0,
+      "pnlDollar": -199.41,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "TSLA",
+      "entryDate": "2024-09-05",
+      "entryPrice": 230.17,
+      "sl": 220.18,
+      "risk": 9.99,
+      "qty": 20,
+      "exitDate": "2024-09-06",
+      "exitPrice": 220.18,
+      "pnlR": -1.0,
+      "pnlDollar": -199.8,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "PYPL",
+      "entryDate": "2024-09-19",
+      "entryPrice": 77.16,
+      "sl": 74.96,
+      "risk": 2.2,
+      "qty": 90,
+      "exitDate": "2024-10-29",
+      "exitPrice": 77.84,
+      "pnlR": 0.31,
+      "pnlDollar": 61.8,
+      "exitReason": "Trail",
+      "durationDays": 40
+    },
+    {
+      "stock": "PLTR",
+      "entryDate": "2024-08-09",
+      "entryPrice": 30.01,
+      "sl": 28.11,
+      "risk": 1.9,
+      "qty": 105,
+      "exitDate": "2024-10-31",
+      "exitPrice": 40.92,
+      "pnlR": 5.73,
+      "pnlDollar": 1145.49,
+      "exitReason": "Trail",
+      "durationDays": 83
+    },
+    {
+      "stock": "ORCL",
+      "entryDate": "2024-09-10",
+      "entryPrice": 153.07,
+      "sl": 149.09,
+      "risk": 3.98,
+      "qty": 50,
+      "exitDate": "2024-10-31",
+      "exitPrice": 166.94,
+      "pnlR": 3.47,
+      "pnlDollar": 693.38,
+      "exitReason": "Trail",
+      "durationDays": 51
+    },
+    {
+      "stock": "ORCL",
+      "entryDate": "2024-11-06",
+      "entryPrice": 178.36,
+      "sl": 175.0,
+      "risk": 3.36,
+      "qty": 59,
+      "exitDate": "2024-12-03",
+      "exitPrice": 177.98,
+      "pnlR": -0.11,
+      "pnlDollar": -22.42,
+      "exitReason": "Trail",
+      "durationDays": 27
+    },
+    {
+      "stock": "NOW",
+      "entryDate": "2024-12-04",
+      "entryPrice": 224.63,
+      "sl": 219.39,
+      "risk": 5.24,
+      "qty": 38,
+      "exitDate": "2024-12-18",
+      "exitPrice": 219.39,
+      "pnlR": -1.0,
+      "pnlDollar": -199.15,
+      "exitReason": "SL",
+      "durationDays": 14
+    },
+    {
+      "stock": "TSLA",
+      "entryDate": "2024-11-06",
+      "entryPrice": 288.53,
+      "sl": 275.12,
+      "risk": 13.41,
+      "qty": 14,
+      "exitDate": "2025-01-02",
+      "exitPrice": 387.91,
+      "pnlR": 6.96,
+      "pnlDollar": 1391.27,
+      "exitReason": "Trail",
+      "durationDays": 57
+    },
+    {
+      "stock": "PLTR",
+      "entryDate": "2024-11-05",
+      "entryPrice": 51.13,
+      "sl": 49.23,
+      "risk": 1.9,
+      "qty": 104,
+      "exitDate": "2025-01-07",
+      "exitPrice": 70.32,
+      "pnlR": 9.98,
+      "pnlDollar": 1995.6,
+      "exitReason": "Trail",
+      "durationDays": 63
+    },
+    {
+      "stock": "MRVL",
+      "entryDate": "2025-01-17",
+      "entryPrice": 124.28,
+      "sl": 119.77,
+      "risk": 4.51,
+      "qty": 44,
+      "exitDate": "2025-01-27",
+      "exitPrice": 119.77,
+      "pnlR": -0.99,
+      "pnlDollar": -198.53,
+      "exitReason": "SL",
+      "durationDays": 10
+    },
+    {
+      "stock": "NOW",
+      "entryDate": "2025-01-22",
+      "entryPrice": 225.03,
+      "sl": 219.89,
+      "risk": 5.14,
+      "qty": 38,
+      "exitDate": "2025-01-30",
+      "exitPrice": 219.89,
+      "pnlR": -0.98,
+      "pnlDollar": -195.36,
+      "exitReason": "SL",
+      "durationDays": 8
+    },
+    {
+      "stock": "CRM",
+      "entryDate": "2025-01-27",
+      "entryPrice": 343.99,
+      "sl": 334.69,
+      "risk": 9.3,
+      "qty": 21,
+      "exitDate": "2025-02-03",
+      "exitPrice": 334.69,
+      "pnlR": -0.98,
+      "pnlDollar": -195.36,
+      "exitReason": "SL",
+      "durationDays": 7
+    },
+    {
+      "stock": "SNOW",
+      "entryDate": "2025-02-04",
+      "entryPrice": 189.11,
+      "sl": 182.08,
+      "risk": 7.03,
+      "qty": 28,
+      "exitDate": "2025-02-05",
+      "exitPrice": 182.08,
+      "pnlR": -0.98,
+      "pnlDollar": -196.82,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "SHOP",
+      "entryDate": "2025-02-11",
+      "entryPrice": 123.59,
+      "sl": 118.14,
+      "risk": 5.45,
+      "qty": 36,
+      "exitDate": "2025-02-12",
+      "exitPrice": 118.14,
+      "pnlR": -0.98,
+      "pnlDollar": -196.22,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "PLTR",
+      "entryDate": "2025-02-04",
+      "entryPrice": 103.83,
+      "sl": 98.46,
+      "risk": 5.37,
+      "qty": 37,
+      "exitDate": "2025-02-20",
+      "exitPrice": 98.46,
+      "pnlR": -0.99,
+      "pnlDollar": -198.7,
+      "exitReason": "Trail",
+      "durationDays": 16
+    },
+    {
+      "stock": "SHOP",
+      "entryDate": "2025-02-13",
+      "entryPrice": 127.65,
+      "sl": 121.48,
+      "risk": 6.17,
+      "qty": 32,
+      "exitDate": "2025-02-20",
+      "exitPrice": 121.48,
+      "pnlR": -0.99,
+      "pnlDollar": -197.42,
+      "exitReason": "SL",
+      "durationDays": 7
+    },
+    {
+      "stock": "NFLX",
+      "entryDate": "2025-01-22",
+      "entryPrice": 95.4,
+      "sl": 92.19,
+      "risk": 3.21,
+      "qty": 62,
+      "exitDate": "2025-02-25",
+      "exitPrice": 97.63,
+      "pnlR": 0.69,
+      "pnlDollar": 138.24,
+      "exitReason": "Trail",
+      "durationDays": 34
+    },
+    {
+      "stock": "SNOW",
+      "entryDate": "2025-05-12",
+      "entryPrice": 180.54,
+      "sl": 174.25,
+      "risk": 6.29,
+      "qty": 31,
+      "exitDate": "2025-07-11",
+      "exitPrice": 210.51,
+      "pnlR": 4.65,
+      "pnlDollar": 929.13,
+      "exitReason": "Trail",
+      "durationDays": 60
+    },
+    {
+      "stock": "COIN",
+      "entryDate": "2025-07-18",
+      "entryPrice": 419.78,
+      "sl": 400.36,
+      "risk": 19.42,
+      "qty": 10,
+      "exitDate": "2025-07-22",
+      "exitPrice": 400.36,
+      "pnlR": -0.97,
+      "pnlDollar": -194.24,
+      "exitReason": "SL",
+      "durationDays": 4
+    },
+    {
+      "stock": "SHOP",
+      "entryDate": "2025-05-12",
+      "entryPrice": 104.34,
+      "sl": 98.8,
+      "risk": 5.54,
+      "qty": 36,
+      "exitDate": "2025-08-01",
+      "exitPrice": 116.1,
+      "pnlR": 2.12,
+      "pnlDollar": 423.33,
+      "exitReason": "Trail",
+      "durationDays": 81
+    },
+    {
+      "stock": "ORCL",
+      "entryDate": "2025-07-31",
+      "entryPrice": 251.78,
+      "sl": 245.68,
+      "risk": 6.11,
+      "qty": 32,
+      "exitDate": "2025-08-01",
+      "exitPrice": 245.68,
+      "pnlR": -0.98,
+      "pnlDollar": -195.4,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "PLTR",
+      "entryDate": "2025-08-05",
+      "entryPrice": 173.27,
+      "sl": 167.28,
+      "risk": 5.99,
+      "qty": 33,
+      "exitDate": "2025-08-19",
+      "exitPrice": 167.28,
+      "pnlR": -0.99,
+      "pnlDollar": -197.64,
+      "exitReason": "SL",
+      "durationDays": 14
+    },
+    {
+      "stock": "AVGO",
+      "entryDate": "2025-05-12",
+      "entryPrice": 219.8,
+      "sl": 212.29,
+      "risk": 7.51,
+      "qty": 26,
+      "exitDate": "2025-08-20",
+      "exitPrice": 287.09,
+      "pnlR": 8.75,
+      "pnlDollar": 1749.54,
+      "exitReason": "Trail",
+      "durationDays": 100
+    },
+    {
+      "stock": "MU",
+      "entryDate": "2025-08-11",
+      "entryPrice": 123.54,
+      "sl": 119.23,
+      "risk": 4.31,
+      "qty": 46,
+      "exitDate": "2025-08-20",
+      "exitPrice": 119.23,
+      "pnlR": -0.99,
+      "pnlDollar": -198.1,
+      "exitReason": "SL",
+      "durationDays": 9
+    },
+    {
+      "stock": "SNOW",
+      "entryDate": "2025-08-28",
+      "entryPrice": 241.0,
+      "sl": 232.26,
+      "risk": 8.74,
+      "qty": 22,
+      "exitDate": "2025-09-02",
+      "exitPrice": 232.26,
+      "pnlR": -0.96,
+      "pnlDollar": -192.22,
+      "exitReason": "SL",
+      "durationDays": 5
+    },
+    {
+      "stock": "ORCL",
+      "entryDate": "2025-09-10",
+      "entryPrice": 325.76,
+      "sl": 311.85,
+      "risk": 13.91,
+      "qty": 14,
+      "exitDate": "2025-09-11",
+      "exitPrice": 311.85,
+      "pnlR": -0.97,
+      "pnlDollar": -194.72,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "ANET",
+      "entryDate": "2025-09-05",
+      "entryPrice": 142.85,
+      "sl": 138.54,
+      "risk": 4.31,
+      "qty": 46,
+      "exitDate": "2025-09-17",
+      "exitPrice": 138.54,
+      "pnlR": -0.99,
+      "pnlDollar": -198.16,
+      "exitReason": "SL",
+      "durationDays": 12
+    },
+    {
+      "stock": "COIN",
+      "entryDate": "2025-09-18",
+      "entryPrice": 343.13,
+      "sl": 329.45,
+      "risk": 13.68,
+      "qty": 14,
+      "exitDate": "2025-09-22",
+      "exitPrice": 329.45,
+      "pnlR": -0.96,
+      "pnlDollar": -191.57,
+      "exitReason": "SL",
+      "durationDays": 4
+    },
+    {
+      "stock": "SHOP",
+      "entryDate": "2025-09-22",
+      "entryPrice": 157.12,
+      "sl": 152.69,
+      "risk": 4.43,
+      "qty": 45,
+      "exitDate": "2025-09-23",
+      "exitPrice": 152.69,
+      "pnlR": -1.0,
+      "pnlDollar": -199.2,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "PLTR",
+      "entryDate": "2025-09-19",
+      "entryPrice": 182.39,
+      "sl": 175.57,
+      "risk": 6.82,
+      "qty": 29,
+      "exitDate": "2025-09-25",
+      "exitPrice": 175.57,
+      "pnlR": -0.99,
+      "pnlDollar": -197.84,
+      "exitReason": "SL",
+      "durationDays": 6
+    },
+    {
+      "stock": "AVGO",
+      "entryDate": "2025-09-05",
+      "entryPrice": 332.98,
+      "sl": 320.62,
+      "risk": 12.36,
+      "qty": 16,
+      "exitDate": "2025-10-10",
+      "exitPrice": 325.37,
+      "pnlR": -0.61,
+      "pnlDollar": -121.8,
+      "exitReason": "Trail",
+      "durationDays": 35
+    },
+    {
+      "stock": "NVDA",
+      "entryDate": "2025-09-30",
+      "entryPrice": 186.56,
+      "sl": 181.2,
+      "risk": 5.36,
+      "qty": 37,
+      "exitDate": "2025-10-14",
+      "exitPrice": 181.2,
+      "pnlR": -0.99,
+      "pnlDollar": -198.48,
+      "exitReason": "SL",
+      "durationDays": 14
+    },
+    {
+      "stock": "INTC",
+      "entryDate": "2025-10-28",
+      "entryPrice": 41.53,
+      "sl": 39.46,
+      "risk": 2.07,
+      "qty": 96,
+      "exitDate": "2025-11-03",
+      "exitPrice": 39.46,
+      "pnlR": -1.0,
+      "pnlDollar": -199.06,
+      "exitReason": "SL",
+      "durationDays": 6
+    },
+    {
+      "stock": "PLTR",
+      "entryDate": "2025-11-03",
+      "entryPrice": 207.18,
+      "sl": 199.72,
+      "risk": 7.46,
+      "qty": 26,
+      "exitDate": "2025-11-04",
+      "exitPrice": 199.72,
+      "pnlR": -0.97,
+      "pnlDollar": -193.96,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "NVDA",
+      "entryDate": "2025-10-28",
+      "entryPrice": 201.01,
+      "sl": 194.59,
+      "risk": 6.42,
+      "qty": 31,
+      "exitDate": "2025-11-06",
+      "exitPrice": 194.59,
+      "pnlR": -0.99,
+      "pnlDollar": -198.95,
+      "exitReason": "SL",
+      "durationDays": 9
+    },
+    {
+      "stock": "MU",
+      "entryDate": "2025-10-01",
+      "entryPrice": 181.89,
+      "sl": 174.85,
+      "risk": 7.03,
+      "qty": 28,
+      "exitDate": "2025-11-20",
+      "exitPrice": 212.82,
+      "pnlR": 4.33,
+      "pnlDollar": 866.1,
+      "exitReason": "Trail",
+      "durationDays": 50
+    },
+    {
+      "stock": "AVGO",
+      "entryDate": "2025-11-26",
+      "entryPrice": 395.98,
+      "sl": 377.73,
+      "risk": 18.25,
+      "qty": 10,
+      "exitDate": "2025-12-03",
+      "exitPrice": 377.73,
+      "pnlR": -0.91,
+      "pnlDollar": -182.52,
+      "exitReason": "SL",
+      "durationDays": 7
+    },
+    {
+      "stock": "INTC",
+      "entryDate": "2025-12-02",
+      "entryPrice": 43.47,
+      "sl": 41.53,
+      "risk": 1.94,
+      "qty": 103,
+      "exitDate": "2025-12-04",
+      "exitPrice": 41.53,
+      "pnlR": -1.0,
+      "pnlDollar": -199.97,
+      "exitReason": "SL",
+      "durationDays": 2
+    },
+    {
+      "stock": "MRVL",
+      "entryDate": "2025-12-03",
+      "entryPrice": 100.08,
+      "sl": 94.75,
+      "risk": 5.33,
+      "qty": 37,
+      "exitDate": "2025-12-08",
+      "exitPrice": 94.75,
+      "pnlR": -0.99,
+      "pnlDollar": -197.31,
+      "exitReason": "SL",
+      "durationDays": 5
+    },
+    {
+      "stock": "AVGO",
+      "entryDate": "2025-12-10",
+      "entryPrice": 411.32,
+      "sl": 394.6,
+      "risk": 16.71,
+      "qty": 11,
+      "exitDate": "2025-12-11",
+      "exitPrice": 394.6,
+      "pnlR": -0.92,
+      "pnlDollar": -183.85,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "GOOGL",
+      "entryDate": "2025-11-24",
+      "entryPrice": 318.15,
+      "sl": 306.18,
+      "risk": 11.97,
+      "qty": 16,
+      "exitDate": "2025-12-12",
+      "exitPrice": 306.18,
+      "pnlR": -0.96,
+      "pnlDollar": -191.5,
+      "exitReason": "SL",
+      "durationDays": 18
+    },
+    {
+      "stock": "ANET",
+      "entryDate": "2026-01-05",
+      "entryPrice": 137.19,
+      "sl": 133.21,
+      "risk": 3.98,
+      "qty": 50,
+      "exitDate": "2026-01-06",
+      "exitPrice": 133.21,
+      "pnlR": -1.0,
+      "pnlDollar": -199.16,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "INTC",
+      "entryDate": "2026-01-07",
+      "entryPrice": 42.63,
+      "sl": 40.89,
+      "risk": 1.74,
+      "qty": 114,
+      "exitDate": "2026-01-08",
+      "exitPrice": 40.89,
+      "pnlR": -0.99,
+      "pnlDollar": -198.36,
+      "exitReason": "SL",
+      "durationDays": 1
+    },
+    {
+      "stock": "INTC",
+      "entryDate": "2026-01-09",
+      "entryPrice": 45.55,
+      "sl": 43.55,
+      "risk": 2.0,
+      "qty": 100,
+      "exitDate": "2026-01-26",
+      "exitPrice": 43.55,
+      "pnlR": -1.0,
+      "pnlDollar": -199.64,
+      "exitReason": "Trail",
+      "durationDays": 17
+    },
+    {
+      "stock": "AMD",
+      "entryDate": "2026-01-21",
+      "entryPrice": 249.8,
+      "sl": 238.95,
+      "risk": 10.85,
+      "qty": 18,
+      "exitDate": "2026-01-30",
+      "exitPrice": 238.95,
+      "pnlR": -0.98,
+      "pnlDollar": -195.34,
+      "exitReason": "SL",
+      "durationDays": 9
+    },
+    {
+      "stock": "CSCO",
+      "entryDate": "2026-02-02",
+      "entryPrice": 80.21,
+      "sl": 78.5,
+      "risk": 1.7,
+      "qty": 117,
+      "exitDate": "2026-02-12",
+      "exitPrice": 78.5,
+      "pnlR": -0.99,
+      "pnlDollar": -198.99,
+      "exitReason": "Trail",
+      "durationDays": 10
+    },
+    {
+      "stock": "AAPL",
+      "entryDate": "2026-02-04",
+      "entryPrice": 275.98,
+      "sl": 269.28,
+      "risk": 6.7,
+      "qty": 29,
+      "exitDate": "2026-02-12",
+      "exitPrice": 269.28,
+      "pnlR": -0.97,
+      "pnlDollar": -194.19,
+      "exitReason": "SL",
+      "durationDays": 8
+    },
+    {
+      "stock": "MU",
+      "entryDate": "2025-12-19",
+      "entryPrice": 265.7,
+      "sl": 250.5,
+      "risk": 15.2,
+      "qty": 13,
+      "exitDate": "2026-03-03",
+      "exitPrice": 383.78,
+      "pnlR": 7.68,
+      "pnlDollar": 1535.03,
+      "exitReason": "Trail",
+      "durationDays": 74
+    },
+    {
+      "stock": "MRVL",
+      "entryDate": "2026-03-06",
+      "entryPrice": 89.53,
+      "sl": 85.26,
+      "risk": 4.27,
+      "qty": 46,
+      "exitDate": "2026-03-09",
+      "exitPrice": 85.26,
+      "pnlR": -0.98,
+      "pnlDollar": -196.19,
+      "exitReason": "SL",
+      "durationDays": 3
+    },
+    {
+      "stock": "MU",
+      "entryDate": "2026-03-16",
+      "entryPrice": 441.61,
+      "sl": 415.83,
+      "risk": 25.79,
+      "qty": 7,
+      "exitDate": "2026-03-20",
+      "exitPrice": 415.83,
+      "pnlR": -0.9,
+      "pnlDollar": -180.51,
+      "exitReason": "SL",
+      "durationDays": 4
+    },
+    {
+      "stock": "INTC",
+      "entryDate": "2026-04-08",
+      "entryPrice": 58.95,
+      "sl": 55.76,
+      "risk": 3.19,
+      "qty": 62,
+      "exitDate": "2026-05-28",
+      "exitPrice": 120.89,
+      "pnlR": 19.2,
+      "pnlDollar": 3840.28,
+      "exitReason": "Open",
+      "durationDays": 50
+    },
+    {
+      "stock": "MRVL",
+      "entryDate": "2026-04-08",
+      "entryPrice": 114.39,
+      "sl": 108.3,
+      "risk": 6.1,
+      "qty": 32,
+      "exitDate": "2026-05-28",
+      "exitPrice": 204.83,
+      "pnlR": 14.47,
+      "pnlDollar": 2893.99,
+      "exitReason": "Open",
+      "durationDays": 50
+    },
+    {
+      "stock": "AMZN",
+      "entryDate": "2026-04-08",
+      "entryPrice": 221.25,
+      "sl": 215.09,
+      "risk": 6.16,
+      "qty": 32,
+      "exitDate": "2026-05-28",
+      "exitPrice": 274.0,
+      "pnlR": 8.44,
+      "pnlDollar": 1688.0,
+      "exitReason": "Open",
+      "durationDays": 50
+    }
+  ],
+  "equity_curve": [
+    {
+      "date": "2021-01-04",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-05",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-06",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-07",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-08",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-11",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-12",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-13",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-14",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-15",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-19",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-20",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-21",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-22",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-25",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-26",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-27",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-28",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-01-29",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-01",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-02",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-03",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-04",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-05",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-08",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-09",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-10",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-11",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-12",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-16",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-17",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-18",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-19",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-22",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-23",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-24",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-25",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-02-26",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-01",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-02",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-03",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-04",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-05",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-08",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-09",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-10",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-11",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-12",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-15",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-16",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-17",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-18",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-19",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-22",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-23",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-24",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-25",
+      "pnl": 0,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-26",
+      "pnl": 0,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-03-29",
+      "pnl": 0,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-03-30",
+      "pnl": -199.83,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-03-31",
+      "pnl": -199.83,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-04-01",
+      "pnl": -199.83,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-05",
+      "pnl": -199.83,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-06",
+      "pnl": -199.83,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-07",
+      "pnl": -199.83,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-08",
+      "pnl": -199.83,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-09",
+      "pnl": -199.83,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-12",
+      "pnl": -199.83,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-13",
+      "pnl": -199.83,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-04-14",
+      "pnl": -398.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-15",
+      "pnl": -398.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-16",
+      "pnl": -398.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-19",
+      "pnl": -398.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-20",
+      "pnl": -398.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-21",
+      "pnl": -398.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-22",
+      "pnl": -398.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-23",
+      "pnl": -398.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-26",
+      "pnl": -398.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-27",
+      "pnl": -398.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-28",
+      "pnl": -398.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-29",
+      "pnl": -398.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-04-30",
+      "pnl": -398.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-05-03",
+      "pnl": -398.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-05-04",
+      "pnl": -398.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-05-05",
+      "pnl": -398.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-05-06",
+      "pnl": -398.55,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-05-07",
+      "pnl": -398.55,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-05-10",
+      "pnl": -398.55,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-05-11",
+      "pnl": -286.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-05-12",
+      "pnl": -286.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-05-13",
+      "pnl": -286.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-05-14",
+      "pnl": -286.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-05-17",
+      "pnl": -286.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-05-18",
+      "pnl": -286.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-05-19",
+      "pnl": -286.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-05-20",
+      "pnl": -286.36,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-05-21",
+      "pnl": -286.36,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-05-24",
+      "pnl": -286.36,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-05-25",
+      "pnl": -286.36,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-05-26",
+      "pnl": -286.36,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-05-27",
+      "pnl": -286.36,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-05-28",
+      "pnl": -286.36,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-06-01",
+      "pnl": -286.36,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-06-02",
+      "pnl": -286.36,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-06-03",
+      "pnl": -286.36,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-06-04",
+      "pnl": -286.36,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-06-07",
+      "pnl": -286.36,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-06-08",
+      "pnl": -286.36,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-06-09",
+      "pnl": -286.36,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-06-10",
+      "pnl": -286.36,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-06-11",
+      "pnl": -286.36,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-06-14",
+      "pnl": -286.36,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-06-15",
+      "pnl": -486.0,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-06-16",
+      "pnl": -486.0,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-06-17",
+      "pnl": -486.0,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-06-18",
+      "pnl": -486.0,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-06-21",
+      "pnl": -678.95,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-06-22",
+      "pnl": -678.95,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-06-23",
+      "pnl": -678.95,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-06-24",
+      "pnl": -678.95,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-06-25",
+      "pnl": -678.95,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-06-28",
+      "pnl": -678.95,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-06-29",
+      "pnl": -678.95,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-06-30",
+      "pnl": -678.95,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-07-01",
+      "pnl": -871.38,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-07-02",
+      "pnl": -871.38,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-07-06",
+      "pnl": -871.38,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-07-07",
+      "pnl": -871.38,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-07-08",
+      "pnl": -871.38,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-07-09",
+      "pnl": -871.38,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-07-12",
+      "pnl": -871.38,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-07-13",
+      "pnl": -871.38,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-07-14",
+      "pnl": -871.38,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-07-15",
+      "pnl": -32.35,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-07-16",
+      "pnl": -32.35,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-07-19",
+      "pnl": 466.84,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-07-20",
+      "pnl": 466.84,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-07-21",
+      "pnl": 466.84,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-07-22",
+      "pnl": 466.84,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-07-23",
+      "pnl": 466.84,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-07-26",
+      "pnl": 466.84,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-07-27",
+      "pnl": 67.59,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-07-28",
+      "pnl": 67.59,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-07-29",
+      "pnl": 67.59,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-07-30",
+      "pnl": 67.59,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-08-02",
+      "pnl": 67.59,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-08-03",
+      "pnl": -130.14,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-08-04",
+      "pnl": -130.14,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-08-05",
+      "pnl": -130.14,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-08-06",
+      "pnl": -130.14,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-08-09",
+      "pnl": -130.14,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-08-10",
+      "pnl": -328.97,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-08-11",
+      "pnl": -328.97,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-08-12",
+      "pnl": -328.97,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-08-13",
+      "pnl": -328.97,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-08-16",
+      "pnl": -328.97,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-08-17",
+      "pnl": -328.97,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-08-18",
+      "pnl": -328.97,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-08-19",
+      "pnl": -328.97,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-08-20",
+      "pnl": -328.97,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-08-23",
+      "pnl": -328.97,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-08-24",
+      "pnl": -328.97,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-08-25",
+      "pnl": -328.97,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-08-26",
+      "pnl": -328.97,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-08-27",
+      "pnl": -328.97,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-08-30",
+      "pnl": -328.97,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-08-31",
+      "pnl": -328.97,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-09-01",
+      "pnl": -328.97,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-09-02",
+      "pnl": -328.97,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-09-03",
+      "pnl": -328.97,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-09-07",
+      "pnl": -328.97,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-09-08",
+      "pnl": -42.05,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-09-09",
+      "pnl": -42.05,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-09-10",
+      "pnl": -42.05,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-09-13",
+      "pnl": -42.05,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-09-14",
+      "pnl": -42.05,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-09-15",
+      "pnl": 0.07,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-09-16",
+      "pnl": 0.07,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-09-17",
+      "pnl": 0.07,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-09-20",
+      "pnl": -196.76,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-09-21",
+      "pnl": -196.76,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-09-22",
+      "pnl": -196.76,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-09-23",
+      "pnl": -196.76,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-09-24",
+      "pnl": -196.76,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-09-27",
+      "pnl": -196.76,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-09-28",
+      "pnl": -196.76,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-09-29",
+      "pnl": -196.76,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-09-30",
+      "pnl": -196.76,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-10-01",
+      "pnl": -196.76,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-10-04",
+      "pnl": -196.76,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-10-05",
+      "pnl": -196.76,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-10-06",
+      "pnl": -196.76,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-10-07",
+      "pnl": -196.76,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-10-08",
+      "pnl": -196.76,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-10-11",
+      "pnl": -196.76,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-10-12",
+      "pnl": -395.09,
+      "open_positions": 0
+    },
+    {
+      "date": "2021-10-13",
+      "pnl": -395.09,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-10-14",
+      "pnl": -395.09,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-10-15",
+      "pnl": -395.09,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-10-18",
+      "pnl": -395.09,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-10-19",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-10-20",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-10-21",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-10-22",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-10-25",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-10-26",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-10-27",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-10-28",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-10-29",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-11-01",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-11-02",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-11-03",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-11-04",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-11-05",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-11-08",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-11-09",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-11-10",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-11-11",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-11-12",
+      "pnl": -395.09,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-11-15",
+      "pnl": -594.78,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-11-16",
+      "pnl": -594.78,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-11-17",
+      "pnl": -594.78,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-11-18",
+      "pnl": -594.78,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-11-19",
+      "pnl": -594.78,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-11-22",
+      "pnl": -991.35,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-11-23",
+      "pnl": -991.35,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-11-24",
+      "pnl": -991.35,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-11-26",
+      "pnl": -991.35,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-11-29",
+      "pnl": -991.35,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-11-30",
+      "pnl": -991.35,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-12-01",
+      "pnl": -991.35,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-12-02",
+      "pnl": -991.35,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-12-03",
+      "pnl": -991.35,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-06",
+      "pnl": 826.6,
+      "open_positions": 1
+    },
+    {
+      "date": "2021-12-07",
+      "pnl": 826.6,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-08",
+      "pnl": 826.6,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-09",
+      "pnl": 826.6,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-10",
+      "pnl": 826.6,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-13",
+      "pnl": 826.6,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-14",
+      "pnl": 826.6,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-15",
+      "pnl": 826.6,
+      "open_positions": 3
+    },
+    {
+      "date": "2021-12-16",
+      "pnl": 627.39,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-17",
+      "pnl": 627.39,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-20",
+      "pnl": 627.39,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-21",
+      "pnl": 627.39,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-22",
+      "pnl": 627.39,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-23",
+      "pnl": 627.39,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-27",
+      "pnl": 627.39,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-28",
+      "pnl": 627.39,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-29",
+      "pnl": 627.39,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-30",
+      "pnl": 627.39,
+      "open_positions": 2
+    },
+    {
+      "date": "2021-12-31",
+      "pnl": 627.39,
+      "open_positions": 2
+    },
+    {
+      "date": "2022-01-03",
+      "pnl": 627.39,
+      "open_positions": 3
+    },
+    {
+      "date": "2022-01-04",
+      "pnl": 436.6,
+      "open_positions": 2
+    },
+    {
+      "date": "2022-01-05",
+      "pnl": 436.6,
+      "open_positions": 2
+    },
+    {
+      "date": "2022-01-06",
+      "pnl": 436.6,
+      "open_positions": 2
+    },
+    {
+      "date": "2022-01-07",
+      "pnl": 436.6,
+      "open_positions": 2
+    },
+    {
+      "date": "2022-01-10",
+      "pnl": 239.86,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-01-11",
+      "pnl": 239.86,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-01-12",
+      "pnl": 239.86,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-01-13",
+      "pnl": 239.86,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-01-14",
+      "pnl": 239.86,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-01-18",
+      "pnl": 239.86,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-01-19",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-01-20",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-01-21",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-01-24",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-01-25",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-01-26",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-01-27",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-01-28",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-01-31",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-02-01",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-02-02",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-02-03",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-02-04",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-02-07",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-02-08",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-02-09",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-02-10",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-02-11",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-02-14",
+      "pnl": 43.36,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-02-15",
+      "pnl": 43.36,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-02-16",
+      "pnl": 43.36,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-02-17",
+      "pnl": 43.36,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-02-18",
+      "pnl": 43.36,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-02-22",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-02-23",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-02-24",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-02-25",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-02-28",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-03-01",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-03-02",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-03-03",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-03-04",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-03-07",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-03-08",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-03-09",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-03-10",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-03-11",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-03-14",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-03-15",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-03-16",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-03-17",
+      "pnl": -155.65,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-03-18",
+      "pnl": -155.65,
+      "open_positions": 2
+    },
+    {
+      "date": "2022-03-21",
+      "pnl": -155.65,
+      "open_positions": 2
+    },
+    {
+      "date": "2022-03-22",
+      "pnl": -155.65,
+      "open_positions": 3
+    },
+    {
+      "date": "2022-03-23",
+      "pnl": -155.65,
+      "open_positions": 3
+    },
+    {
+      "date": "2022-03-24",
+      "pnl": -155.65,
+      "open_positions": 3
+    },
+    {
+      "date": "2022-03-25",
+      "pnl": -155.65,
+      "open_positions": 3
+    },
+    {
+      "date": "2022-03-28",
+      "pnl": -155.65,
+      "open_positions": 3
+    },
+    {
+      "date": "2022-03-29",
+      "pnl": -155.65,
+      "open_positions": 3
+    },
+    {
+      "date": "2022-03-30",
+      "pnl": -155.65,
+      "open_positions": 3
+    },
+    {
+      "date": "2022-03-31",
+      "pnl": -155.65,
+      "open_positions": 3
+    },
+    {
+      "date": "2022-04-01",
+      "pnl": -155.65,
+      "open_positions": 3
+    },
+    {
+      "date": "2022-04-04",
+      "pnl": -155.65,
+      "open_positions": 3
+    },
+    {
+      "date": "2022-04-05",
+      "pnl": -155.65,
+      "open_positions": 3
+    },
+    {
+      "date": "2022-04-06",
+      "pnl": -355.03,
+      "open_positions": 2
+    },
+    {
+      "date": "2022-04-07",
+      "pnl": -355.03,
+      "open_positions": 2
+    },
+    {
+      "date": "2022-04-08",
+      "pnl": -355.03,
+      "open_positions": 2
+    },
+    {
+      "date": "2022-04-11",
+      "pnl": -554.86,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-04-12",
+      "pnl": -554.86,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-04-13",
+      "pnl": -554.86,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-04-14",
+      "pnl": -554.86,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-04-18",
+      "pnl": -554.86,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-04-19",
+      "pnl": -554.86,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-04-20",
+      "pnl": -554.86,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-04-21",
+      "pnl": -554.86,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-04-22",
+      "pnl": -554.86,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-04-25",
+      "pnl": -554.86,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-04-26",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-04-27",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-04-28",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-04-29",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-02",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-03",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-04",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-05",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-06",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-09",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-10",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-11",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-12",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-13",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-16",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-17",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-18",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-19",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-20",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-23",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-24",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-25",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-26",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-27",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-05-31",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-01",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-02",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-03",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-06",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-07",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-08",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-09",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-10",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-13",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-14",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-15",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-16",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-17",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-21",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-22",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-23",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-24",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-27",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-28",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-29",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-06-30",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-01",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-05",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-06",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-07",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-08",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-11",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-12",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-13",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-14",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-15",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-18",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-19",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-20",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-21",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-22",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-25",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-26",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-27",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-28",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-07-29",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-01",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-02",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-03",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-04",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-05",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-08",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-09",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-10",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-11",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-12",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-15",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-16",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-17",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-18",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-19",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-22",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-23",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-24",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-25",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-26",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-29",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-30",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-08-31",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-01",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-02",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-06",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-07",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-08",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-09",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-12",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-13",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-14",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-15",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-16",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-19",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-20",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-21",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-22",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-23",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-26",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-27",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-28",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-29",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-09-30",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-03",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-04",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-05",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-06",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-07",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-10",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-11",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-12",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-13",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-14",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-17",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-18",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-19",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-20",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-21",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-24",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-25",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-26",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-27",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-28",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-10-31",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-01",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-02",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-03",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-04",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-07",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-08",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-09",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-10",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-11",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-14",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-15",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-16",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-17",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-18",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-21",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-22",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-23",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-25",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-28",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-29",
+      "pnl": -682.45,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-11-30",
+      "pnl": -682.45,
+      "open_positions": 2
+    },
+    {
+      "date": "2022-12-01",
+      "pnl": -682.45,
+      "open_positions": 3
+    },
+    {
+      "date": "2022-12-02",
+      "pnl": -881.93,
+      "open_positions": 2
+    },
+    {
+      "date": "2022-12-05",
+      "pnl": -881.93,
+      "open_positions": 2
+    },
+    {
+      "date": "2022-12-06",
+      "pnl": -1281.31,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-12-07",
+      "pnl": -1281.31,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-12-08",
+      "pnl": -1281.31,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-12-09",
+      "pnl": -1281.31,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-12-12",
+      "pnl": -1281.31,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-12-13",
+      "pnl": -1281.31,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-12-14",
+      "pnl": -1281.31,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-12-15",
+      "pnl": -1281.31,
+      "open_positions": 1
+    },
+    {
+      "date": "2022-12-16",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-12-19",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-12-20",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-12-21",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-12-22",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-12-23",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-12-27",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-12-28",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-12-29",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2022-12-30",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-01-03",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-01-04",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-01-05",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-01-06",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-01-09",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-01-10",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-01-11",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-01-12",
+      "pnl": -1480.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-01-13",
+      "pnl": -1480.59,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-01-17",
+      "pnl": -1480.59,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-01-18",
+      "pnl": -1480.59,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-01-19",
+      "pnl": -1679.94,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-01-20",
+      "pnl": -1679.94,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-01-23",
+      "pnl": -1679.94,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-01-24",
+      "pnl": -1879.77,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-01-25",
+      "pnl": -1879.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-01-26",
+      "pnl": -1879.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-01-27",
+      "pnl": -1879.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-01-30",
+      "pnl": -1879.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-01-31",
+      "pnl": -1879.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-02-01",
+      "pnl": -1879.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-02-02",
+      "pnl": -1879.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-02-03",
+      "pnl": -1879.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-02-06",
+      "pnl": -1879.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-02-07",
+      "pnl": -1879.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-02-08",
+      "pnl": -1879.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-02-09",
+      "pnl": -1879.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-02-10",
+      "pnl": -1879.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-02-13",
+      "pnl": -1879.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-02-14",
+      "pnl": -1879.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-02-15",
+      "pnl": -1879.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-02-16",
+      "pnl": -2032.49,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-02-17",
+      "pnl": -2032.49,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-02-21",
+      "pnl": -2232.48,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-02-22",
+      "pnl": -2232.48,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-02-23",
+      "pnl": -2432.1,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-02-24",
+      "pnl": -2432.1,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-02-27",
+      "pnl": -2432.1,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-02-28",
+      "pnl": -2432.1,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-03-01",
+      "pnl": -2432.1,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-03-02",
+      "pnl": -2631.0,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-03-03",
+      "pnl": -2631.0,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-03-06",
+      "pnl": -2631.0,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-03-07",
+      "pnl": -2631.0,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-03-08",
+      "pnl": -2631.0,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-03-09",
+      "pnl": -2631.0,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-03-10",
+      "pnl": -1783.93,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-03-13",
+      "pnl": -1983.87,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-03-14",
+      "pnl": -1983.87,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-03-15",
+      "pnl": -1983.87,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-03-16",
+      "pnl": -1983.87,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-03-17",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-03-20",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-03-21",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-03-22",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-03-23",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-03-24",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-03-27",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-03-28",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-03-29",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-03-30",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-03-31",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-04-03",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-04-04",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-04-05",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-04-06",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-04-10",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-04-11",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-04-12",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-04-13",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-04-14",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-04-17",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-04-18",
+      "pnl": -1983.87,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-04-19",
+      "pnl": -1781.61,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-04-20",
+      "pnl": -1781.61,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-04-21",
+      "pnl": -1781.61,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-04-24",
+      "pnl": -1781.61,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-04-25",
+      "pnl": -1781.61,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-04-26",
+      "pnl": -1781.61,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-04-27",
+      "pnl": -1781.61,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-04-28",
+      "pnl": -1781.61,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-05-01",
+      "pnl": -1781.61,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-05-02",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-03",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-04",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-05",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-08",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-09",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-10",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-11",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-12",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-15",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-16",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-17",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-18",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-19",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-22",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-23",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-24",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-25",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-26",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-30",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-05-31",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-01",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-02",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-05",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-06",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-07",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-08",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-09",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-12",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-13",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-14",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-15",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-16",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-20",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-21",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-22",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-23",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-26",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-27",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-28",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-29",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-06-30",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-07-03",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-07-05",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-07-06",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-07-07",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-07-10",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-07-11",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-07-12",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-07-13",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-07-14",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-07-17",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-07-18",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-07-19",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-07-20",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-07-21",
+      "pnl": -1781.61,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-07-24",
+      "pnl": 1034.58,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-07-25",
+      "pnl": 1034.58,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-07-26",
+      "pnl": 1034.58,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-07-27",
+      "pnl": 1034.58,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-07-28",
+      "pnl": 1034.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-07-31",
+      "pnl": 1034.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-08-01",
+      "pnl": 842.33,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-08-02",
+      "pnl": 842.33,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-08-03",
+      "pnl": 842.33,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-08-04",
+      "pnl": 842.33,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-08-07",
+      "pnl": 2062.26,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-08-08",
+      "pnl": 2062.26,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-08-09",
+      "pnl": 5760.25,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-08-10",
+      "pnl": 5760.25,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-08-11",
+      "pnl": 5760.25,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-08-14",
+      "pnl": 5760.25,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-08-15",
+      "pnl": 5760.25,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-08-16",
+      "pnl": 5760.25,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-08-17",
+      "pnl": 5760.25,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-08-18",
+      "pnl": 5760.25,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-08-21",
+      "pnl": 5760.25,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-08-22",
+      "pnl": 5760.25,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-08-23",
+      "pnl": 5760.25,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-08-24",
+      "pnl": 5760.25,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-08-25",
+      "pnl": 5760.25,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-08-28",
+      "pnl": 5760.25,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-08-29",
+      "pnl": 5760.25,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-08-30",
+      "pnl": 5760.25,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-08-31",
+      "pnl": 5760.25,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-09-01",
+      "pnl": 5561.9,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-09-05",
+      "pnl": 5561.9,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-09-06",
+      "pnl": 5561.9,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-09-07",
+      "pnl": 5561.9,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-09-08",
+      "pnl": 5561.9,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-09-11",
+      "pnl": 5561.9,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-09-12",
+      "pnl": 5362.17,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-09-13",
+      "pnl": 5362.17,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-09-14",
+      "pnl": 5362.17,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-09-15",
+      "pnl": 5162.57,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-09-18",
+      "pnl": 5162.57,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-09-19",
+      "pnl": 5162.57,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-09-20",
+      "pnl": 4963.44,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-09-21",
+      "pnl": 4963.44,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-09-22",
+      "pnl": 4963.44,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-09-25",
+      "pnl": 4963.44,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-09-26",
+      "pnl": 4963.44,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-09-27",
+      "pnl": 4963.44,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-09-28",
+      "pnl": 4963.44,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-09-29",
+      "pnl": 4963.44,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-10-02",
+      "pnl": 4963.44,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-10-03",
+      "pnl": 4963.44,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-10-04",
+      "pnl": 4963.44,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-10-05",
+      "pnl": 4963.44,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-10-06",
+      "pnl": 4963.44,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-10-09",
+      "pnl": 4963.44,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-10-10",
+      "pnl": 4963.44,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-10-11",
+      "pnl": 4963.44,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-10-12",
+      "pnl": 4963.44,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-10-13",
+      "pnl": 4963.44,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-10-16",
+      "pnl": 4572.25,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-10-17",
+      "pnl": 4572.25,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-10-18",
+      "pnl": 4572.25,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-10-19",
+      "pnl": 4572.25,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-10-20",
+      "pnl": 4572.25,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-10-23",
+      "pnl": 4572.25,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-10-24",
+      "pnl": 4572.25,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-10-25",
+      "pnl": 4572.25,
+      "open_positions": 1
+    },
+    {
+      "date": "2023-10-26",
+      "pnl": 4842.58,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-10-27",
+      "pnl": 4842.58,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-10-30",
+      "pnl": 4842.58,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-10-31",
+      "pnl": 4842.58,
+      "open_positions": 0
+    },
+    {
+      "date": "2023-11-01",
+      "pnl": 4842.58,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-11-02",
+      "pnl": 4842.58,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-11-03",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-06",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-07",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-08",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-09",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-10",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-13",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-14",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-15",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-16",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-17",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-20",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-21",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-22",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-24",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-27",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-28",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-29",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-11-30",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-12-01",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-12-04",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-12-05",
+      "pnl": 4842.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-12-06",
+      "pnl": 4642.79,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-12-07",
+      "pnl": 4642.79,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-12-08",
+      "pnl": 4642.79,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-12-11",
+      "pnl": 4642.79,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-12-12",
+      "pnl": 4642.79,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-12-13",
+      "pnl": 4450.77,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-12-14",
+      "pnl": 4450.77,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-12-15",
+      "pnl": 4450.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-12-18",
+      "pnl": 4450.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-12-19",
+      "pnl": 4450.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-12-20",
+      "pnl": 4450.77,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-12-21",
+      "pnl": 4257.36,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-12-22",
+      "pnl": 4257.36,
+      "open_positions": 2
+    },
+    {
+      "date": "2023-12-26",
+      "pnl": 4257.36,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-12-27",
+      "pnl": 4257.36,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-12-28",
+      "pnl": 4257.36,
+      "open_positions": 3
+    },
+    {
+      "date": "2023-12-29",
+      "pnl": 4257.36,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-01-02",
+      "pnl": 4889.15,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-01-03",
+      "pnl": 4889.15,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-01-04",
+      "pnl": 4889.15,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-01-05",
+      "pnl": 4889.15,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-01-08",
+      "pnl": 4889.15,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-01-09",
+      "pnl": 4889.15,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-01-10",
+      "pnl": 4889.15,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-01-11",
+      "pnl": 4889.15,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-01-12",
+      "pnl": 4889.15,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-01-16",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-01-17",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-01-18",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-01-19",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-01-22",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-01-23",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-01-24",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-01-25",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-01-26",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-01-29",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-01-30",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-01-31",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-02-01",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-02-02",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-02-05",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-02-06",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-02-07",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-02-08",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-02-09",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-02-12",
+      "pnl": 4889.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-02-13",
+      "pnl": 5909.74,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-02-14",
+      "pnl": 5909.74,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-02-15",
+      "pnl": 5909.74,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-02-16",
+      "pnl": 5909.74,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-02-20",
+      "pnl": 5855.11,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-02-21",
+      "pnl": 6564.55,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-02-22",
+      "pnl": 6564.55,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-02-23",
+      "pnl": 6564.55,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-02-26",
+      "pnl": 6564.55,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-02-27",
+      "pnl": 6564.55,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-02-28",
+      "pnl": 6564.55,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-02-29",
+      "pnl": 6564.55,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-03-01",
+      "pnl": 6564.55,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-03-04",
+      "pnl": 6564.55,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-03-05",
+      "pnl": 6564.55,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-03-06",
+      "pnl": 6564.55,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-03-07",
+      "pnl": 6564.55,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-03-08",
+      "pnl": 6564.55,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-03-11",
+      "pnl": 6367.4,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-03-12",
+      "pnl": 6367.4,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-03-13",
+      "pnl": 6367.4,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-03-14",
+      "pnl": 6367.4,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-03-15",
+      "pnl": 6367.4,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-03-18",
+      "pnl": 6367.4,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-03-19",
+      "pnl": 6367.4,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-03-20",
+      "pnl": 6367.4,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-03-21",
+      "pnl": 6367.4,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-03-22",
+      "pnl": 6367.4,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-03-25",
+      "pnl": 6367.4,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-03-26",
+      "pnl": 6367.4,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-03-27",
+      "pnl": 6168.4,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-03-28",
+      "pnl": 6168.4,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-04-01",
+      "pnl": 6168.4,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-04-02",
+      "pnl": 6168.4,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-04-03",
+      "pnl": 6168.4,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-04-04",
+      "pnl": 6168.4,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-04-05",
+      "pnl": 6168.4,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-04-08",
+      "pnl": 6168.4,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-04-09",
+      "pnl": 6537.45,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-04-10",
+      "pnl": 6537.45,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-04-11",
+      "pnl": 6537.45,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-04-12",
+      "pnl": 6537.45,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-04-15",
+      "pnl": 7049.04,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-04-16",
+      "pnl": 6849.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-04-17",
+      "pnl": 6849.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-04-18",
+      "pnl": 6849.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-04-19",
+      "pnl": 6849.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-04-22",
+      "pnl": 6849.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-04-23",
+      "pnl": 6849.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-04-24",
+      "pnl": 6849.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-04-25",
+      "pnl": 6849.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-04-26",
+      "pnl": 6849.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-04-29",
+      "pnl": 6849.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-04-30",
+      "pnl": 6849.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-05-01",
+      "pnl": 6849.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-05-02",
+      "pnl": 6849.23,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-05-03",
+      "pnl": 6849.23,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-05-06",
+      "pnl": 6849.23,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-05-07",
+      "pnl": 6650.09,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-05-08",
+      "pnl": 6450.46,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-05-09",
+      "pnl": 6450.46,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-05-10",
+      "pnl": 6450.46,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-05-13",
+      "pnl": 6450.46,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-05-14",
+      "pnl": 6450.46,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-05-15",
+      "pnl": 6450.46,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-05-16",
+      "pnl": 6450.46,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-05-17",
+      "pnl": 6251.13,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-05-20",
+      "pnl": 6251.13,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-05-21",
+      "pnl": 6251.13,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-05-22",
+      "pnl": 6251.13,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-05-23",
+      "pnl": 6251.13,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-05-24",
+      "pnl": 6251.13,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-05-28",
+      "pnl": 6251.13,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-05-29",
+      "pnl": 6251.13,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-05-30",
+      "pnl": 6060.93,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-05-31",
+      "pnl": 6060.93,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-06-03",
+      "pnl": 6060.93,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-06-04",
+      "pnl": 6060.93,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-06-05",
+      "pnl": 6060.93,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-06-06",
+      "pnl": 6060.93,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-06-07",
+      "pnl": 6060.93,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-06-10",
+      "pnl": 6060.93,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-06-11",
+      "pnl": 6060.93,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-06-12",
+      "pnl": 6060.93,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-06-13",
+      "pnl": 6060.93,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-06-14",
+      "pnl": 6060.93,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-06-17",
+      "pnl": 6060.93,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-06-18",
+      "pnl": 6060.93,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-06-20",
+      "pnl": 6060.93,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-06-21",
+      "pnl": 6060.93,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-06-24",
+      "pnl": 6945.66,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-06-25",
+      "pnl": 6945.66,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-06-26",
+      "pnl": 6945.66,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-06-27",
+      "pnl": 6855.32,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-06-28",
+      "pnl": 6855.32,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-07-01",
+      "pnl": 6855.32,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-07-02",
+      "pnl": 6855.32,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-07-03",
+      "pnl": 6855.32,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-07-05",
+      "pnl": 6855.32,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-07-08",
+      "pnl": 6666.78,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-07-09",
+      "pnl": 6666.78,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-07-10",
+      "pnl": 6666.78,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-07-11",
+      "pnl": 6666.78,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-07-12",
+      "pnl": 6666.78,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-07-15",
+      "pnl": 6666.78,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-07-16",
+      "pnl": 6666.78,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-07-17",
+      "pnl": 7699.57,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-07-18",
+      "pnl": 7699.57,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-07-19",
+      "pnl": 7699.57,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-07-22",
+      "pnl": 7699.57,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-07-23",
+      "pnl": 7699.57,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-07-24",
+      "pnl": 7699.57,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-07-25",
+      "pnl": 7499.75,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-07-26",
+      "pnl": 7499.75,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-07-29",
+      "pnl": 7499.75,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-07-30",
+      "pnl": 7499.75,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-07-31",
+      "pnl": 7499.75,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-08-01",
+      "pnl": 7499.75,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-08-02",
+      "pnl": 7499.75,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-08-05",
+      "pnl": 7499.75,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-08-06",
+      "pnl": 7499.75,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-08-07",
+      "pnl": 7499.75,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-08-08",
+      "pnl": 7499.75,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-08-09",
+      "pnl": 7499.75,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-08-12",
+      "pnl": 7499.75,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-08-13",
+      "pnl": 7499.75,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-08-14",
+      "pnl": 7499.75,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-08-15",
+      "pnl": 7499.75,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-08-16",
+      "pnl": 7499.75,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-08-19",
+      "pnl": 7499.75,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-08-20",
+      "pnl": 7499.75,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-08-21",
+      "pnl": 7499.75,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-08-22",
+      "pnl": 7499.75,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-08-23",
+      "pnl": 7499.75,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-08-26",
+      "pnl": 7499.75,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-08-27",
+      "pnl": 7499.75,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-08-28",
+      "pnl": 7499.75,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-08-29",
+      "pnl": 7499.75,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-08-30",
+      "pnl": 7499.75,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-09-03",
+      "pnl": 7300.06,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-09-04",
+      "pnl": 7300.06,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-09-05",
+      "pnl": 7300.06,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-09-06",
+      "pnl": 6900.85,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-09-09",
+      "pnl": 6900.85,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-09-10",
+      "pnl": 6900.85,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-09-11",
+      "pnl": 6900.85,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-09-12",
+      "pnl": 6900.85,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-09-13",
+      "pnl": 6900.85,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-09-16",
+      "pnl": 6900.85,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-09-17",
+      "pnl": 6900.85,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-09-18",
+      "pnl": 6900.85,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-09-19",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-09-20",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-09-23",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-09-24",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-09-25",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-09-26",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-09-27",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-09-30",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-01",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-02",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-03",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-04",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-07",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-08",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-09",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-10",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-11",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-14",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-15",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-16",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-17",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-18",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-21",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-22",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-23",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-24",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-25",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-28",
+      "pnl": 6900.85,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-10-29",
+      "pnl": 6962.65,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-10-30",
+      "pnl": 6962.65,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-10-31",
+      "pnl": 8801.52,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-11-01",
+      "pnl": 8801.52,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-11-04",
+      "pnl": 8801.52,
+      "open_positions": 0
+    },
+    {
+      "date": "2024-11-05",
+      "pnl": 8801.52,
+      "open_positions": 1
+    },
+    {
+      "date": "2024-11-06",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-11-07",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-11-08",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-11-11",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-11-12",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-11-13",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-11-14",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-11-15",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-11-18",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-11-19",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-11-20",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-11-21",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-11-22",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-11-25",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-11-26",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-11-27",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-11-29",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-12-02",
+      "pnl": 8801.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-12-03",
+      "pnl": 8779.1,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-12-04",
+      "pnl": 8779.1,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-12-05",
+      "pnl": 8779.1,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-12-06",
+      "pnl": 8779.1,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-12-09",
+      "pnl": 8779.1,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-12-10",
+      "pnl": 8779.1,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-12-11",
+      "pnl": 8779.1,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-12-12",
+      "pnl": 8779.1,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-12-13",
+      "pnl": 8779.1,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-12-16",
+      "pnl": 8779.1,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-12-17",
+      "pnl": 8779.1,
+      "open_positions": 3
+    },
+    {
+      "date": "2024-12-18",
+      "pnl": 8579.95,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-12-19",
+      "pnl": 8579.95,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-12-20",
+      "pnl": 8579.95,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-12-23",
+      "pnl": 8579.95,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-12-24",
+      "pnl": 8579.95,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-12-26",
+      "pnl": 8579.95,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-12-27",
+      "pnl": 8579.95,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-12-30",
+      "pnl": 8579.95,
+      "open_positions": 2
+    },
+    {
+      "date": "2024-12-31",
+      "pnl": 8579.95,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-01-02",
+      "pnl": 9971.22,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-01-03",
+      "pnl": 9971.22,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-01-06",
+      "pnl": 9971.22,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-01-07",
+      "pnl": 11966.82,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-01-08",
+      "pnl": 11966.82,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-01-10",
+      "pnl": 11966.82,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-01-13",
+      "pnl": 11966.82,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-01-14",
+      "pnl": 11966.82,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-01-15",
+      "pnl": 11966.82,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-01-16",
+      "pnl": 11966.82,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-01-17",
+      "pnl": 11966.82,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-01-21",
+      "pnl": 11966.82,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-01-22",
+      "pnl": 11966.82,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-01-23",
+      "pnl": 11966.82,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-01-24",
+      "pnl": 11966.82,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-01-27",
+      "pnl": 11768.28,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-01-28",
+      "pnl": 11768.28,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-01-29",
+      "pnl": 11768.28,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-01-30",
+      "pnl": 11572.92,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-01-31",
+      "pnl": 11572.92,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-02-03",
+      "pnl": 11377.56,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-02-04",
+      "pnl": 11377.56,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-02-05",
+      "pnl": 11180.74,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-02-06",
+      "pnl": 11180.74,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-02-07",
+      "pnl": 11180.74,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-02-10",
+      "pnl": 11180.74,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-02-11",
+      "pnl": 11180.74,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-02-12",
+      "pnl": 10984.52,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-02-13",
+      "pnl": 10984.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-02-14",
+      "pnl": 10984.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-02-18",
+      "pnl": 10984.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-02-19",
+      "pnl": 10984.52,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-02-20",
+      "pnl": 10588.39,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-02-21",
+      "pnl": 10588.39,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-02-24",
+      "pnl": 10588.39,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-02-25",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-02-26",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-02-27",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-02-28",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-03",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-04",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-05",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-06",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-07",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-10",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-11",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-12",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-13",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-14",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-17",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-18",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-19",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-20",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-21",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-24",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-25",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-26",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-27",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-28",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-03-31",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-01",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-02",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-03",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-04",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-07",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-08",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-09",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-10",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-11",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-14",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-15",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-16",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-17",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-21",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-22",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-23",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-24",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-25",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-28",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-29",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-04-30",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-05-01",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-05-02",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-05-05",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-05-06",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-05-07",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-05-08",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-05-09",
+      "pnl": 10726.64,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-05-12",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-05-13",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-05-14",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-05-15",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-05-16",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-05-19",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-05-20",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-05-21",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-05-22",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-05-23",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-05-27",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-05-28",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-05-29",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-05-30",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-02",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-03",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-04",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-05",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-06",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-09",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-10",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-11",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-12",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-13",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-16",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-17",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-18",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-20",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-23",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-24",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-25",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-26",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-27",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-06-30",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-07-01",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-07-02",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-07-03",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-07-07",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-07-08",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-07-09",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-07-10",
+      "pnl": 10726.64,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-07-11",
+      "pnl": 11655.76,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-07-14",
+      "pnl": 11655.76,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-07-15",
+      "pnl": 11655.76,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-07-16",
+      "pnl": 11655.76,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-07-17",
+      "pnl": 11655.76,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-07-18",
+      "pnl": 11655.76,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-07-21",
+      "pnl": 11655.76,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-07-22",
+      "pnl": 11461.53,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-07-23",
+      "pnl": 11461.53,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-07-24",
+      "pnl": 11461.53,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-07-25",
+      "pnl": 11461.53,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-07-28",
+      "pnl": 11461.53,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-07-29",
+      "pnl": 11461.53,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-07-30",
+      "pnl": 11461.53,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-07-31",
+      "pnl": 11461.53,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-08-01",
+      "pnl": 11689.46,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-08-04",
+      "pnl": 11689.46,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-08-05",
+      "pnl": 11689.46,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-08-06",
+      "pnl": 11689.46,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-08-07",
+      "pnl": 11689.46,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-08-08",
+      "pnl": 11689.46,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-08-11",
+      "pnl": 11689.46,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-08-12",
+      "pnl": 11689.46,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-08-13",
+      "pnl": 11689.46,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-08-14",
+      "pnl": 11689.46,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-08-15",
+      "pnl": 11689.46,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-08-18",
+      "pnl": 11689.46,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-08-19",
+      "pnl": 11491.82,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-08-20",
+      "pnl": 13043.26,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-08-21",
+      "pnl": 13043.26,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-08-22",
+      "pnl": 13043.26,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-08-25",
+      "pnl": 13043.26,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-08-26",
+      "pnl": 13043.26,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-08-27",
+      "pnl": 13043.26,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-08-28",
+      "pnl": 13043.26,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-08-29",
+      "pnl": 13043.26,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-09-02",
+      "pnl": 12851.04,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-09-03",
+      "pnl": 12851.04,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-09-04",
+      "pnl": 12851.04,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-09-05",
+      "pnl": 12851.04,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-09-08",
+      "pnl": 12851.04,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-09-09",
+      "pnl": 12851.04,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-09-10",
+      "pnl": 12851.04,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-09-11",
+      "pnl": 12656.31,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-09-12",
+      "pnl": 12656.31,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-09-15",
+      "pnl": 12656.31,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-09-16",
+      "pnl": 12656.31,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-09-17",
+      "pnl": 12458.15,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-09-18",
+      "pnl": 12458.15,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-09-19",
+      "pnl": 12458.15,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-09-22",
+      "pnl": 12266.58,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-09-23",
+      "pnl": 12067.38,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-09-24",
+      "pnl": 12067.38,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-09-25",
+      "pnl": 11869.54,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-09-26",
+      "pnl": 11869.54,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-09-29",
+      "pnl": 11869.54,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-09-30",
+      "pnl": 11869.54,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-10-01",
+      "pnl": 11869.54,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-10-02",
+      "pnl": 11869.54,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-10-03",
+      "pnl": 11869.54,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-10-06",
+      "pnl": 11869.54,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-10-07",
+      "pnl": 11869.54,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-10-08",
+      "pnl": 11869.54,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-10-09",
+      "pnl": 11869.54,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-10-10",
+      "pnl": 11747.74,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-10-13",
+      "pnl": 11747.74,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-10-14",
+      "pnl": 11549.26,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-10-15",
+      "pnl": 11549.26,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-10-16",
+      "pnl": 11549.26,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-10-17",
+      "pnl": 11549.26,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-10-20",
+      "pnl": 11549.26,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-10-21",
+      "pnl": 11549.26,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-10-22",
+      "pnl": 11549.26,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-10-23",
+      "pnl": 11549.26,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-10-24",
+      "pnl": 11549.26,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-10-27",
+      "pnl": 11549.26,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-10-28",
+      "pnl": 11549.26,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-10-29",
+      "pnl": 11549.26,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-10-30",
+      "pnl": 11549.26,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-10-31",
+      "pnl": 11549.26,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-11-03",
+      "pnl": 11350.2,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-11-04",
+      "pnl": 11156.24,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-11-05",
+      "pnl": 11156.24,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-11-06",
+      "pnl": 10957.28,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-11-07",
+      "pnl": 10957.28,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-11-10",
+      "pnl": 10957.28,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-11-11",
+      "pnl": 10957.28,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-11-12",
+      "pnl": 10957.28,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-11-13",
+      "pnl": 10957.28,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-11-14",
+      "pnl": 10957.28,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-11-17",
+      "pnl": 10957.28,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-11-18",
+      "pnl": 10957.28,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-11-19",
+      "pnl": 10957.28,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-11-20",
+      "pnl": 11823.39,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-11-21",
+      "pnl": 11823.39,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-11-24",
+      "pnl": 11823.39,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-11-25",
+      "pnl": 11823.39,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-11-26",
+      "pnl": 11823.39,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-11-28",
+      "pnl": 11823.39,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-12-01",
+      "pnl": 11823.39,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-12-02",
+      "pnl": 11823.39,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-12-03",
+      "pnl": 11640.86,
+      "open_positions": 3
+    },
+    {
+      "date": "2025-12-04",
+      "pnl": 11440.89,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-12-05",
+      "pnl": 11440.89,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-12-08",
+      "pnl": 11243.58,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-12-09",
+      "pnl": 11243.58,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-12-10",
+      "pnl": 11243.58,
+      "open_positions": 2
+    },
+    {
+      "date": "2025-12-11",
+      "pnl": 11059.73,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-12-12",
+      "pnl": 10868.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-12-15",
+      "pnl": 10868.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-12-16",
+      "pnl": 10868.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-12-17",
+      "pnl": 10868.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-12-18",
+      "pnl": 10868.23,
+      "open_positions": 0
+    },
+    {
+      "date": "2025-12-19",
+      "pnl": 10868.23,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-12-22",
+      "pnl": 10868.23,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-12-23",
+      "pnl": 10868.23,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-12-24",
+      "pnl": 10868.23,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-12-26",
+      "pnl": 10868.23,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-12-29",
+      "pnl": 10868.23,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-12-30",
+      "pnl": 10868.23,
+      "open_positions": 1
+    },
+    {
+      "date": "2025-12-31",
+      "pnl": 10868.23,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-01-02",
+      "pnl": 10868.23,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-01-05",
+      "pnl": 10868.23,
+      "open_positions": 2
+    },
+    {
+      "date": "2026-01-06",
+      "pnl": 10669.08,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-01-07",
+      "pnl": 10669.08,
+      "open_positions": 2
+    },
+    {
+      "date": "2026-01-08",
+      "pnl": 10470.72,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-01-09",
+      "pnl": 10470.72,
+      "open_positions": 2
+    },
+    {
+      "date": "2026-01-12",
+      "pnl": 10470.72,
+      "open_positions": 2
+    },
+    {
+      "date": "2026-01-13",
+      "pnl": 10470.72,
+      "open_positions": 2
+    },
+    {
+      "date": "2026-01-14",
+      "pnl": 10470.72,
+      "open_positions": 2
+    },
+    {
+      "date": "2026-01-15",
+      "pnl": 10470.72,
+      "open_positions": 2
+    },
+    {
+      "date": "2026-01-16",
+      "pnl": 10470.72,
+      "open_positions": 2
+    },
+    {
+      "date": "2026-01-20",
+      "pnl": 10470.72,
+      "open_positions": 2
+    },
+    {
+      "date": "2026-01-21",
+      "pnl": 10470.72,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-01-22",
+      "pnl": 10470.72,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-01-23",
+      "pnl": 10470.72,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-01-26",
+      "pnl": 10271.07,
+      "open_positions": 2
+    },
+    {
+      "date": "2026-01-27",
+      "pnl": 10271.07,
+      "open_positions": 2
+    },
+    {
+      "date": "2026-01-28",
+      "pnl": 10271.07,
+      "open_positions": 2
+    },
+    {
+      "date": "2026-01-29",
+      "pnl": 10271.07,
+      "open_positions": 2
+    },
+    {
+      "date": "2026-01-30",
+      "pnl": 10075.73,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-02-02",
+      "pnl": 10075.73,
+      "open_positions": 2
+    },
+    {
+      "date": "2026-02-03",
+      "pnl": 10075.73,
+      "open_positions": 2
+    },
+    {
+      "date": "2026-02-04",
+      "pnl": 10075.73,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-02-05",
+      "pnl": 10075.73,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-02-06",
+      "pnl": 10075.73,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-02-09",
+      "pnl": 10075.73,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-02-10",
+      "pnl": 10075.73,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-02-11",
+      "pnl": 10075.73,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-02-12",
+      "pnl": 9682.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-02-13",
+      "pnl": 9682.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-02-17",
+      "pnl": 9682.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-02-18",
+      "pnl": 9682.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-02-19",
+      "pnl": 9682.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-02-20",
+      "pnl": 9682.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-02-23",
+      "pnl": 9682.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-02-24",
+      "pnl": 9682.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-02-25",
+      "pnl": 9682.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-02-26",
+      "pnl": 9682.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-02-27",
+      "pnl": 9682.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-03-02",
+      "pnl": 9682.55,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-03-03",
+      "pnl": 11217.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-03-04",
+      "pnl": 11217.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-03-05",
+      "pnl": 11217.59,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-03-06",
+      "pnl": 11217.59,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-03-09",
+      "pnl": 11021.4,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-03-10",
+      "pnl": 11021.4,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-03-11",
+      "pnl": 11021.4,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-03-12",
+      "pnl": 11021.4,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-03-13",
+      "pnl": 11021.4,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-03-16",
+      "pnl": 11021.4,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-03-17",
+      "pnl": 11021.4,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-03-18",
+      "pnl": 11021.4,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-03-19",
+      "pnl": 11021.4,
+      "open_positions": 1
+    },
+    {
+      "date": "2026-03-20",
+      "pnl": 10840.89,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-03-23",
+      "pnl": 10840.89,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-03-24",
+      "pnl": 10840.89,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-03-25",
+      "pnl": 10840.89,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-03-26",
+      "pnl": 10840.89,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-03-27",
+      "pnl": 10840.89,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-03-30",
+      "pnl": 10840.89,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-03-31",
+      "pnl": 10840.89,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-04-01",
+      "pnl": 10840.89,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-04-02",
+      "pnl": 10840.89,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-04-06",
+      "pnl": 10840.89,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-04-07",
+      "pnl": 10840.89,
+      "open_positions": 0
+    },
+    {
+      "date": "2026-04-08",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-04-09",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-04-10",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-04-13",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-04-14",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-04-15",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-04-16",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-04-17",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-04-20",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-04-21",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-04-22",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-04-23",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-04-24",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-04-27",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-04-28",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-04-29",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-04-30",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-01",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-04",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-05",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-06",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-07",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-08",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-11",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-12",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-13",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-14",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-15",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-18",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-19",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-20",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-21",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-22",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-26",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-27",
+      "pnl": 10840.89,
+      "open_positions": 3
+    },
+    {
+      "date": "2026-05-28",
+      "pnl": 10840.89,
+      "open_positions": 3
+    }
+  ]
+}

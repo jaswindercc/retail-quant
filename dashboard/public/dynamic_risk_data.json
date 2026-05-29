@@ -1,0 +1,534 @@
+{
+  "strategy_names": [
+    "Baseline ($200 fixed)",
+    "Skip after 3 losses",
+    "Skip after 4 losses",
+    "Skip after 5 losses",
+    "Half risk after 3 losses",
+    "Half risk after 4 losses",
+    "Progressive (200\u2192150\u2192100\u219250)",
+    "Anti-Martingale (\u2191wins \u2193losses)",
+    "Cool-off: 3L \u2192 skip 2",
+    "Cool-off: 5L \u2192 skip 3",
+    "Half@3L + Skip@5L"
+  ],
+  "backtest_names": [
+    "BT1",
+    "BT3",
+    "BT5",
+    "BT6"
+  ],
+  "results": {
+    "BT1": {
+      "Baseline ($200 fixed)": {
+        "trades_taken": 426,
+        "trades_skipped": 0,
+        "total_trades": 426,
+        "win_rate": 23.7,
+        "total_pnl": 16263.62,
+        "profit_factor": 1.23,
+        "max_losing_streak": 18,
+        "max_drawdown": 13192.56
+      },
+      "Skip after 3 losses": {
+        "trades_taken": 343,
+        "trades_skipped": 83,
+        "total_trades": 426,
+        "win_rate": 23.9,
+        "total_pnl": 17059.7,
+        "profit_factor": 1.3,
+        "max_losing_streak": 21,
+        "max_drawdown": 11860.42
+      },
+      "Skip after 4 losses": {
+        "trades_taken": 376,
+        "trades_skipped": 50,
+        "total_trades": 426,
+        "win_rate": 24.5,
+        "total_pnl": 20479.71,
+        "profit_factor": 1.34,
+        "max_losing_streak": 18,
+        "max_drawdown": 10715.05
+      },
+      "Skip after 5 losses": {
+        "trades_taken": 388,
+        "trades_skipped": 38,
+        "total_trades": 426,
+        "win_rate": 24.5,
+        "total_pnl": 18699.75,
+        "profit_factor": 1.3,
+        "max_losing_streak": 15,
+        "max_drawdown": 11481.85
+      },
+      "Half risk after 3 losses": {
+        "trades_taken": 426,
+        "trades_skipped": 0,
+        "total_trades": 426,
+        "win_rate": 23.7,
+        "total_pnl": 18907.18,
+        "profit_factor": 1.36,
+        "max_losing_streak": 18,
+        "max_drawdown": 9132.92
+      },
+      "Half risk after 4 losses": {
+        "trades_taken": 426,
+        "trades_skipped": 0,
+        "total_trades": 426,
+        "win_rate": 23.7,
+        "total_pnl": 20467.76,
+        "profit_factor": 1.36,
+        "max_losing_streak": 18,
+        "max_drawdown": 8422.64
+      },
+      "Progressive (200\u2192150\u2192100\u219250)": {
+        "trades_taken": 426,
+        "trades_skipped": 0,
+        "total_trades": 426,
+        "win_rate": 23.7,
+        "total_pnl": 19737.23,
+        "profit_factor": 1.41,
+        "max_losing_streak": 18,
+        "max_drawdown": 6062.58
+      },
+      "Anti-Martingale (\u2191wins \u2193losses)": {
+        "trades_taken": 426,
+        "trades_skipped": 0,
+        "total_trades": 426,
+        "win_rate": 23.7,
+        "total_pnl": 23274.0,
+        "profit_factor": 1.42,
+        "max_losing_streak": 18,
+        "max_drawdown": 9014.58
+      },
+      "Cool-off: 3L \u2192 skip 2": {
+        "trades_taken": 260,
+        "trades_skipped": 166,
+        "total_trades": 426,
+        "win_rate": 24.6,
+        "total_pnl": 18381.02,
+        "profit_factor": 1.43,
+        "max_losing_streak": 15,
+        "max_drawdown": 6322.53
+      },
+      "Cool-off: 5L \u2192 skip 3": {
+        "trades_taken": 312,
+        "trades_skipped": 114,
+        "total_trades": 426,
+        "win_rate": 22.4,
+        "total_pnl": 12869.9,
+        "profit_factor": 1.25,
+        "max_losing_streak": 18,
+        "max_drawdown": 10252.51
+      },
+      "Half@3L + Skip@5L": {
+        "trades_taken": 388,
+        "trades_skipped": 38,
+        "total_trades": 426,
+        "win_rate": 24.5,
+        "total_pnl": 20484.71,
+        "profit_factor": 1.38,
+        "max_losing_streak": 15,
+        "max_drawdown": 9796.25
+      }
+    },
+    "BT3": {
+      "Baseline ($200 fixed)": {
+        "trades_taken": 316,
+        "trades_skipped": 0,
+        "total_trades": 316,
+        "win_rate": 29.1,
+        "total_pnl": 25449.17,
+        "profit_factor": 1.54,
+        "max_losing_streak": 16,
+        "max_drawdown": 4849.99
+      },
+      "Skip after 3 losses": {
+        "trades_taken": 267,
+        "trades_skipped": 49,
+        "total_trades": 316,
+        "win_rate": 30.7,
+        "total_pnl": 28507.46,
+        "profit_factor": 1.74,
+        "max_losing_streak": 14,
+        "max_drawdown": 3760.06
+      },
+      "Skip after 4 losses": {
+        "trades_taken": 286,
+        "trades_skipped": 30,
+        "total_trades": 316,
+        "win_rate": 30.4,
+        "total_pnl": 27707.05,
+        "profit_factor": 1.66,
+        "max_losing_streak": 15,
+        "max_drawdown": 4466.46
+      },
+      "Skip after 5 losses": {
+        "trades_taken": 292,
+        "trades_skipped": 24,
+        "total_trades": 316,
+        "win_rate": 29.5,
+        "total_pnl": 24350.9,
+        "profit_factor": 1.56,
+        "max_losing_streak": 17,
+        "max_drawdown": 6302.18
+      },
+      "Half risk after 3 losses": {
+        "trades_taken": 316,
+        "trades_skipped": 0,
+        "total_trades": 316,
+        "win_rate": 29.1,
+        "total_pnl": 27007.96,
+        "profit_factor": 1.71,
+        "max_losing_streak": 16,
+        "max_drawdown": 3899.08
+      },
+      "Half risk after 4 losses": {
+        "trades_taken": 316,
+        "trades_skipped": 0,
+        "total_trades": 316,
+        "win_rate": 29.1,
+        "total_pnl": 25629.77,
+        "profit_factor": 1.64,
+        "max_losing_streak": 16,
+        "max_drawdown": 4657.24
+      },
+      "Progressive (200\u2192150\u2192100\u219250)": {
+        "trades_taken": 316,
+        "trades_skipped": 0,
+        "total_trades": 316,
+        "win_rate": 29.1,
+        "total_pnl": 24728.73,
+        "profit_factor": 1.7,
+        "max_losing_streak": 16,
+        "max_drawdown": 4245.29
+      },
+      "Anti-Martingale (\u2191wins \u2193losses)": {
+        "trades_taken": 316,
+        "trades_skipped": 0,
+        "total_trades": 316,
+        "win_rate": 29.1,
+        "total_pnl": 30603.58,
+        "profit_factor": 1.77,
+        "max_losing_streak": 16,
+        "max_drawdown": 4078.68
+      },
+      "Cool-off: 3L \u2192 skip 2": {
+        "trades_taken": 218,
+        "trades_skipped": 98,
+        "total_trades": 316,
+        "win_rate": 32.1,
+        "total_pnl": 28044.64,
+        "profit_factor": 1.9,
+        "max_losing_streak": 18,
+        "max_drawdown": 3331.34
+      },
+      "Cool-off: 5L \u2192 skip 3": {
+        "trades_taken": 244,
+        "trades_skipped": 72,
+        "total_trades": 316,
+        "win_rate": 28.7,
+        "total_pnl": 22335.33,
+        "profit_factor": 1.62,
+        "max_losing_streak": 11,
+        "max_drawdown": 8454.86
+      },
+      "Half@3L + Skip@5L": {
+        "trades_taken": 292,
+        "trades_skipped": 24,
+        "total_trades": 316,
+        "win_rate": 29.5,
+        "total_pnl": 26646.79,
+        "profit_factor": 1.69,
+        "max_losing_streak": 17,
+        "max_drawdown": 5194.89
+      }
+    },
+    "BT5": {
+      "Baseline ($200 fixed)": {
+        "trades_taken": 132,
+        "trades_skipped": 0,
+        "total_trades": 132,
+        "win_rate": 25.8,
+        "total_pnl": 19263.15,
+        "profit_factor": 2.02,
+        "max_losing_streak": 18,
+        "max_drawdown": 3558.79
+      },
+      "Skip after 3 losses": {
+        "trades_taken": 109,
+        "trades_skipped": 23,
+        "total_trades": 132,
+        "win_rate": 27.5,
+        "total_pnl": 20002.5,
+        "profit_factor": 2.33,
+        "max_losing_streak": 17,
+        "max_drawdown": 3248.63
+      },
+      "Skip after 4 losses": {
+        "trades_taken": 116,
+        "trades_skipped": 16,
+        "total_trades": 132,
+        "win_rate": 26.7,
+        "total_pnl": 20600.91,
+        "profit_factor": 2.26,
+        "max_losing_streak": 19,
+        "max_drawdown": 3648.0
+      },
+      "Skip after 5 losses": {
+        "trades_taken": 120,
+        "trades_skipped": 12,
+        "total_trades": 132,
+        "win_rate": 25.8,
+        "total_pnl": 17496.79,
+        "profit_factor": 2.03,
+        "max_losing_streak": 20,
+        "max_drawdown": 4801.62
+      },
+      "Half risk after 3 losses": {
+        "trades_taken": 132,
+        "trades_skipped": 0,
+        "total_trades": 132,
+        "win_rate": 25.8,
+        "total_pnl": 19514.62,
+        "profit_factor": 2.36,
+        "max_losing_streak": 18,
+        "max_drawdown": 2417.17
+      },
+      "Half risk after 4 losses": {
+        "trades_taken": 132,
+        "trades_skipped": 0,
+        "total_trades": 132,
+        "win_rate": 25.8,
+        "total_pnl": 18948.97,
+        "profit_factor": 2.24,
+        "max_losing_streak": 18,
+        "max_drawdown": 2713.42
+      },
+      "Progressive (200\u2192150\u2192100\u219250)": {
+        "trades_taken": 132,
+        "trades_skipped": 0,
+        "total_trades": 132,
+        "win_rate": 25.8,
+        "total_pnl": 17679.56,
+        "profit_factor": 2.35,
+        "max_losing_streak": 18,
+        "max_drawdown": 2051.68
+      },
+      "Anti-Martingale (\u2191wins \u2193losses)": {
+        "trades_taken": 132,
+        "trades_skipped": 0,
+        "total_trades": 132,
+        "win_rate": 25.8,
+        "total_pnl": 19905.03,
+        "profit_factor": 2.32,
+        "max_losing_streak": 18,
+        "max_drawdown": 2615.4
+      },
+      "Cool-off: 3L \u2192 skip 2": {
+        "trades_taken": 86,
+        "trades_skipped": 46,
+        "total_trades": 132,
+        "win_rate": 31.4,
+        "total_pnl": 23292.91,
+        "profit_factor": 3.06,
+        "max_losing_streak": 10,
+        "max_drawdown": 1973.45
+      },
+      "Cool-off: 5L \u2192 skip 3": {
+        "trades_taken": 96,
+        "trades_skipped": 36,
+        "total_trades": 132,
+        "win_rate": 27.1,
+        "total_pnl": 17690.94,
+        "profit_factor": 2.3,
+        "max_losing_streak": 15,
+        "max_drawdown": 3586.63
+      },
+      "Half@3L + Skip@5L": {
+        "trades_taken": 120,
+        "trades_skipped": 12,
+        "total_trades": 132,
+        "win_rate": 25.8,
+        "total_pnl": 18917.01,
+        "profit_factor": 2.3,
+        "max_losing_streak": 20,
+        "max_drawdown": 3881.0
+      }
+    },
+    "BT6": {
+      "Baseline ($200 fixed)": {
+        "trades_taken": 116,
+        "trades_skipped": 0,
+        "total_trades": 116,
+        "win_rate": 31.9,
+        "total_pnl": 29815.79,
+        "profit_factor": 2.93,
+        "max_losing_streak": 10,
+        "max_drawdown": 1985.34
+      },
+      "Skip after 3 losses": {
+        "trades_taken": 97,
+        "trades_skipped": 19,
+        "total_trades": 116,
+        "win_rate": 34.0,
+        "total_pnl": 30672.23,
+        "profit_factor": 3.45,
+        "max_losing_streak": 7,
+        "max_drawdown": 1917.35
+      },
+      "Skip after 4 losses": {
+        "trades_taken": 102,
+        "trades_skipped": 14,
+        "total_trades": 116,
+        "win_rate": 29.4,
+        "total_pnl": 26716.81,
+        "profit_factor": 2.9,
+        "max_losing_streak": 12,
+        "max_drawdown": 2317.51
+      },
+      "Skip after 5 losses": {
+        "trades_taken": 110,
+        "trades_skipped": 6,
+        "total_trades": 116,
+        "win_rate": 32.7,
+        "total_pnl": 30070.47,
+        "profit_factor": 3.08,
+        "max_losing_streak": 9,
+        "max_drawdown": 1785.7
+      },
+      "Half risk after 3 losses": {
+        "trades_taken": 116,
+        "trades_skipped": 0,
+        "total_trades": 116,
+        "win_rate": 31.9,
+        "total_pnl": 29116.98,
+        "profit_factor": 3.33,
+        "max_losing_streak": 10,
+        "max_drawdown": 1719.13
+      },
+      "Half risk after 4 losses": {
+        "trades_taken": 116,
+        "trades_skipped": 0,
+        "total_trades": 116,
+        "win_rate": 31.9,
+        "total_pnl": 28449.0,
+        "profit_factor": 3.1,
+        "max_losing_streak": 10,
+        "max_drawdown": 2017.5
+      },
+      "Progressive (200\u2192150\u2192100\u219250)": {
+        "trades_taken": 116,
+        "trades_skipped": 0,
+        "total_trades": 116,
+        "win_rate": 31.9,
+        "total_pnl": 27584.85,
+        "profit_factor": 3.3,
+        "max_losing_streak": 10,
+        "max_drawdown": 1718.74
+      },
+      "Anti-Martingale (\u2191wins \u2193losses)": {
+        "trades_taken": 116,
+        "trades_skipped": 0,
+        "total_trades": 116,
+        "win_rate": 31.9,
+        "total_pnl": 33407.17,
+        "profit_factor": 3.52,
+        "max_losing_streak": 10,
+        "max_drawdown": 1818.98
+      },
+      "Cool-off: 3L \u2192 skip 2": {
+        "trades_taken": 78,
+        "trades_skipped": 38,
+        "total_trades": 116,
+        "win_rate": 30.8,
+        "total_pnl": 28025.7,
+        "profit_factor": 3.67,
+        "max_losing_streak": 9,
+        "max_drawdown": 1738.22
+      },
+      "Cool-off: 5L \u2192 skip 3": {
+        "trades_taken": 98,
+        "trades_skipped": 18,
+        "total_trades": 116,
+        "win_rate": 32.7,
+        "total_pnl": 20692.77,
+        "profit_factor": 2.61,
+        "max_losing_streak": 8,
+        "max_drawdown": 2297.73
+      },
+      "Half@3L + Skip@5L": {
+        "trades_taken": 110,
+        "trades_skipped": 6,
+        "total_trades": 116,
+        "win_rate": 32.7,
+        "total_pnl": 28985.4,
+        "profit_factor": 3.3,
+        "max_losing_streak": 9,
+        "max_drawdown": 1719.13
+      }
+    }
+  },
+  "summary": {
+    "Baseline ($200 fixed)": {
+      "avg_streak_reduction": 0.0,
+      "avg_dd_reduction_pct": 0.0,
+      "avg_pnl_retention_pct": 100.0
+    },
+    "Skip after 3 losses": {
+      "avg_streak_reduction": 0.8,
+      "avg_dd_reduction_pct": 11.2,
+      "avg_pnl_retention_pct": 105.9
+    },
+    "Skip after 4 losses": {
+      "avg_streak_reduction": -0.5,
+      "avg_dd_reduction_pct": 1.9,
+      "avg_pnl_retention_pct": 107.8
+    },
+    "Skip after 5 losses": {
+      "avg_streak_reduction": 0.2,
+      "avg_dd_reduction_pct": -10.5,
+      "avg_pnl_retention_pct": 100.6
+    },
+    "Half risk after 3 losses": {
+      "avg_streak_reduction": 0.0,
+      "avg_dd_reduction_pct": 24.0,
+      "avg_pnl_retention_pct": 105.3
+    },
+    "Half risk after 4 losses": {
+      "avg_streak_reduction": 0.0,
+      "avg_dd_reduction_pct": 15.6,
+      "avg_pnl_retention_pct": 105.1
+    },
+    "Progressive (200\u2192150\u2192100\u219250)": {
+      "avg_streak_reduction": 0.0,
+      "avg_dd_reduction_pct": 30.6,
+      "avg_pnl_retention_pct": 100.7
+    },
+    "Anti-Martingale (\u2191wins \u2193losses)": {
+      "avg_streak_reduction": 0.0,
+      "avg_dd_reduction_pct": 20.6,
+      "avg_pnl_retention_pct": 119.7
+    },
+    "Cool-off: 3L \u2192 skip 2": {
+      "avg_streak_reduction": 2.5,
+      "avg_dd_reduction_pct": 35.1,
+      "avg_pnl_retention_pct": 109.5
+    },
+    "Cool-off: 5L \u2192 skip 3": {
+      "avg_streak_reduction": 2.5,
+      "avg_dd_reduction_pct": -17.1,
+      "avg_pnl_retention_pct": 82.0
+    },
+    "Half@3L + Skip@5L": {
+      "avg_streak_reduction": 0.2,
+      "avg_dd_reduction_pct": 5.7,
+      "avg_pnl_retention_pct": 106.5
+    }
+  },
+  "best_overall": "Cool-off: 3L \u2192 skip 2",
+  "best_overall_summary": {
+    "avg_streak_reduction": 2.5,
+    "avg_dd_reduction_pct": 35.1,
+    "avg_pnl_retention_pct": 109.5
+  }
+}

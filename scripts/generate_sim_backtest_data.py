@@ -268,11 +268,12 @@ def find_daily_signals(all_data):
     return daily_signals, all_data_ind
 
 
-def simulate_trades(daily_signals, all_data_ind, rank_mode='random'):
+def simulate_trades(daily_signals, all_data_ind, rank_mode='random', start_date='2021-01-01'):
     """
     Simulate: pick 1 confluence trade per day, manage with trailing SL.
     all_data_ind: dict of ticker -> DataFrame with indicators already computed.
     rank_mode: 'random' | 'most_strategies' | 'tightest_atr' | 'combo'
+    start_date: only open new trades on/after this date (manage existing positions regardless)
     """
     print("  📊 Simulating trades...")
 
@@ -356,6 +357,19 @@ def simulate_trades(daily_signals, all_data_ind, rank_mode='random'):
             still_open.append(pos)
 
         open_positions = still_open
+
+        # Skip new entries before start_date (still manage open positions above)
+        if date_str < start_date:
+            # Record equity curve
+            open_pnl = sum((p['last_price'] - p['entry']) * p['shares'] for p in open_positions)
+            closed_pnl = sum(t['pnl'] for t in trades)
+            equity_curve.append({
+                'date': date_str,
+                'total_pnl': closed_pnl + open_pnl,
+                'closed_pnl': closed_pnl,
+                'open_positions': len(open_positions),
+            })
+            continue
 
         # Try to enter a new trade
         candidates = daily_signals[date_str]
@@ -465,8 +479,8 @@ def main():
     tickers = get_universe()
     print(f"  Universe: {len(tickers)} stocks")
 
-    # Download data
-    all_data = download_data(tickers, period='5y')
+    # Download data (6y for indicator warmup — trading starts ~Jan 2021)
+    all_data = download_data(tickers, period='6y')
 
     # Find confluence signals
     daily_signals, all_data_ind = find_daily_signals(all_data)

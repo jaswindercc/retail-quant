@@ -43,6 +43,14 @@ import SpxIncomePage from './pages/SpxIncomePage'
 import SpxSkipAnalysisPage from './pages/SpxSkipAnalysisPage'
 import SimPage from './pages/SimPage'
 import SimBacktestPage from './pages/SimBacktestPage'
+import SimBacktest2Page from './pages/SimBacktest2Page'
+import SimBacktest3Page from './pages/SimBacktest3Page'
+import SimBacktest4Page from './pages/SimBacktest4Page'
+import SimBacktestSummaryPage from './pages/SimBacktestSummaryPage'
+import SimBacktest5Page from './pages/SimBacktest5Page'
+import SimBacktest6Page from './pages/SimBacktest6Page'
+import DynamicRiskPage from './pages/DynamicRiskPage'
+import LiveStrategyPage from './pages/LiveStrategyPage'
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
 
@@ -222,8 +230,32 @@ export default function App() {
             <NavLink to="/sim" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: '#ffd700', fontWeight: 700 })}>
               📝 Paper Trading
             </NavLink>
+            <NavLink to="/sim/summary" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: '#4ade80', fontWeight: 700 })}>
+              📋 Summary & Final Plan
+            </NavLink>
             <NavLink to="/sim/backtest-1" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
               📊 Backtest 1 — Confluence
+            </NavLink>
+            <NavLink to="/sim/backtest-2" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              📊 Backtest 2 — Top 3
+            </NavLink>
+            <NavLink to="/sim/backtest-3" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: '#4ade80', fontWeight: 600 })}>
+              ⭐ Backtest 3 — Regime
+            </NavLink>
+            <NavLink to="/sim/backtest-4" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              🎯 Backtest 4 — Universe
+            </NavLink>
+            <NavLink to="/sim/backtest-5" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              🔄 Backtest 5 — Rotation Mega-Cap
+            </NavLink>
+            <NavLink to="/sim/backtest-6" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              🔄 Backtest 6 — Rotation Mid-Cap
+            </NavLink>
+            <NavLink to="/sim/dynamic-risk" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              ⚡ Dynamic Risk
+            </NavLink>
+            <NavLink to="/sim/live" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: isActive ? '#4ade80' : '#4ade80', fontWeight: 700 })}>
+              🟢 LIVE
             </NavLink>
           </NavGroup>
 
@@ -372,6 +404,14 @@ export default function App() {
           <Route path="/options/spx/skip-analysis" element={<SpxSkipAnalysisPage />} />
           <Route path="/sim" element={<SimPage />} />
           <Route path="/sim/backtest-1" element={<SimBacktestPage />} />
+          <Route path="/sim/backtest-2" element={<SimBacktest2Page />} />
+          <Route path="/sim/backtest-3" element={<SimBacktest3Page />} />
+          <Route path="/sim/backtest-4" element={<SimBacktest4Page />} />
+          <Route path="/sim/summary" element={<SimBacktestSummaryPage />} />
+          <Route path="/sim/backtest-5" element={<SimBacktest5Page />} />
+          <Route path="/sim/backtest-6" element={<SimBacktest6Page />} />
+          <Route path="/sim/dynamic-risk" element={<DynamicRiskPage />} />
+          <Route path="/sim/live" element={<LiveStrategyPage />} />
           <Route path="/markov" element={<MarkovPage />} />
           <Route path="/learnings" element={<MasterLearningsPage />} />
         </Routes>
