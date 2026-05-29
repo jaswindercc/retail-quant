@@ -3,6 +3,10 @@ import { useState, useEffect } from 'react'
 export default function LivePlanPage() {
   const [data, setData] = useState(null)
   const [showAllTrades, setShowAllTrades] = useState(false)
+  const [showDynamicTrades, setShowDynamicTrades] = useState(false)
+  const [showReductionTrades, setShowReductionTrades] = useState(false)
+  const [capital, setCapital] = useState(40000)
+  const [riskPct, setRiskPct] = useState(0.5)
 
   useEffect(() => {
     const base = import.meta.env.BASE_URL
@@ -20,6 +24,73 @@ export default function LivePlanPage() {
   const pnls = equityCurve.map(e => e.pnl)
   const maxPnl = Math.max(...pnls, 1)
   const minPnl = Math.min(...pnls, 0)
+
+  // === DYNAMIC RISK STUDY: % of current portfolio (compounds) ===
+  function runDynamicRisk(trades, startCapital, riskPctVal) {
+    let currentCapital = startCapital
+    let peakCapital = startCapital
+    let maxDD = 0
+    let maxDDPct = 0
+    const results = []
+    for (const t of trades) {
+      const riskDollars = currentCapital * (riskPctVal / 100)
+      const shares = Math.floor(riskDollars / t.risk)
+      const positionSize = shares * t.entryPrice
+      const positionPct = (positionSize / currentCapital) * 100
+      const pnlScaled = shares > 0 ? t.pnlR * riskDollars : 0
+      results.push({ ...t, shares, positionSize, positionPct, riskDollars, pnlScaled, capitalAtEntry: currentCapital, riskMult: 1.0 })
+      if (shares > 0) currentCapital += pnlScaled
+      if (currentCapital > peakCapital) peakCapital = currentCapital
+      const dd = peakCapital - currentCapital
+      if (dd > maxDD) maxDD = dd
+      const ddPct = peakCapital > 0 ? (dd / peakCapital) * 100 : 0
+      if (ddPct > maxDDPct) maxDDPct = ddPct
+    }
+    const wins = results.filter(r => r.pnlScaled > 0).length
+    const totalPnl = currentCapital - startCapital
+    const grossWin = results.filter(r => r.pnlScaled > 0).reduce((s, r) => s + r.pnlScaled, 0)
+    const grossLoss = Math.abs(results.filter(r => r.pnlScaled < 0).reduce((s, r) => s + r.pnlScaled, 0))
+    const pf = grossLoss > 0 ? grossWin / grossLoss : grossWin > 0 ? 99 : 0
+    return { results, finalCapital: currentCapital, totalPnl, wins, wr: (wins / results.length * 100), pf, maxDD, maxDDPct }
+  }
+
+  // === RISK REDUCTION STUDY: reduce risk after each consecutive loss ===
+  function runRiskReduction(trades, startCapital, riskPctVal) {
+    let currentCapital = startCapital
+    let peakCapital = startCapital
+    let maxDD = 0
+    let maxDDPct = 0
+    let consecutiveLosses = 0
+    const results = []
+    for (const t of trades) {
+      // Progressive reduction: each consecutive loss reduces by 10%, floor at 50%
+      const riskMult = Math.max(0.5, 1.0 - (consecutiveLosses * 0.1))
+      const riskDollars = currentCapital * (riskPctVal / 100) * riskMult
+      const shares = Math.floor(riskDollars / t.risk)
+      const positionSize = shares * t.entryPrice
+      const positionPct = (positionSize / currentCapital) * 100
+      const pnlScaled = shares > 0 ? t.pnlR * riskDollars : 0
+      results.push({ ...t, shares, positionSize, positionPct, riskDollars, pnlScaled, capitalAtEntry: currentCapital, riskMult })
+      if (shares > 0) currentCapital += pnlScaled
+      if (currentCapital > peakCapital) peakCapital = currentCapital
+      const dd = peakCapital - currentCapital
+      if (dd > maxDD) maxDD = dd
+      const ddPct = peakCapital > 0 ? (dd / peakCapital) * 100 : 0
+      if (ddPct > maxDDPct) maxDDPct = ddPct
+      // Update streak
+      if (t.pnlR < 0) { consecutiveLosses++ }
+      else { consecutiveLosses = 0 }
+    }
+    const wins = results.filter(r => r.pnlScaled > 0).length
+    const totalPnl = currentCapital - startCapital
+    const grossWin = results.filter(r => r.pnlScaled > 0).reduce((s, r) => s + r.pnlScaled, 0)
+    const grossLoss = Math.abs(results.filter(r => r.pnlScaled < 0).reduce((s, r) => s + r.pnlScaled, 0))
+    const pf = grossLoss > 0 ? grossWin / grossLoss : grossWin > 0 ? 99 : 0
+    return { results, finalCapital: currentCapital, totalPnl, wins, wr: (wins / results.length * 100), pf, maxDD, maxDDPct }
+  }
+
+  const dynamic = trades.length > 0 ? runDynamicRisk(trades, capital, riskPct) : null
+  const reduction = trades.length > 0 ? runRiskReduction(trades, capital, riskPct) : null
 
   return (
     <div className="page-container" style={{ padding: '1.5rem', maxWidth: 1100 }}>
@@ -80,6 +151,196 @@ export default function LivePlanPage() {
             <p style={{ marginBottom: 0, color: '#38bdf8' }}><strong>Note:</strong> All 30 stocks in the pool were publicly traded and liquid by January 2020. No look-ahead bias in pool construction.</p>
           </div>
         </div>
+
+        {/* ═══════════════ CONFIGURE YOUR RISK ═══════════════ */}
+        <div style={{ background: '#1e1e2e', border: '1px solid #6366f1', borderRadius: 8, padding: '1rem', marginBottom: '1.5rem' }}>
+          <div style={{ fontSize: 13, color: '#6366f1', fontWeight: 700, marginBottom: '0.75rem' }}>⚙️ Configure Your Risk</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', fontSize: 13 }}>
+            <div>
+              <label style={{ color: '#71717a', fontSize: 11, display: 'block', marginBottom: 4 }}>Account Capital ($)</label>
+              <input type="number" value={capital} onChange={e => setCapital(Math.max(1000, +e.target.value || 40000))}
+                style={{ background: '#0f0f1a', border: '1px solid #444', borderRadius: 4, padding: '6px 10px', color: '#e4e4e7', width: '100%', fontSize: 14 }} />
+            </div>
+            <div>
+              <label style={{ color: '#71717a', fontSize: 11, display: 'block', marginBottom: 4 }}>Risk per Trade (%)</label>
+              <div style={{ display: 'flex', gap: 6 }}>
+                {[0.5, 1, 2, 3, 5].map(pct => (
+                  <button key={pct} onClick={() => setRiskPct(pct)}
+                    style={{ padding: '6px 12px', borderRadius: 4, border: riskPct === pct ? '2px solid #4ade80' : '1px solid #444', background: riskPct === pct ? '#0f2a1a' : '#0f0f1a', color: riskPct === pct ? '#4ade80' : '#e4e4e7', fontSize: 13, fontWeight: riskPct === pct ? 700 : 400, cursor: 'pointer' }}>
+                    {pct}%
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{ background: '#0f0f1a', border: '1px solid #444', borderRadius: 4, padding: '6px 12px', textAlign: 'center', width: '100%' }}>
+                <div style={{ color: '#71717a', fontSize: 10 }}>Risk per trade (start)</div>
+                <div style={{ color: '#4ade80', fontSize: 20, fontWeight: 800 }}>${(capital * riskPct / 100).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
+                <div style={{ color: '#52525b', fontSize: 10 }}>{riskPct}% of ${capital.toLocaleString()}</div>
+              </div>
+            </div>
+          </div>
+          <div style={{ marginTop: 8, fontSize: 11, color: '#71717a' }}>
+            Risk compounds: as portfolio grows, you risk more $ per trade. As it shrinks, you risk less. This is NOT the fixed-$200 backtest above — it's a realistic simulation of how you'd actually trade.
+          </div>
+        </div>
+
+        {/* ═══════════════ DYNAMIC RISK STUDY ═══════════════ */}
+        {dynamic && (
+          <div style={{ background: '#1e1e2e', border: '1px solid #4ade80', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
+            <h2 style={{ color: '#4ade80', fontSize: 15, marginBottom: '0.75rem' }}>📊 Study 1: Dynamic Risk (Compounding)</h2>
+            <p style={{ color: '#a1a1aa', fontSize: 12, marginBottom: '1rem' }}>
+              Risk = {riskPct}% of current portfolio each trade. Wins grow your risk naturally. Losses shrink it.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 8, marginBottom: '1rem' }}>
+              <Stat label="Final Capital" value={`$${dynamic.finalCapital.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`started $${capital.toLocaleString()}`} color="#4ade80" />
+              <Stat label="Total Return" value={`$${dynamic.totalPnl.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`${(dynamic.totalPnl / capital * 100).toFixed(0)}%`} color={dynamic.totalPnl >= 0 ? '#4ade80' : '#f87171'} />
+              <Stat label="Profit Factor" value={dynamic.pf.toFixed(2)} sub="gross W / gross L" color={dynamic.pf >= 1.5 ? '#4ade80' : '#fbbf24'} />
+              <Stat label="Win Rate" value={`${dynamic.wr.toFixed(1)}%`} sub={`${dynamic.wins}/${dynamic.results.length}`} color="#60a5fa" />
+              <Stat label="Max Drawdown" value={`$${dynamic.maxDD.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`${dynamic.maxDDPct.toFixed(1)}% of peak`} color="#f87171" />
+              <Stat label="Risk/Trade (end)" value={`$${(dynamic.finalCapital * riskPct / 100).toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`was $${(capital * riskPct / 100).toFixed(0)}`} color="#6366f1" />
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+              <span style={{ fontSize: 12, color: '#71717a' }}>{dynamic.results.length} trades</span>
+              <button onClick={() => setShowDynamicTrades(!showDynamicTrades)}
+                style={{ background: '#333', color: '#e4e4e7', border: 'none', borderRadius: 4, padding: '4px 12px', cursor: 'pointer', fontSize: 11 }}>
+                {showDynamicTrades ? 'Hide Trades' : 'Show Trades'}
+              </button>
+            </div>
+            {showDynamicTrades && (
+              <div style={{ maxHeight: 400, overflowY: 'auto' }}>
+                <table style={{ width: '100%', fontSize: 11, borderCollapse: 'collapse' }}>
+                  <thead>
+                    <tr style={{ color: '#71717a', borderBottom: '1px solid #333', position: 'sticky', top: 0, background: '#1e1e2e' }}>
+                      <th style={{ textAlign: 'left', padding: '4px 5px' }}>#</th>
+                      <th style={{ textAlign: 'left', padding: '4px 5px' }}>Stock</th>
+                      <th style={{ textAlign: 'left', padding: '4px 5px' }}>Date</th>
+                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>Capital</th>
+                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>Risk$</th>
+                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>Shares</th>
+                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>Pos%</th>
+                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>R</th>
+                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>P/L</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dynamic.results.map((t, i) => (
+                      <tr key={i} style={{ borderBottom: '1px solid #1a1a1a', color: t.pnlScaled >= 0 ? '#4ade80' : '#f87171' }}>
+                        <td style={{ padding: '3px 5px', color: '#71717a' }}>{i + 1}</td>
+                        <td style={{ padding: '3px 5px', color: '#60a5fa', fontWeight: 500 }}>{t.stock}</td>
+                        <td style={{ padding: '3px 5px', color: '#a1a1aa' }}>{t.entryDate}</td>
+                        <td style={{ padding: '3px 5px', textAlign: 'right', color: '#71717a' }}>${t.capitalAtEntry.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+                        <td style={{ padding: '3px 5px', textAlign: 'right', color: '#6366f1' }}>${t.riskDollars.toFixed(0)}</td>
+                        <td style={{ padding: '3px 5px', textAlign: 'right', color: '#e4e4e7' }}>{t.shares}</td>
+                        <td style={{ padding: '3px 5px', textAlign: 'right', color: t.positionPct > 50 ? '#fbbf24' : '#71717a' }}>{t.positionPct.toFixed(0)}%</td>
+                        <td style={{ padding: '3px 5px', textAlign: 'right' }}>{t.pnlR > 0 ? '+' : ''}{t.pnlR.toFixed(1)}R</td>
+                        <td style={{ padding: '3px 5px', textAlign: 'right', fontWeight: 600 }}>{t.pnlScaled > 0 ? '+' : ''}${t.pnlScaled.toFixed(0)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ═══════════════ RISK REDUCTION STUDY ═══════════════ */}
+        {reduction && (
+          <div style={{ background: '#1e1e2e', border: '1px solid #f59e0b', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
+            <h2 style={{ color: '#f59e0b', fontSize: 15, marginBottom: '0.75rem' }}>🛡️ Study 2: Risk Reduction (Drawdown Protection)</h2>
+            <p style={{ color: '#a1a1aa', fontSize: 12, marginBottom: 8 }}>
+              Same as Study 1, but after each loss reduce risk by 10% (floor at 50%). Win resets to full risk.
+              Idea: losses cluster. Throttle down during hostile streaks, let compounding do its job during wins.
+            </p>
+            <div style={{ background: '#111', borderRadius: 6, padding: '8px 12px', marginBottom: '1rem', fontSize: 12, color: '#d4d4d8' }}>
+              <strong style={{ color: '#f59e0b' }}>Logic:</strong> risk_mult = max(0.5, 1.0 − consecutive_losses × 0.1). After 1 loss → 90% risk. After 2 → 80%. After 5+ → 50%. Win → reset to 100%.
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 8, marginBottom: '1rem' }}>
+              <Stat label="Final Capital" value={`$${reduction.finalCapital.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`started $${capital.toLocaleString()}`} color="#4ade80" />
+              <Stat label="Total Return" value={`$${reduction.totalPnl.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`${(reduction.totalPnl / capital * 100).toFixed(0)}%`} color={reduction.totalPnl >= 0 ? '#4ade80' : '#f87171'} />
+              <Stat label="Profit Factor" value={reduction.pf.toFixed(2)} sub="gross W / gross L" color={reduction.pf >= 1.5 ? '#4ade80' : '#fbbf24'} />
+              <Stat label="Win Rate" value={`${reduction.wr.toFixed(1)}%`} sub={`${reduction.wins}/${reduction.results.length}`} color="#60a5fa" />
+              <Stat label="Max Drawdown" value={`$${reduction.maxDD.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`${reduction.maxDDPct.toFixed(1)}% of peak`} color="#f87171" />
+              <Stat label="DD Saved" value={`$${(dynamic.maxDD - reduction.maxDD).toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub="vs dynamic" color={reduction.maxDD < dynamic.maxDD ? '#4ade80' : '#f87171'} />
+            </div>
+
+            {/* COMPARISON TABLE */}
+            <div style={{ background: '#111', borderRadius: 6, padding: '10px 12px', marginBottom: '1rem' }}>
+              <table style={{ width: '100%', fontSize: 12, borderCollapse: 'collapse' }}>
+                <thead>
+                  <tr style={{ color: '#71717a', borderBottom: '1px solid #333' }}>
+                    <th style={{ textAlign: 'left', padding: '4px 6px' }}>Method</th>
+                    <th style={{ textAlign: 'right', padding: '4px 6px' }}>Return</th>
+                    <th style={{ textAlign: 'right', padding: '4px 6px' }}>PF</th>
+                    <th style={{ textAlign: 'right', padding: '4px 6px' }}>Max DD</th>
+                    <th style={{ textAlign: 'right', padding: '4px 6px' }}>DD%</th>
+                    <th style={{ textAlign: 'right', padding: '4px 6px' }}>Return/DD</th>
+                  </tr>
+                </thead>
+                <tbody style={{ color: '#e4e4e7' }}>
+                  <tr style={{ borderBottom: '1px solid #222' }}>
+                    <td style={{ padding: '4px 6px' }}>Dynamic ({riskPct}%)</td>
+                    <td style={{ padding: '4px 6px', textAlign: 'right', color: '#4ade80' }}>${dynamic.totalPnl.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+                    <td style={{ padding: '4px 6px', textAlign: 'right' }}>{dynamic.pf.toFixed(2)}</td>
+                    <td style={{ padding: '4px 6px', textAlign: 'right', color: '#f87171' }}>${dynamic.maxDD.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+                    <td style={{ padding: '4px 6px', textAlign: 'right' }}>{dynamic.maxDDPct.toFixed(1)}%</td>
+                    <td style={{ padding: '4px 6px', textAlign: 'right' }}>{(dynamic.totalPnl / dynamic.maxDD).toFixed(2)}</td>
+                  </tr>
+                  <tr style={{ background: '#f59e0b22', fontWeight: 600 }}>
+                    <td style={{ padding: '4px 6px', color: '#f59e0b' }}>Risk Reduction</td>
+                    <td style={{ padding: '4px 6px', textAlign: 'right', color: '#4ade80' }}>${reduction.totalPnl.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+                    <td style={{ padding: '4px 6px', textAlign: 'right' }}>{reduction.pf.toFixed(2)}</td>
+                    <td style={{ padding: '4px 6px', textAlign: 'right', color: '#4ade80' }}>${reduction.maxDD.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+                    <td style={{ padding: '4px 6px', textAlign: 'right' }}>{reduction.maxDDPct.toFixed(1)}%</td>
+                    <td style={{ padding: '4px 6px', textAlign: 'right' }}>{(reduction.totalPnl / reduction.maxDD).toFixed(2)}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+              <span style={{ fontSize: 12, color: '#71717a' }}>{reduction.results.length} trades — risk mult shown per trade</span>
+              <button onClick={() => setShowReductionTrades(!showReductionTrades)}
+                style={{ background: '#333', color: '#e4e4e7', border: 'none', borderRadius: 4, padding: '4px 12px', cursor: 'pointer', fontSize: 11 }}>
+                {showReductionTrades ? 'Hide Trades' : 'Show Trades'}
+              </button>
+            </div>
+            {showReductionTrades && (
+              <div style={{ maxHeight: 400, overflowY: 'auto' }}>
+                <table style={{ width: '100%', fontSize: 11, borderCollapse: 'collapse' }}>
+                  <thead>
+                    <tr style={{ color: '#71717a', borderBottom: '1px solid #333', position: 'sticky', top: 0, background: '#1e1e2e' }}>
+                      <th style={{ textAlign: 'left', padding: '4px 5px' }}>#</th>
+                      <th style={{ textAlign: 'left', padding: '4px 5px' }}>Stock</th>
+                      <th style={{ textAlign: 'left', padding: '4px 5px' }}>Date</th>
+                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>Capital</th>
+                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>Risk$</th>
+                      <th style={{ textAlign: 'center', padding: '4px 5px' }}>Mult</th>
+                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>Shares</th>
+                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>R</th>
+                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>P/L</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {reduction.results.map((t, i) => (
+                      <tr key={i} style={{ borderBottom: '1px solid #1a1a1a', color: t.pnlScaled >= 0 ? '#4ade80' : '#f87171' }}>
+                        <td style={{ padding: '3px 5px', color: '#71717a' }}>{i + 1}</td>
+                        <td style={{ padding: '3px 5px', color: '#60a5fa', fontWeight: 500 }}>{t.stock}</td>
+                        <td style={{ padding: '3px 5px', color: '#a1a1aa' }}>{t.entryDate}</td>
+                        <td style={{ padding: '3px 5px', textAlign: 'right', color: '#71717a' }}>${t.capitalAtEntry.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+                        <td style={{ padding: '3px 5px', textAlign: 'right', color: '#6366f1' }}>${t.riskDollars.toFixed(0)}</td>
+                        <td style={{ padding: '3px 5px', textAlign: 'center', color: t.riskMult < 1 ? '#f59e0b' : '#71717a', fontWeight: t.riskMult < 1 ? 600 : 400 }}>{(t.riskMult * 100).toFixed(0)}%</td>
+                        <td style={{ padding: '3px 5px', textAlign: 'right', color: '#e4e4e7' }}>{t.shares}</td>
+                        <td style={{ padding: '3px 5px', textAlign: 'right' }}>{t.pnlR > 0 ? '+' : ''}{t.pnlR.toFixed(1)}R</td>
+                        <td style={{ padding: '3px 5px', textAlign: 'right', fontWeight: 600 }}>{t.pnlScaled > 0 ? '+' : ''}${t.pnlScaled.toFixed(0)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* COMPARISON TABLE */}
         <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
@@ -285,6 +546,16 @@ export default function LivePlanPage() {
           <p style={{ marginBottom: 0 }}>• <strong>Broke a rule:</strong> Stop for the day. Journal it. No revenge trades.</p>
         </div>
       </div>
+    </div>
+  )
+}
+
+function Stat({ label, value, sub, color }) {
+  return (
+    <div style={{ background: '#111', border: '1px solid #333', borderRadius: 6, padding: '8px 10px', textAlign: 'center' }}>
+      <div style={{ color: '#71717a', fontSize: 10 }}>{label}</div>
+      <div style={{ color, fontSize: 16, fontWeight: 800 }}>{value}</div>
+      {sub && <div style={{ color: '#52525b', fontSize: 10 }}>{sub}</div>}
     </div>
   )
 }
