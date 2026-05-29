@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   workflow_run:
-    workflows: ["Live Swing Scanner", "Swing Simulator (Daily)", "Overnight Scanner"]
+    workflows: ["Live Swing Scanner", "Google Sheet Sync to SIM", "Overnight Scanner"]
     types: [completed]
   workflow_dispatch:
 

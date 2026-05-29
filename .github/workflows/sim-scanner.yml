@@ -1,4 +1,4 @@
-name: Swing Simulator (Daily)
+name: Google Sheet Sync to SIM
 
 on:
   schedule:
