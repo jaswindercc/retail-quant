@@ -1,14 +1,11 @@
 name: Overnight Scanner
 
 on:
-  # Run Mon-Fri at 4:15 PM New York (EDT) — after market close
   schedule:
-    - cron: '15 20 * * 1-5'
-  # Manual trigger
+    - cron: '15 20 * * 1-5'  # Mon-Fri 4:15 PM EDT
   workflow_dispatch:
 
 permissions:
-  contents: read
   actions: write
 
 jobs:

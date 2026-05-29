@@ -2,18 +2,11 @@ name: Swing Simulator (Daily)
 
 on:
   schedule:
-    - cron: '5 20 * * 1-5'  # Mon-Fri 4:05 PM EDT (after live scanner)
+    - cron: '5 20 * * 1-5'  # Mon-Fri 4:05 PM EDT
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
   actions: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
 
 jobs:
   simulate:
@@ -35,43 +28,8 @@ jobs:
       - name: Run simulator
         run: python scripts/generate_sim_data.py
 
-      - name: Restore live scanner data from cache
-        uses: actions/cache/restore@v4
-        with:
-          path: dashboard/public/live_scanner_data.json
-          key: live-scanner-data
-
-      - name: Cache sim data for deploy workflow
+      - name: Cache sim data
         uses: actions/cache/save@v4
         with:
           path: dashboard/public/sim_data.json
           key: sim-data
-
-      - name: Restore overnight scanner data from cache
-        uses: actions/cache/restore@v4
-        with:
-          path: dashboard/public/scanner_data.json
-          key: overnight-scanner-data
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: dashboard/package-lock.json
-
-      - name: Install & build dashboard
-        run: cd dashboard && npm ci && npm run build
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dashboard/dist
-
-  deploy:
-    needs: simulate
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
