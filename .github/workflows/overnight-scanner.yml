@@ -34,5 +34,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -f dashboard/public/scanner_data.json
           # Only commit if there are changes
-          git diff --cached --quiet || git commit -m "🤖 Scanner refresh $(TZ='America/New_York' date '+%Y-%m-%d %I:%M %p ET')"
+          git diff --cached --quiet || git commit -m "🤖 Scanner refresh [skip ci]"
           git push

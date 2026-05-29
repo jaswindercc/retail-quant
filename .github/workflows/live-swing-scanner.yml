@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -39,6 +39,14 @@ jobs:
 
       - name: Copy data to dashboard public
         run: cp data/*.json dashboard/public/ 2>/dev/null || true
+
+      - name: Commit live scanner data to repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f dashboard/public/live_scanner_data.json
+          git diff --cached --quiet || git commit -m "🔴 Live scanner update [skip ci]"
+          git push
 
       - uses: actions/setup-node@v4
         with:
