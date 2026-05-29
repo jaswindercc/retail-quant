@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2026-05-28 06:02 PM EDT",
+  "lastUpdated": "2026-05-29 10:56 AM EDT",
   "summary": {
-    "total_positions": 2,
-    "open": 2,
+    "total_positions": 3,
+    "open": 3,
     "closed": 0,
     "winners": 0,
     "losers": 0,
@@ -20,19 +20,19 @@
       "entry_price": 412.6,
       "initial_sl": 392.0,
       "current_sl": 392.0,
-      "last_price": 412.67,
-      "last_price_date": "2026-05-27",
+      "last_price": 426.99,
+      "last_price_date": "2026-05-28",
       "price_age_days": 1,
       "status": "OPEN",
       "reason": "Still holding",
       "exit_date": null,
-      "exit_price": 412.67,
-      "pnl": 0.7,
-      "pnl_per_share": 0.07,
-      "r_multiple": 0.0,
-      "max_r": 0.0,
+      "exit_price": 426.99,
+      "pnl": 143.9,
+      "pnl_per_share": 14.39,
+      "r_multiple": 0.7,
+      "max_r": 0.82,
       "risk_per_share": 20.6,
-      "days_held": 0,
+      "days_held": 1,
       "trail_activated": false,
       "strategy": "\ud83d\udd35 MA Bounce",
       "qty": 10,
@@ -47,6 +47,13 @@
           "sl": 392.0,
           "trail_active": false,
           "note": "Entry day"
+        },
+        {
+          "date": "2026-05-28",
+          "close": 426.99,
+          "sl": 392.0,
+          "trail_active": false,
+          "note": "R=0.7"
         }
       ]
     },
@@ -55,6 +62,42 @@
       "entry_date": "2026-05-28",
       "entry_price": 142.88,
       "initial_sl": 136.69,
+      "current_sl": 136.69,
+      "last_price": 143.34,
+      "last_price_date": "2026-05-28",
+      "price_age_days": 1,
+      "status": "OPEN",
+      "reason": "Still holding",
+      "exit_date": null,
+      "exit_price": 143.34,
+      "pnl": 17.48,
+      "pnl_per_share": 0.46,
+      "r_multiple": 0.07,
+      "max_r": 0.0,
+      "risk_per_share": 6.19,
+      "days_held": 0,
+      "trail_activated": false,
+      "strategy": "\ud83d\udfe3 RSI Trend \ud83d\udd35 MA Bounce",
+      "qty": 38,
+      "trail_params": {
+        "trail_start_r": 2.5,
+        "trail_atr_buf": 1.0
+      },
+      "daily_log": [
+        {
+          "date": "2026-05-28",
+          "close": 143.34,
+          "sl": 136.69,
+          "trail_active": false,
+          "note": "Entry day"
+        }
+      ]
+    },
+    {
+      "ticker": "ADBE",
+      "entry_date": "2026-05-29",
+      "entry_price": 249.08,
+      "initial_sl": 237.46,
       "status": "OPEN",
       "reason": "No bars since entry (market closed?)",
       "exit_date": null,
@@ -64,8 +107,8 @@
       "max_r": 0,
       "days_held": 0,
       "trail_activated": false,
-      "strategy": "\ud83d\udfe3 RSI Trend \ud83d\udd35 MA Bounce",
-      "qty": 38,
+      "strategy": "\ud83d\udfe3 RSI Trend\n\ud83d\udd35 MA Bounce",
+      "qty": 22,
       "daily_log": []
     }
   ],

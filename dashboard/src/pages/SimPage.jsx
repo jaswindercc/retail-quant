@@ -4,14 +4,36 @@ export default function SimPage() {
   const [data, setData] = useState(null)
   const [error, setError] = useState(null)
   const [selectedPos, setSelectedPos] = useState(null)
+  const [refreshing, setRefreshing] = useState(false)
+  const [refreshMsg, setRefreshMsg] = useState(null)
 
-  useEffect(() => {
+  const fetchData = () => {
     const base = import.meta.env.BASE_URL
     fetch(`${base}sim_data.json`)
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() })
       .then(setData)
       .catch(e => setError(e.message))
-  }, [])
+  }
+
+  useEffect(() => { fetchData() }, [])
+
+  const handleRefresh = async () => {
+    setRefreshing(true)
+    setRefreshMsg(null)
+    try {
+      const res = await fetch('/api/refresh-sim')
+      const json = await res.json()
+      if (json.ok) {
+        setRefreshMsg('✅ Updated from Google Sheet')
+        setTimeout(() => fetchData(), 500)
+      } else {
+        setRefreshMsg(`❌ ${json.error}`)
+      }
+    } catch (e) {
+      setRefreshMsg(`❌ ${e.message} (only works in dev)`)
+    }
+    setRefreshing(false)
+  }
 
   if (error) return (
     <div style={{ padding: 40, color: '#f87171' }}>
@@ -25,26 +47,36 @@ export default function SimPage() {
   const { summary, positions, lastUpdated, trailRules } = data
   const open = positions.filter(p => p.status === 'OPEN')
   const closed = positions.filter(p => p.status === 'CLOSED')
+  const openPnl = open.reduce((sum, p) => sum + (p.pnl || 0), 0)
+  const totalPnl = summary.total_pnl + openPnl
 
   return (
     <div>
       <h1 className="page-title">Swing Simulator <span>Paper Trading · Real Prices · No Cheating</span></h1>
 
-      {/* Last updated */}
-      <div style={{ fontSize: '0.8rem', color: '#888', marginBottom: 16 }}>
-        Last updated: {lastUpdated}
+      {/* Refresh button + last updated */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+        <button
+          onClick={handleRefresh}
+          disabled={refreshing}
+          style={{ background: '#2563eb', color: '#fff', border: 'none', borderRadius: 6, padding: '8px 16px', cursor: refreshing ? 'wait' : 'pointer', fontWeight: 600, fontSize: '0.85rem', opacity: refreshing ? 0.6 : 1 }}
+        >
+          {refreshing ? '⏳ Syncing...' : '🔄 Sync from Google Sheet'}
+        </button>
+        <span style={{ fontSize: '0.8rem', color: '#888' }}>Last updated: {lastUpdated}</span>
+        {refreshMsg && <span style={{ fontSize: '0.8rem', color: refreshMsg.startsWith('✅') ? '#4ade80' : '#f87171' }}>{refreshMsg}</span>}
       </div>
 
       {/* KPI Row */}
       <div className="kpi-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 12, marginBottom: 24 }}>
+        <KpiCard label="Total P&L" value={`$${totalPnl.toFixed(2)}`} color={totalPnl >= 0 ? '#4ade80' : '#f87171'} />
+        <KpiCard label="Open P&L" value={`$${openPnl.toFixed(2)}`} color={openPnl >= 0 ? '#4ade80' : '#f87171'} />
+        <KpiCard label="Closed P&L" value={`$${summary.total_pnl.toFixed(2)}`} color={summary.total_pnl >= 0 ? '#4ade80' : '#f87171'} />
         <KpiCard label="Total Trades" value={summary.total_positions} />
         <KpiCard label="Open" value={summary.open} color="#4ade80" />
         <KpiCard label="Closed" value={summary.closed} />
         <KpiCard label="Win Rate" value={`${summary.win_rate}%`} color={summary.win_rate >= 50 ? '#4ade80' : '#f87171'} />
-        <KpiCard label="Total PnL" value={`$${summary.total_pnl.toLocaleString()}`} color={summary.total_pnl >= 0 ? '#4ade80' : '#f87171'} />
         <KpiCard label="Avg R" value={`${summary.avg_r}R`} color={summary.avg_r >= 0 ? '#4ade80' : '#f87171'} />
-        <KpiCard label="Best Trade" value={`${summary.best_trade}R`} color="#4ade80" />
-        <KpiCard label="Worst Trade" value={`${summary.worst_trade}R`} color="#f87171" />
         <KpiCard label="Avg Days Held" value={summary.avg_days_held} />
       </div>
 
