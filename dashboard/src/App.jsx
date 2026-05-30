@@ -50,7 +50,7 @@ import SimBacktestSummaryPage from './pages/SimBacktestSummaryPage'
 import SimBacktest5Page from './pages/SimBacktest5Page'
 import SimBacktest6Page from './pages/SimBacktest6Page'
 import DynamicRiskPage from './pages/DynamicRiskPage'
-import LiveStrategyPage from './pages/LiveStrategyPage'
+// LiveStrategyPage removed — merged into SimBacktest5Page
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
 
@@ -245,8 +245,8 @@ export default function App() {
             <NavLink to="/sim/backtest-4" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
               🎯 Backtest 4 — Universe
             </NavLink>
-            <NavLink to="/sim/backtest-5" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
-              🔄 Backtest 5 — Rotation Mega-Cap
+            <NavLink to="/sim/backtest-5" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: isActive ? '#4ade80' : '#4ade80', fontWeight: 700 })}>
+              🟢 LIVE — Mega-Cap
             </NavLink>
             <NavLink to="/sim/backtest-6" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
               🔄 Backtest 6 — Rotation Mid-Cap
@@ -254,9 +254,7 @@ export default function App() {
             <NavLink to="/sim/dynamic-risk" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
               ⚡ Dynamic Risk
             </NavLink>
-            <NavLink to="/sim/live" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: isActive ? '#4ade80' : '#4ade80', fontWeight: 700 })}>
-              🟢 LIVE
-            </NavLink>
+
           </NavGroup>
 
           <NavGroup label="Swing Strategies" icon="📈" defaultOpen={isSwingRoute}>
@@ -411,7 +409,7 @@ export default function App() {
           <Route path="/sim/backtest-5" element={<SimBacktest5Page />} />
           <Route path="/sim/backtest-6" element={<SimBacktest6Page />} />
           <Route path="/sim/dynamic-risk" element={<DynamicRiskPage />} />
-          <Route path="/sim/live" element={<LiveStrategyPage />} />
+          <Route path="/sim/live" element={<SimBacktest5Page />} />
           <Route path="/markov" element={<MarkovPage />} />
           <Route path="/learnings" element={<MasterLearningsPage />} />
         </Routes>
