@@ -13,24 +13,16 @@ export default function SimBacktest6Page() {
     fetch(`${base}sim_backtest6_data.json`).then(r => r.ok ? r.json() : null).then(setData).catch(() => {})
   }, [])
 
-  const ruleStyle = { padding: '8px 12px', borderBottom: '1px solid #333', display: 'flex', gap: 10, alignItems: 'flex-start' }
-  const numStyle = { color: '#fbbf24', fontWeight: 700, minWidth: 22 }
-
   const s = data?.summary
   const trades = data?.trades || []
   const params = data?.params || {}
   const equityCurve = data?.equity_curve || []
-
   const pnls = equityCurve.map(e => e.pnl)
   const maxPnl = Math.max(...pnls, 1)
   const minPnl = Math.min(...pnls, 0)
 
-  // === DYNAMIC RISK STUDY: % of current portfolio (compounds) ===
   function runDynamicRisk(trades, startCapital, riskPctVal) {
-    let currentCapital = startCapital
-    let peakCapital = startCapital
-    let maxDD = 0
-    let maxDDPct = 0
+    let currentCapital = startCapital, peakCapital = startCapital, maxDD = 0, maxDDPct = 0
     const results = []
     for (const t of trades) {
       const riskDollars = currentCapital * (riskPctVal / 100)
@@ -54,13 +46,8 @@ export default function SimBacktest6Page() {
     return { results, finalCapital: currentCapital, totalPnl, wins, wr: (wins / results.length * 100), pf, maxDD, maxDDPct }
   }
 
-  // === RISK REDUCTION STUDY: reduce risk after each consecutive loss ===
   function runRiskReduction(trades, startCapital, riskPctVal) {
-    let currentCapital = startCapital
-    let peakCapital = startCapital
-    let maxDD = 0
-    let maxDDPct = 0
-    let consecutiveLosses = 0
+    let currentCapital = startCapital, peakCapital = startCapital, maxDD = 0, maxDDPct = 0, consecutiveLosses = 0
     const results = []
     for (const t of trades) {
       const riskMult = Math.max(0.5, 1.0 - (consecutiveLosses * 0.1))
@@ -76,8 +63,7 @@ export default function SimBacktest6Page() {
       if (dd > maxDD) maxDD = dd
       const ddPct = peakCapital > 0 ? (dd / peakCapital) * 100 : 0
       if (ddPct > maxDDPct) maxDDPct = ddPct
-      if (t.pnlR < 0) { consecutiveLosses++ }
-      else { consecutiveLosses = 0 }
+      if (t.pnlR < 0) { consecutiveLosses++ } else { consecutiveLosses = 0 }
     }
     const wins = results.filter(r => r.pnlScaled > 0).length
     const totalPnl = currentCapital - startCapital
@@ -92,84 +78,45 @@ export default function SimBacktest6Page() {
 
   return (
     <div className="page-container" style={{ padding: '1.5rem', maxWidth: 1100 }}>
-      <h1 style={{ marginBottom: '0.25rem' }}>🔄 Backtest 6 — Rotation Mid-Cap (HONEST)</h1>
+      <h1 style={{ marginBottom: '0.25rem' }}>BT6 — Mid-Cap Rotation</h1>
       <p style={{ color: '#71717a', fontSize: 13, marginBottom: '1.5rem' }}>
-        Momentum rotation on 68 mid-cap growth stocks that were liquid by mid-2020. Includes disaster stocks (PTON, BYND, SPCE, PLUG, WKHS). No cherry-picking.
+        68 mid-cap growth stocks (includes disasters: PTON, BYND, PLUG, SPCE) · Monthly rotation · SPY {'>'} 200 SMA regime · Breakout + trail
       </p>
 
-      {/* HONESTY PROOF */}
-      <div style={{ background: '#0a1f2a', border: '2px solid #38bdf8', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
-        <h2 style={{ color: '#38bdf8', fontSize: 15, marginBottom: '0.75rem' }}>✅ This Backtest Is Honest — Here's Proof</h2>
-        <div style={{ fontSize: 13, color: '#d4d4d8', lineHeight: 1.8 }}>
-          <p style={{ marginBottom: 8 }}>The rotation algorithm picked the top 10 by 6-month return <strong>each month</strong> from a pool of 68 stocks that existed in 2020. No look-ahead, no cherry-picking. The watchlist rotated in disaster stocks when they had momentum:</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 8, marginTop: 8 }}>
-            <div style={{ background: '#111', borderRadius: 4, padding: '8px 10px', fontSize: 12 }}>
-              <span style={{ color: '#f87171', fontWeight: 600 }}>Jan 2021:</span> <span style={{ color: '#a1a1aa' }}>BLNK, CELH, NIO, FCEL, PLUG, FUBO</span>
-              <div style={{ color: '#71717a', fontSize: 11 }}>↑ EV/clean energy bubble — these had 300%+ 6mo returns</div>
-            </div>
-            <div style={{ background: '#111', borderRadius: 4, padding: '8px 10px', fontSize: 12 }}>
-              <span style={{ color: '#f87171', fontWeight: 600 }}>Feb 2021:</span> <span style={{ color: '#a1a1aa' }}>FCEL, PLUG, FUBO, BLNK, NIO</span>
-              <div style={{ color: '#71717a', fontSize: 11 }}>↑ Still top momentum — then they crashed 80-90%</div>
-            </div>
-            <div style={{ background: '#111', borderRadius: 4, padding: '8px 10px', fontSize: 12 }}>
-              <span style={{ color: '#f87171', fontWeight: 600 }}>Feb 2023:</span> <span style={{ color: '#a1a1aa' }}>PTON in top 10</span>
-              <div style={{ color: '#71717a', fontSize: 11 }}>↑ Dead-cat bounce — PTON rallied 50% then died again</div>
-            </div>
-            <div style={{ background: '#111', borderRadius: 4, padding: '8px 10px', fontSize: 12 }}>
-              <span style={{ color: '#f87171', fontWeight: 600 }}>Apr 2021:</span> <span style={{ color: '#a1a1aa' }}>QS, PLUG, PLTR in top 10</span>
-              <div style={{ color: '#71717a', fontSize: 11 }}>↑ Momentum still high — these all fell 60-80% after</div>
-            </div>
-          </div>
-          <p style={{ marginTop: 10, color: '#38bdf8', fontWeight: 600, marginBottom: 0 }}>Result: PF 1.51 — still profitable despite eating real losses from bubble stocks. The strategy survived honest conditions.</p>
-        </div>
-      </div>
-
-      {!data && <p style={{ color: '#71717a' }}>Loading backtest data...</p>}
+      {!data && <p style={{ color: '#71717a' }}>Loading...</p>}
 
       {s && <>
-        {/* KEY STATS */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 10, marginBottom: '1.5rem' }}>
-          {[
-            { label: 'Total PnL', value: `$${s.total_pnl.toLocaleString()}`, color: s.total_pnl >= 0 ? '#4ade80' : '#f87171' },
-            { label: 'Profit Factor', value: s.profit_factor.toFixed(2), color: s.profit_factor >= 1.5 ? '#4ade80' : '#fbbf24' },
-            { label: 'Win Rate', value: `${s.win_rate.toFixed(1)}%`, color: '#60a5fa' },
-            { label: 'Trades', value: s.total_trades, color: '#e4e4e7' },
-            { label: 'Max Streak', value: s.max_losing_streak, color: s.max_losing_streak > 15 ? '#f87171' : '#fbbf24' },
-            { label: 'Max Drawdown', value: `$${s.max_drawdown.toLocaleString()}`, color: '#f87171' },
-            { label: 'Avg Winner', value: `$${s.avg_winner.toLocaleString()} (${s.avg_r_winner}R)`, color: '#4ade80' },
-            { label: 'Avg Loser', value: `$${s.avg_loser.toLocaleString()}`, color: '#f87171' },
-          ].map(m => (
-            <div key={m.label} style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 6, padding: '10px 12px' }}>
-              <div style={{ fontSize: 11, color: '#71717a', marginBottom: 4 }}>{m.label}</div>
-              <div style={{ fontSize: 15, fontWeight: 700, color: m.color }}>{m.value}</div>
-            </div>
-          ))}
+        {/* BASELINE STATS */}
+        <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 8, padding: '1rem', marginBottom: '1.5rem' }}>
+          <div style={{ fontSize: 11, color: '#71717a', marginBottom: 8 }}>BASELINE (fixed $200/trade) · {s.total_trades} trades · Regime: {params.regime || 'SPY > 200 SMA'}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: 8 }}>
+            <Stat label="PnL" value={`$${s.total_pnl.toLocaleString()}`} color={s.total_pnl >= 0 ? '#4ade80' : '#f87171'} />
+            <Stat label="Profit Factor" value={s.profit_factor.toFixed(2)} color={s.profit_factor >= 1.5 ? '#4ade80' : '#fbbf24'} />
+            <Stat label="Win Rate" value={`${s.win_rate.toFixed(1)}%`} color="#60a5fa" />
+            <Stat label="Max Streak" value={s.max_losing_streak} color={s.max_losing_streak > 15 ? '#f87171' : '#fbbf24'} />
+            <Stat label="Max DD" value={`$${s.max_drawdown.toLocaleString()}`} color="#f87171" />
+            <Stat label="Avg Win" value={`${s.avg_r_winner}R`} color="#4ade80" />
+          </div>
         </div>
 
         {/* EQUITY CURVE */}
         {equityCurve.length > 0 && (
-          <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
-            <h2 style={{ color: '#fbbf24', fontSize: 15, marginBottom: '0.75rem' }}>📈 Equity Curve</h2>
-            <svg width="100%" height="120" viewBox={`0 0 ${equityCurve.length} 100`} preserveAspectRatio="none" style={{ display: 'block' }}>
+          <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 8, padding: '1rem', marginBottom: '1.5rem' }}>
+            <svg width="100%" height="100" viewBox={`0 0 ${equityCurve.length} 100`} preserveAspectRatio="none" style={{ display: 'block' }}>
               <line x1="0" y1={((0 - minPnl) / (maxPnl - minPnl)) * -100 + 100} x2={equityCurve.length} y2={((0 - minPnl) / (maxPnl - minPnl)) * -100 + 100} stroke="#333" strokeWidth="0.5" />
-              <polyline
-                fill="none"
-                stroke="#4ade80"
-                strokeWidth="1.5"
-                points={equityCurve.map((e, i) => `${i},${((e.pnl - minPnl) / (maxPnl - minPnl)) * -100 + 100}`).join(' ')}
-              />
+              <polyline fill="none" stroke="#4ade80" strokeWidth="1.5"
+                points={equityCurve.map((e, i) => `${i},${((e.pnl - minPnl) / (maxPnl - minPnl)) * -100 + 100}`).join(' ')} />
             </svg>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: '#71717a', marginTop: 4 }}>
-              <span>{equityCurve[0]?.date}</span>
-              <span>{equityCurve[equityCurve.length - 1]?.date}</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: '#71717a', marginTop: 4 }}>
+              <span>{equityCurve[0]?.date}</span><span>{equityCurve[equityCurve.length - 1]?.date}</span>
             </div>
           </div>
         )}
 
-        {/* ═══════════════ CONFIGURE YOUR RISK ═══════════════ */}
+        {/* CONFIGURE YOUR RISK */}
         <div style={{ background: '#1e1e2e', border: '1px solid #6366f1', borderRadius: 8, padding: '1rem', marginBottom: '1.5rem' }}>
           <div style={{ fontSize: 13, color: '#6366f1', fontWeight: 700, marginBottom: '0.75rem' }}>⚙️ Configure Your Risk</div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', fontSize: 13 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', fontSize: 13 }}>
             <div>
               <label style={{ color: '#71717a', fontSize: 11, display: 'block', marginBottom: 4 }}>Account Capital ($)</label>
               <input type="number" value={capital} onChange={e => setCapital(Math.max(1000, +e.target.value || 40000))}
@@ -188,310 +135,105 @@ export default function SimBacktest6Page() {
             </div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <div style={{ background: '#0f0f1a', border: '1px solid #444', borderRadius: 4, padding: '6px 12px', textAlign: 'center', width: '100%' }}>
-                <div style={{ color: '#71717a', fontSize: 10 }}>Risk per trade (start)</div>
+                <div style={{ color: '#71717a', fontSize: 10 }}>Starting risk/trade</div>
                 <div style={{ color: '#4ade80', fontSize: 20, fontWeight: 800 }}>${(capital * riskPct / 100).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
-                <div style={{ color: '#52525b', fontSize: 10 }}>{riskPct}% of ${capital.toLocaleString()}</div>
               </div>
             </div>
           </div>
-          <div style={{ marginTop: 8, fontSize: 11, color: '#71717a' }}>
-            Risk compounds: as portfolio grows, you risk more $ per trade. As it shrinks, you risk less. This is NOT the fixed-$200 backtest above — it's a realistic simulation of how you'd actually trade.
-          </div>
         </div>
 
-        {/* ═══════════════ DYNAMIC RISK STUDY ═══════════════ */}
+        {/* STUDY 1: DYNAMIC RISK */}
         {dynamic && (
           <div style={{ background: '#1e1e2e', border: '1px solid #4ade80', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
-            <h2 style={{ color: '#4ade80', fontSize: 15, marginBottom: '0.75rem' }}>📊 Study 1: Dynamic Risk (Compounding)</h2>
-            <p style={{ color: '#a1a1aa', fontSize: 12, marginBottom: '1rem' }}>
-              Risk = {riskPct}% of current portfolio each trade. Wins grow your risk naturally. Losses shrink it.
-            </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 8, marginBottom: '1rem' }}>
-              <Stat label="Final Capital" value={`$${dynamic.finalCapital.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`started $${capital.toLocaleString()}`} color="#4ade80" />
-              <Stat label="Total Return" value={`$${dynamic.totalPnl.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`${(dynamic.totalPnl / capital * 100).toFixed(0)}%`} color={dynamic.totalPnl >= 0 ? '#4ade80' : '#f87171'} />
-              <Stat label="Profit Factor" value={dynamic.pf.toFixed(2)} sub="gross W / gross L" color={dynamic.pf >= 1.5 ? '#4ade80' : '#fbbf24'} />
-              <Stat label="Win Rate" value={`${dynamic.wr.toFixed(1)}%`} sub={`${dynamic.wins}/${dynamic.results.length}`} color="#60a5fa" />
-              <Stat label="Max Drawdown" value={`$${dynamic.maxDD.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`${dynamic.maxDDPct.toFixed(1)}% of peak`} color="#f87171" />
-              <Stat label="Risk/Trade (end)" value={`$${(dynamic.finalCapital * riskPct / 100).toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`was $${(capital * riskPct / 100).toFixed(0)}`} color="#6366f1" />
+            <h2 style={{ color: '#4ade80', fontSize: 15, marginBottom: '0.5rem' }}>📊 Dynamic Risk ({riskPct}% compounding)</h2>
+            <p style={{ color: '#71717a', fontSize: 11, marginBottom: '1rem' }}>Risk = {riskPct}% of current portfolio. Grows with wins, shrinks with losses.</p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: 8, marginBottom: '1rem' }}>
+              <Stat label="Final Capital" value={`$${dynamic.finalCapital.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`+${(dynamic.totalPnl / capital * 100).toFixed(0)}%`} color="#4ade80" />
+              <Stat label="Total Return" value={`$${dynamic.totalPnl.toLocaleString(undefined, {maximumFractionDigits: 0})}`} color={dynamic.totalPnl >= 0 ? '#4ade80' : '#f87171'} />
+              <Stat label="PF" value={dynamic.pf.toFixed(2)} color={dynamic.pf >= 1.5 ? '#4ade80' : '#fbbf24'} />
+              <Stat label="Max DD" value={`$${dynamic.maxDD.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`${dynamic.maxDDPct.toFixed(1)}%`} color="#f87171" />
+              <Stat label="Return/DD" value={(dynamic.totalPnl / dynamic.maxDD).toFixed(2)} color="#60a5fa" />
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-              <span style={{ fontSize: 12, color: '#71717a' }}>{dynamic.results.length} trades</span>
-              <button onClick={() => setShowDynamicTrades(!showDynamicTrades)}
-                style={{ background: '#333', color: '#e4e4e7', border: 'none', borderRadius: 4, padding: '4px 12px', cursor: 'pointer', fontSize: 11 }}>
-                {showDynamicTrades ? 'Hide Trades' : 'Show Trades'}
-              </button>
-            </div>
-            {showDynamicTrades && (
-              <div style={{ maxHeight: 400, overflowY: 'auto' }}>
-                <table style={{ width: '100%', fontSize: 11, borderCollapse: 'collapse' }}>
-                  <thead>
-                    <tr style={{ color: '#71717a', borderBottom: '1px solid #333', position: 'sticky', top: 0, background: '#1e1e2e' }}>
-                      <th style={{ textAlign: 'left', padding: '4px 5px' }}>#</th>
-                      <th style={{ textAlign: 'left', padding: '4px 5px' }}>Stock</th>
-                      <th style={{ textAlign: 'left', padding: '4px 5px' }}>Date</th>
-                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>Capital</th>
-                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>Risk$</th>
-                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>Shares</th>
-                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>Pos%</th>
-                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>R</th>
-                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>P/L</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {dynamic.results.map((t, i) => (
-                      <tr key={i} style={{ borderBottom: '1px solid #1a1a1a', color: t.pnlScaled >= 0 ? '#4ade80' : '#f87171' }}>
-                        <td style={{ padding: '3px 5px', color: '#71717a' }}>{i + 1}</td>
-                        <td style={{ padding: '3px 5px', color: '#60a5fa', fontWeight: 500 }}>{t.stock}</td>
-                        <td style={{ padding: '3px 5px', color: '#a1a1aa' }}>{t.entryDate}</td>
-                        <td style={{ padding: '3px 5px', textAlign: 'right', color: '#71717a' }}>${t.capitalAtEntry.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
-                        <td style={{ padding: '3px 5px', textAlign: 'right', color: '#6366f1' }}>${t.riskDollars.toFixed(0)}</td>
-                        <td style={{ padding: '3px 5px', textAlign: 'right', color: '#e4e4e7' }}>{t.shares}</td>
-                        <td style={{ padding: '3px 5px', textAlign: 'right', color: t.positionPct > 50 ? '#fbbf24' : '#71717a' }}>{t.positionPct.toFixed(0)}%</td>
-                        <td style={{ padding: '3px 5px', textAlign: 'right' }}>{t.pnlR > 0 ? '+' : ''}{t.pnlR.toFixed(1)}R</td>
-                        <td style={{ padding: '3px 5px', textAlign: 'right', fontWeight: 600 }}>{t.pnlScaled > 0 ? '+' : ''}${t.pnlScaled.toFixed(0)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+            <TradeToggle show={showDynamicTrades} setShow={setShowDynamicTrades} results={dynamic.results} showMult={false} />
           </div>
         )}
 
-        {/* ═══════════════ RISK REDUCTION STUDY ═══════════════ */}
-        {reduction && (
+        {/* STUDY 2: RISK REDUCTION */}
+        {reduction && dynamic && (
           <div style={{ background: '#1e1e2e', border: '1px solid #f59e0b', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
-            <h2 style={{ color: '#f59e0b', fontSize: 15, marginBottom: '0.75rem' }}>🛡️ Study 2: Risk Reduction (Drawdown Protection)</h2>
-            <p style={{ color: '#a1a1aa', fontSize: 12, marginBottom: 8 }}>
-              Same as Study 1, but after each loss reduce risk by 10% (floor at 50%). Win resets to full risk.
-              Idea: losses cluster. Throttle down during hostile streaks, let compounding do its job during wins.
-            </p>
-            <div style={{ background: '#111', borderRadius: 6, padding: '8px 12px', marginBottom: '1rem', fontSize: 12, color: '#d4d4d8' }}>
-              <strong style={{ color: '#f59e0b' }}>Logic:</strong> risk_mult = max(0.5, 1.0 − consecutive_losses × 0.1). After 1 loss → 90% risk. After 2 → 80%. After 5+ → 50%. Win → reset to 100%.
+            <h2 style={{ color: '#f59e0b', fontSize: 15, marginBottom: '0.5rem' }}>🛡️ Risk Reduction (Drawdown Protection)</h2>
+            <p style={{ color: '#71717a', fontSize: 11, marginBottom: '1rem' }}>Each consecutive loss → reduce risk 10%. Floor 50%. Win resets to 100%.</p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: 8, marginBottom: '1rem' }}>
+              <Stat label="Final Capital" value={`$${reduction.finalCapital.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`+${(reduction.totalPnl / capital * 100).toFixed(0)}%`} color="#4ade80" />
+              <Stat label="Total Return" value={`$${reduction.totalPnl.toLocaleString(undefined, {maximumFractionDigits: 0})}`} color={reduction.totalPnl >= 0 ? '#4ade80' : '#f87171'} />
+              <Stat label="PF" value={reduction.pf.toFixed(2)} color={reduction.pf >= 1.5 ? '#4ade80' : '#fbbf24'} />
+              <Stat label="Max DD" value={`$${reduction.maxDD.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`${reduction.maxDDPct.toFixed(1)}%`} color="#f87171" />
+              <Stat label="DD Saved" value={`$${(dynamic.maxDD - reduction.maxDD).toLocaleString(undefined, {maximumFractionDigits: 0})}`} color={reduction.maxDD < dynamic.maxDD ? '#4ade80' : '#f87171'} />
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 8, marginBottom: '1rem' }}>
-              <Stat label="Final Capital" value={`$${reduction.finalCapital.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`started $${capital.toLocaleString()}`} color="#4ade80" />
-              <Stat label="Total Return" value={`$${reduction.totalPnl.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`${(reduction.totalPnl / capital * 100).toFixed(0)}%`} color={reduction.totalPnl >= 0 ? '#4ade80' : '#f87171'} />
-              <Stat label="Profit Factor" value={reduction.pf.toFixed(2)} sub="gross W / gross L" color={reduction.pf >= 1.5 ? '#4ade80' : '#fbbf24'} />
-              <Stat label="Win Rate" value={`${reduction.wr.toFixed(1)}%`} sub={`${reduction.wins}/${reduction.results.length}`} color="#60a5fa" />
-              <Stat label="Max Drawdown" value={`$${reduction.maxDD.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`${reduction.maxDDPct.toFixed(1)}% of peak`} color="#f87171" />
-              <Stat label="DD Saved" value={`$${(dynamic.maxDD - reduction.maxDD).toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub="vs dynamic" color={reduction.maxDD < dynamic.maxDD ? '#4ade80' : '#f87171'} />
-            </div>
-
-            {/* COMPARISON TABLE */}
-            <div style={{ background: '#111', borderRadius: 6, padding: '10px 12px', marginBottom: '1rem' }}>
-              <table style={{ width: '100%', fontSize: 12, borderCollapse: 'collapse' }}>
-                <thead>
-                  <tr style={{ color: '#71717a', borderBottom: '1px solid #333' }}>
-                    <th style={{ textAlign: 'left', padding: '4px 6px' }}>Method</th>
-                    <th style={{ textAlign: 'right', padding: '4px 6px' }}>Return</th>
-                    <th style={{ textAlign: 'right', padding: '4px 6px' }}>PF</th>
-                    <th style={{ textAlign: 'right', padding: '4px 6px' }}>Max DD</th>
-                    <th style={{ textAlign: 'right', padding: '4px 6px' }}>DD%</th>
-                    <th style={{ textAlign: 'right', padding: '4px 6px' }}>Return/DD</th>
-                  </tr>
-                </thead>
-                <tbody style={{ color: '#e4e4e7' }}>
-                  <tr style={{ borderBottom: '1px solid #222' }}>
-                    <td style={{ padding: '4px 6px' }}>Dynamic ({riskPct}%)</td>
-                    <td style={{ padding: '4px 6px', textAlign: 'right', color: '#4ade80' }}>${dynamic.totalPnl.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
-                    <td style={{ padding: '4px 6px', textAlign: 'right' }}>{dynamic.pf.toFixed(2)}</td>
-                    <td style={{ padding: '4px 6px', textAlign: 'right', color: '#f87171' }}>${dynamic.maxDD.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
-                    <td style={{ padding: '4px 6px', textAlign: 'right' }}>{dynamic.maxDDPct.toFixed(1)}%</td>
-                    <td style={{ padding: '4px 6px', textAlign: 'right' }}>{(dynamic.totalPnl / dynamic.maxDD).toFixed(2)}</td>
-                  </tr>
-                  <tr style={{ background: '#f59e0b22', fontWeight: 600 }}>
-                    <td style={{ padding: '4px 6px', color: '#f59e0b' }}>Risk Reduction</td>
-                    <td style={{ padding: '4px 6px', textAlign: 'right', color: '#4ade80' }}>${reduction.totalPnl.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
-                    <td style={{ padding: '4px 6px', textAlign: 'right' }}>{reduction.pf.toFixed(2)}</td>
-                    <td style={{ padding: '4px 6px', textAlign: 'right', color: '#4ade80' }}>${reduction.maxDD.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
-                    <td style={{ padding: '4px 6px', textAlign: 'right' }}>{reduction.maxDDPct.toFixed(1)}%</td>
-                    <td style={{ padding: '4px 6px', textAlign: 'right' }}>{(reduction.totalPnl / reduction.maxDD).toFixed(2)}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-              <span style={{ fontSize: 12, color: '#71717a' }}>{reduction.results.length} trades — risk mult shown per trade</span>
-              <button onClick={() => setShowReductionTrades(!showReductionTrades)}
-                style={{ background: '#333', color: '#e4e4e7', border: 'none', borderRadius: 4, padding: '4px 12px', cursor: 'pointer', fontSize: 11 }}>
-                {showReductionTrades ? 'Hide Trades' : 'Show Trades'}
-              </button>
-            </div>
-            {showReductionTrades && (
-              <div style={{ maxHeight: 400, overflowY: 'auto' }}>
-                <table style={{ width: '100%', fontSize: 11, borderCollapse: 'collapse' }}>
-                  <thead>
-                    <tr style={{ color: '#71717a', borderBottom: '1px solid #333', position: 'sticky', top: 0, background: '#1e1e2e' }}>
-                      <th style={{ textAlign: 'left', padding: '4px 5px' }}>#</th>
-                      <th style={{ textAlign: 'left', padding: '4px 5px' }}>Stock</th>
-                      <th style={{ textAlign: 'left', padding: '4px 5px' }}>Date</th>
-                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>Capital</th>
-                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>Risk$</th>
-                      <th style={{ textAlign: 'center', padding: '4px 5px' }}>Mult</th>
-                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>Shares</th>
-                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>R</th>
-                      <th style={{ textAlign: 'right', padding: '4px 5px' }}>P/L</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {reduction.results.map((t, i) => (
-                      <tr key={i} style={{ borderBottom: '1px solid #1a1a1a', color: t.pnlScaled >= 0 ? '#4ade80' : '#f87171' }}>
-                        <td style={{ padding: '3px 5px', color: '#71717a' }}>{i + 1}</td>
-                        <td style={{ padding: '3px 5px', color: '#60a5fa', fontWeight: 500 }}>{t.stock}</td>
-                        <td style={{ padding: '3px 5px', color: '#a1a1aa' }}>{t.entryDate}</td>
-                        <td style={{ padding: '3px 5px', textAlign: 'right', color: '#71717a' }}>${t.capitalAtEntry.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
-                        <td style={{ padding: '3px 5px', textAlign: 'right', color: '#6366f1' }}>${t.riskDollars.toFixed(0)}</td>
-                        <td style={{ padding: '3px 5px', textAlign: 'center', color: t.riskMult < 1 ? '#f59e0b' : '#71717a', fontWeight: t.riskMult < 1 ? 600 : 400 }}>{(t.riskMult * 100).toFixed(0)}%</td>
-                        <td style={{ padding: '3px 5px', textAlign: 'right', color: '#e4e4e7' }}>{t.shares}</td>
-                        <td style={{ padding: '3px 5px', textAlign: 'right' }}>{t.pnlR > 0 ? '+' : ''}{t.pnlR.toFixed(1)}R</td>
-                        <td style={{ padding: '3px 5px', textAlign: 'right', fontWeight: 600 }}>{t.pnlScaled > 0 ? '+' : ''}${t.pnlScaled.toFixed(0)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* COMPARISON vs BT5 */}
-        <div style={{ background: '#1a2e1a', border: '1px solid #22c55e', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
-          <h2 style={{ color: '#4ade80', fontSize: 15, marginBottom: '1rem' }}>📊 Mid-Cap vs Mega-Cap Rotation</h2>
-          <table style={{ width: '100%', fontSize: 12, borderCollapse: 'collapse' }}>
-            <thead>
-              <tr style={{ color: '#71717a', borderBottom: '1px solid #333' }}>
-                <th style={{ textAlign: 'left', padding: '6px 8px' }}>Strategy</th>
-                <th style={{ textAlign: 'right', padding: '6px 8px' }}>PF</th>
-                <th style={{ textAlign: 'right', padding: '6px 8px' }}>WR</th>
-                <th style={{ textAlign: 'right', padding: '6px 8px' }}>PnL</th>
-                <th style={{ textAlign: 'right', padding: '6px 8px' }}>Streak</th>
-                <th style={{ textAlign: 'right', padding: '6px 8px' }}>DD</th>
-              </tr>
-            </thead>
-            <tbody style={{ color: '#e4e4e7' }}>
-              <tr style={{ background: '#22c55e22', fontWeight: 600, borderBottom: '1px solid #222' }}>
-                <td style={{ padding: '6px 8px' }}>⭐ BT6: Mid-Cap Rotation</td>
-                <td style={{ textAlign: 'right', padding: '6px 8px', color: '#4ade80' }}>{s.profit_factor}</td>
-                <td style={{ textAlign: 'right', padding: '6px 8px' }}>{s.win_rate.toFixed(1)}%</td>
-                <td style={{ textAlign: 'right', padding: '6px 8px' }}>${s.total_pnl.toLocaleString()}</td>
-                <td style={{ textAlign: 'right', padding: '6px 8px' }}>{s.max_losing_streak}</td>
-                <td style={{ textAlign: 'right', padding: '6px 8px' }}>${s.max_drawdown.toLocaleString()}</td>
-              </tr>
-              <tr style={{ borderBottom: '1px solid #222' }}>
-                <td style={{ padding: '6px 8px' }}>BT5: Mega-Cap Rotation</td>
-                <td style={{ textAlign: 'right', padding: '6px 8px' }}>2.02</td>
-                <td style={{ textAlign: 'right', padding: '6px 8px' }}>25.8%</td>
-                <td style={{ textAlign: 'right', padding: '6px 8px' }}>$19,263</td>
-                <td style={{ textAlign: 'right', padding: '6px 8px' }}>18</td>
-                <td style={{ textAlign: 'right', padding: '6px 8px' }}>$3,559</td>
-              </tr>
-              <tr style={{ borderBottom: '1px solid #222' }}>
-                <td style={{ padding: '6px 8px' }}>BT3: Confluence + Regime (275)</td>
-                <td style={{ textAlign: 'right', padding: '6px 8px' }}>1.84</td>
-                <td style={{ textAlign: 'right', padding: '6px 8px' }}>30.3%</td>
-                <td style={{ textAlign: 'right', padding: '6px 8px' }}>$30,255</td>
-                <td style={{ textAlign: 'right', padding: '6px 8px' }}>11</td>
-                <td style={{ textAlign: 'right', padding: '6px 8px' }}>$7,992</td>
-              </tr>
-            </tbody>
-          </table>
-          <p style={{ color: '#a1a1aa', fontSize: 12, marginTop: 10, marginBottom: 0 }}>
-            Honest results: lower PF than biased version (was 2.93 with cherry-picked pool, now 1.51 with honest pool). Strategy still profitable.
-          </p>
-        </div>
-
-        {/* ROTATION LOG */}
-        {s.rotation_log && s.rotation_log.length > 0 && (
-          <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
-            <h2 style={{ color: '#fbbf24', fontSize: 15, marginBottom: '0.75rem' }}>🔄 Watchlist Rotation History</h2>
-            <p style={{ color: '#a1a1aa', fontSize: 12, marginBottom: 10 }}>Monthly rotation — top 10 by 6-month momentum. Stocks rotate in/out.</p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 8 }}>
-              {s.rotation_log.map(r => (
-                <div key={r.month} style={{ fontSize: 12, padding: '4px 8px', background: '#111', borderRadius: 4 }}>
-                  <span style={{ color: '#60a5fa', fontWeight: 600 }}>{r.month}:</span>{' '}
-                  <span style={{ color: '#a1a1aa' }}>{r.watchlist.join(', ')}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* PER-STOCK BREAKDOWN */}
-        {s.stock_breakdown && (
-          <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
-            <h2 style={{ color: '#fbbf24', fontSize: 15, marginBottom: '1rem' }}>📋 Per-Stock Results</h2>
-            <table style={{ width: '100%', fontSize: 12, borderCollapse: 'collapse' }}>
+            <table style={{ width: '100%', fontSize: 12, borderCollapse: 'collapse', marginBottom: '1rem' }}>
               <thead>
                 <tr style={{ color: '#71717a', borderBottom: '1px solid #333' }}>
-                  <th style={{ textAlign: 'left', padding: '4px 8px' }}>Stock</th>
-                  <th style={{ textAlign: 'right', padding: '4px 8px' }}>Trades</th>
-                  <th style={{ textAlign: 'right', padding: '4px 8px' }}>Wins</th>
-                  <th style={{ textAlign: 'right', padding: '4px 8px' }}>WR%</th>
-                  <th style={{ textAlign: 'right', padding: '4px 8px' }}>PnL</th>
+                  <th style={{ textAlign: 'left', padding: '4px 6px' }}>Method</th>
+                  <th style={{ textAlign: 'right', padding: '4px 6px' }}>Return</th>
+                  <th style={{ textAlign: 'right', padding: '4px 6px' }}>PF</th>
+                  <th style={{ textAlign: 'right', padding: '4px 6px' }}>Max DD</th>
+                  <th style={{ textAlign: 'right', padding: '4px 6px' }}>Return/DD</th>
                 </tr>
               </thead>
-              <tbody>
-                {Object.entries(s.stock_breakdown)
-                  .sort((a, b) => b[1].pnl - a[1].pnl)
-                  .map(([stock, info]) => (
-                    <tr key={stock} style={{ borderBottom: '1px solid #222', color: '#e4e4e7' }}>
-                      <td style={{ padding: '4px 8px', fontWeight: 600, color: '#60a5fa' }}>{stock}</td>
-                      <td style={{ textAlign: 'right', padding: '4px 8px' }}>{info.trades}</td>
-                      <td style={{ textAlign: 'right', padding: '4px 8px' }}>{info.wins}</td>
-                      <td style={{ textAlign: 'right', padding: '4px 8px' }}>{(info.wins / info.trades * 100).toFixed(0)}%</td>
-                      <td style={{ textAlign: 'right', padding: '4px 8px', color: info.pnl >= 0 ? '#4ade80' : '#f87171' }}>
-                        ${Math.round(info.pnl).toLocaleString()}
-                      </td>
-                    </tr>
-                  ))}
+              <tbody style={{ color: '#e4e4e7' }}>
+                <tr style={{ borderBottom: '1px solid #222' }}>
+                  <td style={{ padding: '4px 6px' }}>Dynamic</td>
+                  <td style={{ padding: '4px 6px', textAlign: 'right' }}>${dynamic.totalPnl.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+                  <td style={{ padding: '4px 6px', textAlign: 'right' }}>{dynamic.pf.toFixed(2)}</td>
+                  <td style={{ padding: '4px 6px', textAlign: 'right', color: '#f87171' }}>${dynamic.maxDD.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+                  <td style={{ padding: '4px 6px', textAlign: 'right' }}>{(dynamic.totalPnl / dynamic.maxDD).toFixed(2)}</td>
+                </tr>
+                <tr style={{ background: '#f59e0b22', fontWeight: 600 }}>
+                  <td style={{ padding: '4px 6px', color: '#f59e0b' }}>Reduction</td>
+                  <td style={{ padding: '4px 6px', textAlign: 'right' }}>${reduction.totalPnl.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+                  <td style={{ padding: '4px 6px', textAlign: 'right' }}>{reduction.pf.toFixed(2)}</td>
+                  <td style={{ padding: '4px 6px', textAlign: 'right', color: '#4ade80' }}>${reduction.maxDD.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+                  <td style={{ padding: '4px 6px', textAlign: 'right' }}>{(reduction.totalPnl / reduction.maxDD).toFixed(2)}</td>
+                </tr>
               </tbody>
             </table>
+            <TradeToggle show={showReductionTrades} setShow={setShowReductionTrades} results={reduction.results} showMult={true} />
           </div>
         )}
 
-        {/* TRADE LOG */}
-        <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <h2 style={{ color: '#fbbf24', fontSize: 15, margin: 0 }}>📝 All Trades ({trades.length})</h2>
-            <button
-              onClick={() => setShowAllTrades(!showAllTrades)}
-              style={{ background: '#333', color: '#e4e4e7', border: 'none', borderRadius: 4, padding: '4px 12px', cursor: 'pointer', fontSize: 12 }}
-            >
-              {showAllTrades ? 'Collapse' : 'Expand'}
+        {/* BASELINE TRADES */}
+        <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 8, padding: '1rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+            <span style={{ color: '#71717a', fontSize: 12 }}>Baseline trades (fixed $200) · {trades.length} total</span>
+            <button onClick={() => setShowAllTrades(!showAllTrades)}
+              style={{ background: '#333', color: '#e4e4e7', border: 'none', borderRadius: 4, padding: '4px 12px', cursor: 'pointer', fontSize: 11 }}>
+              {showAllTrades ? 'Hide' : 'Show'}
             </button>
           </div>
           {showAllTrades && (
-            <div style={{ maxHeight: 500, overflowY: 'auto' }}>
+            <div style={{ maxHeight: 400, overflowY: 'auto' }}>
               <table style={{ width: '100%', fontSize: 11, borderCollapse: 'collapse' }}>
                 <thead>
                   <tr style={{ color: '#71717a', borderBottom: '1px solid #333', position: 'sticky', top: 0, background: '#1e1e2e' }}>
-                    <th style={{ textAlign: 'left', padding: '4px 6px' }}>#</th>
-                    <th style={{ textAlign: 'left', padding: '4px 6px' }}>Stock</th>
-                    <th style={{ textAlign: 'left', padding: '4px 6px' }}>Entry</th>
-                    <th style={{ textAlign: 'left', padding: '4px 6px' }}>Exit</th>
-                    <th style={{ textAlign: 'right', padding: '4px 6px' }}>Entry$</th>
-                    <th style={{ textAlign: 'right', padding: '4px 6px' }}>Exit$</th>
-                    <th style={{ textAlign: 'right', padding: '4px 6px' }}>R</th>
-                    <th style={{ textAlign: 'right', padding: '4px 6px' }}>PnL</th>
-                    <th style={{ textAlign: 'left', padding: '4px 6px' }}>Reason</th>
-                    <th style={{ textAlign: 'right', padding: '4px 6px' }}>Days</th>
+                    <th style={{ textAlign: 'left', padding: '3px 5px' }}>#</th>
+                    <th style={{ textAlign: 'left', padding: '3px 5px' }}>Stock</th>
+                    <th style={{ textAlign: 'left', padding: '3px 5px' }}>Entry</th>
+                    <th style={{ textAlign: 'left', padding: '3px 5px' }}>Exit</th>
+                    <th style={{ textAlign: 'right', padding: '3px 5px' }}>R</th>
+                    <th style={{ textAlign: 'right', padding: '3px 5px' }}>PnL</th>
+                    <th style={{ textAlign: 'left', padding: '3px 5px' }}>Reason</th>
                   </tr>
                 </thead>
                 <tbody>
                   {trades.map((t, i) => (
                     <tr key={i} style={{ borderBottom: '1px solid #1a1a1a', color: t.pnlDollar >= 0 ? '#4ade80' : '#f87171' }}>
-                      <td style={{ padding: '3px 6px', color: '#71717a' }}>{i + 1}</td>
-                      <td style={{ padding: '3px 6px', color: '#60a5fa', fontWeight: 500 }}>{t.stock}</td>
-                      <td style={{ padding: '3px 6px', color: '#a1a1aa' }}>{t.entryDate}</td>
-                      <td style={{ padding: '3px 6px', color: '#a1a1aa' }}>{t.exitDate}</td>
-                      <td style={{ padding: '3px 6px', textAlign: 'right', color: '#e4e4e7' }}>{t.entryPrice.toFixed(2)}</td>
-                      <td style={{ padding: '3px 6px', textAlign: 'right', color: '#e4e4e7' }}>{t.exitPrice.toFixed(2)}</td>
-                      <td style={{ padding: '3px 6px', textAlign: 'right' }}>{t.pnlR.toFixed(1)}</td>
-                      <td style={{ padding: '3px 6px', textAlign: 'right', fontWeight: 600 }}>${t.pnlDollar.toLocaleString()}</td>
-                      <td style={{ padding: '3px 6px', color: '#a1a1aa' }}>{t.exitReason}</td>
-                      <td style={{ padding: '3px 6px', textAlign: 'right', color: '#71717a' }}>{t.durationDays}</td>
+                      <td style={{ padding: '3px 5px', color: '#71717a' }}>{i + 1}</td>
+                      <td style={{ padding: '3px 5px', color: '#60a5fa' }}>{t.stock}</td>
+                      <td style={{ padding: '3px 5px', color: '#a1a1aa' }}>{t.entryDate}</td>
+                      <td style={{ padding: '3px 5px', color: '#a1a1aa' }}>{t.exitDate}</td>
+                      <td style={{ padding: '3px 5px', textAlign: 'right' }}>{t.pnlR.toFixed(1)}</td>
+                      <td style={{ padding: '3px 5px', textAlign: 'right', fontWeight: 600 }}>${t.pnlDollar.toLocaleString()}</td>
+                      <td style={{ padding: '3px 5px', color: '#71717a' }}>{t.exitReason}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -500,40 +242,62 @@ export default function SimBacktest6Page() {
           )}
         </div>
       </>}
-
-      {/* THE POOL */}
-      <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 8, padding: '1.25rem', marginBottom: '1.5rem' }}>
-        <h2 style={{ color: '#fbbf24', fontSize: 15, marginBottom: '0.75rem' }}>📋 Mid-Cap Pool (68 stocks — honest)</h2>
-        <p style={{ color: '#a1a1aa', fontSize: 12, marginBottom: 10 }}>
-          All mid-cap growth stocks liquid by mid-2020. Includes winners AND disasters — no hindsight cherry-picking.
-        </p>
-        <div style={{ fontSize: 13, color: '#60a5fa', lineHeight: 2 }}>
-          {(params.pool || []).join(', ')}
-        </div>
-      </div>
-
-      {/* RULES */}
-      <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 8, padding: '1.25rem' }}>
-        <h2 style={{ color: '#fbbf24', fontSize: 15, marginBottom: '1rem' }}>📏 Rules (Same as BT5)</h2>
-        <div style={{ fontSize: 13, color: '#e4e4e7' }}>
-          <div style={ruleStyle}><span style={numStyle}>1</span><span><strong>Monthly Rotation:</strong> Top 10 from pool by 6-month return.</span></div>
-          <div style={ruleStyle}><span style={numStyle}>2</span><span><strong>Regime:</strong> SPY {'>'} 200 SMA → trade. Below → 100% cash.</span></div>
-          <div style={ruleStyle}><span style={numStyle}>3</span><span><strong>Entry:</strong> Close above 20-day high + volume ≥ 1.2× avg + above 50 SMA.</span></div>
-          <div style={ruleStyle}><span style={numStyle}>4</span><span><strong>Stop:</strong> 1×ATR below entry. Risk $200/trade.</span></div>
-          <div style={ruleStyle}><span style={numStyle}>5</span><span><strong>Trail:</strong> 2.5R activate → EMA20 − 1×ATR (ratchets up).</span></div>
-          <div style={{ ...ruleStyle, borderBottom: 'none' }}><span style={numStyle}>6</span><span><strong>Max:</strong> 3 positions, $40k capital.</span></div>
-        </div>
-      </div>
     </div>
   )
 }
 
 function Stat({ label, value, sub, color }) {
   return (
-    <div style={{ background: '#111', border: '1px solid #333', borderRadius: 6, padding: '8px 10px', textAlign: 'center' }}>
+    <div style={{ background: '#111', border: '1px solid #222', borderRadius: 6, padding: '8px 10px', textAlign: 'center' }}>
       <div style={{ color: '#71717a', fontSize: 10 }}>{label}</div>
       <div style={{ color, fontSize: 16, fontWeight: 800 }}>{value}</div>
       {sub && <div style={{ color: '#52525b', fontSize: 10 }}>{sub}</div>}
     </div>
+  )
+}
+
+function TradeToggle({ show, setShow, results, showMult }) {
+  return (
+    <>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span style={{ fontSize: 11, color: '#71717a' }}>{results.length} trades</span>
+        <button onClick={() => setShow(!show)}
+          style={{ background: '#333', color: '#e4e4e7', border: 'none', borderRadius: 4, padding: '4px 12px', cursor: 'pointer', fontSize: 11 }}>
+          {show ? 'Hide' : 'Show Trades'}
+        </button>
+      </div>
+      {show && (
+        <div style={{ maxHeight: 350, overflowY: 'auto', marginTop: 8 }}>
+          <table style={{ width: '100%', fontSize: 11, borderCollapse: 'collapse' }}>
+            <thead>
+              <tr style={{ color: '#71717a', borderBottom: '1px solid #333', position: 'sticky', top: 0, background: '#1e1e2e' }}>
+                <th style={{ textAlign: 'left', padding: '3px 5px' }}>#</th>
+                <th style={{ textAlign: 'left', padding: '3px 5px' }}>Stock</th>
+                <th style={{ textAlign: 'left', padding: '3px 5px' }}>Date</th>
+                <th style={{ textAlign: 'right', padding: '3px 5px' }}>Capital</th>
+                <th style={{ textAlign: 'right', padding: '3px 5px' }}>Risk$</th>
+                {showMult && <th style={{ textAlign: 'center', padding: '3px 5px' }}>Mult</th>}
+                <th style={{ textAlign: 'right', padding: '3px 5px' }}>R</th>
+                <th style={{ textAlign: 'right', padding: '3px 5px' }}>P/L</th>
+              </tr>
+            </thead>
+            <tbody>
+              {results.map((t, i) => (
+                <tr key={i} style={{ borderBottom: '1px solid #1a1a1a', color: t.pnlScaled >= 0 ? '#4ade80' : '#f87171' }}>
+                  <td style={{ padding: '3px 5px', color: '#71717a' }}>{i + 1}</td>
+                  <td style={{ padding: '3px 5px', color: '#60a5fa' }}>{t.stock}</td>
+                  <td style={{ padding: '3px 5px', color: '#a1a1aa' }}>{t.entryDate}</td>
+                  <td style={{ padding: '3px 5px', textAlign: 'right', color: '#71717a' }}>${t.capitalAtEntry.toLocaleString(undefined, {maximumFractionDigits: 0})}</td>
+                  <td style={{ padding: '3px 5px', textAlign: 'right', color: '#6366f1' }}>${t.riskDollars.toFixed(0)}</td>
+                  {showMult && <td style={{ padding: '3px 5px', textAlign: 'center', color: t.riskMult < 1 ? '#f59e0b' : '#71717a' }}>{(t.riskMult * 100).toFixed(0)}%</td>}
+                  <td style={{ padding: '3px 5px', textAlign: 'right' }}>{t.pnlR > 0 ? '+' : ''}{t.pnlR.toFixed(1)}R</td>
+                  <td style={{ padding: '3px 5px', textAlign: 'right', fontWeight: 600 }}>{t.pnlScaled > 0 ? '+' : ''}${t.pnlScaled.toFixed(0)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </>
   )
 }
