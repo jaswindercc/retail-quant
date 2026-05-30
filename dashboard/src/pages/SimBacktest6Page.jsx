@@ -71,6 +71,7 @@ export default function SimBacktest6Page() {
   return (
     <div className="page-container" style={{ padding: '1.5rem', maxWidth: 1100 }}>
       <h1 style={{ marginBottom: '0.25rem' }}>BT6 — Mid-Cap Rotation</h1>
+      <p style={{ color: '#6366f1', fontSize: 12, marginBottom: '0.25rem' }}>Based on: <strong>Breakout v1</strong> (momentum rotation + breakout entry + trailing exit)</p>
       <p style={{ color: '#71717a', fontSize: 13, marginBottom: '1.5rem' }}>
         68 mid-cap growth stocks (incl. disasters: PTON, BYND, PLUG, SPCE) · Top 10 by 6mo momentum · {params.regime || 'SPY > 200 SMA'} regime · {params.period}
       </p>
