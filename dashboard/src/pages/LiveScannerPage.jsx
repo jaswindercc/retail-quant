@@ -42,6 +42,7 @@ export default function LiveScannerPage() {
   const [filter, setFilter] = useState('all') // 'all' | 'MA Bounce' | 'Breakout' | 'Higher High' | 'Confluence'
   const [sortCol, setSortCol] = useState(null)
   const [sortDir, setSortDir] = useState('asc')
+  const [scanStatus, setScanStatus] = useState(null) // null | 'running' | 'done' | 'error'
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}live_scanner_data.json`)
@@ -49,6 +50,25 @@ export default function LiveScannerPage() {
       .then(setData)
       .catch(e => setData({ error: e.message }))
   }, [])
+
+  const runScanner = async () => {
+    setScanStatus('running')
+    try {
+      const resp = await fetch('/api/run-live-scanner', { method: 'POST' })
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`)
+      const result = await resp.json()
+      if (result.success) {
+        setScanStatus('done')
+        // Reload data
+        const r = await fetch(`${import.meta.env.BASE_URL}live_scanner_data.json?t=${Date.now()}`)
+        if (r.ok) setData(await r.json())
+      } else {
+        setScanStatus('error')
+      }
+    } catch {
+      setScanStatus('error')
+    }
+  }
 
   const handleSort = (col) => {
     if (sortCol === col) { setSortDir(d => d === 'asc' ? 'desc' : 'asc') }
@@ -150,8 +170,14 @@ export default function LiveScannerPage() {
           <span>📡 Data fetched: </span>
           <strong style={{color: '#4ade80'}}>{displayScanDate}</strong>
         </div>
-        <div style={{fontSize: 12, color: '#71717a'}}>
-          ⏰ Best time to check: <strong style={{color: '#fbbf24'}}>After 4:05 PM ET</strong> · Position sizing uses <strong style={{ color: '#4ade80' }}>$200 risk/trade</strong>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{fontSize: 12, color: '#71717a'}}>
+            ⏰ Best time to check: <strong style={{color: '#fbbf24'}}>After 4:05 PM ET</strong> · Position sizing uses <strong style={{ color: '#4ade80' }}>$200 risk/trade</strong>
+          </div>
+          <button onClick={runScanner} disabled={scanStatus === 'running'}
+            style={{ padding: '6px 14px', borderRadius: 6, border: '1px solid #4ade80', background: scanStatus === 'running' ? '#1e1e2e' : '#0a1f14', color: '#4ade80', fontSize: 12, fontWeight: 600, cursor: scanStatus === 'running' ? 'wait' : 'pointer' }}>
+            {scanStatus === 'running' ? '⏳ Running…' : scanStatus === 'done' ? '✅ Done' : scanStatus === 'error' ? '❌ Failed' : '▶️ Run Scanner'}
+          </button>
         </div>
       </div>
 

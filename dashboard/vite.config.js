@@ -20,6 +20,38 @@ function simRefreshPlugin() {
           res.end(JSON.stringify({ ok: false, error: e.message }))
         }
       })
+
+      server.middlewares.use('/api/run-live-scanner', (req, res) => {
+        if (req.method !== 'POST') { res.writeHead(405); res.end(); return }
+        try {
+          const output = execSync('python3 scripts/scan_live.py && cp data/live_scanner_data.json dashboard/public/live_scanner_data.json', {
+            cwd: server.config.root + '/..',
+            timeout: 180000,
+            encoding: 'utf-8'
+          })
+          res.writeHead(200, { 'Content-Type': 'application/json' })
+          res.end(JSON.stringify({ success: true, output }))
+        } catch (e) {
+          res.writeHead(500, { 'Content-Type': 'application/json' })
+          res.end(JSON.stringify({ success: false, error: e.message }))
+        }
+      })
+
+      server.middlewares.use('/api/run-overnight-scanner', (req, res) => {
+        if (req.method !== 'POST') { res.writeHead(405); res.end(); return }
+        try {
+          const output = execSync('python3 scripts/refresh_scanner.py', {
+            cwd: server.config.root + '/..',
+            timeout: 180000,
+            encoding: 'utf-8'
+          })
+          res.writeHead(200, { 'Content-Type': 'application/json' })
+          res.end(JSON.stringify({ success: true, output }))
+        } catch (e) {
+          res.writeHead(500, { 'Content-Type': 'application/json' })
+          res.end(JSON.stringify({ success: false, error: e.message }))
+        }
+      })
     }
   }
 }

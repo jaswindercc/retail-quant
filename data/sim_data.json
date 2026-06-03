@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2026-05-29 05:22 PM EDT",
+  "lastUpdated": "2026-06-02 09:22 PM EDT",
   "summary": {
-    "total_positions": 3,
-    "open": 3,
+    "total_positions": 5,
+    "open": 5,
     "closed": 0,
     "winners": 0,
     "losers": 0,
@@ -20,19 +20,19 @@
       "entry_price": 412.6,
       "initial_sl": 392.0,
       "current_sl": 392.0,
-      "last_price": 426.99,
-      "last_price_date": "2026-05-28",
+      "last_price": 460.52,
+      "last_price_date": "2026-06-01",
       "price_age_days": 1,
       "status": "OPEN",
       "reason": "Still holding",
       "exit_date": null,
-      "exit_price": 426.99,
-      "pnl": 143.9,
-      "pnl_per_share": 14.39,
-      "r_multiple": 0.7,
-      "max_r": 0.82,
+      "exit_price": 460.52,
+      "pnl": 479.2,
+      "pnl_per_share": 47.92,
+      "r_multiple": 2.33,
+      "max_r": 2.61,
       "risk_per_share": 20.6,
-      "days_held": 1,
+      "days_held": 3,
       "trail_activated": false,
       "strategy": "\ud83d\udd35 MA Bounce",
       "qty": 10,
@@ -54,6 +54,20 @@
           "sl": 392.0,
           "trail_active": false,
           "note": "R=0.7"
+        },
+        {
+          "date": "2026-05-29",
+          "close": 450.24,
+          "sl": 392.0,
+          "trail_active": false,
+          "note": "R=1.8"
+        },
+        {
+          "date": "2026-06-01",
+          "close": 460.52,
+          "sl": 392.0,
+          "trail_active": false,
+          "note": "R=2.3"
         }
       ]
     },
@@ -63,20 +77,20 @@
       "entry_price": 142.88,
       "initial_sl": 136.69,
       "current_sl": 136.69,
-      "last_price": 143.34,
-      "last_price_date": "2026-05-28",
+      "last_price": 160.65,
+      "last_price_date": "2026-06-01",
       "price_age_days": 1,
       "status": "OPEN",
       "reason": "Still holding",
       "exit_date": null,
-      "exit_price": 143.34,
-      "pnl": 17.48,
-      "pnl_per_share": 0.46,
-      "r_multiple": 0.07,
-      "max_r": 0.0,
+      "exit_price": 160.65,
+      "pnl": 675.26,
+      "pnl_per_share": 17.77,
+      "r_multiple": 2.87,
+      "max_r": 3.36,
       "risk_per_share": 6.19,
-      "days_held": 0,
-      "trail_activated": false,
+      "days_held": 2,
+      "trail_activated": true,
       "strategy": "\ud83d\udfe3 RSI Trend \ud83d\udd35 MA Bounce",
       "qty": 38,
       "trail_params": {
@@ -90,6 +104,20 @@
           "sl": 136.69,
           "trail_active": false,
           "note": "Entry day"
+        },
+        {
+          "date": "2026-05-29",
+          "close": 156.54,
+          "sl": 136.69,
+          "trail_active": false,
+          "note": "R=2.2"
+        },
+        {
+          "date": "2026-06-01",
+          "close": 160.65,
+          "sl": 136.69,
+          "trail_active": true,
+          "note": "R=2.9"
         }
       ]
     },
@@ -98,6 +126,85 @@
       "entry_date": "2026-05-29",
       "entry_price": 249.08,
       "initial_sl": 237.46,
+      "current_sl": 237.46,
+      "last_price": 274.03,
+      "last_price_date": "2026-06-01",
+      "price_age_days": 1,
+      "status": "OPEN",
+      "reason": "Still holding",
+      "exit_date": null,
+      "exit_price": 274.03,
+      "pnl": 548.9,
+      "pnl_per_share": 24.95,
+      "r_multiple": 2.15,
+      "max_r": 2.27,
+      "risk_per_share": 11.62,
+      "days_held": 1,
+      "trail_activated": false,
+      "strategy": "\ud83d\udfe3 RSI Trend\n\ud83d\udd35 MA Bounce",
+      "qty": 22,
+      "trail_params": {
+        "trail_start_r": 2.5,
+        "trail_atr_buf": 1.0
+      },
+      "daily_log": [
+        {
+          "date": "2026-05-29",
+          "close": 259.21,
+          "sl": 237.46,
+          "trail_active": false,
+          "note": "Entry day"
+        },
+        {
+          "date": "2026-06-01",
+          "close": 274.03,
+          "sl": 237.46,
+          "trail_active": false,
+          "note": "R=2.1"
+        }
+      ]
+    },
+    {
+      "ticker": "CRM",
+      "entry_date": "2026-06-01",
+      "entry_price": 208.97,
+      "initial_sl": 196.0,
+      "current_sl": 196.0,
+      "last_price": 209.6,
+      "last_price_date": "2026-06-01",
+      "price_age_days": 1,
+      "status": "OPEN",
+      "reason": "Still holding",
+      "exit_date": null,
+      "exit_price": 209.6,
+      "pnl": 13.86,
+      "pnl_per_share": 0.63,
+      "r_multiple": 0.05,
+      "max_r": 0.0,
+      "risk_per_share": 12.97,
+      "days_held": 0,
+      "trail_activated": false,
+      "strategy": "based on gemini , big ass candle + parabolic",
+      "qty": 22,
+      "trail_params": {
+        "trail_start_r": 2.5,
+        "trail_atr_buf": 1.0
+      },
+      "daily_log": [
+        {
+          "date": "2026-06-01",
+          "close": 209.6,
+          "sl": 196.0,
+          "trail_active": false,
+          "note": "Entry day"
+        }
+      ]
+    },
+    {
+      "ticker": "TSLA",
+      "entry_date": "2026-06-02",
+      "entry_price": 423.74,
+      "initial_sl": 409.22,
       "status": "OPEN",
       "reason": "No bars since entry (market closed?)",
       "exit_date": null,
@@ -107,8 +214,8 @@
       "max_r": 0,
       "days_held": 0,
       "trail_activated": false,
-      "strategy": "\ud83d\udfe3 RSI Trend\n\ud83d\udd35 MA Bounce",
-      "qty": 22,
+      "strategy": "\ud83d\udd35 MA Bounce",
+      "qty": 13,
       "daily_log": []
     }
   ],

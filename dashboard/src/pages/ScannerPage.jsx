@@ -6,6 +6,20 @@ const CONFIG_LABELS = { vanilla: 'Vanilla (1d)', trail3d: 'Trail 3d', forever: '
 const INST_LABELS = { SPX: 'S&P 500 (SPX)', SPY: 'SPY ETF', QQQ: 'QQQ ETF' }
 
 export default function ScannerPage({ data }) {
+  const [scanStatus, setScanStatus] = useState(null)
+
+  const runScanner = async () => {
+    setScanStatus('running')
+    try {
+      const resp = await fetch('/api/run-overnight-scanner', { method: 'POST' })
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`)
+      const result = await resp.json()
+      setScanStatus(result.success ? 'done' : 'error')
+    } catch {
+      setScanStatus('error')
+    }
+  }
+
   if (!data) return <p className="loading">Loading scanner data…</p>
 
   const { instruments, lastFetched, nextRefresh, fetchSuccess } = data
@@ -45,9 +59,15 @@ export default function ScannerPage({ data }) {
           <strong style={{color: fetchSuccess ? '#4ade80' : '#f59e0b'}}>{lastFetched || 'Never'}</strong>
           {!fetchSuccess && <span style={{color:'#f59e0b', marginLeft:8}}>⚠️ Some fetches failed</span>}
         </div>
-        <div style={{textAlign:'right'}}>
-          <span style={{color:'#8e8e9a', fontSize:13}}>Auto-refresh: </span>
-          <strong style={{color:'#d1d1d8'}}>{nextRefresh}</strong>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{textAlign:'right'}}>
+            <span style={{color:'#8e8e9a', fontSize:13}}>Auto-refresh: </span>
+            <strong style={{color:'#d1d1d8'}}>{nextRefresh}</strong>
+          </div>
+          <button onClick={runScanner} disabled={scanStatus === 'running'}
+            style={{ padding: '6px 14px', borderRadius: 6, border: '1px solid #4ade80', background: scanStatus === 'running' ? '#1e1e2e' : '#0a1f14', color: '#4ade80', fontSize: 12, fontWeight: 600, cursor: scanStatus === 'running' ? 'wait' : 'pointer' }}>
+            {scanStatus === 'running' ? '⏳ Running…' : scanStatus === 'done' ? '✅ Done' : scanStatus === 'error' ? '❌ Failed' : '▶️ Run Scanner'}
+          </button>
         </div>
       </div>
 

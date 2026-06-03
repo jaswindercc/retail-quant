@@ -49,6 +49,8 @@ import SimBacktest4Page from './pages/SimBacktest4Page'
 import SimBacktestSummaryPage from './pages/SimBacktestSummaryPage'
 import SimBacktest5Page from './pages/SimBacktest5Page'
 import SimBacktest6Page from './pages/SimBacktest6Page'
+import StrategySwitcherPage from './pages/StrategySwitcherPage'
+import FactorSwitcherPage from './pages/FactorSwitcherPage'
 import DynamicRiskPage from './pages/DynamicRiskPage'
 // LiveStrategyPage removed — merged into SimBacktest5Page
 
@@ -183,6 +185,7 @@ export default function App() {
   const isStratRoute = location.pathname.startsWith('/the-strat')
   const isOptionsRoute = ['/options/tsla', '/options/qqq', '/options/spx'].some(p => location.pathname.startsWith(p))
   const isSimRoute = location.pathname.startsWith('/sim')
+  const isSwitcherRoute = location.pathname.startsWith('/strategy-switcher')
   const isResearchRoute = ['/trail-study', '/skip-analysis'].some(p => location.pathname.startsWith(p))
 
   return (
@@ -255,6 +258,15 @@ export default function App() {
               ⚡ Dynamic Risk
             </NavLink>
 
+          </NavGroup>
+
+          <NavGroup label="Strategy Switcher" icon="🔀" defaultOpen={isSwitcherRoute}>
+            <NavLink to="/strategy-switcher" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              📊 Switcher Dashboard
+            </NavLink>
+            <NavLink to="/strategy-switcher/factors" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              🧬 Factor Switcher
+            </NavLink>
           </NavGroup>
 
           <NavGroup label="Swing Strategies" icon="📈" defaultOpen={isSwingRoute}>
@@ -408,6 +420,8 @@ export default function App() {
           <Route path="/sim/summary" element={<SimBacktestSummaryPage />} />
           <Route path="/sim/backtest-5" element={<SimBacktest5Page />} />
           <Route path="/sim/backtest-6" element={<SimBacktest6Page />} />
+          <Route path="/strategy-switcher" element={<StrategySwitcherPage />} />
+          <Route path="/strategy-switcher/factors" element={<FactorSwitcherPage />} />
           <Route path="/sim/dynamic-risk" element={<DynamicRiskPage />} />
           <Route path="/sim/live" element={<SimBacktest5Page />} />
           <Route path="/markov" element={<MarkovPage />} />

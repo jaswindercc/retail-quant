@@ -92,34 +92,49 @@ export default function SimPage() {
                   <th>Entry Date</th>
                   <th>Entry $</th>
                   <th>Last Price</th>
-                  <th>Initial SL</th>
-                  <th>Current SL</th>
-                  <th>Trail?</th>
+                  <th>% Gain</th>
                   <th>Current R</th>
+                  <th>Trail Progress</th>
+                  <th>Current SL</th>
                   <th>PnL</th>
                   <th>Days</th>
                   <th>Strategy</th>
                 </tr>
               </thead>
               <tbody>
-                {open.map((p, i) => (
-                  <tr key={i} onClick={() => setSelectedPos(p)} style={{ cursor: 'pointer' }}>
-                    <td style={{ fontWeight: 700, color: '#e2e8f0' }}>{p.ticker}</td>
-                    <td>{p.entry_date}</td>
-                    <td>${p.entry_price}</td>
-                    <td>
-                      <span style={{ color: '#e2e8f0' }}>${p.last_price}</span>
-                      {p.price_age_days > 0 && <span style={{ color: '#888', fontSize: '0.7rem', marginLeft: 4 }}>({p.price_age_days}d ago)</span>}
-                    </td>
-                    <td style={{ color: '#f87171' }}>${p.initial_sl}</td>
-                    <td style={{ color: p.trail_activated ? '#fbbf24' : '#f87171' }}>${p.current_sl}</td>
-                    <td>{p.trail_activated ? '🟡 YES' : '—'}</td>
-                    <td style={{ color: p.r_multiple >= 0 ? '#4ade80' : '#f87171' }}>{p.r_multiple}R</td>
-                    <td style={{ color: p.pnl >= 0 ? '#4ade80' : '#f87171' }}>${p.pnl}</td>
-                    <td>{p.days_held}</td>
-                    <td style={{ fontSize: '0.8rem', color: '#aaa' }}>{p.strategy}</td>
-                  </tr>
-                ))}
+                {open.map((p, i) => {
+                  const pctGain = ((p.last_price - p.entry_price) / p.entry_price * 100).toFixed(1)
+                  const trailTarget = p.trail_params?.trail_start_r || 2.5
+                  const rProgress = Math.min((p.r_multiple / trailTarget) * 100, 100).toFixed(0)
+                  return (
+                    <tr key={i} onClick={() => setSelectedPos(p)} style={{ cursor: 'pointer' }}>
+                      <td style={{ fontWeight: 700, color: '#e2e8f0' }}>{p.ticker}</td>
+                      <td>{p.entry_date}</td>
+                      <td>${p.entry_price}</td>
+                      <td>
+                        <span style={{ color: '#e2e8f0' }}>${p.last_price}</span>
+                        {p.price_age_days > 0 && <span style={{ color: '#888', fontSize: '0.7rem', marginLeft: 4 }}>({p.price_age_days}d ago)</span>}
+                      </td>
+                      <td style={{ color: pctGain >= 0 ? '#4ade80' : '#f87171', fontWeight: 600 }}>{pctGain > 0 ? '+' : ''}{pctGain}%</td>
+                      <td style={{ color: p.r_multiple >= 0 ? '#4ade80' : '#f87171', fontWeight: 700 }}>{p.r_multiple}R <span style={{ color: '#666', fontWeight: 400, fontSize: '0.72rem' }}>/ {trailTarget}R</span></td>
+                      <td>
+                        {p.trail_activated
+                          ? <span style={{ color: '#fbbf24', fontWeight: 600 }}>🟡 TRAILING</span>
+                          : <span style={{ fontSize: '0.8rem' }}>
+                              <span style={{ color: rProgress >= 80 ? '#fbbf24' : '#94a3b8' }}>{rProgress}%</span>
+                              <span style={{ display: 'inline-block', width: 40, height: 4, background: '#334155', borderRadius: 2, marginLeft: 6, verticalAlign: 'middle' }}>
+                                <span style={{ display: 'block', width: `${rProgress}%`, height: '100%', background: rProgress >= 80 ? '#fbbf24' : '#64b5f6', borderRadius: 2 }}></span>
+                              </span>
+                            </span>
+                        }
+                      </td>
+                      <td style={{ color: p.trail_activated ? '#fbbf24' : '#f87171' }}>${p.current_sl}</td>
+                      <td style={{ color: p.pnl >= 0 ? '#4ade80' : '#f87171' }}>${p.pnl}</td>
+                      <td>{p.days_held}</td>
+                      <td style={{ fontSize: '0.8rem', color: '#aaa' }}>{p.strategy}</td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>
