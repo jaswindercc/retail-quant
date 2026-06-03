@@ -52,6 +52,7 @@ import SimBacktest6Page from './pages/SimBacktest6Page'
 import StrategySwitcherPage from './pages/StrategySwitcherPage'
 import FactorSwitcherPage from './pages/FactorSwitcherPage'
 import DynamicRiskPage from './pages/DynamicRiskPage'
+import MasterPage from './pages/MasterPage'
 // LiveStrategyPage removed — merged into SimBacktest5Page
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
@@ -355,6 +356,9 @@ export default function App() {
           <NavLink to="/learnings" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`} style={{marginTop:'0.5rem'}}>
             📖 Master Learnings
           </NavLink>
+          <NavLink to="/master" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`} style={{marginTop:'0.75rem', padding:'0.75rem 1rem', fontSize:'1rem', fontWeight:700, background:'rgba(74,222,128,0.1)', borderRadius:8, border:'1px solid rgba(74,222,128,0.2)'}}>
+            🏆 Master Ranking
+          </NavLink>
         </div>
       </nav>
       {sidebarOpen && <div className="sidebar-overlay show" onClick={() => setSidebarOpen(false)} />}
@@ -426,6 +430,7 @@ export default function App() {
           <Route path="/sim/live" element={<SimBacktest5Page />} />
           <Route path="/markov" element={<MarkovPage />} />
           <Route path="/learnings" element={<MasterLearningsPage />} />
+          <Route path="/master" element={<MasterPage />} />
         </Routes>
       </div>
     </div>

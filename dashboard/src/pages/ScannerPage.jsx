@@ -284,6 +284,34 @@ export default function ScannerPage({ data }) {
         </table>
       </div>
 
+      {/* Daily Score History — full transparency */}
+      <div className="card">
+        <h3>Daily Score History — {instTab} (last 60 days)</h3>
+        <p style={{color:'#8e8e9a', fontSize:12, marginBottom:12}}>Every day's score. Green = entry signal (≥3). Shows why there's no trade when score is low.</p>
+        <div style={{overflowX:'auto', maxHeight:450}}>
+          <table style={{fontSize:'0.78rem'}}>
+            <thead><tr><th>Date</th><th>Close</th><th>Score</th><th>RSI(5)</th><th>VIX</th><th>Bullish Signals</th><th>Bearish Signals</th></tr></thead>
+            <tbody>
+              {[...history].reverse().map((r, i) => {
+                const bullSignals = (r.signals || []).filter(s => s.type === 'bull').map(s => `${s.name} (+${s.points})`).join(', ')
+                const bearSignals = (r.signals || []).filter(s => s.type === 'bear').map(s => `${s.name} (${s.points})`).join(', ')
+                return (
+                  <tr key={i} style={r.score >= 3 ? {background:'rgba(74,222,128,0.08)'} : {}}>
+                    <td style={{whiteSpace:'nowrap'}}>{r.date}</td>
+                    <td>{r.close?.toLocaleString()}</td>
+                    <td style={{fontWeight:700, color: r.score >= 3 ? '#4ade80' : r.score >= 1 ? '#fbbf24' : r.score <= -2 ? '#ef4444' : '#8e8e9a'}}>{r.score}</td>
+                    <td>{r.rsi5?.toFixed(1)}</td>
+                    <td>{r.vix?.toFixed(1)}</td>
+                    <td style={{color:'#4ade80', maxWidth:250}}>{bullSignals || '—'}</td>
+                    <td style={{color:'#ef4444', maxWidth:250}}>{bearSignals || '—'}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       {/* Signal History */}
       <div className="card">
         <h3>Recent Entry Signals — {instTab} (Score ≥ 3)</h3>

@@ -102,51 +102,51 @@ def compute_realized_vol(prices, window=30):
 STRATEGIES = {
     'put_spread_20d': {
         'label': 'Put Spread 20Δ',
-        'desc': '45 DTE, sell 20-delta put, buy $5 lower. Bread-and-butter income trade.',
+        'desc': '45 DTE, sell 20-delta put, buy $50 lower. Bread-and-butter income trade.',
         'type': 'put_spread',
-        'dte': 45, 'sell_delta': 0.20, 'width': 5, 'freq': 7,
+        'dte': 45, 'sell_delta': 0.20, 'width': 50, 'freq': 7,
         'take_profit': 0.50, 'stop_loss': 2.0,
     },
     'put_spread_30d': {
         'label': 'Put Spread 30Δ',
-        'desc': '45 DTE, sell 30-delta put, buy $5 lower. More premium, more directional risk.',
+        'desc': '45 DTE, sell 30-delta put, buy $50 lower. More premium, more directional risk.',
         'type': 'put_spread',
-        'dte': 45, 'sell_delta': 0.30, 'width': 5, 'freq': 7,
+        'dte': 45, 'sell_delta': 0.30, 'width': 50, 'freq': 7,
         'take_profit': 0.50, 'stop_loss': 2.0,
     },
     'put_spread_40d': {
         'label': 'Put Spread 40Δ',
-        'desc': '45 DTE, sell 40-delta put, buy $5 lower. Near ATM, high premium.',
+        'desc': '45 DTE, sell 40-delta put, buy $50 lower. Near ATM, high premium.',
         'type': 'put_spread',
-        'dte': 45, 'sell_delta': 0.40, 'width': 5, 'freq': 7,
+        'dte': 45, 'sell_delta': 0.40, 'width': 50, 'freq': 7,
         'take_profit': 0.50, 'stop_loss': 2.0,
     },
     'iron_condor_20d': {
         'label': 'Iron Condor 20Δ',
-        'desc': '45 DTE, sell 20Δ put + 20Δ call, $5 wings. Neutral income.',
+        'desc': '45 DTE, sell 20Δ put + 20Δ call, $50 wings. Neutral income.',
         'type': 'iron_condor',
-        'dte': 45, 'sell_delta': 0.20, 'width': 5, 'freq': 7,
+        'dte': 45, 'sell_delta': 0.20, 'width': 50, 'freq': 7,
         'take_profit': 0.50, 'stop_loss': 2.0,
     },
     'iron_condor_30d': {
         'label': 'Iron Condor 30Δ',
-        'desc': '45 DTE, sell 30Δ put + 30Δ call, $5 wings. More premium, tighter range.',
+        'desc': '45 DTE, sell 30Δ put + 30Δ call, $50 wings. More premium, tighter range.',
         'type': 'iron_condor',
-        'dte': 45, 'sell_delta': 0.30, 'width': 5, 'freq': 7,
+        'dte': 45, 'sell_delta': 0.30, 'width': 50, 'freq': 7,
         'take_profit': 0.50, 'stop_loss': 2.0,
     },
     'iron_fly': {
         'label': 'Iron Fly 50Δ (ATM)',
-        'desc': '45 DTE, sell ATM put + ATM call (50Δ), $5 wings. Maximum premium.',
+        'desc': '45 DTE, sell ATM put + ATM call (50Δ), $75 wings. Maximum premium.',
         'type': 'iron_fly',
-        'dte': 45, 'sell_delta': 0.50, 'width': 5, 'freq': 7,
+        'dte': 45, 'sell_delta': 0.50, 'width': 75, 'freq': 7,
         'take_profit': 0.25, 'stop_loss': 1.5,
     },
 }
 
 
 def backtest_strategy(df, config, iv_mult=1.3, max_positions=1):
-    """Backtest a delta-based strategy on SPX using real VIX as IV."""
+    """Backtest a delta-based strategy on SPX."""
     dte = config['dte']
     sell_delta = config['sell_delta']
     spread_width = config['width']
@@ -156,23 +156,17 @@ def backtest_strategy(df, config, iv_mult=1.3, max_positions=1):
     
     trades = []
     df = df.copy().reset_index(drop=True)
-    df['rvol'] = compute_realized_vol(df['Close'], window=30)  # fallback only
+    df['rvol'] = compute_realized_vol(df['Close'], window=30)
     
-    # Find first Monday (or Tuesday if Monday is holiday) after warmup period
+    # Find first Monday after warmup period
     i = 60
-    while i < len(df) - 5 and df.iloc[i]['Date'].weekday() not in (0, 1):
+    while i < len(df) - 5 and df.iloc[i]['Date'].weekday() != 0:
         i += 1
     
-    def next_entry_day(idx):
-        """Advance to next Monday in the dataframe, or Tuesday if Monday is missing (holiday)."""
+    def next_monday(idx):
+        """Advance to next Monday in the dataframe."""
         idx += 1
-        while idx < len(df):
-            day = df.iloc[idx]['Date'].weekday()
-            if day == 0:  # Monday found
-                return idx
-            if day == 1:  # Tuesday — check if Monday was skipped (holiday)
-                if idx == 0 or df.iloc[idx - 1]['Date'].weekday() != 0:
-                    return idx  # Monday was missing, use Tuesday
+        while idx < len(df) and df.iloc[idx]['Date'].weekday() != 0:
             idx += 1
         return idx
     
@@ -185,21 +179,16 @@ def backtest_strategy(df, config, iv_mult=1.3, max_positions=1):
         # Check how many positions are still open at this entry date
         open_count = sum(1 for t in trades if pd.Timestamp(t['exitDate']) > pd.Timestamp(entry_date))
         if open_count >= max_positions:
-            i = next_entry_day(i)
+            i = next_monday(i)
             continue
         
         if pd.isna(rvol) or rvol <= 0:
-            i = next_entry_day(i)
+            i = next_monday(i)
             continue
         
-        # Use real VIX as IV if available, else fallback to rvol * iv_mult
-        if 'VIX' in df.columns and not pd.isna(entry_row.get('VIX', np.nan)):
-            iv = entry_row['VIX'] / 100.0  # VIX is in %, convert to decimal
-        else:
-            iv = rvol * iv_mult
+        iv = rvol * iv_mult
         T = dte / 365
         r = 0.05
-        call_iv = iv * 0.75  # Skew: OTM calls trade at ~75% of ATM IV
         
         # === FIND STRIKES BY DELTA ===
         if strategy_type == 'put_spread':
@@ -216,14 +205,12 @@ def backtest_strategy(df, config, iv_mult=1.3, max_positions=1):
         elif strategy_type == 'iron_condor':
             short_put_K = find_strike_by_put_delta(entry_price, sell_delta, T, r, iv)
             long_put_K = short_put_K - spread_width
-            # Call side: apply skew — OTM calls trade at ~75% of ATM IV in equities
-            call_iv = iv * 0.75
-            short_call_K = find_strike_by_call_delta(entry_price, sell_delta, T, r, call_iv)
+            short_call_K = find_strike_by_call_delta(entry_price, sell_delta, T, r, iv)
             long_call_K = short_call_K + spread_width
             
             actual_delta = abs(put_delta(entry_price, short_put_K, T, r, iv))
             put_credit = bs_put_price(entry_price, short_put_K, T, r, iv) - bs_put_price(entry_price, long_put_K, T, r, iv)
-            call_credit = bs_call_price(entry_price, short_call_K, T, r, call_iv) - bs_call_price(entry_price, long_call_K, T, r, call_iv)
+            call_credit = bs_call_price(entry_price, short_call_K, T, r, iv) - bs_call_price(entry_price, long_call_K, T, r, iv)
             credit = round(max(put_credit + call_credit, 0.10), 2)
             max_loss = round(spread_width - credit, 2)
             
@@ -242,7 +229,7 @@ def backtest_strategy(df, config, iv_mult=1.3, max_positions=1):
         
         # Skip tiny credits (unrealistic to trade)
         if credit < 0.50:
-            i = next_entry_day(i)
+            i = next_monday(i)
             continue
         
         # Find expiry index
@@ -254,7 +241,7 @@ def backtest_strategy(df, config, iv_mult=1.3, max_positions=1):
                 break
         
         if expiry_idx is None:
-            i = next_entry_day(i)
+            i = next_monday(i)
             continue
         
         # === DAILY MANAGEMENT ===
@@ -272,10 +259,6 @@ def backtest_strategy(df, config, iv_mult=1.3, max_positions=1):
             
             if strategy_type == 'put_spread':
                 current_value = bs_put_price(day_price, short_put_K, T_rem, r, iv) - bs_put_price(day_price, long_put_K, T_rem, r, iv)
-            elif strategy_type == 'iron_condor':
-                put_val = bs_put_price(day_price, short_put_K, T_rem, r, iv) - bs_put_price(day_price, long_put_K, T_rem, r, iv)
-                call_val = bs_call_price(day_price, short_call_K, T_rem, r, call_iv) - bs_call_price(day_price, long_call_K, T_rem, r, call_iv)
-                current_value = put_val + call_val
             else:
                 put_val = bs_put_price(day_price, short_put_K, T_rem, r, iv) - bs_put_price(day_price, long_put_K, T_rem, r, iv)
                 call_val = bs_call_price(day_price, short_call_K, T_rem, r, iv) - bs_call_price(day_price, long_call_K, T_rem, r, iv)
@@ -356,7 +339,7 @@ def backtest_strategy(df, config, iv_mult=1.3, max_positions=1):
         })
         
         # Advance to next Monday (position limit checked at top of loop)
-        i = next_entry_day(i)
+        i = next_monday(i)
     
     return trades
 
@@ -449,32 +432,19 @@ def main():
     parser = argparse.ArgumentParser(description='SPX Options Income — Delta-based')
     parser.add_argument('--period', default='5y', help='Data period (default: 5y)')
     parser.add_argument('--iv-mult', type=float, default=1.3, help='IV/RV multiplier (default: 1.3)')
-    parser.add_argument('--max-positions', type=int, default=4, help='Max concurrent positions (default: 4, max: 8)')
+    parser.add_argument('--max-positions', type=int, default=1, help='Max concurrent positions (default: 1, max: 4)')
     args = parser.parse_args()
-    args.max_positions = min(max(args.max_positions, 1), 8)
+    args.max_positions = min(max(args.max_positions, 1), 4)
 
     print("=" * 70)
-    print("  🔻 SPX OPTIONS INCOME — REAL VIX IV")
+    print("  🔻 SPX OPTIONS INCOME — DELTA-BASED (LIQUID STRIKES ONLY)")
     print("=" * 70)
     print("  European-style, cash-settled → NO assignment risk")
-    print("  IV Source: Real VIX data (not synthetic)")
+    print("  Minimum delta: 20Δ (no illiquid deep OTM)")
     print("  Strategies: Put Spreads (20/30/40Δ), Iron Condors (20/30Δ), Iron Fly (50Δ)")
-    print(f"  Fallback IV: {args.iv_mult}× realized vol (when VIX missing)")
+    print(f"  IV multiplier: {args.iv_mult}× realized vol")
     print(f"  Max positions: {args.max_positions} concurrent")
     print()
-
-    # Load real VIX data from CSV
-    vix_path = Path(__file__).resolve().parent.parent / 'data' / 'VIX_daily_data_right - Sheet1.csv'
-    vix_df = None
-    if vix_path.exists():
-        vix_df = pd.read_csv(vix_path)
-        vix_df['Date'] = pd.to_datetime(vix_df['Date'])
-        vix_df = vix_df[['Date', 'Close']].rename(columns={'Close': 'VIX'})
-        vix_df = vix_df.sort_values('Date').reset_index(drop=True)
-        print(f"  ✅ VIX data loaded: {len(vix_df)} bars ({vix_df['Date'].iloc[0].strftime('%Y-%m-%d')} → {vix_df['Date'].iloc[-1].strftime('%Y-%m-%d')})")
-        print(f"     Using REAL VIX as IV (no synthetic multiplier)")
-    else:
-        print(f"  ⚠️  VIX CSV not found at {vix_path}, falling back to {args.iv_mult}× realized vol")
 
     print(f"  📥 Downloading ^GSPC ({args.period})...")
     df = yf.download('^GSPC', period=args.period, interval='1d', progress=False)
@@ -494,19 +464,9 @@ def main():
         print("  ❌ Could not find Date/Close columns:", df.columns.tolist())
         return
     
-    df['Date'] = pd.to_datetime(df['Date']).dt.tz_localize(None).dt.normalize()
+    df['Date'] = pd.to_datetime(df['Date'])
     df = df.sort_values('Date').reset_index(drop=True)
     df = df.dropna(subset=['Close'])
-    
-    # Merge VIX data
-    if vix_df is not None:
-        vix_df['Date'] = vix_df['Date'].dt.tz_localize(None).dt.normalize()
-        df = df.merge(vix_df, on='Date', how='left')
-        # Forward-fill weekday gaps (holidays, etc.)
-        df['VIX'] = df['VIX'].ffill()
-        vix_coverage = df['VIX'].notna().sum() / len(df) * 100
-        avg_vix = df['VIX'].mean()
-        print(f"  ✅ VIX merged: {vix_coverage:.0f}% coverage, avg VIX = {avg_vix:.1f}%")
     
     print(f"  ✅ {len(df)} bars ({df['Date'].iloc[0].strftime('%Y-%m-%d')} → {df['Date'].iloc[-1].strftime('%Y-%m-%d')})")
     print()
@@ -536,11 +496,11 @@ def main():
         'generatedAt': str(pd.Timestamp.now()),
         'params': {
             'dataRange': args.period,
-            'ivSource': 'Real VIX' if vix_df is not None else f'{args.iv_mult}× realized vol',
+            'ivMultiplier': args.iv_mult,
             'maxPositions': args.max_positions,
             'totalBars': len(df),
             'entryDay': 'Monday',
-            'note': 'Uses REAL VIX as IV for strike placement. European-style, cash-settled. Only liquid strikes (≥20Δ).',
+            'note': 'Delta-based. Only liquid strikes (≥20Δ). European-style, cash-settled.',
             'management': '50% profit take / 2× credit stop (Iron Fly: 25% take / 1.5× stop)',
         },
         'strategies': all_results,

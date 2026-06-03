@@ -103,9 +103,9 @@ export default function SimPage() {
               </thead>
               <tbody>
                 {open.map((p, i) => {
-                  const pctGain = ((p.last_price - p.entry_price) / p.entry_price * 100).toFixed(1)
+                  const pctGain = p.last_price && p.entry_price ? ((p.last_price - p.entry_price) / p.entry_price * 100).toFixed(1) : '0.0'
                   const trailTarget = p.trail_params?.trail_start_r || 2.5
-                  const rProgress = Math.min((p.r_multiple / trailTarget) * 100, 100).toFixed(0)
+                  const rProgress = Math.min(((p.r_multiple || 0) / trailTarget) * 100, 100).toFixed(0)
                   return (
                     <tr key={i} onClick={() => setSelectedPos(p)} style={{ cursor: 'pointer' }}>
                       <td style={{ fontWeight: 700, color: '#e2e8f0' }}>{p.ticker}</td>

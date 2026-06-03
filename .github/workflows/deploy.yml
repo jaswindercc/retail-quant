@@ -3,9 +3,6 @@ name: Deploy Dashboard to GitHub Pages
 on:
   push:
     branches: [main]
-  workflow_run:
-    workflows: ["Live Swing Scanner", "Google Sheet Sync to SIM", "Overnight Scanner"]
-    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -20,27 +17,26 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Restore live scanner data from cache
-        uses: actions/cache/restore@v4
+      - uses: actions/setup-python@v5
         with:
-          path: dashboard/public/live_scanner_data.json
-          key: live-scanner-data
+          python-version: '3.12'
 
-      - name: Restore sim data from cache
-        uses: actions/cache/restore@v4
-        with:
-          path: dashboard/public/sim_data.json
-          key: sim-data
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install yfinance lxml html5lib
 
-      - name: Restore overnight scanner data from cache
-        uses: actions/cache/restore@v4
-        with:
-          path: dashboard/public/scanner_data.json
-          key: overnight-scanner-data
+      - name: Build stock universe
+        run: python scripts/build_universe.py
+
+      - name: Generate live scanner data
+        run: python scripts/scan_live.py --universe universe --lookback 3 --hh-lookback 30
+
+      - name: Copy data to dashboard public
+        run: cp data/*.json dashboard/public/ 2>/dev/null || true
 
       - uses: actions/setup-node@v4
         with:

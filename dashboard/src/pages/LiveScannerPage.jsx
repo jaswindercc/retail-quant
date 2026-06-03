@@ -42,7 +42,6 @@ export default function LiveScannerPage() {
   const [filter, setFilter] = useState('all') // 'all' | 'MA Bounce' | 'Breakout' | 'Higher High' | 'Confluence'
   const [sortCol, setSortCol] = useState(null)
   const [sortDir, setSortDir] = useState('asc')
-  const [scanStatus, setScanStatus] = useState(null) // null | 'running' | 'done' | 'error'
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}live_scanner_data.json`)
@@ -50,25 +49,6 @@ export default function LiveScannerPage() {
       .then(setData)
       .catch(e => setData({ error: e.message }))
   }, [])
-
-  const runScanner = async () => {
-    setScanStatus('running')
-    try {
-      const resp = await fetch('/api/run-live-scanner', { method: 'POST' })
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`)
-      const result = await resp.json()
-      if (result.success) {
-        setScanStatus('done')
-        // Reload data
-        const r = await fetch(`${import.meta.env.BASE_URL}live_scanner_data.json?t=${Date.now()}`)
-        if (r.ok) setData(await r.json())
-      } else {
-        setScanStatus('error')
-      }
-    } catch {
-      setScanStatus('error')
-    }
-  }
 
   const handleSort = (col) => {
     if (sortCol === col) { setSortDir(d => d === 'asc' ? 'desc' : 'asc') }
@@ -107,12 +87,10 @@ export default function LiveScannerPage() {
       const shares = calcShares(s.risk_per_share)
       const entry = Number(s.entry)
       const position_size = Number.isFinite(entry) ? +(shares * entry).toFixed(2) : 0
-      const atr_pct = entry > 0 ? +((s.risk_per_share / entry) * 100).toFixed(2) : 0
       return {
         ...s,
         shares,
         position_size,
-        atr_pct,
       }
     })
 
@@ -170,14 +148,8 @@ export default function LiveScannerPage() {
           <span>📡 Data fetched: </span>
           <strong style={{color: '#4ade80'}}>{displayScanDate}</strong>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{fontSize: 12, color: '#71717a'}}>
-            ⏰ Best time to check: <strong style={{color: '#fbbf24'}}>After 4:05 PM ET</strong> · Position sizing uses <strong style={{ color: '#4ade80' }}>$200 risk/trade</strong>
-          </div>
-          <button onClick={runScanner} disabled={scanStatus === 'running'}
-            style={{ padding: '6px 14px', borderRadius: 6, border: '1px solid #4ade80', background: scanStatus === 'running' ? '#1e1e2e' : '#0a1f14', color: '#4ade80', fontSize: 12, fontWeight: 600, cursor: scanStatus === 'running' ? 'wait' : 'pointer' }}>
-            {scanStatus === 'running' ? '⏳ Running…' : scanStatus === 'done' ? '✅ Done' : scanStatus === 'error' ? '❌ Failed' : '▶️ Run Scanner'}
-          </button>
+        <div style={{fontSize: 12, color: '#71717a'}}>
+          ⏰ Best time to check: <strong style={{color: '#fbbf24'}}>After 4:05 PM ET</strong> · Position sizing uses <strong style={{ color: '#4ade80' }}>$200 risk/trade</strong>
         </div>
       </div>
 
@@ -210,21 +182,12 @@ export default function LiveScannerPage() {
         <div className="card" style={{ border: '2px solid #ffd700', background: 'linear-gradient(135deg, #1a1a2e 0%, #1b2838 100%)' }}>
           <h3 style={{ color: '#ffd700', textTransform: 'none', letterSpacing: 0 }}>⭐ Confluence — Picked by Multiple Strategies</h3>
           <p style={{ color: '#aaa', fontSize: '0.8rem', margin: '-8px 0 1rem' }}>
-            These stocks triggered signals from 2+ strategies today. <strong style={{ color: '#4ade80' }}>Pick lowest ATR% for tightest stop.</strong>
+            These stocks triggered signals from 2+ strategies today. Higher conviction.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '0.75rem' }}>
-            {todayConfluence
-              .map(c => {
-                const sig = todaySignals.find(s => s.ticker === c.ticker)
-                const atrPct = sig ? ((sig.risk_per_share / sig.entry) * 100).toFixed(2) : null
-                return { ...c, atrPct: atrPct ? parseFloat(atrPct) : 99, atrPctStr: atrPct }
-              })
-              .sort((a, b) => a.atrPct - b.atrPct)
-              .map((c, idx) => (
-              <div key={c.ticker} style={{ padding: '0.75rem', background: '#0d1b2a', borderRadius: 8, border: idx === 0 ? '2px solid #4ade80' : '1px solid #ffd70044', position: 'relative' }}>
-                {idx === 0 && <span style={{ position: 'absolute', top: 4, right: 8, fontSize: 10, color: '#4ade80', fontWeight: 700 }}>👈 PICK</span>}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '0.75rem' }}>
+            {todayConfluence.map(c => (
+              <div key={c.ticker} style={{ padding: '0.75rem', background: '#0d1b2a', borderRadius: 8, border: '1px solid #ffd70044' }}>
                 <strong style={{ fontSize: '1.1rem' }}>{c.ticker}</strong>
-                <span style={{ marginLeft: 8, fontSize: '0.8rem', color: idx === 0 ? '#4ade80' : '#fbbf24', fontWeight: 600 }}>ATR: {c.atrPctStr}%</span>
                 <div style={{ marginTop: '0.25rem', display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
                   {c.strategies.map(st => (
                     <span key={st} style={{
@@ -265,7 +228,6 @@ export default function LiveScannerPage() {
                 {[
                   { key: 'ticker', label: 'Ticker' },
                   { key: 'strategy', label: 'Strategy' },
-                  { key: 'atr_pct', label: 'ATR%' },
                   { key: 'market_cap', label: 'Mkt Cap' },
                   { key: 'date', label: 'Date' },
                   { key: 'entry', label: 'Entry' },
@@ -303,7 +265,6 @@ export default function LiveScannerPage() {
                         </Link>
                       )}
                     </td>
-                    <td style={{ whiteSpace: 'nowrap', fontSize: '0.85rem', color: s.atr_pct <= 3 ? '#4ade80' : s.atr_pct <= 5 ? '#fbbf24' : '#f87171' }}><strong>{s.atr_pct}%</strong></td>
                     <td style={{ whiteSpace: 'nowrap', fontSize: '0.85rem' }}>{fmtCap(s.market_cap)}</td>
                     <td style={{ whiteSpace: 'nowrap', fontSize: '0.85rem' }}>{s.date}</td>
                     <td><strong>${s.entry}</strong></td>
