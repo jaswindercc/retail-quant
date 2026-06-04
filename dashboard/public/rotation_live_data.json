@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-03 18:47",
+  "lastUpdated": "2026-06-04 15:38",
   "rotation_freq": "weekly",
   "lookback": "6 months",
   "universes": {
@@ -9,1933 +9,2969 @@
       "top_10": [
         {
           "ticker": "SNDK",
-          "market_cap": 269310115840,
-          "market_cap_B": 269.3,
-          "return_6m": 716.65,
-          "price": 1716.36,
-          "price_6m_ago": 210.17
+          "market_cap": 266362830848,
+          "market_cap_B": 266.4,
+          "return_6m": 791.89,
+          "price": 1831.5,
+          "price_6m_ago": 205.35,
+          "news": [
+            {
+              "title": "Intel, AMD, Micron shares sink as Broadcom results spark semiconductor sector sell-off",
+              "summary": "Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Micron Drops 7% as Broadcom\u2019s Disappointing AI Outlook Triggers a Semiconductor Selloff",
+              "summary": "Shares of Micron Technology (NASDAQ:MU) are down by about 7% to $1,004 in mid-morning trading on Thursday, June 4, after Broadcom (NASDAQ:AVGO) delive",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Opinion: The Best Memory Stock to Buy Isn\u2019t Named Micron or SanDisk",
+              "summary": "Investors just can\u2019t seem to get enough of the memory and storage stocks, even after their mouth-watering parabolic moves. Micron (NASDAQ:MU) and Sout",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "MU",
-          "market_cap": 1209043648512,
-          "market_cap_B": 1209.0,
-          "return_6m": 342.89,
-          "price": 1064.1,
-          "price_6m_ago": 240.26
+          "market_cap": 1138379849728,
+          "market_cap_B": 1138.4,
+          "return_6m": 351.15,
+          "price": 1079.57,
+          "price_6m_ago": 239.29,
+          "news": [
+            {
+              "title": "Intel, AMD, Micron shares sink as Broadcom results spark semiconductor sector sell-off",
+              "summary": "Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Micron Drops 7% as Broadcom\u2019s Disappointing AI Outlook Triggers a Semiconductor Selloff",
+              "summary": "Shares of Micron Technology (NASDAQ:MU) are down by about 7% to $1,004 in mid-morning trading on Thursday, June 4, after Broadcom (NASDAQ:AVGO) delive",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Broadcom Stock Punished Over Lack of AI Guidance Boost",
+              "summary": "$340 billion That's roughly how much market value Broadcom is slated to lose today after its results last night sent its shares sliding 15%. The move ",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "WDC",
-          "market_cap": 202841997312,
-          "market_cap_B": 202.8,
-          "return_6m": 244.76,
-          "price": 563.1,
-          "price_6m_ago": 163.33
+          "market_cap": 201012281344,
+          "market_cap_B": 201.0,
+          "return_6m": 271.82,
+          "price": 594.11,
+          "price_6m_ago": 159.78,
+          "news": [
+            {
+              "title": "Micron Drops 7% as Broadcom\u2019s Disappointing AI Outlook Triggers a Semiconductor Selloff",
+              "summary": "Shares of Micron Technology (NASDAQ:MU) are down by about 7% to $1,004 in mid-morning trading on Thursday, June 4, after Broadcom (NASDAQ:AVGO) delive",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Western Digital (WDC) Hits All-Time High as Citi Hikes PT by 37%",
+              "summary": "Western Digital Corp. (NASDAQ:WDC) is one of the 10 Stocks With Remarkable Resilience. Western Digital saw its share prices climb to a fresh all-time ",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Sandisk Spin Off And AI Deals Test Lofty Valuation And Momentum",
+              "summary": "Sandisk (NasdaqGS:SNDK) has completed its spin off from Western Digital and is now operating as an independent company focused on AI storage. The comp",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "STX",
-          "market_cap": 211722207232,
-          "market_cap_B": 211.7,
-          "return_6m": 244.56,
-          "price": 926.61,
-          "price_6m_ago": 268.92
-        },
-        {
-          "ticker": "DELL",
-          "market_cap": 273461739520,
-          "market_cap_B": 273.5,
-          "return_6m": 232.02,
-          "price": 435.31,
-          "price_6m_ago": 131.11
+          "market_cap": 209620320256,
+          "market_cap_B": 209.6,
+          "return_6m": 254.03,
+          "price": 940.69,
+          "price_6m_ago": 265.71,
+          "news": [
+            {
+              "title": "Buy These 5 Growth Stocks in June Amid Massive AI Infrastructure Boost",
+              "summary": "MU, SNDK, STX, DELL and FIX are five large AI-centric growth stocks benefiting from massive AI infrastructure spending.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Space Florida to fund ocean-based space launch company, other secretive projects",
+              "summary": "Space Florida continues to hold things close to the vest with several ongoing projects as it tries to attract aerospace business to the state \u2014 but di",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Seagate Settlement Over Huawei Sales Reframes Risks For Soaring Stock Narrative",
+              "summary": "Seagate Technology Holdings agreed to a $175 million settlement over claims it failed to disclose more than $1.1 billion in hard drive sales to Huawei",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "MRVL",
-          "market_cap": 262028836864,
-          "market_cap_B": 262.0,
-          "return_6m": 219.59,
-          "price": 290.79,
-          "price_6m_ago": 90.99
+          "market_cap": 269215318016,
+          "market_cap_B": 269.2,
+          "return_6m": 225.14,
+          "price": 301.65,
+          "price_6m_ago": 92.78,
+          "news": [
+            {
+              "title": "Intel, AMD, Micron shares sink as Broadcom results spark semiconductor sector sell-off",
+              "summary": "Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Jensen Huang's $70 Billion Endorsement Didn't Eliminate Marvell's Risks",
+              "summary": "Can a single comment add more than $70 billion of market value to a company overnight.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Stocks to Watch: Broadcom, Universal Music,  Quantinuum",
+              "summary": "\u2198\ufe0f Broadcom (AVGO): The semiconductor and software maker logged higher revenue in its latest quarter as demand for its AI chips accelerates. Still, sh",
+              "date": "2026-06-04"
+            }
+          ]
+        },
+        {
+          "ticker": "DELL",
+          "market_cap": 269570834432,
+          "market_cap_B": 269.6,
+          "return_6m": 212.05,
+          "price": 421.08,
+          "price_6m_ago": 134.94,
+          "news": [
+            {
+              "title": "Broadcom stock sinks. Are AI earnings expectations 'insatiable'?",
+              "summary": "Broadcom (AVGO) stock sinks further in Thursday trading despite topping estimates for fiscal second quarter earnings and revenue, while also outpacing",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Dell's Stock Rally Has Made CEO Michael Dell Richer Than Mark Zuckerberg and Jensen Huang",
+              "summary": "Dell's recent stock rally helped propel CEO Michael Dell up the ranks of the world's richest people.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "The 5 Most Interesting Analyst Questions From Dell\u2019s Q1 Earnings Call",
+              "summary": "Dell\u2019s results for Q1 were met with a strongly positive market response, reflecting significant outperformance versus Wall Street expectations. Manage",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "ARM",
-          "market_cap": 437314191360,
-          "market_cap_B": 437.3,
-          "return_6m": 198.28,
-          "price": 402.71,
-          "price_6m_ago": 135.01
+          "market_cap": 410377224192,
+          "market_cap_B": 410.4,
+          "return_6m": 201.75,
+          "price": 411.83,
+          "price_6m_ago": 136.48,
+          "news": [
+            {
+              "title": "Intel, AMD, Micron shares sink as Broadcom results spark semiconductor sector sell-off",
+              "summary": "Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "US Equity Futures Mixed Pre-Bell as Broadcom Falls, Clashes Continue in Middle East",
+              "summary": "US equity futures were mixed pre-bell Thursday as traders watched tech giant Broadcom's (AVGO) stock",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "SoftBank just got a reminder of AI's biggest risk",
+              "summary": "Investors Reassess Valuations After Huge Year To Date Rally",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "INTC",
-          "market_cap": 565977874432,
-          "market_cap_B": 566.0,
-          "return_6m": 169.76,
-          "price": 107.93,
-          "price_6m_ago": 40.01
+          "market_cap": 556126371840,
+          "market_cap_B": 556.1,
+          "return_6m": 159.28,
+          "price": 112.71,
+          "price_6m_ago": 43.47,
+          "news": [
+            {
+              "title": "Intel, AMD, Micron shares sink as Broadcom results spark semiconductor sector sell-off",
+              "summary": "Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Amazon\u2019s $50 Billion Chip Secret: Why It Could Become Nvidia\u2019s Biggest AI Rival",
+              "summary": "Artificial intelligence has turned semiconductor stocks into the market\u2019s biggest winners. Nvidia (NASDAQ:NVDA), Broadcom (NASDAQ:AVGO), Advanced Micr",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Brookfield Renewable Partners Is Up 38% This Year. Does AI Energy Demand Make This Green Energy Stock a Buy in 2026?",
+              "summary": "There's a reason Brookfield Renewable Partners has rocketed so much this year.",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "AMD",
-          "market_cap": 883524632576,
-          "market_cap_B": 883.5,
-          "return_6m": 137.32,
-          "price": 521.54,
-          "price_6m_ago": 219.76
+          "market_cap": 854410199040,
+          "market_cap_B": 854.4,
+          "return_6m": 152.05,
+          "price": 542.52,
+          "price_6m_ago": 215.24,
+          "news": [
+            {
+              "title": "Tech stocks today: Tech stocks tumble following Broadcom, CrowdStrike earnings",
+              "summary": "This week, tech investors will be watching chip and cybersecurity earnings, the impact of AI on labor market data, and the Computex annual chip summit",
+              "date": "2026-06-01"
+            },
+            {
+              "title": "Intel, AMD, Micron shares sink as Broadcom results spark semiconductor sector sell-off",
+              "summary": "Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Amazon\u2019s $50 Billion Chip Secret: Why It Could Become Nvidia\u2019s Biggest AI Rival",
+              "summary": "Artificial intelligence has turned semiconductor stocks into the market\u2019s biggest winners. Nvidia (NASDAQ:NVDA), Broadcom (NASDAQ:AVGO), Advanced Micr",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "LRCX",
-          "market_cap": 429245988864,
-          "market_cap_B": 429.2,
-          "return_6m": 116.66,
-          "price": 334.41,
-          "price_6m_ago": 154.35
+          "market_cap": 419266461696,
+          "market_cap_B": 419.3,
+          "return_6m": 117.9,
+          "price": 343.71,
+          "price_6m_ago": 157.74,
+          "news": [
+            {
+              "title": "Lam Research Corp (LRCX): Increasing Dependence on Essential Chip Manufacturing",
+              "summary": "Green Alpha Investment recently released its Q1 2026 investor letter. A copy of the letter can be downloaded here. Green Alpha Investment\u2019s philosophy",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Stocks Retreat as US-Iran Peace Hopes in Doubt",
+              "summary": "The S&P 500 Index ($SPX ) (SPY ) on Wednesday closed down -0.74%, the Dow Jones Industrial Average ($DOWI ) (DIA ) closed down -1.21%, and the Nasdaq ",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Stocks Fall on Escalation of US-Iran Hostilities",
+              "summary": "The S&P 500 Index ($SPX ) (SPY ) today is down -0.40%, the Dow Jones Industrial Average ($DOWI ) (DIA ) is down -0.74%, and the Nasdaq 100 Index ($IUX",
+              "date": "2026-06-03"
+            }
+          ]
         }
       ],
       "all_ranked": [
         {
           "ticker": "SNDK",
-          "market_cap": 269310115840,
-          "market_cap_B": 269.3,
-          "return_6m": 716.65,
-          "price": 1716.36,
-          "price_6m_ago": 210.17
+          "market_cap": 266362830848,
+          "market_cap_B": 266.4,
+          "return_6m": 791.89,
+          "price": 1831.5,
+          "price_6m_ago": 205.35,
+          "news": [
+            {
+              "title": "Intel, AMD, Micron shares sink as Broadcom results spark semiconductor sector sell-off",
+              "summary": "Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Micron Drops 7% as Broadcom\u2019s Disappointing AI Outlook Triggers a Semiconductor Selloff",
+              "summary": "Shares of Micron Technology (NASDAQ:MU) are down by about 7% to $1,004 in mid-morning trading on Thursday, June 4, after Broadcom (NASDAQ:AVGO) delive",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Opinion: The Best Memory Stock to Buy Isn\u2019t Named Micron or SanDisk",
+              "summary": "Investors just can\u2019t seem to get enough of the memory and storage stocks, even after their mouth-watering parabolic moves. Micron (NASDAQ:MU) and Sout",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "MU",
-          "market_cap": 1209043648512,
-          "market_cap_B": 1209.0,
-          "return_6m": 342.89,
-          "price": 1064.1,
-          "price_6m_ago": 240.26
+          "market_cap": 1138379849728,
+          "market_cap_B": 1138.4,
+          "return_6m": 351.15,
+          "price": 1079.57,
+          "price_6m_ago": 239.29,
+          "news": [
+            {
+              "title": "Intel, AMD, Micron shares sink as Broadcom results spark semiconductor sector sell-off",
+              "summary": "Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Micron Drops 7% as Broadcom\u2019s Disappointing AI Outlook Triggers a Semiconductor Selloff",
+              "summary": "Shares of Micron Technology (NASDAQ:MU) are down by about 7% to $1,004 in mid-morning trading on Thursday, June 4, after Broadcom (NASDAQ:AVGO) delive",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Broadcom Stock Punished Over Lack of AI Guidance Boost",
+              "summary": "$340 billion That's roughly how much market value Broadcom is slated to lose today after its results last night sent its shares sliding 15%. The move ",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "WDC",
-          "market_cap": 202841997312,
-          "market_cap_B": 202.8,
-          "return_6m": 244.76,
-          "price": 563.1,
-          "price_6m_ago": 163.33
+          "market_cap": 201012281344,
+          "market_cap_B": 201.0,
+          "return_6m": 271.82,
+          "price": 594.11,
+          "price_6m_ago": 159.78,
+          "news": [
+            {
+              "title": "Micron Drops 7% as Broadcom\u2019s Disappointing AI Outlook Triggers a Semiconductor Selloff",
+              "summary": "Shares of Micron Technology (NASDAQ:MU) are down by about 7% to $1,004 in mid-morning trading on Thursday, June 4, after Broadcom (NASDAQ:AVGO) delive",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Western Digital (WDC) Hits All-Time High as Citi Hikes PT by 37%",
+              "summary": "Western Digital Corp. (NASDAQ:WDC) is one of the 10 Stocks With Remarkable Resilience. Western Digital saw its share prices climb to a fresh all-time ",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Sandisk Spin Off And AI Deals Test Lofty Valuation And Momentum",
+              "summary": "Sandisk (NasdaqGS:SNDK) has completed its spin off from Western Digital and is now operating as an independent company focused on AI storage. The comp",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "STX",
-          "market_cap": 211722207232,
-          "market_cap_B": 211.7,
-          "return_6m": 244.56,
-          "price": 926.61,
-          "price_6m_ago": 268.92
-        },
-        {
-          "ticker": "DELL",
-          "market_cap": 273461739520,
-          "market_cap_B": 273.5,
-          "return_6m": 232.02,
-          "price": 435.31,
-          "price_6m_ago": 131.11
+          "market_cap": 209620320256,
+          "market_cap_B": 209.6,
+          "return_6m": 254.03,
+          "price": 940.69,
+          "price_6m_ago": 265.71,
+          "news": [
+            {
+              "title": "Buy These 5 Growth Stocks in June Amid Massive AI Infrastructure Boost",
+              "summary": "MU, SNDK, STX, DELL and FIX are five large AI-centric growth stocks benefiting from massive AI infrastructure spending.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Space Florida to fund ocean-based space launch company, other secretive projects",
+              "summary": "Space Florida continues to hold things close to the vest with several ongoing projects as it tries to attract aerospace business to the state \u2014 but di",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Seagate Settlement Over Huawei Sales Reframes Risks For Soaring Stock Narrative",
+              "summary": "Seagate Technology Holdings agreed to a $175 million settlement over claims it failed to disclose more than $1.1 billion in hard drive sales to Huawei",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "MRVL",
-          "market_cap": 262028836864,
-          "market_cap_B": 262.0,
-          "return_6m": 219.59,
-          "price": 290.79,
-          "price_6m_ago": 90.99
+          "market_cap": 269215318016,
+          "market_cap_B": 269.2,
+          "return_6m": 225.14,
+          "price": 301.65,
+          "price_6m_ago": 92.78,
+          "news": [
+            {
+              "title": "Intel, AMD, Micron shares sink as Broadcom results spark semiconductor sector sell-off",
+              "summary": "Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Jensen Huang's $70 Billion Endorsement Didn't Eliminate Marvell's Risks",
+              "summary": "Can a single comment add more than $70 billion of market value to a company overnight.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Stocks to Watch: Broadcom, Universal Music,  Quantinuum",
+              "summary": "\u2198\ufe0f Broadcom (AVGO): The semiconductor and software maker logged higher revenue in its latest quarter as demand for its AI chips accelerates. Still, sh",
+              "date": "2026-06-04"
+            }
+          ]
+        },
+        {
+          "ticker": "DELL",
+          "market_cap": 269570834432,
+          "market_cap_B": 269.6,
+          "return_6m": 212.05,
+          "price": 421.08,
+          "price_6m_ago": 134.94,
+          "news": [
+            {
+              "title": "Broadcom stock sinks. Are AI earnings expectations 'insatiable'?",
+              "summary": "Broadcom (AVGO) stock sinks further in Thursday trading despite topping estimates for fiscal second quarter earnings and revenue, while also outpacing",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Dell's Stock Rally Has Made CEO Michael Dell Richer Than Mark Zuckerberg and Jensen Huang",
+              "summary": "Dell's recent stock rally helped propel CEO Michael Dell up the ranks of the world's richest people.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "The 5 Most Interesting Analyst Questions From Dell\u2019s Q1 Earnings Call",
+              "summary": "Dell\u2019s results for Q1 were met with a strongly positive market response, reflecting significant outperformance versus Wall Street expectations. Manage",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "ARM",
-          "market_cap": 437314191360,
-          "market_cap_B": 437.3,
-          "return_6m": 198.28,
-          "price": 402.71,
-          "price_6m_ago": 135.01
+          "market_cap": 410377224192,
+          "market_cap_B": 410.4,
+          "return_6m": 201.75,
+          "price": 411.83,
+          "price_6m_ago": 136.48,
+          "news": [
+            {
+              "title": "Intel, AMD, Micron shares sink as Broadcom results spark semiconductor sector sell-off",
+              "summary": "Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "US Equity Futures Mixed Pre-Bell as Broadcom Falls, Clashes Continue in Middle East",
+              "summary": "US equity futures were mixed pre-bell Thursday as traders watched tech giant Broadcom's (AVGO) stock",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "SoftBank just got a reminder of AI's biggest risk",
+              "summary": "Investors Reassess Valuations After Huge Year To Date Rally",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "INTC",
-          "market_cap": 565977874432,
-          "market_cap_B": 566.0,
-          "return_6m": 169.76,
-          "price": 107.93,
-          "price_6m_ago": 40.01
+          "market_cap": 556126371840,
+          "market_cap_B": 556.1,
+          "return_6m": 159.28,
+          "price": 112.71,
+          "price_6m_ago": 43.47,
+          "news": [
+            {
+              "title": "Intel, AMD, Micron shares sink as Broadcom results spark semiconductor sector sell-off",
+              "summary": "Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Amazon\u2019s $50 Billion Chip Secret: Why It Could Become Nvidia\u2019s Biggest AI Rival",
+              "summary": "Artificial intelligence has turned semiconductor stocks into the market\u2019s biggest winners. Nvidia (NASDAQ:NVDA), Broadcom (NASDAQ:AVGO), Advanced Micr",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Brookfield Renewable Partners Is Up 38% This Year. Does AI Energy Demand Make This Green Energy Stock a Buy in 2026?",
+              "summary": "There's a reason Brookfield Renewable Partners has rocketed so much this year.",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "AMD",
-          "market_cap": 883524632576,
-          "market_cap_B": 883.5,
-          "return_6m": 137.32,
-          "price": 521.54,
-          "price_6m_ago": 219.76
+          "market_cap": 854410199040,
+          "market_cap_B": 854.4,
+          "return_6m": 152.05,
+          "price": 542.52,
+          "price_6m_ago": 215.24,
+          "news": [
+            {
+              "title": "Tech stocks today: Tech stocks tumble following Broadcom, CrowdStrike earnings",
+              "summary": "This week, tech investors will be watching chip and cybersecurity earnings, the impact of AI on labor market data, and the Computex annual chip summit",
+              "date": "2026-06-01"
+            },
+            {
+              "title": "Intel, AMD, Micron shares sink as Broadcom results spark semiconductor sector sell-off",
+              "summary": "Semiconductor stocks declined as Broadcom's forecast weighed down the broader complex.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Amazon\u2019s $50 Billion Chip Secret: Why It Could Become Nvidia\u2019s Biggest AI Rival",
+              "summary": "Artificial intelligence has turned semiconductor stocks into the market\u2019s biggest winners. Nvidia (NASDAQ:NVDA), Broadcom (NASDAQ:AVGO), Advanced Micr",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "LRCX",
-          "market_cap": 429245988864,
-          "market_cap_B": 429.2,
-          "return_6m": 116.66,
-          "price": 334.41,
-          "price_6m_ago": 154.35
+          "market_cap": 419266461696,
+          "market_cap_B": 419.3,
+          "return_6m": 117.9,
+          "price": 343.71,
+          "price_6m_ago": 157.74,
+          "news": [
+            {
+              "title": "Lam Research Corp (LRCX): Increasing Dependence on Essential Chip Manufacturing",
+              "summary": "Green Alpha Investment recently released its Q1 2026 investor letter. A copy of the letter can be downloaded here. Green Alpha Investment\u2019s philosophy",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Stocks Retreat as US-Iran Peace Hopes in Doubt",
+              "summary": "The S&P 500 Index ($SPX ) (SPY ) on Wednesday closed down -0.74%, the Dow Jones Industrial Average ($DOWI ) (DIA ) closed down -1.21%, and the Nasdaq ",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Stocks Fall on Escalation of US-Iran Hostilities",
+              "summary": "The S&P 500 Index ($SPX ) (SPY ) today is down -0.40%, the Dow Jones Industrial Average ($DOWI ) (DIA ) is down -0.74%, and the Nasdaq 100 Index ($IUX",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "AMAT",
-          "market_cap": 397392576512,
-          "market_cap_B": 397.4,
-          "return_6m": 92.84,
-          "price": 490.05,
-          "price_6m_ago": 254.12
-        },
-        {
-          "ticker": "TXN",
-          "market_cap": 281437077504,
-          "market_cap_B": 281.4,
-          "return_6m": 85.36,
-          "price": 308.12,
-          "price_6m_ago": 166.22
+          "market_cap": 396217516032,
+          "market_cap_B": 396.2,
+          "return_6m": 89.21,
+          "price": 500.77,
+          "price_6m_ago": 264.67
         },
         {
           "ticker": "KLAC",
-          "market_cap": 277546926080,
-          "market_cap_B": 277.5,
-          "return_6m": 77.2,
-          "price": 2045.2,
-          "price_6m_ago": 1154.21
+          "market_cap": 274140086272,
+          "market_cap_B": 274.1,
+          "return_6m": 79.06,
+          "price": 2125.11,
+          "price_6m_ago": 1186.8
+        },
+        {
+          "ticker": "TXN",
+          "market_cap": 278952542208,
+          "market_cap_B": 279.0,
+          "return_6m": 78.13,
+          "price": 308.59,
+          "price_6m_ago": 173.24
         },
         {
           "ticker": "CSCO",
-          "market_cap": 508484452352,
-          "market_cap_B": 508.5,
-          "return_6m": 70.15,
-          "price": 128.0,
-          "price_6m_ago": 75.23
-        },
-        {
-          "ticker": "GEV",
-          "market_cap": 259228811264,
-          "market_cap_B": 259.2,
-          "return_6m": 68.31,
-          "price": 969.67,
-          "price_6m_ago": 576.13
-        },
-        {
-          "ticker": "CAT",
-          "market_cap": 426003824640,
-          "market_cap_B": 426.0,
-          "return_6m": 60.84,
-          "price": 909.81,
-          "price_6m_ago": 565.66
+          "market_cap": 504621858816,
+          "market_cap_B": 504.6,
+          "return_6m": 66.34,
+          "price": 126.5,
+          "price_6m_ago": 76.05
         },
         {
           "ticker": "ADI",
-          "market_cap": 213029961728,
-          "market_cap_B": 213.0,
-          "return_6m": 60.29,
-          "price": 423.2,
-          "price_6m_ago": 264.02
+          "market_cap": 207426011136,
+          "market_cap_B": 207.4,
+          "return_6m": 61.85,
+          "price": 437.67,
+          "price_6m_ago": 270.42
         },
         {
-          "ticker": "PANW",
-          "market_cap": 226637987840,
-          "market_cap_B": 226.6,
-          "return_6m": 58.3,
-          "price": 297.18,
-          "price_6m_ago": 187.73
+          "ticker": "GEV",
+          "market_cap": 255544360960,
+          "market_cap_B": 255.5,
+          "return_6m": 59.69,
+          "price": 959.36,
+          "price_6m_ago": 600.77
+        },
+        {
+          "ticker": "CAT",
+          "market_cap": 430089273344,
+          "market_cap_B": 430.1,
+          "return_6m": 59.68,
+          "price": 926.18,
+          "price_6m_ago": 580.01
         },
         {
           "ticker": "QCOM",
-          "market_cap": 263847821312,
-          "market_cap_B": 263.8,
-          "return_6m": 44.98,
-          "price": 240.84,
-          "price_6m_ago": 166.12
+          "market_cap": 252770287616,
+          "market_cap_B": 252.8,
+          "return_6m": 48.16,
+          "price": 250.01,
+          "price_6m_ago": 168.75
+        },
+        {
+          "ticker": "PANW",
+          "market_cap": 220750888960,
+          "market_cap_B": 220.8,
+          "return_6m": 47.69,
+          "price": 280.43,
+          "price_6m_ago": 189.88
         },
         {
           "ticker": "ANET",
-          "market_cap": 221639000064,
-          "market_cap_B": 221.6,
-          "return_6m": 36.86,
-          "price": 175.33,
-          "price_6m_ago": 128.11
-        },
-        {
-          "ticker": "GS",
-          "market_cap": 309238595584,
-          "market_cap_B": 309.2,
-          "return_6m": 33.22,
-          "price": 1064.58,
-          "price_6m_ago": 799.11
+          "market_cap": 206963392512,
+          "market_cap_B": 207.0,
+          "return_6m": 37.06,
+          "price": 174.37,
+          "price_6m_ago": 127.22
         },
         {
           "ticker": "XOM",
-          "market_cap": 634922991616,
-          "market_cap_B": 634.9,
-          "return_6m": 29.97,
-          "price": 149.56,
-          "price_6m_ago": 115.08
+          "market_cap": 635068088320,
+          "market_cap_B": 635.1,
+          "return_6m": 33.98,
+          "price": 152.53,
+          "price_6m_ago": 113.84
         },
         {
-          "ticker": "C",
-          "market_cap": 222228152320,
-          "market_cap_B": 222.2,
-          "return_6m": 29.11,
-          "price": 131.26,
-          "price_6m_ago": 101.67
-        },
-        {
-          "ticker": "MS",
-          "market_cap": 333232963584,
-          "market_cap_B": 333.2,
-          "return_6m": 29.0,
-          "price": 214.98,
-          "price_6m_ago": 166.65
+          "ticker": "GS",
+          "market_cap": 320490176512,
+          "market_cap_B": 320.5,
+          "return_6m": 28.94,
+          "price": 1041.02,
+          "price_6m_ago": 807.38
         },
         {
           "ticker": "CVX",
-          "market_cap": 377716473856,
-          "market_cap_B": 377.7,
-          "return_6m": 25.29,
-          "price": 187.55,
-          "price_6m_ago": 149.69
+          "market_cap": 377409175552,
+          "market_cap_B": 377.4,
+          "return_6m": 28.67,
+          "price": 189.71,
+          "price_6m_ago": 147.44
+        },
+        {
+          "ticker": "C",
+          "market_cap": 229331894272,
+          "market_cap_B": 229.3,
+          "return_6m": 27.17,
+          "price": 129.93,
+          "price_6m_ago": 102.17
         },
         {
           "ticker": "AVGO",
-          "market_cap": 2310967918592,
-          "market_cap_B": 2311.0,
-          "return_6m": 25.23,
-          "price": 481.57,
-          "price_6m_ago": 384.54
+          "market_cap": 1959442513920,
+          "market_cap_B": 1959.4,
+          "return_6m": 26.1,
+          "price": 479.23,
+          "price_6m_ago": 380.04
         },
         {
-          "ticker": "NVDA",
-          "market_cap": 5233431805952,
-          "market_cap_B": 5233.4,
-          "return_6m": 23.86,
-          "price": 222.82,
-          "price_6m_ago": 179.9
+          "ticker": "MS",
+          "market_cap": 343997939712,
+          "market_cap_B": 344.0,
+          "return_6m": 25.63,
+          "price": 210.14,
+          "price_6m_ago": 167.26
         },
         {
           "ticker": "LIN",
-          "market_cap": 234687496192,
-          "market_cap_B": 234.7,
-          "return_6m": 22.66,
-          "price": 495.91,
-          "price_6m_ago": 404.29
+          "market_cap": 236028297216,
+          "market_cap_B": 236.0,
+          "return_6m": 25.04,
+          "price": 507.57,
+          "price_6m_ago": 405.93
         },
         {
-          "ticker": "ORCL",
-          "market_cap": 667228307456,
-          "market_cap_B": 667.2,
-          "return_6m": 22.47,
-          "price": 244.58,
-          "price_6m_ago": 199.71
+          "ticker": "NVDA",
+          "market_cap": 5238597615616,
+          "market_cap_B": 5238.6,
+          "return_6m": 18.36,
+          "price": 214.75,
+          "price_6m_ago": 181.44
         },
         {
           "ticker": "UNH",
-          "market_cap": 346242646016,
-          "market_cap_B": 346.2,
-          "return_6m": 18.63,
-          "price": 377.92,
-          "price_6m_ago": 318.57
-        },
-        {
-          "ticker": "MRK",
-          "market_cap": 284005105664,
-          "market_cap_B": 284.0,
-          "return_6m": 15.39,
-          "price": 115.65,
-          "price_6m_ago": 100.22
-        },
-        {
-          "ticker": "GOOGL",
-          "market_cap": 4372342767616,
-          "market_cap_B": 4372.3,
-          "return_6m": 15.07,
-          "price": 361.85,
-          "price_6m_ago": 314.46
+          "market_cap": 361121447936,
+          "market_cap_B": 361.1,
+          "return_6m": 17.85,
+          "price": 377.0,
+          "price_6m_ago": 319.89
         },
         {
           "ticker": "PM",
-          "market_cap": 275896107008,
-          "market_cap_B": 275.9,
-          "return_6m": 13.23,
-          "price": 173.66,
-          "price_6m_ago": 153.37
+          "market_cap": 275709034496,
+          "market_cap_B": 275.7,
+          "return_6m": 15.85,
+          "price": 175.94,
+          "price_6m_ago": 151.87
         },
         {
-          "ticker": "AAPL",
-          "market_cap": 4548453728256,
-          "market_cap_B": 4548.5,
-          "return_6m": 11.55,
-          "price": 315.2,
-          "price_6m_ago": 282.58
+          "ticker": "MRK",
+          "market_cap": 293229920256,
+          "market_cap_B": 293.2,
+          "return_6m": 15.35,
+          "price": 114.7,
+          "price_6m_ago": 99.44
         },
         {
-          "ticker": "GE",
-          "market_cap": 331764760576,
-          "market_cap_B": 331.8,
-          "return_6m": 10.43,
-          "price": 317.72,
-          "price_6m_ago": 287.7
+          "ticker": "ORCL",
+          "market_cap": 677538955264,
+          "market_cap_B": 677.5,
+          "return_6m": 15.24,
+          "price": 230.33,
+          "price_6m_ago": 199.87
         },
         {
-          "ticker": "JNJ",
-          "market_cap": 538578681856,
-          "market_cap_B": 538.6,
-          "return_6m": 9.75,
-          "price": 222.89,
-          "price_6m_ago": 203.09
+          "ticker": "GOOGL",
+          "market_cap": 4481260453888,
+          "market_cap_B": 4481.3,
+          "return_6m": 13.83,
+          "price": 358.99,
+          "price_6m_ago": 315.38
         },
         {
           "ticker": "KO",
-          "market_cap": 338906513408,
-          "market_cap_B": 338.9,
-          "return_6m": 9.73,
-          "price": 78.41,
-          "price_6m_ago": 71.46
+          "market_cap": 337766383616,
+          "market_cap_B": 337.8,
+          "return_6m": 12.21,
+          "price": 78.76,
+          "price_6m_ago": 70.19
+        },
+        {
+          "ticker": "JNJ",
+          "market_cap": 545860485120,
+          "market_cap_B": 545.9,
+          "return_6m": 9.88,
+          "price": 223.24,
+          "price_6m_ago": 203.17
+        },
+        {
+          "ticker": "GE",
+          "market_cap": 339076251648,
+          "market_cap_B": 339.1,
+          "return_6m": 9.03,
+          "price": 314.64,
+          "price_6m_ago": 288.57
+        },
+        {
+          "ticker": "AAPL",
+          "market_cap": 4554254974976,
+          "market_cap_B": 4554.3,
+          "return_6m": 8.61,
+          "price": 310.26,
+          "price_6m_ago": 285.66
         },
         {
           "ticker": "AMZN",
-          "market_cap": 2675829899264,
-          "market_cap_B": 2675.8,
-          "return_6m": 9.68,
-          "price": 256.52,
-          "price_6m_ago": 233.88
-        },
-        {
-          "ticker": "IBM",
-          "market_cap": 289606860800,
-          "market_cap_B": 289.6,
-          "return_6m": 9.12,
-          "price": 329.23,
-          "price_6m_ago": 301.72
+          "market_cap": 2735317975040,
+          "market_cap_B": 2735.3,
+          "return_6m": 6.65,
+          "price": 250.02,
+          "price_6m_ago": 234.42
         },
         {
           "ticker": "COST",
-          "market_cap": 425931210752,
-          "market_cap_B": 425.9,
-          "return_6m": 4.93,
-          "price": 954.27,
-          "price_6m_ago": 909.4
-        },
-        {
-          "ticker": "RTX",
-          "market_cap": 234592239616,
-          "market_cap_B": 234.6,
-          "return_6m": 4.49,
-          "price": 174.26,
-          "price_6m_ago": 166.77
+          "market_cap": 433242210304,
+          "market_cap_B": 433.2,
+          "return_6m": 4.61,
+          "price": 961.83,
+          "price_6m_ago": 919.44
         },
         {
           "ticker": "WMT",
-          "market_cap": 930737160192,
-          "market_cap_B": 930.7,
-          "return_6m": 1.98,
-          "price": 113.06,
-          "price_6m_ago": 110.86
+          "market_cap": 937541238784,
+          "market_cap_B": 937.5,
+          "return_6m": 4.61,
+          "price": 116.89,
+          "price_6m_ago": 111.74
         },
         {
           "ticker": "LLY",
-          "market_cap": 971945541632,
-          "market_cap_B": 971.9,
-          "return_6m": 0.93,
-          "price": 1064.15,
-          "price_6m_ago": 1054.31
+          "market_cap": 1013909946368,
+          "market_cap_B": 1013.9,
+          "return_6m": 3.47,
+          "price": 1078.78,
+          "price_6m_ago": 1042.58
+        },
+        {
+          "ticker": "RTX",
+          "market_cap": 240113647616,
+          "market_cap_B": 240.1,
+          "return_6m": 2.99,
+          "price": 172.55,
+          "price_6m_ago": 167.54
+        },
+        {
+          "ticker": "IBM",
+          "market_cap": 288760987648,
+          "market_cap_B": 288.8,
+          "return_6m": 2.6,
+          "price": 305.63,
+          "price_6m_ago": 297.88
         },
         {
           "ticker": "BAC",
-          "market_cap": 372499349504,
-          "market_cap_B": 372.5,
-          "return_6m": -0.36,
-          "price": 52.48,
-          "price_6m_ago": 52.67
+          "market_cap": 383890096128,
+          "market_cap_B": 383.9,
+          "return_6m": -0.41,
+          "price": 52.4,
+          "price_6m_ago": 52.62
         },
         {
           "ticker": "TSLA",
-          "market_cap": 1591224958976,
-          "market_cap_B": 1591.2,
-          "return_6m": -1.49,
-          "price": 423.74,
-          "price_6m_ago": 430.14
+          "market_cap": 1573019582464,
+          "market_cap_B": 1573.0,
+          "return_6m": -1.29,
+          "price": 423.7,
+          "price_6m_ago": 429.24
         },
         {
           "ticker": "JPM",
-          "market_cap": 808542535680,
-          "market_cap_B": 808.5,
-          "return_6m": -1.64,
-          "price": 300.96,
-          "price_6m_ago": 305.97
+          "market_cap": 830621679616,
+          "market_cap_B": 830.6,
+          "return_6m": -1.34,
+          "price": 300.85,
+          "price_6m_ago": 304.94
         },
         {
           "ticker": "ABBV",
-          "market_cap": 386247426048,
-          "market_cap_B": 386.2,
-          "return_6m": -2.74,
-          "price": 215.4,
-          "price_6m_ago": 221.48
+          "market_cap": 391379943424,
+          "market_cap_B": 391.4,
+          "return_6m": -1.64,
+          "price": 217.13,
+          "price_6m_ago": 220.75
         },
         {
           "ticker": "PG",
-          "market_cap": 329496756224,
-          "market_cap_B": 329.5,
-          "return_6m": -3.09,
-          "price": 140.82,
-          "price_6m_ago": 145.31
-        },
-        {
-          "ticker": "V",
-          "market_cap": 597813166080,
-          "market_cap_B": 597.8,
-          "return_6m": -3.56,
-          "price": 317.32,
-          "price_6m_ago": 329.03
-        },
-        {
-          "ticker": "WFC",
-          "market_cap": 241372446720,
-          "market_cap_B": 241.4,
-          "return_6m": -5.99,
-          "price": 79.44,
-          "price_6m_ago": 84.5
+          "market_cap": 326422986752,
+          "market_cap_B": 326.4,
+          "return_6m": -2.48,
+          "price": 140.19,
+          "price_6m_ago": 143.75
         },
         {
           "ticker": "META",
-          "market_cap": 1581158498304,
-          "market_cap_B": 1581.2,
-          "return_6m": -6.59,
-          "price": 597.63,
-          "price_6m_ago": 639.8
+          "market_cap": 1616061792256,
+          "market_cap_B": 1616.1,
+          "return_6m": -3.57,
+          "price": 622.98,
+          "price_6m_ago": 646.02
+        },
+        {
+          "ticker": "V",
+          "market_cap": 613407391744,
+          "market_cap_B": 613.4,
+          "return_6m": -4.83,
+          "price": 312.4,
+          "price_6m_ago": 328.26
         },
         {
           "ticker": "BRK-B",
-          "market_cap": 1029498667008,
-          "market_cap_B": 1029.5,
-          "return_6m": -7.28,
-          "price": 471.51,
-          "price_6m_ago": 508.55
+          "market_cap": 1026597715968,
+          "market_cap_B": 1026.6,
+          "return_6m": -6.17,
+          "price": 475.37,
+          "price_6m_ago": 506.65
         },
         {
-          "ticker": "MSFT",
-          "market_cap": 3182675886080,
-          "market_cap_B": 3182.7,
-          "return_6m": -8.93,
-          "price": 441.31,
-          "price_6m_ago": 484.58
-        },
-        {
-          "ticker": "PLTR",
-          "market_cap": 342012493824,
-          "market_cap_B": 342.0,
-          "return_6m": -9.15,
-          "price": 152.17,
-          "price_6m_ago": 167.49
+          "ticker": "WFC",
+          "market_cap": 250369409024,
+          "market_cap_B": 250.4,
+          "return_6m": -7.88,
+          "price": 78.68,
+          "price_6m_ago": 85.41
         },
         {
           "ticker": "HD",
-          "market_cap": 311055515648,
-          "market_cap_B": 311.1,
-          "return_6m": -11.67,
-          "price": 311.52,
-          "price_6m_ago": 352.68
+          "market_cap": 309749284864,
+          "market_cap_B": 309.7,
+          "return_6m": -10.43,
+          "price": 312.97,
+          "price_6m_ago": 349.42
+        },
+        {
+          "ticker": "MSFT",
+          "market_cap": 3195452784640,
+          "market_cap_B": 3195.5,
+          "return_6m": -12.4,
+          "price": 427.34,
+          "price_6m_ago": 487.83
         },
         {
           "ticker": "MA",
-          "market_cap": 417935163392,
-          "market_cap_B": 417.9,
-          "return_6m": -11.9,
-          "price": 477.68,
-          "price_6m_ago": 542.22
+          "market_cap": 428304007168,
+          "market_cap_B": 428.3,
+          "return_6m": -13.34,
+          "price": 471.55,
+          "price_6m_ago": 544.16
         },
         {
           "ticker": "AXP",
-          "market_cap": 206717616128,
-          "market_cap_B": 206.7,
-          "return_6m": -13.23,
-          "price": 310.97,
-          "price_6m_ago": 358.38
+          "market_cap": 214830497792,
+          "market_cap_B": 214.8,
+          "return_6m": -16.22,
+          "price": 300.57,
+          "price_6m_ago": 358.77
+        },
+        {
+          "ticker": "PLTR",
+          "market_cap": 341161246720,
+          "market_cap_B": 341.2,
+          "return_6m": -16.69,
+          "price": 142.2,
+          "price_6m_ago": 170.69
         },
         {
           "ticker": "NFLX",
-          "market_cap": 343348117504,
-          "market_cap_B": 343.3,
-          "return_6m": -23.64,
-          "price": 83.33,
-          "price_6m_ago": 109.13
+          "market_cap": 346569768960,
+          "market_cap_B": 346.6,
+          "return_6m": -25.45,
+          "price": 81.52,
+          "price_6m_ago": 109.35
         }
       ]
     },
     "large": {
       "label": "Large-Cap ($50B\u2013$200B)",
-      "total_stocks": 107,
+      "total_stocks": 108,
       "top_10": [
         {
           "ticker": "BE",
-          "market_cap": 81180278784,
-          "market_cap_B": 81.2,
-          "return_6m": 206.13,
-          "price": 302.85,
-          "price_6m_ago": 98.93
+          "market_cap": 80554508288,
+          "market_cap_B": 80.6,
+          "return_6m": 173.64,
+          "price": 287.32,
+          "price_6m_ago": 105.0,
+          "news": [
+            {
+              "title": "Jim Cramer Says He Is a \u201cHuge Believer\u201d in Bloom Energy",
+              "summary": "Bloom Energy Corporation (NYSE:BE) was among the stocks Jim Cramer talked about as he discussed the recent rally in several AI-related stocks. Mention",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "FuelCell Energy Plunges 10%, Plug Power Falls 6% in Fuel Cell Rout as Bloom Energy Slips",
+              "summary": "Fuel cell stocks are taking a sharp step back midday Wednesday, with FuelCell Energy (NASDAQ:FCEL) leading the decline. FuelCell Energy shares are dow",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Could Plug Power Become the Next Bloom Energy?",
+              "summary": "Booming AI infrastructure spending has sent Bloom Energy soaring. Could Plug Power be the next beneficiary?",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "ON",
-          "market_cap": 51656392704,
-          "market_cap_B": 51.7,
-          "return_6m": 155.09,
-          "price": 128.64,
-          "price_6m_ago": 50.43
+          "market_cap": 50820468736,
+          "market_cap_B": 50.8,
+          "return_6m": 160.16,
+          "price": 133.93,
+          "price_6m_ago": 51.48,
+          "news": [
+            {
+              "title": "Cambiar SMID Fund\u2019s Strategic Bet on ON Semiconductor Corporation (ON) Amid Demand Inflection Ahead",
+              "summary": "Cambiar SMID Fund, managed by Cambiar Investors, published its Q1 2026 investor letter. A copy of the letter is available to download here. The invest",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Stocks Retreat as US-Iran Peace Hopes in Doubt",
+              "summary": "The S&P 500 Index ($SPX ) (SPY ) on Wednesday closed down -0.74%, the Dow Jones Industrial Average ($DOWI ) (DIA ) closed down -1.21%, and the Nasdaq ",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Texas Instruments Stock's Rally Is Asking One Big Question",
+              "summary": "The chipmaker's guidance sent the stock soaring, but management's own words suggest the celebration might be premature.",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "TER",
-          "market_cap": 63227375616,
-          "market_cap_B": 63.2,
-          "return_6m": 118.75,
-          "price": 392.62,
-          "price_6m_ago": 179.49
-        },
-        {
-          "ticker": "MCHP",
-          "market_cap": 52549169152,
-          "market_cap_B": 52.5,
-          "return_6m": 83.46,
-          "price": 96.96,
-          "price_6m_ago": 52.85
-        },
-        {
-          "ticker": "FTNT",
-          "market_cap": 107160813568,
-          "market_cap_B": 107.2,
-          "return_6m": 81.94,
-          "price": 148.86,
-          "price_6m_ago": 81.82
+          "market_cap": 63300169728,
+          "market_cap_B": 63.3,
+          "return_6m": 115.86,
+          "price": 409.67,
+          "price_6m_ago": 189.79,
+          "news": [
+            {
+              "title": "Q1 Earnings Highlights: Teradyne (NASDAQ:TER) Vs The Rest Of The Semiconductor Manufacturing Stocks",
+              "summary": "Wrapping up Q1 earnings, we look at the numbers and key takeaways for the semiconductor manufacturing stocks, including Teradyne (NASDAQ:TER) and its ",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Vertiv Soars 33% in Three Months: Should Investors Buy VRT Stock?",
+              "summary": "VRT stock outpaces peers as AI-driven data center demand, NVIDIA partnerships and margin gains fuel growth despite a premium valuation.",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "1 Large-Cap Stock Worth Your Attention and 2 We Avoid",
+              "summary": "Large-cap stocks usually command their industries because they have the scale to drive market trends. The flip side though is that their sheer size ca",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "MPWR",
-          "market_cap": 82263515136,
-          "market_cap_B": 82.3,
-          "return_6m": 75.69,
-          "price": 1624.99,
-          "price_6m_ago": 924.93
+          "market_cap": 79873835008,
+          "market_cap_B": 79.9,
+          "return_6m": 78.13,
+          "price": 1689.89,
+          "price_6m_ago": 948.68,
+          "news": [
+            {
+              "title": "Has Monolithic Power Systems (MPWR) Outpaced Other Computer and Technology Stocks This Year?",
+              "summary": "Here is how Monolithic Power (MPWR) and CTS (CTS) have performed compared to their sector so far this year.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Monolithic Power Systems Cloud Focus At COMPUTEX Puts Growth Story To Test",
+              "summary": "Monolithic Power Systems (NasdaqGS:MPWR) is scheduled to present at the COMPUTEX Forum 2026. Senior vice president Jinghai Zhou will lead the session,",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "How The Story Around Monolithic Power Systems (MPWR) Is Evolving For Investors",
+              "summary": "Analysts have kept their price targets for Monolithic Power Systems unchanged, which itself is a useful signal for how the stock currently fits into e",
+              "date": "2026-06-03"
+            }
+          ]
+        },
+        {
+          "ticker": "FTNT",
+          "market_cap": 108615122944,
+          "market_cap_B": 108.6,
+          "return_6m": 76.61,
+          "price": 146.48,
+          "price_6m_ago": 82.94,
+          "news": [
+            {
+              "title": "Is CrowdStrike Stock A Great Business At A Dangerous Price?",
+              "summary": "CrowdStrike's (CRWD) Q1 FY27 financial disclosures reveal a structural disconnect between operational excellence and equity pricing mechanisms. The ce",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Stocks Retreat as US-Iran Peace Hopes in Doubt",
+              "summary": "The S&P 500 Index ($SPX ) (SPY ) on Wednesday closed down -0.74%, the Dow Jones Industrial Average ($DOWI ) (DIA ) closed down -1.21%, and the Nasdaq ",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Stocks Fall on Escalation of US-Iran Hostilities",
+              "summary": "The S&P 500 Index ($SPX ) (SPY ) today is down -0.40%, the Dow Jones Industrial Average ($DOWI ) (DIA ) is down -0.74%, and the Nasdaq 100 Index ($IUX",
+              "date": "2026-06-03"
+            }
+          ]
+        },
+        {
+          "ticker": "MCHP",
+          "market_cap": 53047881728,
+          "market_cap_B": 53.0,
+          "return_6m": 72.11,
+          "price": 96.55,
+          "price_6m_ago": 56.1,
+          "news": [
+            {
+              "title": "How Is NXP Semiconductors' Stock Performance Compared to Other Semiconductors Stocks?",
+              "summary": "Despite NXP Semiconductors' outperformance relative to its industry peers over the past year, Wall Street analysts maintain a cautiously optimistic ou",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Texas Instruments Stock's Rally Is Asking One Big Question",
+              "summary": "The chipmaker's guidance sent the stock soaring, but management's own words suggest the celebration might be premature.",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "S&P Futures Muted as Fresh U.S.-Iran Hostilities Lift Oil and Bond Yields, ADP Jobs Report and Broadcom Earnings on Tap",
+              "summary": "June S&P 500 E-Mini futures (ESM26) are trending down -0.05% this morning as oil prices and bond yields climbed after the U.S. and Iran exchanged heav",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "DDOG",
-          "market_cap": 88338636800,
-          "market_cap_B": 88.3,
-          "return_6m": 70.44,
-          "price": 269.13,
-          "price_6m_ago": 157.9
-        },
-        {
-          "ticker": "NXPI",
-          "market_cap": 81233829888,
-          "market_cap_B": 81.2,
-          "return_6m": 63.79,
-          "price": 323.62,
-          "price_6m_ago": 197.58
+          "market_cap": 88662564864,
+          "market_cap_B": 88.7,
+          "return_6m": 59.98,
+          "price": 250.33,
+          "price_6m_ago": 156.48,
+          "news": [
+            {
+              "title": "Stocks Retreat as US-Iran Peace Hopes in Doubt",
+              "summary": "The S&P 500 Index ($SPX ) (SPY ) on Wednesday closed down -0.74%, the Dow Jones Industrial Average ($DOWI ) (DIA ) closed down -1.21%, and the Nasdaq ",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Stock Market Today: Dow Drops 620 Points After Iran War Jitters; Broadcom Hits Highs",
+              "summary": "Stock Market Today: The Dow Jones index dropped Wednesday after Trump's latest U.S.-Iran comments. Marvell stock continued to soar.",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Stocks Fall on Escalation of US-Iran Hostilities",
+              "summary": "The S&P 500 Index ($SPX ) (SPY ) today is down -0.40%, the Dow Jones Industrial Average ($DOWI ) (DIA ) is down -0.74%, and the Nasdaq 100 Index ($IUX",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "SLB",
-          "market_cap": 84407066624,
-          "market_cap_B": 84.4,
-          "return_6m": 56.67,
-          "price": 56.56,
-          "price_6m_ago": 36.1
+          "market_cap": 86294732800,
+          "market_cap_B": 86.3,
+          "return_6m": 59.35,
+          "price": 56.85,
+          "price_6m_ago": 35.68,
+          "news": [
+            {
+              "title": "Oil Services Are Setting Up to Do It Again, But There\u2019s a Catch the Strait of Hormuz Trade Can\u2019t Ignore",
+              "summary": "If you put $10,000 into the VanEck Oil Services ETF (NYSEARCA:OIH) at the closing bell on December 31, 2025, you were sitting on roughly $15,100 five ",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "How Is SLB N.V.'s Stock Performance Compared to Other Energy Stocks",
+              "summary": "SLB N.V. has outperformed other energy stocks, and analysts remain highly optimistic about the stock\u2019s outlook.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Duolingo (DUOL) Up 5.7% Since Last Earnings Report: Can It Continue?",
+              "summary": "Duolingo (DUOL) reported earnings 30 days ago. What's next for the stock? We take a look at earnings estimates for some clues.",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
-          "ticker": "CRWD",
-          "market_cap": 191044943872,
-          "market_cap_B": 191.0,
-          "return_6m": 52.53,
-          "price": 768.95,
-          "price_6m_ago": 504.13
+          "ticker": "NXPI",
+          "market_cap": 82017746944,
+          "market_cap_B": 82.0,
+          "return_6m": 50.92,
+          "price": 321.88,
+          "price_6m_ago": 213.29,
+          "news": [
+            {
+              "title": "How Is NXP Semiconductors' Stock Performance Compared to Other Semiconductors Stocks?",
+              "summary": "Despite NXP Semiconductors' outperformance relative to its industry peers over the past year, Wall Street analysts maintain a cautiously optimistic ou",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Texas Instruments Stock's Rally Is Asking One Big Question",
+              "summary": "The chipmaker's guidance sent the stock soaring, but management's own words suggest the celebration might be premature.",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Why Is ON Semiconductor Corp. (ON) Up 25.3% Since Last Earnings Report?",
+              "summary": "ON Semiconductor Corp. (ON) reported earnings 30 days ago. What's next for the stock? We take a look at earnings estimates for some clues.",
+              "date": "2026-06-03"
+            }
+          ]
+        },
+        {
+          "ticker": "FDX",
+          "market_cap": 79468576768,
+          "market_cap_B": 79.5,
+          "return_6m": 50.3,
+          "price": 324.46,
+          "price_6m_ago": 215.88,
+          "news": [
+            {
+              "title": "FedEx partner airline says Caribbean service at risk without FAA waiver",
+              "summary": "A FedEx air cargo contractor says it wants to use bigger aircraft on Caribbean routes, but that FAA rules governing how far the planes can fly over wa",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Jim Cramer Highlights FedEx\u2019s New Spin-off",
+              "summary": "FedEx Corporation (NYSE:FDX) was among the stocks Jim Cramer talked about as he discussed the recent rally in several AI-related stocks. Cramer highli",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Net Health CFO on shifting from apparel retail to niche SaaS",
+              "summary": "Christy Totin discusses the appeal of healthcare software financial leadership after a decade in retail finance.",
+              "date": "2026-06-04"
+            }
+          ]
         }
       ],
       "all_ranked": [
         {
           "ticker": "BE",
-          "market_cap": 81180278784,
-          "market_cap_B": 81.2,
-          "return_6m": 206.13,
-          "price": 302.85,
-          "price_6m_ago": 98.93
+          "market_cap": 80554508288,
+          "market_cap_B": 80.6,
+          "return_6m": 173.64,
+          "price": 287.32,
+          "price_6m_ago": 105.0,
+          "news": [
+            {
+              "title": "Jim Cramer Says He Is a \u201cHuge Believer\u201d in Bloom Energy",
+              "summary": "Bloom Energy Corporation (NYSE:BE) was among the stocks Jim Cramer talked about as he discussed the recent rally in several AI-related stocks. Mention",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "FuelCell Energy Plunges 10%, Plug Power Falls 6% in Fuel Cell Rout as Bloom Energy Slips",
+              "summary": "Fuel cell stocks are taking a sharp step back midday Wednesday, with FuelCell Energy (NASDAQ:FCEL) leading the decline. FuelCell Energy shares are dow",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Could Plug Power Become the Next Bloom Energy?",
+              "summary": "Booming AI infrastructure spending has sent Bloom Energy soaring. Could Plug Power be the next beneficiary?",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "ON",
-          "market_cap": 51656392704,
-          "market_cap_B": 51.7,
-          "return_6m": 155.09,
-          "price": 128.64,
-          "price_6m_ago": 50.43
+          "market_cap": 50820468736,
+          "market_cap_B": 50.8,
+          "return_6m": 160.16,
+          "price": 133.93,
+          "price_6m_ago": 51.48,
+          "news": [
+            {
+              "title": "Cambiar SMID Fund\u2019s Strategic Bet on ON Semiconductor Corporation (ON) Amid Demand Inflection Ahead",
+              "summary": "Cambiar SMID Fund, managed by Cambiar Investors, published its Q1 2026 investor letter. A copy of the letter is available to download here. The invest",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Stocks Retreat as US-Iran Peace Hopes in Doubt",
+              "summary": "The S&P 500 Index ($SPX ) (SPY ) on Wednesday closed down -0.74%, the Dow Jones Industrial Average ($DOWI ) (DIA ) closed down -1.21%, and the Nasdaq ",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Texas Instruments Stock's Rally Is Asking One Big Question",
+              "summary": "The chipmaker's guidance sent the stock soaring, but management's own words suggest the celebration might be premature.",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "TER",
-          "market_cap": 63227375616,
-          "market_cap_B": 63.2,
-          "return_6m": 118.75,
-          "price": 392.62,
-          "price_6m_ago": 179.49
-        },
-        {
-          "ticker": "MCHP",
-          "market_cap": 52549169152,
-          "market_cap_B": 52.5,
-          "return_6m": 83.46,
-          "price": 96.96,
-          "price_6m_ago": 52.85
-        },
-        {
-          "ticker": "FTNT",
-          "market_cap": 107160813568,
-          "market_cap_B": 107.2,
-          "return_6m": 81.94,
-          "price": 148.86,
-          "price_6m_ago": 81.82
+          "market_cap": 63300169728,
+          "market_cap_B": 63.3,
+          "return_6m": 115.86,
+          "price": 409.67,
+          "price_6m_ago": 189.79,
+          "news": [
+            {
+              "title": "Q1 Earnings Highlights: Teradyne (NASDAQ:TER) Vs The Rest Of The Semiconductor Manufacturing Stocks",
+              "summary": "Wrapping up Q1 earnings, we look at the numbers and key takeaways for the semiconductor manufacturing stocks, including Teradyne (NASDAQ:TER) and its ",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Vertiv Soars 33% in Three Months: Should Investors Buy VRT Stock?",
+              "summary": "VRT stock outpaces peers as AI-driven data center demand, NVIDIA partnerships and margin gains fuel growth despite a premium valuation.",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "1 Large-Cap Stock Worth Your Attention and 2 We Avoid",
+              "summary": "Large-cap stocks usually command their industries because they have the scale to drive market trends. The flip side though is that their sheer size ca",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "MPWR",
-          "market_cap": 82263515136,
-          "market_cap_B": 82.3,
-          "return_6m": 75.69,
-          "price": 1624.99,
-          "price_6m_ago": 924.93
+          "market_cap": 79873835008,
+          "market_cap_B": 79.9,
+          "return_6m": 78.13,
+          "price": 1689.89,
+          "price_6m_ago": 948.68,
+          "news": [
+            {
+              "title": "Has Monolithic Power Systems (MPWR) Outpaced Other Computer and Technology Stocks This Year?",
+              "summary": "Here is how Monolithic Power (MPWR) and CTS (CTS) have performed compared to their sector so far this year.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Monolithic Power Systems Cloud Focus At COMPUTEX Puts Growth Story To Test",
+              "summary": "Monolithic Power Systems (NasdaqGS:MPWR) is scheduled to present at the COMPUTEX Forum 2026. Senior vice president Jinghai Zhou will lead the session,",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "How The Story Around Monolithic Power Systems (MPWR) Is Evolving For Investors",
+              "summary": "Analysts have kept their price targets for Monolithic Power Systems unchanged, which itself is a useful signal for how the stock currently fits into e",
+              "date": "2026-06-03"
+            }
+          ]
+        },
+        {
+          "ticker": "FTNT",
+          "market_cap": 108615122944,
+          "market_cap_B": 108.6,
+          "return_6m": 76.61,
+          "price": 146.48,
+          "price_6m_ago": 82.94,
+          "news": [
+            {
+              "title": "Is CrowdStrike Stock A Great Business At A Dangerous Price?",
+              "summary": "CrowdStrike's (CRWD) Q1 FY27 financial disclosures reveal a structural disconnect between operational excellence and equity pricing mechanisms. The ce",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Stocks Retreat as US-Iran Peace Hopes in Doubt",
+              "summary": "The S&P 500 Index ($SPX ) (SPY ) on Wednesday closed down -0.74%, the Dow Jones Industrial Average ($DOWI ) (DIA ) closed down -1.21%, and the Nasdaq ",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Stocks Fall on Escalation of US-Iran Hostilities",
+              "summary": "The S&P 500 Index ($SPX ) (SPY ) today is down -0.40%, the Dow Jones Industrial Average ($DOWI ) (DIA ) is down -0.74%, and the Nasdaq 100 Index ($IUX",
+              "date": "2026-06-03"
+            }
+          ]
+        },
+        {
+          "ticker": "MCHP",
+          "market_cap": 53047881728,
+          "market_cap_B": 53.0,
+          "return_6m": 72.11,
+          "price": 96.55,
+          "price_6m_ago": 56.1,
+          "news": [
+            {
+              "title": "How Is NXP Semiconductors' Stock Performance Compared to Other Semiconductors Stocks?",
+              "summary": "Despite NXP Semiconductors' outperformance relative to its industry peers over the past year, Wall Street analysts maintain a cautiously optimistic ou",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Texas Instruments Stock's Rally Is Asking One Big Question",
+              "summary": "The chipmaker's guidance sent the stock soaring, but management's own words suggest the celebration might be premature.",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "S&P Futures Muted as Fresh U.S.-Iran Hostilities Lift Oil and Bond Yields, ADP Jobs Report and Broadcom Earnings on Tap",
+              "summary": "June S&P 500 E-Mini futures (ESM26) are trending down -0.05% this morning as oil prices and bond yields climbed after the U.S. and Iran exchanged heav",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "DDOG",
-          "market_cap": 88338636800,
-          "market_cap_B": 88.3,
-          "return_6m": 70.44,
-          "price": 269.13,
-          "price_6m_ago": 157.9
-        },
-        {
-          "ticker": "NXPI",
-          "market_cap": 81233829888,
-          "market_cap_B": 81.2,
-          "return_6m": 63.79,
-          "price": 323.62,
-          "price_6m_ago": 197.58
+          "market_cap": 88662564864,
+          "market_cap_B": 88.7,
+          "return_6m": 59.98,
+          "price": 250.33,
+          "price_6m_ago": 156.48,
+          "news": [
+            {
+              "title": "Stocks Retreat as US-Iran Peace Hopes in Doubt",
+              "summary": "The S&P 500 Index ($SPX ) (SPY ) on Wednesday closed down -0.74%, the Dow Jones Industrial Average ($DOWI ) (DIA ) closed down -1.21%, and the Nasdaq ",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Stock Market Today: Dow Drops 620 Points After Iran War Jitters; Broadcom Hits Highs",
+              "summary": "Stock Market Today: The Dow Jones index dropped Wednesday after Trump's latest U.S.-Iran comments. Marvell stock continued to soar.",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Stocks Fall on Escalation of US-Iran Hostilities",
+              "summary": "The S&P 500 Index ($SPX ) (SPY ) today is down -0.40%, the Dow Jones Industrial Average ($DOWI ) (DIA ) is down -0.74%, and the Nasdaq 100 Index ($IUX",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "SLB",
-          "market_cap": 84407066624,
-          "market_cap_B": 84.4,
-          "return_6m": 56.67,
-          "price": 56.56,
-          "price_6m_ago": 36.1
+          "market_cap": 86294732800,
+          "market_cap_B": 86.3,
+          "return_6m": 59.35,
+          "price": 56.85,
+          "price_6m_ago": 35.68,
+          "news": [
+            {
+              "title": "Oil Services Are Setting Up to Do It Again, But There\u2019s a Catch the Strait of Hormuz Trade Can\u2019t Ignore",
+              "summary": "If you put $10,000 into the VanEck Oil Services ETF (NYSEARCA:OIH) at the closing bell on December 31, 2025, you were sitting on roughly $15,100 five ",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "How Is SLB N.V.'s Stock Performance Compared to Other Energy Stocks",
+              "summary": "SLB N.V. has outperformed other energy stocks, and analysts remain highly optimistic about the stock\u2019s outlook.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Duolingo (DUOL) Up 5.7% Since Last Earnings Report: Can It Continue?",
+              "summary": "Duolingo (DUOL) reported earnings 30 days ago. What's next for the stock? We take a look at earnings estimates for some clues.",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
-          "ticker": "CRWD",
-          "market_cap": 191044943872,
-          "market_cap_B": 191.0,
-          "return_6m": 52.53,
-          "price": 768.95,
-          "price_6m_ago": 504.13
+          "ticker": "NXPI",
+          "market_cap": 82017746944,
+          "market_cap_B": 82.0,
+          "return_6m": 50.92,
+          "price": 321.88,
+          "price_6m_ago": 213.29,
+          "news": [
+            {
+              "title": "How Is NXP Semiconductors' Stock Performance Compared to Other Semiconductors Stocks?",
+              "summary": "Despite NXP Semiconductors' outperformance relative to its industry peers over the past year, Wall Street analysts maintain a cautiously optimistic ou",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Texas Instruments Stock's Rally Is Asking One Big Question",
+              "summary": "The chipmaker's guidance sent the stock soaring, but management's own words suggest the celebration might be premature.",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Why Is ON Semiconductor Corp. (ON) Up 25.3% Since Last Earnings Report?",
+              "summary": "ON Semiconductor Corp. (ON) reported earnings 30 days ago. What's next for the stock? We take a look at earnings estimates for some clues.",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "FDX",
-          "market_cap": 77618774016,
-          "market_cap_B": 77.6,
-          "return_6m": 50.74,
-          "price": 329.0,
-          "price_6m_ago": 218.25
+          "market_cap": 79468576768,
+          "market_cap_B": 79.5,
+          "return_6m": 50.3,
+          "price": 324.46,
+          "price_6m_ago": 215.88,
+          "news": [
+            {
+              "title": "FedEx partner airline says Caribbean service at risk without FAA waiver",
+              "summary": "A FedEx air cargo contractor says it wants to use bigger aircraft on Caribbean routes, but that FAA rules governing how far the planes can fly over wa",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Jim Cramer Highlights FedEx\u2019s New Spin-off",
+              "summary": "FedEx Corporation (NYSE:FDX) was among the stocks Jim Cramer talked about as he discussed the recent rally in several AI-related stocks. Cramer highli",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Net Health CFO on shifting from apparel retail to niche SaaS",
+              "summary": "Christy Totin discusses the appeal of healthcare software financial leadership after a decade in retail finance.",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "EQIX",
-          "market_cap": 106287841280,
+          "market_cap": 106279952384,
           "market_cap_B": 106.3,
-          "return_6m": 47.69,
-          "price": 1071.8,
-          "price_6m_ago": 725.72
+          "return_6m": 49.61,
+          "price": 1077.0,
+          "price_6m_ago": 719.88
         },
         {
-          "ticker": "NET",
-          "market_cap": 93817012224,
-          "market_cap_B": 93.8,
-          "return_6m": 38.27,
-          "price": 272.66,
-          "price_6m_ago": 197.2
-        },
-        {
-          "ticker": "CDNS",
-          "market_cap": 111748227072,
-          "market_cap_B": 111.7,
-          "return_6m": 34.48,
-          "price": 416.39,
-          "price_6m_ago": 309.62
-        },
-        {
-          "ticker": "CSX",
-          "market_cap": 86226935808,
-          "market_cap_B": 86.2,
-          "return_6m": 33.24,
-          "price": 46.14,
-          "price_6m_ago": 34.63
+          "ticker": "CRWD",
+          "market_cap": 177143431168,
+          "market_cap_B": 177.1,
+          "return_6m": 44.73,
+          "price": 747.61,
+          "price_6m_ago": 516.55
         },
         {
           "ticker": "COP",
-          "market_cap": 144495771648,
-          "market_cap_B": 144.5,
-          "return_6m": 31.46,
-          "price": 116.87,
-          "price_6m_ago": 88.9
+          "market_cap": 145050075136,
+          "market_cap_B": 145.1,
+          "return_6m": 35.37,
+          "price": 119.05,
+          "price_6m_ago": 87.95
+        },
+        {
+          "ticker": "CSX",
+          "market_cap": 85390778368,
+          "market_cap_B": 85.4,
+          "return_6m": 33.65,
+          "price": 46.44,
+          "price_6m_ago": 34.75
         },
         {
           "ticker": "EOG",
-          "market_cap": 75579990016,
-          "market_cap_B": 75.6,
-          "return_6m": 28.51,
-          "price": 138.58,
-          "price_6m_ago": 107.84
+          "market_cap": 74908934144,
+          "market_cap_B": 74.9,
+          "return_6m": 32.0,
+          "price": 141.5,
+          "price_6m_ago": 107.2
         },
         {
-          "ticker": "F",
-          "market_cap": 62599524352,
-          "market_cap_B": 62.6,
-          "return_6m": 25.61,
-          "price": 16.15,
-          "price_6m_ago": 12.86
+          "ticker": "NET",
+          "market_cap": 97191731200,
+          "market_cap_B": 97.2,
+          "return_6m": 31.83,
+          "price": 265.33,
+          "price_6m_ago": 201.26
         },
         {
-          "ticker": "HON",
-          "market_cap": 145318838272,
-          "market_cap_B": 145.3,
-          "return_6m": 24.96,
-          "price": 235.23,
-          "price_6m_ago": 188.25
-        },
-        {
-          "ticker": "DE",
-          "market_cap": 158663835648,
-          "market_cap_B": 158.7,
-          "return_6m": 24.53,
-          "price": 579.25,
-          "price_6m_ago": 465.14
+          "ticker": "CDNS",
+          "market_cap": 113820991488,
+          "market_cap_B": 113.8,
+          "return_6m": 28.33,
+          "price": 408.0,
+          "price_6m_ago": 317.94
         },
         {
           "ticker": "JCI",
-          "market_cap": 90233044992,
-          "market_cap_B": 90.2,
-          "return_6m": 23.91,
-          "price": 141.99,
-          "price_6m_ago": 114.59
-        },
-        {
-          "ticker": "MAR",
-          "market_cap": 99223396352,
-          "market_cap_B": 99.2,
-          "return_6m": 23.66,
-          "price": 373.76,
-          "price_6m_ago": 302.26
+          "market_cap": 89336176640,
+          "market_cap_B": 89.3,
+          "return_6m": 27.87,
+          "price": 146.96,
+          "price_6m_ago": 114.93
         },
         {
           "ticker": "CARR",
-          "market_cap": 56392253440,
-          "market_cap_B": 56.4,
-          "return_6m": 23.4,
-          "price": 66.42,
-          "price_6m_ago": 53.83
+          "market_cap": 56923496448,
+          "market_cap_B": 56.9,
+          "return_6m": 26.55,
+          "price": 67.58,
+          "price_6m_ago": 53.4
         },
         {
-          "ticker": "VZ",
-          "market_cap": 193056964608,
-          "market_cap_B": 193.1,
-          "return_6m": 21.34,
-          "price": 47.87,
-          "price_6m_ago": 39.45
+          "ticker": "DE",
+          "market_cap": 162040741888,
+          "market_cap_B": 162.0,
+          "return_6m": 26.2,
+          "price": 588.29,
+          "price_6m_ago": 466.17
+        },
+        {
+          "ticker": "MAR",
+          "market_cap": 100692131840,
+          "market_cap_B": 100.7,
+          "return_6m": 24.15,
+          "price": 376.75,
+          "price_6m_ago": 303.46
+        },
+        {
+          "ticker": "F",
+          "market_cap": 61264650240,
+          "market_cap_B": 61.3,
+          "return_6m": 24.08,
+          "price": 15.71,
+          "price_6m_ago": 12.66
         },
         {
           "ticker": "MO",
-          "market_cap": 117977817088,
-          "market_cap_B": 118.0,
-          "return_6m": 21.22,
-          "price": 69.24,
-          "price_6m_ago": 57.12
-        },
-        {
-          "ticker": "ROK",
-          "market_cap": 51229417472,
-          "market_cap_B": 51.2,
-          "return_6m": 19.62,
-          "price": 463.41,
-          "price_6m_ago": 387.42
-        },
-        {
-          "ticker": "ELV",
-          "market_cap": 85336129536,
-          "market_cap_B": 85.3,
-          "return_6m": 19.34,
-          "price": 389.03,
-          "price_6m_ago": 325.98
-        },
-        {
-          "ticker": "LMT",
-          "market_cap": 119008862208,
-          "market_cap_B": 119.0,
-          "return_6m": 18.29,
-          "price": 513.43,
-          "price_6m_ago": 434.05
-        },
-        {
-          "ticker": "UPS",
-          "market_cap": 92310683648,
-          "market_cap_B": 92.3,
-          "return_6m": 17.95,
-          "price": 108.93,
-          "price_6m_ago": 92.35
-        },
-        {
-          "ticker": "HLT",
-          "market_cap": 76212117504,
-          "market_cap_B": 76.2,
-          "return_6m": 17.71,
-          "price": 332.85,
-          "price_6m_ago": 282.77
-        },
-        {
-          "ticker": "BA",
-          "market_cap": 167545765888,
-          "market_cap_B": 167.5,
-          "return_6m": 16.75,
-          "price": 217.7,
-          "price_6m_ago": 186.46
-        },
-        {
-          "ticker": "PNC",
-          "market_cap": 88342208512,
-          "market_cap_B": 88.3,
-          "return_6m": 16.64,
-          "price": 221.0,
-          "price_6m_ago": 189.48
-        },
-        {
-          "ticker": "UNP",
-          "market_cap": 156562178048,
-          "market_cap_B": 156.6,
-          "return_6m": 16.27,
-          "price": 264.68,
-          "price_6m_ago": 227.64
-        },
-        {
-          "ticker": "SNPS",
-          "market_cap": 95571165184,
-          "market_cap_B": 95.6,
-          "return_6m": 15.98,
-          "price": 508.35,
-          "price_6m_ago": 438.29
+          "market_cap": 117744033792,
+          "market_cap_B": 117.7,
+          "return_6m": 23.74,
+          "price": 70.3,
+          "price_6m_ago": 56.81
         },
         {
           "ticker": "CVS",
-          "market_cap": 117646876672,
-          "market_cap_B": 117.6,
-          "return_6m": 15.08,
-          "price": 89.5,
-          "price_6m_ago": 77.77
+          "market_cap": 119905263616,
+          "market_cap_B": 119.9,
+          "return_6m": 19.72,
+          "price": 91.37,
+          "price_6m_ago": 76.32
         },
         {
-          "ticker": "WBD",
-          "market_cap": 67893264384,
-          "market_cap_B": 67.9,
-          "return_6m": 13.87,
-          "price": 27.18,
-          "price_6m_ago": 23.87
+          "ticker": "ELV",
+          "market_cap": 88943198208,
+          "market_cap_B": 88.9,
+          "return_6m": 19.58,
+          "price": 391.27,
+          "price_6m_ago": 327.21
+        },
+        {
+          "ticker": "ROK",
+          "market_cap": 51588829184,
+          "market_cap_B": 51.6,
+          "return_6m": 18.8,
+          "price": 461.73,
+          "price_6m_ago": 388.65
+        },
+        {
+          "ticker": "VZ",
+          "market_cap": 190238474240,
+          "market_cap_B": 190.2,
+          "return_6m": 18.62,
+          "price": 46.65,
+          "price_6m_ago": 39.33
+        },
+        {
+          "ticker": "HLT",
+          "market_cap": 76859777024,
+          "market_cap_B": 76.9,
+          "return_6m": 17.96,
+          "price": 331.37,
+          "price_6m_ago": 280.92
+        },
+        {
+          "ticker": "LMT",
+          "market_cap": 118878593024,
+          "market_cap_B": 118.9,
+          "return_6m": 17.26,
+          "price": 512.03,
+          "price_6m_ago": 436.65
+        },
+        {
+          "ticker": "UPS",
+          "market_cap": 94350696448,
+          "market_cap_B": 94.4,
+          "return_6m": 17.22,
+          "price": 108.67,
+          "price_6m_ago": 92.7
+        },
+        {
+          "ticker": "HON",
+          "market_cap": 140572770304,
+          "market_cap_B": 140.6,
+          "return_6m": 16.8,
+          "price": 223.26,
+          "price_6m_ago": 191.15
         },
         {
           "ticker": "BMY",
-          "market_cap": 111956557824,
-          "market_cap_B": 112.0,
-          "return_6m": 13.2,
-          "price": 54.46,
-          "price_6m_ago": 48.11
+          "market_cap": 114284519424,
+          "market_cap_B": 114.3,
+          "return_6m": 15.93,
+          "price": 54.72,
+          "price_6m_ago": 47.2
         },
         {
-          "ticker": "ABNB",
-          "market_cap": 79707709440,
-          "market_cap_B": 79.7,
-          "return_6m": 13.09,
-          "price": 134.35,
-          "price_6m_ago": 118.8
+          "ticker": "PNC",
+          "market_cap": 90727505920,
+          "market_cap_B": 90.7,
+          "return_6m": 15.4,
+          "price": 218.27,
+          "price_6m_ago": 189.13
         },
         {
-          "ticker": "USB",
-          "market_cap": 83117359104,
-          "market_cap_B": 83.1,
-          "return_6m": 12.72,
-          "price": 54.6,
-          "price_6m_ago": 48.44
+          "ticker": "UNP",
+          "market_cap": 155033370624,
+          "market_cap_B": 155.0,
+          "return_6m": 14.72,
+          "price": 262.13,
+          "price_6m_ago": 228.5
         },
         {
           "ticker": "PSA",
-          "market_cap": 53226344448,
-          "market_cap_B": 53.2,
-          "return_6m": 12.68,
-          "price": 299.14,
-          "price_6m_ago": 265.49
+          "market_cap": 53465968640,
+          "market_cap_B": 53.5,
+          "return_6m": 12.9,
+          "price": 301.97,
+          "price_6m_ago": 267.46
         },
         {
-          "ticker": "GM",
-          "market_cap": 74107863040,
-          "market_cap_B": 74.1,
-          "return_6m": 12.53,
-          "price": 81.73,
-          "price_6m_ago": 72.63
-        },
-        {
-          "ticker": "CL",
-          "market_cap": 68668248064,
-          "market_cap_B": 68.7,
-          "return_6m": 11.79,
-          "price": 88.27,
-          "price_6m_ago": 78.96
+          "ticker": "ABNB",
+          "market_cap": 81345781760,
+          "market_cap_B": 81.3,
+          "return_6m": 12.73,
+          "price": 133.59,
+          "price_6m_ago": 118.5
         },
         {
           "ticker": "PLD",
-          "market_cap": 132564475904,
-          "market_cap_B": 132.6,
-          "return_6m": 10.64,
-          "price": 140.41,
+          "market_cap": 133709152256,
+          "market_cap_B": 133.7,
+          "return_6m": 11.75,
+          "price": 141.82,
           "price_6m_ago": 126.91
         },
         {
           "ticker": "MDLZ",
-          "market_cap": 79137013760,
-          "market_cap_B": 79.1,
-          "return_6m": 10.22,
-          "price": 61.07,
-          "price_6m_ago": 55.41
-        },
-        {
-          "ticker": "MET",
-          "market_cap": 52350017536,
-          "market_cap_B": 52.4,
-          "return_6m": 10.15,
-          "price": 82.82,
-          "price_6m_ago": 75.19
-        },
-        {
-          "ticker": "RCL",
-          "market_cap": 77216014336,
-          "market_cap_B": 77.2,
-          "return_6m": 10.03,
-          "price": 290.8,
-          "price_6m_ago": 264.29
+          "market_cap": 78739079168,
+          "market_cap_B": 78.7,
+          "return_6m": 11.47,
+          "price": 61.31,
+          "price_6m_ago": 55.0
         },
         {
           "ticker": "APD",
-          "market_cap": 62731374592,
-          "market_cap_B": 62.7,
-          "return_6m": 8.52,
-          "price": 279.29,
-          "price_6m_ago": 257.36
+          "market_cap": 63227953152,
+          "market_cap_B": 63.2,
+          "return_6m": 11.43,
+          "price": 282.27,
+          "price_6m_ago": 253.32
+        },
+        {
+          "ticker": "GM",
+          "market_cap": 74711982080,
+          "market_cap_B": 74.7,
+          "return_6m": 11.4,
+          "price": 81.7,
+          "price_6m_ago": 73.34
+        },
+        {
+          "ticker": "SNPS",
+          "market_cap": 94525685760,
+          "market_cap_B": 94.5,
+          "return_6m": 10.83,
+          "price": 498.02,
+          "price_6m_ago": 449.35
+        },
+        {
+          "ticker": "WBD",
+          "market_cap": 67551543296,
+          "market_cap_B": 67.6,
+          "return_6m": 10.07,
+          "price": 27.0,
+          "price_6m_ago": 24.53
+        },
+        {
+          "ticker": "RCL",
+          "market_cap": 76355108864,
+          "market_cap_B": 76.4,
+          "return_6m": 9.56,
+          "price": 286.42,
+          "price_6m_ago": 261.42
+        },
+        {
+          "ticker": "USB",
+          "market_cap": 85637947392,
+          "market_cap_B": 85.6,
+          "return_6m": 9.11,
+          "price": 53.14,
+          "price_6m_ago": 48.7
+        },
+        {
+          "ticker": "CL",
+          "market_cap": 67820044288,
+          "market_cap_B": 67.8,
+          "return_6m": 9.01,
+          "price": 84.87,
+          "price_6m_ago": 77.86
+        },
+        {
+          "ticker": "MET",
+          "market_cap": 53681934336,
+          "market_cap_B": 53.7,
+          "return_6m": 7.73,
+          "price": 80.96,
+          "price_6m_ago": 75.15
         },
         {
           "ticker": "EMR",
-          "market_cap": 78912487424,
-          "market_cap_B": 78.9,
-          "return_6m": 8.5,
-          "price": 142.03,
-          "price_6m_ago": 130.91
-        },
-        {
-          "ticker": "AMT",
-          "market_cap": 86036471808,
-          "market_cap_B": 86.0,
-          "return_6m": 7.34,
-          "price": 185.53,
-          "price_6m_ago": 172.84
+          "market_cap": 79489384448,
+          "market_cap_B": 79.5,
+          "return_6m": 7.7,
+          "price": 140.88,
+          "price_6m_ago": 130.81
         },
         {
           "ticker": "O",
-          "market_cap": 55982190592,
-          "market_cap_B": 56.0,
-          "return_6m": 7.11,
-          "price": 59.91,
-          "price_6m_ago": 55.93
-        },
-        {
-          "ticker": "NSC",
-          "market_cap": 68887470080,
-          "market_cap_B": 68.9,
-          "return_6m": 7.04,
-          "price": 307.55,
-          "price_6m_ago": 287.31
+          "market_cap": 55632506880,
+          "market_cap_B": 55.6,
+          "return_6m": 6.64,
+          "price": 59.72,
+          "price_6m_ago": 56.0
         },
         {
           "ticker": "CB",
-          "market_cap": 121128665088,
-          "market_cap_B": 121.1,
-          "return_6m": 6.57,
-          "price": 312.27,
-          "price_6m_ago": 293.02
-        },
-        {
-          "ticker": "TFC",
-          "market_cap": 59478265856,
-          "market_cap_B": 59.5,
-          "return_6m": 5.47,
-          "price": 48.12,
-          "price_6m_ago": 45.62
-        },
-        {
-          "ticker": "PFE",
-          "market_cap": 144765878272,
-          "market_cap_B": 144.8,
-          "return_6m": 4.5,
-          "price": 25.55,
-          "price_6m_ago": 24.45
-        },
-        {
-          "ticker": "GILD",
-          "market_cap": 160820543488,
-          "market_cap_B": 160.8,
-          "return_6m": 3.87,
-          "price": 127.57,
-          "price_6m_ago": 122.82
-        },
-        {
-          "ticker": "SNOW",
-          "market_cap": 85010579456,
-          "market_cap_B": 85.0,
-          "return_6m": 3.63,
-          "price": 261.14,
-          "price_6m_ago": 252.0
-        },
-        {
-          "ticker": "SO",
-          "market_cap": 103339687936,
-          "market_cap_B": 103.3,
-          "return_6m": 3.33,
-          "price": 90.51,
-          "price_6m_ago": 87.59
+          "market_cap": 122296164352,
+          "market_cap_B": 122.3,
+          "return_6m": 6.51,
+          "price": 312.75,
+          "price_6m_ago": 293.63
         },
         {
           "ticker": "TJX",
-          "market_cap": 174040645632,
-          "market_cap_B": 174.0,
-          "return_6m": 2.32,
-          "price": 153.69,
-          "price_6m_ago": 150.21
+          "market_cap": 175018426368,
+          "market_cap_B": 175.0,
+          "return_6m": 5.9,
+          "price": 157.9,
+          "price_6m_ago": 149.11
         },
         {
-          "ticker": "CMCSA",
-          "market_cap": 84501069824,
-          "market_cap_B": 84.5,
-          "return_6m": 2.1,
-          "price": 24.85,
-          "price_6m_ago": 24.34
+          "ticker": "AMT",
+          "market_cap": 86416171008,
+          "market_cap_B": 86.4,
+          "return_6m": 5.71,
+          "price": 182.24,
+          "price_6m_ago": 172.39
+        },
+        {
+          "ticker": "NSC",
+          "market_cap": 68366974976,
+          "market_cap_B": 68.4,
+          "return_6m": 5.5,
+          "price": 305.11,
+          "price_6m_ago": 289.22
+        },
+        {
+          "ticker": "GILD",
+          "market_cap": 158976819200,
+          "market_cap_B": 159.0,
+          "return_6m": 5.38,
+          "price": 128.99,
+          "price_6m_ago": 122.4
+        },
+        {
+          "ticker": "TFC",
+          "market_cap": 61004468224,
+          "market_cap_B": 61.0,
+          "return_6m": 4.14,
+          "price": 47.42,
+          "price_6m_ago": 45.53
+        },
+        {
+          "ticker": "PFE",
+          "market_cap": 146903744512,
+          "market_cap_B": 146.9,
+          "return_6m": 4.13,
+          "price": 25.34,
+          "price_6m_ago": 24.33
+        },
+        {
+          "ticker": "SO",
+          "market_cap": 101609291776,
+          "market_cap_B": 101.6,
+          "return_6m": 3.27,
+          "price": 90.49,
+          "price_6m_ago": 87.62
         },
         {
           "ticker": "DUK",
-          "market_cap": 94978211840,
-          "market_cap_B": 95.0,
-          "return_6m": 2.01,
-          "price": 121.09,
-          "price_6m_ago": 118.7
+          "market_cap": 93762035712,
+          "market_cap_B": 93.8,
+          "return_6m": 2.87,
+          "price": 121.04,
+          "price_6m_ago": 117.66
         },
         {
-          "ticker": "NEE",
-          "market_cap": 176984473600,
-          "market_cap_B": 177.0,
-          "return_6m": 1.91,
-          "price": 85.68,
-          "price_6m_ago": 84.08
+          "ticker": "BA",
+          "market_cap": 170194468864,
+          "market_cap_B": 170.2,
+          "return_6m": 2.53,
+          "price": 210.58,
+          "price_6m_ago": 205.38
         },
         {
           "ticker": "ITW",
-          "market_cap": 72044396544,
+          "market_cap": 71983980544,
           "market_cap_B": 72.0,
-          "return_6m": 1.73,
-          "price": 248.58,
-          "price_6m_ago": 244.36
+          "return_6m": 2.05,
+          "price": 250.26,
+          "price_6m_ago": 245.23
         },
         {
-          "ticker": "ALL",
-          "market_cap": 54115028992,
-          "market_cap_B": 54.1,
-          "return_6m": 1.26,
-          "price": 210.46,
-          "price_6m_ago": 207.85
-        },
-        {
-          "ticker": "TRV",
-          "market_cap": 61731815424,
-          "market_cap_B": 61.7,
-          "return_6m": 1.23,
-          "price": 291.86,
-          "price_6m_ago": 288.31
-        },
-        {
-          "ticker": "CI",
-          "market_cap": 72226603008,
-          "market_cap_B": 72.2,
-          "return_6m": 0.8,
-          "price": 272.72,
-          "price_6m_ago": 270.55
-        },
-        {
-          "ticker": "EA",
-          "market_cap": 50849918976,
-          "market_cap_B": 50.8,
-          "return_6m": -0.02,
-          "price": 202.01,
-          "price_6m_ago": 202.05
-        },
-        {
-          "ticker": "VRTX",
-          "market_cap": 108565266432,
-          "market_cap_B": 108.6,
-          "return_6m": -0.12,
-          "price": 425.09,
-          "price_6m_ago": 425.6
-        },
-        {
-          "ticker": "BLK",
-          "market_cap": 153604030464,
-          "market_cap_B": 153.6,
-          "return_6m": -0.99,
-          "price": 1018.96,
-          "price_6m_ago": 1029.17
+          "ticker": "EW",
+          "market_cap": 50670399488,
+          "market_cap_B": 50.7,
+          "return_6m": 1.52,
+          "price": 86.0,
+          "price_6m_ago": 84.71
         },
         {
           "ticker": "AMGN",
-          "market_cap": 181943746560,
-          "market_cap_B": 181.9,
-          "return_6m": -1.32,
-          "price": 328.26,
-          "price_6m_ago": 332.66
+          "market_cap": 185670434816,
+          "market_cap_B": 185.7,
+          "return_6m": 1.41,
+          "price": 338.22,
+          "price_6m_ago": 333.51
         },
         {
-          "ticker": "T",
-          "market_cap": 163320692736,
-          "market_cap_B": 163.3,
-          "return_6m": -2.33,
-          "price": 24.64,
-          "price_6m_ago": 25.23
+          "ticker": "TRV",
+          "market_cap": 62351675392,
+          "market_cap_B": 62.4,
+          "return_6m": 1.26,
+          "price": 289.95,
+          "price_6m_ago": 286.34
+        },
+        {
+          "ticker": "ALL",
+          "market_cap": 54346706944,
+          "market_cap_B": 54.3,
+          "return_6m": 1.24,
+          "price": 209.34,
+          "price_6m_ago": 206.77
+        },
+        {
+          "ticker": "NEE",
+          "market_cap": 176045965312,
+          "market_cap_B": 176.0,
+          "return_6m": 0.68,
+          "price": 84.58,
+          "price_6m_ago": 84.01
+        },
+        {
+          "ticker": "EA",
+          "market_cap": 50957717504,
+          "market_cap_B": 51.0,
+          "return_6m": -0.02,
+          "price": 202.63,
+          "price_6m_ago": 202.67
+        },
+        {
+          "ticker": "CI",
+          "market_cap": 74733051904,
+          "market_cap_B": 74.7,
+          "return_6m": -0.13,
+          "price": 270.73,
+          "price_6m_ago": 271.08
+        },
+        {
+          "ticker": "VRTX",
+          "market_cap": 112327942144,
+          "market_cap_B": 112.3,
+          "return_6m": -1.11,
+          "price": 428.34,
+          "price_6m_ago": 433.15
         },
         {
           "ticker": "PEP",
-          "market_cap": 195301687296,
-          "market_cap_B": 195.3,
-          "return_6m": -3.24,
-          "price": 142.0,
-          "price_6m_ago": 146.75
+          "market_cap": 194802745344,
+          "market_cap_B": 194.8,
+          "return_6m": -2.28,
+          "price": 142.54,
+          "price_6m_ago": 145.87
+        },
+        {
+          "ticker": "BLK",
+          "market_cap": 157173235712,
+          "market_cap_B": 157.2,
+          "return_6m": -3.6,
+          "price": 990.87,
+          "price_6m_ago": 1027.87
         },
         {
           "ticker": "DIS",
-          "market_cap": 173321207808,
-          "market_cap_B": 173.3,
-          "return_6m": -4.38,
-          "price": 101.41,
-          "price_6m_ago": 106.05
+          "market_cap": 174918811648,
+          "market_cap_B": 174.9,
+          "return_6m": -4.55,
+          "price": 99.39,
+          "price_6m_ago": 104.13
         },
         {
-          "ticker": "SCHW",
-          "market_cap": 152017846272,
-          "market_cap_B": 152.0,
-          "return_6m": -4.82,
-          "price": 87.61,
-          "price_6m_ago": 92.05
+          "ticker": "CMCSA",
+          "market_cap": 84590370816,
+          "market_cap_B": 84.6,
+          "return_6m": -4.94,
+          "price": 23.52,
+          "price_6m_ago": 24.74
         },
         {
           "ticker": "ECL",
-          "market_cap": 72577105920,
-          "market_cap_B": 72.6,
-          "return_6m": -5.57,
-          "price": 256.26,
-          "price_6m_ago": 271.37
+          "market_cap": 72083177472,
+          "market_cap_B": 72.1,
+          "return_6m": -5.1,
+          "price": 255.67,
+          "price_6m_ago": 269.41
+        },
+        {
+          "ticker": "SCHW",
+          "market_cap": 152956960768,
+          "market_cap_B": 153.0,
+          "return_6m": -5.3,
+          "price": 86.59,
+          "price_6m_ago": 91.43
+        },
+        {
+          "ticker": "T",
+          "market_cap": 159360139264,
+          "market_cap_B": 159.4,
+          "return_6m": -5.66,
+          "price": 23.55,
+          "price_6m_ago": 24.96
         },
         {
           "ticker": "CME",
-          "market_cap": 91671199744,
-          "market_cap_B": 91.7,
-          "return_6m": -7.63,
-          "price": 250.53,
-          "price_6m_ago": 271.23
+          "market_cap": 92075876352,
+          "market_cap_B": 92.1,
+          "return_6m": -6.35,
+          "price": 252.64,
+          "price_6m_ago": 269.77
         },
         {
-          "ticker": "TMUS",
-          "market_cap": 195738353664,
-          "market_cap_B": 195.7,
-          "return_6m": -7.68,
-          "price": 188.83,
-          "price_6m_ago": 204.53
+          "ticker": "SNOW",
+          "market_cap": 86987939840,
+          "market_cap_B": 87.0,
+          "return_6m": -7.09,
+          "price": 241.28,
+          "price_6m_ago": 259.68
         },
         {
           "ticker": "MCD",
-          "market_cap": 195261218816,
-          "market_cap_B": 195.3,
-          "return_6m": -7.83,
-          "price": 276.36,
-          "price_6m_ago": 299.85
+          "market_cap": 194802941952,
+          "market_cap_B": 194.8,
+          "return_6m": -7.99,
+          "price": 273.29,
+          "price_6m_ago": 297.03
         },
         {
           "ticker": "ADP",
-          "market_cap": 90793639936,
-          "market_cap_B": 90.8,
-          "return_6m": -8.3,
-          "price": 231.18,
-          "price_6m_ago": 252.11
+          "market_cap": 92870262784,
+          "market_cap_B": 92.9,
+          "return_6m": -10.13,
+          "price": 227.75,
+          "price_6m_ago": 253.43
         },
         {
           "ticker": "ICE",
-          "market_cap": 78459256832,
-          "market_cap_B": 78.5,
-          "return_6m": -8.71,
-          "price": 142.38,
-          "price_6m_ago": 155.97
+          "market_cap": 81162354688,
+          "market_cap_B": 81.2,
+          "return_6m": -10.33,
+          "price": 138.45,
+          "price_6m_ago": 154.4
         },
         {
           "ticker": "VST",
-          "market_cap": 52082888704,
-          "market_cap_B": 52.1,
-          "return_6m": -8.77,
-          "price": 157.97,
-          "price_6m_ago": 173.16
-        },
-        {
-          "ticker": "MMM",
-          "market_cap": 79408619520,
-          "market_cap_B": 79.4,
-          "return_6m": -9.44,
-          "price": 152.9,
-          "price_6m_ago": 168.85
-        },
-        {
-          "ticker": "SPOT",
-          "market_cap": 99499548672,
-          "market_cap_B": 99.5,
-          "return_6m": -13.37,
-          "price": 501.5,
-          "price_6m_ago": 578.89
-        },
-        {
-          "ticker": "CRM",
-          "market_cap": 156428517376,
-          "market_cap_B": 156.4,
-          "return_6m": -13.38,
-          "price": 200.84,
-          "price_6m_ago": 231.87
-        },
-        {
-          "ticker": "SHW",
-          "market_cap": 73353371648,
-          "market_cap_B": 73.4,
-          "return_6m": -13.79,
-          "price": 293.0,
-          "price_6m_ago": 339.86
+          "market_cap": 51130347520,
+          "market_cap_B": 51.1,
+          "return_6m": -10.62,
+          "price": 153.8,
+          "price_6m_ago": 172.08
         },
         {
           "ticker": "MCK",
-          "market_cap": 88836800512,
-          "market_cap_B": 88.8,
-          "return_6m": -13.85,
-          "price": 736.78,
-          "price_6m_ago": 855.23
+          "market_cap": 90662535168,
+          "market_cap_B": 90.7,
+          "return_6m": -10.7,
+          "price": 739.53,
+          "price_6m_ago": 828.1
         },
         {
-          "ticker": "BKNG",
-          "market_cap": 127947931648,
-          "market_cap_B": 127.9,
-          "return_6m": -14.19,
-          "price": 167.21,
-          "price_6m_ago": 194.85
+          "ticker": "MMM",
+          "market_cap": 80227483648,
+          "market_cap_B": 80.2,
+          "return_6m": -10.75,
+          "price": 151.65,
+          "price_6m_ago": 169.91
         },
         {
-          "ticker": "SPGI",
-          "market_cap": 121987522560,
-          "market_cap_B": 122.0,
-          "return_6m": -15.32,
-          "price": 417.46,
-          "price_6m_ago": 492.97
+          "ticker": "SHW",
+          "market_cap": 73549201408,
+          "market_cap_B": 73.5,
+          "return_6m": -11.73,
+          "price": 296.49,
+          "price_6m_ago": 335.87
+        },
+        {
+          "ticker": "TMUS",
+          "market_cap": 192134610944,
+          "market_cap_B": 192.1,
+          "return_6m": -12.76,
+          "price": 181.45,
+          "price_6m_ago": 208.0
         },
         {
           "ticker": "LOW",
-          "market_cap": 116150468608,
-          "market_cap_B": 116.2,
-          "return_6m": -15.35,
-          "price": 206.64,
-          "price_6m_ago": 244.12
+          "market_cap": 116416806912,
+          "market_cap_B": 116.4,
+          "return_6m": -13.81,
+          "price": 207.65,
+          "price_6m_ago": 240.93
         },
         {
-          "ticker": "UBER",
-          "market_cap": 145026252800,
-          "market_cap_B": 145.0,
-          "return_6m": -17.27,
-          "price": 71.62,
-          "price_6m_ago": 86.57
+          "ticker": "SPOT",
+          "market_cap": 102352527360,
+          "market_cap_B": 102.4,
+          "return_6m": -15.47,
+          "price": 487.54,
+          "price_6m_ago": 576.79
         },
         {
-          "ticker": "TMO",
-          "market_cap": 176434724864,
-          "market_cap_B": 176.4,
-          "return_6m": -17.47,
-          "price": 482.08,
-          "price_6m_ago": 584.13
-        },
-        {
-          "ticker": "ADBE",
-          "market_cap": 103596457984,
-          "market_cap_B": 103.6,
-          "return_6m": -18.81,
-          "price": 262.11,
-          "price_6m_ago": 322.85
-        },
-        {
-          "ticker": "MELI",
-          "market_cap": 82976079872,
-          "market_cap_B": 83.0,
-          "return_6m": -18.97,
-          "price": 1672.83,
-          "price_6m_ago": 2064.55
+          "ticker": "SPGI",
+          "market_cap": 125003759616,
+          "market_cap_B": 125.0,
+          "return_6m": -15.68,
+          "price": 412.29,
+          "price_6m_ago": 488.93
         },
         {
           "ticker": "REGN",
-          "market_cap": 64986570752,
-          "market_cap_B": 65.0,
-          "return_6m": -19.41,
-          "price": 602.92,
-          "price_6m_ago": 748.09
+          "market_cap": 65542217728,
+          "market_cap_B": 65.5,
+          "return_6m": -16.36,
+          "price": 618.95,
+          "price_6m_ago": 740.0
+        },
+        {
+          "ticker": "UBER",
+          "market_cap": 148781924352,
+          "market_cap_B": 148.8,
+          "return_6m": -18.13,
+          "price": 71.69,
+          "price_6m_ago": 87.57
+        },
+        {
+          "ticker": "TMO",
+          "market_cap": 181407023104,
+          "market_cap_B": 181.4,
+          "return_6m": -18.19,
+          "price": 473.95,
+          "price_6m_ago": 579.36
+        },
+        {
+          "ticker": "CRM",
+          "market_cap": 156187394048,
+          "market_cap_B": 156.2,
+          "return_6m": -18.45,
+          "price": 190.61,
+          "price_6m_ago": 233.75
         },
         {
           "ticker": "SYK",
-          "market_cap": 112922746880,
-          "market_cap_B": 112.9,
-          "return_6m": -20.81,
-          "price": 293.3,
-          "price_6m_ago": 370.39
+          "market_cap": 115207577600,
+          "market_cap_B": 115.2,
+          "return_6m": -19.13,
+          "price": 295.0,
+          "price_6m_ago": 364.78
+        },
+        {
+          "ticker": "BKNG",
+          "market_cap": 132078034944,
+          "market_cap_B": 132.1,
+          "return_6m": -19.44,
+          "price": 164.78,
+          "price_6m_ago": 204.54
+        },
+        {
+          "ticker": "ADBE",
+          "market_cap": 106388750336,
+          "market_cap_B": 106.4,
+          "return_6m": -20.62,
+          "price": 256.24,
+          "price_6m_ago": 322.81
         },
         {
           "ticker": "DHR",
-          "market_cap": 125622214656,
-          "market_cap_B": 125.6,
-          "return_6m": -21.15,
-          "price": 176.11,
-          "price_6m_ago": 223.35
+          "market_cap": 132653907968,
+          "market_cap_B": 132.7,
+          "return_6m": -21.13,
+          "price": 178.08,
+          "price_6m_ago": 225.8
         },
         {
-          "ticker": "SHOP",
-          "market_cap": 147063209984,
-          "market_cap_B": 147.1,
-          "return_6m": -21.62,
-          "price": 117.01,
-          "price_6m_ago": 149.28
-        },
-        {
-          "ticker": "NOW",
-          "market_cap": 123602264064,
-          "market_cap_B": 123.6,
-          "return_6m": -22.36,
-          "price": 127.65,
-          "price_6m_ago": 164.41
-        },
-        {
-          "ticker": "DASH",
-          "market_cap": 66808754176,
-          "market_cap_B": 66.8,
-          "return_6m": -23.66,
-          "price": 156.95,
-          "price_6m_ago": 205.58
+          "ticker": "MELI",
+          "market_cap": 84320567296,
+          "market_cap_B": 84.3,
+          "return_6m": -22.56,
+          "price": 1638.54,
+          "price_6m_ago": 2115.91
         },
         {
           "ticker": "CEG",
-          "market_cap": 95741976576,
-          "market_cap_B": 95.7,
-          "return_6m": -23.84,
-          "price": 272.65,
-          "price_6m_ago": 358.01
+          "market_cap": 93924966400,
+          "market_cap_B": 93.9,
+          "return_6m": -26.3,
+          "price": 267.24,
+          "price_6m_ago": 362.62
         },
         {
           "ticker": "HCA",
-          "market_cap": 80461299712,
-          "market_cap_B": 80.5,
-          "return_6m": -26.75,
-          "price": 367.35,
-          "price_6m_ago": 501.51
+          "market_cap": 80314884096,
+          "market_cap_B": 80.3,
+          "return_6m": -27.18,
+          "price": 363.23,
+          "price_6m_ago": 498.82
         },
         {
-          "ticker": "ACN",
-          "market_cap": 109960970240,
-          "market_cap_B": 110.0,
-          "return_6m": -27.05,
-          "price": 186.22,
-          "price_6m_ago": 255.27
-        },
-        {
-          "ticker": "HOOD",
-          "market_cap": 75295727616,
-          "market_cap_B": 75.3,
-          "return_6m": -28.46,
-          "price": 88.16,
-          "price_6m_ago": 123.24
+          "ticker": "SHOP",
+          "market_cap": 152260313088,
+          "market_cap_B": 152.3,
+          "return_6m": -27.99,
+          "price": 112.94,
+          "price_6m_ago": 156.83
         },
         {
           "ticker": "ISRG",
-          "market_cap": 143609495552,
-          "market_cap_B": 143.6,
-          "return_6m": -29.09,
-          "price": 402.3,
-          "price_6m_ago": 567.37
+          "market_cap": 148097630208,
+          "market_cap_B": 148.1,
+          "return_6m": -28.26,
+          "price": 407.29,
+          "price_6m_ago": 567.72
         },
         {
-          "ticker": "SE",
-          "market_cap": 54437625856,
-          "market_cap_B": 54.4,
-          "return_6m": -31.15,
-          "price": 93.14,
-          "price_6m_ago": 135.28
+          "ticker": "NOW",
+          "market_cap": 126273355776,
+          "market_cap_B": 126.3,
+          "return_6m": -28.49,
+          "price": 117.9,
+          "price_6m_ago": 164.88
+        },
+        {
+          "ticker": "DASH",
+          "market_cap": 70695362560,
+          "market_cap_B": 70.7,
+          "return_6m": -28.76,
+          "price": 154.58,
+          "price_6m_ago": 216.98
         },
         {
           "ticker": "ABT",
-          "market_cap": 152025448448,
-          "market_cap_B": 152.0,
-          "return_6m": -31.29,
-          "price": 86.97,
-          "price_6m_ago": 126.57
+          "market_cap": 156989603840,
+          "market_cap_B": 157.0,
+          "return_6m": -30.35,
+          "price": 86.99,
+          "price_6m_ago": 124.9
+        },
+        {
+          "ticker": "ACN",
+          "market_cap": 110882947072,
+          "market_cap_B": 110.9,
+          "return_6m": -31.45,
+          "price": 177.43,
+          "price_6m_ago": 258.83
         },
         {
           "ticker": "NKE",
-          "market_cap": 64292712448,
+          "market_cap": 64344543232,
           "market_cap_B": 64.3,
-          "return_6m": -32.08,
-          "price": 43.73,
-          "price_6m_ago": 64.38
+          "return_6m": -31.47,
+          "price": 43.81,
+          "price_6m_ago": 63.93
+        },
+        {
+          "ticker": "HOOD",
+          "market_cap": 77209305088,
+          "market_cap_B": 77.2,
+          "return_6m": -34.22,
+          "price": 82.85,
+          "price_6m_ago": 125.95
+        },
+        {
+          "ticker": "SE",
+          "market_cap": 56575197184,
+          "market_cap_B": 56.6,
+          "return_6m": -35.09,
+          "price": 89.46,
+          "price_6m_ago": 137.83
         },
         {
           "ticker": "INTU",
-          "market_cap": 85436547072,
-          "market_cap_B": 85.4,
-          "return_6m": -48.75,
-          "price": 322.14,
-          "price_6m_ago": 628.52
+          "market_cap": 84770480128,
+          "market_cap_B": 84.8,
+          "return_6m": -50.76,
+          "price": 311.44,
+          "price_6m_ago": 632.51
         }
       ]
     },
     "mid": {
       "label": "Mid-Cap ($10B\u2013$50B)",
-      "total_stocks": 44,
+      "total_stocks": 45,
       "top_10": [
         {
           "ticker": "TWLO",
-          "market_cap": 34319104000,
-          "market_cap_B": 34.3,
-          "return_6m": 79.76,
-          "price": 229.3,
-          "price_6m_ago": 127.56
+          "market_cap": 35765510144,
+          "market_cap_B": 35.8,
+          "return_6m": 75.13,
+          "price": 227.26,
+          "price_6m_ago": 129.77,
+          "news": [
+            {
+              "title": "Twilio Inc. (TWLO) Is a Trending Stock: Facts to Know Before Betting on It",
+              "summary": "Zacks.com users have recently been watching Twilio (TWLO) quite a bit. Thus, it is worth knowing the facts that could determine the stock's prospects.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Wall Street Bulls Look Optimistic About Twilio (TWLO): Should You Buy?",
+              "summary": "According to the average brokerage recommendation (ABR), one should invest in Twilio (TWLO). It is debatable whether this highly sought-after metric i",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Twilio (TWLO) Hits 4-Year High as This Analyst Repeats Bullish Call",
+              "summary": "Twilio Inc. (NYSE:TWLO) is one of the 10 Stocks Entering June on Fire. Twilio Inc. rallied to a new four-year high on Monday, as investors took heart ",
+              "date": "2026-06-02"
+            }
+          ]
         },
         {
           "ticker": "OKTA",
-          "market_cap": 21722443776,
-          "market_cap_B": 21.7,
-          "return_6m": 67.81,
-          "price": 135.32,
-          "price_6m_ago": 80.64
+          "market_cap": 21526040576,
+          "market_cap_B": 21.5,
+          "return_6m": 52.25,
+          "price": 124.65,
+          "price_6m_ago": 81.87,
+          "news": [
+            {
+              "title": "5 Insightful Analyst Questions From Okta\u2019s Q1 Earnings Call",
+              "summary": "Okta\u2019s first quarter results drew a positive response from the market, with management crediting growth in large enterprise adoption, increased partne",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Stocks Retreat as US-Iran Peace Hopes in Doubt",
+              "summary": "The S&P 500 Index ($SPX ) (SPY ) on Wednesday closed down -0.74%, the Dow Jones Industrial Average ($DOWI ) (DIA ) closed down -1.21%, and the Nasdaq ",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Why Okta (OKTA) Stock Is Down Today",
+              "summary": "Shares of identity management company Okta (NASDAQ:OKTA) fell 7.2% in the morning session after Mizuho downgraded the stock to Neutral from Outperform",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "SMCI",
-          "market_cap": 28221562880,
-          "market_cap_B": 28.2,
-          "return_6m": 50.16,
-          "price": 50.17,
-          "price_6m_ago": 33.41
+          "market_cap": 28320856064,
+          "market_cap_B": 28.3,
+          "return_6m": 44.05,
+          "price": 47.42,
+          "price_6m_ago": 32.92,
+          "news": [
+            {
+              "title": "Broadcom Stock Punished Over Lack of AI Guidance Boost",
+              "summary": "$340 billion That's roughly how much market value Broadcom is slated to lose today after its results last night sent its shares sliding 15%. The move ",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Stocks to Watch: Broadcom, Universal Music,  Quantinuum",
+              "summary": "\u2198\ufe0f Broadcom (AVGO): The semiconductor and software maker logged higher revenue in its latest quarter as demand for its AI chips accelerates. Still, sh",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Broadcom, Micron, Marvell, Ciena, and More Stocks That Explain Today\u2019s Market",
+              "summary": "FEATURE  The artificial-intelligence rally may be grinding to a halt. Technology stocks were getting hit hard Thursday after mediocre revenue guidance",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "HUM",
-          "market_cap": 39238500352,
-          "market_cap_B": 39.2,
-          "return_6m": 33.6,
-          "price": 320.88,
-          "price_6m_ago": 240.18
-        },
-        {
-          "ticker": "ZM",
-          "market_cap": 31114870784,
-          "market_cap_B": 31.1,
-          "return_6m": 31.72,
-          "price": 111.88,
-          "price_6m_ago": 84.94
-        },
-        {
-          "ticker": "ROKU",
-          "market_cap": 18009776128,
-          "market_cap_B": 18.0,
-          "return_6m": 31.7,
-          "price": 127.12,
-          "price_6m_ago": 96.52
-        },
-        {
-          "ticker": "LYV",
-          "market_cap": 38246350848,
-          "market_cap_B": 38.2,
-          "return_6m": 27.87,
-          "price": 167.64,
-          "price_6m_ago": 131.1
+          "market_cap": 41873850368,
+          "market_cap_B": 41.9,
+          "return_6m": 36.52,
+          "price": 327.54,
+          "price_6m_ago": 239.92,
+          "news": [
+            {
+              "title": "UNH, CVS Lead S&P 500 Health Insurers Flashing Buy Signals",
+              "summary": "UnitedHealth Group, CVS Health and other S&P 500 health insurance giant rallied on Thursday morning after price-target hikes from Morgan Stanley and a",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Zacks Industry Outlook Highlights UnitedHealth, The Cigna, Humana, Centene and Molina",
+              "summary": "UnitedHealth, The Cigna, Humana, Centene and Molina have been highlighted in this Industry Outlook article.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "5 HMO Stocks in Focus Amid an Aging U.S. Population, Tech Innovation",
+              "summary": "Aging demographics, sound Medicare premiums, digital healthcare adoption and increased M&A activity are likely to drive the performance of the Zacks M",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "ILMN",
-          "market_cap": 25581803520,
-          "market_cap_B": 25.6,
-          "return_6m": 26.28,
-          "price": 162.55,
-          "price_6m_ago": 128.72
+          "market_cap": 26497183744,
+          "market_cap_B": 26.5,
+          "return_6m": 34.01,
+          "price": 170.93,
+          "price_6m_ago": 127.55,
+          "news": [
+            {
+              "title": "Is Illumina\u2019s (ILMN) Deeper IDT DRAGEN Tie-Up Quietly Rewriting Its Oncology Software Edge?",
+              "summary": "In May and June 2026, Integrated DNA Technologies announced a collaboration with Illumina to connect IDT\u2019s xGen FFPE and cfDNA library prep workflows ",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "BioMarin (BMRN) Up 0.2% Since Last Earnings Report: Can It Continue?",
+              "summary": "BioMarin (BMRN) reported earnings 30 days ago. What's next for the stock? We take a look at earnings estimates for some clues.",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "ILMN Stock Jumps 98.7% in a Year: What's Powering the Surge?",
+              "summary": "Illumina shares surge 98.7% in a year as NovaSeq X adoption accelerates, clinical sequencing demand grows, and the company tops Q1 2026 guidance.",
+              "date": "2026-06-03"
+            }
+          ]
+        },
+        {
+          "ticker": "LYV",
+          "market_cap": 37505155072,
+          "market_cap_B": 37.5,
+          "return_6m": 27.78,
+          "price": 164.25,
+          "price_6m_ago": 128.54,
+          "news": [
+            {
+              "title": "3 Hyped Up  Stocks with Questionable Fundamentals",
+              "summary": "The stocks in this article are all trading near their 52-week highs. This strength often reflects positive developments such as new product launches, ",
+              "date": "2026-06-01"
+            },
+            {
+              "title": "States Flex Muscle on Antitrust Enforcement as Trump Administration Pulls Back",
+              "summary": "When the Justice Department settled with  Live Nation  at the start of a long-awaited antitrust trial, it mounted a pressure campaign against a group ",
+              "date": "2026-05-26"
+            },
+            {
+              "title": "Could Mark Cuban\u2019s Backing Amid Monopoly Ruling Reshape Live Nation\u2019s Regulatory Risk Narrative (LYV)?",
+              "summary": "In recent months, Live Nation Entertainment was highlighted by Mark Cuban as one of his top stock picks, even as a US court found the company and Tick",
+              "date": "2026-05-22"
+            }
+          ]
+        },
+        {
+          "ticker": "ZM",
+          "market_cap": 31229231104,
+          "market_cap_B": 31.2,
+          "return_6m": 25.59,
+          "price": 106.2,
+          "price_6m_ago": 84.56,
+          "news": [
+            {
+              "title": "Zoom, monday.com, and SentinelOne Shares Are Falling, What You Need To Know",
+              "summary": "A number of stocks fell in the afternoon session after software stocks declined for a second consecutive session, extending the profit-taking that beg",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "SpaceX Is About to IPO. History Says a 55% Stock Drop Could Be Coming Next.",
+              "summary": "While SpaceX\u2019s anticipated public debut has Wall Street salivating over what could be the most consequential IPO in a decade, the historical record of",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "2 Reasons Why Zoom Stock Popped 10%",
+              "summary": "Zoom stock rallies on the launch of ZoomMate and reports that Anthropic has confidentially filed for an IPO. Here\u2019s what the announcements mean for ZO",
+              "date": "2026-06-02"
+            }
+          ]
+        },
+        {
+          "ticker": "ROKU",
+          "market_cap": 18897414144,
+          "market_cap_B": 18.9,
+          "return_6m": 24.36,
+          "price": 122.2,
+          "price_6m_ago": 98.26,
+          "news": [
+            {
+              "title": "Wayfair, Roku, and Instacart Stocks Trade Down, What You Need To Know",
+              "summary": "A number of stocks fell in the afternoon session after rising Treasury yields compressed valuations for growth-oriented names as geopolitical uncertai",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Andrew Left Guilty On 13 Counts As Short-Seller Risk Rises",
+              "summary": "Citron founder Andrew Left faces Aug. 31 sentencing after a securities fraud conviction tied to social media stock posts.",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "How Andrew Left used social media to move stocks",
+              "summary": "Yahoo Finance Breaking News Report Jake Conley joins Julie Hyman on Market Catalysts to break down the case against Andrew Left, who was convicted of ",
+              "date": "2026-06-02"
+            }
+          ]
         },
         {
           "ticker": "DD",
-          "market_cap": 19511652352,
-          "market_cap_B": 19.5,
-          "return_6m": 22.9,
-          "price": 48.66,
-          "price_6m_ago": 39.59
+          "market_cap": 19175454720,
+          "market_cap_B": 19.2,
+          "return_6m": 22.35,
+          "price": 47.97,
+          "price_6m_ago": 39.21,
+          "news": [
+            {
+              "title": "A 224-Year-Old Wall Street Stalwart Just Announced a Reverse Stock Split -- and It's Truly a Head-Scratcher",
+              "summary": "This industrial titan doesn't fit the mold of a typical reverse stock split.",
+              "date": "2026-06-02"
+            },
+            {
+              "title": "How DuPont\u2019s Reverse Stock Split Approval And Reaffirmed Guidance At DuPont de Nemours (DD) Has Changed Its Investment Story",
+              "summary": "At its 21 May 2026 AGM, DuPont de Nemours approved an amendment to enable a reverse stock split of between 1-for-2 and 1-for-4, alongside a proportion",
+              "date": "2026-06-01"
+            },
+            {
+              "title": "DuPont Announces Reverse Split. What It Means for the Stock.",
+              "summary": "DuPont stock was unchanged late Tuesday after the chemicals company announced a 1-for-3 reverse stock split which will become effective next month.",
+              "date": "2026-05-27"
+            }
+          ]
         },
         {
-          "ticker": "SWKS",
-          "market_cap": 12304711680,
-          "market_cap_B": 12.3,
-          "return_6m": 22.69,
-          "price": 79.12,
-          "price_6m_ago": 64.49
+          "ticker": "FSLR",
+          "market_cap": 33170315264,
+          "market_cap_B": 33.2,
+          "return_6m": 21.21,
+          "price": 318.25,
+          "price_6m_ago": 262.56,
+          "news": [
+            {
+              "title": "Here is What to Know Beyond Why First Solar, Inc. (FSLR) is a Trending Stock",
+              "summary": "Zacks.com users have recently been watching First Solar (FSLR) quite a bit. Thus, it is worth knowing the facts that could determine the stock's prosp",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Selling US$8.5m Of First Solar Stock Rewarded Insiders",
+              "summary": "While First Solar, Inc. ( NASDAQ:FSLR ) shareholders have enjoyed a good week with stock up 15%, they need remain...",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Record Sales Lift First Solar Shares",
+              "summary": "First Solar, Inc. (FSLR) up 47% in a month after big institutional buying.",
+              "date": "2026-06-03"
+            }
+          ]
         }
       ],
       "all_ranked": [
         {
           "ticker": "TWLO",
-          "market_cap": 34319104000,
-          "market_cap_B": 34.3,
-          "return_6m": 79.76,
-          "price": 229.3,
-          "price_6m_ago": 127.56
+          "market_cap": 35765510144,
+          "market_cap_B": 35.8,
+          "return_6m": 75.13,
+          "price": 227.26,
+          "price_6m_ago": 129.77,
+          "news": [
+            {
+              "title": "Twilio Inc. (TWLO) Is a Trending Stock: Facts to Know Before Betting on It",
+              "summary": "Zacks.com users have recently been watching Twilio (TWLO) quite a bit. Thus, it is worth knowing the facts that could determine the stock's prospects.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Wall Street Bulls Look Optimistic About Twilio (TWLO): Should You Buy?",
+              "summary": "According to the average brokerage recommendation (ABR), one should invest in Twilio (TWLO). It is debatable whether this highly sought-after metric i",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Twilio (TWLO) Hits 4-Year High as This Analyst Repeats Bullish Call",
+              "summary": "Twilio Inc. (NYSE:TWLO) is one of the 10 Stocks Entering June on Fire. Twilio Inc. rallied to a new four-year high on Monday, as investors took heart ",
+              "date": "2026-06-02"
+            }
+          ]
         },
         {
           "ticker": "OKTA",
-          "market_cap": 21722443776,
-          "market_cap_B": 21.7,
-          "return_6m": 67.81,
-          "price": 135.32,
-          "price_6m_ago": 80.64
+          "market_cap": 21526040576,
+          "market_cap_B": 21.5,
+          "return_6m": 52.25,
+          "price": 124.65,
+          "price_6m_ago": 81.87,
+          "news": [
+            {
+              "title": "5 Insightful Analyst Questions From Okta\u2019s Q1 Earnings Call",
+              "summary": "Okta\u2019s first quarter results drew a positive response from the market, with management crediting growth in large enterprise adoption, increased partne",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Stocks Retreat as US-Iran Peace Hopes in Doubt",
+              "summary": "The S&P 500 Index ($SPX ) (SPY ) on Wednesday closed down -0.74%, the Dow Jones Industrial Average ($DOWI ) (DIA ) closed down -1.21%, and the Nasdaq ",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Why Okta (OKTA) Stock Is Down Today",
+              "summary": "Shares of identity management company Okta (NASDAQ:OKTA) fell 7.2% in the morning session after Mizuho downgraded the stock to Neutral from Outperform",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "SMCI",
-          "market_cap": 28221562880,
-          "market_cap_B": 28.2,
-          "return_6m": 50.16,
-          "price": 50.17,
-          "price_6m_ago": 33.41
+          "market_cap": 28320856064,
+          "market_cap_B": 28.3,
+          "return_6m": 44.05,
+          "price": 47.42,
+          "price_6m_ago": 32.92,
+          "news": [
+            {
+              "title": "Broadcom Stock Punished Over Lack of AI Guidance Boost",
+              "summary": "$340 billion That's roughly how much market value Broadcom is slated to lose today after its results last night sent its shares sliding 15%. The move ",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Stocks to Watch: Broadcom, Universal Music,  Quantinuum",
+              "summary": "\u2198\ufe0f Broadcom (AVGO): The semiconductor and software maker logged higher revenue in its latest quarter as demand for its AI chips accelerates. Still, sh",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Broadcom, Micron, Marvell, Ciena, and More Stocks That Explain Today\u2019s Market",
+              "summary": "FEATURE  The artificial-intelligence rally may be grinding to a halt. Technology stocks were getting hit hard Thursday after mediocre revenue guidance",
+              "date": "2026-06-04"
+            }
+          ]
         },
         {
           "ticker": "HUM",
-          "market_cap": 39238500352,
-          "market_cap_B": 39.2,
-          "return_6m": 33.6,
-          "price": 320.88,
-          "price_6m_ago": 240.18
-        },
-        {
-          "ticker": "ZM",
-          "market_cap": 31114870784,
-          "market_cap_B": 31.1,
-          "return_6m": 31.72,
-          "price": 111.88,
-          "price_6m_ago": 84.94
-        },
-        {
-          "ticker": "ROKU",
-          "market_cap": 18009776128,
-          "market_cap_B": 18.0,
-          "return_6m": 31.7,
-          "price": 127.12,
-          "price_6m_ago": 96.52
-        },
-        {
-          "ticker": "LYV",
-          "market_cap": 38246350848,
-          "market_cap_B": 38.2,
-          "return_6m": 27.87,
-          "price": 167.64,
-          "price_6m_ago": 131.1
+          "market_cap": 41873850368,
+          "market_cap_B": 41.9,
+          "return_6m": 36.52,
+          "price": 327.54,
+          "price_6m_ago": 239.92,
+          "news": [
+            {
+              "title": "UNH, CVS Lead S&P 500 Health Insurers Flashing Buy Signals",
+              "summary": "UnitedHealth Group, CVS Health and other S&P 500 health insurance giant rallied on Thursday morning after price-target hikes from Morgan Stanley and a",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Zacks Industry Outlook Highlights UnitedHealth, The Cigna, Humana, Centene and Molina",
+              "summary": "UnitedHealth, The Cigna, Humana, Centene and Molina have been highlighted in this Industry Outlook article.",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "5 HMO Stocks in Focus Amid an Aging U.S. Population, Tech Innovation",
+              "summary": "Aging demographics, sound Medicare premiums, digital healthcare adoption and increased M&A activity are likely to drive the performance of the Zacks M",
+              "date": "2026-06-03"
+            }
+          ]
         },
         {
           "ticker": "ILMN",
-          "market_cap": 25581803520,
-          "market_cap_B": 25.6,
-          "return_6m": 26.28,
-          "price": 162.55,
-          "price_6m_ago": 128.72
+          "market_cap": 26497183744,
+          "market_cap_B": 26.5,
+          "return_6m": 34.01,
+          "price": 170.93,
+          "price_6m_ago": 127.55,
+          "news": [
+            {
+              "title": "Is Illumina\u2019s (ILMN) Deeper IDT DRAGEN Tie-Up Quietly Rewriting Its Oncology Software Edge?",
+              "summary": "In May and June 2026, Integrated DNA Technologies announced a collaboration with Illumina to connect IDT\u2019s xGen FFPE and cfDNA library prep workflows ",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "BioMarin (BMRN) Up 0.2% Since Last Earnings Report: Can It Continue?",
+              "summary": "BioMarin (BMRN) reported earnings 30 days ago. What's next for the stock? We take a look at earnings estimates for some clues.",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "ILMN Stock Jumps 98.7% in a Year: What's Powering the Surge?",
+              "summary": "Illumina shares surge 98.7% in a year as NovaSeq X adoption accelerates, clinical sequencing demand grows, and the company tops Q1 2026 guidance.",
+              "date": "2026-06-03"
+            }
+          ]
+        },
+        {
+          "ticker": "LYV",
+          "market_cap": 37505155072,
+          "market_cap_B": 37.5,
+          "return_6m": 27.78,
+          "price": 164.25,
+          "price_6m_ago": 128.54,
+          "news": [
+            {
+              "title": "3 Hyped Up  Stocks with Questionable Fundamentals",
+              "summary": "The stocks in this article are all trading near their 52-week highs. This strength often reflects positive developments such as new product launches, ",
+              "date": "2026-06-01"
+            },
+            {
+              "title": "States Flex Muscle on Antitrust Enforcement as Trump Administration Pulls Back",
+              "summary": "When the Justice Department settled with  Live Nation  at the start of a long-awaited antitrust trial, it mounted a pressure campaign against a group ",
+              "date": "2026-05-26"
+            },
+            {
+              "title": "Could Mark Cuban\u2019s Backing Amid Monopoly Ruling Reshape Live Nation\u2019s Regulatory Risk Narrative (LYV)?",
+              "summary": "In recent months, Live Nation Entertainment was highlighted by Mark Cuban as one of his top stock picks, even as a US court found the company and Tick",
+              "date": "2026-05-22"
+            }
+          ]
+        },
+        {
+          "ticker": "ZM",
+          "market_cap": 31229231104,
+          "market_cap_B": 31.2,
+          "return_6m": 25.59,
+          "price": 106.2,
+          "price_6m_ago": 84.56,
+          "news": [
+            {
+              "title": "Zoom, monday.com, and SentinelOne Shares Are Falling, What You Need To Know",
+              "summary": "A number of stocks fell in the afternoon session after software stocks declined for a second consecutive session, extending the profit-taking that beg",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "SpaceX Is About to IPO. History Says a 55% Stock Drop Could Be Coming Next.",
+              "summary": "While SpaceX\u2019s anticipated public debut has Wall Street salivating over what could be the most consequential IPO in a decade, the historical record of",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "2 Reasons Why Zoom Stock Popped 10%",
+              "summary": "Zoom stock rallies on the launch of ZoomMate and reports that Anthropic has confidentially filed for an IPO. Here\u2019s what the announcements mean for ZO",
+              "date": "2026-06-02"
+            }
+          ]
+        },
+        {
+          "ticker": "ROKU",
+          "market_cap": 18897414144,
+          "market_cap_B": 18.9,
+          "return_6m": 24.36,
+          "price": 122.2,
+          "price_6m_ago": 98.26,
+          "news": [
+            {
+              "title": "Wayfair, Roku, and Instacart Stocks Trade Down, What You Need To Know",
+              "summary": "A number of stocks fell in the afternoon session after rising Treasury yields compressed valuations for growth-oriented names as geopolitical uncertai",
+              "date": "2026-06-04"
+            },
+            {
+              "title": "Andrew Left Guilty On 13 Counts As Short-Seller Risk Rises",
+              "summary": "Citron founder Andrew Left faces Aug. 31 sentencing after a securities fraud conviction tied to social media stock posts.",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "How Andrew Left used social media to move stocks",
+              "summary": "Yahoo Finance Breaking News Report Jake Conley joins Julie Hyman on Market Catalysts to break down the case against Andrew Left, who was convicted of ",
+              "date": "2026-06-02"
+            }
+          ]
         },
         {
           "ticker": "DD",
-          "market_cap": 19511652352,
-          "market_cap_B": 19.5,
-          "return_6m": 22.9,
-          "price": 48.66,
-          "price_6m_ago": 39.59
-        },
-        {
-          "ticker": "SWKS",
-          "market_cap": 12304711680,
-          "market_cap_B": 12.3,
-          "return_6m": 22.69,
-          "price": 79.12,
-          "price_6m_ago": 64.49
-        },
-        {
-          "ticker": "MDB",
-          "market_cap": 29863571456,
-          "market_cap_B": 29.9,
-          "return_6m": 21.16,
-          "price": 398.46,
-          "price_6m_ago": 328.87
-        },
-        {
-          "ticker": "DECK",
-          "market_cap": 14738742272,
-          "market_cap_B": 14.7,
-          "return_6m": 20.4,
-          "price": 110.79,
-          "price_6m_ago": 92.02
+          "market_cap": 19175454720,
+          "market_cap_B": 19.2,
+          "return_6m": 22.35,
+          "price": 47.97,
+          "price_6m_ago": 39.21,
+          "news": [
+            {
+              "title": "A 224-Year-Old Wall Street Stalwart Just Announced a Reverse Stock Split -- and It's Truly a Head-Scratcher",
+              "summary": "This industrial titan doesn't fit the mold of a typical reverse stock split.",
+              "date": "2026-06-02"
+            },
+            {
+              "title": "How DuPont\u2019s Reverse Stock Split Approval And Reaffirmed Guidance At DuPont de Nemours (DD) Has Changed Its Investment Story",
+              "summary": "At its 21 May 2026 AGM, DuPont de Nemours approved an amendment to enable a reverse stock split of between 1-for-2 and 1-for-4, alongside a proportion",
+              "date": "2026-06-01"
+            },
+            {
+              "title": "DuPont Announces Reverse Split. What It Means for the Stock.",
+              "summary": "DuPont stock was unchanged late Tuesday after the chemicals company announced a 1-for-3 reverse stock split which will become effective next month.",
+              "date": "2026-05-27"
+            }
+          ]
         },
         {
           "ticker": "FSLR",
-          "market_cap": 33992871936,
-          "market_cap_B": 34.0,
-          "return_6m": 18.01,
-          "price": 311.01,
-          "price_6m_ago": 263.54
+          "market_cap": 33170315264,
+          "market_cap_B": 33.2,
+          "return_6m": 21.21,
+          "price": 318.25,
+          "price_6m_ago": 262.56,
+          "news": [
+            {
+              "title": "Here is What to Know Beyond Why First Solar, Inc. (FSLR) is a Trending Stock",
+              "summary": "Zacks.com users have recently been watching First Solar (FSLR) quite a bit. Thus, it is worth knowing the facts that could determine the stock's prosp",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Selling US$8.5m Of First Solar Stock Rewarded Insiders",
+              "summary": "While First Solar, Inc. ( NASDAQ:FSLR ) shareholders have enjoyed a good week with stock up 15%, they need remain...",
+              "date": "2026-06-03"
+            },
+            {
+              "title": "Record Sales Lift First Solar Shares",
+              "summary": "First Solar, Inc. (FSLR) up 47% in a month after big institutional buying.",
+              "date": "2026-06-03"
+            }
+          ]
+        },
+        {
+          "ticker": "SWKS",
+          "market_cap": 12088128512,
+          "market_cap_B": 12.1,
+          "return_6m": 20.66,
+          "price": 80.66,
+          "price_6m_ago": 66.85
+        },
+        {
+          "ticker": "DECK",
+          "market_cap": 15061640192,
+          "market_cap_B": 15.1,
+          "return_6m": 16.99,
+          "price": 107.36,
+          "price_6m_ago": 91.77
         },
         {
           "ticker": "NIO",
-          "market_cap": 14495283200,
+          "market_cap": 14457448448,
           "market_cap_B": 14.5,
-          "return_6m": 16.02,
-          "price": 6.01,
-          "price_6m_ago": 5.18
+          "return_6m": 14.31,
+          "price": 5.75,
+          "price_6m_ago": 5.03
         },
         {
           "ticker": "DXCM",
-          "market_cap": 28076120064,
-          "market_cap_B": 28.1,
-          "return_6m": 15.63,
-          "price": 73.45,
-          "price_6m_ago": 63.52
+          "market_cap": 28415686656,
+          "market_cap_B": 28.4,
+          "return_6m": 12.91,
+          "price": 72.77,
+          "price_6m_ago": 64.45
         },
         {
           "ticker": "CCL",
-          "market_cap": 37751980032,
-          "market_cap_B": 37.8,
-          "return_6m": 7.74,
-          "price": 27.64,
-          "price_6m_ago": 25.65
-        },
-        {
-          "ticker": "CCI",
-          "market_cap": 39352692736,
-          "market_cap_B": 39.4,
-          "return_6m": 4.09,
-          "price": 89.92,
-          "price_6m_ago": 86.39
-        },
-        {
-          "ticker": "AFRM",
-          "market_cap": 22089908224,
-          "market_cap_B": 22.1,
-          "return_6m": 2.82,
-          "price": 71.01,
-          "price_6m_ago": 69.07
-        },
-        {
-          "ticker": "EW",
-          "market_cap": 49749118976,
-          "market_cap_B": 49.7,
-          "return_6m": 2.8,
-          "price": 87.66,
-          "price_6m_ago": 85.27
+          "market_cap": 37980528640,
+          "market_cap_B": 38.0,
+          "return_6m": 6.28,
+          "price": 27.17,
+          "price_6m_ago": 25.56
         },
         {
           "ticker": "RIVN",
-          "market_cap": 24500598784,
+          "market_cap": 24547598336,
           "market_cap_B": 24.5,
-          "return_6m": 0.76,
-          "price": 17.29,
-          "price_6m_ago": 17.16
+          "return_6m": 6.04,
+          "price": 18.27,
+          "price_6m_ago": 17.23
+        },
+        {
+          "ticker": "CCI",
+          "market_cap": 39376695296,
+          "market_cap_B": 39.4,
+          "return_6m": 2.84,
+          "price": 88.62,
+          "price_6m_ago": 86.17
+        },
+        {
+          "ticker": "AFRM",
+          "market_cap": 23047718912,
+          "market_cap_B": 23.0,
+          "return_6m": -1.12,
+          "price": 66.27,
+          "price_6m_ago": 67.02
         },
         {
           "ticker": "PRU",
-          "market_cap": 35190980608,
-          "market_cap_B": 35.2,
-          "return_6m": -2.48,
-          "price": 102.72,
-          "price_6m_ago": 105.34
+          "market_cap": 35930783744,
+          "market_cap_B": 35.9,
+          "return_6m": -3.99,
+          "price": 100.79,
+          "price_6m_ago": 104.98
         },
         {
           "ticker": "AIG",
-          "market_cap": 38498271232,
-          "market_cap_B": 38.5,
-          "return_6m": -2.59,
-          "price": 73.8,
-          "price_6m_ago": 75.76
+          "market_cap": 39137173504,
+          "market_cap_B": 39.1,
+          "return_6m": -4.66,
+          "price": 72.55,
+          "price_6m_ago": 76.1
         },
         {
           "ticker": "A",
-          "market_cap": 38840041472,
-          "market_cap_B": 38.8,
-          "return_6m": -9.66,
-          "price": 135.05,
-          "price_6m_ago": 149.49
+          "market_cap": 39647797248,
+          "market_cap_B": 39.6,
+          "return_6m": -7.29,
+          "price": 137.4,
+          "price_6m_ago": 148.21
         },
         {
-          "ticker": "TTWO",
-          "market_cap": 40239534080,
-          "market_cap_B": 40.2,
-          "return_6m": -10.81,
-          "price": 222.38,
-          "price_6m_ago": 249.34
-        },
-        {
-          "ticker": "LI",
-          "market_cap": 15353841664,
-          "market_cap_B": 15.4,
-          "return_6m": -13.99,
-          "price": 15.43,
-          "price_6m_ago": 17.94
-        },
-        {
-          "ticker": "OKLO",
-          "market_cap": 11493844992,
-          "market_cap_B": 11.5,
-          "return_6m": -15.9,
-          "price": 73.47,
-          "price_6m_ago": 87.36
+          "ticker": "MDB",
+          "market_cap": 31135199232,
+          "market_cap_B": 31.1,
+          "return_6m": -8.38,
+          "price": 368.32,
+          "price_6m_ago": 401.99
         },
         {
           "ticker": "XPEV",
-          "market_cap": 16840328192,
-          "market_cap_B": 16.8,
-          "return_6m": -16.21,
-          "price": 17.89,
-          "price_6m_ago": 21.35
+          "market_cap": 16152186880,
+          "market_cap_B": 16.2,
+          "return_6m": -11.19,
+          "price": 17.46,
+          "price_6m_ago": 19.66
         },
         {
-          "ticker": "DOCU",
-          "market_cap": 10209040384,
-          "market_cap_B": 10.2,
-          "return_6m": -19.36,
-          "price": 55.1,
-          "price_6m_ago": 68.33
+          "ticker": "TTWO",
+          "market_cap": 40555167744,
+          "market_cap_B": 40.6,
+          "return_6m": -12.57,
+          "price": 215.8,
+          "price_6m_ago": 246.83
+        },
+        {
+          "ticker": "LI",
+          "market_cap": 14942850048,
+          "market_cap_B": 14.9,
+          "return_6m": -17.18,
+          "price": 14.99,
+          "price_6m_ago": 18.1
         },
         {
           "ticker": "IQV",
-          "market_cap": 30082056192,
-          "market_cap_B": 30.1,
-          "return_6m": -20.93,
-          "price": 180.64,
-          "price_6m_ago": 228.47
+          "market_cap": 31193608192,
+          "market_cap_B": 31.2,
+          "return_6m": -19.31,
+          "price": 182.05,
+          "price_6m_ago": 225.63
         },
         {
           "ticker": "PINS",
-          "market_cap": 11570050048,
-          "market_cap_B": 11.6,
-          "return_6m": -22.24,
-          "price": 20.87,
-          "price_6m_ago": 26.84
+          "market_cap": 12365472768,
+          "market_cap_B": 12.4,
+          "return_6m": -23.13,
+          "price": 20.67,
+          "price_6m_ago": 26.89
         },
         {
-          "ticker": "ADSK",
-          "market_cap": 48860065792,
-          "market_cap_B": 48.9,
-          "return_6m": -22.44,
-          "price": 236.66,
-          "price_6m_ago": 305.12
+          "ticker": "DOCU",
+          "market_cap": 10331444224,
+          "market_cap_B": 10.3,
+          "return_6m": -23.9,
+          "price": 52.4,
+          "price_6m_ago": 68.86
+        },
+        {
+          "ticker": "SNAP",
+          "market_cap": 10212751360,
+          "market_cap_B": 10.2,
+          "return_6m": -24.8,
+          "price": 5.73,
+          "price_6m_ago": 7.62
         },
         {
           "ticker": "DKNG",
-          "market_cap": 12375933952,
-          "market_cap_B": 12.4,
-          "return_6m": -25.3,
-          "price": 25.3,
-          "price_6m_ago": 33.87
-        },
-        {
-          "ticker": "TEAM",
-          "market_cap": 25602637824,
-          "market_cap_B": 25.6,
-          "return_6m": -28.02,
-          "price": 109.1,
-          "price_6m_ago": 151.58
-        },
-        {
-          "ticker": "PYPL",
-          "market_cap": 37555642368,
-          "market_cap_B": 37.6,
-          "return_6m": -28.63,
-          "price": 44.53,
-          "price_6m_ago": 62.39
-        },
-        {
-          "ticker": "U",
-          "market_cap": 12775196672,
+          "market_cap": 12782758912,
           "market_cap_B": 12.8,
-          "return_6m": -28.67,
-          "price": 30.77,
-          "price_6m_ago": 43.14
+          "return_6m": -25.29,
+          "price": 25.11,
+          "price_6m_ago": 33.61
         },
         {
-          "ticker": "CHTR",
-          "market_cap": 18594603008,
-          "market_cap_B": 18.6,
-          "return_6m": -28.78,
-          "price": 140.27,
-          "price_6m_ago": 196.94
+          "ticker": "ADSK",
+          "market_cap": 49980194816,
+          "market_cap_B": 50.0,
+          "return_6m": -26.0,
+          "price": 229.6,
+          "price_6m_ago": 310.25
         },
         {
-          "ticker": "WDAY",
-          "market_cap": 36058128384,
-          "market_cap_B": 36.1,
-          "return_6m": -30.22,
-          "price": 148.88,
-          "price_6m_ago": 213.35
+          "ticker": "OKLO",
+          "market_cap": 11185863680,
+          "market_cap_B": 11.2,
+          "return_6m": -29.0,
+          "price": 65.21,
+          "price_6m_ago": 91.84
         },
         {
           "ticker": "LULU",
-          "market_cap": 15051458560,
+          "market_cap": 15090911232,
           "market_cap_B": 15.1,
-          "return_6m": -30.67,
-          "price": 126.47,
-          "price_6m_ago": 182.41
+          "return_6m": -30.9,
+          "price": 126.03,
+          "price_6m_ago": 182.4
         },
         {
-          "ticker": "COIN",
-          "market_cap": 43676524544,
-          "market_cap_B": 43.7,
-          "return_6m": -33.04,
-          "price": 173.99,
-          "price_6m_ago": 259.84
+          "ticker": "WDAY",
+          "market_cap": 37136166912,
+          "market_cap_B": 37.1,
+          "return_6m": -31.05,
+          "price": 146.9,
+          "price_6m_ago": 213.06
         },
         {
-          "ticker": "HUBS",
-          "market_cap": 11341045760,
-          "market_cap_B": 11.3,
-          "return_6m": -35.68,
-          "price": 240.16,
-          "price_6m_ago": 373.4
+          "ticker": "PYPL",
+          "market_cap": 38102544384,
+          "market_cap_B": 38.1,
+          "return_6m": -32.05,
+          "price": 42.61,
+          "price_6m_ago": 62.71
         },
         {
-          "ticker": "SOFI",
-          "market_cap": 21543639040,
-          "market_cap_B": 21.5,
-          "return_6m": -38.89,
-          "price": 17.74,
-          "price_6m_ago": 29.03
+          "ticker": "TEAM",
+          "market_cap": 26366480384,
+          "market_cap_B": 26.4,
+          "return_6m": -34.03,
+          "price": 101.53,
+          "price_6m_ago": 153.91
+        },
+        {
+          "ticker": "U",
+          "market_cap": 13174626304,
+          "market_cap_B": 13.2,
+          "return_6m": -34.22,
+          "price": 29.22,
+          "price_6m_ago": 44.42
+        },
+        {
+          "ticker": "CHTR",
+          "market_cap": 20228743168,
+          "market_cap_B": 20.2,
+          "return_6m": -34.75,
+          "price": 129.01,
+          "price_6m_ago": 197.72
         },
         {
           "ticker": "ZTS",
-          "market_cap": 32330874880,
-          "market_cap_B": 32.3,
-          "return_6m": -39.45,
-          "price": 76.39,
-          "price_6m_ago": 126.16
+          "market_cap": 34070669312,
+          "market_cap_B": 34.1,
+          "return_6m": -37.11,
+          "price": 77.59,
+          "price_6m_ago": 123.37
+        },
+        {
+          "ticker": "COIN",
+          "market_cap": 43197030400,
+          "market_cap_B": 43.2,
+          "return_6m": -38.0,
+          "price": 163.22,
+          "price_6m_ago": 263.26
+        },
+        {
+          "ticker": "HUBS",
+          "market_cap": 11636672512,
+          "market_cap_B": 11.6,
+          "return_6m": -40.41,
+          "price": 222.45,
+          "price_6m_ago": 373.32
+        },
+        {
+          "ticker": "SOFI",
+          "market_cap": 21960531968,
+          "market_cap_B": 22.0,
+          "return_6m": -43.48,
+          "price": 16.68,
+          "price_6m_ago": 29.51
         },
         {
           "ticker": "ZS",
-          "market_cap": 21819463680,
-          "market_cap_B": 21.8,
-          "return_6m": -40.75,
-          "price": 144.15,
-          "price_6m_ago": 243.28
+          "market_cap": 22011092992,
+          "market_cap_B": 22.0,
+          "return_6m": -44.4,
+          "price": 134.37,
+          "price_6m_ago": 241.68
+        },
+        {
+          "ticker": "TTD",
+          "market_cap": 10208402432,
+          "market_cap_B": 10.2,
+          "return_6m": -48.54,
+          "price": 20.56,
+          "price_6m_ago": 39.95
         },
         {
           "ticker": "RBLX",
-          "market_cap": 31277533184,
-          "market_cap_B": 31.3,
-          "return_6m": -52.02,
-          "price": 45.0,
-          "price_6m_ago": 93.79
+          "market_cap": 31438626816,
+          "market_cap_B": 31.4,
+          "return_6m": -53.38,
+          "price": 43.68,
+          "price_6m_ago": 93.7
         }
       ]
     }

@@ -177,8 +177,8 @@ export default function RotationPage() {
                 <th style={{ textAlign: 'left', padding: '4px 8px' }}>Ticker</th>
                 <th style={{ textAlign: 'right', padding: '4px 8px' }}>6mo Return</th>
                 <th style={{ textAlign: 'right', padding: '4px 8px' }}>Price</th>
-                <th style={{ textAlign: 'right', padding: '4px 8px' }}>6mo Ago</th>
                 <th style={{ textAlign: 'right', padding: '4px 8px' }}>Mkt Cap</th>
+                <th style={{ textAlign: 'left', padding: '4px 8px' }}>Recent News / Catalyst</th>
               </tr>
             </thead>
             <tbody>
@@ -188,8 +188,20 @@ export default function RotationPage() {
                   <td style={{ padding: '6px 8px', color: accentColor, fontWeight: 700, fontSize: 14 }}>{stock.ticker}</td>
                   <td style={{ padding: '6px 8px', textAlign: 'right', color: '#4ade80', fontWeight: 700 }}>+{stock.return_6m.toFixed(1)}%</td>
                   <td style={{ padding: '6px 8px', textAlign: 'right' }}>${stock.price.toFixed(2)}</td>
-                  <td style={{ padding: '6px 8px', textAlign: 'right', color: '#71717a' }}>${stock.price_6m_ago.toFixed(2)}</td>
                   <td style={{ padding: '6px 8px', textAlign: 'right', color: '#71717a' }}>${(stock.market_cap_B).toFixed(0)}B</td>
+                  <td style={{ padding: '6px 8px', maxWidth: 300 }}>
+                    {stock.news && stock.news.length > 0 ? (
+                      <div style={{ fontSize: 10, lineHeight: 1.5 }}>
+                        {stock.news.slice(0, 2).map((n, j) => (
+                          <div key={j} style={{ color: '#a1a1aa', marginBottom: 2 }}>
+                            <span style={{ color: '#52525b' }}>{n.date}</span> {n.title}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <span style={{ color: '#52525b', fontSize: 10 }}>—</span>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>

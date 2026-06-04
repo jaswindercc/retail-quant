@@ -180,6 +180,41 @@ def classify_by_cap(caps, momentum):
     return results
 
 
+def get_news_for_top_stocks(results):
+    """Fetch recent news headlines for top 10 stocks in each universe."""
+    all_top_tickers = set()
+    for data in results.values():
+        for stock in data['top_10']:
+            all_top_tickers.add(stock['ticker'])
+    
+    print(f"  📰 Fetching news for {len(all_top_tickers)} top stocks...")
+    news_map = {}
+    
+    for ticker in all_top_tickers:
+        try:
+            t = yf.Ticker(ticker)
+            articles = t.news or []
+            headlines = []
+            for article in articles[:3]:
+                content = article.get('content', {})
+                title = content.get('title', '')
+                summary = content.get('summary', '')
+                pub_date = content.get('pubDate', '')[:10]
+                if title:
+                    headlines.append({
+                        'title': title,
+                        'summary': summary[:150] if summary else '',
+                        'date': pub_date,
+                    })
+            if headlines:
+                news_map[ticker] = headlines
+        except Exception:
+            pass
+    
+    print(f"  ✅ Got news for {len(news_map)} stocks")
+    return news_map
+
+
 def main():
     print("🚀 Dynamic Universe Scanner — Live Market Cap + Momentum Ranking")
     print(f"   Date: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
@@ -194,6 +229,14 @@ def main():
     
     # Step 3: Classify and rank
     results = classify_by_cap(caps, momentum)
+    
+    # Step 4: Fetch news for top stocks
+    news_map = get_news_for_top_stocks(results)
+    
+    # Attach news to top 10 stocks
+    for data in results.values():
+        for stock in data['top_10']:
+            stock['news'] = news_map.get(stock['ticker'], [])
     
     # Print results
     for name, data in results.items():
