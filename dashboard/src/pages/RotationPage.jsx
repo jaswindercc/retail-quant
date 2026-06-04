@@ -168,7 +168,7 @@ export default function RotationPage() {
 
       <h1 style={{ marginBottom: '0.25rem' }}>🎯 {data.label} — Weekly Rotation Scanner</h1>
       <p style={{ color: '#71717a', fontSize: 12, marginBottom: '1rem' }}>
-        Dynamic universe by market cap · Top {params.top_n} by 3mo momentum · Weekly rebalance (Monday) · Backtest: {params.period}
+        Dynamic universe by market cap · Top {params.top_n} by {params.lookback_months}mo momentum · Weekly rebalance (Sunday) · Backtest: {params.period}
       </p>
 
       {/* ═══ STATUS BAR ═══ */}
@@ -217,17 +217,17 @@ export default function RotationPage() {
                   <td style={{ padding: '6px 8px', textAlign: 'right', color: '#4ade80', fontWeight: 700 }}>+{stock.return_3m.toFixed(1)}%</td>
                   <td style={{ padding: '6px 8px', textAlign: 'right' }}>${stock.price.toFixed(2)}</td>
                   <td style={{ padding: '6px 8px', textAlign: 'right', color: '#71717a' }}>${(stock.market_cap_B).toFixed(0)}B</td>
-                  <td style={{ padding: '6px 8px', maxWidth: 300 }}>
+                  <td style={{ padding: '6px 8px', maxWidth: 220 }}>
                     {stock.news && stock.news.length > 0 ? (
-                      <div style={{ fontSize: 10, lineHeight: 1.5 }}>
-                        {stock.news.slice(0, 2).map((n, j) => (
-                          <div key={j} style={{ color: '#a1a1aa', marginBottom: 2 }}>
-                            <span style={{ color: '#52525b' }}>{n.date}</span> {n.title}
+                      <div style={{ fontSize: 9, lineHeight: 1.3 }}>
+                        {stock.news.slice(0, 1).map((n, j) => (
+                          <div key={j} style={{ color: '#a1a1aa', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 220 }}>
+                            {n.title.length > 50 ? n.title.slice(0, 50) + '…' : n.title}
                           </div>
                         ))}
                       </div>
                     ) : (
-                      <span style={{ color: '#52525b', fontSize: 10 }}>—</span>
+                      <span style={{ color: '#52525b', fontSize: 9 }}>—</span>
                     )}
                   </td>
                 </tr>
@@ -353,7 +353,7 @@ export default function RotationPage() {
           <div>☐ <strong>3.</strong> Scan top-10 watchlist above — any closing {'>'} 20d high with volume ≥ 1.2×?</div>
           <div>☐ <strong>4.</strong> If signal + under {params.max_positions || 3} positions{skipActive ? ' + ⚠️ SKIP RULE ACTIVE — skip this one' : ''} → Enter at close. Stop = entry − 1×ATR.</div>
           <div>☐ <strong>5.</strong> Log trade. Update loss counter (currently: {consecutiveLossCount} consecutive losses).</div>
-          <div style={{ color: '#f59e0b', marginTop: 4 }}>☐ <strong>Monday:</strong> Rebalance watchlist — rank all {params.pool?.length} stocks by 6-month return, new top 10.</div>
+          <div style={{ color: '#f59e0b', marginTop: 4 }}>☐ <strong>Sunday:</strong> Scanner auto-rebalances watchlist — rank all stocks by {params.lookback_months}-month return, new top 10.</div>
         </div>
       </div>
 
@@ -446,7 +446,7 @@ export default function RotationPage() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', fontSize: 12, lineHeight: 1.9, color: '#d4d4d8' }}>
                 <div>
                   <div><strong style={{ color: accentColor }}>Universe:</strong> {params.pool?.length} stocks ({data.label})</div>
-                  <div><strong style={{ color: accentColor }}>Watchlist:</strong> Top 10 by 3mo return (weekly rebalance on Monday)</div>
+                  <div><strong style={{ color: accentColor }}>Watchlist:</strong> Top 10 by {params.lookback_months}mo return (auto-rebalance every Sunday)</div>
                   <div><strong style={{ color: accentColor }}>Regime:</strong> SPY &gt; 200 SMA = ON. Below = 100% cash, close all.</div>
                   <div><strong style={{ color: accentColor }}>Entry:</strong> Close &gt; 20d high + volume ≥ 1.2× avg + price &gt; 50 SMA</div>
                   <div><strong style={{ color: accentColor }}>Max positions:</strong> 3 at a time</div>
@@ -462,9 +462,9 @@ export default function RotationPage() {
             </div>
 
             <div style={{ background: '#1e1e2e', border: '1px solid #f59e0b', borderRadius: 8, padding: '1.25rem', marginBottom: '1rem' }}>
-              <h2 style={{ color: '#f59e0b', fontSize: 14, marginBottom: '0.75rem' }}>📆 Weekly Routine (Every Monday)</h2>
+              <h2 style={{ color: '#f59e0b', fontSize: 14, marginBottom: '0.75rem' }}>📆 Weekly Routine (Every Sunday)</h2>
               <div style={{ fontSize: 12, color: '#d4d4d8', lineHeight: 2 }}>
-                <div>1. <strong>Rebalance watchlist:</strong> Rank all {params.pool?.length} stocks by 6-month return. New top 10 = your watchlist for the week.</div>
+                <div>1. <strong>Rebalance watchlist:</strong> Scanner runs Sunday 6PM ET. Ranks all stocks by {params.lookback_months}-month return. New top 10 = your watchlist for the week.</div>
                 <div>2. <strong>Do NOT close open positions</strong> just because a stock left the top 10. Ride the trail.</div>
                 <div>3. <strong>Review regime:</strong> If SPY crossed below 200 SMA, close all at next open. Go cash.</div>
                 <div>4. <strong>New entries only from current top 10.</strong> Existing positions stay regardless.</div>
@@ -621,7 +621,7 @@ export default function RotationPage() {
             </thead>
             <tbody>
               {TABS.map(tab => {
-                const d = dataMap[tab.key]
+                const d = dataMap[`${tab.key}_${activeLookback}`]
                 if (!d) return null
                 const s = d.summary
                 const retDD = s.max_drawdown > 0 ? (s.total_pnl / s.max_drawdown).toFixed(1) : '—'

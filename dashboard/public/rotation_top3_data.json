@@ -1,0 +1,6797 @@
+{
+  "lastUpdated": "2026-06-04 18:20",
+  "strategy": "Top-3 Pure Momentum Rotation",
+  "universe": "S&P 500",
+  "universe_size": 362,
+  "params": {
+    "capital": 40000.0,
+    "max_positions": 3,
+    "stop_loss_pct": 0.1,
+    "lookback_days": 63,
+    "rotation_freq": "weekly (Monday)",
+    "period": "2025-01-01 to 2026-06-04"
+  },
+  "stats": {
+    "total_trades": 77,
+    "closed_trades": 75,
+    "wins": 38,
+    "losses": 37,
+    "win_rate": 50.7,
+    "total_pnl": 37885.61,
+    "profit_factor": 2.06,
+    "max_drawdown": 12735.64,
+    "avg_winner": 1937.79,
+    "avg_loser": 966.23,
+    "avg_winner_pct": 14.61,
+    "avg_loser_pct": 7.3,
+    "best_trade": 15399.07,
+    "worst_trade": -1333.29,
+    "avg_duration": 19.3,
+    "max_lose_streak": 6,
+    "monthly_pnl": {
+      "2025-01": -3624.879999999999,
+      "2025-02": -1529.0500000000002,
+      "2025-03": -4607.65,
+      "2025-04": -2974.0600000000004,
+      "2025-05": 3678.0599999999986,
+      "2025-06": 1874.51,
+      "2025-07": 1768.26,
+      "2025-08": 2907.6699999999996,
+      "2025-09": 712.6,
+      "2025-10": 512.51,
+      "2025-11": 122.15,
+      "2025-12": 7158.45,
+      "2026-02": 9130.82,
+      "2026-03": 12389.49,
+      "2026-04": 4511.759999999999,
+      "2026-05": 599.2799999999997,
+      "2026-06": 5255.6900000000005
+    },
+    "total_return_pct": 94.71
+  },
+  "trades": [
+    {
+      "stock": "PLTR",
+      "entryDate": "2025-01-06",
+      "entryPrice": 75.92,
+      "exitDate": "2025-01-08",
+      "exitPrice": 68.33,
+      "pnlDollar": -1328.6,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 2,
+      "rank_at_entry": 1
+    },
+    {
+      "stock": "SOFI",
+      "entryDate": "2025-01-06",
+      "entryPrice": 15.29,
+      "exitDate": "2025-01-13",
+      "exitPrice": 13.76,
+      "pnlDollar": -1333.29,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 7,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "HOOD",
+      "entryDate": "2025-01-06",
+      "entryPrice": 42.71,
+      "exitDate": "2025-01-13",
+      "exitPrice": 38.44,
+      "pnlDollar": -1332.55,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 7,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "MRVL",
+      "entryDate": "2025-01-13",
+      "entryPrice": 114.71,
+      "exitDate": "2025-01-27",
+      "exitPrice": 103.24,
+      "pnlDollar": -1330.63,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 14,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "TSLA",
+      "entryDate": "2025-01-13",
+      "entryPrice": 403.31,
+      "exitDate": "2025-01-27",
+      "exitPrice": 397.15,
+      "pnlDollar": -203.28,
+      "pnlPct": -1.53,
+      "exitReason": "Rotated Out",
+      "durationDays": 14,
+      "rank_at_entry": 1
+    },
+    {
+      "stock": "SOFI",
+      "entryDate": "2025-01-13",
+      "entryPrice": 14.07,
+      "exitDate": "2025-01-27",
+      "exitPrice": 16.08,
+      "pnlDollar": 1903.47,
+      "pnlPct": 14.29,
+      "exitReason": "Rotated Out",
+      "durationDays": 14,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "TWLO",
+      "entryDate": "2025-01-27",
+      "entryPrice": 138.99,
+      "exitDate": "2025-02-10",
+      "exitPrice": 144.46,
+      "pnlDollar": 519.65,
+      "pnlPct": 3.94,
+      "exitReason": "Rotated Out",
+      "durationDays": 14,
+      "rank_at_entry": 1
+    },
+    {
+      "stock": "NET",
+      "entryDate": "2025-02-10",
+      "entryPrice": 172.49,
+      "exitDate": "2025-02-20",
+      "exitPrice": 155.24,
+      "pnlDollar": -1328.17,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 10,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "HOOD",
+      "entryDate": "2025-01-27",
+      "entryPrice": 47.74,
+      "exitDate": "2025-02-24",
+      "exitPrice": 49.93,
+      "pnlDollar": 611.01,
+      "pnlPct": 4.59,
+      "exitReason": "Rotated Out",
+      "durationDays": 28,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "SMCI",
+      "entryDate": "2025-02-24",
+      "entryPrice": 51.61,
+      "exitDate": "2025-02-25",
+      "exitPrice": 46.45,
+      "pnlDollar": -1331.54,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 1,
+      "rank_at_entry": 1
+    },
+    {
+      "stock": "NET",
+      "entryDate": "2025-02-24",
+      "entryPrice": 148.0,
+      "exitDate": "2025-03-04",
+      "exitPrice": 133.2,
+      "pnlDollar": -1332.0,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 8,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "PLTR",
+      "entryDate": "2025-01-27",
+      "entryPrice": 75.44,
+      "exitDate": "2025-03-10",
+      "exitPrice": 76.38,
+      "pnlDollar": 165.44,
+      "pnlPct": 1.25,
+      "exitReason": "Rotated Out",
+      "durationDays": 42,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "GILD",
+      "entryDate": "2025-03-03",
+      "entryPrice": 112.2,
+      "exitDate": "2025-03-17",
+      "exitPrice": 109.35,
+      "pnlDollar": -335.82,
+      "pnlPct": -2.54,
+      "exitReason": "Rotated Out",
+      "durationDays": 14,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "ABBV",
+      "entryDate": "2025-03-10",
+      "entryPrice": 207.9,
+      "exitDate": "2025-03-24",
+      "exitPrice": 200.72,
+      "pnlDollar": -459.99,
+      "pnlPct": -3.46,
+      "exitReason": "Rotated Out",
+      "durationDays": 14,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "SMCI",
+      "entryDate": "2025-03-24",
+      "entryPrice": 41.72,
+      "exitDate": "2025-03-26",
+      "exitPrice": 37.55,
+      "pnlDollar": -1330.87,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 2,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "SPOT",
+      "entryDate": "2025-03-17",
+      "entryPrice": 597.46,
+      "exitDate": "2025-03-31",
+      "exitPrice": 537.71,
+      "pnlDollar": -1314.41,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 14,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "OKTA",
+      "entryDate": "2025-03-10",
+      "entryPrice": 105.19,
+      "exitDate": "2025-04-04",
+      "exitPrice": 94.67,
+      "pnlDollar": -1325.39,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 25,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "NEM",
+      "entryDate": "2025-03-31",
+      "entryPrice": 47.55,
+      "exitDate": "2025-04-07",
+      "exitPrice": 42.79,
+      "pnlDollar": -1331.38,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 7,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "ED",
+      "entryDate": "2025-04-07",
+      "entryPrice": 101.15,
+      "exitDate": "2025-04-14",
+      "exitPrice": 107.72,
+      "pnlDollar": 861.15,
+      "pnlPct": 6.5,
+      "exitReason": "Rotated Out",
+      "durationDays": 7,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "T",
+      "entryDate": "2025-04-07",
+      "entryPrice": 25.44,
+      "exitDate": "2025-04-14",
+      "exitPrice": 26.06,
+      "pnlDollar": 327.25,
+      "pnlPct": 2.46,
+      "exitReason": "Rotated Out",
+      "durationDays": 7,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "NEM",
+      "entryDate": "2025-04-14",
+      "entryPrice": 53.96,
+      "exitDate": "2025-04-28",
+      "exitPrice": 53.25,
+      "pnlDollar": -175.15,
+      "pnlPct": -1.31,
+      "exitReason": "Rotated Out",
+      "durationDays": 14,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "SMCI",
+      "entryDate": "2025-04-28",
+      "entryPrice": 37.27,
+      "exitDate": "2025-04-30",
+      "exitPrice": 33.54,
+      "pnlDollar": -1330.54,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 2,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "PLTR",
+      "entryDate": "2025-04-14",
+      "entryPrice": 92.62,
+      "exitDate": "2025-05-05",
+      "exitPrice": 123.77,
+      "pnlDollar": 4454.45,
+      "pnlPct": 33.63,
+      "exitReason": "Rotated Out",
+      "durationDays": 21,
+      "rank_at_entry": 1
+    },
+    {
+      "stock": "PM",
+      "entryDate": "2025-03-31",
+      "entryPrice": 153.3,
+      "exitDate": "2025-05-12",
+      "exitPrice": 159.19,
+      "pnlDollar": 506.65,
+      "pnlPct": 3.84,
+      "exitReason": "Rotated Out",
+      "durationDays": 42,
+      "rank_at_entry": 1
+    },
+    {
+      "stock": "EA",
+      "entryDate": "2025-05-05",
+      "entryPrice": 153.93,
+      "exitDate": "2025-05-12",
+      "exitPrice": 148.49,
+      "pnlDollar": -467.97,
+      "pnlPct": -3.53,
+      "exitReason": "Rotated Out",
+      "durationDays": 7,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "MNST",
+      "entryDate": "2025-05-05",
+      "entryPrice": 60.91,
+      "exitDate": "2025-05-19",
+      "exitPrice": 62.9,
+      "pnlDollar": 433.82,
+      "pnlPct": 3.27,
+      "exitReason": "Rotated Out",
+      "durationDays": 14,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "PAYC",
+      "entryDate": "2025-05-12",
+      "entryPrice": 255.6,
+      "exitDate": "2025-05-19",
+      "exitPrice": 257.13,
+      "pnlDollar": 79.73,
+      "pnlPct": 0.6,
+      "exitReason": "Rotated Out",
+      "durationDays": 7,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "OKTA",
+      "entryDate": "2025-05-12",
+      "entryPrice": 124.17,
+      "exitDate": "2025-05-28",
+      "exitPrice": 111.75,
+      "pnlDollar": -1328.62,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 16,
+      "rank_at_entry": 1
+    },
+    {
+      "stock": "RBLX",
+      "entryDate": "2025-05-19",
+      "entryPrice": 81.21,
+      "exitDate": "2025-06-02",
+      "exitPrice": 89.95,
+      "pnlDollar": 1433.36,
+      "pnlPct": 10.76,
+      "exitReason": "Rotated Out",
+      "durationDays": 14,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "MOS",
+      "entryDate": "2025-05-19",
+      "entryPrice": 33.95,
+      "exitDate": "2025-06-09",
+      "exitPrice": 33.42,
+      "pnlDollar": -207.84,
+      "pnlPct": -1.56,
+      "exitReason": "Rotated Out",
+      "durationDays": 21,
+      "rank_at_entry": 1
+    },
+    {
+      "stock": "GEV",
+      "entryDate": "2025-06-02",
+      "entryPrice": 484.1,
+      "exitDate": "2025-06-09",
+      "exitPrice": 478.95,
+      "pnlDollar": -139.01,
+      "pnlPct": -1.06,
+      "exitReason": "Rotated Out",
+      "durationDays": 7,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "PLTR",
+      "entryDate": "2025-06-02",
+      "entryPrice": 132.04,
+      "exitDate": "2025-06-23",
+      "exitPrice": 139.92,
+      "pnlDollar": 788.0,
+      "pnlPct": 5.97,
+      "exitReason": "Rotated Out",
+      "durationDays": 21,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "RBLX",
+      "entryDate": "2025-06-09",
+      "entryPrice": 93.42,
+      "exitDate": "2025-07-07",
+      "exitPrice": 107.76,
+      "pnlDollar": 2036.28,
+      "pnlPct": 15.35,
+      "exitReason": "Rotated Out",
+      "durationDays": 28,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "STX",
+      "entryDate": "2025-07-07",
+      "entryPrice": 147.28,
+      "exitDate": "2025-07-21",
+      "exitPrice": 148.51,
+      "pnlDollar": 110.76,
+      "pnlPct": 0.84,
+      "exitReason": "Rotated Out",
+      "durationDays": 14,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "RBLX",
+      "entryDate": "2025-07-21",
+      "entryPrice": 124.5,
+      "exitDate": "2025-07-28",
+      "exitPrice": 120.96,
+      "pnlDollar": -378.78,
+      "pnlPct": -2.84,
+      "exitReason": "Rotated Out",
+      "durationDays": 7,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "COIN",
+      "entryDate": "2025-06-23",
+      "entryPrice": 307.59,
+      "exitDate": "2025-08-04",
+      "exitPrice": 318.17,
+      "pnlDollar": 454.94,
+      "pnlPct": 3.44,
+      "exitReason": "Rotated Out",
+      "durationDays": 42,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "STX",
+      "entryDate": "2025-07-28",
+      "entryPrice": 149.33,
+      "exitDate": "2025-08-04",
+      "exitPrice": 153.65,
+      "pnlDollar": 384.25,
+      "pnlPct": 2.89,
+      "exitReason": "Rotated Out",
+      "durationDays": 7,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "SMCI",
+      "entryDate": "2025-08-04",
+      "entryPrice": 58.23,
+      "exitDate": "2025-08-06",
+      "exitPrice": 52.41,
+      "pnlDollar": -1327.64,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 2,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "RBLX",
+      "entryDate": "2025-08-04",
+      "entryPrice": 130.7,
+      "exitDate": "2025-08-15",
+      "exitPrice": 117.63,
+      "pnlDollar": -1333.14,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 11,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "ORCL",
+      "entryDate": "2025-08-11",
+      "entryPrice": 250.7,
+      "exitDate": "2025-08-18",
+      "exitPrice": 247.12,
+      "pnlDollar": -189.83,
+      "pnlPct": -1.43,
+      "exitReason": "Rotated Out",
+      "durationDays": 7,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "SOFI",
+      "entryDate": "2025-08-18",
+      "entryPrice": 24.23,
+      "exitDate": "2025-08-20",
+      "exitPrice": 21.81,
+      "pnlDollar": -1332.65,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 2,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "HOOD",
+      "entryDate": "2025-06-09",
+      "entryPrice": 73.4,
+      "exitDate": "2025-08-25",
+      "exitPrice": 107.94,
+      "pnlDollar": 6251.74,
+      "pnlPct": 47.06,
+      "exitReason": "Rotated Out",
+      "durationDays": 77,
+      "rank_at_entry": 1
+    },
+    {
+      "stock": "SOFI",
+      "entryDate": "2025-08-25",
+      "entryPrice": 26.15,
+      "exitDate": "2025-09-29",
+      "exitPrice": 27.55,
+      "pnlDollar": 712.6,
+      "pnlPct": 5.35,
+      "exitReason": "Rotated Out",
+      "durationDays": 35,
+      "rank_at_entry": 1
+    },
+    {
+      "stock": "U",
+      "entryDate": "2025-08-18",
+      "entryPrice": 38.34,
+      "exitDate": "2025-10-06",
+      "exitPrice": 37.53,
+      "pnlDollar": -281.07,
+      "pnlPct": -2.11,
+      "exitReason": "Rotated Out",
+      "durationDays": 49,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "STX",
+      "entryDate": "2025-10-06",
+      "entryPrice": 241.77,
+      "exitDate": "2025-10-10",
+      "exitPrice": 217.6,
+      "pnlDollar": -1329.75,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 4,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "NIO",
+      "entryDate": "2025-08-25",
+      "entryPrice": 6.09,
+      "exitDate": "2025-10-20",
+      "exitPrice": 7.06,
+      "pnlDollar": 2123.33,
+      "pnlPct": 15.93,
+      "exitReason": "Rotated Out",
+      "durationDays": 56,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "INTC",
+      "entryDate": "2025-10-20",
+      "entryPrice": 38.1,
+      "exitDate": "2025-11-10",
+      "exitPrice": 38.45,
+      "pnlDollar": 122.15,
+      "pnlPct": 0.92,
+      "exitReason": "Rotated Out",
+      "durationDays": 21,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "MU",
+      "entryDate": "2025-10-13",
+      "entryPrice": 192.61,
+      "exitDate": "2025-12-15",
+      "exitPrice": 237.3,
+      "pnlDollar": 3083.83,
+      "pnlPct": 23.2,
+      "exitReason": "Rotated Out",
+      "durationDays": 63,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "WBD",
+      "entryDate": "2025-11-10",
+      "entryPrice": 22.98,
+      "exitDate": "2025-12-15",
+      "exitPrice": 29.71,
+      "pnlDollar": 3903.4,
+      "pnlPct": 29.29,
+      "exitReason": "Rotated Out",
+      "durationDays": 35,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "TER",
+      "entryDate": "2025-12-15",
+      "entryPrice": 194.55,
+      "exitDate": "2025-12-22",
+      "exitPrice": 197.06,
+      "pnlDollar": 171.22,
+      "pnlPct": 1.29,
+      "exitReason": "Rotated Out",
+      "durationDays": 7,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "ALB",
+      "entryDate": "2025-12-15",
+      "entryPrice": 131.89,
+      "exitDate": "2026-02-02",
+      "exitPrice": 164.52,
+      "pnlDollar": 3295.55,
+      "pnlPct": 24.74,
+      "exitReason": "Rotated Out",
+      "durationDays": 49,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "MU",
+      "entryDate": "2025-12-22",
+      "entryPrice": 276.36,
+      "exitDate": "2026-02-09",
+      "exitPrice": 383.34,
+      "pnlDollar": 5134.88,
+      "pnlPct": 38.71,
+      "exitReason": "Rotated Out",
+      "durationDays": 49,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "STX",
+      "entryDate": "2026-02-02",
+      "entryPrice": 432.2,
+      "exitDate": "2026-02-09",
+      "exitPrice": 424.26,
+      "pnlDollar": -238.09,
+      "pnlPct": -1.84,
+      "exitReason": "Rotated Out",
+      "durationDays": 7,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "ALB",
+      "entryDate": "2026-02-09",
+      "entryPrice": 165.35,
+      "exitDate": "2026-02-23",
+      "exitPrice": 177.08,
+      "pnlDollar": 938.48,
+      "pnlPct": 7.09,
+      "exitReason": "Rotated Out",
+      "durationDays": 14,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "MU",
+      "entryDate": "2026-02-23",
+      "entryPrice": 420.79,
+      "exitDate": "2026-03-03",
+      "exitPrice": 378.71,
+      "pnlDollar": -1304.46,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 8,
+      "rank_at_entry": 1
+    },
+    {
+      "stock": "TER",
+      "entryDate": "2026-02-09",
+      "entryPrice": 309.76,
+      "exitDate": "2026-03-06",
+      "exitPrice": 278.79,
+      "pnlDollar": -1331.98,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 25,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "DOW",
+      "entryDate": "2026-03-09",
+      "entryPrice": 33.96,
+      "exitDate": "2026-03-16",
+      "exitPrice": 35.64,
+      "pnlDollar": 655.81,
+      "pnlPct": 4.93,
+      "exitReason": "Rotated Out",
+      "durationDays": 7,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "MU",
+      "entryDate": "2026-03-09",
+      "entryPrice": 389.16,
+      "exitDate": "2026-03-23",
+      "exitPrice": 404.18,
+      "pnlDollar": 510.81,
+      "pnlPct": 3.86,
+      "exitReason": "Rotated Out",
+      "durationDays": 14,
+      "rank_at_entry": 1
+    },
+    {
+      "stock": "CF",
+      "entryDate": "2026-03-16",
+      "entryPrice": 121.83,
+      "exitDate": "2026-03-23",
+      "exitPrice": 119.69,
+      "pnlDollar": -233.4,
+      "pnlPct": -1.76,
+      "exitReason": "Rotated Out",
+      "durationDays": 7,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "TER",
+      "entryDate": "2026-03-23",
+      "entryPrice": 303.81,
+      "exitDate": "2026-03-30",
+      "exitPrice": 273.42,
+      "pnlDollar": -1306.36,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 7,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "WDC",
+      "entryDate": "2025-09-29",
+      "entryPrice": 116.59,
+      "exitDate": "2026-03-30",
+      "exitPrice": 251.67,
+      "pnlDollar": 15399.07,
+      "pnlPct": 115.86,
+      "exitReason": "Rotated Out",
+      "durationDays": 182,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "OXY",
+      "entryDate": "2026-03-30",
+      "entryPrice": 66.24,
+      "exitDate": "2026-04-06",
+      "exitPrice": 62.96,
+      "pnlDollar": -659.28,
+      "pnlPct": -4.95,
+      "exitReason": "Rotated Out",
+      "durationDays": 7,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "CF",
+      "entryDate": "2026-03-30",
+      "entryPrice": 137.04,
+      "exitDate": "2026-04-08",
+      "exitPrice": 123.34,
+      "pnlDollar": -1329.29,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 9,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "DOW",
+      "entryDate": "2026-03-23",
+      "entryPrice": 35.68,
+      "exitDate": "2026-04-13",
+      "exitPrice": 39.71,
+      "pnlDollar": 1502.83,
+      "pnlPct": 11.29,
+      "exitReason": "Rotated Out",
+      "durationDays": 21,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "TER",
+      "entryDate": "2026-04-13",
+      "entryPrice": 369.99,
+      "exitDate": "2026-04-20",
+      "exitPrice": 375.07,
+      "pnlDollar": 182.81,
+      "pnlPct": 1.37,
+      "exitReason": "Rotated Out",
+      "durationDays": 7,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "STX",
+      "entryDate": "2026-04-13",
+      "entryPrice": 513.28,
+      "exitDate": "2026-04-20",
+      "exitPrice": 539.75,
+      "pnlDollar": 661.75,
+      "pnlPct": 5.16,
+      "exitReason": "Rotated Out",
+      "durationDays": 7,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "WDC",
+      "entryDate": "2026-04-06",
+      "entryPrice": 304.15,
+      "exitDate": "2026-04-27",
+      "exitPrice": 400.73,
+      "pnlDollar": 4152.94,
+      "pnlPct": 31.75,
+      "exitReason": "Rotated Out",
+      "durationDays": 21,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "DELL",
+      "entryDate": "2026-04-20",
+      "entryPrice": 203.61,
+      "exitDate": "2026-05-04",
+      "exitPrice": 211.64,
+      "pnlDollar": 521.95,
+      "pnlPct": 3.94,
+      "exitReason": "Rotated Out",
+      "durationDays": 14,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "MRVL",
+      "entryDate": "2026-04-20",
+      "entryPrice": 147.84,
+      "exitDate": "2026-05-11",
+      "exitPrice": 170.84,
+      "pnlDollar": 2070.0,
+      "pnlPct": 15.56,
+      "exitReason": "Rotated Out",
+      "durationDays": 21,
+      "rank_at_entry": 1
+    },
+    {
+      "stock": "ARM",
+      "entryDate": "2026-05-04",
+      "entryPrice": 203.26,
+      "exitDate": "2026-05-11",
+      "exitPrice": 212.65,
+      "pnlDollar": 610.35,
+      "pnlPct": 4.62,
+      "exitReason": "Rotated Out",
+      "durationDays": 7,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "MU",
+      "entryDate": "2026-05-11",
+      "entryPrice": 795.33,
+      "exitDate": "2026-05-12",
+      "exitPrice": 715.8,
+      "pnlDollar": -1272.53,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 1,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "AMD",
+      "entryDate": "2026-05-11",
+      "entryPrice": 458.79,
+      "exitDate": "2026-05-18",
+      "exitPrice": 412.91,
+      "pnlDollar": -1330.49,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 7,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "INTC",
+      "entryDate": "2026-04-27",
+      "entryPrice": 84.99,
+      "exitDate": "2026-06-01",
+      "exitPrice": 109.33,
+      "pnlDollar": 3797.04,
+      "pnlPct": 28.64,
+      "exitReason": "Rotated Out",
+      "durationDays": 35,
+      "rank_at_entry": 1
+    },
+    {
+      "stock": "AMD",
+      "entryDate": "2026-05-18",
+      "entryPrice": 420.99,
+      "exitDate": "2026-06-01",
+      "exitPrice": 510.13,
+      "pnlDollar": 2763.34,
+      "pnlPct": 21.17,
+      "exitReason": "Rotated Out",
+      "durationDays": 14,
+      "rank_at_entry": 3
+    },
+    {
+      "stock": "DELL",
+      "entryDate": "2026-06-01",
+      "entryPrice": 465.96,
+      "exitDate": "2026-06-03",
+      "exitPrice": 419.36,
+      "pnlDollar": -1304.69,
+      "pnlPct": -10.0,
+      "exitReason": "Stop Loss",
+      "durationDays": 2,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "MRVL",
+      "entryDate": "2026-05-18",
+      "entryPrice": 168.93,
+      "exitDate": "2026-06-03",
+      "exitPrice": 301.65,
+      "pnlDollar": 10352.16,
+      "pnlPct": 78.57,
+      "exitReason": "Open",
+      "durationDays": 16,
+      "rank_at_entry": 2
+    },
+    {
+      "stock": "ARM",
+      "entryDate": "2026-06-01",
+      "entryPrice": 408.85,
+      "exitDate": "2026-06-03",
+      "exitPrice": 411.83,
+      "pnlDollar": 95.36,
+      "pnlPct": 0.73,
+      "exitReason": "Open",
+      "durationDays": 2,
+      "rank_at_entry": 1
+    }
+  ],
+  "equity_curve": [
+    {
+      "date": "2025-01-02",
+      "realized_pnl": 0,
+      "total_pnl": 0,
+      "positions": 0
+    },
+    {
+      "date": "2025-01-03",
+      "realized_pnl": 0,
+      "total_pnl": 0,
+      "positions": 0
+    },
+    {
+      "date": "2025-01-06",
+      "realized_pnl": 0,
+      "total_pnl": 0.0,
+      "positions": 3
+    },
+    {
+      "date": "2025-01-07",
+      "realized_pnl": 0,
+      "total_pnl": -2039.91,
+      "positions": 3
+    },
+    {
+      "date": "2025-01-08",
+      "realized_pnl": -1328.6,
+      "total_pnl": -2566.68,
+      "positions": 2
+    },
+    {
+      "date": "2025-01-10",
+      "realized_pnl": -1328.6,
+      "total_pnl": -3143.24,
+      "positions": 2
+    },
+    {
+      "date": "2025-01-13",
+      "realized_pnl": -3994.44,
+      "total_pnl": -3994.44,
+      "positions": 3
+    },
+    {
+      "date": "2025-01-14",
+      "realized_pnl": -3994.44,
+      "total_pnl": -3810.8,
+      "positions": 3
+    },
+    {
+      "date": "2025-01-15",
+      "realized_pnl": -3994.44,
+      "total_pnl": -1710.51,
+      "positions": 3
+    },
+    {
+      "date": "2025-01-16",
+      "realized_pnl": -3994.44,
+      "total_pnl": -1255.0,
+      "positions": 3
+    },
+    {
+      "date": "2025-01-17",
+      "realized_pnl": -3994.44,
+      "total_pnl": 182.53,
+      "positions": 3
+    },
+    {
+      "date": "2025-01-21",
+      "realized_pnl": -3994.44,
+      "total_pnl": 1314.9,
+      "positions": 3
+    },
+    {
+      "date": "2025-01-22",
+      "realized_pnl": -3994.44,
+      "total_pnl": 890.89,
+      "positions": 3
+    },
+    {
+      "date": "2025-01-23",
+      "realized_pnl": -3994.44,
+      "total_pnl": 1315.71,
+      "positions": 3
+    },
+    {
+      "date": "2025-01-24",
+      "realized_pnl": -3994.44,
+      "total_pnl": 784.4,
+      "positions": 3
+    },
+    {
+      "date": "2025-01-27",
+      "realized_pnl": -3624.88,
+      "total_pnl": -3624.88,
+      "positions": 3
+    },
+    {
+      "date": "2025-01-28",
+      "realized_pnl": -3624.88,
+      "total_pnl": -1560.6,
+      "positions": 3
+    },
+    {
+      "date": "2025-01-29",
+      "realized_pnl": -3624.88,
+      "total_pnl": -1237.72,
+      "positions": 3
+    },
+    {
+      "date": "2025-01-30",
+      "realized_pnl": -3624.88,
+      "total_pnl": -250.86,
+      "positions": 3
+    },
+    {
+      "date": "2025-01-31",
+      "realized_pnl": -3624.88,
+      "total_pnl": -488.44,
+      "positions": 3
+    },
+    {
+      "date": "2025-02-03",
+      "realized_pnl": -3624.88,
+      "total_pnl": -283.34,
+      "positions": 3
+    },
+    {
+      "date": "2025-02-04",
+      "realized_pnl": -3624.88,
+      "total_pnl": 3380.47,
+      "positions": 3
+    },
+    {
+      "date": "2025-02-05",
+      "realized_pnl": -3624.88,
+      "total_pnl": 3510.78,
+      "positions": 3
+    },
+    {
+      "date": "2025-02-06",
+      "realized_pnl": -3624.88,
+      "total_pnl": 4999.73,
+      "positions": 3
+    },
+    {
+      "date": "2025-02-07",
+      "realized_pnl": -3624.88,
+      "total_pnl": 5505.46,
+      "positions": 3
+    },
+    {
+      "date": "2025-02-10",
+      "realized_pnl": -3105.23,
+      "total_pnl": 6527.6,
+      "positions": 3
+    },
+    {
+      "date": "2025-02-11",
+      "realized_pnl": -3105.23,
+      "total_pnl": 5005.47,
+      "positions": 3
+    },
+    {
+      "date": "2025-02-12",
+      "realized_pnl": -3105.23,
+      "total_pnl": 6583.58,
+      "positions": 3
+    },
+    {
+      "date": "2025-02-13",
+      "realized_pnl": -3105.23,
+      "total_pnl": 9159.0,
+      "positions": 3
+    },
+    {
+      "date": "2025-02-14",
+      "realized_pnl": -3105.23,
+      "total_pnl": 9380.74,
+      "positions": 3
+    },
+    {
+      "date": "2025-02-18",
+      "realized_pnl": -3105.23,
+      "total_pnl": 8810.39,
+      "positions": 3
+    },
+    {
+      "date": "2025-02-19",
+      "realized_pnl": -3105.23,
+      "total_pnl": 5629.3,
+      "positions": 3
+    },
+    {
+      "date": "2025-02-20",
+      "realized_pnl": -4433.4,
+      "total_pnl": 3313.96,
+      "positions": 2
+    },
+    {
+      "date": "2025-02-21",
+      "realized_pnl": -4433.4,
+      "total_pnl": 1203.7,
+      "positions": 2
+    },
+    {
+      "date": "2025-02-24",
+      "realized_pnl": -3822.39,
+      "total_pnl": -1140.15,
+      "positions": 3
+    },
+    {
+      "date": "2025-02-25",
+      "realized_pnl": -5153.93,
+      "total_pnl": -3408.93,
+      "positions": 2
+    },
+    {
+      "date": "2025-02-26",
+      "realized_pnl": -5153.93,
+      "total_pnl": -2990.01,
+      "positions": 2
+    },
+    {
+      "date": "2025-02-27",
+      "realized_pnl": -5153.93,
+      "total_pnl": -4167.05,
+      "positions": 2
+    },
+    {
+      "date": "2025-02-28",
+      "realized_pnl": -5153.93,
+      "total_pnl": -3728.45,
+      "positions": 2
+    },
+    {
+      "date": "2025-03-03",
+      "realized_pnl": -5153.93,
+      "total_pnl": -4207.55,
+      "positions": 3
+    },
+    {
+      "date": "2025-03-04",
+      "realized_pnl": -6485.93,
+      "total_pnl": -5051.65,
+      "positions": 2
+    },
+    {
+      "date": "2025-03-05",
+      "realized_pnl": -6485.93,
+      "total_pnl": -3963.27,
+      "positions": 2
+    },
+    {
+      "date": "2025-03-06",
+      "realized_pnl": -6485.93,
+      "total_pnl": -5596.7,
+      "positions": 2
+    },
+    {
+      "date": "2025-03-07",
+      "realized_pnl": -6485.93,
+      "total_pnl": -4657.13,
+      "positions": 2
+    },
+    {
+      "date": "2025-03-10",
+      "realized_pnl": -6320.49,
+      "total_pnl": -6181.24,
+      "positions": 3
+    },
+    {
+      "date": "2025-03-11",
+      "realized_pnl": -6320.49,
+      "total_pnl": -6459.03,
+      "positions": 3
+    },
+    {
+      "date": "2025-03-12",
+      "realized_pnl": -6320.49,
+      "total_pnl": -6378.94,
+      "positions": 3
+    },
+    {
+      "date": "2025-03-13",
+      "realized_pnl": -6320.49,
+      "total_pnl": -6754.21,
+      "positions": 3
+    },
+    {
+      "date": "2025-03-14",
+      "realized_pnl": -6320.49,
+      "total_pnl": -6123.51,
+      "positions": 3
+    },
+    {
+      "date": "2025-03-17",
+      "realized_pnl": -6656.31,
+      "total_pnl": -5474.11,
+      "positions": 3
+    },
+    {
+      "date": "2025-03-18",
+      "realized_pnl": -6656.31,
+      "total_pnl": -6470.46,
+      "positions": 3
+    },
+    {
+      "date": "2025-03-19",
+      "realized_pnl": -6656.31,
+      "total_pnl": -6054.06,
+      "positions": 3
+    },
+    {
+      "date": "2025-03-20",
+      "realized_pnl": -6656.31,
+      "total_pnl": -6050.11,
+      "positions": 3
+    },
+    {
+      "date": "2025-03-21",
+      "realized_pnl": -6656.31,
+      "total_pnl": -5932.85,
+      "positions": 3
+    },
+    {
+      "date": "2025-03-24",
+      "realized_pnl": -7116.29,
+      "total_pnl": -5546.85,
+      "positions": 3
+    },
+    {
+      "date": "2025-03-25",
+      "realized_pnl": -7116.29,
+      "total_pnl": -5602.8,
+      "positions": 3
+    },
+    {
+      "date": "2025-03-26",
+      "realized_pnl": -8447.16,
+      "total_pnl": -7799.0,
+      "positions": 2
+    },
+    {
+      "date": "2025-03-27",
+      "realized_pnl": -8447.16,
+      "total_pnl": -8069.18,
+      "positions": 2
+    },
+    {
+      "date": "2025-03-28",
+      "realized_pnl": -8447.16,
+      "total_pnl": -8892.96,
+      "positions": 2
+    },
+    {
+      "date": "2025-03-31",
+      "realized_pnl": -9761.57,
+      "total_pnl": -9757.79,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-01",
+      "realized_pnl": -9761.57,
+      "total_pnl": -9874.97,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-02",
+      "realized_pnl": -9761.57,
+      "total_pnl": -9826.17,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-03",
+      "realized_pnl": -9761.57,
+      "total_pnl": -10090.29,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-04",
+      "realized_pnl": -11086.97,
+      "total_pnl": -12891.19,
+      "positions": 2
+    },
+    {
+      "date": "2025-04-07",
+      "realized_pnl": -12418.35,
+      "total_pnl": -13041.28,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-08",
+      "realized_pnl": -12418.35,
+      "total_pnl": -13344.28,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-09",
+      "realized_pnl": -12418.35,
+      "total_pnl": -13126.28,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-10",
+      "realized_pnl": -12418.35,
+      "total_pnl": -12761.13,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-11",
+      "realized_pnl": -12418.35,
+      "total_pnl": -12140.78,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-14",
+      "realized_pnl": -11229.95,
+      "total_pnl": -11324.64,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-15",
+      "realized_pnl": -11229.95,
+      "total_pnl": -10341.54,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-16",
+      "realized_pnl": -11229.95,
+      "total_pnl": -10789.55,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-17",
+      "realized_pnl": -11229.95,
+      "total_pnl": -10621.43,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-21",
+      "realized_pnl": -11229.95,
+      "total_pnl": -11101.5,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-22",
+      "realized_pnl": -11229.95,
+      "total_pnl": -10648.01,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-23",
+      "realized_pnl": -11229.95,
+      "total_pnl": -9677.23,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-24",
+      "realized_pnl": -11229.95,
+      "total_pnl": -7898.84,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-25",
+      "realized_pnl": -11229.95,
+      "total_pnl": -7597.86,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-28",
+      "realized_pnl": -11405.11,
+      "total_pnl": -7387.7,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-29",
+      "realized_pnl": -11405.11,
+      "total_pnl": -7546.07,
+      "positions": 3
+    },
+    {
+      "date": "2025-04-30",
+      "realized_pnl": -12735.64,
+      "total_pnl": -7994.37,
+      "positions": 2
+    },
+    {
+      "date": "2025-05-01",
+      "realized_pnl": -12735.64,
+      "total_pnl": -8423.5,
+      "positions": 2
+    },
+    {
+      "date": "2025-05-02",
+      "realized_pnl": -12735.64,
+      "total_pnl": -7200.78,
+      "positions": 2
+    },
+    {
+      "date": "2025-05-05",
+      "realized_pnl": -8281.2,
+      "total_pnl": -7080.19,
+      "positions": 3
+    },
+    {
+      "date": "2025-05-06",
+      "realized_pnl": -8281.2,
+      "total_pnl": -7217.4,
+      "positions": 3
+    },
+    {
+      "date": "2025-05-07",
+      "realized_pnl": -8281.2,
+      "total_pnl": -6911.24,
+      "positions": 3
+    },
+    {
+      "date": "2025-05-08",
+      "realized_pnl": -8281.2,
+      "total_pnl": -7268.18,
+      "positions": 3
+    },
+    {
+      "date": "2025-05-09",
+      "realized_pnl": -8281.2,
+      "total_pnl": -7473.64,
+      "positions": 3
+    },
+    {
+      "date": "2025-05-12",
+      "realized_pnl": -8242.52,
+      "total_pnl": -8144.42,
+      "positions": 3
+    },
+    {
+      "date": "2025-05-13",
+      "realized_pnl": -8242.52,
+      "total_pnl": -8309.46,
+      "positions": 3
+    },
+    {
+      "date": "2025-05-14",
+      "realized_pnl": -8242.52,
+      "total_pnl": -8371.38,
+      "positions": 3
+    },
+    {
+      "date": "2025-05-15",
+      "realized_pnl": -8242.52,
+      "total_pnl": -8008.18,
+      "positions": 3
+    },
+    {
+      "date": "2025-05-16",
+      "realized_pnl": -8242.52,
+      "total_pnl": -7380.65,
+      "positions": 3
+    },
+    {
+      "date": "2025-05-19",
+      "realized_pnl": -7728.96,
+      "total_pnl": -7486.07,
+      "positions": 3
+    },
+    {
+      "date": "2025-05-20",
+      "realized_pnl": -7728.96,
+      "total_pnl": -7432.61,
+      "positions": 3
+    },
+    {
+      "date": "2025-05-21",
+      "realized_pnl": -7728.96,
+      "total_pnl": -7891.4,
+      "positions": 3
+    },
+    {
+      "date": "2025-05-22",
+      "realized_pnl": -7728.96,
+      "total_pnl": -7786.38,
+      "positions": 3
+    },
+    {
+      "date": "2025-05-23",
+      "realized_pnl": -7728.96,
+      "total_pnl": -7699.03,
+      "positions": 3
+    },
+    {
+      "date": "2025-05-27",
+      "realized_pnl": -7728.96,
+      "total_pnl": -6631.05,
+      "positions": 3
+    },
+    {
+      "date": "2025-05-28",
+      "realized_pnl": -9057.58,
+      "total_pnl": -8239.07,
+      "positions": 2
+    },
+    {
+      "date": "2025-05-29",
+      "realized_pnl": -9057.58,
+      "total_pnl": -8259.64,
+      "positions": 2
+    },
+    {
+      "date": "2025-05-30",
+      "realized_pnl": -9057.58,
+      "total_pnl": -7813.89,
+      "positions": 2
+    },
+    {
+      "date": "2025-06-02",
+      "realized_pnl": -7624.22,
+      "total_pnl": -7082.11,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-03",
+      "realized_pnl": -7624.22,
+      "total_pnl": -6698.47,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-04",
+      "realized_pnl": -7624.22,
+      "total_pnl": -7193.8,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-05",
+      "realized_pnl": -7624.22,
+      "total_pnl": -8382.46,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-06",
+      "realized_pnl": -7624.22,
+      "total_pnl": -8188.84,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-09",
+      "realized_pnl": -7971.08,
+      "total_pnl": -7969.07,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-10",
+      "realized_pnl": -7971.08,
+      "total_pnl": -8012.56,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-11",
+      "realized_pnl": -7971.08,
+      "total_pnl": -6877.7,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-12",
+      "realized_pnl": -7971.08,
+      "total_pnl": -7336.45,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-13",
+      "realized_pnl": -7971.08,
+      "total_pnl": -7047.38,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-16",
+      "realized_pnl": -7971.08,
+      "total_pnl": -5430.88,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-17",
+      "realized_pnl": -7971.08,
+      "total_pnl": -5981.13,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-18",
+      "realized_pnl": -7971.08,
+      "total_pnl": -4972.46,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-20",
+      "realized_pnl": -7971.08,
+      "total_pnl": -5290.83,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-23",
+      "realized_pnl": -7183.07,
+      "total_pnl": -5219.19,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-24",
+      "realized_pnl": -7183.07,
+      "total_pnl": -2410.65,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-25",
+      "realized_pnl": -7183.07,
+      "total_pnl": -2098.55,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-26",
+      "realized_pnl": -7183.07,
+      "total_pnl": -624.35,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-27",
+      "realized_pnl": -7183.07,
+      "total_pnl": -1740.79,
+      "positions": 3
+    },
+    {
+      "date": "2025-06-30",
+      "realized_pnl": -7183.07,
+      "total_pnl": -3.99,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-01",
+      "realized_pnl": -7183.07,
+      "total_pnl": -1537.26,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-02",
+      "realized_pnl": -7183.07,
+      "total_pnl": 556.05,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-03",
+      "realized_pnl": -7183.07,
+      "total_pnl": 135.09,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-07",
+      "realized_pnl": -5146.79,
+      "total_pnl": 613.0,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-08",
+      "realized_pnl": -5146.79,
+      "total_pnl": -231.6,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-09",
+      "realized_pnl": -5146.79,
+      "total_pnl": 958.82,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-10",
+      "realized_pnl": -5146.79,
+      "total_pnl": 2583.93,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-11",
+      "realized_pnl": -5146.79,
+      "total_pnl": 2676.47,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-14",
+      "realized_pnl": -5146.79,
+      "total_pnl": 3438.26,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-15",
+      "realized_pnl": -5146.79,
+      "total_pnl": 3101.99,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-16",
+      "realized_pnl": -5146.79,
+      "total_pnl": 4038.84,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-17",
+      "realized_pnl": -5146.79,
+      "total_pnl": 4940.96,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-18",
+      "realized_pnl": -5146.79,
+      "total_pnl": 6315.66,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-21",
+      "realized_pnl": -5036.03,
+      "total_pnl": 5123.83,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-22",
+      "realized_pnl": -5036.03,
+      "total_pnl": 3817.87,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-23",
+      "realized_pnl": -5036.03,
+      "total_pnl": 3406.42,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-24",
+      "realized_pnl": -5036.03,
+      "total_pnl": 3276.97,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-25",
+      "realized_pnl": -5036.03,
+      "total_pnl": 3663.67,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-28",
+      "realized_pnl": -5414.81,
+      "total_pnl": 3716.86,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-29",
+      "realized_pnl": -5414.81,
+      "total_pnl": 2942.36,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-30",
+      "realized_pnl": -5414.81,
+      "total_pnl": 3240.62,
+      "positions": 3
+    },
+    {
+      "date": "2025-07-31",
+      "realized_pnl": -5414.81,
+      "total_pnl": 3547.74,
+      "positions": 3
+    },
+    {
+      "date": "2025-08-01",
+      "realized_pnl": -5414.81,
+      "total_pnl": 71.24,
+      "positions": 3
+    },
+    {
+      "date": "2025-08-04",
+      "realized_pnl": -4575.62,
+      "total_pnl": 1391.95,
+      "positions": 3
+    },
+    {
+      "date": "2025-08-05",
+      "realized_pnl": -4575.62,
+      "total_pnl": 639.9,
+      "positions": 3
+    },
+    {
+      "date": "2025-08-06",
+      "realized_pnl": -5903.26,
+      "total_pnl": 284.87,
+      "positions": 2
+    },
+    {
+      "date": "2025-08-07",
+      "realized_pnl": -5903.26,
+      "total_pnl": 834.83,
+      "positions": 2
+    },
+    {
+      "date": "2025-08-08",
+      "realized_pnl": -5903.26,
+      "total_pnl": 1356.39,
+      "positions": 2
+    },
+    {
+      "date": "2025-08-11",
+      "realized_pnl": -5903.26,
+      "total_pnl": 1380.64,
+      "positions": 3
+    },
+    {
+      "date": "2025-08-12",
+      "realized_pnl": -5903.26,
+      "total_pnl": 1404.34,
+      "positions": 3
+    },
+    {
+      "date": "2025-08-13",
+      "realized_pnl": -5903.26,
+      "total_pnl": -375.25,
+      "positions": 3
+    },
+    {
+      "date": "2025-08-14",
+      "realized_pnl": -5903.26,
+      "total_pnl": -108.95,
+      "positions": 3
+    },
+    {
+      "date": "2025-08-15",
+      "realized_pnl": -7236.4,
+      "total_pnl": -88.41,
+      "positions": 2
+    },
+    {
+      "date": "2025-08-18",
+      "realized_pnl": -7426.23,
+      "total_pnl": 106.99,
+      "positions": 3
+    },
+    {
+      "date": "2025-08-19",
+      "realized_pnl": -7426.23,
+      "total_pnl": -2453.3,
+      "positions": 3
+    },
+    {
+      "date": "2025-08-20",
+      "realized_pnl": -8758.88,
+      "total_pnl": -3845.24,
+      "positions": 2
+    },
+    {
+      "date": "2025-08-21",
+      "realized_pnl": -8758.88,
+      "total_pnl": -3518.8,
+      "positions": 2
+    },
+    {
+      "date": "2025-08-22",
+      "realized_pnl": -8758.88,
+      "total_pnl": -1972.82,
+      "positions": 2
+    },
+    {
+      "date": "2025-08-25",
+      "realized_pnl": -2507.14,
+      "total_pnl": -1990.11,
+      "positions": 3
+    },
+    {
+      "date": "2025-08-26",
+      "realized_pnl": -2507.14,
+      "total_pnl": -841.31,
+      "positions": 3
+    },
+    {
+      "date": "2025-08-27",
+      "realized_pnl": -2507.14,
+      "total_pnl": -1871.6,
+      "positions": 3
+    },
+    {
+      "date": "2025-08-28",
+      "realized_pnl": -2507.14,
+      "total_pnl": -1008.74,
+      "positions": 3
+    },
+    {
+      "date": "2025-08-29",
+      "realized_pnl": -2507.14,
+      "total_pnl": -1811.53,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-02",
+      "realized_pnl": -2507.14,
+      "total_pnl": -1694.4,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-03",
+      "realized_pnl": -2507.14,
+      "total_pnl": -2584.89,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-04",
+      "realized_pnl": -2507.14,
+      "total_pnl": -2173.03,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-05",
+      "realized_pnl": -2507.14,
+      "total_pnl": -1191.99,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-08",
+      "realized_pnl": -2507.14,
+      "total_pnl": 55.79,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-09",
+      "realized_pnl": -2507.14,
+      "total_pnl": 301.67,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-10",
+      "realized_pnl": -2507.14,
+      "total_pnl": -1986.02,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-11",
+      "realized_pnl": -2507.14,
+      "total_pnl": -891.81,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-12",
+      "realized_pnl": -2507.14,
+      "total_pnl": -211.1,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-15",
+      "realized_pnl": -2507.14,
+      "total_pnl": 1984.07,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-16",
+      "realized_pnl": -2507.14,
+      "total_pnl": 2805.32,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-17",
+      "realized_pnl": -2507.14,
+      "total_pnl": 3482.62,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-18",
+      "realized_pnl": -2507.14,
+      "total_pnl": 3759.59,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-19",
+      "realized_pnl": -2507.14,
+      "total_pnl": 4680.39,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-22",
+      "realized_pnl": -2507.14,
+      "total_pnl": 3777.57,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-23",
+      "realized_pnl": -2507.14,
+      "total_pnl": 2972.54,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-24",
+      "realized_pnl": -2507.14,
+      "total_pnl": 3033.31,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-25",
+      "realized_pnl": -2507.14,
+      "total_pnl": 2824.6,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-26",
+      "realized_pnl": -2507.14,
+      "total_pnl": 2037.62,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-29",
+      "realized_pnl": -1794.54,
+      "total_pnl": 2253.34,
+      "positions": 3
+    },
+    {
+      "date": "2025-09-30",
+      "realized_pnl": -1794.54,
+      "total_pnl": 2522.52,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-01",
+      "realized_pnl": -1794.54,
+      "total_pnl": 3183.29,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-02",
+      "realized_pnl": -1794.54,
+      "total_pnl": 4062.53,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-03",
+      "realized_pnl": -1794.54,
+      "total_pnl": 3232.45,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-06",
+      "realized_pnl": -2075.61,
+      "total_pnl": 2180.2,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-07",
+      "realized_pnl": -2075.61,
+      "total_pnl": 398.24,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-08",
+      "realized_pnl": -2075.61,
+      "total_pnl": 1270.56,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-09",
+      "realized_pnl": -2075.61,
+      "total_pnl": 103.23,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-10",
+      "realized_pnl": -3405.36,
+      "total_pnl": -2198.47,
+      "positions": 2
+    },
+    {
+      "date": "2025-10-13",
+      "realized_pnl": -3405.36,
+      "total_pnl": -777.98,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-14",
+      "realized_pnl": -3405.36,
+      "total_pnl": -2655.85,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-15",
+      "realized_pnl": -3405.36,
+      "total_pnl": -1443.36,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-16",
+      "realized_pnl": -3405.36,
+      "total_pnl": -67.44,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-17",
+      "realized_pnl": -3405.36,
+      "total_pnl": -221.02,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-20",
+      "realized_pnl": -1282.03,
+      "total_pnl": 228.53,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-21",
+      "realized_pnl": -1282.03,
+      "total_pnl": -87.02,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-22",
+      "realized_pnl": -1282.03,
+      "total_pnl": -876.2,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-23",
+      "realized_pnl": -1282.03,
+      "total_pnl": 722.38,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-24",
+      "realized_pnl": -1282.03,
+      "total_pnl": 2035.35,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-27",
+      "realized_pnl": -1282.03,
+      "total_pnl": 2235.31,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-28",
+      "realized_pnl": -1282.03,
+      "total_pnl": 2855.37,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-29",
+      "realized_pnl": -1282.03,
+      "total_pnl": 4988.5,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-30",
+      "realized_pnl": -1282.03,
+      "total_pnl": 4026.03,
+      "positions": 3
+    },
+    {
+      "date": "2025-10-31",
+      "realized_pnl": -1282.03,
+      "total_pnl": 5325.51,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-03",
+      "realized_pnl": -1282.03,
+      "total_pnl": 6797.25,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-04",
+      "realized_pnl": -1282.03,
+      "total_pnl": 4121.02,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-05",
+      "realized_pnl": -1282.03,
+      "total_pnl": 6836.22,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-06",
+      "realized_pnl": -1282.03,
+      "total_pnl": 6894.07,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-07",
+      "realized_pnl": -1282.03,
+      "total_pnl": 7103.55,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-10",
+      "realized_pnl": -1159.88,
+      "total_pnl": 9557.57,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-11",
+      "realized_pnl": -1159.88,
+      "total_pnl": 8276.15,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-12",
+      "realized_pnl": -1159.88,
+      "total_pnl": 7596.89,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-13",
+      "realized_pnl": -1159.88,
+      "total_pnl": 6000.8,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-14",
+      "realized_pnl": -1159.88,
+      "total_pnl": 7274.44,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-17",
+      "realized_pnl": -1159.88,
+      "total_pnl": 7295.81,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-18",
+      "realized_pnl": -1159.88,
+      "total_pnl": 5827.66,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-19",
+      "realized_pnl": -1159.88,
+      "total_pnl": 5428.17,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-20",
+      "realized_pnl": -1159.88,
+      "total_pnl": 2049.46,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-21",
+      "realized_pnl": -1159.88,
+      "total_pnl": 2512.91,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-24",
+      "realized_pnl": -1159.88,
+      "total_pnl": 4811.45,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-25",
+      "realized_pnl": -1159.88,
+      "total_pnl": 5420.88,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-26",
+      "realized_pnl": -1159.88,
+      "total_pnl": 6614.81,
+      "positions": 3
+    },
+    {
+      "date": "2025-11-28",
+      "realized_pnl": -1159.88,
+      "total_pnl": 7749.68,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-01",
+      "realized_pnl": -1159.88,
+      "total_pnl": 7972.58,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-02",
+      "realized_pnl": -1159.88,
+      "total_pnl": 7884.33,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-03",
+      "realized_pnl": -1159.88,
+      "total_pnl": 7039.1,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-04",
+      "realized_pnl": -1159.88,
+      "total_pnl": 7134.62,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-05",
+      "realized_pnl": -1159.88,
+      "total_pnl": 9655.58,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-08",
+      "realized_pnl": -1159.88,
+      "total_pnl": 11092.74,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-09",
+      "realized_pnl": -1159.88,
+      "total_pnl": 12041.98,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-10",
+      "realized_pnl": -1159.88,
+      "total_pnl": 14971.02,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-11",
+      "realized_pnl": -1159.88,
+      "total_pnl": 15184.08,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-12",
+      "realized_pnl": -1159.88,
+      "total_pnl": 13036.73,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-15",
+      "realized_pnl": 5827.35,
+      "total_pnl": 12139.22,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-16",
+      "realized_pnl": 5827.35,
+      "total_pnl": 12149.03,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-17",
+      "realized_pnl": 5827.35,
+      "total_pnl": 11086.67,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-18",
+      "realized_pnl": 5827.35,
+      "total_pnl": 13021.06,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-19",
+      "realized_pnl": 5827.35,
+      "total_pnl": 14578.15,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-22",
+      "realized_pnl": 5998.57,
+      "total_pnl": 14174.14,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-23",
+      "realized_pnl": 5998.57,
+      "total_pnl": 14461.56,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-24",
+      "realized_pnl": 5998.57,
+      "total_pnl": 15292.46,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-26",
+      "realized_pnl": 5998.57,
+      "total_pnl": 15578.55,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-29",
+      "realized_pnl": 5998.57,
+      "total_pnl": 15284.7,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-30",
+      "realized_pnl": 5998.57,
+      "total_pnl": 14529.8,
+      "positions": 3
+    },
+    {
+      "date": "2025-12-31",
+      "realized_pnl": 5998.57,
+      "total_pnl": 13694.11,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-02",
+      "realized_pnl": 5998.57,
+      "total_pnl": 17143.03,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-05",
+      "realized_pnl": 5998.57,
+      "total_pnl": 17228.3,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-06",
+      "realized_pnl": 5998.57,
+      "total_pnl": 23529.41,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-07",
+      "realized_pnl": 5998.57,
+      "total_pnl": 21465.88,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-08",
+      "realized_pnl": 5998.57,
+      "total_pnl": 19146.11,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-09",
+      "realized_pnl": 5998.57,
+      "total_pnl": 21769.56,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-12",
+      "realized_pnl": 5998.57,
+      "total_pnl": 23947.9,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-13",
+      "realized_pnl": 5998.57,
+      "total_pnl": 24549.14,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-14",
+      "realized_pnl": 5998.57,
+      "total_pnl": 24501.25,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-15",
+      "realized_pnl": 5998.57,
+      "total_pnl": 25087.81,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-16",
+      "realized_pnl": 5998.57,
+      "total_pnl": 25191.75,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-20",
+      "realized_pnl": 5998.57,
+      "total_pnl": 26423.2,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-21",
+      "realized_pnl": 5998.57,
+      "total_pnl": 30494.62,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-22",
+      "realized_pnl": 5998.57,
+      "total_pnl": 31891.59,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-23",
+      "realized_pnl": 5998.57,
+      "total_pnl": 31324.58,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-26",
+      "realized_pnl": 5998.57,
+      "total_pnl": 31350.29,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-27",
+      "realized_pnl": 5998.57,
+      "total_pnl": 34157.08,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-28",
+      "realized_pnl": 5998.57,
+      "total_pnl": 37447.19,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-29",
+      "realized_pnl": 5998.57,
+      "total_pnl": 36958.95,
+      "positions": 3
+    },
+    {
+      "date": "2026-01-30",
+      "realized_pnl": 5998.57,
+      "total_pnl": 31730.15,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-02",
+      "realized_pnl": 9294.11,
+      "total_pnl": 34534.48,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-03",
+      "realized_pnl": 9294.11,
+      "total_pnl": 36278.02,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-04",
+      "realized_pnl": 9294.11,
+      "total_pnl": 31210.17,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-05",
+      "realized_pnl": 9294.11,
+      "total_pnl": 29932.33,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-06",
+      "realized_pnl": 9294.11,
+      "total_pnl": 33764.58,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-09",
+      "realized_pnl": 14190.91,
+      "total_pnl": 33486.87,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-10",
+      "realized_pnl": 14190.91,
+      "total_pnl": 30820.59,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-11",
+      "realized_pnl": 14190.91,
+      "total_pnl": 33354.26,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-12",
+      "realized_pnl": 14190.91,
+      "total_pnl": 32770.29,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-13",
+      "realized_pnl": 14190.91,
+      "total_pnl": 33236.9,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-17",
+      "realized_pnl": 14190.91,
+      "total_pnl": 33337.83,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-18",
+      "realized_pnl": 14190.91,
+      "total_pnl": 35339.32,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-19",
+      "realized_pnl": 14190.91,
+      "total_pnl": 33806.69,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-20",
+      "realized_pnl": 14190.91,
+      "total_pnl": 34289.04,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-23",
+      "realized_pnl": 15129.39,
+      "total_pnl": 34161.17,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-24",
+      "realized_pnl": 15129.39,
+      "total_pnl": 33402.29,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-25",
+      "realized_pnl": 15129.39,
+      "total_pnl": 36655.21,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-26",
+      "realized_pnl": 15129.39,
+      "total_pnl": 34812.42,
+      "positions": 3
+    },
+    {
+      "date": "2026-02-27",
+      "realized_pnl": 15129.39,
+      "total_pnl": 33878.41,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-02",
+      "realized_pnl": 15129.39,
+      "total_pnl": 33040.85,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-03",
+      "realized_pnl": 13824.93,
+      "total_pnl": 28846.19,
+      "positions": 2
+    },
+    {
+      "date": "2026-03-04",
+      "realized_pnl": 13824.93,
+      "total_pnl": 30106.39,
+      "positions": 2
+    },
+    {
+      "date": "2026-03-05",
+      "realized_pnl": 13824.93,
+      "total_pnl": 29878.2,
+      "positions": 2
+    },
+    {
+      "date": "2026-03-06",
+      "realized_pnl": 12492.95,
+      "total_pnl": 27160.14,
+      "positions": 1
+    },
+    {
+      "date": "2026-03-09",
+      "realized_pnl": 12492.95,
+      "total_pnl": 29076.48,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-10",
+      "realized_pnl": 12492.95,
+      "total_pnl": 29856.4,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-11",
+      "realized_pnl": 12492.95,
+      "total_pnl": 30867.42,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-12",
+      "realized_pnl": 12492.95,
+      "total_pnl": 30789.89,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-13",
+      "realized_pnl": 12492.95,
+      "total_pnl": 32390.12,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-16",
+      "realized_pnl": 13148.76,
+      "total_pnl": 34268.96,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-17",
+      "realized_pnl": 13148.76,
+      "total_pnl": 38195.55,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-18",
+      "realized_pnl": 13148.76,
+      "total_pnl": 37554.61,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-19",
+      "realized_pnl": 13148.76,
+      "total_pnl": 38205.62,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-20",
+      "realized_pnl": 13148.76,
+      "total_pnl": 34691.08,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-23",
+      "realized_pnl": 13426.17,
+      "total_pnl": 33740.92,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-24",
+      "realized_pnl": 13426.17,
+      "total_pnl": 35989.94,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-25",
+      "realized_pnl": 13426.17,
+      "total_pnl": 36052.32,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-26",
+      "realized_pnl": 13426.17,
+      "total_pnl": 32280.44,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-27",
+      "realized_pnl": 13426.17,
+      "total_pnl": 32931.42,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-30",
+      "realized_pnl": 27518.88,
+      "total_pnl": 29671.58,
+      "positions": 3
+    },
+    {
+      "date": "2026-03-31",
+      "realized_pnl": 27518.88,
+      "total_pnl": 28591.45,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-01",
+      "realized_pnl": 27518.88,
+      "total_pnl": 27500.51,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-02",
+      "realized_pnl": 27518.88,
+      "total_pnl": 28103.66,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-06",
+      "realized_pnl": 26859.6,
+      "total_pnl": 27889.06,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-07",
+      "realized_pnl": 26859.6,
+      "total_pnl": 28809.24,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-08",
+      "realized_pnl": 25530.31,
+      "total_pnl": 28215.75,
+      "positions": 2
+    },
+    {
+      "date": "2026-04-09",
+      "realized_pnl": 25530.31,
+      "total_pnl": 27719.19,
+      "positions": 2
+    },
+    {
+      "date": "2026-04-10",
+      "realized_pnl": 25530.31,
+      "total_pnl": 28316.0,
+      "positions": 2
+    },
+    {
+      "date": "2026-04-13",
+      "realized_pnl": 27033.13,
+      "total_pnl": 29011.56,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-14",
+      "realized_pnl": 27033.13,
+      "total_pnl": 30039.89,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-15",
+      "realized_pnl": 27033.13,
+      "total_pnl": 29621.63,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-16",
+      "realized_pnl": 27033.13,
+      "total_pnl": 29819.1,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-17",
+      "realized_pnl": 27033.13,
+      "total_pnl": 31203.65,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-20",
+      "realized_pnl": 27877.69,
+      "total_pnl": 30885.97,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-21",
+      "realized_pnl": 27877.69,
+      "total_pnl": 32184.12,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-22",
+      "realized_pnl": 27877.69,
+      "total_pnl": 33101.34,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-23",
+      "realized_pnl": 27877.69,
+      "total_pnl": 34282.65,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-24",
+      "realized_pnl": 27877.69,
+      "total_pnl": 34464.74,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-27",
+      "realized_pnl": 32030.63,
+      "total_pnl": 33767.33,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-28",
+      "realized_pnl": 32030.63,
+      "total_pnl": 32593.21,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-29",
+      "realized_pnl": 32030.63,
+      "total_pnl": 34472.15,
+      "positions": 3
+    },
+    {
+      "date": "2026-04-30",
+      "realized_pnl": 32030.63,
+      "total_pnl": 35416.07,
+      "positions": 3
+    },
+    {
+      "date": "2026-05-01",
+      "realized_pnl": 32030.63,
+      "total_pnl": 36279.21,
+      "positions": 3
+    },
+    {
+      "date": "2026-05-04",
+      "realized_pnl": 32552.58,
+      "total_pnl": 35659.62,
+      "positions": 3
+    },
+    {
+      "date": "2026-05-05",
+      "realized_pnl": 32552.58,
+      "total_pnl": 38410.14,
+      "positions": 3
+    },
+    {
+      "date": "2026-05-06",
+      "realized_pnl": 32552.58,
+      "total_pnl": 41324.2,
+      "positions": 3
+    },
+    {
+      "date": "2026-05-07",
+      "realized_pnl": 32552.58,
+      "total_pnl": 38143.41,
+      "positions": 3
+    },
+    {
+      "date": "2026-05-08",
+      "realized_pnl": 32552.58,
+      "total_pnl": 41438.42,
+      "positions": 3
+    },
+    {
+      "date": "2026-05-11",
+      "realized_pnl": 35232.93,
+      "total_pnl": 42167.13,
+      "positions": 3
+    },
+    {
+      "date": "2026-05-12",
+      "realized_pnl": 33960.41,
+      "total_pnl": 39212.63,
+      "positions": 2
+    },
+    {
+      "date": "2026-05-13",
+      "realized_pnl": 33960.41,
+      "total_pnl": 39081.8,
+      "positions": 2
+    },
+    {
+      "date": "2026-05-14",
+      "realized_pnl": 33960.41,
+      "total_pnl": 38523.44,
+      "positions": 2
+    },
+    {
+      "date": "2026-05-15",
+      "realized_pnl": 33960.41,
+      "total_pnl": 36664.08,
+      "positions": 2
+    },
+    {
+      "date": "2026-05-18",
+      "realized_pnl": 32629.91,
+      "total_pnl": 36245.99,
+      "positions": 3
+    },
+    {
+      "date": "2026-05-19",
+      "realized_pnl": 32629.91,
+      "total_pnl": 37013.66,
+      "positions": 3
+    },
+    {
+      "date": "2026-05-20",
+      "realized_pnl": 32629.91,
+      "total_pnl": 40147.39,
+      "positions": 3
+    },
+    {
+      "date": "2026-05-21",
+      "realized_pnl": 32629.91,
+      "total_pnl": 40441.36,
+      "positions": 3
+    },
+    {
+      "date": "2026-05-22",
+      "realized_pnl": 32629.91,
+      "total_pnl": 41645.84,
+      "positions": 3
+    },
+    {
+      "date": "2026-05-26",
+      "realized_pnl": 32629.91,
+      "total_pnl": 44278.24,
+      "positions": 3
+    },
+    {
+      "date": "2026-05-27",
+      "realized_pnl": 32629.91,
+      "total_pnl": 43000.71,
+      "positions": 3
+    },
+    {
+      "date": "2026-05-28",
+      "realized_pnl": 32629.91,
+      "total_pnl": 44040.62,
+      "positions": 3
+    },
+    {
+      "date": "2026-05-29",
+      "realized_pnl": 32629.91,
+      "total_pnl": 43023.43,
+      "positions": 3
+    },
+    {
+      "date": "2026-06-01",
+      "realized_pnl": 39190.3,
+      "total_pnl": 43129.3,
+      "positions": 3
+    },
+    {
+      "date": "2026-06-02",
+      "realized_pnl": 39190.3,
+      "total_pnl": 47640.7,
+      "positions": 3
+    },
+    {
+      "date": "2026-06-03",
+      "realized_pnl": 37885.61,
+      "total_pnl": 48333.13,
+      "positions": 2
+    }
+  ],
+  "weekly_log": [
+    {
+      "week": "2025-01-06",
+      "top_10": [
+        {
+          "ticker": "PLTR",
+          "return_pct": 95.22,
+          "price": 75.92
+        },
+        {
+          "ticker": "SOFI",
+          "return_pct": 84.89,
+          "price": 15.29
+        },
+        {
+          "ticker": "HOOD",
+          "return_pct": 83.15,
+          "price": 42.71
+        },
+        {
+          "ticker": "TSLA",
+          "return_pct": 70.68,
+          "price": 411.05
+        },
+        {
+          "ticker": "COIN",
+          "return_pct": 70.35,
+          "price": 287.76
+        },
+        {
+          "ticker": "AFRM",
+          "return_pct": 68.63,
+          "price": 65.09
+        },
+        {
+          "ticker": "TWLO",
+          "return_pct": 64.76,
+          "price": 113.01
+        },
+        {
+          "ticker": "BILL",
+          "return_pct": 62.28,
+          "price": 87.5
+        },
+        {
+          "ticker": "MRVL",
+          "return_pct": 61.57,
+          "price": 118.49
+        },
+        {
+          "ticker": "RIVN",
+          "return_pct": 49.81,
+          "price": 15.72
+        }
+      ]
+    },
+    {
+      "week": "2025-01-13",
+      "top_10": [
+        {
+          "ticker": "TSLA",
+          "return_pct": 85.17,
+          "price": 403.31
+        },
+        {
+          "ticker": "SOFI",
+          "return_pct": 56.16,
+          "price": 14.07
+        },
+        {
+          "ticker": "MRVL",
+          "return_pct": 55.67,
+          "price": 114.71
+        },
+        {
+          "ticker": "TWLO",
+          "return_pct": 53.61,
+          "price": 107.96
+        },
+        {
+          "ticker": "HOOD",
+          "return_pct": 50.7,
+          "price": 39.59
+        },
+        {
+          "ticker": "PLTR",
+          "return_pct": 49.34,
+          "price": 64.98
+        },
+        {
+          "ticker": "RBLX",
+          "return_pct": 47.52,
+          "price": 61.37
+        },
+        {
+          "ticker": "BILL",
+          "return_pct": 45.16,
+          "price": 81.03
+        },
+        {
+          "ticker": "LULU",
+          "return_pct": 43.35,
+          "price": 398.86
+        },
+        {
+          "ticker": "COIN",
+          "return_pct": 42.42,
+          "price": 251.2
+        }
+      ]
+    },
+    {
+      "week": "2025-01-27",
+      "top_10": [
+        {
+          "ticker": "TWLO",
+          "return_pct": 95.1,
+          "price": 138.99
+        },
+        {
+          "ticker": "HOOD",
+          "return_pct": 75.39,
+          "price": 47.74
+        },
+        {
+          "ticker": "PLTR",
+          "return_pct": 73.19,
+          "price": 75.44
+        },
+        {
+          "ticker": "BILL",
+          "return_pct": 68.58,
+          "price": 92.89
+        },
+        {
+          "ticker": "RBLX",
+          "return_pct": 60.77,
+          "price": 67.17
+        },
+        {
+          "ticker": "SNOW",
+          "return_pct": 52.73,
+          "price": 175.52
+        },
+        {
+          "ticker": "TSLA",
+          "return_pct": 52.47,
+          "price": 397.15
+        },
+        {
+          "ticker": "SOFI",
+          "return_pct": 47.12,
+          "price": 16.08
+        },
+        {
+          "ticker": "NET",
+          "return_pct": 41.2,
+          "price": 126.47
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 39.49,
+          "price": 10.49
+        }
+      ]
+    },
+    {
+      "week": "2025-02-03",
+      "top_10": [
+        {
+          "ticker": "HOOD",
+          "return_pct": 120.95,
+          "price": 51.9
+        },
+        {
+          "ticker": "PLTR",
+          "return_pct": 101.49,
+          "price": 83.74
+        },
+        {
+          "ticker": "TWLO",
+          "return_pct": 81.74,
+          "price": 146.57
+        },
+        {
+          "ticker": "BILL",
+          "return_pct": 64.17,
+          "price": 95.81
+        },
+        {
+          "ticker": "SNOW",
+          "return_pct": 58.98,
+          "price": 182.54
+        },
+        {
+          "ticker": "COIN",
+          "return_pct": 58.67,
+          "price": 284.41
+        },
+        {
+          "ticker": "NET",
+          "return_pct": 56.01,
+          "price": 136.84
+        },
+        {
+          "ticker": "TSLA",
+          "return_pct": 53.56,
+          "price": 383.68
+        },
+        {
+          "ticker": "SHOP",
+          "return_pct": 46.26,
+          "price": 114.39
+        },
+        {
+          "ticker": "SPOT",
+          "return_pct": 42.58,
+          "price": 549.08
+        }
+      ]
+    },
+    {
+      "week": "2025-02-10",
+      "top_10": [
+        {
+          "ticker": "PLTR",
+          "return_pct": 108.75,
+          "price": 116.65
+        },
+        {
+          "ticker": "HOOD",
+          "return_pct": 91.66,
+          "price": 56.27
+        },
+        {
+          "ticker": "NET",
+          "return_pct": 80.32,
+          "price": 172.49
+        },
+        {
+          "ticker": "SMCI",
+          "return_pct": 67.39,
+          "price": 42.65
+        },
+        {
+          "ticker": "SPOT",
+          "return_pct": 59.49,
+          "price": 637.69
+        },
+        {
+          "ticker": "AFRM",
+          "return_pct": 59.36,
+          "price": 77.75
+        },
+        {
+          "ticker": "TWLO",
+          "return_pct": 56.33,
+          "price": 144.46
+        },
+        {
+          "ticker": "SNOW",
+          "return_pct": 50.66,
+          "price": 186.12
+        },
+        {
+          "ticker": "SHOP",
+          "return_pct": 40.15,
+          "price": 119.9
+        },
+        {
+          "ticker": "CEG",
+          "return_pct": 33.42,
+          "price": 319.11
+        }
+      ]
+    },
+    {
+      "week": "2025-02-24",
+      "top_10": [
+        {
+          "ticker": "SMCI",
+          "return_pct": 100.04,
+          "price": 51.61
+        },
+        {
+          "ticker": "NET",
+          "return_pct": 53.42,
+          "price": 148.0
+        },
+        {
+          "ticker": "PLTR",
+          "return_pct": 45.98,
+          "price": 90.68
+        },
+        {
+          "ticker": "HOOD",
+          "return_pct": 38.39,
+          "price": 49.93
+        },
+        {
+          "ticker": "LCID",
+          "return_pct": 36.95,
+          "price": 27.8
+        },
+        {
+          "ticker": "ROKU",
+          "return_pct": 32.79,
+          "price": 91.24
+        },
+        {
+          "ticker": "SNOW",
+          "return_pct": 32.37,
+          "price": 170.92
+        },
+        {
+          "ticker": "SPOT",
+          "return_pct": 28.0,
+          "price": 601.61
+        },
+        {
+          "ticker": "AVGO",
+          "return_pct": 27.71,
+          "price": 205.64
+        },
+        {
+          "ticker": "FOXA",
+          "return_pct": 26.91,
+          "price": 57.18
+        }
+      ]
+    },
+    {
+      "week": "2025-03-03",
+      "top_10": [
+        {
+          "ticker": "NET",
+          "return_pct": 43.82,
+          "price": 142.91
+        },
+        {
+          "ticker": "GILD",
+          "return_pct": 26.57,
+          "price": 112.2
+        },
+        {
+          "ticker": "PLTR",
+          "return_pct": 26.3,
+          "price": 83.42
+        },
+        {
+          "ticker": "SPOT",
+          "return_pct": 26.22,
+          "price": 599.86
+        },
+        {
+          "ticker": "RBLX",
+          "return_pct": 25.95,
+          "price": 62.18
+        },
+        {
+          "ticker": "HOOD",
+          "return_pct": 24.54,
+          "price": 46.89
+        },
+        {
+          "ticker": "FOXA",
+          "return_pct": 22.09,
+          "price": 56.22
+        },
+        {
+          "ticker": "PM",
+          "return_pct": 21.8,
+          "price": 152.01
+        },
+        {
+          "ticker": "T",
+          "return_pct": 20.64,
+          "price": 26.28
+        },
+        {
+          "ticker": "FOX",
+          "return_pct": 20.49,
+          "price": 52.63
+        }
+      ]
+    },
+    {
+      "week": "2025-03-10",
+      "top_10": [
+        {
+          "ticker": "GILD",
+          "return_pct": 26.56,
+          "price": 113.38
+        },
+        {
+          "ticker": "OKTA",
+          "return_pct": 25.95,
+          "price": 105.19
+        },
+        {
+          "ticker": "ABBV",
+          "return_pct": 24.14,
+          "price": 207.9
+        },
+        {
+          "ticker": "AMGN",
+          "return_pct": 20.29,
+          "price": 315.02
+        },
+        {
+          "ticker": "ABT",
+          "return_pct": 19.46,
+          "price": 133.99
+        },
+        {
+          "ticker": "FOXA",
+          "return_pct": 16.57,
+          "price": 53.61
+        },
+        {
+          "ticker": "EXC",
+          "return_pct": 16.29,
+          "price": 42.26
+        },
+        {
+          "ticker": "T",
+          "return_pct": 15.93,
+          "price": 25.86
+        },
+        {
+          "ticker": "AZO",
+          "return_pct": 15.68,
+          "price": 3690.12
+        },
+        {
+          "ticker": "GL",
+          "return_pct": 15.23,
+          "price": 121.3
+        }
+      ]
+    },
+    {
+      "week": "2025-03-17",
+      "top_10": [
+        {
+          "ticker": "OKTA",
+          "return_pct": 37.81,
+          "price": 115.64
+        },
+        {
+          "ticker": "ABBV",
+          "return_pct": 25.0,
+          "price": 205.8
+        },
+        {
+          "ticker": "SPOT",
+          "return_pct": 24.44,
+          "price": 597.46
+        },
+        {
+          "ticker": "PM",
+          "return_pct": 23.97,
+          "price": 149.07
+        },
+        {
+          "ticker": "INTC",
+          "return_pct": 23.63,
+          "price": 25.69
+        },
+        {
+          "ticker": "GILD",
+          "return_pct": 23.4,
+          "price": 109.35
+        },
+        {
+          "ticker": "GE",
+          "return_pct": 23.0,
+          "price": 200.97
+        },
+        {
+          "ticker": "GL",
+          "return_pct": 22.38,
+          "price": 126.28
+        },
+        {
+          "ticker": "EXC",
+          "return_pct": 21.65,
+          "price": 42.86
+        },
+        {
+          "ticker": "PLTR",
+          "return_pct": 19.33,
+          "price": 87.35
+        }
+      ]
+    },
+    {
+      "week": "2025-03-24",
+      "top_10": [
+        {
+          "ticker": "OKTA",
+          "return_pct": 42.47,
+          "price": 116.38
+        },
+        {
+          "ticker": "SMCI",
+          "return_pct": 33.55,
+          "price": 41.72
+        },
+        {
+          "ticker": "SPOT",
+          "return_pct": 33.15,
+          "price": 604.71
+        },
+        {
+          "ticker": "HOOD",
+          "return_pct": 30.92,
+          "price": 48.36
+        },
+        {
+          "ticker": "PLTR",
+          "return_pct": 30.37,
+          "price": 96.75
+        },
+        {
+          "ticker": "VRTX",
+          "return_pct": 29.02,
+          "price": 511.74
+        },
+        {
+          "ticker": "MELI",
+          "return_pct": 28.11,
+          "price": 2134.31
+        },
+        {
+          "ticker": "GE",
+          "return_pct": 28.01,
+          "price": 209.12
+        },
+        {
+          "ticker": "NEM",
+          "return_pct": 27.22,
+          "price": 46.11
+        },
+        {
+          "ticker": "UBER",
+          "return_pct": 27.07,
+          "price": 76.51
+        }
+      ]
+    },
+    {
+      "week": "2025-03-31",
+      "top_10": [
+        {
+          "ticker": "PM",
+          "return_pct": 31.85,
+          "price": 153.3
+        },
+        {
+          "ticker": "OKTA",
+          "return_pct": 28.88,
+          "price": 105.22
+        },
+        {
+          "ticker": "NEM",
+          "return_pct": 28.35,
+          "price": 47.55
+        },
+        {
+          "ticker": "T",
+          "return_pct": 25.28,
+          "price": 26.81
+        },
+        {
+          "ticker": "ED",
+          "return_pct": 24.59,
+          "price": 106.13
+        },
+        {
+          "ticker": "EXC",
+          "return_pct": 24.26,
+          "price": 44.5
+        },
+        {
+          "ticker": "WELL",
+          "return_pct": 23.12,
+          "price": 150.19
+        },
+        {
+          "ticker": "BRO",
+          "return_pct": 21.08,
+          "price": 123.13
+        },
+        {
+          "ticker": "DVN",
+          "return_pct": 20.73,
+          "price": 36.46
+        },
+        {
+          "ticker": "AJG",
+          "return_pct": 20.72,
+          "price": 341.85
+        }
+      ]
+    },
+    {
+      "week": "2025-04-07",
+      "top_10": [
+        {
+          "ticker": "PM",
+          "return_pct": 26.09,
+          "price": 146.05
+        },
+        {
+          "ticker": "ED",
+          "return_pct": 20.34,
+          "price": 101.15
+        },
+        {
+          "ticker": "T",
+          "return_pct": 20.22,
+          "price": 25.44
+        },
+        {
+          "ticker": "NEM",
+          "return_pct": 19.41,
+          "price": 44.18
+        },
+        {
+          "ticker": "EXC",
+          "return_pct": 19.33,
+          "price": 43.15
+        },
+        {
+          "ticker": "AMT",
+          "return_pct": 18.38,
+          "price": 204.12
+        },
+        {
+          "ticker": "VRTX",
+          "return_pct": 17.91,
+          "price": 474.56
+        },
+        {
+          "ticker": "AWK",
+          "return_pct": 17.44,
+          "price": 137.88
+        },
+        {
+          "ticker": "TMUS",
+          "return_pct": 16.53,
+          "price": 241.22
+        },
+        {
+          "ticker": "GILD",
+          "return_pct": 16.48,
+          "price": 102.79
+        }
+      ]
+    },
+    {
+      "week": "2025-04-14",
+      "top_10": [
+        {
+          "ticker": "PLTR",
+          "return_pct": 40.52,
+          "price": 92.62
+        },
+        {
+          "ticker": "NEM",
+          "return_pct": 37.24,
+          "price": 53.96
+        },
+        {
+          "ticker": "PM",
+          "return_pct": 34.2,
+          "price": 152.2
+        },
+        {
+          "ticker": "ED",
+          "return_pct": 26.73,
+          "price": 107.72
+        },
+        {
+          "ticker": "T",
+          "return_pct": 26.09,
+          "price": 26.06
+        },
+        {
+          "ticker": "EXC",
+          "return_pct": 24.73,
+          "price": 45.25
+        },
+        {
+          "ticker": "TMUS",
+          "return_pct": 23.04,
+          "price": 256.83
+        },
+        {
+          "ticker": "AMT",
+          "return_pct": 22.81,
+          "price": 210.04
+        },
+        {
+          "ticker": "AWK",
+          "return_pct": 22.23,
+          "price": 144.15
+        },
+        {
+          "ticker": "OKTA",
+          "return_pct": 21.44,
+          "price": 100.88
+        }
+      ]
+    },
+    {
+      "week": "2025-04-21",
+      "top_10": [
+        {
+          "ticker": "PM",
+          "return_pct": 32.15,
+          "price": 156.63
+        },
+        {
+          "ticker": "NEM",
+          "return_pct": 31.14,
+          "price": 54.37
+        },
+        {
+          "ticker": "PLTR",
+          "return_pct": 24.26,
+          "price": 90.8
+        },
+        {
+          "ticker": "KR",
+          "return_pct": 23.08,
+          "price": 70.49
+        },
+        {
+          "ticker": "ED",
+          "return_pct": 20.11,
+          "price": 106.48
+        },
+        {
+          "ticker": "MDLZ",
+          "return_pct": 18.46,
+          "price": 65.58
+        },
+        {
+          "ticker": "T",
+          "return_pct": 18.32,
+          "price": 25.23
+        },
+        {
+          "ticker": "MNST",
+          "return_pct": 17.86,
+          "price": 58.01
+        },
+        {
+          "ticker": "KO",
+          "return_pct": 17.44,
+          "price": 70.72
+        },
+        {
+          "ticker": "AWK",
+          "return_pct": 17.19,
+          "price": 142.5
+        }
+      ]
+    },
+    {
+      "week": "2025-04-28",
+      "top_10": [
+        {
+          "ticker": "PLTR",
+          "return_pct": 42.9,
+          "price": 114.65
+        },
+        {
+          "ticker": "PM",
+          "return_pct": 32.34,
+          "price": 163.38
+        },
+        {
+          "ticker": "SMCI",
+          "return_pct": 32.26,
+          "price": 37.27
+        },
+        {
+          "ticker": "NEM",
+          "return_pct": 31.54,
+          "price": 53.25
+        },
+        {
+          "ticker": "EA",
+          "return_pct": 26.09,
+          "price": 145.96
+        },
+        {
+          "ticker": "TTWO",
+          "return_pct": 20.52,
+          "price": 225.55
+        },
+        {
+          "ticker": "MNST",
+          "return_pct": 20.23,
+          "price": 58.49
+        },
+        {
+          "ticker": "ED",
+          "return_pct": 20.06,
+          "price": 106.65
+        },
+        {
+          "ticker": "EXC",
+          "return_pct": 17.84,
+          "price": 44.88
+        },
+        {
+          "ticker": "KR",
+          "return_pct": 17.14,
+          "price": 68.6
+        }
+      ]
+    },
+    {
+      "week": "2025-05-05",
+      "top_10": [
+        {
+          "ticker": "PM",
+          "return_pct": 34.0,
+          "price": 167.26
+        },
+        {
+          "ticker": "MNST",
+          "return_pct": 30.68,
+          "price": 60.91
+        },
+        {
+          "ticker": "EA",
+          "return_pct": 27.8,
+          "price": 153.93
+        },
+        {
+          "ticker": "NEM",
+          "return_pct": 23.08,
+          "price": 52.24
+        },
+        {
+          "ticker": "CCI",
+          "return_pct": 22.83,
+          "price": 102.16
+        },
+        {
+          "ticker": "TTWO",
+          "return_pct": 22.76,
+          "price": 225.32
+        },
+        {
+          "ticker": "AMT",
+          "return_pct": 22.58,
+          "price": 215.9
+        },
+        {
+          "ticker": "OKTA",
+          "return_pct": 22.56,
+          "price": 115.71
+        },
+        {
+          "ticker": "UBER",
+          "return_pct": 22.48,
+          "price": 85.43
+        },
+        {
+          "ticker": "CAH",
+          "return_pct": 21.87,
+          "price": 150.29
+        }
+      ]
+    },
+    {
+      "week": "2025-05-12",
+      "top_10": [
+        {
+          "ticker": "OKTA",
+          "return_pct": 29.64,
+          "price": 124.17
+        },
+        {
+          "ticker": "MNST",
+          "return_pct": 27.67,
+          "price": 61.36
+        },
+        {
+          "ticker": "PAYC",
+          "return_pct": 27.27,
+          "price": 255.6
+        },
+        {
+          "ticker": "WYNN",
+          "return_pct": 23.93,
+          "price": 94.05
+        },
+        {
+          "ticker": "MOS",
+          "return_pct": 23.39,
+          "price": 31.64
+        },
+        {
+          "ticker": "MELI",
+          "return_pct": 23.07,
+          "price": 2504.61
+        },
+        {
+          "ticker": "F",
+          "return_pct": 20.02,
+          "price": 10.05
+        },
+        {
+          "ticker": "RIVN",
+          "return_pct": 17.68,
+          "price": 14.64
+        },
+        {
+          "ticker": "MCHP",
+          "return_pct": 16.81,
+          "price": 58.89
+        },
+        {
+          "ticker": "CAH",
+          "return_pct": 16.18,
+          "price": 146.96
+        }
+      ]
+    },
+    {
+      "week": "2025-05-19",
+      "top_10": [
+        {
+          "ticker": "MOS",
+          "return_pct": 31.5,
+          "price": 33.95
+        },
+        {
+          "ticker": "OKTA",
+          "return_pct": 30.38,
+          "price": 126.44
+        },
+        {
+          "ticker": "RBLX",
+          "return_pct": 27.61,
+          "price": 81.21
+        },
+        {
+          "ticker": "MELI",
+          "return_pct": 24.21,
+          "price": 2578.35
+        },
+        {
+          "ticker": "CAH",
+          "return_pct": 21.84,
+          "price": 152.14
+        },
+        {
+          "ticker": "MNST",
+          "return_pct": 21.69,
+          "price": 62.9
+        },
+        {
+          "ticker": "HCA",
+          "return_pct": 20.96,
+          "price": 384.31
+        },
+        {
+          "ticker": "MCK",
+          "return_pct": 20.65,
+          "price": 722.74
+        },
+        {
+          "ticker": "PAYC",
+          "return_pct": 20.46,
+          "price": 257.13
+        },
+        {
+          "ticker": "SE",
+          "return_pct": 19.45,
+          "price": 162.72
+        }
+      ]
+    },
+    {
+      "week": "2025-06-02",
+      "top_10": [
+        {
+          "ticker": "MOS",
+          "return_pct": 60.87,
+          "price": 35.33
+        },
+        {
+          "ticker": "PLTR",
+          "return_pct": 56.45,
+          "price": 132.04
+        },
+        {
+          "ticker": "GEV",
+          "return_pct": 55.09,
+          "price": 484.1
+        },
+        {
+          "ticker": "ZS",
+          "return_pct": 51.26,
+          "price": 293.18
+        },
+        {
+          "ticker": "HOOD",
+          "return_pct": 47.08,
+          "price": 67.98
+        },
+        {
+          "ticker": "RBLX",
+          "return_pct": 43.55,
+          "price": 89.95
+        },
+        {
+          "ticker": "ULTA",
+          "return_pct": 38.5,
+          "price": 475.68
+        },
+        {
+          "ticker": "CEG",
+          "return_pct": 35.74,
+          "price": 311.79
+        },
+        {
+          "ticker": "BA",
+          "return_pct": 33.08,
+          "price": 211.47
+        },
+        {
+          "ticker": "AVGO",
+          "return_pct": 33.06,
+          "price": 246.71
+        }
+      ]
+    },
+    {
+      "week": "2025-06-09",
+      "top_10": [
+        {
+          "ticker": "HOOD",
+          "return_pct": 101.87,
+          "price": 73.4
+        },
+        {
+          "ticker": "RBLX",
+          "return_pct": 70.63,
+          "price": 93.42
+        },
+        {
+          "ticker": "PLTR",
+          "return_pct": 69.2,
+          "price": 132.06
+        },
+        {
+          "ticker": "GEV",
+          "return_pct": 69.02,
+          "price": 478.95
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 50.9,
+          "price": 128.51
+        },
+        {
+          "ticker": "ZS",
+          "return_pct": 50.43,
+          "price": 299.9
+        },
+        {
+          "ticker": "VST",
+          "return_pct": 48.36,
+          "price": 168.51
+        },
+        {
+          "ticker": "NET",
+          "return_pct": 48.08,
+          "price": 177.8
+        },
+        {
+          "ticker": "CEG",
+          "return_pct": 43.86,
+          "price": 298.09
+        },
+        {
+          "ticker": "BA",
+          "return_pct": 41.19,
+          "price": 217.51
+        }
+      ]
+    },
+    {
+      "week": "2025-06-16",
+      "top_10": [
+        {
+          "ticker": "HOOD",
+          "return_pct": 91.4,
+          "price": 76.75
+        },
+        {
+          "ticker": "RBLX",
+          "return_pct": 79.42,
+          "price": 100.44
+        },
+        {
+          "ticker": "PLTR",
+          "return_pct": 68.57,
+          "price": 141.41
+        },
+        {
+          "ticker": "NET",
+          "return_pct": 55.72,
+          "price": 179.27
+        },
+        {
+          "ticker": "GEV",
+          "return_pct": 53.09,
+          "price": 486.81
+        },
+        {
+          "ticker": "ZS",
+          "return_pct": 51.31,
+          "price": 305.02
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 49.04,
+          "price": 129.37
+        },
+        {
+          "ticker": "CEG",
+          "return_pct": 46.28,
+          "price": 306.4
+        },
+        {
+          "ticker": "TSLA",
+          "return_pct": 46.08,
+          "price": 329.13
+        },
+        {
+          "ticker": "COIN",
+          "return_pct": 44.4,
+          "price": 261.57
+        }
+      ]
+    },
+    {
+      "week": "2025-06-23",
+      "top_10": [
+        {
+          "ticker": "RBLX",
+          "return_pct": 69.16,
+          "price": 103.49
+        },
+        {
+          "ticker": "HOOD",
+          "return_pct": 57.88,
+          "price": 76.35
+        },
+        {
+          "ticker": "COIN",
+          "return_pct": 51.49,
+          "price": 307.59
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 49.88,
+          "price": 131.39
+        },
+        {
+          "ticker": "NET",
+          "return_pct": 48.37,
+          "price": 183.87
+        },
+        {
+          "ticker": "ZS",
+          "return_pct": 47.93,
+          "price": 310.46
+        },
+        {
+          "ticker": "GEV",
+          "return_pct": 45.61,
+          "price": 498.79
+        },
+        {
+          "ticker": "PLTR",
+          "return_pct": 44.62,
+          "price": 139.92
+        },
+        {
+          "ticker": "VST",
+          "return_pct": 38.42,
+          "price": 185.84
+        },
+        {
+          "ticker": "CEG",
+          "return_pct": 38.06,
+          "price": 313.56
+        }
+      ]
+    },
+    {
+      "week": "2025-06-30",
+      "top_10": [
+        {
+          "ticker": "HOOD",
+          "return_pct": 124.96,
+          "price": 93.63
+        },
+        {
+          "ticker": "COIN",
+          "return_pct": 103.5,
+          "price": 350.49
+        },
+        {
+          "ticker": "RBLX",
+          "return_pct": 80.48,
+          "price": 105.2
+        },
+        {
+          "ticker": "NET",
+          "return_pct": 73.78,
+          "price": 195.83
+        },
+        {
+          "ticker": "GEV",
+          "return_pct": 73.46,
+          "price": 527.99
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 70.8,
+          "price": 143.25
+        },
+        {
+          "ticker": "VST",
+          "return_pct": 65.24,
+          "price": 193.07
+        },
+        {
+          "ticker": "AVGO",
+          "return_pct": 65.02,
+          "price": 274.08
+        },
+        {
+          "ticker": "PLTR",
+          "return_pct": 61.52,
+          "price": 136.32
+        },
+        {
+          "ticker": "CEG",
+          "return_pct": 60.29,
+          "price": 321.07
+        }
+      ]
+    },
+    {
+      "week": "2025-07-07",
+      "top_10": [
+        {
+          "ticker": "HOOD",
+          "return_pct": 170.82,
+          "price": 93.46
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 123.55,
+          "price": 147.28
+        },
+        {
+          "ticker": "COIN",
+          "return_pct": 122.42,
+          "price": 357.1
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 113.95,
+          "price": 65.06
+        },
+        {
+          "ticker": "RBLX",
+          "return_pct": 103.47,
+          "price": 107.76
+        },
+        {
+          "ticker": "SOFI",
+          "return_pct": 101.04,
+          "price": 19.24
+        },
+        {
+          "ticker": "AFRM",
+          "return_pct": 99.24,
+          "price": 71.23
+        },
+        {
+          "ticker": "MCHP",
+          "return_pct": 98.88,
+          "price": 69.59
+        },
+        {
+          "ticker": "NET",
+          "return_pct": 98.65,
+          "price": 192.85
+        },
+        {
+          "ticker": "VST",
+          "return_pct": 97.76,
+          "price": 192.96
+        }
+      ]
+    },
+    {
+      "week": "2025-07-14",
+      "top_10": [
+        {
+          "ticker": "HOOD",
+          "return_pct": 128.85,
+          "price": 99.96
+        },
+        {
+          "ticker": "COIN",
+          "return_pct": 124.51,
+          "price": 394.01
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 113.64,
+          "price": 147.96
+        },
+        {
+          "ticker": "SOFI",
+          "return_pct": 99.16,
+          "price": 21.33
+        },
+        {
+          "ticker": "RBLX",
+          "return_pct": 95.3,
+          "price": 111.83
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 94.93,
+          "price": 66.77
+        },
+        {
+          "ticker": "MCHP",
+          "return_pct": 92.77,
+          "price": 72.09
+        },
+        {
+          "ticker": "RCL",
+          "return_pct": 78.63,
+          "price": 336.28
+        },
+        {
+          "ticker": "VST",
+          "return_pct": 74.61,
+          "price": 194.06
+        },
+        {
+          "ticker": "ORCL",
+          "return_pct": 73.61,
+          "price": 227.48
+        }
+      ]
+    },
+    {
+      "week": "2025-07-21",
+      "top_10": [
+        {
+          "ticker": "HOOD",
+          "return_pct": 161.83,
+          "price": 104.34
+        },
+        {
+          "ticker": "COIN",
+          "return_pct": 136.36,
+          "price": 413.63
+        },
+        {
+          "ticker": "RBLX",
+          "return_pct": 107.81,
+          "price": 124.5
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 103.47,
+          "price": 148.51
+        },
+        {
+          "ticker": "ORCL",
+          "return_pct": 98.71,
+          "price": 241.63
+        },
+        {
+          "ticker": "SOFI",
+          "return_pct": 97.94,
+          "price": 21.16
+        },
+        {
+          "ticker": "NET",
+          "return_pct": 93.67,
+          "price": 197.76
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 91.51,
+          "price": 68.57
+        },
+        {
+          "ticker": "MCHP",
+          "return_pct": 88.74,
+          "price": 71.9
+        },
+        {
+          "ticker": "U",
+          "return_pct": 86.6,
+          "price": 35.92
+        }
+      ]
+    },
+    {
+      "week": "2025-07-28",
+      "top_10": [
+        {
+          "ticker": "HOOD",
+          "return_pct": 118.21,
+          "price": 106.77
+        },
+        {
+          "ticker": "COIN",
+          "return_pct": 84.87,
+          "price": 379.49
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 84.1,
+          "price": 149.33
+        },
+        {
+          "ticker": "RBLX",
+          "return_pct": 82.09,
+          "price": 120.96
+        },
+        {
+          "ticker": "AMD",
+          "return_pct": 80.16,
+          "price": 173.66
+        },
+        {
+          "ticker": "ORCL",
+          "return_pct": 77.13,
+          "price": 245.77
+        },
+        {
+          "ticker": "GEV",
+          "return_pct": 75.09,
+          "price": 646.52
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 68.95,
+          "price": 68.82
+        },
+        {
+          "ticker": "NET",
+          "return_pct": 64.8,
+          "price": 199.41
+        },
+        {
+          "ticker": "RCL",
+          "return_pct": 63.19,
+          "price": 346.08
+        }
+      ]
+    },
+    {
+      "week": "2025-08-04",
+      "top_10": [
+        {
+          "ticker": "HOOD",
+          "return_pct": 121.37,
+          "price": 106.37
+        },
+        {
+          "ticker": "RBLX",
+          "return_pct": 81.98,
+          "price": 130.7
+        },
+        {
+          "ticker": "SMCI",
+          "return_pct": 81.01,
+          "price": 58.23
+        },
+        {
+          "ticker": "AMD",
+          "return_pct": 75.74,
+          "price": 176.78
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 71.96,
+          "price": 77.1
+        },
+        {
+          "ticker": "SOFI",
+          "return_pct": 69.6,
+          "price": 21.81
+        },
+        {
+          "ticker": "ORCL",
+          "return_pct": 69.51,
+          "price": 250.55
+        },
+        {
+          "ticker": "NET",
+          "return_pct": 67.52,
+          "price": 208.8
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 66.31,
+          "price": 153.65
+        },
+        {
+          "ticker": "GEV",
+          "return_pct": 65.31,
+          "price": 661.61
+        }
+      ]
+    },
+    {
+      "week": "2025-08-11",
+      "top_10": [
+        {
+          "ticker": "HOOD",
+          "return_pct": 97.84,
+          "price": 113.62
+        },
+        {
+          "ticker": "RBLX",
+          "return_pct": 77.9,
+          "price": 130.74
+        },
+        {
+          "ticker": "ORCL",
+          "return_pct": 61.06,
+          "price": 250.7
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 60.57,
+          "price": 74.46
+        },
+        {
+          "ticker": "SOFI",
+          "return_pct": 59.69,
+          "price": 22.42
+        },
+        {
+          "ticker": "AMD",
+          "return_pct": 59.34,
+          "price": 172.28
+        },
+        {
+          "ticker": "GEV",
+          "return_pct": 56.26,
+          "price": 649.62
+        },
+        {
+          "ticker": "COIN",
+          "return_pct": 54.24,
+          "price": 319.62
+        },
+        {
+          "ticker": "PLTR",
+          "return_pct": 54.21,
+          "price": 182.68
+        },
+        {
+          "ticker": "U",
+          "return_pct": 51.97,
+          "price": 33.19
+        }
+      ]
+    },
+    {
+      "week": "2025-08-18",
+      "top_10": [
+        {
+          "ticker": "HOOD",
+          "return_pct": 78.96,
+          "price": 115.02
+        },
+        {
+          "ticker": "SOFI",
+          "return_pct": 76.47,
+          "price": 24.23
+        },
+        {
+          "ticker": "U",
+          "return_pct": 72.39,
+          "price": 38.34
+        },
+        {
+          "ticker": "ORCL",
+          "return_pct": 56.35,
+          "price": 247.12
+        },
+        {
+          "ticker": "AMD",
+          "return_pct": 53.51,
+          "price": 176.14
+        },
+        {
+          "ticker": "AFRM",
+          "return_pct": 51.31,
+          "price": 78.24
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 50.69,
+          "price": 76.1
+        },
+        {
+          "ticker": "RBLX",
+          "return_pct": 47.7,
+          "price": 119.95
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 46.32,
+          "price": 157.51
+        },
+        {
+          "ticker": "ANET",
+          "return_pct": 42.75,
+          "price": 138.04
+        }
+      ]
+    },
+    {
+      "week": "2025-08-25",
+      "top_10": [
+        {
+          "ticker": "SOFI",
+          "return_pct": 95.29,
+          "price": 26.15
+        },
+        {
+          "ticker": "U",
+          "return_pct": 82.62,
+          "price": 39.83
+        },
+        {
+          "ticker": "NIO",
+          "return_pct": 65.04,
+          "price": 6.09
+        },
+        {
+          "ticker": "HOOD",
+          "return_pct": 63.5,
+          "price": 107.94
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 53.16,
+          "price": 79.03
+        },
+        {
+          "ticker": "AFRM",
+          "return_pct": 51.21,
+          "price": 77.39
+        },
+        {
+          "ticker": "RBLX",
+          "return_pct": 46.1,
+          "price": 124.81
+        },
+        {
+          "ticker": "ORCL",
+          "return_pct": 45.7,
+          "price": 233.57
+        },
+        {
+          "ticker": "ANET",
+          "return_pct": 43.84,
+          "price": 133.04
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 43.22,
+          "price": 116.77
+        }
+      ]
+    },
+    {
+      "week": "2025-09-08",
+      "top_10": [
+        {
+          "ticker": "U",
+          "return_pct": 84.29,
+          "price": 45.5
+        },
+        {
+          "ticker": "SOFI",
+          "return_pct": 84.11,
+          "price": 25.96
+        },
+        {
+          "ticker": "NIO",
+          "return_pct": 71.39,
+          "price": 6.17
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 63.8,
+          "price": 93.17
+        },
+        {
+          "ticker": "HOOD",
+          "return_pct": 59.78,
+          "price": 117.28
+        },
+        {
+          "ticker": "DHI",
+          "return_pct": 50.44,
+          "price": 182.4
+        },
+        {
+          "ticker": "MDB",
+          "return_pct": 48.82,
+          "price": 323.29
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 46.15,
+          "price": 187.82
+        },
+        {
+          "ticker": "WYNN",
+          "return_pct": 45.16,
+          "price": 121.83
+        },
+        {
+          "ticker": "ANET",
+          "return_pct": 44.64,
+          "price": 140.01
+        }
+      ]
+    },
+    {
+      "week": "2025-09-15",
+      "top_10": [
+        {
+          "ticker": "U",
+          "return_pct": 90.7,
+          "price": 46.53
+        },
+        {
+          "ticker": "SOFI",
+          "return_pct": 85.7,
+          "price": 27.67
+        },
+        {
+          "ticker": "NIO",
+          "return_pct": 84.37,
+          "price": 6.49
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 80.86,
+          "price": 19.46
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 78.56,
+          "price": 102.26
+        },
+        {
+          "ticker": "MDB",
+          "return_pct": 64.92,
+          "price": 333.97
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 61.97,
+          "price": 209.54
+        },
+        {
+          "ticker": "ANET",
+          "return_pct": 52.94,
+          "price": 145.43
+        },
+        {
+          "ticker": "HOOD",
+          "return_pct": 49.62,
+          "price": 114.83
+        },
+        {
+          "ticker": "AFRM",
+          "return_pct": 46.97,
+          "price": 89.43
+        }
+      ]
+    },
+    {
+      "week": "2025-09-22",
+      "top_10": [
+        {
+          "ticker": "NIO",
+          "return_pct": 97.43,
+          "price": 6.91
+        },
+        {
+          "ticker": "U",
+          "return_pct": 90.97,
+          "price": 45.91
+        },
+        {
+          "ticker": "SOFI",
+          "return_pct": 88.08,
+          "price": 29.81
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 81.31,
+          "price": 112.27
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 79.91,
+          "price": 19.61
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 69.13,
+          "price": 227.61
+        },
+        {
+          "ticker": "MDB",
+          "return_pct": 54.64,
+          "price": 323.59
+        },
+        {
+          "ticker": "ANET",
+          "return_pct": 53.1,
+          "price": 145.4
+        },
+        {
+          "ticker": "ORCL",
+          "return_pct": 52.76,
+          "price": 325.58
+        },
+        {
+          "ticker": "HOOD",
+          "return_pct": 52.29,
+          "price": 124.89
+        }
+      ]
+    },
+    {
+      "week": "2025-09-29",
+      "top_10": [
+        {
+          "ticker": "NIO",
+          "return_pct": 105.41,
+          "price": 7.21
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 83.08,
+          "price": 116.59
+        },
+        {
+          "ticker": "U",
+          "return_pct": 78.84,
+          "price": 42.94
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 72.39,
+          "price": 18.86
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 57.98,
+          "price": 227.43
+        },
+        {
+          "ticker": "SOFI",
+          "return_pct": 56.18,
+          "price": 27.55
+        },
+        {
+          "ticker": "MDB",
+          "return_pct": 53.85,
+          "price": 317.0
+        },
+        {
+          "ticker": "INTC",
+          "return_pct": 50.9,
+          "price": 34.48
+        },
+        {
+          "ticker": "HOOD",
+          "return_pct": 48.08,
+          "price": 136.72
+        },
+        {
+          "ticker": "TSLA",
+          "return_pct": 47.39,
+          "price": 443.21
+        }
+      ]
+    },
+    {
+      "week": "2025-10-06",
+      "top_10": [
+        {
+          "ticker": "NIO",
+          "return_pct": 118.1,
+          "price": 7.59
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 94.04,
+          "price": 125.12
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 71.53,
+          "price": 241.77
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 66.06,
+          "price": 19.08
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 59.54,
+          "price": 147.64
+        },
+        {
+          "ticker": "MU",
+          "return_pct": 56.32,
+          "price": 190.8
+        },
+        {
+          "ticker": "INTC",
+          "return_pct": 56.1,
+          "price": 36.59
+        },
+        {
+          "ticker": "TSLA",
+          "return_pct": 53.19,
+          "price": 453.25
+        },
+        {
+          "ticker": "HOOD",
+          "return_pct": 52.59,
+          "price": 144.26
+        },
+        {
+          "ticker": "NEM",
+          "return_pct": 51.16,
+          "price": 87.87
+        }
+      ]
+    },
+    {
+      "week": "2025-10-13",
+      "top_10": [
+        {
+          "ticker": "WDC",
+          "return_pct": 78.86,
+          "price": 118.71
+        },
+        {
+          "ticker": "NIO",
+          "return_pct": 74.7,
+          "price": 7.18
+        },
+        {
+          "ticker": "MU",
+          "return_pct": 65.67,
+          "price": 192.61
+        },
+        {
+          "ticker": "INTC",
+          "return_pct": 64.04,
+          "price": 37.22
+        },
+        {
+          "ticker": "NEM",
+          "return_pct": 53.46,
+          "price": 88.75
+        },
+        {
+          "ticker": "MDB",
+          "return_pct": 52.27,
+          "price": 319.21
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 51.41,
+          "price": 138.91
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 49.68,
+          "price": 218.55
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 41.34,
+          "price": 17.78
+        },
+        {
+          "ticker": "MPWR",
+          "return_pct": 37.73,
+          "price": 978.06
+        }
+      ]
+    },
+    {
+      "week": "2025-10-20",
+      "top_10": [
+        {
+          "ticker": "MU",
+          "return_pct": 88.38,
+          "price": 206.6
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 75.52,
+          "price": 121.37
+        },
+        {
+          "ticker": "INTC",
+          "return_pct": 62.2,
+          "price": 38.1
+        },
+        {
+          "ticker": "NEM",
+          "return_pct": 55.01,
+          "price": 94.2
+        },
+        {
+          "ticker": "AMD",
+          "return_pct": 51.63,
+          "price": 240.56
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 49.77,
+          "price": 138.97
+        },
+        {
+          "ticker": "LRCX",
+          "return_pct": 48.65,
+          "price": 143.64
+        },
+        {
+          "ticker": "MPWR",
+          "return_pct": 43.53,
+          "price": 1027.79
+        },
+        {
+          "ticker": "NIO",
+          "return_pct": 43.5,
+          "price": 7.06
+        },
+        {
+          "ticker": "MDB",
+          "return_pct": 43.44,
+          "price": 327.41
+        }
+      ]
+    },
+    {
+      "week": "2025-10-27",
+      "top_10": [
+        {
+          "ticker": "INTC",
+          "return_pct": 94.4,
+          "price": 39.54
+        },
+        {
+          "ticker": "MU",
+          "return_pct": 91.95,
+          "price": 219.92
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 77.54,
+          "price": 126.51
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 58.67,
+          "price": 21.04
+        },
+        {
+          "ticker": "LRCX",
+          "return_pct": 58.65,
+          "price": 156.45
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 56.73,
+          "price": 229.32
+        },
+        {
+          "ticker": "NIO",
+          "return_pct": 56.1,
+          "price": 7.04
+        },
+        {
+          "ticker": "MPWR",
+          "return_pct": 51.53,
+          "price": 1100.98
+        },
+        {
+          "ticker": "AMD",
+          "return_pct": 44.65,
+          "price": 259.67
+        },
+        {
+          "ticker": "SHOP",
+          "return_pct": 42.31,
+          "price": 175.06
+        }
+      ]
+    },
+    {
+      "week": "2025-11-03",
+      "top_10": [
+        {
+          "ticker": "MU",
+          "return_pct": 115.89,
+          "price": 234.51
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 114.43,
+          "price": 157.82
+        },
+        {
+          "ticker": "INTC",
+          "return_pct": 93.53,
+          "price": 39.5
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 80.88,
+          "price": 264.39
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 74.73,
+          "price": 182.79
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 74.28,
+          "price": 22.29
+        },
+        {
+          "ticker": "LRCX",
+          "return_pct": 68.4,
+          "price": 160.78
+        },
+        {
+          "ticker": "NIO",
+          "return_pct": 60.95,
+          "price": 7.42
+        },
+        {
+          "ticker": "AMD",
+          "return_pct": 59.18,
+          "price": 259.65
+        },
+        {
+          "ticker": "MDB",
+          "return_pct": 56.5,
+          "price": 369.05
+        }
+      ]
+    },
+    {
+      "week": "2025-11-10",
+      "top_10": [
+        {
+          "ticker": "WDC",
+          "return_pct": 129.29,
+          "price": 174.0
+        },
+        {
+          "ticker": "MU",
+          "return_pct": 103.96,
+          "price": 253.09
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 90.71,
+          "price": 22.98
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 87.94,
+          "price": 292.71
+        },
+        {
+          "ticker": "MDB",
+          "return_pct": 80.25,
+          "price": 373.89
+        },
+        {
+          "ticker": "INTC",
+          "return_pct": 73.04,
+          "price": 38.45
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 61.62,
+          "price": 183.79
+        },
+        {
+          "ticker": "LRCX",
+          "return_pct": 56.17,
+          "price": 165.9
+        },
+        {
+          "ticker": "DDOG",
+          "return_pct": 55.17,
+          "price": 199.72
+        },
+        {
+          "ticker": "FSLR",
+          "return_pct": 47.5,
+          "price": 272.64
+        }
+      ]
+    },
+    {
+      "week": "2025-11-17",
+      "top_10": [
+        {
+          "ticker": "WDC",
+          "return_pct": 115.02,
+          "price": 162.24
+        },
+        {
+          "ticker": "MU",
+          "return_pct": 106.55,
+          "price": 241.75
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 97.05,
+          "price": 22.74
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 65.53,
+          "price": 260.24
+        },
+        {
+          "ticker": "MDB",
+          "return_pct": 59.66,
+          "price": 339.6
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 53.04,
+          "price": 167.18
+        },
+        {
+          "ticker": "ALB",
+          "return_pct": 51.48,
+          "price": 117.06
+        },
+        {
+          "ticker": "LRCX",
+          "return_pct": 49.02,
+          "price": 147.04
+        },
+        {
+          "ticker": "INTC",
+          "return_pct": 47.45,
+          "price": 34.71
+        },
+        {
+          "ticker": "AMD",
+          "return_pct": 45.59,
+          "price": 240.52
+        }
+      ]
+    },
+    {
+      "week": "2025-11-24",
+      "top_10": [
+        {
+          "ticker": "MU",
+          "return_pct": 90.29,
+          "price": 223.75
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 88.15,
+          "price": 22.86
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 87.31,
+          "price": 150.74
+        },
+        {
+          "ticker": "GOOGL",
+          "return_pct": 53.68,
+          "price": 318.15
+        },
+        {
+          "ticker": "GOOG",
+          "return_pct": 53.09,
+          "price": 318.04
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 51.98,
+          "price": 252.28
+        },
+        {
+          "ticker": "LLY",
+          "return_pct": 45.98,
+          "price": 1066.54
+        },
+        {
+          "ticker": "LRCX",
+          "return_pct": 45.34,
+          "price": 149.95
+        },
+        {
+          "ticker": "INTC",
+          "return_pct": 44.02,
+          "price": 35.79
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 42.12,
+          "price": 165.84
+        }
+      ]
+    },
+    {
+      "week": "2025-12-01",
+      "top_10": [
+        {
+          "ticker": "MU",
+          "return_pct": 102.67,
+          "price": 240.26
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 100.25,
+          "price": 23.87
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 90.38,
+          "price": 163.33
+        },
+        {
+          "ticker": "INTC",
+          "return_pct": 66.71,
+          "price": 40.01
+        },
+        {
+          "ticker": "AMAT",
+          "return_pct": 63.36,
+          "price": 254.12
+        },
+        {
+          "ticker": "ALB",
+          "return_pct": 61.06,
+          "price": 127.63
+        },
+        {
+          "ticker": "LRCX",
+          "return_pct": 58.68,
+          "price": 154.35
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 53.67,
+          "price": 268.92
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 50.42,
+          "price": 179.49
+        },
+        {
+          "ticker": "MRVL",
+          "return_pct": 46.3,
+          "price": 90.99
+        }
+      ]
+    },
+    {
+      "week": "2025-12-08",
+      "top_10": [
+        {
+          "ticker": "WBD",
+          "return_pct": 117.15,
+          "price": 27.23
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 78.82,
+          "price": 169.7
+        },
+        {
+          "ticker": "MU",
+          "return_pct": 76.48,
+          "price": 246.72
+        },
+        {
+          "ticker": "ALB",
+          "return_pct": 74.43,
+          "price": 126.5
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 72.42,
+          "price": 202.83
+        },
+        {
+          "ticker": "AMAT",
+          "return_pct": 64.41,
+          "price": 267.49
+        },
+        {
+          "ticker": "INTC",
+          "return_pct": 62.7,
+          "price": 40.3
+        },
+        {
+          "ticker": "LRCX",
+          "return_pct": 52.13,
+          "price": 162.55
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 48.32,
+          "price": 284.17
+        },
+        {
+          "ticker": "CAT",
+          "return_pct": 41.45,
+          "price": 593.98
+        }
+      ]
+    },
+    {
+      "week": "2025-12-15",
+      "top_10": [
+        {
+          "ticker": "WDC",
+          "return_pct": 70.57,
+          "price": 171.96
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 70.44,
+          "price": 194.55
+        },
+        {
+          "ticker": "ALB",
+          "return_pct": 65.44,
+          "price": 131.89
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 65.15,
+          "price": 29.71
+        },
+        {
+          "ticker": "INTC",
+          "return_pct": 50.64,
+          "price": 37.51
+        },
+        {
+          "ticker": "MU",
+          "return_pct": 48.54,
+          "price": 237.3
+        },
+        {
+          "ticker": "AMAT",
+          "return_pct": 46.96,
+          "price": 260.62
+        },
+        {
+          "ticker": "LLY",
+          "return_pct": 39.94,
+          "price": 1058.6
+        },
+        {
+          "ticker": "GM",
+          "return_pct": 39.87,
+          "price": 81.79
+        },
+        {
+          "ticker": "EPAM",
+          "return_pct": 38.24,
+          "price": 212.14
+        }
+      ]
+    },
+    {
+      "week": "2025-12-22",
+      "top_10": [
+        {
+          "ticker": "ALB",
+          "return_pct": 78.74,
+          "price": 145.02
+        },
+        {
+          "ticker": "MU",
+          "return_pct": 71.15,
+          "price": 276.36
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 61.27,
+          "price": 176.68
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 48.16,
+          "price": 197.06
+        },
+        {
+          "ticker": "ILMN",
+          "return_pct": 45.75,
+          "price": 137.6
+        },
+        {
+          "ticker": "LLY",
+          "return_pct": 45.32,
+          "price": 1072.84
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 45.06,
+          "price": 28.75
+        },
+        {
+          "ticker": "MDB",
+          "return_pct": 39.45,
+          "price": 439.68
+        },
+        {
+          "ticker": "GM",
+          "return_pct": 38.84,
+          "price": 82.83
+        },
+        {
+          "ticker": "RIVN",
+          "return_pct": 37.75,
+          "price": 21.75
+        }
+      ]
+    },
+    {
+      "week": "2025-12-29",
+      "top_10": [
+        {
+          "ticker": "ALB",
+          "return_pct": 78.86,
+          "price": 144.22
+        },
+        {
+          "ticker": "MU",
+          "return_pct": 76.11,
+          "price": 294.25
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 49.78,
+          "price": 179.59
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 47.41,
+          "price": 28.79
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 43.5,
+          "price": 197.2
+        },
+        {
+          "ticker": "ILMN",
+          "return_pct": 41.6,
+          "price": 134.48
+        },
+        {
+          "ticker": "LLY",
+          "return_pct": 41.59,
+          "price": 1075.08
+        },
+        {
+          "ticker": "TWLO",
+          "return_pct": 41.39,
+          "price": 141.52
+        },
+        {
+          "ticker": "RIVN",
+          "return_pct": 40.8,
+          "price": 20.67
+        },
+        {
+          "ticker": "EPAM",
+          "return_pct": 40.35,
+          "price": 211.64
+        }
+      ]
+    },
+    {
+      "week": "2026-01-05",
+      "top_10": [
+        {
+          "ticker": "MU",
+          "return_pct": 63.53,
+          "price": 312.02
+        },
+        {
+          "ticker": "ALB",
+          "return_pct": 59.26,
+          "price": 145.77
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 50.09,
+          "price": 187.79
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 49.53,
+          "price": 28.53
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 48.55,
+          "price": 219.33
+        },
+        {
+          "ticker": "RIVN",
+          "return_pct": 45.11,
+          "price": 19.59
+        },
+        {
+          "ticker": "GM",
+          "return_pct": 43.18,
+          "price": 82.95
+        },
+        {
+          "ticker": "ILMN",
+          "return_pct": 39.9,
+          "price": 141.33
+        },
+        {
+          "ticker": "EPAM",
+          "return_pct": 35.47,
+          "price": 206.61
+        },
+        {
+          "ticker": "FCX",
+          "return_pct": 35.43,
+          "price": 54.16
+        }
+      ]
+    },
+    {
+      "week": "2026-01-12",
+      "top_10": [
+        {
+          "ticker": "MU",
+          "return_pct": 79.49,
+          "price": 345.72
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 78.62,
+          "price": 212.04
+        },
+        {
+          "ticker": "ALB",
+          "return_pct": 76.29,
+          "price": 168.91
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 61.38,
+          "price": 224.18
+        },
+        {
+          "ticker": "LRCX",
+          "return_pct": 60.19,
+          "price": 220.14
+        },
+        {
+          "ticker": "WBD",
+          "return_pct": 59.73,
+          "price": 28.4
+        },
+        {
+          "ticker": "ILMN",
+          "return_pct": 53.16,
+          "price": 145.55
+        },
+        {
+          "ticker": "GM",
+          "return_pct": 49.34,
+          "price": 82.7
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 46.84,
+          "price": 320.92
+        },
+        {
+          "ticker": "RIVN",
+          "return_pct": 46.63,
+          "price": 19.15
+        }
+      ]
+    },
+    {
+      "week": "2026-01-26",
+      "top_10": [
+        {
+          "ticker": "WDC",
+          "return_pct": 86.23,
+          "price": 240.73
+        },
+        {
+          "ticker": "ALB",
+          "return_pct": 80.16,
+          "price": 189.28
+        },
+        {
+          "ticker": "MU",
+          "return_pct": 77.72,
+          "price": 388.93
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 60.75,
+          "price": 231.57
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 53.44,
+          "price": 357.67
+        },
+        {
+          "ticker": "ILMN",
+          "return_pct": 52.83,
+          "price": 153.0
+        },
+        {
+          "ticker": "NEM",
+          "return_pct": 51.48,
+          "price": 125.37
+        },
+        {
+          "ticker": "FCX",
+          "return_pct": 48.23,
+          "price": 61.04
+        },
+        {
+          "ticker": "LRCX",
+          "return_pct": 47.18,
+          "price": 222.6
+        },
+        {
+          "ticker": "AMAT",
+          "return_pct": 39.93,
+          "price": 318.67
+        }
+      ]
+    },
+    {
+      "week": "2026-02-02",
+      "top_10": [
+        {
+          "ticker": "MU",
+          "return_pct": 95.73,
+          "price": 437.62
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 80.05,
+          "price": 270.1
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 69.64,
+          "price": 432.2
+        },
+        {
+          "ticker": "ALB",
+          "return_pct": 68.41,
+          "price": 164.52
+        },
+        {
+          "ticker": "LRCX",
+          "return_pct": 51.08,
+          "price": 237.22
+        },
+        {
+          "ticker": "FCX",
+          "return_pct": 46.07,
+          "price": 60.63
+        },
+        {
+          "ticker": "DECK",
+          "return_pct": 42.64,
+          "price": 116.25
+        },
+        {
+          "ticker": "AMAT",
+          "return_pct": 41.16,
+          "price": 327.58
+        },
+        {
+          "ticker": "TXN",
+          "return_pct": 40.27,
+          "price": 223.87
+        },
+        {
+          "ticker": "NEM",
+          "return_pct": 39.78,
+          "price": 112.36
+        }
+      ]
+    },
+    {
+      "week": "2026-02-09",
+      "top_10": [
+        {
+          "ticker": "WDC",
+          "return_pct": 75.64,
+          "price": 285.85
+        },
+        {
+          "ticker": "ALB",
+          "return_pct": 71.08,
+          "price": 165.35
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 70.2,
+          "price": 309.76
+        },
+        {
+          "ticker": "ENPH",
+          "return_pct": 66.45,
+          "price": 50.3
+        },
+        {
+          "ticker": "MU",
+          "return_pct": 61.25,
+          "price": 383.34
+        },
+        {
+          "ticker": "FCX",
+          "return_pct": 60.18,
+          "price": 63.47
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 52.54,
+          "price": 424.26
+        },
+        {
+          "ticker": "DOW",
+          "return_pct": 46.06,
+          "price": 31.39
+        },
+        {
+          "ticker": "NEM",
+          "return_pct": 45.2,
+          "price": 120.21
+        },
+        {
+          "ticker": "LRCX",
+          "return_pct": 44.12,
+          "price": 229.01
+        }
+      ]
+    },
+    {
+      "week": "2026-02-23",
+      "top_10": [
+        {
+          "ticker": "MU",
+          "return_pct": 109.14,
+          "price": 420.79
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 104.54,
+          "price": 318.38
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 100.13,
+          "price": 280.29
+        },
+        {
+          "ticker": "ENPH",
+          "return_pct": 81.47,
+          "price": 47.4
+        },
+        {
+          "ticker": "LRCX",
+          "return_pct": 73.84,
+          "price": 241.98
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 69.84,
+          "price": 406.69
+        },
+        {
+          "ticker": "AMAT",
+          "return_pct": 69.83,
+          "price": 373.09
+        },
+        {
+          "ticker": "FCX",
+          "return_pct": 65.82,
+          "price": 65.41
+        },
+        {
+          "ticker": "MCHP",
+          "return_pct": 58.6,
+          "price": 76.22
+        },
+        {
+          "ticker": "ADI",
+          "return_pct": 58.26,
+          "price": 353.07
+        }
+      ]
+    },
+    {
+      "week": "2026-03-02",
+      "top_10": [
+        {
+          "ticker": "TER",
+          "return_pct": 79.21,
+          "price": 325.71
+        },
+        {
+          "ticker": "MU",
+          "return_pct": 74.58,
+          "price": 412.5
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 65.49,
+          "price": 269.95
+        },
+        {
+          "ticker": "FCX",
+          "return_pct": 59.28,
+          "price": 68.14
+        },
+        {
+          "ticker": "KEYS",
+          "return_pct": 58.26,
+          "price": 313.27
+        },
+        {
+          "ticker": "ENPH",
+          "return_pct": 54.97,
+          "price": 44.71
+        },
+        {
+          "ticker": "ODFL",
+          "return_pct": 53.86,
+          "price": 207.2
+        },
+        {
+          "ticker": "LMT",
+          "return_pct": 49.7,
+          "price": 672.3
+        },
+        {
+          "ticker": "LRCX",
+          "return_pct": 48.32,
+          "price": 230.72
+        },
+        {
+          "ticker": "AMAT",
+          "return_pct": 47.73,
+          "price": 371.72
+        }
+      ]
+    },
+    {
+      "week": "2026-03-09",
+      "top_10": [
+        {
+          "ticker": "MU",
+          "return_pct": 64.18,
+          "price": 389.16
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 55.24,
+          "price": 262.06
+        },
+        {
+          "ticker": "DOW",
+          "return_pct": 51.2,
+          "price": 33.96
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 47.71,
+          "price": 296.33
+        },
+        {
+          "ticker": "LMT",
+          "return_pct": 47.64,
+          "price": 659.83
+        },
+        {
+          "ticker": "CF",
+          "return_pct": 43.34,
+          "price": 110.59
+        },
+        {
+          "ticker": "NOC",
+          "return_pct": 36.57,
+          "price": 744.07
+        },
+        {
+          "ticker": "ALB",
+          "return_pct": 35.86,
+          "price": 169.15
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 34.62,
+          "price": 373.68
+        },
+        {
+          "ticker": "FCX",
+          "return_pct": 34.16,
+          "price": 60.36
+        }
+      ]
+    },
+    {
+      "week": "2026-03-16",
+      "top_10": [
+        {
+          "ticker": "MU",
+          "return_pct": 83.29,
+          "price": 441.61
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 62.38,
+          "price": 286.21
+        },
+        {
+          "ticker": "CF",
+          "return_pct": 55.3,
+          "price": 121.83
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 54.31,
+          "price": 298.16
+        },
+        {
+          "ticker": "DOW",
+          "return_pct": 51.97,
+          "price": 35.64
+        },
+        {
+          "ticker": "ENPH",
+          "return_pct": 42.6,
+          "price": 45.89
+        },
+        {
+          "ticker": "OXY",
+          "return_pct": 40.06,
+          "price": 57.25
+        },
+        {
+          "ticker": "VLO",
+          "return_pct": 39.03,
+          "price": 231.47
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 39.0,
+          "price": 398.09
+        },
+        {
+          "ticker": "KEYS",
+          "return_pct": 36.94,
+          "price": 285.94
+        }
+      ]
+    },
+    {
+      "week": "2026-03-23",
+      "top_10": [
+        {
+          "ticker": "WDC",
+          "return_pct": 62.87,
+          "price": 294.79
+        },
+        {
+          "ticker": "DOW",
+          "return_pct": 56.78,
+          "price": 35.68
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 55.78,
+          "price": 303.81
+        },
+        {
+          "ticker": "CF",
+          "return_pct": 53.52,
+          "price": 119.69
+        },
+        {
+          "ticker": "OXY",
+          "return_pct": 52.94,
+          "price": 60.31
+        },
+        {
+          "ticker": "MU",
+          "return_pct": 52.12,
+          "price": 404.18
+        },
+        {
+          "ticker": "VLO",
+          "return_pct": 46.79,
+          "price": 236.27
+        },
+        {
+          "ticker": "KEYS",
+          "return_pct": 42.72,
+          "price": 288.96
+        },
+        {
+          "ticker": "AMAT",
+          "return_pct": 41.27,
+          "price": 361.34
+        },
+        {
+          "ticker": "BKR",
+          "return_pct": 40.38,
+          "price": 62.32
+        }
+      ]
+    },
+    {
+      "week": "2026-03-30",
+      "top_10": [
+        {
+          "ticker": "DOW",
+          "return_pct": 81.44,
+          "price": 41.45
+        },
+        {
+          "ticker": "CF",
+          "return_pct": 78.15,
+          "price": 137.04
+        },
+        {
+          "ticker": "OXY",
+          "return_pct": 64.7,
+          "price": 66.24
+        },
+        {
+          "ticker": "VLO",
+          "return_pct": 52.0,
+          "price": 249.09
+        },
+        {
+          "ticker": "MPC",
+          "return_pct": 50.6,
+          "price": 244.23
+        },
+        {
+          "ticker": "CE",
+          "return_pct": 49.89,
+          "price": 64.22
+        },
+        {
+          "ticker": "PSX",
+          "return_pct": 44.9,
+          "price": 183.48
+        },
+        {
+          "ticker": "EOG",
+          "return_pct": 44.61,
+          "price": 148.74
+        },
+        {
+          "ticker": "COP",
+          "return_pct": 44.58,
+          "price": 131.91
+        },
+        {
+          "ticker": "XOM",
+          "return_pct": 43.21,
+          "price": 170.31
+        }
+      ]
+    },
+    {
+      "week": "2026-04-06",
+      "top_10": [
+        {
+          "ticker": "DOW",
+          "return_pct": 64.82,
+          "price": 40.15
+        },
+        {
+          "ticker": "CF",
+          "return_pct": 64.07,
+          "price": 130.45
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 61.96,
+          "price": 304.15
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 56.67,
+          "price": 453.3
+        },
+        {
+          "ticker": "OXY",
+          "return_pct": 53.43,
+          "price": 62.96
+        },
+        {
+          "ticker": "CE",
+          "return_pct": 49.9,
+          "price": 63.76
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 43.76,
+          "price": 315.31
+        },
+        {
+          "ticker": "KEYS",
+          "return_pct": 40.27,
+          "price": 292.92
+        },
+        {
+          "ticker": "DELL",
+          "return_pct": 40.26,
+          "price": 172.65
+        },
+        {
+          "ticker": "MPC",
+          "return_pct": 38.68,
+          "price": 240.48
+        }
+      ]
+    },
+    {
+      "week": "2026-04-13",
+      "top_10": [
+        {
+          "ticker": "WDC",
+          "return_pct": 65.14,
+          "price": 350.16
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 65.04,
+          "price": 369.99
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 59.94,
+          "price": 513.28
+        },
+        {
+          "ticker": "KEYS",
+          "return_pct": 58.63,
+          "price": 331.11
+        },
+        {
+          "ticker": "MRVL",
+          "return_pct": 58.48,
+          "price": 131.3
+        },
+        {
+          "ticker": "DELL",
+          "return_pct": 58.23,
+          "price": 189.2
+        },
+        {
+          "ticker": "GEV",
+          "return_pct": 55.01,
+          "price": 991.12
+        },
+        {
+          "ticker": "DOW",
+          "return_pct": 53.15,
+          "price": 39.71
+        },
+        {
+          "ticker": "CF",
+          "return_pct": 51.42,
+          "price": 121.19
+        },
+        {
+          "ticker": "CE",
+          "return_pct": 49.56,
+          "price": 68.19
+        }
+      ]
+    },
+    {
+      "week": "2026-04-20",
+      "top_10": [
+        {
+          "ticker": "MRVL",
+          "return_pct": 85.36,
+          "price": 147.84
+        },
+        {
+          "ticker": "DELL",
+          "return_pct": 83.88,
+          "price": 203.61
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 67.87,
+          "price": 374.11
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 67.59,
+          "price": 375.07
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 65.86,
+          "price": 539.75
+        },
+        {
+          "ticker": "ARM",
+          "return_pct": 63.39,
+          "price": 175.1
+        },
+        {
+          "ticker": "KEYS",
+          "return_pct": 58.11,
+          "price": 335.14
+        },
+        {
+          "ticker": "NIO",
+          "return_pct": 46.05,
+          "price": 6.66
+        },
+        {
+          "ticker": "GEV",
+          "return_pct": 44.67,
+          "price": 990.18
+        },
+        {
+          "ticker": "MPWR",
+          "return_pct": 44.4,
+          "price": 1490.86
+        }
+      ]
+    },
+    {
+      "week": "2026-04-27",
+      "top_10": [
+        {
+          "ticker": "INTC",
+          "return_pct": 93.47,
+          "price": 84.99
+        },
+        {
+          "ticker": "MRVL",
+          "return_pct": 90.87,
+          "price": 158.21
+        },
+        {
+          "ticker": "DELL",
+          "return_pct": 88.94,
+          "price": 215.97
+        },
+        {
+          "ticker": "ARM",
+          "return_pct": 87.92,
+          "price": 215.88
+        },
+        {
+          "ticker": "TER",
+          "return_pct": 68.31,
+          "price": 401.85
+        },
+        {
+          "ticker": "GEV",
+          "return_pct": 61.82,
+          "price": 1120.23
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 60.56,
+          "price": 595.86
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 58.68,
+          "price": 400.73
+        },
+        {
+          "ticker": "ON",
+          "return_pct": 56.54,
+          "price": 98.04
+        },
+        {
+          "ticker": "KEYS",
+          "return_pct": 56.39,
+          "price": 340.64
+        }
+      ]
+    },
+    {
+      "week": "2026-05-04",
+      "top_10": [
+        {
+          "ticker": "MRVL",
+          "return_pct": 116.76,
+          "price": 163.66
+        },
+        {
+          "ticker": "INTC",
+          "return_pct": 94.48,
+          "price": 95.78
+        },
+        {
+          "ticker": "ARM",
+          "return_pct": 94.41,
+          "price": 203.26
+        },
+        {
+          "ticker": "DELL",
+          "return_pct": 81.22,
+          "price": 211.64
+        },
+        {
+          "ticker": "TWLO",
+          "return_pct": 73.21,
+          "price": 189.67
+        },
+        {
+          "ticker": "ON",
+          "return_pct": 71.7,
+          "price": 102.04
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 66.46,
+          "price": 738.54
+        },
+        {
+          "ticker": "KEYS",
+          "return_pct": 54.67,
+          "price": 351.35
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 52.48,
+          "price": 442.36
+        },
+        {
+          "ticker": "CE",
+          "return_pct": 43.24,
+          "price": 68.74
+        }
+      ]
+    },
+    {
+      "week": "2026-05-11",
+      "top_10": [
+        {
+          "ticker": "INTC",
+          "return_pct": 174.64,
+          "price": 129.44
+        },
+        {
+          "ticker": "AMD",
+          "return_pct": 114.82,
+          "price": 458.79
+        },
+        {
+          "ticker": "MU",
+          "return_pct": 113.17,
+          "price": 795.33
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 110.85,
+          "price": 834.01
+        },
+        {
+          "ticker": "MRVL",
+          "return_pct": 108.42,
+          "price": 170.84
+        },
+        {
+          "ticker": "DELL",
+          "return_pct": 96.65,
+          "price": 247.04
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 96.56,
+          "price": 515.83
+        },
+        {
+          "ticker": "QCOM",
+          "return_pct": 70.64,
+          "price": 237.53
+        },
+        {
+          "ticker": "ARM",
+          "return_pct": 68.84,
+          "price": 212.65
+        },
+        {
+          "ticker": "TWLO",
+          "return_pct": 67.22,
+          "price": 198.59
+        }
+      ]
+    },
+    {
+      "week": "2026-05-18",
+      "top_10": [
+        {
+          "ticker": "INTC",
+          "return_pct": 137.95,
+          "price": 108.17
+        },
+        {
+          "ticker": "MRVL",
+          "return_pct": 113.7,
+          "price": 168.93
+        },
+        {
+          "ticker": "AMD",
+          "return_pct": 110.37,
+          "price": 420.99
+        },
+        {
+          "ticker": "DELL",
+          "return_pct": 104.46,
+          "price": 238.03
+        },
+        {
+          "ticker": "TWLO",
+          "return_pct": 78.7,
+          "price": 197.68
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 74.97,
+          "price": 740.84
+        },
+        {
+          "ticker": "DDOG",
+          "return_pct": 71.47,
+          "price": 208.82
+        },
+        {
+          "ticker": "ARM",
+          "return_pct": 69.07,
+          "price": 215.12
+        },
+        {
+          "ticker": "HUM",
+          "return_pct": 64.36,
+          "price": 306.0
+        },
+        {
+          "ticker": "PANW",
+          "return_pct": 62.49,
+          "price": 247.55
+        }
+      ]
+    },
+    {
+      "week": "2026-06-01",
+      "top_10": [
+        {
+          "ticker": "ARM",
+          "return_pct": 235.89,
+          "price": 408.85
+        },
+        {
+          "ticker": "DELL",
+          "return_pct": 221.95,
+          "price": 465.96
+        },
+        {
+          "ticker": "MRVL",
+          "return_pct": 183.24,
+          "price": 219.43
+        },
+        {
+          "ticker": "MU",
+          "return_pct": 172.84,
+          "price": 1035.5
+        },
+        {
+          "ticker": "AMD",
+          "return_pct": 167.15,
+          "price": 510.13
+        },
+        {
+          "ticker": "STX",
+          "return_pct": 158.06,
+          "price": 921.26
+        },
+        {
+          "ticker": "INTC",
+          "return_pct": 153.67,
+          "price": 109.33
+        },
+        {
+          "ticker": "DDOG",
+          "return_pct": 148.27,
+          "price": 277.49
+        },
+        {
+          "ticker": "HPE",
+          "return_pct": 118.59,
+          "price": 47.0
+        },
+        {
+          "ticker": "WDC",
+          "return_pct": 118.05,
+          "price": 546.2
+        }
+      ]
+    }
+  ]
+}
