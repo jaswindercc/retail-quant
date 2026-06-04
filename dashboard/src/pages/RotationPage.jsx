@@ -1,13 +1,19 @@
 import { useState, useEffect } from 'react'
 
 const TABS = [
-  { key: 'mega', label: '🏛️ Mega-Cap', file: 'rotation_mega_data.json', color: '#4ade80' },
-  { key: 'large', label: '📊 Large-Cap', file: 'rotation_large_data.json', color: '#60a5fa' },
-  { key: 'mid', label: '🚀 Mid-Cap', file: 'rotation_mid_data.json', color: '#f59e0b' },
+  { key: 'mega', label: '🏛️ Mega-Cap', color: '#4ade80' },
+  { key: 'large', label: '📊 Large-Cap', color: '#60a5fa' },
+  { key: 'mid', label: '🚀 Mid-Cap', color: '#f59e0b' },
+]
+
+const LOOKBACKS = [
+  { key: '3m', label: '3-Month', months: 3, suffix: '' },
+  { key: '6m', label: '6-Month', months: 6, suffix: '_6m' },
 ]
 
 export default function RotationPage() {
   const [activeTab, setActiveTab] = useState('mega')
+  const [activeLookback, setActiveLookback] = useState('3m')
   const [dataMap, setDataMap] = useState({})
   const [liveData, setLiveData] = useState(null)
   const [showTrades, setShowTrades] = useState(false)
@@ -19,16 +25,22 @@ export default function RotationPage() {
 
   useEffect(() => {
     const base = import.meta.env.BASE_URL
+    // Load all combinations: mega/large/mid × 3m/6m
     TABS.forEach(tab => {
-      fetch(`${base}${tab.file}`).then(r => r.ok ? r.json() : null).then(d => {
-        if (d) setDataMap(prev => ({ ...prev, [tab.key]: d }))
-      }).catch(() => {})
+      LOOKBACKS.forEach(lb => {
+        const file = `rotation_${tab.key}${lb.suffix}_data.json`
+        const mapKey = `${tab.key}_${lb.key}`
+        fetch(`${base}${file}`).then(r => r.ok ? r.json() : null).then(d => {
+          if (d) setDataMap(prev => ({ ...prev, [mapKey]: d }))
+        }).catch(() => {})
+      })
     })
     // Load live scanner data
     fetch(`${base}rotation_live_data.json`).then(r => r.ok ? r.json() : null).then(setLiveData).catch(() => {})
   }, [])
 
-  const data = dataMap[activeTab]
+  const dataKey = `${activeTab}_${activeLookback}`
+  const data = dataMap[dataKey]
   const tabConfig = TABS.find(t => t.key === activeTab)
   const accentColor = tabConfig?.color || '#4ade80'
 
@@ -131,9 +143,25 @@ export default function RotationPage() {
               color: activeTab === tab.key ? tab.color : '#71717a',
             }}>
             {tab.label}
-            {dataMap[tab.key] && <span style={{ fontSize: 10, marginLeft: 6, opacity: 0.7 }}>
-              ${Math.round(dataMap[tab.key].summary?.total_pnl || 0).toLocaleString()}
+            {dataMap[`${tab.key}_${activeLookback}`] && <span style={{ fontSize: 10, marginLeft: 6, opacity: 0.7 }}>
+              ${Math.round(dataMap[`${tab.key}_${activeLookback}`].summary?.total_pnl || 0).toLocaleString()}
             </span>}
+          </button>
+        ))}
+      </div>
+
+      {/* ═══ LOOKBACK TOGGLE ═══ */}
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', alignItems: 'center' }}>
+        <span style={{ color: '#71717a', fontSize: 12, marginRight: 8 }}>Momentum Lookback:</span>
+        {LOOKBACKS.map(lb => (
+          <button key={lb.key} onClick={() => setActiveLookback(lb.key)}
+            style={{
+              padding: '6px 14px', borderRadius: 6, fontSize: 12, fontWeight: 600, cursor: 'pointer',
+              border: activeLookback === lb.key ? '2px solid #a78bfa' : '1px solid #333',
+              background: activeLookback === lb.key ? '#a78bfa20' : '#1e1e2e',
+              color: activeLookback === lb.key ? '#a78bfa' : '#71717a',
+            }}>
+            {lb.label}
           </button>
         ))}
       </div>

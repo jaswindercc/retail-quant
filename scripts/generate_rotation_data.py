@@ -102,9 +102,9 @@ MID_POOL = [
 ]
 
 UNIVERSES = {
-    'mega': {'pool': MEGA_POOL, 'label': 'Mega-Cap ($200B+)', 'file': 'rotation_mega_data.json'},
-    'large': {'pool': LARGE_POOL, 'label': 'Large-Cap ($50B–$200B)', 'file': 'rotation_large_data.json'},
-    'mid': {'pool': MID_POOL, 'label': 'Mid-Cap Growth ($10B–$50B)', 'file': 'rotation_mid_data.json'},
+    'mega': {'pool': MEGA_POOL, 'label': 'Mega-Cap ($200B+)'},
+    'large': {'pool': LARGE_POOL, 'label': 'Large-Cap ($50B–$200B)'},
+    'mid': {'pool': MID_POOL, 'label': 'Mid-Cap Growth ($10B–$50B)'},
 }
 
 
@@ -173,8 +173,8 @@ def get_regime(spy_data):
     return set(spy[bull_mask].index)
 
 
-def get_weekly_watchlist(stock_data, date, pool):
-    """Pick top N stocks by 3-month momentum as of given date."""
+def get_weekly_watchlist(stock_data, date, pool, lookback_days=63):
+    """Pick top N stocks by momentum as of given date."""
     scores = []
     for ticker in pool:
         if ticker not in stock_data or ticker == 'SPY':
@@ -182,9 +182,9 @@ def get_weekly_watchlist(stock_data, date, pool):
         df = stock_data[ticker]
         mask = df.index <= date
         subset = df[mask]
-        if len(subset) < 63:
+        if len(subset) < lookback_days:
             continue
-        mom = subset['Close'].iloc[-1] / subset['Close'].iloc[-63] - 1
+        mom = subset['Close'].iloc[-1] / subset['Close'].iloc[-lookback_days] - 1
         if np.isnan(mom):
             continue
         scores.append((ticker, mom))
@@ -193,7 +193,7 @@ def get_weekly_watchlist(stock_data, date, pool):
     return [s[0] for s in scores[:TOP_N]]
 
 
-def simulate(stock_data, bull_dates, pool):
+def simulate(stock_data, bull_dates, pool, lookback_days=63):
     """Run the breakout backtest with weekly rotation."""
     trade_start = pd.Timestamp(TRADE_START)
     spy_dates = stock_data['SPY'].index
@@ -212,12 +212,12 @@ def simulate(stock_data, bull_dates, pool):
         # ── Weekly rotation (every Monday) ──
         week_key = date.isocalendar()[:2]  # (year, week)
         if week_key != last_rotation_week and date.weekday() == 0:
-            current_watchlist = get_weekly_watchlist(stock_data, date, pool)
+            current_watchlist = get_weekly_watchlist(stock_data, date, pool, lookback_days)
             last_rotation_week = week_key
             rotation_log.append({'week': date.strftime('%Y-%m-%d'), 'watchlist': current_watchlist[:]})
         elif not current_watchlist:
             # First day might not be Monday
-            current_watchlist = get_weekly_watchlist(stock_data, date, pool)
+            current_watchlist = get_weekly_watchlist(stock_data, date, pool, lookback_days)
             rotation_log.append({'week': date.strftime('%Y-%m-%d'), 'watchlist': current_watchlist[:]})
 
         # ── Regime check ──
@@ -460,14 +460,16 @@ def compute_stats(trades, rotation_log):
     }
 
 
-def run_universe(name, config, shared_spy_data=None):
+def run_universe(name, config, lookback_months=3, shared_spy_data=None):
     """Run backtest for one universe."""
     pool = config['pool']
     label = config['label']
-    filename = config['file']
+    lookback_days = lookback_months * 21  # approx trading days per month
+    suffix = f'_{lookback_months}m' if lookback_months != 3 else ''
+    filename = f'rotation_{name}{suffix}_data.json'
 
     print(f"\n{'='*60}")
-    print(f"  🎯 {label} — {len(pool)} stocks, Weekly Rotation")
+    print(f"  🎯 {label} — {len(pool)} stocks, Weekly Rotation ({lookback_months}mo lookback)")
     print(f"{'='*60}")
 
     # Download data
@@ -495,12 +497,12 @@ def run_universe(name, config, shared_spy_data=None):
 
     # Run simulation
     print("  🎲 Running simulation...")
-    trades, equity_curve, rotation_log = simulate(stock_data, bull_dates, pool)
+    trades, equity_curve, rotation_log = simulate(stock_data, bull_dates, pool, lookback_days)
 
     # Compute stats
     stats = compute_stats(trades, rotation_log)
 
-    print(f"\n  === {label} RESULTS ===")
+    print(f"\n  === {label} RESULTS ({lookback_months}mo) ===")
     print(f"  Trades: {stats['total_trades']} ({stats['closed_trades']} closed)")
     print(f"  Win Rate: {stats['win_rate']:.1f}%")
     print(f"  Total PnL: ${stats['total_pnl']:,.0f}")
@@ -520,7 +522,7 @@ def run_universe(name, config, shared_spy_data=None):
         'params': {
             'pool': pool,
             'top_n': TOP_N,
-            'lookback_months': LOOKBACK_MONTHS,
+            'lookback_months': lookback_months,
             'rotation_freq': ROTATION_FREQ,
             'max_risk': MAX_RISK_PER_TRADE,
             'max_capital': MAX_CAPITAL,
@@ -545,21 +547,26 @@ def run_universe(name, config, shared_spy_data=None):
 def main():
     print("🚀 Rotation Strategy Backtest — 3 Universes, Weekly Rotation")
     print(f"   Risk: ${MAX_RISK_PER_TRADE}/trade (1% of ${MAX_CAPITAL:,.0f})")
-    print(f"   Rotation: Weekly (every Monday), Top {TOP_N} by {LOOKBACK_MONTHS}mo momentum")
     print(f"   Max {MAX_POSITIONS} positions, Trail at {TRAIL_START_R}R")
 
     # Run specific universe or all
     target = sys.argv[1] if len(sys.argv) > 1 else 'all'
 
-    if target == 'all':
-        for name, config in UNIVERSES.items():
-            run_universe(name, config)
-    elif target in UNIVERSES:
-        run_universe(target, UNIVERSES[target])
-    else:
-        print(f"  ❌ Unknown universe: {target}")
-        print(f"     Options: {', '.join(UNIVERSES.keys())} or 'all'")
-        sys.exit(1)
+    # Run both 3-month and 6-month lookbacks
+    for lookback in [3, 6]:
+        print(f"\n\n{'#'*60}")
+        print(f"  📊 LOOKBACK: {lookback}-MONTH MOMENTUM")
+        print(f"{'#'*60}")
+
+        if target == 'all':
+            for name, config in UNIVERSES.items():
+                run_universe(name, config, lookback_months=lookback)
+        elif target in UNIVERSES:
+            run_universe(target, UNIVERSES[target], lookback_months=lookback)
+        else:
+            print(f"  ❌ Unknown universe: {target}")
+            print(f"     Options: {', '.join(UNIVERSES.keys())} or 'all'")
+            sys.exit(1)
 
     print("\n✅ Done!")
 
