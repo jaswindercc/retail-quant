@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Dynamic Universe Scanner: Pull current stocks by market cap, rank by 6mo momentum.
+Dynamic Universe Scanner: Pull current stocks by market cap, rank by 3mo momentum.
 
 This generates the LIVE watchlist for the rotation scanner.
 Unlike the backtest (which uses a fixed pool for honesty), this pulls
@@ -102,11 +102,11 @@ def get_market_caps(tickers):
     return caps
 
 
-def get_momentum(tickers, lookback_days=126):
-    """Get 6-month return for each ticker."""
-    print(f"  📊 Computing 6-month momentum for {len(tickers)} stocks...")
+def get_momentum(tickers, lookback_days=63):
+    """Get 3-month return for each ticker."""
+    print(f"  📊 Computing 3-month momentum for {len(tickers)} stocks...")
     end = datetime.now()
-    start = end - timedelta(days=210)  # ~7 months calendar to get 126 trading days
+    start = end - timedelta(days=120)  # ~4 months calendar to get 63 trading days
     
     df = yf.download(tickers, start=start.strftime('%Y-%m-%d'),
                      end=end.strftime('%Y-%m-%d'),
@@ -134,12 +134,12 @@ def get_momentum(tickers, lookback_days=126):
             if len(closes) < lookback_days:
                 continue
             
-            ret_6m = closes.iloc[-1] / closes.iloc[-lookback_days] - 1
-            if not np.isnan(ret_6m):
+            ret_3m = closes.iloc[-1] / closes.iloc[-lookback_days] - 1
+            if not np.isnan(ret_3m):
                 momentum[ticker] = {
-                    'return_6m': round(ret_6m * 100, 2),
+                    'return_3m': round(ret_3m * 100, 2),
                     'price': round(float(closes.iloc[-1]), 2),
-                    'price_6m_ago': round(float(closes.iloc[-lookback_days]), 2),
+                    'price_3m_ago': round(float(closes.iloc[-lookback_days]), 2),
                 }
         except (KeyError, TypeError, IndexError):
             pass
@@ -167,8 +167,8 @@ def classify_by_cap(caps, momentum):
                     **momentum[ticker],
                 })
         
-        # Sort by 6-month return (descending)
-        eligible.sort(key=lambda x: x['return_6m'], reverse=True)
+        # Sort by 3-month return (descending)
+        eligible.sort(key=lambda x: x['return_3m'], reverse=True)
         
         results[universe_name] = {
             'label': config['label'],
@@ -216,7 +216,7 @@ def get_news_for_top_stocks(results):
 
 
 def main():
-    print("🚀 Dynamic Universe Scanner — Live Market Cap + Momentum Ranking")
+    print("🚀 Dynamic Universe Scanner — Live Market Cap + 3-Month Momentum Ranking")
     print(f"   Date: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     print()
     
@@ -243,10 +243,10 @@ def main():
         print(f"\n{'='*60}")
         print(f"  {data['label']} — {data['total_stocks']} qualifying stocks")
         print(f"{'='*60}")
-        print(f"  {'Rank':<5} {'Ticker':<8} {'6mo Return':<12} {'Price':<10} {'Mkt Cap':<10}")
+        print(f"  {'Rank':<5} {'Ticker':<8} {'3mo Return':<12} {'Price':<10} {'Mkt Cap':<10}")
         print(f"  {'-'*50}")
         for i, stock in enumerate(data['top_10'], 1):
-            print(f"  {i:<5} {stock['ticker']:<8} {stock['return_6m']:>+7.1f}%    ${stock['price']:<8.2f} ${stock['market_cap_B']:.0f}B")
+            print(f"  {i:<5} {stock['ticker']:<8} {stock['return_3m']:>+7.1f}%    ${stock['price']:<8.2f} ${stock['market_cap_B']:.0f}B")
         
         if len(data['all_ranked']) > 10:
             print(f"\n  ... and {len(data['all_ranked']) - 10} more stocks in this universe")
@@ -255,7 +255,7 @@ def main():
     output = {
         'lastUpdated': datetime.now().strftime('%Y-%m-%d %H:%M'),
         'rotation_freq': 'weekly',
-        'lookback': '6 months',
+        'lookback': '3 months',
         'universes': {}
     }
     

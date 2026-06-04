@@ -1,25 +1,14 @@
 #!/usr/bin/env python3
 """
-Unified Rotation Backtest: Three universes (Mega-cap, Large-cap, Mid-cap)
+Rotation Scoring Comparison Backtest
 
-Generates backtest data for three separate breakout + momentum rotation strategies,
-each with WEEKLY rotation of the top 10 watchlist.
+Compares 3 momentum scoring methods over the last 12 months:
+1. Pure 6-month return
+2. Pure 3-month return
+3. Composite (0.4×1mo + 0.35×3mo + 0.25×6mo)
 
-All three use identical rules:
-- Dynamic Watchlist: Top 10 by 6-month momentum, re-evaluated WEEKLY (every Monday)
-- Regime Filter: SPY > 200-day SMA (if not, 100% cash)
-- Entry: Close above 20-day high + volume ≥ 1.2× avg 20-day volume + above 50 SMA
-- Stop Loss: 1 × ATR(14) below entry
-- Position Size: $400 risk per trade (1% of $40K)
-- Max Capital: $40,000
-- Trail: Activate at 2.5R, trail = EMA20 - 1×ATR (ratchets up only)
-- Max Positions: 3 simultaneous
-- Period: Jan 2021 – Jun 2026
-
-Universes (all liquid by Jan 2020 for survivorship-bias honesty):
-- MEGA-CAP: 30 stocks, $200B+ market cap (cross-sector)
-- LARGE-CAP: 35 stocks, $50B–$200B (tech-heavy but diversified)
-- MID-CAP: 45 stocks, $10B–$50B growth (includes bubble losers)
+For each scoring method, simulates weekly rotation with the same breakout rules
+as generate_rotation_data.py. Outputs results for all 3 universes (mega/large/mid).
 """
 
 import json
@@ -31,80 +20,60 @@ import numpy as np
 import pandas as pd
 import yfinance as yf
 
-# ── PARAMETERS (same for all three) ─────────────────────────────────────────────
-MAX_RISK_PER_TRADE = 400.0   # 1% of $40K
+# ── PARAMETERS ───────────────────────────────────────────────────────────────────
+MAX_RISK_PER_TRADE = 400.0
 MAX_CAPITAL = 40000.0
 TRAIL_START_R = 2.5
 TRAIL_ATR_BUF = 1.0
 MAX_POSITIONS = 3
-LOOKBACK_MONTHS = 3
 TOP_N = 10
-ROTATION_FREQ = 'weekly'   # 'weekly' = every Monday
 
-START_DATE = '2019-06-01'
-END_DATE = '2026-06-03'
-TRADE_START = '2021-01-01'
+# Need 18 months of data: 6mo lookback + 12mo test
+START_DATE = '2024-06-01'
+END_DATE = '2026-06-04'
+TRADE_START = '2025-06-04'  # last 12 months
 
-# ── UNIVERSES ────────────────────────────────────────────────────────────────────
+SCORING_METHODS = {
+    '6mo': {'label': 'Pure 6-Month', 'lookback_days': 126},
+    '3mo': {'label': 'Pure 3-Month', 'lookback_days': 63},
+    'composite': {'label': 'Composite (1m+3m+6m)', 'weights': [0.40, 0.35, 0.25], 'lookbacks': [21, 63, 126]},
+}
 
-# MEGA-CAP: $200B+ market cap, cross-sector blue chips (all liquid by Jan 2020)
+# ── UNIVERSES (same as generate_rotation_data.py) ────────────────────────────────
 MEGA_POOL = [
-    # Tech
     'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'META', 'NVDA', 'TSLA',
-    # Finance
     'JPM', 'V', 'MA', 'BAC',
-    # Healthcare
     'UNH', 'JNJ', 'LLY', 'ABBV', 'MRK',
-    # Consumer
     'WMT', 'PG', 'KO', 'PEP', 'COST', 'HD',
-    # Energy / Industrial
     'XOM', 'CVX',
-    # Tech 2nd tier (still mega)
     'AVGO', 'ORCL', 'CRM', 'NFLX', 'ADBE', 'AMD',
 ]
 
-# LARGE-CAP: $50B–$200B range, diversified (all liquid by Jan 2020)
 LARGE_POOL = [
-    # Semis / Hardware
     'QCOM', 'INTC', 'MU', 'ANET', 'MRVL', 'LRCX', 'KLAC', 'ON',
-    # Software / SaaS
     'NOW', 'PANW', 'CRWD', 'ADSK', 'WDAY', 'INTU', 'SNPS', 'CDNS', 'FTNT',
-    # Internet / Consumer
     'UBER', 'PYPL', 'SHOP', 'EA', 'ABNB',
-    # Biotech / MedTech
     'REGN', 'GILD', 'ISRG', 'DXCM', 'ILMN',
-    # Industrial / Energy
     'CAT', 'DE', 'GE', 'LMT', 'RTX',
-    # Financials
     'GS', 'MS',
 ]
 
-# MID-CAP: $10B–$50B growth (includes 2020 bubble stocks for honesty)
 MID_POOL = [
-    # Growth SaaS
     'NET', 'DDOG', 'ZS', 'BILL', 'HUBS', 'TTD', 'OKTA', 'MDB',
     'DOCU', 'ESTC', 'PAYC', 'TWLO',
-    # Consumer / Social
     'SNAP', 'ROKU', 'PINS', 'ETSY', 'CHWY', 'MTCH', 'W',
-    # Clean energy / EV (bubble stocks — honest inclusion)
-    'ENPH', 'SEDG', 'RUN', 'PLUG', 'FCEL', 'NIO', 'BLNK',
-    'TAN', 'SPCE',
-    # E-commerce
+    'ENPH', 'SEDG', 'RUN', 'PLUG', 'FCEL', 'NIO', 'BLNK', 'TAN', 'SPCE',
     'SE', 'MELI', 'PAGS',
-    # Growth that crashed (would show up in any 2020 screen)
     'PTON', 'BYND', 'FSLY', 'ZM',
-    # Fintech / Payments
     'FOUR', 'SOFI', 'AFRM',
-    # Sports / Gaming
     'DKNG', 'PENN',
-    # Others
     'FVRR', 'FUBO', 'U',
 ]
 
 UNIVERSES = {
-    'mega': {'pool': MEGA_POOL, 'label': 'Mega-Cap ($200B+)', 'file': 'rotation_mega_data.json'},
-    'large': {'pool': LARGE_POOL, 'label': 'Large-Cap ($50B–$200B)', 'file': 'rotation_large_data.json'},
-    'mid': {'pool': MID_POOL, 'label': 'Mid-Cap Growth ($10B–$50B)', 'file': 'rotation_mid_data.json'},
+    'mega': {'pool': MEGA_POOL, 'label': 'Mega-Cap ($200B+)'},
+    'large': {'pool': LARGE_POOL, 'label': 'Large-Cap ($50B–$200B)'},
+    'mid': {'pool': MID_POOL, 'label': 'Mid-Cap ($10B–$50B)'},
 }
 
 
@@ -161,7 +130,6 @@ def add_indicators(df):
     df['atr'] = tr.rolling(14).mean()
     df['high_20'] = df['High'].rolling(20).max().shift(1)
     df['vol_avg20'] = df['Volume'].rolling(20).mean()
-    df['mom_3m'] = df['Close'].pct_change(63)
 
     return df
 
@@ -173,8 +141,8 @@ def get_regime(spy_data):
     return set(spy[bull_mask].index)
 
 
-def get_weekly_watchlist(stock_data, date, pool):
-    """Pick top N stocks by 3-month momentum as of given date."""
+def get_weekly_watchlist(stock_data, date, pool, method):
+    """Pick top N stocks by given scoring method as of given date."""
     scores = []
     for ticker in pool:
         if ticker not in stock_data or ticker == 'SPY':
@@ -182,19 +150,42 @@ def get_weekly_watchlist(stock_data, date, pool):
         df = stock_data[ticker]
         mask = df.index <= date
         subset = df[mask]
-        if len(subset) < 63:
-            continue
-        mom = subset['Close'].iloc[-1] / subset['Close'].iloc[-63] - 1
-        if np.isnan(mom):
-            continue
-        scores.append((ticker, mom))
+
+        if method == 'composite':
+            # Need at least 126 days
+            if len(subset) < 126:
+                continue
+            weights = SCORING_METHODS['composite']['weights']
+            lookbacks = SCORING_METHODS['composite']['lookbacks']
+            score = 0
+            valid = True
+            for w, lb in zip(weights, lookbacks):
+                if len(subset) < lb:
+                    valid = False
+                    break
+                ret = subset['Close'].iloc[-1] / subset['Close'].iloc[-lb] - 1
+                if np.isnan(ret):
+                    valid = False
+                    break
+                score += w * ret
+            if not valid:
+                continue
+            scores.append((ticker, score))
+        else:
+            lb = SCORING_METHODS[method]['lookback_days']
+            if len(subset) < lb:
+                continue
+            ret = subset['Close'].iloc[-1] / subset['Close'].iloc[-lb] - 1
+            if np.isnan(ret):
+                continue
+            scores.append((ticker, ret))
 
     scores.sort(key=lambda x: x[1], reverse=True)
     return [s[0] for s in scores[:TOP_N]]
 
 
-def simulate(stock_data, bull_dates, pool):
-    """Run the breakout backtest with weekly rotation."""
+def simulate(stock_data, bull_dates, pool, method):
+    """Run the breakout backtest with weekly rotation using given scoring method."""
     trade_start = pd.Timestamp(TRADE_START)
     spy_dates = stock_data['SPY'].index
     trading_dates = spy_dates[spy_dates >= trade_start]
@@ -209,21 +200,20 @@ def simulate(stock_data, bull_dates, pool):
     capital_deployed = 0
 
     for date in trading_dates:
-        # ── Weekly rotation (every Monday) ──
-        week_key = date.isocalendar()[:2]  # (year, week)
+        # Weekly rotation (every Monday)
+        week_key = date.isocalendar()[:2]
         if week_key != last_rotation_week and date.weekday() == 0:
-            current_watchlist = get_weekly_watchlist(stock_data, date, pool)
+            current_watchlist = get_weekly_watchlist(stock_data, date, pool, method)
             last_rotation_week = week_key
             rotation_log.append({'week': date.strftime('%Y-%m-%d'), 'watchlist': current_watchlist[:]})
         elif not current_watchlist:
-            # First day might not be Monday
-            current_watchlist = get_weekly_watchlist(stock_data, date, pool)
+            current_watchlist = get_weekly_watchlist(stock_data, date, pool, method)
             rotation_log.append({'week': date.strftime('%Y-%m-%d'), 'watchlist': current_watchlist[:]})
 
-        # ── Regime check ──
+        # Regime check
         in_bull = date in bull_dates
 
-        # ── Update open positions ──
+        # Update open positions
         closed_today = []
         for pos in open_positions:
             ticker = pos['ticker']
@@ -244,9 +234,6 @@ def simulate(stock_data, bull_dates, pool):
                     'stock': ticker,
                     'entryDate': pos['entry_date'].strftime('%Y-%m-%d'),
                     'entryPrice': round(entry, 2),
-                    'sl': round(pos['original_sl'], 2),
-                    'risk': round(pos['entry_atr'], 2),
-                    'qty': pos['shares'],
                     'exitDate': date.strftime('%Y-%m-%d'),
                     'exitPrice': round(sl, 2),
                     'pnlR': round(pnl_r, 2),
@@ -270,7 +257,7 @@ def simulate(stock_data, bull_dates, pool):
             if current_r >= TRAIL_START_R and not pos['trail_active']:
                 pos['trail_active'] = True
 
-            # Update trailing stop (ratchets up only)
+            # Update trailing stop
             if pos['trail_active']:
                 new_trail = pos['current_ema20'] - TRAIL_ATR_BUF * pos['current_atr']
                 if new_trail > sl:
@@ -279,13 +266,12 @@ def simulate(stock_data, bull_dates, pool):
         for p in closed_today:
             open_positions.remove(p)
 
-        # ── Regime off → close all ──
+        # Regime off → close all
         if not in_bull and open_positions:
             for pos in open_positions:
                 ticker = pos['ticker']
                 if date in stock_data[ticker].index:
-                    row = stock_data[ticker].loc[date]
-                    exit_price = row['Close']
+                    exit_price = stock_data[ticker].loc[date]['Close']
                 else:
                     exit_price = pos['entry_price']
                 pnl_dollar = (exit_price - pos['entry_price']) * pos['shares']
@@ -294,9 +280,6 @@ def simulate(stock_data, bull_dates, pool):
                     'stock': ticker,
                     'entryDate': pos['entry_date'].strftime('%Y-%m-%d'),
                     'entryPrice': round(pos['entry_price'], 2),
-                    'sl': round(pos['original_sl'], 2),
-                    'risk': round(pos['entry_atr'], 2),
-                    'qty': pos['shares'],
                     'exitDate': date.strftime('%Y-%m-%d'),
                     'exitPrice': round(exit_price, 2),
                     'pnlR': round(pnl_r, 2),
@@ -308,7 +291,7 @@ def simulate(stock_data, bull_dates, pool):
                 capital_deployed -= pos['entry_price'] * pos['shares']
             open_positions = []
 
-        # ── Check for new entries (only in bull market) ──
+        # Check for new entries (only in bull market)
         if in_bull and len(open_positions) < MAX_POSITIONS:
             for ticker in current_watchlist:
                 if len(open_positions) >= MAX_POSITIONS:
@@ -326,7 +309,7 @@ def simulate(stock_data, bull_dates, pool):
                 if row['Close'] < 5:
                     continue
 
-                # ── BREAKOUT SIGNAL ──
+                # Breakout signal
                 if row['Close'] <= row['high_20']:
                     continue
                 if pd.isna(row.get('vol_avg20')) or row['Volume'] < 1.2 * row['vol_avg20']:
@@ -334,7 +317,7 @@ def simulate(stock_data, bull_dates, pool):
                 if pd.isna(row.get('sma50')) or row['Close'] <= row['sma50']:
                     continue
 
-                # ── POSITION SIZING ──
+                # Position sizing
                 atr = row['atr']
                 sl_price = row['Close'] - atr
                 shares = int(MAX_RISK_PER_TRADE / atr)
@@ -361,10 +344,9 @@ def simulate(stock_data, bull_dates, pool):
         equity_curve.append({
             'date': date.strftime('%Y-%m-%d'),
             'pnl': round(running_pnl, 2),
-            'open_positions': len(open_positions),
         })
 
-    # Mark remaining positions as Open
+    # Mark remaining positions as open
     for pos in open_positions:
         ticker = pos['ticker']
         last_row = stock_data[ticker].iloc[-1]
@@ -374,9 +356,6 @@ def simulate(stock_data, bull_dates, pool):
             'stock': ticker,
             'entryDate': pos['entry_date'].strftime('%Y-%m-%d'),
             'entryPrice': round(pos['entry_price'], 2),
-            'sl': round(pos['original_sl'], 2),
-            'risk': round(pos['entry_atr'], 2),
-            'qty': pos['shares'],
             'exitDate': trading_dates[-1].strftime('%Y-%m-%d'),
             'exitPrice': round(last_row['Close'], 2),
             'pnlR': round(pnl_r, 2),
@@ -388,10 +367,13 @@ def simulate(stock_data, bull_dates, pool):
     return trades, equity_curve, rotation_log
 
 
-def compute_stats(trades, rotation_log):
+def compute_stats(trades):
     """Compute summary statistics."""
     if not trades:
-        return {}
+        return {'total_trades': 0, 'closed_trades': 0, 'win_rate': 0,
+                'total_pnl': 0, 'profit_factor': 0, 'max_drawdown': 0,
+                'avg_winner': 0, 'avg_loser': 0, 'max_losing_streak': 0,
+                'avg_duration_days': 0}
 
     closed_trades = [t for t in trades if t['exitReason'] != 'Open']
     pnls = [t['pnlDollar'] for t in closed_trades]
@@ -427,140 +409,122 @@ def compute_stats(trades, rotation_log):
         key = t['exitDate'][:7]
         monthly[key] = monthly.get(key, 0) + t['pnlDollar']
 
-    # Per-stock breakdown
-    stock_stats = {}
-    for t in trades:
-        s = t['stock']
-        if s not in stock_stats:
-            stock_stats[s] = {'trades': 0, 'pnl': 0, 'wins': 0}
-        stock_stats[s]['trades'] += 1
-        stock_stats[s]['pnl'] += t['pnlDollar']
-        if t['pnlDollar'] > 0:
-            stock_stats[s]['wins'] += 1
-
     return {
         'total_trades': len(trades),
         'closed_trades': len(closed_trades),
-        'win_rate': len(wins) / len(closed_trades) * 100 if closed_trades else 0,
+        'win_rate': round(len(wins) / len(closed_trades) * 100, 1) if closed_trades else 0,
         'total_pnl': round(sum(pnls), 2),
         'profit_factor': round(pf, 2),
         'max_losing_streak': max_streak,
         'max_drawdown': round(max_dd, 2),
         'avg_winner': round(gross_win / len(wins), 2) if wins else 0,
         'avg_loser': round(gross_loss / len(losses), 2) if losses else 0,
-        'avg_r_winner': round(sum(t['pnlR'] for t in closed_trades if t['pnlDollar'] > 0) / len(wins), 2) if wins else 0,
         'best_trade': round(max(pnls), 2) if pnls else 0,
         'worst_trade': round(min(pnls), 2) if pnls else 0,
         'avg_duration_days': round(sum(t['durationDays'] for t in closed_trades) / len(closed_trades), 1) if closed_trades else 0,
         'monthly_pnl': monthly,
-        'stock_breakdown': stock_stats,
-        'rotation_log': rotation_log,
         'total_wins': len(wins),
         'total_losses': len(losses),
     }
 
 
-def run_universe(name, config, shared_spy_data=None):
-    """Run backtest for one universe."""
-    pool = config['pool']
-    label = config['label']
-    filename = config['file']
+def main():
+    print("🔬 Rotation Scoring Comparison — 12-Month Backtest")
+    print(f"   Period: {TRADE_START} to {END_DATE}")
+    print(f"   Methods: {', '.join(m['label'] for m in SCORING_METHODS.values())}")
+    print()
 
-    print(f"\n{'='*60}")
-    print(f"  🎯 {label} — {len(pool)} stocks, Weekly Rotation")
+    results = {}
+
+    for uni_name, uni_config in UNIVERSES.items():
+        pool = uni_config['pool']
+        label = uni_config['label']
+
+        print(f"\n{'='*60}")
+        print(f"  🎯 {label} — {len(pool)} stocks")
+        print(f"{'='*60}")
+
+        # Download data once per universe
+        stock_data = download_data(pool, START_DATE, END_DATE)
+
+        # Add indicators
+        print("  📊 Adding indicators...")
+        for ticker in list(stock_data.keys()):
+            stock_data[ticker] = add_indicators(stock_data[ticker])
+
+        if 'SPY' not in stock_data:
+            print("  ❌ SPY data missing!")
+            continue
+
+        bull_dates = get_regime(stock_data['SPY'])
+
+        uni_results = {}
+        for method_name, method_config in SCORING_METHODS.items():
+            print(f"\n  ── Testing: {method_config['label']} ──")
+            trades, equity_curve, rotation_log = simulate(stock_data, bull_dates, pool, method_name)
+            stats = compute_stats(trades)
+
+            print(f"     Trades: {stats['closed_trades']} | WR: {stats['win_rate']}% | "
+                  f"PnL: ${stats['total_pnl']:,.0f} | PF: {stats['profit_factor']}")
+
+            uni_results[method_name] = {
+                'label': method_config['label'],
+                'stats': stats,
+                'trades': trades,
+                'equity_curve': equity_curve,
+                'rotation_log': rotation_log[-10:],  # last 10 weeks only
+            }
+
+        results[uni_name] = {
+            'label': label,
+            'methods': uni_results,
+        }
+
+    # Find winner for each universe
+    print(f"\n\n{'='*60}")
+    print("  📊 FINAL COMPARISON")
     print(f"{'='*60}")
+    print(f"\n  {'Universe':<25} {'6-Month':<18} {'3-Month':<18} {'Composite':<18}")
+    print(f"  {'-'*79}")
 
-    # Download data
-    stock_data = download_data(pool, START_DATE, END_DATE)
+    for uni_name, uni_data in results.items():
+        methods = uni_data['methods']
+        row = f"  {uni_data['label']:<25}"
+        best_pnl = -999999
+        best_method = ''
+        for m_name, m_data in methods.items():
+            pnl = m_data['stats']['total_pnl']
+            pf = m_data['stats']['profit_factor']
+            row += f" ${pnl:>8,.0f} PF{pf:<5}"
+            if pnl > best_pnl:
+                best_pnl = pnl
+                best_method = m_name
+        row += f"  ← {best_method}"
+        print(row)
 
-    # Use shared SPY if available
-    if shared_spy_data is not None and 'SPY' not in stock_data:
-        stock_data['SPY'] = shared_spy_data
-    elif shared_spy_data is not None:
-        pass  # already have it
-
-    # Add indicators
-    print("  📊 Adding indicators...")
-    for ticker in list(stock_data.keys()):
-        stock_data[ticker] = add_indicators(stock_data[ticker])
-
-    if 'SPY' not in stock_data:
-        print("  ❌ SPY data missing!")
-        return None
-
-    bull_dates = get_regime(stock_data['SPY'])
-    total_days = len(stock_data['SPY'][stock_data['SPY'].index >= TRADE_START])
-    bull_pct = len([d for d in bull_dates if d >= pd.Timestamp(TRADE_START)]) / total_days * 100
-    print(f"  🐂 Bull market: {bull_pct:.0f}% of trading days")
-
-    # Run simulation
-    print("  🎲 Running simulation...")
-    trades, equity_curve, rotation_log = simulate(stock_data, bull_dates, pool)
-
-    # Compute stats
-    stats = compute_stats(trades, rotation_log)
-
-    print(f"\n  === {label} RESULTS ===")
-    print(f"  Trades: {stats['total_trades']} ({stats['closed_trades']} closed)")
-    print(f"  Win Rate: {stats['win_rate']:.1f}%")
-    print(f"  Total PnL: ${stats['total_pnl']:,.0f}")
-    print(f"  Profit Factor: {stats['profit_factor']}")
-    print(f"  Max Losing Streak: {stats['max_losing_streak']}")
-    print(f"  Max Drawdown: ${stats['max_drawdown']:,.0f}")
-    if stats.get('avg_winner'):
-        print(f"  Avg Winner: ${stats['avg_winner']:,.0f} ({stats['avg_r_winner']:.1f}R)")
-        print(f"  Avg Loser: ${stats['avg_loser']:,.0f}")
-    print(f"  Avg Duration: {stats['avg_duration_days']:.0f} days")
-
-    # Output JSON
+    # Save output
     output = {
         'lastUpdated': datetime.now().strftime('%Y-%m-%d %H:%M'),
-        'universe': name,
-        'label': label,
-        'params': {
-            'pool': pool,
-            'top_n': TOP_N,
-            'lookback_months': LOOKBACK_MONTHS,
-            'rotation_freq': ROTATION_FREQ,
-            'max_risk': MAX_RISK_PER_TRADE,
-            'max_capital': MAX_CAPITAL,
-            'max_positions': MAX_POSITIONS,
-            'trail_start_r': TRAIL_START_R,
-            'trail_atr_buf': TRAIL_ATR_BUF,
-            'period': f'{TRADE_START} to {END_DATE}',
-        },
-        'summary': stats,
-        'trades': trades,
-        'equity_curve': equity_curve,
+        'period': {'start': TRADE_START, 'end': END_DATE},
+        'scoring_methods': {k: v['label'] for k, v in SCORING_METHODS.items()},
+        'universes': {}
     }
 
-    out_path = Path(__file__).resolve().parent.parent / 'dashboard' / 'public' / filename
+    for uni_name, uni_data in results.items():
+        uni_out = {'label': uni_data['label'], 'methods': {}}
+        for m_name, m_data in uni_data['methods'].items():
+            uni_out['methods'][m_name] = {
+                'label': m_data['label'],
+                'stats': m_data['stats'],
+                'trades': m_data['trades'],
+                'equity_curve': m_data['equity_curve'],
+            }
+        output['universes'][uni_name] = uni_out
+
+    out_path = Path(__file__).parent.parent / 'dashboard' / 'public' / 'rotation_comparison_data.json'
     with open(out_path, 'w') as f:
         json.dump(output, f, indent=2)
-
-    print(f"  💾 Saved to {out_path}")
-    return output
-
-
-def main():
-    print("🚀 Rotation Strategy Backtest — 3 Universes, Weekly Rotation")
-    print(f"   Risk: ${MAX_RISK_PER_TRADE}/trade (1% of ${MAX_CAPITAL:,.0f})")
-    print(f"   Rotation: Weekly (every Monday), Top {TOP_N} by {LOOKBACK_MONTHS}mo momentum")
-    print(f"   Max {MAX_POSITIONS} positions, Trail at {TRAIL_START_R}R")
-
-    # Run specific universe or all
-    target = sys.argv[1] if len(sys.argv) > 1 else 'all'
-
-    if target == 'all':
-        for name, config in UNIVERSES.items():
-            run_universe(name, config)
-    elif target in UNIVERSES:
-        run_universe(target, UNIVERSES[target])
-    else:
-        print(f"  ❌ Unknown universe: {target}")
-        print(f"     Options: {', '.join(UNIVERSES.keys())} or 'all'")
-        sys.exit(1)
-
+    print(f"\n  💾 Saved to {out_path}")
     print("\n✅ Done!")
 
 

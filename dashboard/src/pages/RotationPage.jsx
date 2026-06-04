@@ -140,7 +140,7 @@ export default function RotationPage() {
 
       <h1 style={{ marginBottom: '0.25rem' }}>🎯 {data.label} — Weekly Rotation Scanner</h1>
       <p style={{ color: '#71717a', fontSize: 12, marginBottom: '1rem' }}>
-        Dynamic universe by market cap · Top {params.top_n} by 6mo momentum · Weekly rebalance (Monday) · Backtest: {params.period}
+        Dynamic universe by market cap · Top {params.top_n} by 3mo momentum · Weekly rebalance (Monday) · Backtest: {params.period}
       </p>
 
       {/* ═══ STATUS BAR ═══ */}
@@ -167,7 +167,7 @@ export default function RotationPage() {
       {liveTop10.length > 0 && (
         <div style={{ background: '#0a1628', border: `2px solid ${accentColor}`, borderRadius: 8, padding: '1rem', marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-            <h2 style={{ color: accentColor, fontSize: 14, margin: 0 }}>📡 LIVE Watchlist — Top 10 by 6mo Momentum (Dynamic Market Cap)</h2>
+            <h2 style={{ color: accentColor, fontSize: 14, margin: 0 }}>📡 LIVE Watchlist — Top 10 by 3mo Momentum (Dynamic Market Cap)</h2>
             <span style={{ color: '#71717a', fontSize: 11 }}>Updated: {liveData?.lastUpdated} · {liveUniverse?.total_stocks} stocks in universe</span>
           </div>
           <table style={{ width: '100%', fontSize: 12, borderCollapse: 'collapse', marginBottom: 8 }}>
@@ -175,7 +175,7 @@ export default function RotationPage() {
               <tr style={{ color: '#71717a', borderBottom: '1px solid #333' }}>
                 <th style={{ textAlign: 'left', padding: '4px 8px' }}>#</th>
                 <th style={{ textAlign: 'left', padding: '4px 8px' }}>Ticker</th>
-                <th style={{ textAlign: 'right', padding: '4px 8px' }}>6mo Return</th>
+                <th style={{ textAlign: 'right', padding: '4px 8px' }}>3mo Return</th>
                 <th style={{ textAlign: 'right', padding: '4px 8px' }}>Price</th>
                 <th style={{ textAlign: 'right', padding: '4px 8px' }}>Mkt Cap</th>
                 <th style={{ textAlign: 'left', padding: '4px 8px' }}>Recent News / Catalyst</th>
@@ -186,7 +186,7 @@ export default function RotationPage() {
                 <tr key={stock.ticker} style={{ borderBottom: '1px solid #1a1a2e', background: i < 3 ? '#0f2a1a' : 'transparent' }}>
                   <td style={{ padding: '6px 8px', color: '#71717a', fontWeight: 700 }}>{i + 1}</td>
                   <td style={{ padding: '6px 8px', color: accentColor, fontWeight: 700, fontSize: 14 }}>{stock.ticker}</td>
-                  <td style={{ padding: '6px 8px', textAlign: 'right', color: '#4ade80', fontWeight: 700 }}>+{stock.return_6m.toFixed(1)}%</td>
+                  <td style={{ padding: '6px 8px', textAlign: 'right', color: '#4ade80', fontWeight: 700 }}>+{stock.return_3m.toFixed(1)}%</td>
                   <td style={{ padding: '6px 8px', textAlign: 'right' }}>${stock.price.toFixed(2)}</td>
                   <td style={{ padding: '6px 8px', textAlign: 'right', color: '#71717a' }}>${(stock.market_cap_B).toFixed(0)}B</td>
                   <td style={{ padding: '6px 8px', maxWidth: 300 }}>
@@ -216,7 +216,7 @@ export default function RotationPage() {
       {!liveTop10.length && currentWatchlist && (
         <div style={{ background: '#0a1628', border: `1px solid ${accentColor}`, borderRadius: 8, padding: '1rem', marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-            <h2 style={{ color: accentColor, fontSize: 14, margin: 0 }}>📡 Watchlist (from backtest) — Top 10 by 6mo Momentum</h2>
+            <h2 style={{ color: accentColor, fontSize: 14, margin: 0 }}>📡 Watchlist (from backtest) — Top 10 by 3mo Momentum</h2>
             <span style={{ color: '#71717a', fontSize: 11 }}>Week of: {currentWatchlist.week}</span>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(90px, 1fr))', gap: '0.5rem' }}>
@@ -339,7 +339,7 @@ export default function RotationPage() {
               <thead>
                 <tr style={{ color: '#71717a', borderBottom: '1px solid #333', position: 'sticky', top: 0, background: '#1e1e2e' }}>
                   <th style={{ textAlign: 'left', padding: '4px 8px', whiteSpace: 'nowrap' }}>Week</th>
-                  <th style={{ textAlign: 'left', padding: '4px 8px' }}>Top 10 Watchlist (ranked by 6mo momentum)</th>
+                  <th style={{ textAlign: 'left', padding: '4px 8px' }}>Top 10 Watchlist (ranked by 3mo momentum)</th>
                 </tr>
               </thead>
               <tbody>
@@ -370,7 +370,7 @@ export default function RotationPage() {
         <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 8, padding: '1rem', marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
             <h2 style={{ color: '#71717a', fontSize: 13, margin: 0 }}>🌐 Full Universe — {liveUniverse?.total_stocks} stocks by current market cap</h2>
-            <span style={{ color: '#52525b', fontSize: 10 }}>Top 10 = watchlist · Ranked by 6mo return</span>
+            <span style={{ color: '#52525b', fontSize: 10 }}>Top 10 = watchlist · Ranked by 3mo return</span>
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
             {liveAllRanked.map((stock, i) => (
@@ -379,7 +379,7 @@ export default function RotationPage() {
                 background: i < 10 ? '#1a1a3e' : '#18181b',
                 color: i < 10 ? accentColor : '#52525b',
                 border: `1px solid ${i < 10 ? accentColor + '60' : '#333'}`
-              }}>{i < 10 ? `${i+1}.` : ''} {stock.ticker} {i < 20 ? `(${stock.return_6m > 0 ? '+' : ''}${stock.return_6m.toFixed(0)}%)` : ''}</span>
+              }}>{i < 10 ? `${i+1}.` : ''} {stock.ticker} {i < 20 ? `(${stock.return_3m > 0 ? '+' : ''}${stock.return_3m.toFixed(0)}%)` : ''}</span>
             ))}
           </div>
         </div>
@@ -418,7 +418,7 @@ export default function RotationPage() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', fontSize: 12, lineHeight: 1.9, color: '#d4d4d8' }}>
                 <div>
                   <div><strong style={{ color: accentColor }}>Universe:</strong> {params.pool?.length} stocks ({data.label})</div>
-                  <div><strong style={{ color: accentColor }}>Watchlist:</strong> Top 10 by 6mo return (weekly rebalance on Monday)</div>
+                  <div><strong style={{ color: accentColor }}>Watchlist:</strong> Top 10 by 3mo return (weekly rebalance on Monday)</div>
                   <div><strong style={{ color: accentColor }}>Regime:</strong> SPY &gt; 200 SMA = ON. Below = 100% cash, close all.</div>
                   <div><strong style={{ color: accentColor }}>Entry:</strong> Close &gt; 20d high + volume ≥ 1.2× avg + price &gt; 50 SMA</div>
                   <div><strong style={{ color: accentColor }}>Max positions:</strong> 3 at a time</div>
