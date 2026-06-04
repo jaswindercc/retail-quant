@@ -3,6 +3,8 @@ import { useState, useEffect, useMemo } from 'react'
 export default function RotationTop3Page() {
   const [data, setData] = useState(null)
   const [showAllTrades, setShowAllTrades] = useState(false)
+  const [capital, setCapital] = useState(40000)
+  const [riskPct, setRiskPct] = useState(100) // % of capital per position (equal weight = 33% each)
 
   useEffect(() => {
     fetch(import.meta.env.BASE_URL + 'rotation_top3_data.json')
@@ -11,21 +13,71 @@ export default function RotationTop3Page() {
       .catch(() => {})
   }, [])
 
+  // Compounding calculation
+  const compounded = useMemo(() => {
+    if (!data) return null
+    const trades = (data.trades || []).filter(t => t.exitReason !== 'Open')
+    const maxPos = data.params?.max_positions || 3
+
+    let currentCapital = capital
+    let peakCapital = capital
+    let maxDD = 0, maxDDPct = 0
+    const results = []
+    const equityCurve = [{ capital, date: trades[0]?.entryDate }]
+
+    for (const t of trades) {
+      const slotSize = currentCapital / maxPos
+      const shares = Math.floor(slotSize / t.entryPrice)
+      if (shares <= 0) { results.push({ ...t, pnlScaled: 0, capitalAtEntry: currentCapital }); continue }
+      const pnlScaled = (t.exitPrice - t.entryPrice) * shares
+
+      results.push({ ...t, pnlScaled: Math.round(pnlScaled), shares, capitalAtEntry: Math.round(currentCapital) })
+      currentCapital += pnlScaled
+      if (currentCapital > peakCapital) peakCapital = currentCapital
+      const dd = peakCapital - currentCapital
+      if (dd > maxDD) maxDD = dd
+      const ddPct = peakCapital > 0 ? (dd / peakCapital) * 100 : 0
+      if (ddPct > maxDDPct) maxDDPct = ddPct
+      equityCurve.push({ capital: Math.round(currentCapital), date: t.exitDate })
+    }
+
+    const wins = results.filter(r => r.pnlScaled > 0)
+    const losses = results.filter(r => r.pnlScaled < 0)
+    const grossWin = wins.reduce((s, r) => s + r.pnlScaled, 0)
+    const grossLoss = Math.abs(losses.reduce((s, r) => s + r.pnlScaled, 0))
+    const pf = grossLoss > 0 ? grossWin / grossLoss : 99
+    const totalPnl = currentCapital - capital
+
+    // Monthly PnL
+    const monthly = {}
+    for (const r of results) {
+      const key = r.exitDate.slice(0, 7)
+      monthly[key] = (monthly[key] || 0) + r.pnlScaled
+    }
+
+    return {
+      results, equityCurve, finalCapital: Math.round(currentCapital),
+      totalPnl: Math.round(totalPnl), totalPct: ((currentCapital / capital - 1) * 100).toFixed(1),
+      wins: wins.length, losses: losses.length,
+      wr: results.length > 0 ? (wins.length / results.length * 100).toFixed(1) : 0,
+      pf: pf.toFixed(2), maxDD: Math.round(maxDD), maxDDPct: maxDDPct.toFixed(1),
+      monthly,
+    }
+  }, [data, capital])
+
   if (!data) return <div style={{ padding: 40, color: '#a1a1aa' }}>Loading...</div>
 
-  const stats = data.stats || {}
   const trades = data.trades || []
   const weeklyLog = data.weekly_log || []
-  const equityCurve = data.equity_curve || []
+  const spyCurve = data.spy_curve || []
   const params = data.params || {}
-
   const closedTrades = trades.filter(t => t.exitReason !== 'Open')
   const openTrades = trades.filter(t => t.exitReason === 'Open')
   const recentTrades = [...closedTrades].reverse().slice(0, 20)
 
-  // Monthly PnL
-  const monthlyPnl = stats.monthly_pnl || {}
-  const months = Object.keys(monthlyPnl).sort()
+  const months = compounded ? Object.keys(compounded.monthly).sort() : []
+  const spyFinal = spyCurve.length > 0 ? spyCurve[spyCurve.length - 1].pnl : 0
+  const spyPct = ((spyFinal / capital) * 100).toFixed(1)
 
   return (
     <div style={{ padding: '2rem', maxWidth: 1100, margin: '0 auto' }}>
@@ -36,32 +88,60 @@ export default function RotationTop3Page() {
         Universe: S&P 500 ({data.universe_size} stocks) · Buy top 3 by 3mo return every Monday · Sell when dropped out · 10% hard stop
       </p>
       <p style={{ color: '#52525b', fontSize: 11, marginBottom: 20 }}>
-        Period: {params.period} · Updated: {data.lastUpdated} · No entry filter — pure rotation
+        Period: {params.period} · Updated: {data.lastUpdated}
       </p>
 
-      {/* Stats Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 8, marginBottom: 24 }}>
-        <StatCard label="Total Return" value={`$${Math.round(stats.total_pnl).toLocaleString()}`} sub={`${stats.total_return_pct}%`} color={stats.total_pnl > 0 ? '#4ade80' : '#ef4444'} />
-        <StatCard label="Profit Factor" value={stats.profit_factor} color={stats.profit_factor >= 1.5 ? '#4ade80' : '#fbbf24'} />
-        <StatCard label="Win Rate" value={`${stats.win_rate}%`} sub={`${stats.wins}W / ${stats.losses}L`} />
-        <StatCard label="Max Drawdown" value={`-$${Math.round(stats.max_drawdown).toLocaleString()}`} color="#ef4444" />
-        <StatCard label="Avg Winner" value={`+${stats.avg_winner_pct}%`} sub={`$${Math.round(stats.avg_winner).toLocaleString()}`} color="#4ade80" />
-        <StatCard label="Avg Loser" value={`-${stats.avg_loser_pct}%`} sub={`-$${Math.round(stats.avg_loser).toLocaleString()}`} color="#ef4444" />
-        <StatCard label="Avg Hold" value={`${stats.avg_duration}d`} />
-        <StatCard label="Lose Streak" value={stats.max_lose_streak} />
+      {/* ═══ CONFIGURE YOUR RISK ═══ */}
+      <div style={{ background: '#1a1a2e', border: '1px solid #333', borderRadius: 8, padding: 16, marginBottom: 20 }}>
+        <h2 style={{ fontSize: 14, fontWeight: 700, marginBottom: 10, color: '#a78bfa' }}>⚙️ Configure Your Risk</h2>
+        <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'center' }}>
+          <div>
+            <label style={{ fontSize: 11, color: '#71717a', display: 'block', marginBottom: 4 }}>Starting Capital</label>
+            <div style={{ display: 'flex', gap: 6 }}>
+              {[10000, 25000, 40000, 100000].map(v => (
+                <button key={v} onClick={() => setCapital(v)} style={{
+                  padding: '4px 10px', borderRadius: 4, fontSize: 11, cursor: 'pointer',
+                  background: capital === v ? '#a78bfa' : '#0a0a1a', color: capital === v ? '#000' : '#71717a',
+                  border: `1px solid ${capital === v ? '#a78bfa' : '#333'}`, fontWeight: capital === v ? 700 : 400,
+                }}>${(v/1000)}K</button>
+              ))}
+            </div>
+          </div>
+          {compounded && (
+            <div style={{ marginLeft: 'auto', textAlign: 'right' }}>
+              <div style={{ fontSize: 10, color: '#71717a' }}>Final Capital (compounded)</div>
+              <div style={{ fontSize: 22, fontWeight: 800, color: compounded.totalPnl > 0 ? '#4ade80' : '#ef4444' }}>
+                ${compounded.finalCapital.toLocaleString()}
+              </div>
+              <div style={{ fontSize: 11, color: '#52525b' }}>+{compounded.totalPct}% return</div>
+            </div>
+          )}
+        </div>
       </div>
+
+      {/* Stats Cards */}
+      {compounded && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: 8, marginBottom: 24 }}>
+          <StatCard label="Total P/L" value={`$${compounded.totalPnl.toLocaleString()}`} sub={`+${compounded.totalPct}%`} color={compounded.totalPnl > 0 ? '#4ade80' : '#ef4444'} />
+          <StatCard label="Profit Factor" value={compounded.pf} color={parseFloat(compounded.pf) >= 1.5 ? '#4ade80' : '#fbbf24'} />
+          <StatCard label="Win Rate" value={`${compounded.wr}%`} sub={`${compounded.wins}W / ${compounded.losses}L`} />
+          <StatCard label="Max Drawdown" value={`-$${compounded.maxDD.toLocaleString()}`} sub={`-${compounded.maxDDPct}%`} color="#ef4444" />
+          <StatCard label="SPY B&H" value={`$${Math.round(spyFinal).toLocaleString()}`} sub={`+${spyPct}%`} color="#60a5fa" />
+          <StatCard label="vs SPY" value={`+${(parseFloat(compounded.totalPct) - parseFloat(spyPct)).toFixed(0)}%`} color="#a78bfa" />
+        </div>
+      )}
 
       {/* Open Positions */}
       {openTrades.length > 0 && (
         <div style={{ background: '#0a1628', border: '2px solid #4ade80', borderRadius: 8, padding: 16, marginBottom: 20 }}>
-          <h2 style={{ fontSize: 14, fontWeight: 700, color: '#4ade80', marginBottom: 8 }}>📍 Current Positions (as of last date)</h2>
+          <h2 style={{ fontSize: 14, fontWeight: 700, color: '#4ade80', marginBottom: 8 }}>📍 Current Positions</h2>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             {openTrades.map(t => (
               <div key={t.stock} style={{ background: '#1a1a2e', borderRadius: 6, padding: '8px 14px', border: '1px solid #333' }}>
                 <div style={{ fontWeight: 700, color: '#4ade80', fontSize: 14 }}>{t.stock}</div>
                 <div style={{ fontSize: 10, color: '#71717a' }}>Entry: ${t.entryPrice} · #{t.rank_at_entry}</div>
                 <div style={{ fontSize: 12, color: t.pnlDollar > 0 ? '#4ade80' : '#ef4444', fontWeight: 600 }}>
-                  {t.pnlPct > 0 ? '+' : ''}{t.pnlPct}% (${Math.round(t.pnlDollar).toLocaleString()})
+                  {t.pnlPct > 0 ? '+' : ''}{t.pnlPct}%
                 </div>
               </div>
             ))}
@@ -69,19 +149,25 @@ export default function RotationTop3Page() {
         </div>
       )}
 
-      {/* Equity Curve */}
+      {/* Equity Curve vs SPY */}
       <div style={{ background: '#0a0a1a', borderRadius: 12, padding: 16, marginBottom: 20, border: '1px solid #1a1a2e' }}>
-        <h2 style={{ fontSize: 14, fontWeight: 700, marginBottom: 8 }}>📈 Equity Curve (Realized + Unrealized)</h2>
-        <EquityChart data={equityCurve} />
+        <h2 style={{ fontSize: 14, fontWeight: 700, marginBottom: 8 }}>📈 Equity Curve vs SPY Buy & Hold</h2>
+        <EquityChart equityCurve={compounded?.equityCurve || []} spyCurve={spyCurve} startCapital={capital} />
       </div>
 
-      {/* Weekly Top 10 Log — THE EVIDENCE */}
+      {/* Monthly Bar Chart */}
       <div style={{ background: '#0a0a1a', borderRadius: 12, padding: 16, marginBottom: 20, border: '1px solid #1a1a2e' }}>
-        <h2 style={{ fontSize: 14, fontWeight: 700, marginBottom: 4 }}>📋 Weekly Top 10 (Evidence — what was ACTUALLY top 10 each week)</h2>
+        <h2 style={{ fontSize: 14, fontWeight: 700, marginBottom: 8 }}>📊 Monthly Returns (Bar Chart)</h2>
+        <MonthlyBarChart monthly={compounded?.monthly || {}} />
+      </div>
+
+      {/* Weekly Top 10 Log */}
+      <div style={{ background: '#0a0a1a', borderRadius: 12, padding: 16, marginBottom: 20, border: '1px solid #1a1a2e' }}>
+        <h2 style={{ fontSize: 14, fontWeight: 700, marginBottom: 4 }}>📋 Weekly Top 10 (Evidence)</h2>
         <p style={{ fontSize: 10, color: '#52525b', marginBottom: 10 }}>
-          Showing last 15 weeks. Green = we held it. These are the real rankings at each Monday.
+          Green = we held it. Real rankings at each Monday close.
         </p>
-        <div style={{ maxHeight: 400, overflowY: 'auto' }}>
+        <div style={{ maxHeight: 350, overflowY: 'auto' }}>
           <table style={{ width: '100%', fontSize: 11, borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ color: '#71717a', borderBottom: '1px solid #333', position: 'sticky', top: 0, background: '#0a0a1a' }}>
@@ -95,7 +181,7 @@ export default function RotationTop3Page() {
               </tr>
             </thead>
             <tbody>
-              {weeklyLog.slice(-15).reverse().map(wk => (
+              {weeklyLog.slice(-25).reverse().map(wk => (
                 <tr key={wk.week} style={{ borderBottom: '1px solid #1a1a2e' }}>
                   <td style={{ padding: '4px 6px', color: '#71717a', fontWeight: 600 }}>{wk.week.slice(5)}</td>
                   {wk.top_10.slice(0, 5).map((s, i) => (
@@ -116,28 +202,10 @@ export default function RotationTop3Page() {
         </div>
       </div>
 
-      {/* Monthly PnL */}
-      <div style={{ background: '#0a0a1a', borderRadius: 12, padding: 16, marginBottom: 20, border: '1px solid #1a1a2e' }}>
-        <h2 style={{ fontSize: 14, fontWeight: 700, marginBottom: 8 }}>📅 Monthly P/L</h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-          {months.map(m => {
-            const val = monthlyPnl[m]
-            return (
-              <div key={m} style={{ background: val > 0 ? '#0f2a1a' : '#2a0f0f', border: `1px solid ${val > 0 ? '#4ade8040' : '#ef444440'}`, borderRadius: 6, padding: '6px 10px', minWidth: 90 }}>
-                <div style={{ fontSize: 10, color: '#71717a' }}>{m}</div>
-                <div style={{ fontSize: 13, fontWeight: 700, color: val > 0 ? '#4ade80' : '#ef4444' }}>
-                  {val > 0 ? '+' : ''}${Math.round(val).toLocaleString()}
-                </div>
-              </div>
-            )
-          })}
-        </div>
-      </div>
-
       {/* Recent Trades */}
-      <div style={{ background: '#0a0a1a', borderRadius: 12, padding: 16, border: '1px solid #1a1a2e' }}>
+      <div style={{ background: '#0a0a1a', borderRadius: 12, padding: 16, marginBottom: 20, border: '1px solid #1a1a2e' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-          <h2 style={{ fontSize: 14, fontWeight: 700 }}>📋 Trades ({closedTrades.length} total)</h2>
+          <h2 style={{ fontSize: 14, fontWeight: 700 }}>📋 Trades ({closedTrades.length} closed)</h2>
           <button onClick={() => setShowAllTrades(!showAllTrades)} style={{ fontSize: 11, color: '#60a5fa', background: 'none', border: 'none', cursor: 'pointer' }}>
             {showAllTrades ? 'Show recent' : 'Show all'}
           </button>
@@ -183,25 +251,21 @@ export default function RotationTop3Page() {
         <summary style={{ cursor: 'pointer', fontWeight: 600 }}>📖 Methodology & Caveats</summary>
         <div style={{ padding: 12, background: '#0a0a1a', borderRadius: 8, marginTop: 8, lineHeight: 1.8 }}>
           <p><strong>Strategy:</strong> Every Monday, rank all ~{data.universe_size} S&P 500 stocks by 3-month (63-day) return. Buy top 3. Sell when they drop out of top 3.</p>
-          <p><strong>Position sizing:</strong> Equal weight — ${(CAPITAL / MAX_POSITIONS).toLocaleString()} per slot ({MAX_POSITIONS} slots)</p>
+          <p><strong>Position sizing:</strong> Equal weight — capital/3 per slot, compounding (sizes grow with equity)</p>
           <p><strong>Stop loss:</strong> 10% hard stop from entry, checked daily</p>
           <p><strong>No entry filter:</strong> No breakout requirement. Just buy at close on rotation day.</p>
           <p><strong>Exit:</strong> Either dropped out of top 3 at next Monday, or hit 10% stop loss</p>
           <p style={{ marginTop: 8, color: '#f59e0b' }}><strong>⚠️ Caveats:</strong></p>
           <ul style={{ paddingLeft: 20 }}>
-            <li>Survivorship bias: uses today's S&P 500 list, not historical constituents</li>
+            <li>Survivorship bias: uses today's S&P 500 list, not historical constituents (~10-15 stocks may have been removed)</li>
             <li>No slippage or commissions modeled</li>
             <li>Assumes you can buy at Monday close (realistic for liquid S&P 500 stocks)</li>
-            <li>18 months is a short test period — results may not persist</li>
           </ul>
         </div>
       </details>
     </div>
   )
 }
-
-const CAPITAL = 40000
-const MAX_POSITIONS = 3
 
 function StatCard({ label, value, sub, color }) {
   return (
@@ -213,26 +277,94 @@ function StatCard({ label, value, sub, color }) {
   )
 }
 
-function EquityChart({ data }) {
-  if (!data || data.length === 0) return null
-  
-  const pnls = data.map(d => d.total_pnl)
-  const minPnl = Math.min(0, ...pnls)
-  const maxPnl = Math.max(1, ...pnls)
-  
-  const W = 900, H = 180, PAD = 35
-  const scaleX = (i) => PAD + (i / (data.length - 1)) * (W - 2 * PAD)
-  const scaleY = (v) => H - PAD - ((v - minPnl) / (maxPnl - minPnl)) * (H - 2 * PAD)
-  
-  const points = data.map((d, i) => `${scaleX(i)},${scaleY(d.total_pnl)}`).join(' ')
-  
+function EquityChart({ equityCurve, spyCurve, startCapital }) {
+  if (!equityCurve || equityCurve.length === 0) return null
+
+  // Map equity curve by date for alignment
+  const eqByDate = {}
+  equityCurve.forEach(e => { eqByDate[e.date] = e.capital })
+  const spyByDate = {}
+  spyCurve.forEach(s => { spyByDate[s.date] = startCapital + s.pnl })
+
+  // Use spy dates as x-axis (it has every trading day)
+  const dates = spyCurve.map(s => s.date)
+  if (dates.length === 0) return null
+
+  // Interpolate equity curve
+  let lastEq = startCapital
+  const eqValues = dates.map(d => { if (eqByDate[d] !== undefined) lastEq = eqByDate[d]; return lastEq })
+  const spyValues = dates.map(d => spyByDate[d] || startCapital)
+
+  const allVals = [...eqValues, ...spyValues]
+  const minVal = Math.min(...allVals) * 0.95
+  const maxVal = Math.max(...allVals) * 1.02
+
+  const W = 900, H = 200, PAD = 45
+  const scaleX = (i) => PAD + (i / (dates.length - 1)) * (W - 2 * PAD)
+  const scaleY = (v) => H - PAD - ((v - minVal) / (maxVal - minVal)) * (H - 2 * PAD)
+
+  const eqPoints = eqValues.map((v, i) => `${scaleX(i)},${scaleY(v)}`).join(' ')
+  const spyPoints = spyValues.map((v, i) => `${scaleX(i)},${scaleY(v)}`).join(' ')
+
   return (
     <svg width="100%" viewBox={`0 0 ${W} ${H}`} style={{ background: '#050510', borderRadius: 8 }}>
-      <line x1={PAD} x2={W-PAD} y1={scaleY(0)} y2={scaleY(0)} stroke="#333" strokeDasharray="4" />
-      <text x={PAD-4} y={scaleY(0)+3} fill="#52525b" fontSize="9" textAnchor="end">$0</text>
-      <text x={PAD-4} y={scaleY(maxPnl)+3} fill="#52525b" fontSize="9" textAnchor="end">${Math.round(maxPnl/1000)}K</text>
-      {minPnl < 0 && <text x={PAD-4} y={scaleY(minPnl)+3} fill="#52525b" fontSize="9" textAnchor="end">-${Math.round(Math.abs(minPnl)/1000)}K</text>}
-      <polyline points={points} fill="none" stroke="#4ade80" strokeWidth="1.5" />
+      {/* Grid */}
+      <line x1={PAD} x2={W-PAD} y1={scaleY(startCapital)} y2={scaleY(startCapital)} stroke="#333" strokeDasharray="4" />
+      <text x={PAD-4} y={scaleY(startCapital)+3} fill="#52525b" fontSize="9" textAnchor="end">${(startCapital/1000).toFixed(0)}K</text>
+      <text x={PAD-4} y={scaleY(maxVal)+3} fill="#52525b" fontSize="9" textAnchor="end">${(maxVal/1000).toFixed(0)}K</text>
+      <text x={PAD-4} y={scaleY(minVal)+3} fill="#52525b" fontSize="9" textAnchor="end">${(minVal/1000).toFixed(0)}K</text>
+
+      {/* SPY line */}
+      <polyline points={spyPoints} fill="none" stroke="#60a5fa" strokeWidth="1.2" opacity="0.7" />
+      {/* Strategy line */}
+      <polyline points={eqPoints} fill="none" stroke="#4ade80" strokeWidth="2" />
+
+      {/* Legend */}
+      <rect x={W-160} y={10} width={12} height={3} fill="#4ade80" />
+      <text x={W-144} y={14} fill="#4ade80" fontSize="9">Top-3 Rotation</text>
+      <rect x={W-160} y={24} width={12} height={3} fill="#60a5fa" />
+      <text x={W-144} y={28} fill="#60a5fa" fontSize="9">SPY Buy & Hold</text>
+
+      {/* Final values */}
+      <text x={W-PAD+4} y={scaleY(eqValues[eqValues.length-1])+3} fill="#4ade80" fontSize="9">${(eqValues[eqValues.length-1]/1000).toFixed(0)}K</text>
+      <text x={W-PAD+4} y={scaleY(spyValues[spyValues.length-1])+3} fill="#60a5fa" fontSize="9">${(spyValues[spyValues.length-1]/1000).toFixed(0)}K</text>
+    </svg>
+  )
+}
+
+function MonthlyBarChart({ monthly }) {
+  const months = Object.keys(monthly).sort()
+  if (months.length === 0) return <div style={{ color: '#52525b', fontSize: 11 }}>No data</div>
+
+  const values = months.map(m => monthly[m])
+  const maxVal = Math.max(...values.map(Math.abs), 1)
+  
+  const W = 900, H = 160, PAD = 40
+  const barW = Math.min(20, (W - 2 * PAD) / months.length - 2)
+
+  return (
+    <svg width="100%" viewBox={`0 0 ${W} ${H}`} style={{ background: '#050510', borderRadius: 8 }}>
+      {/* Zero line */}
+      <line x1={PAD} x2={W-PAD} y1={H/2} y2={H/2} stroke="#333" strokeWidth="1" />
+      <text x={PAD-4} y={H/2+3} fill="#52525b" fontSize="8" textAnchor="end">$0</text>
+      <text x={PAD-4} y={20} fill="#52525b" fontSize="8" textAnchor="end">+${(maxVal/1000).toFixed(0)}K</text>
+      <text x={PAD-4} y={H-10} fill="#52525b" fontSize="8" textAnchor="end">-${(maxVal/1000).toFixed(0)}K</text>
+
+      {months.map((m, i) => {
+        const val = monthly[m]
+        const x = PAD + (i / months.length) * (W - 2 * PAD) + barW / 2
+        const barH = Math.abs(val) / maxVal * (H / 2 - 20)
+        const y = val >= 0 ? H / 2 - barH : H / 2
+        const color = val >= 0 ? '#4ade80' : '#ef4444'
+        return (
+          <g key={m}>
+            <rect x={x} y={y} width={barW} height={barH} fill={color} opacity="0.8" rx="2" />
+            {i % 3 === 0 && (
+              <text x={x + barW/2} y={H - 2} fill="#52525b" fontSize="7" textAnchor="middle">{m.slice(2)}</text>
+            )}
+          </g>
+        )
+      })}
     </svg>
   )
 }

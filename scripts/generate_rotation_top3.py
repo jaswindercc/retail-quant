@@ -30,9 +30,9 @@ STOP_LOSS_PCT = 0.10  # 10% hard stop
 LOOKBACK_DAYS = 63    # 3-month momentum (63 trading days)
 HOLD_MIN_WEEKS = 1    # minimum hold period
 
-START_DATE = '2024-06-01'   # need 3mo lookback before test starts
+START_DATE = '2020-06-01'   # need 3mo lookback before test starts
 END_DATE = '2026-06-04'
-TRADE_START = '2025-01-01'  # 18 months backtest
+TRADE_START = '2021-01-01'  # 5-year backtest
 
 # ── S&P 500 UNIVERSE ─────────────────────────────────────────────────────────────
 # Current S&P 500 constituents (as close as possible, ~480 liquid names)
@@ -109,7 +109,7 @@ SP500 = list(dict.fromkeys(SP500))
 def download_data(tickers, start, end):
     """Download daily OHLCV data."""
     print(f"  📥 Downloading {len(tickers)} stocks...")
-    all_tickers = list(set(tickers))
+    all_tickers = list(set(tickers + ['SPY']))
     
     # Download in batches to avoid yfinance issues
     stock_data = {}
@@ -441,6 +441,24 @@ def main():
         tickers = ', '.join(f"{s['ticker']}(+{s['return_pct']:.0f}%)" for s in wk['top_10'][:5])
         print(f"     {wk['week']}: {tickers} ...")
     
+    # SPY buy-and-hold comparison
+    spy_curve = []
+    if 'SPY' in stock_data:
+        spy_df = stock_data['SPY']
+        spy_start_mask = spy_df.index >= pd.Timestamp(TRADE_START)
+        spy_subset = spy_df[spy_start_mask]
+        if len(spy_subset) > 0:
+            spy_start_price = float(spy_subset['Close'].iloc[0])
+            spy_shares = CAPITAL / spy_start_price
+            for date, row in spy_subset.iterrows():
+                spy_pnl = (float(row['Close']) - spy_start_price) * spy_shares
+                spy_curve.append({
+                    'date': date.strftime('%Y-%m-%d'),
+                    'pnl': round(spy_pnl, 2),
+                })
+            spy_final = spy_curve[-1]['pnl'] if spy_curve else 0
+            print(f"\n  📊 SPY Buy & Hold: ${spy_final:,.0f} ({spy_final/CAPITAL*100:.1f}%)")
+    
     # Save
     output = {
         'lastUpdated': datetime.now().strftime('%Y-%m-%d %H:%M'),
@@ -459,6 +477,7 @@ def main():
         'trades': trades,
         'equity_curve': equity_curve,
         'weekly_log': weekly_log,
+        'spy_curve': spy_curve,
     }
     
     out_path = Path(__file__).resolve().parent.parent / 'dashboard' / 'public' / 'rotation_top3_data.json'
