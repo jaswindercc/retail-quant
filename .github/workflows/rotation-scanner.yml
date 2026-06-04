@@ -1,0 +1,37 @@
+name: Weekly Rotation Scanner
+
+on:
+  schedule:
+    - cron: '0 22 * * 0'  # Every Sunday 6:00 PM EDT (22:00 UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rotate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install yfinance lxml html5lib
+
+      - name: Run rotation scanner
+        run: python scripts/scan_rotation_live.py
+
+      - name: Commit updated watchlist
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dashboard/public/rotation_live_data.json
+          git diff --cached --quiet || git commit -m "chore: weekly rotation watchlist update"
+          git push
