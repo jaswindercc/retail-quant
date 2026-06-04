@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  contents: write
   actions: write
 
 jobs:
@@ -34,8 +35,10 @@ jobs:
       - name: Copy to dashboard public
         run: cp data/live_scanner_data.json dashboard/public/live_scanner_data.json
 
-      - name: Cache live scanner data
-        uses: actions/cache/save@v4
-        with:
-          path: dashboard/public/live_scanner_data.json
-          key: live-scanner-data
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dashboard/public/live_scanner_data.json
+          git diff --cached --quiet || git commit -m "chore: refresh live scanner data"
+          git push

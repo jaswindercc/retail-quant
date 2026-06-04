@@ -53,6 +53,7 @@ import StrategySwitcherPage from './pages/StrategySwitcherPage'
 import FactorSwitcherPage from './pages/FactorSwitcherPage'
 import DynamicRiskPage from './pages/DynamicRiskPage'
 import MasterPage from './pages/MasterPage'
+import RotationPage from './pages/RotationPage'
 // LiveStrategyPage removed — merged into SimBacktest5Page
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
@@ -356,7 +357,10 @@ export default function App() {
           <NavLink to="/learnings" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`} style={{marginTop:'0.5rem'}}>
             📖 Master Learnings
           </NavLink>
-          <NavLink to="/master" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`} style={{marginTop:'0.75rem', padding:'0.75rem 1rem', fontSize:'1rem', fontWeight:700, background:'rgba(74,222,128,0.1)', borderRadius:8, border:'1px solid rgba(74,222,128,0.2)'}}>
+          <NavLink to="/rotation" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`} style={{marginTop:'0.75rem', padding:'0.75rem 1rem', fontSize:'1rem', fontWeight:700, background:'rgba(74,222,128,0.1)', borderRadius:8, border:'1px solid rgba(74,222,128,0.2)'}}>
+            🎯 Live Rotation Scanner
+          </NavLink>
+          <NavLink to="/master" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`} style={{marginTop:'0.5rem', padding:'0.75rem 1rem', fontSize:'1rem', fontWeight:700, background:'rgba(74,222,128,0.1)', borderRadius:8, border:'1px solid rgba(74,222,128,0.2)'}}>
             🏆 Master Ranking
           </NavLink>
         </div>
@@ -431,6 +435,7 @@ export default function App() {
           <Route path="/markov" element={<MarkovPage />} />
           <Route path="/learnings" element={<MasterLearningsPage />} />
           <Route path="/master" element={<MasterPage />} />
+          <Route path="/rotation" element={<RotationPage />} />
         </Routes>
       </div>
     </div>

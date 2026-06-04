@@ -1,0 +1,1943 @@
+{
+  "lastUpdated": "2026-06-03 18:47",
+  "rotation_freq": "weekly",
+  "lookback": "6 months",
+  "universes": {
+    "mega": {
+      "label": "Mega-Cap ($200B+)",
+      "total_stocks": 58,
+      "top_10": [
+        {
+          "ticker": "SNDK",
+          "market_cap": 269310115840,
+          "market_cap_B": 269.3,
+          "return_6m": 716.65,
+          "price": 1716.36,
+          "price_6m_ago": 210.17
+        },
+        {
+          "ticker": "MU",
+          "market_cap": 1209043648512,
+          "market_cap_B": 1209.0,
+          "return_6m": 342.89,
+          "price": 1064.1,
+          "price_6m_ago": 240.26
+        },
+        {
+          "ticker": "WDC",
+          "market_cap": 202841997312,
+          "market_cap_B": 202.8,
+          "return_6m": 244.76,
+          "price": 563.1,
+          "price_6m_ago": 163.33
+        },
+        {
+          "ticker": "STX",
+          "market_cap": 211722207232,
+          "market_cap_B": 211.7,
+          "return_6m": 244.56,
+          "price": 926.61,
+          "price_6m_ago": 268.92
+        },
+        {
+          "ticker": "DELL",
+          "market_cap": 273461739520,
+          "market_cap_B": 273.5,
+          "return_6m": 232.02,
+          "price": 435.31,
+          "price_6m_ago": 131.11
+        },
+        {
+          "ticker": "MRVL",
+          "market_cap": 262028836864,
+          "market_cap_B": 262.0,
+          "return_6m": 219.59,
+          "price": 290.79,
+          "price_6m_ago": 90.99
+        },
+        {
+          "ticker": "ARM",
+          "market_cap": 437314191360,
+          "market_cap_B": 437.3,
+          "return_6m": 198.28,
+          "price": 402.71,
+          "price_6m_ago": 135.01
+        },
+        {
+          "ticker": "INTC",
+          "market_cap": 565977874432,
+          "market_cap_B": 566.0,
+          "return_6m": 169.76,
+          "price": 107.93,
+          "price_6m_ago": 40.01
+        },
+        {
+          "ticker": "AMD",
+          "market_cap": 883524632576,
+          "market_cap_B": 883.5,
+          "return_6m": 137.32,
+          "price": 521.54,
+          "price_6m_ago": 219.76
+        },
+        {
+          "ticker": "LRCX",
+          "market_cap": 429245988864,
+          "market_cap_B": 429.2,
+          "return_6m": 116.66,
+          "price": 334.41,
+          "price_6m_ago": 154.35
+        }
+      ],
+      "all_ranked": [
+        {
+          "ticker": "SNDK",
+          "market_cap": 269310115840,
+          "market_cap_B": 269.3,
+          "return_6m": 716.65,
+          "price": 1716.36,
+          "price_6m_ago": 210.17
+        },
+        {
+          "ticker": "MU",
+          "market_cap": 1209043648512,
+          "market_cap_B": 1209.0,
+          "return_6m": 342.89,
+          "price": 1064.1,
+          "price_6m_ago": 240.26
+        },
+        {
+          "ticker": "WDC",
+          "market_cap": 202841997312,
+          "market_cap_B": 202.8,
+          "return_6m": 244.76,
+          "price": 563.1,
+          "price_6m_ago": 163.33
+        },
+        {
+          "ticker": "STX",
+          "market_cap": 211722207232,
+          "market_cap_B": 211.7,
+          "return_6m": 244.56,
+          "price": 926.61,
+          "price_6m_ago": 268.92
+        },
+        {
+          "ticker": "DELL",
+          "market_cap": 273461739520,
+          "market_cap_B": 273.5,
+          "return_6m": 232.02,
+          "price": 435.31,
+          "price_6m_ago": 131.11
+        },
+        {
+          "ticker": "MRVL",
+          "market_cap": 262028836864,
+          "market_cap_B": 262.0,
+          "return_6m": 219.59,
+          "price": 290.79,
+          "price_6m_ago": 90.99
+        },
+        {
+          "ticker": "ARM",
+          "market_cap": 437314191360,
+          "market_cap_B": 437.3,
+          "return_6m": 198.28,
+          "price": 402.71,
+          "price_6m_ago": 135.01
+        },
+        {
+          "ticker": "INTC",
+          "market_cap": 565977874432,
+          "market_cap_B": 566.0,
+          "return_6m": 169.76,
+          "price": 107.93,
+          "price_6m_ago": 40.01
+        },
+        {
+          "ticker": "AMD",
+          "market_cap": 883524632576,
+          "market_cap_B": 883.5,
+          "return_6m": 137.32,
+          "price": 521.54,
+          "price_6m_ago": 219.76
+        },
+        {
+          "ticker": "LRCX",
+          "market_cap": 429245988864,
+          "market_cap_B": 429.2,
+          "return_6m": 116.66,
+          "price": 334.41,
+          "price_6m_ago": 154.35
+        },
+        {
+          "ticker": "AMAT",
+          "market_cap": 397392576512,
+          "market_cap_B": 397.4,
+          "return_6m": 92.84,
+          "price": 490.05,
+          "price_6m_ago": 254.12
+        },
+        {
+          "ticker": "TXN",
+          "market_cap": 281437077504,
+          "market_cap_B": 281.4,
+          "return_6m": 85.36,
+          "price": 308.12,
+          "price_6m_ago": 166.22
+        },
+        {
+          "ticker": "KLAC",
+          "market_cap": 277546926080,
+          "market_cap_B": 277.5,
+          "return_6m": 77.2,
+          "price": 2045.2,
+          "price_6m_ago": 1154.21
+        },
+        {
+          "ticker": "CSCO",
+          "market_cap": 508484452352,
+          "market_cap_B": 508.5,
+          "return_6m": 70.15,
+          "price": 128.0,
+          "price_6m_ago": 75.23
+        },
+        {
+          "ticker": "GEV",
+          "market_cap": 259228811264,
+          "market_cap_B": 259.2,
+          "return_6m": 68.31,
+          "price": 969.67,
+          "price_6m_ago": 576.13
+        },
+        {
+          "ticker": "CAT",
+          "market_cap": 426003824640,
+          "market_cap_B": 426.0,
+          "return_6m": 60.84,
+          "price": 909.81,
+          "price_6m_ago": 565.66
+        },
+        {
+          "ticker": "ADI",
+          "market_cap": 213029961728,
+          "market_cap_B": 213.0,
+          "return_6m": 60.29,
+          "price": 423.2,
+          "price_6m_ago": 264.02
+        },
+        {
+          "ticker": "PANW",
+          "market_cap": 226637987840,
+          "market_cap_B": 226.6,
+          "return_6m": 58.3,
+          "price": 297.18,
+          "price_6m_ago": 187.73
+        },
+        {
+          "ticker": "QCOM",
+          "market_cap": 263847821312,
+          "market_cap_B": 263.8,
+          "return_6m": 44.98,
+          "price": 240.84,
+          "price_6m_ago": 166.12
+        },
+        {
+          "ticker": "ANET",
+          "market_cap": 221639000064,
+          "market_cap_B": 221.6,
+          "return_6m": 36.86,
+          "price": 175.33,
+          "price_6m_ago": 128.11
+        },
+        {
+          "ticker": "GS",
+          "market_cap": 309238595584,
+          "market_cap_B": 309.2,
+          "return_6m": 33.22,
+          "price": 1064.58,
+          "price_6m_ago": 799.11
+        },
+        {
+          "ticker": "XOM",
+          "market_cap": 634922991616,
+          "market_cap_B": 634.9,
+          "return_6m": 29.97,
+          "price": 149.56,
+          "price_6m_ago": 115.08
+        },
+        {
+          "ticker": "C",
+          "market_cap": 222228152320,
+          "market_cap_B": 222.2,
+          "return_6m": 29.11,
+          "price": 131.26,
+          "price_6m_ago": 101.67
+        },
+        {
+          "ticker": "MS",
+          "market_cap": 333232963584,
+          "market_cap_B": 333.2,
+          "return_6m": 29.0,
+          "price": 214.98,
+          "price_6m_ago": 166.65
+        },
+        {
+          "ticker": "CVX",
+          "market_cap": 377716473856,
+          "market_cap_B": 377.7,
+          "return_6m": 25.29,
+          "price": 187.55,
+          "price_6m_ago": 149.69
+        },
+        {
+          "ticker": "AVGO",
+          "market_cap": 2310967918592,
+          "market_cap_B": 2311.0,
+          "return_6m": 25.23,
+          "price": 481.57,
+          "price_6m_ago": 384.54
+        },
+        {
+          "ticker": "NVDA",
+          "market_cap": 5233431805952,
+          "market_cap_B": 5233.4,
+          "return_6m": 23.86,
+          "price": 222.82,
+          "price_6m_ago": 179.9
+        },
+        {
+          "ticker": "LIN",
+          "market_cap": 234687496192,
+          "market_cap_B": 234.7,
+          "return_6m": 22.66,
+          "price": 495.91,
+          "price_6m_ago": 404.29
+        },
+        {
+          "ticker": "ORCL",
+          "market_cap": 667228307456,
+          "market_cap_B": 667.2,
+          "return_6m": 22.47,
+          "price": 244.58,
+          "price_6m_ago": 199.71
+        },
+        {
+          "ticker": "UNH",
+          "market_cap": 346242646016,
+          "market_cap_B": 346.2,
+          "return_6m": 18.63,
+          "price": 377.92,
+          "price_6m_ago": 318.57
+        },
+        {
+          "ticker": "MRK",
+          "market_cap": 284005105664,
+          "market_cap_B": 284.0,
+          "return_6m": 15.39,
+          "price": 115.65,
+          "price_6m_ago": 100.22
+        },
+        {
+          "ticker": "GOOGL",
+          "market_cap": 4372342767616,
+          "market_cap_B": 4372.3,
+          "return_6m": 15.07,
+          "price": 361.85,
+          "price_6m_ago": 314.46
+        },
+        {
+          "ticker": "PM",
+          "market_cap": 275896107008,
+          "market_cap_B": 275.9,
+          "return_6m": 13.23,
+          "price": 173.66,
+          "price_6m_ago": 153.37
+        },
+        {
+          "ticker": "AAPL",
+          "market_cap": 4548453728256,
+          "market_cap_B": 4548.5,
+          "return_6m": 11.55,
+          "price": 315.2,
+          "price_6m_ago": 282.58
+        },
+        {
+          "ticker": "GE",
+          "market_cap": 331764760576,
+          "market_cap_B": 331.8,
+          "return_6m": 10.43,
+          "price": 317.72,
+          "price_6m_ago": 287.7
+        },
+        {
+          "ticker": "JNJ",
+          "market_cap": 538578681856,
+          "market_cap_B": 538.6,
+          "return_6m": 9.75,
+          "price": 222.89,
+          "price_6m_ago": 203.09
+        },
+        {
+          "ticker": "KO",
+          "market_cap": 338906513408,
+          "market_cap_B": 338.9,
+          "return_6m": 9.73,
+          "price": 78.41,
+          "price_6m_ago": 71.46
+        },
+        {
+          "ticker": "AMZN",
+          "market_cap": 2675829899264,
+          "market_cap_B": 2675.8,
+          "return_6m": 9.68,
+          "price": 256.52,
+          "price_6m_ago": 233.88
+        },
+        {
+          "ticker": "IBM",
+          "market_cap": 289606860800,
+          "market_cap_B": 289.6,
+          "return_6m": 9.12,
+          "price": 329.23,
+          "price_6m_ago": 301.72
+        },
+        {
+          "ticker": "COST",
+          "market_cap": 425931210752,
+          "market_cap_B": 425.9,
+          "return_6m": 4.93,
+          "price": 954.27,
+          "price_6m_ago": 909.4
+        },
+        {
+          "ticker": "RTX",
+          "market_cap": 234592239616,
+          "market_cap_B": 234.6,
+          "return_6m": 4.49,
+          "price": 174.26,
+          "price_6m_ago": 166.77
+        },
+        {
+          "ticker": "WMT",
+          "market_cap": 930737160192,
+          "market_cap_B": 930.7,
+          "return_6m": 1.98,
+          "price": 113.06,
+          "price_6m_ago": 110.86
+        },
+        {
+          "ticker": "LLY",
+          "market_cap": 971945541632,
+          "market_cap_B": 971.9,
+          "return_6m": 0.93,
+          "price": 1064.15,
+          "price_6m_ago": 1054.31
+        },
+        {
+          "ticker": "BAC",
+          "market_cap": 372499349504,
+          "market_cap_B": 372.5,
+          "return_6m": -0.36,
+          "price": 52.48,
+          "price_6m_ago": 52.67
+        },
+        {
+          "ticker": "TSLA",
+          "market_cap": 1591224958976,
+          "market_cap_B": 1591.2,
+          "return_6m": -1.49,
+          "price": 423.74,
+          "price_6m_ago": 430.14
+        },
+        {
+          "ticker": "JPM",
+          "market_cap": 808542535680,
+          "market_cap_B": 808.5,
+          "return_6m": -1.64,
+          "price": 300.96,
+          "price_6m_ago": 305.97
+        },
+        {
+          "ticker": "ABBV",
+          "market_cap": 386247426048,
+          "market_cap_B": 386.2,
+          "return_6m": -2.74,
+          "price": 215.4,
+          "price_6m_ago": 221.48
+        },
+        {
+          "ticker": "PG",
+          "market_cap": 329496756224,
+          "market_cap_B": 329.5,
+          "return_6m": -3.09,
+          "price": 140.82,
+          "price_6m_ago": 145.31
+        },
+        {
+          "ticker": "V",
+          "market_cap": 597813166080,
+          "market_cap_B": 597.8,
+          "return_6m": -3.56,
+          "price": 317.32,
+          "price_6m_ago": 329.03
+        },
+        {
+          "ticker": "WFC",
+          "market_cap": 241372446720,
+          "market_cap_B": 241.4,
+          "return_6m": -5.99,
+          "price": 79.44,
+          "price_6m_ago": 84.5
+        },
+        {
+          "ticker": "META",
+          "market_cap": 1581158498304,
+          "market_cap_B": 1581.2,
+          "return_6m": -6.59,
+          "price": 597.63,
+          "price_6m_ago": 639.8
+        },
+        {
+          "ticker": "BRK-B",
+          "market_cap": 1029498667008,
+          "market_cap_B": 1029.5,
+          "return_6m": -7.28,
+          "price": 471.51,
+          "price_6m_ago": 508.55
+        },
+        {
+          "ticker": "MSFT",
+          "market_cap": 3182675886080,
+          "market_cap_B": 3182.7,
+          "return_6m": -8.93,
+          "price": 441.31,
+          "price_6m_ago": 484.58
+        },
+        {
+          "ticker": "PLTR",
+          "market_cap": 342012493824,
+          "market_cap_B": 342.0,
+          "return_6m": -9.15,
+          "price": 152.17,
+          "price_6m_ago": 167.49
+        },
+        {
+          "ticker": "HD",
+          "market_cap": 311055515648,
+          "market_cap_B": 311.1,
+          "return_6m": -11.67,
+          "price": 311.52,
+          "price_6m_ago": 352.68
+        },
+        {
+          "ticker": "MA",
+          "market_cap": 417935163392,
+          "market_cap_B": 417.9,
+          "return_6m": -11.9,
+          "price": 477.68,
+          "price_6m_ago": 542.22
+        },
+        {
+          "ticker": "AXP",
+          "market_cap": 206717616128,
+          "market_cap_B": 206.7,
+          "return_6m": -13.23,
+          "price": 310.97,
+          "price_6m_ago": 358.38
+        },
+        {
+          "ticker": "NFLX",
+          "market_cap": 343348117504,
+          "market_cap_B": 343.3,
+          "return_6m": -23.64,
+          "price": 83.33,
+          "price_6m_ago": 109.13
+        }
+      ]
+    },
+    "large": {
+      "label": "Large-Cap ($50B\u2013$200B)",
+      "total_stocks": 107,
+      "top_10": [
+        {
+          "ticker": "BE",
+          "market_cap": 81180278784,
+          "market_cap_B": 81.2,
+          "return_6m": 206.13,
+          "price": 302.85,
+          "price_6m_ago": 98.93
+        },
+        {
+          "ticker": "ON",
+          "market_cap": 51656392704,
+          "market_cap_B": 51.7,
+          "return_6m": 155.09,
+          "price": 128.64,
+          "price_6m_ago": 50.43
+        },
+        {
+          "ticker": "TER",
+          "market_cap": 63227375616,
+          "market_cap_B": 63.2,
+          "return_6m": 118.75,
+          "price": 392.62,
+          "price_6m_ago": 179.49
+        },
+        {
+          "ticker": "MCHP",
+          "market_cap": 52549169152,
+          "market_cap_B": 52.5,
+          "return_6m": 83.46,
+          "price": 96.96,
+          "price_6m_ago": 52.85
+        },
+        {
+          "ticker": "FTNT",
+          "market_cap": 107160813568,
+          "market_cap_B": 107.2,
+          "return_6m": 81.94,
+          "price": 148.86,
+          "price_6m_ago": 81.82
+        },
+        {
+          "ticker": "MPWR",
+          "market_cap": 82263515136,
+          "market_cap_B": 82.3,
+          "return_6m": 75.69,
+          "price": 1624.99,
+          "price_6m_ago": 924.93
+        },
+        {
+          "ticker": "DDOG",
+          "market_cap": 88338636800,
+          "market_cap_B": 88.3,
+          "return_6m": 70.44,
+          "price": 269.13,
+          "price_6m_ago": 157.9
+        },
+        {
+          "ticker": "NXPI",
+          "market_cap": 81233829888,
+          "market_cap_B": 81.2,
+          "return_6m": 63.79,
+          "price": 323.62,
+          "price_6m_ago": 197.58
+        },
+        {
+          "ticker": "SLB",
+          "market_cap": 84407066624,
+          "market_cap_B": 84.4,
+          "return_6m": 56.67,
+          "price": 56.56,
+          "price_6m_ago": 36.1
+        },
+        {
+          "ticker": "CRWD",
+          "market_cap": 191044943872,
+          "market_cap_B": 191.0,
+          "return_6m": 52.53,
+          "price": 768.95,
+          "price_6m_ago": 504.13
+        }
+      ],
+      "all_ranked": [
+        {
+          "ticker": "BE",
+          "market_cap": 81180278784,
+          "market_cap_B": 81.2,
+          "return_6m": 206.13,
+          "price": 302.85,
+          "price_6m_ago": 98.93
+        },
+        {
+          "ticker": "ON",
+          "market_cap": 51656392704,
+          "market_cap_B": 51.7,
+          "return_6m": 155.09,
+          "price": 128.64,
+          "price_6m_ago": 50.43
+        },
+        {
+          "ticker": "TER",
+          "market_cap": 63227375616,
+          "market_cap_B": 63.2,
+          "return_6m": 118.75,
+          "price": 392.62,
+          "price_6m_ago": 179.49
+        },
+        {
+          "ticker": "MCHP",
+          "market_cap": 52549169152,
+          "market_cap_B": 52.5,
+          "return_6m": 83.46,
+          "price": 96.96,
+          "price_6m_ago": 52.85
+        },
+        {
+          "ticker": "FTNT",
+          "market_cap": 107160813568,
+          "market_cap_B": 107.2,
+          "return_6m": 81.94,
+          "price": 148.86,
+          "price_6m_ago": 81.82
+        },
+        {
+          "ticker": "MPWR",
+          "market_cap": 82263515136,
+          "market_cap_B": 82.3,
+          "return_6m": 75.69,
+          "price": 1624.99,
+          "price_6m_ago": 924.93
+        },
+        {
+          "ticker": "DDOG",
+          "market_cap": 88338636800,
+          "market_cap_B": 88.3,
+          "return_6m": 70.44,
+          "price": 269.13,
+          "price_6m_ago": 157.9
+        },
+        {
+          "ticker": "NXPI",
+          "market_cap": 81233829888,
+          "market_cap_B": 81.2,
+          "return_6m": 63.79,
+          "price": 323.62,
+          "price_6m_ago": 197.58
+        },
+        {
+          "ticker": "SLB",
+          "market_cap": 84407066624,
+          "market_cap_B": 84.4,
+          "return_6m": 56.67,
+          "price": 56.56,
+          "price_6m_ago": 36.1
+        },
+        {
+          "ticker": "CRWD",
+          "market_cap": 191044943872,
+          "market_cap_B": 191.0,
+          "return_6m": 52.53,
+          "price": 768.95,
+          "price_6m_ago": 504.13
+        },
+        {
+          "ticker": "FDX",
+          "market_cap": 77618774016,
+          "market_cap_B": 77.6,
+          "return_6m": 50.74,
+          "price": 329.0,
+          "price_6m_ago": 218.25
+        },
+        {
+          "ticker": "EQIX",
+          "market_cap": 106287841280,
+          "market_cap_B": 106.3,
+          "return_6m": 47.69,
+          "price": 1071.8,
+          "price_6m_ago": 725.72
+        },
+        {
+          "ticker": "NET",
+          "market_cap": 93817012224,
+          "market_cap_B": 93.8,
+          "return_6m": 38.27,
+          "price": 272.66,
+          "price_6m_ago": 197.2
+        },
+        {
+          "ticker": "CDNS",
+          "market_cap": 111748227072,
+          "market_cap_B": 111.7,
+          "return_6m": 34.48,
+          "price": 416.39,
+          "price_6m_ago": 309.62
+        },
+        {
+          "ticker": "CSX",
+          "market_cap": 86226935808,
+          "market_cap_B": 86.2,
+          "return_6m": 33.24,
+          "price": 46.14,
+          "price_6m_ago": 34.63
+        },
+        {
+          "ticker": "COP",
+          "market_cap": 144495771648,
+          "market_cap_B": 144.5,
+          "return_6m": 31.46,
+          "price": 116.87,
+          "price_6m_ago": 88.9
+        },
+        {
+          "ticker": "EOG",
+          "market_cap": 75579990016,
+          "market_cap_B": 75.6,
+          "return_6m": 28.51,
+          "price": 138.58,
+          "price_6m_ago": 107.84
+        },
+        {
+          "ticker": "F",
+          "market_cap": 62599524352,
+          "market_cap_B": 62.6,
+          "return_6m": 25.61,
+          "price": 16.15,
+          "price_6m_ago": 12.86
+        },
+        {
+          "ticker": "HON",
+          "market_cap": 145318838272,
+          "market_cap_B": 145.3,
+          "return_6m": 24.96,
+          "price": 235.23,
+          "price_6m_ago": 188.25
+        },
+        {
+          "ticker": "DE",
+          "market_cap": 158663835648,
+          "market_cap_B": 158.7,
+          "return_6m": 24.53,
+          "price": 579.25,
+          "price_6m_ago": 465.14
+        },
+        {
+          "ticker": "JCI",
+          "market_cap": 90233044992,
+          "market_cap_B": 90.2,
+          "return_6m": 23.91,
+          "price": 141.99,
+          "price_6m_ago": 114.59
+        },
+        {
+          "ticker": "MAR",
+          "market_cap": 99223396352,
+          "market_cap_B": 99.2,
+          "return_6m": 23.66,
+          "price": 373.76,
+          "price_6m_ago": 302.26
+        },
+        {
+          "ticker": "CARR",
+          "market_cap": 56392253440,
+          "market_cap_B": 56.4,
+          "return_6m": 23.4,
+          "price": 66.42,
+          "price_6m_ago": 53.83
+        },
+        {
+          "ticker": "VZ",
+          "market_cap": 193056964608,
+          "market_cap_B": 193.1,
+          "return_6m": 21.34,
+          "price": 47.87,
+          "price_6m_ago": 39.45
+        },
+        {
+          "ticker": "MO",
+          "market_cap": 117977817088,
+          "market_cap_B": 118.0,
+          "return_6m": 21.22,
+          "price": 69.24,
+          "price_6m_ago": 57.12
+        },
+        {
+          "ticker": "ROK",
+          "market_cap": 51229417472,
+          "market_cap_B": 51.2,
+          "return_6m": 19.62,
+          "price": 463.41,
+          "price_6m_ago": 387.42
+        },
+        {
+          "ticker": "ELV",
+          "market_cap": 85336129536,
+          "market_cap_B": 85.3,
+          "return_6m": 19.34,
+          "price": 389.03,
+          "price_6m_ago": 325.98
+        },
+        {
+          "ticker": "LMT",
+          "market_cap": 119008862208,
+          "market_cap_B": 119.0,
+          "return_6m": 18.29,
+          "price": 513.43,
+          "price_6m_ago": 434.05
+        },
+        {
+          "ticker": "UPS",
+          "market_cap": 92310683648,
+          "market_cap_B": 92.3,
+          "return_6m": 17.95,
+          "price": 108.93,
+          "price_6m_ago": 92.35
+        },
+        {
+          "ticker": "HLT",
+          "market_cap": 76212117504,
+          "market_cap_B": 76.2,
+          "return_6m": 17.71,
+          "price": 332.85,
+          "price_6m_ago": 282.77
+        },
+        {
+          "ticker": "BA",
+          "market_cap": 167545765888,
+          "market_cap_B": 167.5,
+          "return_6m": 16.75,
+          "price": 217.7,
+          "price_6m_ago": 186.46
+        },
+        {
+          "ticker": "PNC",
+          "market_cap": 88342208512,
+          "market_cap_B": 88.3,
+          "return_6m": 16.64,
+          "price": 221.0,
+          "price_6m_ago": 189.48
+        },
+        {
+          "ticker": "UNP",
+          "market_cap": 156562178048,
+          "market_cap_B": 156.6,
+          "return_6m": 16.27,
+          "price": 264.68,
+          "price_6m_ago": 227.64
+        },
+        {
+          "ticker": "SNPS",
+          "market_cap": 95571165184,
+          "market_cap_B": 95.6,
+          "return_6m": 15.98,
+          "price": 508.35,
+          "price_6m_ago": 438.29
+        },
+        {
+          "ticker": "CVS",
+          "market_cap": 117646876672,
+          "market_cap_B": 117.6,
+          "return_6m": 15.08,
+          "price": 89.5,
+          "price_6m_ago": 77.77
+        },
+        {
+          "ticker": "WBD",
+          "market_cap": 67893264384,
+          "market_cap_B": 67.9,
+          "return_6m": 13.87,
+          "price": 27.18,
+          "price_6m_ago": 23.87
+        },
+        {
+          "ticker": "BMY",
+          "market_cap": 111956557824,
+          "market_cap_B": 112.0,
+          "return_6m": 13.2,
+          "price": 54.46,
+          "price_6m_ago": 48.11
+        },
+        {
+          "ticker": "ABNB",
+          "market_cap": 79707709440,
+          "market_cap_B": 79.7,
+          "return_6m": 13.09,
+          "price": 134.35,
+          "price_6m_ago": 118.8
+        },
+        {
+          "ticker": "USB",
+          "market_cap": 83117359104,
+          "market_cap_B": 83.1,
+          "return_6m": 12.72,
+          "price": 54.6,
+          "price_6m_ago": 48.44
+        },
+        {
+          "ticker": "PSA",
+          "market_cap": 53226344448,
+          "market_cap_B": 53.2,
+          "return_6m": 12.68,
+          "price": 299.14,
+          "price_6m_ago": 265.49
+        },
+        {
+          "ticker": "GM",
+          "market_cap": 74107863040,
+          "market_cap_B": 74.1,
+          "return_6m": 12.53,
+          "price": 81.73,
+          "price_6m_ago": 72.63
+        },
+        {
+          "ticker": "CL",
+          "market_cap": 68668248064,
+          "market_cap_B": 68.7,
+          "return_6m": 11.79,
+          "price": 88.27,
+          "price_6m_ago": 78.96
+        },
+        {
+          "ticker": "PLD",
+          "market_cap": 132564475904,
+          "market_cap_B": 132.6,
+          "return_6m": 10.64,
+          "price": 140.41,
+          "price_6m_ago": 126.91
+        },
+        {
+          "ticker": "MDLZ",
+          "market_cap": 79137013760,
+          "market_cap_B": 79.1,
+          "return_6m": 10.22,
+          "price": 61.07,
+          "price_6m_ago": 55.41
+        },
+        {
+          "ticker": "MET",
+          "market_cap": 52350017536,
+          "market_cap_B": 52.4,
+          "return_6m": 10.15,
+          "price": 82.82,
+          "price_6m_ago": 75.19
+        },
+        {
+          "ticker": "RCL",
+          "market_cap": 77216014336,
+          "market_cap_B": 77.2,
+          "return_6m": 10.03,
+          "price": 290.8,
+          "price_6m_ago": 264.29
+        },
+        {
+          "ticker": "APD",
+          "market_cap": 62731374592,
+          "market_cap_B": 62.7,
+          "return_6m": 8.52,
+          "price": 279.29,
+          "price_6m_ago": 257.36
+        },
+        {
+          "ticker": "EMR",
+          "market_cap": 78912487424,
+          "market_cap_B": 78.9,
+          "return_6m": 8.5,
+          "price": 142.03,
+          "price_6m_ago": 130.91
+        },
+        {
+          "ticker": "AMT",
+          "market_cap": 86036471808,
+          "market_cap_B": 86.0,
+          "return_6m": 7.34,
+          "price": 185.53,
+          "price_6m_ago": 172.84
+        },
+        {
+          "ticker": "O",
+          "market_cap": 55982190592,
+          "market_cap_B": 56.0,
+          "return_6m": 7.11,
+          "price": 59.91,
+          "price_6m_ago": 55.93
+        },
+        {
+          "ticker": "NSC",
+          "market_cap": 68887470080,
+          "market_cap_B": 68.9,
+          "return_6m": 7.04,
+          "price": 307.55,
+          "price_6m_ago": 287.31
+        },
+        {
+          "ticker": "CB",
+          "market_cap": 121128665088,
+          "market_cap_B": 121.1,
+          "return_6m": 6.57,
+          "price": 312.27,
+          "price_6m_ago": 293.02
+        },
+        {
+          "ticker": "TFC",
+          "market_cap": 59478265856,
+          "market_cap_B": 59.5,
+          "return_6m": 5.47,
+          "price": 48.12,
+          "price_6m_ago": 45.62
+        },
+        {
+          "ticker": "PFE",
+          "market_cap": 144765878272,
+          "market_cap_B": 144.8,
+          "return_6m": 4.5,
+          "price": 25.55,
+          "price_6m_ago": 24.45
+        },
+        {
+          "ticker": "GILD",
+          "market_cap": 160820543488,
+          "market_cap_B": 160.8,
+          "return_6m": 3.87,
+          "price": 127.57,
+          "price_6m_ago": 122.82
+        },
+        {
+          "ticker": "SNOW",
+          "market_cap": 85010579456,
+          "market_cap_B": 85.0,
+          "return_6m": 3.63,
+          "price": 261.14,
+          "price_6m_ago": 252.0
+        },
+        {
+          "ticker": "SO",
+          "market_cap": 103339687936,
+          "market_cap_B": 103.3,
+          "return_6m": 3.33,
+          "price": 90.51,
+          "price_6m_ago": 87.59
+        },
+        {
+          "ticker": "TJX",
+          "market_cap": 174040645632,
+          "market_cap_B": 174.0,
+          "return_6m": 2.32,
+          "price": 153.69,
+          "price_6m_ago": 150.21
+        },
+        {
+          "ticker": "CMCSA",
+          "market_cap": 84501069824,
+          "market_cap_B": 84.5,
+          "return_6m": 2.1,
+          "price": 24.85,
+          "price_6m_ago": 24.34
+        },
+        {
+          "ticker": "DUK",
+          "market_cap": 94978211840,
+          "market_cap_B": 95.0,
+          "return_6m": 2.01,
+          "price": 121.09,
+          "price_6m_ago": 118.7
+        },
+        {
+          "ticker": "NEE",
+          "market_cap": 176984473600,
+          "market_cap_B": 177.0,
+          "return_6m": 1.91,
+          "price": 85.68,
+          "price_6m_ago": 84.08
+        },
+        {
+          "ticker": "ITW",
+          "market_cap": 72044396544,
+          "market_cap_B": 72.0,
+          "return_6m": 1.73,
+          "price": 248.58,
+          "price_6m_ago": 244.36
+        },
+        {
+          "ticker": "ALL",
+          "market_cap": 54115028992,
+          "market_cap_B": 54.1,
+          "return_6m": 1.26,
+          "price": 210.46,
+          "price_6m_ago": 207.85
+        },
+        {
+          "ticker": "TRV",
+          "market_cap": 61731815424,
+          "market_cap_B": 61.7,
+          "return_6m": 1.23,
+          "price": 291.86,
+          "price_6m_ago": 288.31
+        },
+        {
+          "ticker": "CI",
+          "market_cap": 72226603008,
+          "market_cap_B": 72.2,
+          "return_6m": 0.8,
+          "price": 272.72,
+          "price_6m_ago": 270.55
+        },
+        {
+          "ticker": "EA",
+          "market_cap": 50849918976,
+          "market_cap_B": 50.8,
+          "return_6m": -0.02,
+          "price": 202.01,
+          "price_6m_ago": 202.05
+        },
+        {
+          "ticker": "VRTX",
+          "market_cap": 108565266432,
+          "market_cap_B": 108.6,
+          "return_6m": -0.12,
+          "price": 425.09,
+          "price_6m_ago": 425.6
+        },
+        {
+          "ticker": "BLK",
+          "market_cap": 153604030464,
+          "market_cap_B": 153.6,
+          "return_6m": -0.99,
+          "price": 1018.96,
+          "price_6m_ago": 1029.17
+        },
+        {
+          "ticker": "AMGN",
+          "market_cap": 181943746560,
+          "market_cap_B": 181.9,
+          "return_6m": -1.32,
+          "price": 328.26,
+          "price_6m_ago": 332.66
+        },
+        {
+          "ticker": "T",
+          "market_cap": 163320692736,
+          "market_cap_B": 163.3,
+          "return_6m": -2.33,
+          "price": 24.64,
+          "price_6m_ago": 25.23
+        },
+        {
+          "ticker": "PEP",
+          "market_cap": 195301687296,
+          "market_cap_B": 195.3,
+          "return_6m": -3.24,
+          "price": 142.0,
+          "price_6m_ago": 146.75
+        },
+        {
+          "ticker": "DIS",
+          "market_cap": 173321207808,
+          "market_cap_B": 173.3,
+          "return_6m": -4.38,
+          "price": 101.41,
+          "price_6m_ago": 106.05
+        },
+        {
+          "ticker": "SCHW",
+          "market_cap": 152017846272,
+          "market_cap_B": 152.0,
+          "return_6m": -4.82,
+          "price": 87.61,
+          "price_6m_ago": 92.05
+        },
+        {
+          "ticker": "ECL",
+          "market_cap": 72577105920,
+          "market_cap_B": 72.6,
+          "return_6m": -5.57,
+          "price": 256.26,
+          "price_6m_ago": 271.37
+        },
+        {
+          "ticker": "CME",
+          "market_cap": 91671199744,
+          "market_cap_B": 91.7,
+          "return_6m": -7.63,
+          "price": 250.53,
+          "price_6m_ago": 271.23
+        },
+        {
+          "ticker": "TMUS",
+          "market_cap": 195738353664,
+          "market_cap_B": 195.7,
+          "return_6m": -7.68,
+          "price": 188.83,
+          "price_6m_ago": 204.53
+        },
+        {
+          "ticker": "MCD",
+          "market_cap": 195261218816,
+          "market_cap_B": 195.3,
+          "return_6m": -7.83,
+          "price": 276.36,
+          "price_6m_ago": 299.85
+        },
+        {
+          "ticker": "ADP",
+          "market_cap": 90793639936,
+          "market_cap_B": 90.8,
+          "return_6m": -8.3,
+          "price": 231.18,
+          "price_6m_ago": 252.11
+        },
+        {
+          "ticker": "ICE",
+          "market_cap": 78459256832,
+          "market_cap_B": 78.5,
+          "return_6m": -8.71,
+          "price": 142.38,
+          "price_6m_ago": 155.97
+        },
+        {
+          "ticker": "VST",
+          "market_cap": 52082888704,
+          "market_cap_B": 52.1,
+          "return_6m": -8.77,
+          "price": 157.97,
+          "price_6m_ago": 173.16
+        },
+        {
+          "ticker": "MMM",
+          "market_cap": 79408619520,
+          "market_cap_B": 79.4,
+          "return_6m": -9.44,
+          "price": 152.9,
+          "price_6m_ago": 168.85
+        },
+        {
+          "ticker": "SPOT",
+          "market_cap": 99499548672,
+          "market_cap_B": 99.5,
+          "return_6m": -13.37,
+          "price": 501.5,
+          "price_6m_ago": 578.89
+        },
+        {
+          "ticker": "CRM",
+          "market_cap": 156428517376,
+          "market_cap_B": 156.4,
+          "return_6m": -13.38,
+          "price": 200.84,
+          "price_6m_ago": 231.87
+        },
+        {
+          "ticker": "SHW",
+          "market_cap": 73353371648,
+          "market_cap_B": 73.4,
+          "return_6m": -13.79,
+          "price": 293.0,
+          "price_6m_ago": 339.86
+        },
+        {
+          "ticker": "MCK",
+          "market_cap": 88836800512,
+          "market_cap_B": 88.8,
+          "return_6m": -13.85,
+          "price": 736.78,
+          "price_6m_ago": 855.23
+        },
+        {
+          "ticker": "BKNG",
+          "market_cap": 127947931648,
+          "market_cap_B": 127.9,
+          "return_6m": -14.19,
+          "price": 167.21,
+          "price_6m_ago": 194.85
+        },
+        {
+          "ticker": "SPGI",
+          "market_cap": 121987522560,
+          "market_cap_B": 122.0,
+          "return_6m": -15.32,
+          "price": 417.46,
+          "price_6m_ago": 492.97
+        },
+        {
+          "ticker": "LOW",
+          "market_cap": 116150468608,
+          "market_cap_B": 116.2,
+          "return_6m": -15.35,
+          "price": 206.64,
+          "price_6m_ago": 244.12
+        },
+        {
+          "ticker": "UBER",
+          "market_cap": 145026252800,
+          "market_cap_B": 145.0,
+          "return_6m": -17.27,
+          "price": 71.62,
+          "price_6m_ago": 86.57
+        },
+        {
+          "ticker": "TMO",
+          "market_cap": 176434724864,
+          "market_cap_B": 176.4,
+          "return_6m": -17.47,
+          "price": 482.08,
+          "price_6m_ago": 584.13
+        },
+        {
+          "ticker": "ADBE",
+          "market_cap": 103596457984,
+          "market_cap_B": 103.6,
+          "return_6m": -18.81,
+          "price": 262.11,
+          "price_6m_ago": 322.85
+        },
+        {
+          "ticker": "MELI",
+          "market_cap": 82976079872,
+          "market_cap_B": 83.0,
+          "return_6m": -18.97,
+          "price": 1672.83,
+          "price_6m_ago": 2064.55
+        },
+        {
+          "ticker": "REGN",
+          "market_cap": 64986570752,
+          "market_cap_B": 65.0,
+          "return_6m": -19.41,
+          "price": 602.92,
+          "price_6m_ago": 748.09
+        },
+        {
+          "ticker": "SYK",
+          "market_cap": 112922746880,
+          "market_cap_B": 112.9,
+          "return_6m": -20.81,
+          "price": 293.3,
+          "price_6m_ago": 370.39
+        },
+        {
+          "ticker": "DHR",
+          "market_cap": 125622214656,
+          "market_cap_B": 125.6,
+          "return_6m": -21.15,
+          "price": 176.11,
+          "price_6m_ago": 223.35
+        },
+        {
+          "ticker": "SHOP",
+          "market_cap": 147063209984,
+          "market_cap_B": 147.1,
+          "return_6m": -21.62,
+          "price": 117.01,
+          "price_6m_ago": 149.28
+        },
+        {
+          "ticker": "NOW",
+          "market_cap": 123602264064,
+          "market_cap_B": 123.6,
+          "return_6m": -22.36,
+          "price": 127.65,
+          "price_6m_ago": 164.41
+        },
+        {
+          "ticker": "DASH",
+          "market_cap": 66808754176,
+          "market_cap_B": 66.8,
+          "return_6m": -23.66,
+          "price": 156.95,
+          "price_6m_ago": 205.58
+        },
+        {
+          "ticker": "CEG",
+          "market_cap": 95741976576,
+          "market_cap_B": 95.7,
+          "return_6m": -23.84,
+          "price": 272.65,
+          "price_6m_ago": 358.01
+        },
+        {
+          "ticker": "HCA",
+          "market_cap": 80461299712,
+          "market_cap_B": 80.5,
+          "return_6m": -26.75,
+          "price": 367.35,
+          "price_6m_ago": 501.51
+        },
+        {
+          "ticker": "ACN",
+          "market_cap": 109960970240,
+          "market_cap_B": 110.0,
+          "return_6m": -27.05,
+          "price": 186.22,
+          "price_6m_ago": 255.27
+        },
+        {
+          "ticker": "HOOD",
+          "market_cap": 75295727616,
+          "market_cap_B": 75.3,
+          "return_6m": -28.46,
+          "price": 88.16,
+          "price_6m_ago": 123.24
+        },
+        {
+          "ticker": "ISRG",
+          "market_cap": 143609495552,
+          "market_cap_B": 143.6,
+          "return_6m": -29.09,
+          "price": 402.3,
+          "price_6m_ago": 567.37
+        },
+        {
+          "ticker": "SE",
+          "market_cap": 54437625856,
+          "market_cap_B": 54.4,
+          "return_6m": -31.15,
+          "price": 93.14,
+          "price_6m_ago": 135.28
+        },
+        {
+          "ticker": "ABT",
+          "market_cap": 152025448448,
+          "market_cap_B": 152.0,
+          "return_6m": -31.29,
+          "price": 86.97,
+          "price_6m_ago": 126.57
+        },
+        {
+          "ticker": "NKE",
+          "market_cap": 64292712448,
+          "market_cap_B": 64.3,
+          "return_6m": -32.08,
+          "price": 43.73,
+          "price_6m_ago": 64.38
+        },
+        {
+          "ticker": "INTU",
+          "market_cap": 85436547072,
+          "market_cap_B": 85.4,
+          "return_6m": -48.75,
+          "price": 322.14,
+          "price_6m_ago": 628.52
+        }
+      ]
+    },
+    "mid": {
+      "label": "Mid-Cap ($10B\u2013$50B)",
+      "total_stocks": 44,
+      "top_10": [
+        {
+          "ticker": "TWLO",
+          "market_cap": 34319104000,
+          "market_cap_B": 34.3,
+          "return_6m": 79.76,
+          "price": 229.3,
+          "price_6m_ago": 127.56
+        },
+        {
+          "ticker": "OKTA",
+          "market_cap": 21722443776,
+          "market_cap_B": 21.7,
+          "return_6m": 67.81,
+          "price": 135.32,
+          "price_6m_ago": 80.64
+        },
+        {
+          "ticker": "SMCI",
+          "market_cap": 28221562880,
+          "market_cap_B": 28.2,
+          "return_6m": 50.16,
+          "price": 50.17,
+          "price_6m_ago": 33.41
+        },
+        {
+          "ticker": "HUM",
+          "market_cap": 39238500352,
+          "market_cap_B": 39.2,
+          "return_6m": 33.6,
+          "price": 320.88,
+          "price_6m_ago": 240.18
+        },
+        {
+          "ticker": "ZM",
+          "market_cap": 31114870784,
+          "market_cap_B": 31.1,
+          "return_6m": 31.72,
+          "price": 111.88,
+          "price_6m_ago": 84.94
+        },
+        {
+          "ticker": "ROKU",
+          "market_cap": 18009776128,
+          "market_cap_B": 18.0,
+          "return_6m": 31.7,
+          "price": 127.12,
+          "price_6m_ago": 96.52
+        },
+        {
+          "ticker": "LYV",
+          "market_cap": 38246350848,
+          "market_cap_B": 38.2,
+          "return_6m": 27.87,
+          "price": 167.64,
+          "price_6m_ago": 131.1
+        },
+        {
+          "ticker": "ILMN",
+          "market_cap": 25581803520,
+          "market_cap_B": 25.6,
+          "return_6m": 26.28,
+          "price": 162.55,
+          "price_6m_ago": 128.72
+        },
+        {
+          "ticker": "DD",
+          "market_cap": 19511652352,
+          "market_cap_B": 19.5,
+          "return_6m": 22.9,
+          "price": 48.66,
+          "price_6m_ago": 39.59
+        },
+        {
+          "ticker": "SWKS",
+          "market_cap": 12304711680,
+          "market_cap_B": 12.3,
+          "return_6m": 22.69,
+          "price": 79.12,
+          "price_6m_ago": 64.49
+        }
+      ],
+      "all_ranked": [
+        {
+          "ticker": "TWLO",
+          "market_cap": 34319104000,
+          "market_cap_B": 34.3,
+          "return_6m": 79.76,
+          "price": 229.3,
+          "price_6m_ago": 127.56
+        },
+        {
+          "ticker": "OKTA",
+          "market_cap": 21722443776,
+          "market_cap_B": 21.7,
+          "return_6m": 67.81,
+          "price": 135.32,
+          "price_6m_ago": 80.64
+        },
+        {
+          "ticker": "SMCI",
+          "market_cap": 28221562880,
+          "market_cap_B": 28.2,
+          "return_6m": 50.16,
+          "price": 50.17,
+          "price_6m_ago": 33.41
+        },
+        {
+          "ticker": "HUM",
+          "market_cap": 39238500352,
+          "market_cap_B": 39.2,
+          "return_6m": 33.6,
+          "price": 320.88,
+          "price_6m_ago": 240.18
+        },
+        {
+          "ticker": "ZM",
+          "market_cap": 31114870784,
+          "market_cap_B": 31.1,
+          "return_6m": 31.72,
+          "price": 111.88,
+          "price_6m_ago": 84.94
+        },
+        {
+          "ticker": "ROKU",
+          "market_cap": 18009776128,
+          "market_cap_B": 18.0,
+          "return_6m": 31.7,
+          "price": 127.12,
+          "price_6m_ago": 96.52
+        },
+        {
+          "ticker": "LYV",
+          "market_cap": 38246350848,
+          "market_cap_B": 38.2,
+          "return_6m": 27.87,
+          "price": 167.64,
+          "price_6m_ago": 131.1
+        },
+        {
+          "ticker": "ILMN",
+          "market_cap": 25581803520,
+          "market_cap_B": 25.6,
+          "return_6m": 26.28,
+          "price": 162.55,
+          "price_6m_ago": 128.72
+        },
+        {
+          "ticker": "DD",
+          "market_cap": 19511652352,
+          "market_cap_B": 19.5,
+          "return_6m": 22.9,
+          "price": 48.66,
+          "price_6m_ago": 39.59
+        },
+        {
+          "ticker": "SWKS",
+          "market_cap": 12304711680,
+          "market_cap_B": 12.3,
+          "return_6m": 22.69,
+          "price": 79.12,
+          "price_6m_ago": 64.49
+        },
+        {
+          "ticker": "MDB",
+          "market_cap": 29863571456,
+          "market_cap_B": 29.9,
+          "return_6m": 21.16,
+          "price": 398.46,
+          "price_6m_ago": 328.87
+        },
+        {
+          "ticker": "DECK",
+          "market_cap": 14738742272,
+          "market_cap_B": 14.7,
+          "return_6m": 20.4,
+          "price": 110.79,
+          "price_6m_ago": 92.02
+        },
+        {
+          "ticker": "FSLR",
+          "market_cap": 33992871936,
+          "market_cap_B": 34.0,
+          "return_6m": 18.01,
+          "price": 311.01,
+          "price_6m_ago": 263.54
+        },
+        {
+          "ticker": "NIO",
+          "market_cap": 14495283200,
+          "market_cap_B": 14.5,
+          "return_6m": 16.02,
+          "price": 6.01,
+          "price_6m_ago": 5.18
+        },
+        {
+          "ticker": "DXCM",
+          "market_cap": 28076120064,
+          "market_cap_B": 28.1,
+          "return_6m": 15.63,
+          "price": 73.45,
+          "price_6m_ago": 63.52
+        },
+        {
+          "ticker": "CCL",
+          "market_cap": 37751980032,
+          "market_cap_B": 37.8,
+          "return_6m": 7.74,
+          "price": 27.64,
+          "price_6m_ago": 25.65
+        },
+        {
+          "ticker": "CCI",
+          "market_cap": 39352692736,
+          "market_cap_B": 39.4,
+          "return_6m": 4.09,
+          "price": 89.92,
+          "price_6m_ago": 86.39
+        },
+        {
+          "ticker": "AFRM",
+          "market_cap": 22089908224,
+          "market_cap_B": 22.1,
+          "return_6m": 2.82,
+          "price": 71.01,
+          "price_6m_ago": 69.07
+        },
+        {
+          "ticker": "EW",
+          "market_cap": 49749118976,
+          "market_cap_B": 49.7,
+          "return_6m": 2.8,
+          "price": 87.66,
+          "price_6m_ago": 85.27
+        },
+        {
+          "ticker": "RIVN",
+          "market_cap": 24500598784,
+          "market_cap_B": 24.5,
+          "return_6m": 0.76,
+          "price": 17.29,
+          "price_6m_ago": 17.16
+        },
+        {
+          "ticker": "PRU",
+          "market_cap": 35190980608,
+          "market_cap_B": 35.2,
+          "return_6m": -2.48,
+          "price": 102.72,
+          "price_6m_ago": 105.34
+        },
+        {
+          "ticker": "AIG",
+          "market_cap": 38498271232,
+          "market_cap_B": 38.5,
+          "return_6m": -2.59,
+          "price": 73.8,
+          "price_6m_ago": 75.76
+        },
+        {
+          "ticker": "A",
+          "market_cap": 38840041472,
+          "market_cap_B": 38.8,
+          "return_6m": -9.66,
+          "price": 135.05,
+          "price_6m_ago": 149.49
+        },
+        {
+          "ticker": "TTWO",
+          "market_cap": 40239534080,
+          "market_cap_B": 40.2,
+          "return_6m": -10.81,
+          "price": 222.38,
+          "price_6m_ago": 249.34
+        },
+        {
+          "ticker": "LI",
+          "market_cap": 15353841664,
+          "market_cap_B": 15.4,
+          "return_6m": -13.99,
+          "price": 15.43,
+          "price_6m_ago": 17.94
+        },
+        {
+          "ticker": "OKLO",
+          "market_cap": 11493844992,
+          "market_cap_B": 11.5,
+          "return_6m": -15.9,
+          "price": 73.47,
+          "price_6m_ago": 87.36
+        },
+        {
+          "ticker": "XPEV",
+          "market_cap": 16840328192,
+          "market_cap_B": 16.8,
+          "return_6m": -16.21,
+          "price": 17.89,
+          "price_6m_ago": 21.35
+        },
+        {
+          "ticker": "DOCU",
+          "market_cap": 10209040384,
+          "market_cap_B": 10.2,
+          "return_6m": -19.36,
+          "price": 55.1,
+          "price_6m_ago": 68.33
+        },
+        {
+          "ticker": "IQV",
+          "market_cap": 30082056192,
+          "market_cap_B": 30.1,
+          "return_6m": -20.93,
+          "price": 180.64,
+          "price_6m_ago": 228.47
+        },
+        {
+          "ticker": "PINS",
+          "market_cap": 11570050048,
+          "market_cap_B": 11.6,
+          "return_6m": -22.24,
+          "price": 20.87,
+          "price_6m_ago": 26.84
+        },
+        {
+          "ticker": "ADSK",
+          "market_cap": 48860065792,
+          "market_cap_B": 48.9,
+          "return_6m": -22.44,
+          "price": 236.66,
+          "price_6m_ago": 305.12
+        },
+        {
+          "ticker": "DKNG",
+          "market_cap": 12375933952,
+          "market_cap_B": 12.4,
+          "return_6m": -25.3,
+          "price": 25.3,
+          "price_6m_ago": 33.87
+        },
+        {
+          "ticker": "TEAM",
+          "market_cap": 25602637824,
+          "market_cap_B": 25.6,
+          "return_6m": -28.02,
+          "price": 109.1,
+          "price_6m_ago": 151.58
+        },
+        {
+          "ticker": "PYPL",
+          "market_cap": 37555642368,
+          "market_cap_B": 37.6,
+          "return_6m": -28.63,
+          "price": 44.53,
+          "price_6m_ago": 62.39
+        },
+        {
+          "ticker": "U",
+          "market_cap": 12775196672,
+          "market_cap_B": 12.8,
+          "return_6m": -28.67,
+          "price": 30.77,
+          "price_6m_ago": 43.14
+        },
+        {
+          "ticker": "CHTR",
+          "market_cap": 18594603008,
+          "market_cap_B": 18.6,
+          "return_6m": -28.78,
+          "price": 140.27,
+          "price_6m_ago": 196.94
+        },
+        {
+          "ticker": "WDAY",
+          "market_cap": 36058128384,
+          "market_cap_B": 36.1,
+          "return_6m": -30.22,
+          "price": 148.88,
+          "price_6m_ago": 213.35
+        },
+        {
+          "ticker": "LULU",
+          "market_cap": 15051458560,
+          "market_cap_B": 15.1,
+          "return_6m": -30.67,
+          "price": 126.47,
+          "price_6m_ago": 182.41
+        },
+        {
+          "ticker": "COIN",
+          "market_cap": 43676524544,
+          "market_cap_B": 43.7,
+          "return_6m": -33.04,
+          "price": 173.99,
+          "price_6m_ago": 259.84
+        },
+        {
+          "ticker": "HUBS",
+          "market_cap": 11341045760,
+          "market_cap_B": 11.3,
+          "return_6m": -35.68,
+          "price": 240.16,
+          "price_6m_ago": 373.4
+        },
+        {
+          "ticker": "SOFI",
+          "market_cap": 21543639040,
+          "market_cap_B": 21.5,
+          "return_6m": -38.89,
+          "price": 17.74,
+          "price_6m_ago": 29.03
+        },
+        {
+          "ticker": "ZTS",
+          "market_cap": 32330874880,
+          "market_cap_B": 32.3,
+          "return_6m": -39.45,
+          "price": 76.39,
+          "price_6m_ago": 126.16
+        },
+        {
+          "ticker": "ZS",
+          "market_cap": 21819463680,
+          "market_cap_B": 21.8,
+          "return_6m": -40.75,
+          "price": 144.15,
+          "price_6m_ago": 243.28
+        },
+        {
+          "ticker": "RBLX",
+          "market_cap": 31277533184,
+          "market_cap_B": 31.3,
+          "return_6m": -52.02,
+          "price": 45.0,
+          "price_6m_ago": 93.79
+        }
+      ]
+    }
+  }
+}

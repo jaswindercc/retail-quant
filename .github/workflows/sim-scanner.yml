@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  contents: write
   actions: write
 
 jobs:
@@ -28,8 +29,10 @@ jobs:
       - name: Run simulator
         run: python scripts/generate_sim_data.py
 
-      - name: Cache sim data
-        uses: actions/cache/save@v4
-        with:
-          path: dashboard/public/sim_data.json
-          key: sim-data
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dashboard/public/sim_data.json
+          git diff --cached --quiet || git commit -m "chore: refresh sim data"
+          git push

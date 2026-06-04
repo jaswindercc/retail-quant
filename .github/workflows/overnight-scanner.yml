@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  contents: write
   actions: write
 
 jobs:
@@ -26,8 +27,10 @@ jobs:
       - name: Run scanner refresh
         run: python scripts/refresh_scanner.py
 
-      - name: Cache overnight scanner data
-        uses: actions/cache/save@v4
-        with:
-          path: dashboard/public/scanner_data.json
-          key: overnight-scanner-data
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dashboard/public/scanner_data.json
+          git diff --cached --quiet || git commit -m "chore: refresh overnight scanner data"
+          git push

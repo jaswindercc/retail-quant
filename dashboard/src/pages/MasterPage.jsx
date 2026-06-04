@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 
 const STRATEGIES = [
-  { name: 'BT5 LIVE Mega-Cap', pnl: 20194, flatPnl: 20194, flatDD: 5183, retDD: 3.9, eff: 0.80, trades: 128, risk: '$197', wr: 26.6, bear2022: -917, link: '/sim/backtest-5' },
-  { name: 'Strategy Switcher', pnl: 193415, flatPnl: 84154, flatDD: 4168, retDD: 20.2, eff: 0.74, trades: 572, risk: '$200*', wr: 41.6, bear2022: 16831, link: '/strategy-switcher' },
+  { name: 'BT5 LIVE Mega-Cap', pnl: 20194, flatPnl: 20194, flatDD: 5183, retDD: 3.9, eff: 0.80, trades: 128, risk: '$197', wr: 26.6, bear2022: -917, link: '/sim/backtest-5', focus: true },
+  { name: 'Strategy Switcher', pnl: 193415, flatPnl: 84154, flatDD: 4168, retDD: 20.2, eff: 0.74, trades: 572, risk: '$200*', wr: 41.6, bear2022: 16831, link: '/strategy-switcher', focus: true },
   { name: 'BT3 Regime', pnl: 21241, flatPnl: 21480, flatDD: 7086, retDD: 3.0, eff: 0.37, trades: 293, risk: '$197', wr: 28.0, bear2022: 2432, link: '/sim/backtest-3' },
-  { name: 'BT6 Rotation', pnl: 9697, flatPnl: 9697, flatDD: 3977, retDD: 2.4, eff: 0.33, trades: 150, risk: '$197', wr: 22.9, bear2022: null, link: '/sim/backtest-6' },
-  { name: 'Overnight + Factor', pnl: 6805, flatPnl: 6805, flatDD: 590, retDD: 11.5, eff: 0.26, trades: 264, risk: '$100', wr: 51.7, bear2022: null, link: '/strategy-switcher/factors' },
+  { name: 'BT6 Rotation', pnl: 9697, flatPnl: 9697, flatDD: 3977, retDD: 2.4, eff: 0.33, trades: 150, risk: '$197', wr: 22.9, bear2022: null, link: '/sim/backtest-6', focus: true },
+  { name: 'Overnight + Factor', pnl: 6805, flatPnl: 6805, flatDD: 590, retDD: 11.5, eff: 0.26, trades: 264, risk: '$100', wr: 51.7, bear2022: null, link: '/strategy-switcher/factors', focus: true },
   { name: 'Overnight Baseline', pnl: 7073, flatPnl: 7073, flatDD: 2136, retDD: 3.3, eff: 0.27, trades: 264, risk: '$100', wr: 47.7, bear2022: null, link: '/overnight' },
   { name: 'SPX Put Spread 30Δ', pnl: 4368, flatPnl: 2569, flatDD: 1859, retDD: 1.4, eff: 0.06, trades: 220, risk: '$340', wr: 82.7, bear2022: null, link: '/options/spx' },
   { name: 'SPX Iron Condor 20Δ', pnl: 1654, flatPnl: 1099, flatDD: 2876, retDD: 0.4, eff: 0.03, trades: 194, risk: '$301', wr: 72.7, bear2022: null, link: '/options/spx' },
@@ -48,11 +48,12 @@ export default function MasterPage() {
             {STRATEGIES.map((s, i) => {
               const effColor = s.eff >= 0.5 ? '#4ade80' : s.eff >= 0.2 ? '#fbbf24' : '#f87171'
               const bearColor = s.bear2022 == null ? '#52525b' : s.bear2022 >= 0 ? '#4ade80' : '#f87171'
+              const rowBg = s.focus ? 'rgba(74,222,128,0.07)' : 'transparent'
               return (
-                <tr key={s.name} style={{ borderBottom: '1px solid #27272a' }}>
+                <tr key={s.name} style={{ borderBottom: '1px solid #27272a', background: rowBg }}>
                   <td style={{ padding: '0.5rem 0.4rem', color: '#71717a' }}>{i + 1}</td>
-                  <td style={{ padding: '0.5rem 0.4rem' }}>
-                    <Link to={s.link} style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: 3, textDecorationColor: '#52525b' }}>{s.name}</Link>
+                  <td style={{ padding: '0.5rem 0.4rem', fontWeight: s.focus ? 700 : 400 }}>
+                    {s.focus && '▶ '}<Link to={s.link} style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: 3, textDecorationColor: '#52525b' }}>{s.name}</Link>
                   </td>
                   <td style={{ padding: '0.5rem 0.4rem', textAlign: 'right', color: '#a1a1aa' }}>{s.risk}</td>
                   <td style={{ padding: '0.5rem 0.4rem', textAlign: 'right', color: '#a1a1aa' }}>{s.trades}</td>
@@ -80,9 +81,9 @@ export default function MasterPage() {
         * Switcher compounds (2% of capital). "PnL @$200" and "$/$ Risked" use flat $200/trade R-multiple math for fair comparison.
       </p>
 
-      {/* My 3 */}
-      <div style={{ marginTop: '2.5rem', padding: '1.25rem', background: 'rgba(74,222,128,0.06)', borderRadius: 10, border: '1px solid rgba(74,222,128,0.15)' }}>
-        <h2 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: '#4ade80' }}>Focus: Top 3</h2>
+      {/* My 4 */}
+      <div style={{ marginTop: '2.5rem', padding: '1.25rem', background: 'rgba(74,222,128,0.06)', borderRadius: 10, border: '2px solid rgba(74,222,128,0.3)' }}>
+        <h2 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: '#4ade80' }}>▶ Active Focus (Trading These)</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
           <div>
             <strong>1. BT5 LIVE</strong>
@@ -100,6 +101,12 @@ export default function MasterPage() {
             <strong>3. Overnight + Factor</strong>
             <p style={{ color: '#a1a1aa', fontSize: '0.85rem', margin: '0.3rem 0 0' }}>
               $0.26/$. Different timeframe (daily). Tiny DD ($590). Uncorrelated to swing strategies.
+            </p>
+          </div>
+          <div>
+            <strong>4. BT6 IWM Rotation</strong>
+            <p style={{ color: '#a1a1aa', fontSize: '0.85rem', margin: '0.3rem 0 0' }}>
+              $0.33/$. Small/mid-cap growth rotation. Diversifies away from mega-cap. Same breakout framework as BT5.
             </p>
           </div>
         </div>

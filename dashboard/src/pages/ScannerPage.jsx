@@ -11,10 +11,29 @@ export default function ScannerPage({ data }) {
   const runScanner = async () => {
     setScanStatus('running')
     try {
-      const resp = await fetch('/api/run-overnight-scanner', { method: 'POST' })
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`)
-      const result = await resp.json()
-      setScanStatus(result.success ? 'done' : 'error')
+      // Trigger GitHub Actions workflow_dispatch
+      const resp = await fetch('https://api.github.com/repos/jaswindercc/retail-quant/actions/workflows/overnight-scanner.yml/dispatches', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/vnd.github.v3+json',
+          'Authorization': `token ${localStorage.getItem('gh_pat') || ''}`,
+        },
+        body: JSON.stringify({ ref: 'main' }),
+      })
+      if (resp.status === 204) {
+        setScanStatus('done')
+      } else if (resp.status === 401 || resp.status === 403) {
+        const pat = prompt('Enter GitHub PAT (actions:write scope) to trigger scanner:')
+        if (pat) {
+          localStorage.setItem('gh_pat', pat)
+          setScanStatus(null)
+          runScanner()
+        } else {
+          setScanStatus('error')
+        }
+      } else {
+        setScanStatus('error')
+      }
     } catch {
       setScanStatus('error')
     }
