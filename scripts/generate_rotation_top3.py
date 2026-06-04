@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """
-Top-3 Pure Momentum Rotation — S&P 500 Universe
+Top-10 Pure Momentum Rotation - S&P 500 Universe
 
 Truthful backtest:
-- Universe: S&P 500 stocks (current constituents — survivorship bias noted)
+- Universe: S&P 500 stocks (current constituents - survivorship bias noted)
 - Every Monday: rank ALL stocks by 3-month return
-- Buy top 3 at Monday close (no entry filter — just buy)
-- Hold until they drop out of top 3 at next rotation
-- Position size: $40K / 3 = ~$13,333 per slot (equal weight)
-- Stop loss: 10% from entry (hard stop, checked daily)
+- Buy top 10 at Monday close (no entry filter - just buy)
+- Hold until they drop out of top 10 at next rotation
+- Position size: capital / 10 per slot (equal weight, compounding)
+- Stop loss: 3% from entry (tight stop - momentum stocks shouldn't dip this much)
+- Gap-down realism: if open < stop, exit at open (not stop level)
 - Record ACTUAL top 10 each week for evidence
 
 This is an honest test of: "what if I just bought the hottest stocks every week?"
@@ -25,8 +26,8 @@ import yfinance as yf
 
 # ── PARAMETERS ───────────────────────────────────────────────────────────────────
 CAPITAL = 40000.0
-MAX_POSITIONS = 3
-STOP_LOSS_PCT = 0.10  # 10% hard stop
+MAX_POSITIONS = 10
+STOP_LOSS_PCT = 0.03  # 3% tight stop — momentum stocks shouldn't dip this much
 LOOKBACK_DAYS = 63    # 3-month momentum (63 trading days)
 HOLD_MIN_WEEKS = 1    # minimum hold period
 
@@ -204,7 +205,7 @@ def simulate(stock_data, lookback_days):
         week_key = date.isocalendar()[:2]
         is_rotation_day = (week_key != last_rotation_week and date.weekday() == 0)
         
-        # ── Daily: check stop losses ──
+        # ── Daily: check stop losses (gap-down realistic) ──
         closed_today = []
         for ticker, pos in list(open_positions.items()):
             if ticker not in stock_data or date not in stock_data[ticker].index:
@@ -213,9 +214,17 @@ def simulate(stock_data, lookback_days):
             if pd.isna(row['Close']):
                 continue
             
-            # Hard stop loss
+            # Hard stop loss — realistic: if open gaps below stop, exit at open (slippage)
             if row['Low'] <= pos['stop_price']:
-                exit_price = pos['stop_price']
+                # Gap-down realism: if open is already below stop, we get filled at open
+                open_price = float(row['Open']) if not pd.isna(row['Open']) else pos['stop_price']
+                if open_price <= pos['stop_price']:
+                    exit_price = open_price  # gapped through stop — realistic fill
+                    reason = 'Stop (Gap)'
+                else:
+                    exit_price = pos['stop_price']  # intraday hit — filled at stop
+                    reason = 'Stop Loss'
+                
                 pnl = (exit_price - pos['entry_price']) * pos['shares']
                 trades.append({
                     'stock': ticker,
@@ -225,7 +234,7 @@ def simulate(stock_data, lookback_days):
                     'exitPrice': round(exit_price, 2),
                     'pnlDollar': round(pnl, 2),
                     'pnlPct': round((exit_price / pos['entry_price'] - 1) * 100, 2),
-                    'exitReason': 'Stop Loss',
+                    'exitReason': reason,
                     'durationDays': (date - pos['entry_date']).days,
                     'rank_at_entry': pos['rank'],
                 })
@@ -242,7 +251,7 @@ def simulate(stock_data, lookback_days):
             # Rank all stocks
             ranking = rank_by_momentum(stock_data, date, lookback_days)
             top_10 = ranking[:10]
-            top_3_tickers = [s['ticker'] for s in ranking[:MAX_POSITIONS]]
+            top_n_tickers = [s['ticker'] for s in ranking[:MAX_POSITIONS]]
             
             # Log this week's top 10 (evidence)
             weekly_log.append({
@@ -250,10 +259,10 @@ def simulate(stock_data, lookback_days):
                 'top_10': [{'ticker': s['ticker'], 'return_pct': s['return_pct'], 'price': s['price']} for s in top_10],
             })
             
-            # Sell positions that dropped out of top 3
+            # Sell positions that dropped out of top N
             sell_list = []
             for ticker, pos in open_positions.items():
-                if ticker not in top_3_tickers:
+                if ticker not in top_n_tickers:
                     if ticker in stock_data and date in stock_data[ticker].index:
                         exit_price = stock_data[ticker].loc[date]['Close']
                         if pd.isna(exit_price):
@@ -277,9 +286,9 @@ def simulate(stock_data, lookback_days):
             for t in sell_list:
                 del open_positions[t]
             
-            # Buy new positions to fill top 3
+            # Buy new positions to fill top N
             position_size = CAPITAL / MAX_POSITIONS
-            for i, ticker in enumerate(top_3_tickers):
+            for i, ticker in enumerate(top_n_tickers):
                 if ticker in open_positions:
                     continue  # already holding
                 if len(open_positions) >= MAX_POSITIONS:
@@ -405,8 +414,8 @@ def compute_stats(trades):
 
 
 def main():
-    print("🔄 Top-3 Pure Momentum Rotation — S&P 500 Universe")
-    print(f"   Capital: ${CAPITAL:,.0f} | Positions: {MAX_POSITIONS} | Stop: {STOP_LOSS_PCT*100:.0f}%")
+    print("🔄 Top-10 Pure Momentum Rotation — S&P 500 Universe")
+    print(f"   Capital: ${CAPITAL:,.0f} | Positions: {MAX_POSITIONS} | Stop: {STOP_LOSS_PCT*100:.0f}% (gap-down realistic)")
     print(f"   Lookback: {LOOKBACK_DAYS} trading days (~3 months)")
     print(f"   Period: {TRADE_START} to {END_DATE}")
     print(f"   Universe: ~{len(SP500)} S&P 500 stocks")
@@ -423,7 +432,7 @@ def main():
     stats = compute_stats(trades)
     
     print(f"\n  {'='*60}")
-    print(f"  📊 RESULTS — Top {MAX_POSITIONS} Rotation (S&P 500)")
+    print(f"  📊 RESULTS — Top {MAX_POSITIONS} Rotation (S&P 500) [3% stop, gap-down realistic]")
     print(f"  {'='*60}")
     print(f"  Trades: {stats.get('closed_trades', 0)} closed")
     print(f"  Win Rate: {stats.get('win_rate', 0)}%")
@@ -462,7 +471,7 @@ def main():
     # Save
     output = {
         'lastUpdated': datetime.now().strftime('%Y-%m-%d %H:%M'),
-        'strategy': 'Top-3 Pure Momentum Rotation',
+        'strategy': 'Top-10 Pure Momentum Rotation',
         'universe': 'S&P 500',
         'universe_size': len(stock_data),
         'params': {

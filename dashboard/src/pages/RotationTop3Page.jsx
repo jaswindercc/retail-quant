@@ -82,10 +82,10 @@ export default function RotationTop3Page() {
   return (
     <div style={{ padding: '2rem', maxWidth: 1100, margin: '0 auto' }}>
       <h1 style={{ fontSize: 22, fontWeight: 800, marginBottom: 4 }}>
-        🔄 Top-3 Pure Momentum Rotation
+        🔄 Top-10 Pure Momentum Rotation
       </h1>
       <p style={{ color: '#71717a', fontSize: 12, marginBottom: 4 }}>
-        Universe: S&P 500 ({data.universe_size} stocks) · Buy top 3 by 3mo return every Monday · Sell when dropped out · 10% hard stop
+        Universe: S&P 500 ({data.universe_size} stocks) &middot; Buy top 10 by 3mo return every Monday &middot; Sell when dropped out &middot; 3% stop (gap-down realistic)
       </p>
       <p style={{ color: '#52525b', fontSize: 11, marginBottom: 20 }}>
         Period: {params.period} · Updated: {data.lastUpdated}
@@ -186,13 +186,13 @@ export default function RotationTop3Page() {
                   <td style={{ padding: '4px 6px', color: '#71717a', fontWeight: 600 }}>{wk.week.slice(5)}</td>
                   {wk.top_10.slice(0, 5).map((s, i) => (
                     <td key={i} style={{ padding: '4px 6px' }}>
-                      <span style={{ color: i < 3 ? '#4ade80' : '#a1a1aa', fontWeight: i < 3 ? 700 : 400 }}>
+                      <span style={{ color: '#4ade80', fontWeight: 700 }}>
                         {s.ticker}
                       </span>
                       <span style={{ color: '#52525b', fontSize: 9, marginLeft: 3 }}>+{s.return_pct.toFixed(0)}%</span>
                     </td>
                   ))}
-                  <td style={{ padding: '4px 6px', color: '#52525b', fontSize: 9 }}>
+                  <td style={{ padding: '4px 6px', color: '#4ade80', fontSize: 9 }}>
                     {wk.top_10.slice(5, 10).map(s => s.ticker).join(', ')}
                   </td>
                 </tr>
@@ -250,15 +250,15 @@ export default function RotationTop3Page() {
       <details style={{ marginTop: 20, color: '#71717a', fontSize: 12 }}>
         <summary style={{ cursor: 'pointer', fontWeight: 600 }}>📖 Methodology & Caveats</summary>
         <div style={{ padding: 12, background: '#0a0a1a', borderRadius: 8, marginTop: 8, lineHeight: 1.8 }}>
-          <p><strong>Strategy:</strong> Every Monday, rank all ~{data.universe_size} S&P 500 stocks by 3-month (63-day) return. Buy top 3. Sell when they drop out of top 3.</p>
-          <p><strong>Position sizing:</strong> Equal weight — capital/3 per slot, compounding (sizes grow with equity)</p>
-          <p><strong>Stop loss:</strong> 10% hard stop from entry, checked daily</p>
+          <p><strong>Strategy:</strong> Every Monday, rank all ~{data.universe_size} S&P 500 stocks by 3-month (63-day) return. Buy top 10. Sell when they drop out of top 10.</p>
+          <p><strong>Position sizing:</strong> Equal weight &mdash; capital/10 per slot, compounding (sizes grow with equity)</p>
+          <p><strong>Stop loss:</strong> 3% from entry &mdash; if stock gaps below stop at open, exit at the open (realistic slippage)</p>
           <p><strong>No entry filter:</strong> No breakout requirement. Just buy at close on rotation day.</p>
-          <p><strong>Exit:</strong> Either dropped out of top 3 at next Monday, or hit 10% stop loss</p>
+          <p><strong>Exit:</strong> Either dropped out of top 10 at next Monday, or hit 3% stop loss</p>
           <p style={{ marginTop: 8, color: '#f59e0b' }}><strong>⚠️ Caveats:</strong></p>
           <ul style={{ paddingLeft: 20 }}>
             <li>Survivorship bias: uses today's S&P 500 list, not historical constituents (~10-15 stocks may have been removed)</li>
-            <li>No slippage or commissions modeled</li>
+            <li>No commissions modeled (slippage on gap-downs IS modeled)</li>
             <li>Assumes you can buy at Monday close (realistic for liquid S&P 500 stocks)</li>
           </ul>
         </div>

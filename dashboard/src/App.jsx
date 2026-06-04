@@ -363,7 +363,7 @@ export default function App() {
             🎯 Live Rotation Scanner
           </NavLink>
           <NavLink to="/rotation-top3" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
-            🔄 Top 3 Rotation (S&P 500)
+            🔄 Top 10 Rotation (S&P 500)
           </NavLink>
           <NavLink to="/rotation-comparison" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
             🔬 Scoring Comparison
