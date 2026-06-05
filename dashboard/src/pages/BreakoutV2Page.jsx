@@ -89,58 +89,58 @@ export default function BreakoutV2Page() {
   })).sort((a, b) => b.pnl - a.pnl)
 
   return (
-    <div className="page-container" style={{ padding: '1.5rem', maxWidth: 1100 }}>
-      <h1 style={{ marginBottom: '0.25rem' }}>🚀 Breakout v2</h1>
-      <p style={{ color: '#71717a', fontSize: 12, marginBottom: '0.5rem' }}>
+    <div className="page-container" style={{ padding: '2rem', maxWidth: 1200 }}>
+      <h1 style={{ marginBottom: '0.5rem', fontSize: '1.8rem' }}>🚀 Breakout v2</h1>
+      <p style={{ color: '#a1a1aa', fontSize: 15, marginBottom: '0.5rem' }}>
         Same base as v1 + quality filters + portfolio management · Compounding with configurable risk
       </p>
-      <p style={{ color: '#52525b', fontSize: 11, marginBottom: '1.5rem' }}>
+      <p style={{ color: '#71717a', fontSize: 13, marginBottom: '1.5rem' }}>
         Based on: Breakout v1 · {allTrades.length} trades · {allTrades.length > 0 ? allTrades[0].entryDate : ''} → {allTrades.length > 0 ? allTrades[allTrades.length-1].exitDate : ''}
       </p>
 
       {/* ═══ V2 ADDITIONS ═══ */}
-      <div style={{ background: '#0a1628', border: '1px solid #60a5fa', borderRadius: 8, padding: '1rem', marginBottom: '1.5rem' }}>
-        <h2 style={{ color: '#60a5fa', fontSize: 13, marginBottom: '0.5rem' }}>What v2 adds on top of v1</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '0.25rem', fontSize: 12, color: '#d4d4d8' }}>
+      <div style={{ background: '#0a1628', border: '1px solid #60a5fa', borderRadius: 10, padding: '1.25rem', marginBottom: '1.5rem' }}>
+        <h2 style={{ color: '#60a5fa', fontSize: 16, marginBottom: '0.75rem' }}>What v2 adds on top of v1</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '0.5rem', fontSize: 14, color: '#e4e4e7', lineHeight: 1.8 }}>
           {v2Additions.map((a, i) => <div key={i}>✅ {a}</div>)}
         </div>
       </div>
 
       {/* ═══ RISK CONFIGURATOR ═══ */}
-      <div style={{ background: '#1e1e2e', border: '1px solid #6366f1', borderRadius: 8, padding: '1rem', marginBottom: '1.5rem' }}>
-        <div style={{ fontSize: 13, color: '#6366f1', fontWeight: 700, marginBottom: '0.75rem' }}>⚙️ Configure Your Risk</div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', fontSize: 13 }}>
+      <div style={{ background: '#1e1e2e', border: '1px solid #6366f1', borderRadius: 10, padding: '1.25rem', marginBottom: '1.5rem' }}>
+        <div style={{ fontSize: 16, color: '#6366f1', fontWeight: 700, marginBottom: '1rem' }}>⚙️ Configure Your Risk</div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem', fontSize: 14 }}>
           <div>
-            <label style={{ color: '#71717a', fontSize: 11, display: 'block', marginBottom: 4 }}>Account Capital ($)</label>
+            <label style={{ color: '#a1a1aa', fontSize: 13, display: 'block', marginBottom: 6 }}>Account Capital ($)</label>
             <input type="number" value={capital} onChange={e => setCapital(Math.max(1000, +e.target.value || 40000))}
-              style={{ background: '#0f0f1a', border: '1px solid #444', borderRadius: 4, padding: '6px 10px', color: '#e4e4e7', width: '100%', fontSize: 14 }} />
+              style={{ background: '#0f0f1a', border: '1px solid #555', borderRadius: 6, padding: '10px 14px', color: '#e4e4e7', width: '100%', fontSize: 16 }} />
           </div>
           <div>
-            <label style={{ color: '#71717a', fontSize: 11, display: 'block', marginBottom: 4 }}>Risk per Trade (%)</label>
-            <div style={{ display: 'flex', gap: 6 }}>
+            <label style={{ color: '#a1a1aa', fontSize: 13, display: 'block', marginBottom: 6 }}>Risk per Trade (%)</label>
+            <div style={{ display: 'flex', gap: 8 }}>
               {[0.5, 1, 1.5, 2, 3].map(pct => (
                 <button key={pct} onClick={() => setRiskPct(pct)}
-                  style={{ padding: '6px 12px', borderRadius: 4, border: riskPct === pct ? '2px solid #4ade80' : '1px solid #444', background: riskPct === pct ? '#0f2a1a' : '#0f0f1a', color: riskPct === pct ? '#4ade80' : '#e4e4e7', fontSize: 13, fontWeight: riskPct === pct ? 700 : 400, cursor: 'pointer' }}>
+                  style={{ padding: '10px 16px', borderRadius: 6, border: riskPct === pct ? '2px solid #4ade80' : '1px solid #555', background: riskPct === pct ? '#0f2a1a' : '#0f0f1a', color: riskPct === pct ? '#4ade80' : '#e4e4e7', fontSize: 15, fontWeight: riskPct === pct ? 700 : 400, cursor: 'pointer' }}>
                   {pct}%
                 </button>
               ))}
             </div>
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div style={{ background: '#0f0f1a', border: '1px solid #444', borderRadius: 4, padding: '6px 12px', textAlign: 'center', width: '100%' }}>
-              <div style={{ color: '#71717a', fontSize: 10 }}>Risk/trade at start</div>
-              <div style={{ color: '#4ade80', fontSize: 20, fontWeight: 800 }}>${(capital * riskPct / 100).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
+            <div style={{ background: '#0f0f1a', border: '1px solid #555', borderRadius: 6, padding: '10px 16px', textAlign: 'center', width: '100%' }}>
+              <div style={{ color: '#a1a1aa', fontSize: 12 }}>Risk/trade at start</div>
+              <div style={{ color: '#4ade80', fontSize: 24, fontWeight: 800 }}>${(capital * riskPct / 100).toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
             </div>
           </div>
         </div>
-        <div style={{ marginTop: 8, fontSize: 11, color: '#71717a' }}>
+        <div style={{ marginTop: 12, fontSize: 13, color: '#a1a1aa' }}>
           💡 Risk compounds with your capital. After a loss, your next trade risks less $ (capital shrinks). After wins, you size up naturally.
         </div>
       </div>
 
       {/* ═══ PERFORMANCE STATS ═══ */}
       {strat && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '0.75rem', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
           <Stat label="Final Capital" value={`$${strat.finalCapital.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`${strat.totalPnl >= 0 ? '+' : ''}${(strat.totalPnl / capital * 100).toFixed(0)}%`} color="#4ade80" />
           <Stat label="Total P/L" value={`$${strat.totalPnl >= 0 ? '+' : ''}${strat.totalPnl.toLocaleString(undefined, {maximumFractionDigits: 0})}`} color={strat.totalPnl >= 0 ? '#4ade80' : '#f87171'} />
           <Stat label="Profit Factor" value={strat.pf.toFixed(2)} color={strat.pf >= 1.5 ? '#4ade80' : '#fbbf24'} />
@@ -154,33 +154,33 @@ export default function BreakoutV2Page() {
 
       {/* ═══ EQUITY CURVE ═══ */}
       {strat && strat.equityCurve.length > 1 && (
-        <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 8, padding: '1rem', marginBottom: '1.5rem' }}>
-          <h2 style={{ color: '#a1a1aa', fontSize: 13, marginBottom: '0.75rem' }}>📈 Equity Curve (compounding at {riskPct}% risk)</h2>
-          <div style={{ height: 200, position: 'relative' }}>
+        <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 10, padding: '1.25rem', marginBottom: '1.5rem' }}>
+          <h2 style={{ color: '#e4e4e7', fontSize: 16, marginBottom: '1rem' }}>📈 Equity Curve (compounding at {riskPct}% risk)</h2>
+          <div style={{ height: 220, position: 'relative' }}>
             <EquityMini data={strat.equityCurve} startCapital={capital} />
           </div>
         </div>
       )}
 
       {/* ═══ PER-STOCK BREAKDOWN ═══ */}
-      <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 8, padding: '1rem', marginBottom: '1.5rem' }}>
-        <h2 style={{ color: '#a1a1aa', fontSize: 13, marginBottom: '0.75rem' }}>📊 Per-Stock Breakdown</h2>
-        <table style={{ width: '100%', fontSize: 12, borderCollapse: 'collapse' }}>
+      <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 10, padding: '1.25rem', marginBottom: '1.5rem' }}>
+        <h2 style={{ color: '#e4e4e7', fontSize: 16, marginBottom: '1rem' }}>📊 Per-Stock Breakdown</h2>
+        <table style={{ width: '100%', fontSize: 14, borderCollapse: 'collapse' }}>
           <thead>
-            <tr style={{ color: '#71717a', borderBottom: '1px solid #333' }}>
-              <th style={{ textAlign: 'left', padding: '4px 8px' }}>Stock</th>
-              <th style={{ textAlign: 'right', padding: '4px 8px' }}>Trades</th>
-              <th style={{ textAlign: 'right', padding: '4px 8px' }}>Win Rate</th>
-              <th style={{ textAlign: 'right', padding: '4px 8px' }}>P/L</th>
+            <tr style={{ color: '#a1a1aa', borderBottom: '1px solid #444' }}>
+              <th style={{ textAlign: 'left', padding: '8px 10px' }}>Stock</th>
+              <th style={{ textAlign: 'right', padding: '8px 10px' }}>Trades</th>
+              <th style={{ textAlign: 'right', padding: '8px 10px' }}>Win Rate</th>
+              <th style={{ textAlign: 'right', padding: '8px 10px' }}>P/L</th>
             </tr>
           </thead>
           <tbody>
             {stockRows.map(s => (
-              <tr key={s.symbol} style={{ borderBottom: '1px solid #1a1a2e' }}>
-                <td style={{ padding: '5px 8px', color: '#60a5fa', fontWeight: 600 }}>{s.symbol}</td>
-                <td style={{ padding: '5px 8px', textAlign: 'right' }}>{s.trades}</td>
-                <td style={{ padding: '5px 8px', textAlign: 'right' }}>{s.wr}%</td>
-                <td style={{ padding: '5px 8px', textAlign: 'right', color: s.pnl >= 0 ? '#4ade80' : '#f87171', fontWeight: 700 }}>
+              <tr key={s.symbol} style={{ borderBottom: '1px solid #2a2a3e' }}>
+                <td style={{ padding: '8px 10px', color: '#60a5fa', fontWeight: 700, fontSize: 15 }}>{s.symbol}</td>
+                <td style={{ padding: '8px 10px', textAlign: 'right', color: '#e4e4e7' }}>{s.trades}</td>
+                <td style={{ padding: '8px 10px', textAlign: 'right', color: '#e4e4e7' }}>{s.wr}%</td>
+                <td style={{ padding: '8px 10px', textAlign: 'right', color: s.pnl >= 0 ? '#4ade80' : '#f87171', fontWeight: 700, fontSize: 15 }}>
                   {s.pnl >= 0 ? '+' : ''}${Math.round(s.pnl).toLocaleString()}
                 </td>
               </tr>
@@ -192,12 +192,12 @@ export default function BreakoutV2Page() {
       {/* ═══ RULES ═══ */}
       <div style={{ marginBottom: '1.5rem' }}>
         <button onClick={() => setShowRules(!showRules)}
-          style={{ background: '#0f2a1a', border: '1px solid #4ade80', borderRadius: 6, padding: '8px 16px', color: '#4ade80', fontSize: 12, fontWeight: 600, cursor: 'pointer', width: '100%', textAlign: 'left' }}>
+          style={{ background: '#0f2a1a', border: '1px solid #4ade80', borderRadius: 8, padding: '12px 20px', color: '#4ade80', fontSize: 14, fontWeight: 600, cursor: 'pointer', width: '100%', textAlign: 'left' }}>
           {showRules ? '▼' : '▶'} Full Rules
         </button>
         {showRules && (
-          <div style={{ background: '#0f2a1a', border: '1px solid #4ade80', borderRadius: 8, padding: '1.25rem', marginTop: '0.75rem' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', fontSize: 12, lineHeight: 1.9, color: '#d4d4d8' }}>
+          <div style={{ background: '#0f2a1a', border: '1px solid #4ade80', borderRadius: 10, padding: '1.5rem', marginTop: '0.75rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: 14, lineHeight: 2.2, color: '#e4e4e7' }}>
               <div>
                 <div><strong style={{ color: '#4ade80' }}>Entry:</strong> Close &gt; 20d Donchian high</div>
                 <div><strong style={{ color: '#4ade80' }}>Trend:</strong> Price &gt; SMA50</div>
@@ -221,22 +221,22 @@ export default function BreakoutV2Page() {
       {/* ═══ TRADE LOG ═══ */}
       <div style={{ marginBottom: '1.5rem' }}>
         <button onClick={() => setShowTrades(!showTrades)}
-          style={{ background: '#1e1e2e', border: '1px solid #6366f1', borderRadius: 6, padding: '8px 16px', color: '#6366f1', fontSize: 12, fontWeight: 600, cursor: 'pointer', width: '100%', textAlign: 'left' }}>
+          style={{ background: '#1e1e2e', border: '1px solid #6366f1', borderRadius: 8, padding: '12px 20px', color: '#6366f1', fontSize: 14, fontWeight: 600, cursor: 'pointer', width: '100%', textAlign: 'left' }}>
           {showTrades ? '▼' : '▶'} All Trades ({strat?.taken.length || 0} taken, {strat?.skipped.length || 0} skipped)
         </button>
         {showTrades && strat && (
           <div style={{ marginTop: '0.75rem', overflowX: 'auto' }}>
-            <table style={{ width: '100%', fontSize: 11, borderCollapse: 'collapse' }}>
+            <table style={{ width: '100%', fontSize: 13, borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ color: '#71717a', borderBottom: '1px solid #333' }}>
-                  <th style={{ textAlign: 'left', padding: '4px 6px' }}>Stock</th>
-                  <th style={{ textAlign: 'left', padding: '4px 6px' }}>Entry</th>
-                  <th style={{ textAlign: 'left', padding: '4px 6px' }}>Exit</th>
-                  <th style={{ textAlign: 'right', padding: '4px 6px' }}>R</th>
-                  <th style={{ textAlign: 'right', padding: '4px 6px' }}>P/L</th>
-                  <th style={{ textAlign: 'right', padding: '4px 6px' }}>Capital</th>
-                  <th style={{ textAlign: 'left', padding: '4px 6px' }}>Reason</th>
-                  <th style={{ textAlign: 'center', padding: '4px 6px' }}>Status</th>
+                <tr style={{ color: '#a1a1aa', borderBottom: '1px solid #444' }}>
+                  <th style={{ textAlign: 'left', padding: '6px 8px' }}>Stock</th>
+                  <th style={{ textAlign: 'left', padding: '6px 8px' }}>Entry</th>
+                  <th style={{ textAlign: 'left', padding: '6px 8px' }}>Exit</th>
+                  <th style={{ textAlign: 'right', padding: '6px 8px' }}>R</th>
+                  <th style={{ textAlign: 'right', padding: '6px 8px' }}>P/L</th>
+                  <th style={{ textAlign: 'right', padding: '6px 8px' }}>Capital</th>
+                  <th style={{ textAlign: 'left', padding: '6px 8px' }}>Reason</th>
+                  <th style={{ textAlign: 'center', padding: '6px 8px' }}>Status</th>
                 </tr>
               </thead>
               <tbody>
@@ -244,17 +244,17 @@ export default function BreakoutV2Page() {
                   const win = t.pnlScaled > 0
                   const isSkipped = t.status === 'skipped'
                   return (
-                    <tr key={i} style={{ borderBottom: '1px solid #1a1a2e', opacity: isSkipped ? 0.5 : 1, background: isSkipped ? '#1f0a0a' : win ? '#0a1f14' : 'transparent' }}>
-                      <td style={{ padding: '4px 6px', color: '#60a5fa', fontWeight: 600 }}>{t.stock}</td>
-                      <td style={{ padding: '4px 6px', color: '#a1a1aa' }}>{t.entryDate}</td>
-                      <td style={{ padding: '4px 6px', color: '#a1a1aa' }}>{t.exitDate}</td>
-                      <td style={{ padding: '4px 6px', textAlign: 'right', color: win ? '#4ade80' : '#f87171', fontWeight: 700 }}>{t.pnlR > 0 ? '+' : ''}{t.pnlR.toFixed(1)}R</td>
-                      <td style={{ padding: '4px 6px', textAlign: 'right', color: win ? '#4ade80' : '#f87171', fontWeight: 700 }}>
+                    <tr key={i} style={{ borderBottom: '1px solid #2a2a3e', opacity: isSkipped ? 0.5 : 1, background: isSkipped ? '#1f0a0a' : win ? '#0a1f14' : 'transparent' }}>
+                      <td style={{ padding: '6px 8px', color: '#60a5fa', fontWeight: 600 }}>{t.stock}</td>
+                      <td style={{ padding: '6px 8px', color: '#d4d4d8' }}>{t.entryDate}</td>
+                      <td style={{ padding: '6px 8px', color: '#d4d4d8' }}>{t.exitDate}</td>
+                      <td style={{ padding: '6px 8px', textAlign: 'right', color: win ? '#4ade80' : '#f87171', fontWeight: 700 }}>{t.pnlR > 0 ? '+' : ''}{t.pnlR.toFixed(1)}R</td>
+                      <td style={{ padding: '6px 8px', textAlign: 'right', color: win ? '#4ade80' : '#f87171', fontWeight: 700 }}>
                         {isSkipped ? '—' : `${t.pnlScaled >= 0 ? '+' : ''}$${Math.round(t.pnlScaled).toLocaleString()}`}
                       </td>
-                      <td style={{ padding: '4px 6px', textAlign: 'right', color: '#71717a', fontSize: 10 }}>${Math.round(t.capitalAtEntry).toLocaleString()}</td>
-                      <td style={{ padding: '4px 6px', color: '#71717a', fontSize: 10 }}>{t.exitReason}</td>
-                      <td style={{ padding: '4px 6px', textAlign: 'center', fontSize: 10 }}>
+                      <td style={{ padding: '6px 8px', textAlign: 'right', color: '#a1a1aa', fontSize: 12 }}>${Math.round(t.capitalAtEntry).toLocaleString()}</td>
+                      <td style={{ padding: '6px 8px', color: '#a1a1aa' }}>{t.exitReason}</td>
+                      <td style={{ padding: '6px 8px', textAlign: 'center' }}>
                         {isSkipped ? <span style={{ color: '#f87171' }}>SKIPPED</span> : <span style={{ color: '#4ade80' }}>✓</span>}
                       </td>
                     </tr>
@@ -271,10 +271,10 @@ export default function BreakoutV2Page() {
 
 function Stat({ label, value, sub, color }) {
   return (
-    <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 6, padding: '0.6rem', textAlign: 'center' }}>
-      <div style={{ color: '#71717a', fontSize: 10 }}>{label}</div>
-      <div style={{ color: color || '#e4e4e7', fontSize: 20, fontWeight: 800 }}>{value}</div>
-      {sub && <div style={{ color: '#52525b', fontSize: 10 }}>{sub}</div>}
+    <div style={{ background: '#1e1e2e', border: '1px solid #444', borderRadius: 8, padding: '1rem', textAlign: 'center' }}>
+      <div style={{ color: '#a1a1aa', fontSize: 12, marginBottom: 4 }}>{label}</div>
+      <div style={{ color: color || '#e4e4e7', fontSize: 22, fontWeight: 800 }}>{value}</div>
+      {sub && <div style={{ color: '#71717a', fontSize: 12, marginTop: 2 }}>{sub}</div>}
     </div>
   )
 }
