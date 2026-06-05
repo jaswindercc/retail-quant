@@ -3,27 +3,35 @@
 
 Base rules (same as v1):
   - Entry: Price closes above 20-day Donchian high + above SMA50 (uptrend filter)
-  - Stop: 1× ATR
+  - Stop: 1x ATR below entry
   - Exit: EMA20 trailing stop starting at 2.5R
   - Long only
 
 V2 additions (layered on top of v1):
-  1. Volume confirmation: breakout bar volume must be > 1.5× 20-day avg volume
-  2. ADX filter: ADX(14) > 20 (must be in a trending environment)
-  3. Skip after 3 consecutive losses per stock (reduce DD streaks)
+  1. Volume confirmation: breakout bar volume > 1.2x 20-day avg
+  2. Strong close: bar closes in upper 60% of range (conviction)
+  3. Next-day confirmation: enter next day only if open >= breakout level
+  4. SPY regime filter: SPY must be > 200 SMA (otherwise 100% cash)
+  5. Max 3 simultaneous positions
+  6. Skip after 3 consecutive portfolio-wide losses
+  7. Compounding-ready: trades store risk (ATR) so frontend can scale
 
-Goal: Beat v1 on drawdown and return by filtering out low-quality breakouts.
+Static universe: stocks from data/ folder (no rotation bias).
+Frontend handles compounding math with configurable risk %.
 """
 import pandas as pd, numpy as np, json
 from pathlib import Path
 
-DATA_DIR = Path("/workspaces/jas/data")
-OUT = Path("/workspaces/jas/dashboard/public/breakout_v2_data.json")
-RISK = 100.0
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+OUT = Path(__file__).resolve().parent.parent / "dashboard" / "public" / "breakout_v2_data.json"
 
-# ── V2 parameters ──
-VOL_MULT = 1.2        # Volume must be > this × 20-day avg (gentler than 1.5)
-SKIP_AFTER_LOSSES = 3 # Skip next entry after N consecutive losses
+VOL_MULT = 1.2
+SKIP_AFTER_LOSSES = 3
+MAX_POSITIONS = 3
+SL_ATR = 1.0
+TRAIL_START_R = 2.5
+TRAIL_ATR_BUF = 1.0
+EXCLUDE = {'BND', 'IEF', 'TLT', 'USTTENT', 'VIX'}
 
 
 def load(fp):
@@ -38,222 +46,287 @@ def load(fp):
 def add_indicators(df):
     df = df.copy()
     df['sma50'] = df['Close'].rolling(50).mean()
+    df['sma200'] = df['Close'].rolling(200).mean()
     df['donchian_high'] = df['High'].rolling(20).max().shift(1)
     tr = np.maximum(df['High'] - df['Low'],
                     np.maximum(abs(df['High'] - df['Close'].shift(1)),
                                abs(df['Low'] - df['Close'].shift(1))))
     df['atr'] = tr.rolling(14).mean()
-    df['ema_trail'] = df['Close'].ewm(span=20, adjust=False).mean()
+    df['ema20'] = df['Close'].ewm(span=20, adjust=False).mean()
     df['vol_avg'] = df['Volume'].rolling(20).mean()
-    df['fSma'] = df['donchian_high']
-    df['sSma'] = df['sma50']
     return df
 
 
-def backtest_breakout_v2(df, name, portfolio_state):
-    """Breakout v2: same as v1 + volume confirmation + strong close + portfolio skip.
+def load_spy_regime():
+    spy_file = DATA_DIR / "spy_data.csv"
+    if not spy_file.exists():
+        print("  Warning: No spy_data.csv - skipping regime filter")
+        return None
+    spy = load(spy_file)
+    spy = add_indicators(spy)
+    bull_mask = spy['Close'] > spy['sma200']
+    bull_dates = set(spy.loc[bull_mask, 'Date'].dt.strftime('%Y-%m-%d'))
+    total = len(spy.dropna(subset=['sma200']))
+    print(f"  SPY regime: {len(bull_dates)}/{total} bull days ({100*len(bull_dates)/max(total,1):.0f}%)")
+    return bull_dates
 
-    Uses a 'pending signal' approach: when breakout conditions are met,
-    we don't enter immediately. We enter NEXT day only if price opens
-    above the breakout level (confirmation the breakout held overnight).
-    """
-    SL_ATR = 1.0
-    TRAIL_ATR_BUF = 1.0
-    TRAIL_START_R = 2.5
 
-    df = add_indicators(df)
+def run_backtest(stock_dfs, bull_dates):
+    indexed = {}
+    all_dates = set()
+    for name, df in stock_dfs.items():
+        df = add_indicators(df)
+        df['date_str'] = df['Date'].dt.strftime('%Y-%m-%d')
+        indexed[name] = df.set_index('date_str')
+        all_dates.update(df['date_str'].tolist())
+
+    all_dates = sorted(all_dates)
     trades = []
-    pos = 0
-    ep = er = tsl = initial_sl = 0.0
-    last_breakout_high = 0.0
-    skipped = 0
-    pending_signal = None  # Store signal for next-day confirmation
+    open_positions = []
+    pending_signals = {}
+    consecutive_losses = 0
+    total_skipped = 0
+    last_breakout_high = {}
 
-    for i in range(1, len(df)):
-        r = df.iloc[i]
-        prev = df.iloc[i - 1]
-        atr = r['atr']
-
-        if pd.isna(atr) or atr <= 0 or pd.isna(r['sma50']) or pd.isna(r['donchian_high']):
-            pending_signal = None
+    for date_str in all_dates:
+        # Regime check
+        if bull_dates is not None and date_str not in bull_dates:
+            pending_signals = {}
             continue
 
-        # ── In a trade: check stop / trail ──
-        if pos == 1:
-            hit_sl = False
-            xp = 0.0
-            reason = ''
+        # Update open positions
+        closed_today = []
+        for pos in open_positions:
+            name = pos['stock']
+            if name not in indexed or date_str not in indexed[name].index:
+                continue
+            row = indexed[name].loc[date_str]
+            if pd.isna(row['Close']):
+                continue
+            atr = row['atr'] if not pd.isna(row['atr']) else pos['entry_atr']
 
-            if r['Low'] <= tsl:
-                xp = min(r['Open'], tsl)
-                hit_sl = True
-                reason = 'Trail' if tsl > initial_sl else 'SL'
-
-            if not hit_sl:
-                curr_r = (r['Close'] - ep) / er if er > 0 else 0
-                if curr_r >= TRAIL_START_R:
-                    ema_trail = r['ema_trail'] - TRAIL_ATR_BUF * atr
-                    if ema_trail > tsl:
-                        tsl = ema_trail
-
-            if hit_sl:
-                t = trades[-1]
-                t['exitDate'] = r['Date'].strftime('%Y-%m-%d')
-                t['exitPrice'] = round(xp, 2)
-                pnl_r = (xp - ep) / er if er > 0 else 0
-                t['pnlR'] = round(pnl_r, 2)
-                t['pnlDollar'] = round(pnl_r * RISK, 2)
-                t['exitReason'] = reason
-                ed = pd.to_datetime(t['entryDate'])
-                t['durationDays'] = int((r['Date'] - ed).days)
-                pos = 0
-
-                # Track portfolio-wide consecutive losses
+            # Check stop hit
+            if row['Low'] <= pos['stop']:
+                exit_price = min(row['Open'], pos['stop'])
+                pnl_r = (exit_price - pos['entry_price']) / pos['risk']
+                reason = 'Trail' if pos['trail_active'] else 'SL'
+                duration = (pd.Timestamp(date_str) - pd.Timestamp(pos['entry_date'])).days
+                trades.append({
+                    'stock': name, 'dir': 'LONG',
+                    'entryDate': pos['entry_date'],
+                    'entryPrice': round(pos['entry_price'], 2),
+                    'sl': round(pos['original_sl'], 2),
+                    'risk': round(pos['risk'], 2),
+                    'qty': 1,
+                    'exitDate': date_str,
+                    'exitPrice': round(exit_price, 2),
+                    'pnlR': round(pnl_r, 2),
+                    'pnlDollar': round(pnl_r * 100, 2),
+                    'exitReason': reason,
+                    'durationDays': duration,
+                })
                 if pnl_r <= 0:
-                    portfolio_state['consecutive_losses'] += 1
+                    consecutive_losses += 1
                 else:
-                    portfolio_state['consecutive_losses'] = 0
-            pending_signal = None
-            continue
-
-        # ── Check if we have a pending signal from yesterday ──
-        if pending_signal is not None:
-            # Next-day confirmation: open must be above the breakout level
-            if r['Open'] >= pending_signal['level']:
-                # Portfolio skip check
-                if portfolio_state['consecutive_losses'] >= SKIP_AFTER_LOSSES:
-                    skipped += 1
-                    portfolio_state['consecutive_losses'] = 0
-                    pending_signal = None
-                    # Fall through to check for new signal today
-                else:
-                    # ENTER using today's open (realistic fill)
-                    entry_price = r['Open']
-                    prev_atr = pending_signal['atr']
-                    sl = entry_price - SL_ATR * prev_atr
-                    rk = entry_price - sl
-                    pos = 1
-                    ep = entry_price
-                    er = rk
-                    tsl = sl
-                    initial_sl = sl
-                    last_breakout_high = pending_signal['dh']
-                    trades.append({
-                        'stock': name, 'dir': 'LONG',
-                        'entryDate': r['Date'].strftime('%Y-%m-%d'),
-                        'entryPrice': round(entry_price, 2),
-                        'sl': round(sl, 2), 'risk': round(rk, 2), 'qty': 1,
-                        'exitDate': '', 'exitPrice': 0, 'pnlR': 0, 'pnlDollar': 0,
-                        'exitReason': '', 'durationDays': 0
-                    })
-                    pending_signal = None
-                    continue
-            # Signal didn't confirm — discard
-            pending_signal = None
-
-        # ── Flat: look for breakout signal ──
-        dh = r['donchian_high']
-
-        # Must be above SMA50 (uptrend) — same as v1
-        if r['Close'] <= r['sma50']:
-            continue
-
-        # Close above 20-day high = breakout — same as v1
-        breakout = r['Close'] > dh
-
-        # Not the same breakout level — same as v1
-        same_level = abs(dh - last_breakout_high) < 0.01
-
-        # Not a crazy gap bar — same as v1
-        small_bar = (r['High'] - r['Low']) <= 2.5 * atr
-
-        # Not too extended from SMA50 — same as v1
-        not_too_far = r['Close'] - r['sma50'] <= 4.0 * atr
-
-        if not (breakout and not same_level and small_bar and not_too_far):
-            continue
-
-        # ── V2 ADDITIONS ──
-
-        # 1. Volume confirmation: must be above average
-        vol_ok = (not pd.isna(r['vol_avg']) and r['vol_avg'] > 0 and
-                  r['Volume'] > VOL_MULT * r['vol_avg'])
-        if not vol_ok:
-            continue
-
-        # 2. Strong close: bar must close in upper 60% of its range (conviction)
-        bar_range = r['High'] - r['Low']
-        if bar_range > 0:
-            close_position = (r['Close'] - r['Low']) / bar_range
-            if close_position < 0.4:  # close in bottom 40% = weak breakout
+                    consecutive_losses = 0
+                closed_today.append(pos)
                 continue
 
-        # 3. Set pending signal — enter NEXT day if it confirms
-        pending_signal = {
-            'level': dh,  # breakout must hold this level on next open
-            'atr': atr,
-            'dh': dh,
-        }
+            # Update trail
+            curr_r = (row['Close'] - pos['entry_price']) / pos['risk']
+            if curr_r >= TRAIL_START_R:
+                pos['trail_active'] = True
+            if pos['trail_active'] and not pd.isna(row['ema20']):
+                new_trail = row['ema20'] - TRAIL_ATR_BUF * atr
+                if new_trail > pos['stop']:
+                    pos['stop'] = new_trail
 
-    # Close open trade at end
-    if pos != 0 and trades:
-        t = trades[-1]
-        l = df.iloc[-1]
-        t['exitDate'] = l['Date'].strftime('%Y-%m-%d')
-        t['exitPrice'] = round(l['Close'], 2)
-        pnl_r = (l['Close'] - ep) / er if er > 0 else 0
-        t['pnlR'] = round(pnl_r, 2)
-        t['pnlDollar'] = round(pnl_r * RISK, 2)
-        t['exitReason'] = 'Open'
-        ed = pd.to_datetime(t['entryDate'])
-        t['durationDays'] = int((l['Date'] - ed).days)
+        for p in closed_today:
+            open_positions.remove(p)
 
-    # Price series for chart
-    prices = []
-    for _, row in df.iterrows():
-        if pd.notna(row['donchian_high']) and pd.notna(row['sma50']):
-            prices.append({
-                'date': row['Date'].strftime('%Y-%m-%d'),
-                'close': round(row['Close'], 2),
-                'fSma': round(row['donchian_high'], 2),
-                'sSma': round(row['sma50'], 2)
+        # Process pending signals (next-day confirmation)
+        confirmed = []
+        for name, sig in list(pending_signals.items()):
+            if name not in indexed or date_str not in indexed[name].index:
+                continue
+            row = indexed[name].loc[date_str]
+            if pd.isna(row['Open']):
+                continue
+            if row['Open'] >= sig['level']:
+                confirmed.append((name, sig, row))
+        pending_signals = {}
+
+        # Enter confirmed (respect max positions + skip rule)
+        for name, sig, row in confirmed:
+            if len(open_positions) >= MAX_POSITIONS:
+                break
+            if any(p['stock'] == name for p in open_positions):
+                continue
+            if consecutive_losses >= SKIP_AFTER_LOSSES:
+                total_skipped += 1
+                consecutive_losses = 0
+                continue
+
+            entry_price = row['Open']
+            risk = sig['atr'] * SL_ATR
+            sl = entry_price - risk
+            open_positions.append({
+                'stock': name,
+                'entry_price': entry_price,
+                'entry_date': date_str,
+                'original_sl': sl,
+                'stop': sl,
+                'risk': risk,
+                'entry_atr': sig['atr'],
+                'trail_active': False,
             })
-    return trades, prices, skipped
+            last_breakout_high[name] = sig['dh']
+
+        # Scan for new breakout signals
+        if len(open_positions) < MAX_POSITIONS:
+            for name, df in indexed.items():
+                if date_str not in df.index:
+                    continue
+                row = df.loc[date_str]
+                if pd.isna(row['atr']) or row['atr'] <= 0:
+                    continue
+                if pd.isna(row['sma50']) or pd.isna(row['donchian_high']):
+                    continue
+
+                atr = row['atr']
+                dh = row['donchian_high']
+
+                # Base v1 rules
+                if row['Close'] <= row['sma50']:
+                    continue
+                if row['Close'] <= dh:
+                    continue
+                if name in last_breakout_high and abs(dh - last_breakout_high[name]) < 0.01:
+                    continue
+                if (row['High'] - row['Low']) > 2.5 * atr:
+                    continue
+                if row['Close'] - row['sma50'] > 4.0 * atr:
+                    continue
+                if any(p['stock'] == name for p in open_positions):
+                    continue
+                if name in pending_signals:
+                    continue
+
+                # V2 filters
+                if pd.isna(row['vol_avg']) or row['vol_avg'] <= 0:
+                    continue
+                if row['Volume'] <= VOL_MULT * row['vol_avg']:
+                    continue
+                bar_range = row['High'] - row['Low']
+                if bar_range > 0:
+                    close_pos = (row['Close'] - row['Low']) / bar_range
+                    if close_pos < 0.4:
+                        continue
+
+                pending_signals[name] = {'level': dh, 'atr': atr, 'dh': dh}
+
+    # Close remaining open positions
+    for pos in open_positions:
+        name = pos['stock']
+        df = indexed[name]
+        last_date = df.index[-1]
+        last_row = df.iloc[-1]
+        pnl_r = (last_row['Close'] - pos['entry_price']) / pos['risk']
+        duration = (pd.Timestamp(last_date) - pd.Timestamp(pos['entry_date'])).days
+        trades.append({
+            'stock': name, 'dir': 'LONG',
+            'entryDate': pos['entry_date'],
+            'entryPrice': round(pos['entry_price'], 2),
+            'sl': round(pos['original_sl'], 2),
+            'risk': round(pos['risk'], 2),
+            'qty': 1,
+            'exitDate': last_date,
+            'exitPrice': round(last_row['Close'], 2),
+            'pnlR': round(pnl_r, 2),
+            'pnlDollar': round(pnl_r * 100, 2),
+            'exitReason': 'Open',
+            'durationDays': duration,
+        })
+
+    trades.sort(key=lambda t: t['entryDate'])
+
+    # Per-stock price series
+    stock_prices = {}
+    for name, df in indexed.items():
+        prices = []
+        for d, row in df.iterrows():
+            if pd.notna(row.get('donchian_high')) and pd.notna(row.get('sma50')):
+                prices.append({'date': d, 'close': round(row['Close'], 2),
+                               'fSma': round(row['donchian_high'], 2),
+                               'sSma': round(row['sma50'], 2)})
+        stock_prices[name] = prices
+
+    return trades, stock_prices, total_skipped
 
 
-# ── Exclude non-equity tickers ──
-EXCLUDE = {'BND', 'IEF', 'TLT', 'USTTENT', 'VIX'}
+# ── MAIN ──
+print("Breakout v2 - Portfolio backtest")
+print("=" * 60)
 
-all_data = {'stocks': {}, 'allTrades': [], 'settings': {
-    'channel': 'Donchian 20', 'trendMA': 'SMA 50',
-    'slAtrMult': 1.0,
-    'trailEmaLen': 20, 'trailAtrBuf': 1.0, 'trailStartR': 2.5,
-    'riskPerTrade': 100,
-    'strategy': 'Breakout v2',
-    'v2_additions': [
-        f'Volume > {VOL_MULT}× 20-day avg on breakout bar',
-        'Close in upper 60% of bar range (strong close / conviction)',
-        f'Skip entry after {SKIP_AFTER_LOSSES} consecutive losses per stock',
-        'Excluded: bonds & VIX (BND, IEF, TLT, USTTENT, VIX)',
-    ]
-}}
+bull_dates = load_spy_regime()
 
-total_skipped = 0
-portfolio_state = {'consecutive_losses': 0}
-
+stock_dfs = {}
 for f in sorted(DATA_DIR.glob("*.csv")):
     name = f.stem.replace("_daily_data - Sheet1", "").replace("_data", "").upper()
-    # Skip non-equity instruments
     if any(ex in name for ex in EXCLUDE):
         continue
-    trades, prices, skipped = backtest_breakout_v2(load(f), name, portfolio_state)
-    all_data['stocks'][name] = {'trades': trades, 'prices': prices}
-    all_data['allTrades'].extend(trades)
-    total_skipped += skipped
-    print(f"{name}: {len(trades)} trades, {skipped} skipped, {len(prices)} bars")
+    if name == 'SPY':
+        continue
+    stock_dfs[name] = load(f)
 
-all_data['allTrades'].sort(key=lambda t: t['entryDate'])
+print(f"  Loaded {len(stock_dfs)} stocks: {', '.join(sorted(stock_dfs.keys()))}")
+
+trades, stock_prices, total_skipped = run_backtest(stock_dfs, bull_dates)
+
+per_stock = {}
+for t in trades:
+    per_stock.setdefault(t['stock'], []).append(t)
+
+stocks_out = {}
+for name in stock_dfs:
+    stocks_out[name] = {'trades': per_stock.get(name, []), 'prices': stock_prices.get(name, [])}
+
+all_data = {
+    'stocks': stocks_out,
+    'allTrades': trades,
+    'settings': {
+        'channel': 'Donchian 20', 'trendMA': 'SMA 50',
+        'slAtrMult': SL_ATR, 'trailEmaLen': 20, 'trailAtrBuf': TRAIL_ATR_BUF,
+        'trailStartR': TRAIL_START_R, 'maxPositions': MAX_POSITIONS,
+        'strategy': 'Breakout v2',
+        'v2_additions': [
+            f'Volume > {VOL_MULT}x 20-day avg on breakout bar',
+            'Close in upper 60% of bar range (strong close)',
+            'Next-day confirmation (open >= breakout level)',
+            'SPY > 200 SMA regime filter (cash in bear market)',
+            f'Max {MAX_POSITIONS} simultaneous positions',
+            f'Skip entry after {SKIP_AFTER_LOSSES} consecutive losses',
+            'Compounding: risk % of current capital (configurable)',
+        ],
+    },
+}
+
 OUT.parent.mkdir(parents=True, exist_ok=True)
 OUT.write_text(json.dumps(all_data))
-print(f"\nSkipped {total_skipped} signals (3-loss rule)")
-print(f"Written {OUT} ({OUT.stat().st_size // 1024}KB)")
+
+closed = [t for t in trades if t['exitReason'] != 'Open']
+wins = [t for t in closed if t['pnlR'] > 0]
+losses_list = [t for t in closed if t['pnlR'] <= 0]
+total_pnl = sum(t['pnlDollar'] for t in closed)
+gross_win = sum(t['pnlDollar'] for t in wins)
+gross_loss = abs(sum(t['pnlDollar'] for t in losses_list))
+pf = gross_win / gross_loss if gross_loss > 0 else float('inf')
+
+print(f"\n{'=' * 60}")
+print(f"  Trades: {len(closed)} closed, {len(trades)-len(closed)} open")
+if closed:
+    print(f"  Win Rate: {100*len(wins)/len(closed):.1f}% ({len(wins)}/{len(closed)})")
+    print(f"  P&L: ${total_pnl:.0f} (at $100 base risk)")
+    print(f"  Profit Factor: {pf:.2f}")
+print(f"  Skipped: {total_skipped} (3-loss rule)")
+print(f"  Written: {OUT} ({OUT.stat().st_size // 1024}KB)")
