@@ -349,13 +349,6 @@ export default function App() {
             </NavLink>
           </NavGroup>
 
-          <NavGroup label="Breakouts" icon="🚀" defaultOpen={isBreakoutsRoute}>
-            <NavLink to="/breakout" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
-              📊 Breakout v1
-            </NavLink>
-            <NavLink to="/breakout-v2" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: '#4ade80', fontWeight: 600 })}>
-              🚀 Breakout v2
-            </NavLink>
           </NavGroup>
 
           <NavGroup label="Research" icon="🧪" defaultOpen={isResearchRoute}>
@@ -382,6 +375,15 @@ export default function App() {
           <NavLink to="/master" end className={({isActive}) => `strategy-link ${isActive ? 'active' : ''}`} style={{marginTop:'0.5rem', padding:'0.75rem 1rem', fontSize:'1rem', fontWeight:700, background:'rgba(74,222,128,0.1)', borderRadius:8, border:'1px solid rgba(74,222,128,0.2)'}}>
             🏆 Master Ranking
           </NavLink>
+
+          <NavGroup label="Breakouts" icon="🚀" defaultOpen={isBreakoutsRoute}>
+            <NavLink to="/breakout" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
+              📊 Breakout v1
+            </NavLink>
+            <NavLink to="/breakout-v2" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: '#4ade80', fontWeight: 600 })}>
+              🚀 Breakout v2
+            </NavLink>
+          </NavGroup>
         </div>
       </nav>
       {sidebarOpen && <div className="sidebar-overlay show" onClick={() => setSidebarOpen(false)} />}
