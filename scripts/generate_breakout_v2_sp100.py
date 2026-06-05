@@ -29,7 +29,7 @@ OUT = Path(__file__).resolve().parent.parent / "dashboard" / "public" / "breakou
 # ═══════════════════════════════════════════════════════════════
 
 UNIVERSE = {
-    # ── BULL RUN (strong performers) ──
+    # ── BULL RUN (strong performers) ── [35 stocks, unchanged]
     'bull': [
         'NVDA', 'META', 'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'LLY', 'AVGO',
         'COST', 'GE', 'NFLX', 'CRM', 'AMD', 'NOW', 'UBER', 'PANW',
@@ -37,20 +37,29 @@ UNIVERSE = {
         'CEG', 'TRGP', 'DECK', 'GWW', 'CDNS', 'SNPS', 'LRCX', 'MELI',
         'ISRG', 'MCO', 'ODFL',
     ],
-    # ── SIDEWAYS / MODEST (flat to small gains) ──
+    # ── SIDEWAYS / MODEST (flat to small gains) ── [55 stocks]
     'sideways': [
         'JPM', 'JNJ', 'PG', 'KO', 'PEP', 'UNH', 'MRK', 'ABT', 'TMO',
         'HON', 'UPS', 'RTX', 'CAT', 'DE', 'MMM', 'IBM', 'TXN', 'QCOM',
         'MCD', 'WMT', 'HD', 'LOW', 'TGT', 'CVX', 'XOM', 'COP', 'SLB',
         'ADP', 'ITW', 'EMR', 'GD', 'LMT', 'NOC', 'CME', 'BLK',
+        # Added: more S&P 500 sideways/modest 2021-2026
+        'AMGN', 'GILD', 'BMY', 'MDT', 'CI', 'ELV', 'SYK', 'ZTS',
+        'SPGI', 'ICE', 'CB', 'AON', 'PNC', 'USB', 'SCHW', 'MS',
+        'DUK', 'SO', 'NEE', 'D',
     ],
-    # ── CRASHED / DESTROYED (lost significant value) ──
+    # ── CRASHED / DESTROYED (lost significant value) ── [60 stocks]
     'crashed': [
         'PYPL', 'INTC', 'DIS', 'BA', 'NKE', 'MRNA', 'ENPH', 'SEDG',
         'ALGN', 'MTCH', 'PARA', 'WBD', 'VFC', 'FMC',
         'NCLH', 'AAL', 'ETSY', 'ZM', 'DKNG',
         'COIN', 'CRWD', 'SNOW', 'ABNB', 'DASH', 'TSLA',
         'SMCI', 'NFLX', 'SQ', 'SHOP', 'ROKU',
+        # Added: more S&P 500 crashers/underperformers 2021-2026
+        'LULU', 'DLTR', 'DG', 'WBA', 'CVS', 'PFE', 'BIIB', 'REGN',
+        'ATVI', 'EA', 'TTWO', 'RIVN', 'LCID', 'HOOD', 'SNAP',
+        'PINS', 'SPOT', 'DOCU', 'TEAM', 'OKTA', 'ZS', 'DDOG',
+        'NET', 'MDB', 'BILL', 'TWLO', 'PATH', 'U', 'RBLX', 'CPNG',
     ],
 }
 
