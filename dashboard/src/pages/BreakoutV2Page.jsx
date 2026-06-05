@@ -7,7 +7,7 @@ export default function BreakoutV2Page() {
   const [riskPct, setRiskPct] = useState(1)
 
   useEffect(() => {
-    fetchJson(`${import.meta.env.BASE_URL}breakout_v2_data.json`)
+    fetchJson(`${import.meta.env.BASE_URL}breakout_v2_sp100_data.json`)
       .then(setData).catch(console.error)
   }, [])
 
@@ -16,8 +16,10 @@ export default function BreakoutV2Page() {
   const allTrades = data.allTrades || []
   const settings = data.settings || {}
   const buyHold = data.buyHold || {}
+  const universe = data.universe || {}
+  const categories = universe.categories || {}
 
-  // ── Compounding + Skip after 3L ──
+  // Compounding + Skip after 3L
   function runStrategy(trades, startCapital, riskPctVal) {
     let currentCapital = startCapital
     let peakCapital = startCapital
@@ -65,15 +67,15 @@ export default function BreakoutV2Page() {
   }
 
   const strat = allTrades.length > 0 ? runStrategy(allTrades, capital, riskPct) : null
-
-  // Open positions
   const openPositions = allTrades.filter(t => t.exitReason === 'Open')
+  const riskDollars = capital * riskPct / 100
 
-  // Per-stock breakdown
+  // Per-stock
   const stockMap = {}
   if (strat) {
     for (const t of strat.taken) {
-      if (!stockMap[t.stock]) stockMap[t.stock] = { wins: 0, losses: 0, pnl: 0 }
+      if (!stockMap[t.stock]) stockMap[t.stock] = { wins: 0, losses: 0, pnl: 0, trades: 0 }
+      stockMap[t.stock].trades++
       if (t.pnlScaled > 0) stockMap[t.stock].wins++
       else stockMap[t.stock].losses++
       stockMap[t.stock].pnl += t.pnlScaled
@@ -81,120 +83,91 @@ export default function BreakoutV2Page() {
   }
   const stockRows = Object.entries(stockMap).map(([s, v]) => {
     const bh = buyHold[s] || {}
-    const stratRetPct = capital > 0 ? (v.pnl / capital) * 100 : 0
     return {
-      symbol: s, trades: v.wins + v.losses, wins: v.wins,
-      wr: ((v.wins / (v.wins + v.losses)) * 100).toFixed(0),
-      pnl: v.pnl, stratRetPct: stratRetPct.toFixed(1),
+      symbol: s, trades: v.trades, wins: v.wins,
+      wr: ((v.wins / v.trades) * 100).toFixed(0),
+      pnl: v.pnl,
+      stratRetPct: capital > 0 ? ((v.pnl / capital) * 100).toFixed(1) : '0',
       bhRetPct: bh.returnPct || 0,
+      category: categories[s] || 'unknown',
     }
   }).sort((a, b) => b.pnl - a.pnl)
 
-  const riskDollars = capital * riskPct / 100
+  const catColors = { bull: '#4ade80', sideways: '#fbbf24', crashed: '#f87171' }
+  const catSummary = {}
+  for (const r of stockRows) {
+    if (!catSummary[r.category]) catSummary[r.category] = { trades: 0, wins: 0, pnl: 0, stocks: 0 }
+    catSummary[r.category].trades += r.trades
+    catSummary[r.category].wins += r.wins
+    catSummary[r.category].pnl += r.pnl
+    catSummary[r.category].stocks++
+  }
 
   return (
     <div className="page-container" style={{ padding: '2rem', maxWidth: 1200 }}>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          SECTION 1: EXACTLY WHAT TO DO (TOP)
-      ═══════════════════════════════════════════════════════════════ */}
-      <h1 style={{ marginBottom: '0.75rem', fontSize: '1.8rem' }}>🚀 Breakout v2 — Your Playbook</h1>
+      {/* ═══ HEADER ═══ */}
+      <h1 style={{ marginBottom: '0.5rem', fontSize: '1.8rem' }}>🚀 Breakout v2 — Tested on 100 S&P 500 Stocks</h1>
+      <p style={{ color: '#a1a1aa', fontSize: 15, marginBottom: '1.5rem' }}>
+        {universe.total || 99} stocks · {settings.period} · No cherry-picking · Includes stocks that crashed
+      </p>
 
+      {/* ═══ HONEST ASSESSMENT ═══ */}
+      <div style={{ background: '#1a1a2e', border: '1px solid #a78bfa', borderRadius: 12, padding: '1.5rem', marginBottom: '1.5rem' }}>
+        <h2 style={{ color: '#a78bfa', fontSize: 18, marginBottom: '1rem' }}>🧠 Honest Assessment</h2>
+        <div style={{ fontSize: 14, color: '#e4e4e7', lineHeight: 2.2 }}>
+          <div style={{ marginBottom: '1rem' }}>
+            <strong style={{ color: '#4ade80' }}>What's real:</strong>
+            <div style={{ paddingLeft: '1rem' }}>
+              <div>• PF 2.42 on 99 blind-picked stocks. Not spectacular, but robust.</div>
+              <div>• Avg win $644 vs avg loss $108 — 6:1 payoff ratio. That's why 29% WR still makes money.</div>
+              <div>• Works on ALL categories — even crashed stocks were profitable (strategy avoids them naturally).</div>
+              <div>• The edge isn't stock-picking. It's the system: regime filter + stops + trailing.</div>
+            </div>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <strong style={{ color: '#f87171' }}>What's hard:</strong>
+            <div style={{ paddingLeft: '1rem' }}>
+              <div>• 29% win rate = you lose 7 out of 10 trades. Psychologically brutal. Most people quit.</div>
+              <div>• 15% of trades lose more than 1R due to gap-downs. Budget for occasional 2-3R hits.</div>
+              <div>• The backtest can't simulate your execution — no FOMO, no hesitation after 5 losses.</div>
+              <div>• Max 5 positions from 100 stocks = you'll miss signals. Need a nightly scan + ranking.</div>
+            </div>
+          </div>
+          <div>
+            <strong style={{ color: '#fbbf24' }}>How to start:</strong>
+            <div style={{ paddingLeft: '1rem' }}>
+              <div>• Start at <strong>0.5% risk</strong> until you've taken 20+ trades and verified fills match assumptions.</div>
+              <div>• It's mechanical — use alerts/scanners, don't override the rules.</div>
+              <div>• The 3-loss skip rule keeps you alive. Never bypass it.</div>
+              <div>• You don't need to pick stocks. Just scan S&P 500 nightly for breakout signals.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ═══ THE RULES (simple) ═══ */}
       <div style={{ background: '#0f2a1a', border: '2px solid #4ade80', borderRadius: 12, padding: '1.5rem', marginBottom: '1.5rem' }}>
-        <h2 style={{ color: '#4ade80', fontSize: 20, marginBottom: '1rem' }}>📋 The Strategy in Plain English</h2>
-
-        <div style={{ fontSize: 15, lineHeight: 2.4, color: '#e4e4e7', marginBottom: '1.5rem' }}>
-          <div><strong style={{ color: '#4ade80' }}>What you're doing:</strong> Buying stocks that break to new 20-day highs with momentum behind them.</div>
-          <div style={{ marginTop: '0.5rem', paddingLeft: '1rem', borderLeft: '3px solid #4ade80', color: '#d4d4d8', fontSize: 14, lineHeight: 2 }}>
-            <div><strong>20-day high</strong> = the highest price in the last 20 trading days. When price closes above it, that's a "breakout".</div>
-            <div><strong>SMA50</strong> = average closing price over 50 days. Price must be above this (confirms uptrend).</div>
-            <div><strong>SPY 200 SMA</strong> = S&P 500 average over 200 days. If SPY is below it, the market is bearish → you sit in cash.</div>
-            <div><strong>ATR</strong> = Average True Range (14 days). Measures how much a stock moves daily. Used to set your stop.</div>
-          </div>
+        <h2 style={{ color: '#4ade80', fontSize: 18, marginBottom: '1rem' }}>📋 What to Do — Daily</h2>
+        <div style={{ fontSize: 15, lineHeight: 2.4, color: '#e4e4e7' }}>
+          <div><strong>1.</strong> Is SPY above its 200-day average? <strong style={{ color: '#f87171' }}>No → do nothing.</strong></div>
+          <div><strong>2.</strong> Any stock close above its 20-day high with above-average volume + strong close?</div>
+          <div><strong>3.</strong> Next morning: opens at or above that level? → <strong style={{ color: '#4ade80' }}>BUY</strong></div>
+          <div><strong>4.</strong> Stop = entry − ATR. Shares = ${riskDollars.toLocaleString(undefined, {maximumFractionDigits: 0})} ÷ ATR</div>
+          <div><strong>5.</strong> At +2R → trailing stop kicks in (EMA20 − ATR). Let it ride.</div>
+          <div><strong>6.</strong> Max 5 positions. Lost 3 in a row → skip next signal.</div>
         </div>
 
-        <div style={{ borderTop: '1px solid #2a5e3a', paddingTop: '1.25rem', marginBottom: '1.25rem' }}>
-          <h3 style={{ color: '#fbbf24', fontSize: 16, marginBottom: '0.75rem' }}>📅 Your Daily Checklist</h3>
-          <div style={{ fontSize: 15, lineHeight: 2.4, color: '#e4e4e7' }}>
-            <div><strong>1.</strong> Is SPY above its 200-day average? → <strong>No?</strong> Do nothing today. Close this app.</div>
-            <div><strong>2.</strong> Check: Did any stock close above its 20-day high yesterday?</div>
-            <div style={{ paddingLeft: '2rem', fontSize: 14, color: '#a1a1aa' }}>AND volume was above its 20-day average</div>
-            <div style={{ paddingLeft: '2rem', fontSize: 14, color: '#a1a1aa' }}>AND it closed in the upper 70% of the day's range (strong close, not a wick)</div>
-            <div><strong>3.</strong> Next morning: Does it open at or above yesterday's breakout level?</div>
-            <div style={{ paddingLeft: '2rem', fontSize: 14, color: '#a1a1aa' }}>Yes → <strong>BUY</strong>. No → skip, no chase.</div>
-            <div><strong>4.</strong> Set your stop: <strong>Entry price minus 1x ATR</strong></div>
-            <div><strong>5. </strong> Calculate shares: <span style={{ color: '#4ade80', fontWeight: 700 }}>${riskDollars.toLocaleString(undefined, {maximumFractionDigits: 0})} ÷ ATR = number of shares</span></div>
-            <div><strong>6.</strong> Once profit reaches 2R: trailing stop activates at EMA20 − ATR (only goes up, never down)</div>
-            <div><strong>7.</strong> Max {settings.maxPositions || 5} positions at once. Lost 3 in a row? Skip the next signal.</div>
-          </div>
-        </div>
-
-        <div style={{ borderTop: '1px solid #2a5e3a', paddingTop: '1.25rem' }}>
-          <h3 style={{ color: '#f87171', fontSize: 16, marginBottom: '0.75rem' }}>🚫 Do NOT</h3>
-          <div style={{ fontSize: 15, lineHeight: 2.2, color: '#fca5a5' }}>
-            <div>✗ Trade if SPY is below 200 SMA — doesn't matter how good the setup looks</div>
-            <div>✗ Chase — if it gaps up past your level, you missed it</div>
-            <div>✗ Move your stop down, ever</div>
-            <div>✗ Take profits early — the trailing stop does that job</div>
-            <div>✗ Hold more than {settings.maxPositions || 5} stocks at once</div>
-            <div>✗ Trade after 3 losses in a row — sit out the next one</div>
-            <div>✗ Average down on a losing position</div>
+        <div style={{ borderTop: '1px solid #2a5e3a', marginTop: '1.25rem', paddingTop: '1rem' }}>
+          <h3 style={{ color: '#f87171', fontSize: 15, marginBottom: '0.5rem' }}>🚫 Don't</h3>
+          <div style={{ fontSize: 14, color: '#fca5a5', lineHeight: 2 }}>
+            <span>Chase gaps • Move stops down • Take profits early • Trade in bear market • Hold 6+ positions • Override skip rule</span>
           </div>
         </div>
       </div>
 
-      {/* ═══ GAP RISK WARNING ═══ */}
-      <div style={{ background: '#1f0a0a', border: '1px solid #f87171', borderRadius: 10, padding: '1rem', marginBottom: '1.5rem' }}>
-        <div style={{ fontSize: 14, color: '#fca5a5', lineHeight: 1.8 }}>
-          <strong style={{ color: '#f87171' }}>⚠️ Gap Risk:</strong> If a stock gaps down past your stop (opens below it), you take more than 1R loss.
-          This happened 18 times in 121 trades (15%). Worst case: −2.84R. Average extra slippage: 0.7R.
-          <strong> Budget for occasional 2-3R losses on gaps.</strong> That's why we risk only {riskPct}% per trade.
-        </div>
-      </div>
-
-      {/* ═══ OPEN POSITIONS ═══ */}
-      {openPositions.length > 0 && (
-        <div style={{ background: '#0a1628', border: '2px solid #60a5fa', borderRadius: 12, padding: '1.25rem', marginBottom: '1.5rem' }}>
-          <h2 style={{ color: '#60a5fa', fontSize: 18, marginBottom: '1rem' }}>
-            📍 Currently Open: {openPositions.length} position{openPositions.length > 1 ? 's' : ''}
-          </h2>
-          <table style={{ width: '100%', fontSize: 14, borderCollapse: 'collapse' }}>
-            <thead>
-              <tr style={{ color: '#a1a1aa', borderBottom: '2px solid #444' }}>
-                <th style={{ textAlign: 'left', padding: '8px 10px' }}>Stock</th>
-                <th style={{ textAlign: 'left', padding: '8px 10px' }}>Entry Date</th>
-                <th style={{ textAlign: 'right', padding: '8px 10px' }}>Entry $</th>
-                <th style={{ textAlign: 'right', padding: '8px 10px' }}>Stop $</th>
-                <th style={{ textAlign: 'right', padding: '8px 10px' }}>Risk/share</th>
-                <th style={{ textAlign: 'right', padding: '8px 10px' }}>Current R</th>
-                <th style={{ textAlign: 'center', padding: '8px 10px' }}>Trail Active?</th>
-              </tr>
-            </thead>
-            <tbody>
-              {openPositions.map((t, i) => (
-                <tr key={i} style={{ borderBottom: '1px solid #2a2a3e', background: '#071a0f' }}>
-                  <td style={{ padding: '10px', color: '#60a5fa', fontWeight: 700, fontSize: 16 }}>{t.stock}</td>
-                  <td style={{ padding: '10px', color: '#e4e4e7', fontFamily: 'monospace' }}>{t.entryDate}</td>
-                  <td style={{ padding: '10px', textAlign: 'right', color: '#e4e4e7', fontWeight: 600 }}>${t.entryPrice.toFixed(2)}</td>
-                  <td style={{ padding: '10px', textAlign: 'right', color: '#f87171', fontWeight: 600 }}>${t.sl.toFixed(2)}</td>
-                  <td style={{ padding: '10px', textAlign: 'right', color: '#a1a1aa' }}>${t.risk.toFixed(2)}</td>
-                  <td style={{ padding: '10px', textAlign: 'right', color: '#4ade80', fontWeight: 800, fontSize: 16 }}>+{t.pnlR.toFixed(1)}R</td>
-                  <td style={{ padding: '10px', textAlign: 'center', color: t.pnlR >= 2.0 ? '#4ade80' : '#71717a', fontWeight: 700 }}>
-                    {t.pnlR >= 2.0 ? '✓ YES' : 'Not yet'}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div style={{ marginTop: '0.75rem', fontSize: 13, color: '#a1a1aa' }}>
-            Trail activates at 2R profit. Once active, stop ratchets up to EMA20 − ATR (never goes down). Positions above 2R have trailing stops protecting gains.
-          </div>
-        </div>
-      )}
-
-      {/* ═══ RISK CONFIGURATOR ═══ */}
-      <div style={{ background: '#1e1e2e', border: '1px solid #6366f1', borderRadius: 10, padding: '1.25rem', marginBottom: '1.5rem' }}>
-        <div style={{ fontSize: 16, color: '#6366f1', fontWeight: 700, marginBottom: '1rem' }}>⚙️ Your Capital & Risk</div>
+      {/* ═══ RISK CONFIG ═══ */}
+      <div style={{ background: '#1e1e2e', border: '1px solid #555', borderRadius: 10, padding: '1.25rem', marginBottom: '1.5rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem', fontSize: 14 }}>
           <div>
             <label style={{ color: '#a1a1aa', fontSize: 13, display: 'block', marginBottom: 6 }}>Account Size ($)</label>
@@ -204,7 +177,7 @@ export default function BreakoutV2Page() {
           <div>
             <label style={{ color: '#a1a1aa', fontSize: 13, display: 'block', marginBottom: 6 }}>Risk per Trade</label>
             <div style={{ display: 'flex', gap: 8 }}>
-              {[0.5, 1, 1.5, 2, 3].map(pct => (
+              {[0.5, 1, 1.5, 2].map(pct => (
                 <button key={pct} onClick={() => setRiskPct(pct)}
                   style={{ padding: '10px 16px', borderRadius: 6, border: riskPct === pct ? '2px solid #4ade80' : '1px solid #555', background: riskPct === pct ? '#0f2a1a' : '#0f0f1a', color: riskPct === pct ? '#4ade80' : '#e4e4e7', fontSize: 15, fontWeight: riskPct === pct ? 700 : 400, cursor: 'pointer' }}>
                   {pct}%
@@ -214,17 +187,14 @@ export default function BreakoutV2Page() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ background: '#0f0f1a', border: '1px solid #555', borderRadius: 6, padding: '10px 16px', textAlign: 'center', width: '100%' }}>
-              <div style={{ color: '#a1a1aa', fontSize: 12 }}>You risk per trade</div>
+              <div style={{ color: '#a1a1aa', fontSize: 12 }}>Risk/trade</div>
               <div style={{ color: '#4ade80', fontSize: 24, fontWeight: 800 }}>${riskDollars.toLocaleString(undefined, {maximumFractionDigits: 0})}</div>
             </div>
           </div>
         </div>
-        <div style={{ marginTop: 12, fontSize: 13, color: '#a1a1aa' }}>
-          After wins, capital grows → you risk more $ next time. After losses, capital shrinks → you risk less. Automatic position sizing.
-        </div>
       </div>
 
-      {/* ═══ PERFORMANCE STATS ═══ */}
+      {/* ═══ STATS ═══ */}
       {strat && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
           <Stat label="Final Capital" value={`$${strat.finalCapital.toLocaleString(undefined, {maximumFractionDigits: 0})}`} sub={`${strat.totalPnl >= 0 ? '+' : ''}${(strat.totalPnl / capital * 100).toFixed(0)}%`} color="#4ade80" />
@@ -241,82 +211,119 @@ export default function BreakoutV2Page() {
       {/* ═══ EQUITY CURVE ═══ */}
       {strat && strat.equityCurve.length > 1 && (
         <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 10, padding: '1.25rem', marginBottom: '1.5rem' }}>
-          <h2 style={{ color: '#e4e4e7', fontSize: 16, marginBottom: '1rem' }}>📈 Equity Curve (compounding at {riskPct}% risk)</h2>
+          <h2 style={{ color: '#e4e4e7', fontSize: 16, marginBottom: '1rem' }}>📈 Equity Curve</h2>
           <div style={{ height: 220, position: 'relative' }}>
             <EquityMini data={strat.equityCurve} startCapital={capital} />
           </div>
         </div>
       )}
 
-      {/* ═══ PER-STOCK BREAKDOWN ═══ */}
+      {/* ═══ CATEGORY BREAKDOWN ═══ */}
       <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 10, padding: '1.25rem', marginBottom: '1.5rem' }}>
-        <h2 style={{ color: '#e4e4e7', fontSize: 16, marginBottom: '1rem' }}>📊 Strategy vs Buy & Hold</h2>
-        <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', fontSize: 14, borderCollapse: 'collapse' }}>
-            <thead>
-              <tr style={{ color: '#a1a1aa', borderBottom: '2px solid #444' }}>
-                <th style={{ textAlign: 'left', padding: '10px 12px' }}>Stock</th>
-                <th style={{ textAlign: 'right', padding: '10px 12px' }}>Trades</th>
-                <th style={{ textAlign: 'right', padding: '10px 12px' }}>Win%</th>
-                <th style={{ textAlign: 'right', padding: '10px 12px' }}>Strategy P/L</th>
-                <th style={{ textAlign: 'right', padding: '10px 12px' }}>Strategy %</th>
-                <th style={{ textAlign: 'right', padding: '10px 12px' }}>Buy & Hold %</th>
-                <th style={{ textAlign: 'center', padding: '10px 12px' }}>Alpha</th>
-              </tr>
-            </thead>
-            <tbody>
-              {stockRows.map(s => {
-                const alpha = (parseFloat(s.stratRetPct) - s.bhRetPct).toFixed(1)
-                return (
-                  <tr key={s.symbol} style={{ borderBottom: '1px solid #2a2a3e' }}>
-                    <td style={{ padding: '10px 12px', color: '#60a5fa', fontWeight: 700, fontSize: 15 }}>{s.symbol}</td>
-                    <td style={{ padding: '10px 12px', textAlign: 'right', color: '#e4e4e7' }}>{s.trades}</td>
-                    <td style={{ padding: '10px 12px', textAlign: 'right', color: '#e4e4e7' }}>{s.wr}%</td>
-                    <td style={{ padding: '10px 12px', textAlign: 'right', color: s.pnl >= 0 ? '#4ade80' : '#f87171', fontWeight: 700 }}>
-                      {s.pnl >= 0 ? '+' : ''}${Math.round(s.pnl).toLocaleString()}
-                    </td>
-                    <td style={{ padding: '10px 12px', textAlign: 'right', color: parseFloat(s.stratRetPct) >= 0 ? '#4ade80' : '#f87171', fontWeight: 600 }}>
-                      {parseFloat(s.stratRetPct) > 0 ? '+' : ''}{s.stratRetPct}%
-                    </td>
-                    <td style={{ padding: '10px 12px', textAlign: 'right', color: s.bhRetPct >= 0 ? '#4ade80' : '#f87171', fontWeight: 600 }}>
-                      {s.bhRetPct > 0 ? '+' : ''}{s.bhRetPct}%
-                    </td>
-                    <td style={{ padding: '10px 12px', textAlign: 'center', color: parseFloat(alpha) >= 0 ? '#4ade80' : '#f87171', fontWeight: 700 }}>
-                      {parseFloat(alpha) >= 0 ? '+' : ''}{alpha}%
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
-        <div style={{ marginTop: '1rem', fontSize: 12, color: '#71717a' }}>
-          Period: {allTrades[0]?.entryDate} to {allTrades[allTrades.length-1]?.exitDate}. Strategy % = P/L relative to ${capital.toLocaleString()} starting capital.
+        <h2 style={{ color: '#e4e4e7', fontSize: 16, marginBottom: '1rem' }}>Results by Stock Type</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
+          {['bull', 'sideways', 'crashed'].map(cat => {
+            const s = catSummary[cat] || { trades: 0, wins: 0, pnl: 0, stocks: 0 }
+            const wr = s.trades > 0 ? (s.wins / s.trades * 100).toFixed(0) : 0
+            return (
+              <div key={cat} style={{ background: '#0f0f1a', border: `1px solid ${catColors[cat]}`, borderRadius: 8, padding: '1rem' }}>
+                <div style={{ color: catColors[cat], fontSize: 14, fontWeight: 700, marginBottom: 6 }}>
+                  {cat === 'bull' ? '🐂 Bull' : cat === 'sideways' ? '➡️ Sideways' : '💀 Crashed'}
+                </div>
+                <div style={{ color: '#e4e4e7', fontSize: 20, fontWeight: 800 }}>
+                  {s.pnl >= 0 ? '+' : ''}${Math.round(s.pnl).toLocaleString()}
+                </div>
+                <div style={{ color: '#a1a1aa', fontSize: 12, marginTop: 4 }}>{s.trades} trades · {wr}% WR · {s.stocks} stocks</div>
+              </div>
+            )
+          })}
         </div>
       </div>
 
-      {/* ═══ ALL TRADES (newest first) ═══ */}
+      {/* ═══ OPEN POSITIONS ═══ */}
+      {openPositions.length > 0 && (
+        <div style={{ background: '#0a1628', border: '2px solid #60a5fa', borderRadius: 10, padding: '1.25rem', marginBottom: '1.5rem' }}>
+          <h2 style={{ color: '#60a5fa', fontSize: 16, marginBottom: '1rem' }}>📍 Open: {openPositions.length} positions</h2>
+          <table style={{ width: '100%', fontSize: 14, borderCollapse: 'collapse' }}>
+            <thead>
+              <tr style={{ color: '#a1a1aa', borderBottom: '1px solid #444' }}>
+                <th style={{ textAlign: 'left', padding: '8px' }}>Stock</th>
+                <th style={{ textAlign: 'left', padding: '8px' }}>Entry</th>
+                <th style={{ textAlign: 'right', padding: '8px' }}>Entry $</th>
+                <th style={{ textAlign: 'right', padding: '8px' }}>Stop $</th>
+                <th style={{ textAlign: 'right', padding: '8px' }}>Current R</th>
+                <th style={{ textAlign: 'center', padding: '8px' }}>Trail?</th>
+              </tr>
+            </thead>
+            <tbody>
+              {openPositions.map((t, i) => (
+                <tr key={i} style={{ borderBottom: '1px solid #2a2a3e', background: '#071a0f' }}>
+                  <td style={{ padding: '8px', color: '#60a5fa', fontWeight: 700 }}>{t.stock}</td>
+                  <td style={{ padding: '8px', color: '#d4d4d8', fontFamily: 'monospace', fontSize: 12 }}>{t.entryDate}</td>
+                  <td style={{ padding: '8px', textAlign: 'right', color: '#e4e4e7' }}>${t.entryPrice.toFixed(2)}</td>
+                  <td style={{ padding: '8px', textAlign: 'right', color: '#f87171' }}>${t.sl.toFixed(2)}</td>
+                  <td style={{ padding: '8px', textAlign: 'right', color: '#4ade80', fontWeight: 800 }}>+{t.pnlR.toFixed(1)}R</td>
+                  <td style={{ padding: '8px', textAlign: 'center', color: t.pnlR >= 2 ? '#4ade80' : '#71717a' }}>{t.pnlR >= 2 ? '✓ YES' : 'No'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* ═══ PER-STOCK TABLE ═══ */}
+      <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 10, padding: '1.25rem', marginBottom: '1.5rem' }}>
+        <h2 style={{ color: '#e4e4e7', fontSize: 16, marginBottom: '1rem' }}>All Stocks — Strategy vs Buy & Hold</h2>
+        <div style={{ overflowX: 'auto', maxHeight: 450, overflowY: 'auto' }}>
+          <table style={{ width: '100%', fontSize: 13, borderCollapse: 'collapse' }}>
+            <thead style={{ position: 'sticky', top: 0, background: '#1e1e2e' }}>
+              <tr style={{ color: '#a1a1aa', borderBottom: '2px solid #444' }}>
+                <th style={{ textAlign: 'left', padding: '8px' }}>Stock</th>
+                <th style={{ textAlign: 'center', padding: '8px' }}>Type</th>
+                <th style={{ textAlign: 'right', padding: '8px' }}>Trades</th>
+                <th style={{ textAlign: 'right', padding: '8px' }}>Win%</th>
+                <th style={{ textAlign: 'right', padding: '8px' }}>P/L</th>
+                <th style={{ textAlign: 'right', padding: '8px' }}>B&H %</th>
+              </tr>
+            </thead>
+            <tbody>
+              {stockRows.map(s => (
+                <tr key={s.symbol} style={{ borderBottom: '1px solid #2a2a3e' }}>
+                  <td style={{ padding: '6px 8px', color: '#60a5fa', fontWeight: 600 }}>{s.symbol}</td>
+                  <td style={{ padding: '6px 8px', textAlign: 'center', fontSize: 11, color: catColors[s.category] }}>{s.category}</td>
+                  <td style={{ padding: '6px 8px', textAlign: 'right', color: '#e4e4e7' }}>{s.trades}</td>
+                  <td style={{ padding: '6px 8px', textAlign: 'right', color: '#e4e4e7' }}>{s.wr}%</td>
+                  <td style={{ padding: '6px 8px', textAlign: 'right', color: s.pnl >= 0 ? '#4ade80' : '#f87171', fontWeight: 700 }}>
+                    {s.pnl >= 0 ? '+' : ''}${Math.round(s.pnl).toLocaleString()}
+                  </td>
+                  <td style={{ padding: '6px 8px', textAlign: 'right', color: s.bhRetPct >= 0 ? '#4ade80' : '#f87171' }}>
+                    {s.bhRetPct > 0 ? '+' : ''}{s.bhRetPct}%
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* ═══ TRADE LOG ═══ */}
       {strat && (
-        <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 10, padding: '1.25rem', marginBottom: '1.5rem' }}>
+        <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 10, padding: '1.25rem' }}>
           <h2 style={{ color: '#e4e4e7', fontSize: 16, marginBottom: '1rem' }}>
             📝 Trade Log — newest first ({strat.taken.length} taken, {strat.skipped.length} skipped)
           </h2>
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', fontSize: 13, borderCollapse: 'collapse' }}>
-              <thead>
+          <div style={{ overflowX: 'auto', maxHeight: 500, overflowY: 'auto' }}>
+            <table style={{ width: '100%', fontSize: 12, borderCollapse: 'collapse' }}>
+              <thead style={{ position: 'sticky', top: 0, background: '#1e1e2e' }}>
                 <tr style={{ color: '#a1a1aa', borderBottom: '2px solid #444' }}>
-                  <th style={{ textAlign: 'center', padding: '8px 6px' }}>#</th>
-                  <th style={{ textAlign: 'left', padding: '8px' }}>Entry</th>
-                  <th style={{ textAlign: 'left', padding: '8px' }}>Exit</th>
-                  <th style={{ textAlign: 'left', padding: '8px' }}>Stock</th>
-                  <th style={{ textAlign: 'right', padding: '8px' }}>Entry $</th>
-                  <th style={{ textAlign: 'right', padding: '8px' }}>Exit $</th>
-                  <th style={{ textAlign: 'right', padding: '8px' }}>R</th>
-                  <th style={{ textAlign: 'right', padding: '8px' }}>P/L</th>
-                  <th style={{ textAlign: 'right', padding: '8px' }}>Capital</th>
-                  <th style={{ textAlign: 'left', padding: '8px' }}>Why</th>
-                  <th style={{ textAlign: 'right', padding: '8px' }}>Days</th>
-                  <th style={{ textAlign: 'center', padding: '8px 6px' }}></th>
+                  <th style={{ textAlign: 'center', padding: '6px 4px' }}>#</th>
+                  <th style={{ textAlign: 'left', padding: '6px' }}>Entry</th>
+                  <th style={{ textAlign: 'left', padding: '6px' }}>Exit</th>
+                  <th style={{ textAlign: 'left', padding: '6px' }}>Stock</th>
+                  <th style={{ textAlign: 'right', padding: '6px' }}>R</th>
+                  <th style={{ textAlign: 'right', padding: '6px' }}>P/L</th>
+                  <th style={{ textAlign: 'left', padding: '6px' }}>Why</th>
+                  <th style={{ textAlign: 'right', padding: '6px' }}>Days</th>
                 </tr>
               </thead>
               <tbody>
@@ -324,36 +331,25 @@ export default function BreakoutV2Page() {
                   const tradeNum = strat.results.length - i
                   const win = t.pnlScaled > 0
                   const isSkipped = t.status === 'skipped'
-                  const gapDown = t.pnlR < -1.05
                   return (
-                    <tr key={i} style={{ borderBottom: '1px solid #2a2a3e', opacity: isSkipped ? 0.45 : 1, background: isSkipped ? '#1f0a0a' : gapDown ? '#1a0a0a' : win ? '#071a0f' : 'transparent' }}>
-                      <td style={{ padding: '8px 6px', textAlign: 'center', color: '#71717a', fontWeight: 600, fontSize: 12 }}>{tradeNum}</td>
-                      <td style={{ padding: '8px', color: '#e4e4e7', fontFamily: 'monospace', fontSize: 12 }}>{t.entryDate}</td>
-                      <td style={{ padding: '8px', color: '#d4d4d8', fontFamily: 'monospace', fontSize: 12 }}>{t.exitDate}</td>
-                      <td style={{ padding: '8px', color: '#60a5fa', fontWeight: 700 }}>{t.stock}</td>
-                      <td style={{ padding: '8px', textAlign: 'right', color: '#d4d4d8' }}>${t.entryPrice?.toFixed(2)}</td>
-                      <td style={{ padding: '8px', textAlign: 'right', color: '#d4d4d8' }}>${t.exitPrice?.toFixed(2)}</td>
-                      <td style={{ padding: '8px', textAlign: 'right', color: win ? '#4ade80' : '#f87171', fontWeight: 700 }}>
+                    <tr key={i} style={{ borderBottom: '1px solid #2a2a3e', opacity: isSkipped ? 0.4 : 1, background: win ? '#071a0f' : 'transparent' }}>
+                      <td style={{ padding: '5px 4px', textAlign: 'center', color: '#71717a', fontSize: 11 }}>{tradeNum}</td>
+                      <td style={{ padding: '5px 6px', color: '#e4e4e7', fontFamily: 'monospace', fontSize: 11 }}>{t.entryDate}</td>
+                      <td style={{ padding: '5px 6px', color: '#d4d4d8', fontFamily: 'monospace', fontSize: 11 }}>{t.exitDate}</td>
+                      <td style={{ padding: '5px 6px', color: '#60a5fa', fontWeight: 600 }}>{t.stock}</td>
+                      <td style={{ padding: '5px 6px', textAlign: 'right', color: win ? '#4ade80' : '#f87171', fontWeight: 700 }}>
                         {t.pnlR > 0 ? '+' : ''}{t.pnlR.toFixed(1)}R
-                        {gapDown && <span style={{ color: '#fbbf24', fontSize: 10 }}> ⚡</span>}
                       </td>
-                      <td style={{ padding: '8px', textAlign: 'right', color: win ? '#4ade80' : '#f87171', fontWeight: 700 }}>
+                      <td style={{ padding: '5px 6px', textAlign: 'right', color: win ? '#4ade80' : '#f87171', fontWeight: 600 }}>
                         {isSkipped ? '—' : `${t.pnlScaled >= 0 ? '+' : ''}$${Math.round(t.pnlScaled).toLocaleString()}`}
                       </td>
-                      <td style={{ padding: '8px', textAlign: 'right', color: '#a1a1aa', fontSize: 12 }}>${Math.round(t.capitalAtEntry).toLocaleString()}</td>
-                      <td style={{ padding: '8px', color: t.exitReason === 'Trail' ? '#4ade80' : t.exitReason === 'SL' ? '#f87171' : '#71717a', fontSize: 12 }}>{isSkipped ? 'SKIPPED' : t.exitReason}</td>
-                      <td style={{ padding: '8px', textAlign: 'right', color: '#71717a', fontSize: 12 }}>{t.durationDays}d</td>
-                      <td style={{ padding: '8px 6px', textAlign: 'center' }}>
-                        {isSkipped ? <span style={{ color: '#fbbf24' }}>⏭</span> : win ? <span style={{ color: '#4ade80' }}>✓</span> : <span style={{ color: '#f87171' }}>✗</span>}
-                      </td>
+                      <td style={{ padding: '5px 6px', color: t.exitReason === 'Trail' ? '#4ade80' : '#f87171', fontSize: 11 }}>{isSkipped ? 'SKIP' : t.exitReason}</td>
+                      <td style={{ padding: '5px 6px', textAlign: 'right', color: '#71717a', fontSize: 11 }}>{t.durationDays}d</td>
                     </tr>
                   )
                 })}
               </tbody>
             </table>
-          </div>
-          <div style={{ marginTop: '0.75rem', fontSize: 12, color: '#71717a' }}>
-            ⚡ = gap-down (lost more than 1R due to gap). Trail = trailing stop locked profit. SL = initial stop loss hit.
           </div>
         </div>
       )}
