@@ -18,6 +18,7 @@ export default function BreakoutV2Page() {
   const buyHold = data.buyHold || {}
   const universe = data.universe || {}
   const categories = universe.categories || {}
+  const marketCaps = data.marketCaps || {}
 
   // Compounding + Skip after 3L
   function runStrategy(trades, startCapital, riskPctVal) {
@@ -83,12 +84,16 @@ export default function BreakoutV2Page() {
   }
   const stockRows = Object.entries(stockMap).map(([s, v]) => {
     const bh = buyHold[s] || {}
+    const mcap = marketCaps[s] || bh.marketCap || 0
+    // B&H $ amount: if you invested same risk dollars into this stock
+    const bhDollar = bh.returnPct ? (capital * (bh.returnPct / 100)) / (Object.keys(stockMap).length) : 0
     return {
       symbol: s, trades: v.trades, wins: v.wins,
       wr: ((v.wins / v.trades) * 100).toFixed(0),
       pnl: v.pnl,
       stratRetPct: capital > 0 ? ((v.pnl / capital) * 100).toFixed(1) : '0',
       bhRetPct: bh.returnPct || 0,
+      mcap,
       category: categories[s] || 'unknown',
     }
   }).sort((a, b) => b.pnl - a.pnl)
@@ -279,10 +284,12 @@ export default function BreakoutV2Page() {
             <thead style={{ position: 'sticky', top: 0, background: '#1e1e2e' }}>
               <tr style={{ color: '#a1a1aa', borderBottom: '2px solid #444' }}>
                 <th style={{ textAlign: 'left', padding: '8px' }}>Stock</th>
+                <th style={{ textAlign: 'right', padding: '8px' }}>Mkt Cap</th>
                 <th style={{ textAlign: 'center', padding: '8px' }}>Type</th>
                 <th style={{ textAlign: 'right', padding: '8px' }}>Trades</th>
                 <th style={{ textAlign: 'right', padding: '8px' }}>Win%</th>
-                <th style={{ textAlign: 'right', padding: '8px' }}>P/L</th>
+                <th style={{ textAlign: 'right', padding: '8px' }}>Strategy $</th>
+                <th style={{ textAlign: 'right', padding: '8px' }}>Strategy %</th>
                 <th style={{ textAlign: 'right', padding: '8px' }}>B&H %</th>
               </tr>
             </thead>
@@ -290,11 +297,17 @@ export default function BreakoutV2Page() {
               {stockRows.map(s => (
                 <tr key={s.symbol} style={{ borderBottom: '1px solid #2a2a3e' }}>
                   <td style={{ padding: '6px 8px', color: '#60a5fa', fontWeight: 600 }}>{s.symbol}</td>
+                  <td style={{ padding: '6px 8px', textAlign: 'right', color: '#a1a1aa', fontSize: 11 }}>
+                    {s.mcap > 0 ? `$${(s.mcap / 1e9).toFixed(0)}B` : '—'}
+                  </td>
                   <td style={{ padding: '6px 8px', textAlign: 'center', fontSize: 11, color: catColors[s.category] }}>{s.category}</td>
                   <td style={{ padding: '6px 8px', textAlign: 'right', color: '#e4e4e7' }}>{s.trades}</td>
                   <td style={{ padding: '6px 8px', textAlign: 'right', color: '#e4e4e7' }}>{s.wr}%</td>
                   <td style={{ padding: '6px 8px', textAlign: 'right', color: s.pnl >= 0 ? '#4ade80' : '#f87171', fontWeight: 700 }}>
                     {s.pnl >= 0 ? '+' : ''}${Math.round(s.pnl).toLocaleString()}
+                  </td>
+                  <td style={{ padding: '6px 8px', textAlign: 'right', color: parseFloat(s.stratRetPct) >= 0 ? '#4ade80' : '#f87171' }}>
+                    {parseFloat(s.stratRetPct) > 0 ? '+' : ''}{s.stratRetPct}%
                   </td>
                   <td style={{ padding: '6px 8px', textAlign: 'right', color: s.bhRetPct >= 0 ? '#4ade80' : '#f87171' }}>
                     {s.bhRetPct > 0 ? '+' : ''}{s.bhRetPct}%

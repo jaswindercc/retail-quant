@@ -18,6 +18,7 @@ export default function BreakoutV2SP100Page() {
   const buyHold = data.buyHold || {}
   const universe = data.universe || {}
   const categories = universe.categories || {}
+  const marketCaps = data.marketCaps || {}
 
   // Compounding + Skip after 3L
   function runStrategy(trades, startCapital, riskPctVal) {
@@ -83,12 +84,14 @@ export default function BreakoutV2SP100Page() {
 
   const stockRows = Object.entries(stockMap).map(([s, v]) => {
     const bh = buyHold[s] || {}
+    const mcap = marketCaps[s] || bh.marketCap || 0
     return {
       symbol: s, trades: v.trades, wins: v.wins,
       wr: ((v.wins / v.trades) * 100).toFixed(0),
       pnl: v.pnl,
       stratRetPct: capital > 0 ? ((v.pnl / capital) * 100).toFixed(1) : '0',
       bhRetPct: bh.returnPct || 0,
+      mcap,
       category: categories[s] || 'unknown',
     }
   }).sort((a, b) => b.pnl - a.pnl)

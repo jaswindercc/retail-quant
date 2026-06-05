@@ -47,9 +47,10 @@ UNIVERSE = {
     # ── CRASHED / DESTROYED (lost significant value) ──
     'crashed': [
         'PYPL', 'INTC', 'DIS', 'BA', 'NKE', 'MRNA', 'ENPH', 'SEDG',
-        'ALGN', 'MTCH', 'PARA', 'WBD', 'VFC', 'LUMN', 'FMC',
-        'NCLH', 'AAL', 'ETSY', 'SNAP', 'ZM', 'DKNG', 'RIVN', 'LCID',
-        'COIN', 'HOOD', 'CRWD', 'SNOW', 'ABNB', 'DASH', 'TSLA',
+        'ALGN', 'MTCH', 'PARA', 'WBD', 'VFC', 'FMC',
+        'NCLH', 'AAL', 'ETSY', 'ZM', 'DKNG',
+        'COIN', 'CRWD', 'SNOW', 'ABNB', 'DASH', 'TSLA',
+        'SMCI', 'NFLX', 'SQ', 'SHOP', 'ROKU',
     ],
 }
 
@@ -84,6 +85,37 @@ for ticker in ALL_TICKERS:
         print(f"  Skipping {ticker}: {e}")
 
 print(f"  Successfully loaded: {len(stock_dfs)} stocks")
+
+# ═══════════════════════════════════════════════════════════════
+# FILTER: Remove stocks that traded below $10 and fetch market caps
+# ═══════════════════════════════════════════════════════════════
+MIN_PRICE = 10.0
+print(f"\nFiltering stocks below ${MIN_PRICE} and fetching market caps...")
+
+market_caps = {}
+to_remove = []
+for ticker, df in stock_dfs.items():
+    # Check if stock ever traded below $10 during our period
+    if df['Close'].min() < MIN_PRICE:
+        to_remove.append(ticker)
+        print(f"  Removing {ticker}: traded below ${MIN_PRICE} (min=${df['Close'].min():.2f})")
+        continue
+    # Fetch market cap
+    try:
+        info = yf.Ticker(ticker).info
+        mcap = info.get('marketCap', 0)
+        if mcap and mcap < 10e9:  # filter small caps (< $10B)
+            to_remove.append(ticker)
+            print(f"  Removing {ticker}: small cap (${mcap/1e9:.1f}B)")
+            continue
+        market_caps[ticker] = mcap
+    except Exception:
+        market_caps[ticker] = 0
+
+for t in to_remove:
+    del stock_dfs[t]
+
+print(f"  After filtering: {len(stock_dfs)} stocks")
 
 # ═══════════════════════════════════════════════════════════════
 # INDICATORS
@@ -309,7 +341,7 @@ def run_backtest(stock_dfs, bull_dates):
 print(f"\nRunning backtest on {len(stock_dfs)} stocks...")
 trades, total_skipped, open_pos = run_backtest(stock_dfs, bull_dates)
 
-# Buy & hold for each stock
+# Buy & hold for each stock (in $ terms based on $40k allocation proportional)
 first_date = trades[0]['entryDate'] if trades else None
 last_date = trades[-1]['exitDate'] if trades else None
 buy_hold = {}
@@ -321,7 +353,13 @@ for name, df in stock_dfs.items():
     if len(sub) >= 2:
         start_p = sub.iloc[0]['Close']
         end_p = sub.iloc[-1]['Close']
-        buy_hold[name] = {'startPrice': round(start_p, 2), 'endPrice': round(end_p, 2), 'returnPct': round(((end_p - start_p) / start_p) * 100, 1)}
+        ret_pct = ((end_p - start_p) / start_p) * 100
+        buy_hold[name] = {
+            'startPrice': round(start_p, 2),
+            'endPrice': round(end_p, 2),
+            'returnPct': round(ret_pct, 1),
+            'marketCap': market_caps.get(name, 0),
+        }
 
 # Categorize
 categories = {}
@@ -334,6 +372,7 @@ for cat, tickers in UNIVERSE.items():
 all_data = {
     'allTrades': trades,
     'buyHold': buy_hold,
+    'marketCaps': {t: market_caps.get(t, 0) for t in stock_dfs},
     'universe': {
         'total': len(stock_dfs),
         'categories': {t: categories.get(t, 'unknown') for t in stock_dfs},
