@@ -349,8 +349,6 @@ export default function App() {
             </NavLink>
           </NavGroup>
 
-          </NavGroup>
-
           <NavGroup label="Research" icon="🧪" defaultOpen={isResearchRoute}>
             <NavLink to="/trail-study" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`}>
               🔬 Trail Stop Study
