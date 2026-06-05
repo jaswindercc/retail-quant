@@ -199,7 +199,7 @@ export default function BreakoutV2Page() {
                     <td style={{ padding: '10px 12px', textAlign: 'right', color: parseFloat(s.stratRetPct) >= 0 ? '#4ade80' : '#f87171', fontWeight: 600 }}>
                       {s.stratRetPct}%
                     </td>
-                    <td style={{ padding: '10px 12px', textAlign: 'right', color: s.bhRetPct >= 0 ? '#a78bfa' : '#f87171', fontWeight: 600 }}>
+                    <td style={{ padding: '10px 12px', textAlign: 'right', color: s.bhRetPct >= 0 ? '#4ade80' : '#f87171', fontWeight: 600 }}>
                       {s.bhRetPct > 0 ? '+' : ''}{s.bhRetPct}%
                     </td>
                     <td style={{ padding: '10px 12px', textAlign: 'center', color: parseFloat(alpha) >= 0 ? '#4ade80' : '#f87171', fontWeight: 700 }}>
@@ -233,7 +233,7 @@ export default function BreakoutV2Page() {
             <h3 style={{ color: '#60a5fa', fontSize: 15, marginBottom: '0.5rem' }}>Risk Management</h3>
             <div>• <strong>Regime:</strong> SPY &gt; 200 SMA (cash otherwise)</div>
             <div>• <strong>Stop:</strong> Entry − 1x ATR(14)</div>
-            <div>• <strong>Trail:</strong> EMA20 − 1x ATR (activates at 2.5R)</div>
+            <div>• <strong>Trail:</strong> EMA20 − 1x ATR (activates at 2R)</div>
             <div>• <strong>Max positions:</strong> {settings.maxPositions || 3}</div>
             <div>• <strong>Skip:</strong> After 3 consecutive losses, skip 1</div>
             <div>• <strong>Sizing:</strong> {riskPct}% of current capital / ATR = shares</div>

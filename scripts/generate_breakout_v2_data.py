@@ -25,12 +25,14 @@ from pathlib import Path
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 OUT = Path(__file__).resolve().parent.parent / "dashboard" / "public" / "breakout_v2_data.json"
 
-VOL_MULT = 1.2
+VOL_MULT = 1.0           # volume must be above 20d avg (relaxed from 1.2x)
 SKIP_AFTER_LOSSES = 3
-MAX_POSITIONS = 3
+MAX_POSITIONS = 5        # allow more exposure in bull markets (was 3)
 SL_ATR = 1.0
-TRAIL_START_R = 2.5
+TRAIL_START_R = 2.0      # lock in gains earlier (was 2.5R)
 TRAIL_ATR_BUF = 1.0
+CLOSE_QUALITY = 0.3      # close must be in upper 70% of bar (was upper 60%)
+EXTENDED_ATR = 5.0       # allow slightly more extended moves (was 4.0)
 EXCLUDE = {'BND', 'IEF', 'TLT', 'USTTENT', 'VIX'}
 
 
@@ -205,7 +207,7 @@ def run_backtest(stock_dfs, bull_dates):
                     continue
                 if (row['High'] - row['Low']) > 2.5 * atr:
                     continue
-                if row['Close'] - row['sma50'] > 4.0 * atr:
+                if row['Close'] - row['sma50'] > EXTENDED_ATR * atr:
                     continue
                 if any(p['stock'] == name for p in open_positions):
                     continue
@@ -220,7 +222,7 @@ def run_backtest(stock_dfs, bull_dates):
                 bar_range = row['High'] - row['Low']
                 if bar_range > 0:
                     close_pos = (row['Close'] - row['Low']) / bar_range
-                    if close_pos < 0.4:
+                    if close_pos < CLOSE_QUALITY:
                         continue
 
                 pending_signals[name] = {'level': dh, 'atr': atr, 'dh': dh}
@@ -318,11 +320,12 @@ all_data = {
         'strategy': 'Breakout v2',
         'v2_additions': [
             f'Volume > {VOL_MULT}x 20-day avg on breakout bar',
-            'Close in upper 60% of bar range (strong close)',
+            f'Close in upper {int((1-CLOSE_QUALITY)*100)}% of bar range (strong close)',
             'Next-day confirmation (open >= breakout level)',
             'SPY > 200 SMA regime filter (cash in bear market)',
             f'Max {MAX_POSITIONS} simultaneous positions',
             f'Skip entry after {SKIP_AFTER_LOSSES} consecutive losses',
+            f'Trail locks at {TRAIL_START_R}R (faster profit capture)',
             'Compounding: risk % of current capital (configurable)',
         ],
     },
