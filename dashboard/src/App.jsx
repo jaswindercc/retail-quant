@@ -58,7 +58,6 @@ import RotationPage from './pages/RotationPage'
 import RotationComparisonPage from './pages/RotationComparisonPage'
 import RotationTop3Page from './pages/RotationTop3Page'
 import BreakoutV2Page from './pages/BreakoutV2Page'
-import BreakoutV2SP100Page from './pages/BreakoutV2SP100Page'
 // LiveStrategyPage removed — merged into SimBacktest5Page
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
@@ -193,7 +192,7 @@ export default function App() {
   const isSimRoute = location.pathname.startsWith('/sim')
   const isSwitcherRoute = location.pathname.startsWith('/strategy-switcher')
   const isResearchRoute = ['/trail-study', '/skip-analysis'].some(p => location.pathname.startsWith(p))
-  const isBreakoutsRoute = ['/breakout', '/breakout-v2', '/breakout-v2-sp100'].some(p => location.pathname === p)
+  const isBreakoutsRoute = ['/breakout', '/breakout-v2'].some(p => location.pathname === p)
 
   return (
     <div className="app">
@@ -380,10 +379,7 @@ export default function App() {
               📊 Breakout v1
             </NavLink>
             <NavLink to="/breakout-v2" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: '#4ade80', fontWeight: 600 })}>
-              🚀 Breakout v2
-            </NavLink>
-            <NavLink to="/breakout-v2-sp100" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: '#60a5fa', fontWeight: 600 })}>
-              🧪 v2 on 100 Stocks
+              🚀 Breakout v2 (150 Stocks)
             </NavLink>
           </NavGroup>
         </div>
@@ -462,7 +458,6 @@ export default function App() {
           <Route path="/rotation-top3" element={<RotationTop3Page />} />
           <Route path="/rotation-comparison" element={<RotationComparisonPage />} />
           <Route path="/breakout-v2" element={<BreakoutV2Page />} />
-          <Route path="/breakout-v2-sp100" element={<BreakoutV2SP100Page />} />
         </Routes>
       </div>
     </div>
