@@ -91,9 +91,9 @@ export default function BreakoutV2Page() {
   const stockRows = Object.entries(stockMap).map(([s, v]) => {
     const bh = buyHold[s] || {}
     const mcap = marketCaps[s] || bh.marketCap || 0
-    // B&H $ amount: equal-weight allocation across all stocks
-    const numStocks = Object.keys(stockMap).length
-    const perStockAlloc = capital / numStocks
+    // B&H $: equal-weight across entire universe (not just traded stocks)
+    const totalUniverse = universe.total || Object.keys(buyHold).length || 1
+    const perStockAlloc = capital / totalUniverse
     const bhDollar = bh.returnPct ? perStockAlloc * (bh.returnPct / 100) : 0
     return {
       symbol: s, trades: v.trades, wins: v.wins,
@@ -301,10 +301,13 @@ export default function BreakoutV2Page() {
 
       {/* ═══ PER-STOCK TABLE ═══ */}
       <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 10, padding: '1.25rem', marginBottom: '1.5rem' }}>
-        <h2 style={{ color: '#e4e4e7', fontSize: 16, marginBottom: '1rem' }}>All Stocks — Strategy vs Buy & Hold</h2>
-        <div style={{ overflowX: 'auto', maxHeight: 450, overflowY: 'auto' }}>
+        <h2 style={{ color: '#e4e4e7', fontSize: 16, marginBottom: '0.5rem' }}>All Stocks — Strategy vs Buy & Hold</h2>
+        <p style={{ color: '#71717a', fontSize: 12, marginBottom: '1rem' }}>
+          B&H $ = equal-weight ${(capital / (universe.total || 126)).toLocaleString(undefined, {maximumFractionDigits: 0})} per stock held entire period. Strategy $ = compounded trades (capital grows).
+        </p>
+        <div style={{ overflowX: 'auto', maxHeight: 500, overflowY: 'auto' }}>
           <table style={{ width: '100%', fontSize: 13, borderCollapse: 'collapse' }}>
-            <thead style={{ position: 'sticky', top: 0, background: '#1e1e2e' }}>
+            <thead style={{ position: 'sticky', top: 0, background: '#1e1e2e', zIndex: 1 }}>
               <tr style={{ color: '#a1a1aa', borderBottom: '2px solid #444' }}>
                 {[
                   { key: 'symbol', label: 'Stock', align: 'left' },
@@ -313,8 +316,8 @@ export default function BreakoutV2Page() {
                   { key: 'trades', label: 'Trades', align: 'right' },
                   { key: 'wr', label: 'Win%', align: 'right' },
                   { key: 'pnl', label: 'Strat $', align: 'right' },
-                  { key: 'stratRetPct', label: 'Strat %', align: 'right' },
                   { key: 'bhDollar', label: 'B&H $', align: 'right' },
+                  { key: 'stratRetPct', label: 'Strat %', align: 'right' },
                   { key: 'bhRetPct', label: 'B&H %', align: 'right' },
                 ].map(col => (
                   <th key={col.key} onClick={() => toggleSort(col.key)}
@@ -337,17 +340,33 @@ export default function BreakoutV2Page() {
                   <td style={{ padding: '6px 8px', textAlign: 'right', color: s.pnl >= 0 ? '#4ade80' : '#f87171', fontWeight: 700 }}>
                     {s.pnl >= 0 ? '+' : ''}${Math.round(s.pnl).toLocaleString()}
                   </td>
-                  <td style={{ padding: '6px 8px', textAlign: 'right', color: s.stratRetPct >= 0 ? '#4ade80' : '#f87171' }}>
-                    {s.stratRetPct > 0 ? '+' : ''}{s.stratRetPct}%
-                  </td>
                   <td style={{ padding: '6px 8px', textAlign: 'right', color: s.bhDollar >= 0 ? '#4ade80' : '#f87171', fontWeight: 600 }}>
                     {s.bhDollar >= 0 ? '+' : ''}${Math.round(s.bhDollar).toLocaleString()}
+                  </td>
+                  <td style={{ padding: '6px 8px', textAlign: 'right', color: s.stratRetPct >= 0 ? '#4ade80' : '#f87171' }}>
+                    {s.stratRetPct > 0 ? '+' : ''}{s.stratRetPct}%
                   </td>
                   <td style={{ padding: '6px 8px', textAlign: 'right', color: s.bhRetPct >= 0 ? '#4ade80' : '#f87171' }}>
                     {s.bhRetPct > 0 ? '+' : ''}{s.bhRetPct}%
                   </td>
                 </tr>
               ))}
+              {/* TOTALS ROW */}
+              <tr style={{ borderTop: '2px solid #4ade80', background: '#0f2a1a' }}>
+                <td style={{ padding: '8px', color: '#e4e4e7', fontWeight: 800 }}>TOTAL</td>
+                <td></td>
+                <td></td>
+                <td style={{ padding: '8px', textAlign: 'right', color: '#e4e4e7', fontWeight: 700 }}>{stockRows.reduce((s, r) => s + r.trades, 0)}</td>
+                <td></td>
+                <td style={{ padding: '8px', textAlign: 'right', color: '#4ade80', fontWeight: 800 }}>
+                  +${Math.round(stockRows.reduce((s, r) => s + r.pnl, 0)).toLocaleString()}
+                </td>
+                <td style={{ padding: '8px', textAlign: 'right', color: stockRows.reduce((s, r) => s + r.bhDollar, 0) >= 0 ? '#4ade80' : '#f87171', fontWeight: 800 }}>
+                  {stockRows.reduce((s, r) => s + r.bhDollar, 0) >= 0 ? '+' : ''}${Math.round(stockRows.reduce((s, r) => s + r.bhDollar, 0)).toLocaleString()}
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
             </tbody>
           </table>
         </div>
