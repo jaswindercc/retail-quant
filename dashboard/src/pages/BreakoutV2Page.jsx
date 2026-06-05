@@ -5,6 +5,8 @@ export default function BreakoutV2Page() {
   const [data, setData] = useState(null)
   const [capital, setCapital] = useState(40000)
   const [riskPct, setRiskPct] = useState(1)
+  const [sortCol, setSortCol] = useState('pnl')
+  const [sortDir, setSortDir] = useState('desc')
 
   useEffect(() => {
     fetchJson(`${import.meta.env.BASE_URL}breakout_v2_sp100_data.json`)
@@ -32,18 +34,22 @@ export default function BreakoutV2Page() {
     for (const t of trades) {
       if (t.exitReason === 'Open') continue
       const riskDollars = currentCapital * (riskPctVal / 100)
-      const shares = Math.floor(riskDollars / t.risk)
-      const pnlScaled = shares > 0 ? t.pnlR * riskDollars : 0
+      let shares = Math.floor(riskDollars / t.risk)
+      // CAP: position value must never exceed current capital
+      const maxSharesByCapital = Math.floor(currentCapital / t.entryPrice)
+      if (shares > maxSharesByCapital) shares = maxSharesByCapital
+      const positionValue = shares * t.entryPrice
+      const pnlScaled = shares > 0 ? shares * t.risk * t.pnlR : 0
 
       if (skipNext) {
-        results.push({ ...t, status: 'skipped', shares: 0, pnlScaled: 0, capitalAtEntry: currentCapital, riskDollars })
+        results.push({ ...t, status: 'skipped', shares: 0, pnlScaled: 0, capitalAtEntry: currentCapital, riskDollars, positionValue: 0 })
         skipNext = false
         consecutiveLosses = 0
         equityCurve.push({ capital: currentCapital, date: t.exitDate })
         continue
       }
 
-      results.push({ ...t, status: 'taken', shares, pnlScaled, capitalAtEntry: currentCapital, riskDollars })
+      results.push({ ...t, status: 'taken', shares, pnlScaled, capitalAtEntry: currentCapital, riskDollars, positionValue })
       if (shares > 0) currentCapital += pnlScaled
       if (currentCapital > peakCapital) peakCapital = currentCapital
       const dd = peakCapital - currentCapital
@@ -85,18 +91,35 @@ export default function BreakoutV2Page() {
   const stockRows = Object.entries(stockMap).map(([s, v]) => {
     const bh = buyHold[s] || {}
     const mcap = marketCaps[s] || bh.marketCap || 0
-    // B&H $ amount: if you invested same risk dollars into this stock
-    const bhDollar = bh.returnPct ? (capital * (bh.returnPct / 100)) / (Object.keys(stockMap).length) : 0
+    // B&H $ amount: equal-weight allocation across all stocks
+    const numStocks = Object.keys(stockMap).length
+    const perStockAlloc = capital / numStocks
+    const bhDollar = bh.returnPct ? perStockAlloc * (bh.returnPct / 100) : 0
     return {
       symbol: s, trades: v.trades, wins: v.wins,
-      wr: ((v.wins / v.trades) * 100).toFixed(0),
+      wr: Math.round((v.wins / v.trades) * 100),
       pnl: v.pnl,
-      stratRetPct: capital > 0 ? ((v.pnl / capital) * 100).toFixed(1) : '0',
+      stratRetPct: capital > 0 ? parseFloat(((v.pnl / capital) * 100).toFixed(1)) : 0,
       bhRetPct: bh.returnPct || 0,
+      bhDollar,
       mcap,
       category: categories[s] || 'unknown',
     }
-  }).sort((a, b) => b.pnl - a.pnl)
+  })
+
+  // Sort stock rows
+  const toggleSort = (col) => {
+    if (sortCol === col) setSortDir(sortDir === 'asc' ? 'desc' : 'asc')
+    else { setSortCol(col); setSortDir('desc') }
+  }
+  const sortedStockRows = [...stockRows].sort((a, b) => {
+    let av = a[sortCol], bv = b[sortCol]
+    if (typeof av === 'string') av = av.toLowerCase()
+    if (typeof bv === 'string') bv = bv.toLowerCase()
+    if (av < bv) return sortDir === 'asc' ? -1 : 1
+    if (av > bv) return sortDir === 'asc' ? 1 : -1
+    return 0
+  })
 
   const catColors = { bull: '#4ade80', sideways: '#fbbf24', crashed: '#f87171' }
   const catSummary = {}
@@ -283,18 +306,26 @@ export default function BreakoutV2Page() {
           <table style={{ width: '100%', fontSize: 13, borderCollapse: 'collapse' }}>
             <thead style={{ position: 'sticky', top: 0, background: '#1e1e2e' }}>
               <tr style={{ color: '#a1a1aa', borderBottom: '2px solid #444' }}>
-                <th style={{ textAlign: 'left', padding: '8px' }}>Stock</th>
-                <th style={{ textAlign: 'right', padding: '8px' }}>Mkt Cap</th>
-                <th style={{ textAlign: 'center', padding: '8px' }}>Type</th>
-                <th style={{ textAlign: 'right', padding: '8px' }}>Trades</th>
-                <th style={{ textAlign: 'right', padding: '8px' }}>Win%</th>
-                <th style={{ textAlign: 'right', padding: '8px' }}>Strategy $</th>
-                <th style={{ textAlign: 'right', padding: '8px' }}>Strategy %</th>
-                <th style={{ textAlign: 'right', padding: '8px' }}>B&H %</th>
+                {[
+                  { key: 'symbol', label: 'Stock', align: 'left' },
+                  { key: 'mcap', label: 'Mkt Cap', align: 'right' },
+                  { key: 'category', label: 'Type', align: 'center' },
+                  { key: 'trades', label: 'Trades', align: 'right' },
+                  { key: 'wr', label: 'Win%', align: 'right' },
+                  { key: 'pnl', label: 'Strat $', align: 'right' },
+                  { key: 'stratRetPct', label: 'Strat %', align: 'right' },
+                  { key: 'bhDollar', label: 'B&H $', align: 'right' },
+                  { key: 'bhRetPct', label: 'B&H %', align: 'right' },
+                ].map(col => (
+                  <th key={col.key} onClick={() => toggleSort(col.key)}
+                    style={{ textAlign: col.align, padding: '8px', cursor: 'pointer', userSelect: 'none', whiteSpace: 'nowrap' }}>
+                    {col.label} {sortCol === col.key ? (sortDir === 'asc' ? '▲' : '▼') : ''}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              {stockRows.map(s => (
+              {sortedStockRows.map(s => (
                 <tr key={s.symbol} style={{ borderBottom: '1px solid #2a2a3e' }}>
                   <td style={{ padding: '6px 8px', color: '#60a5fa', fontWeight: 600 }}>{s.symbol}</td>
                   <td style={{ padding: '6px 8px', textAlign: 'right', color: '#a1a1aa', fontSize: 11 }}>
@@ -306,8 +337,11 @@ export default function BreakoutV2Page() {
                   <td style={{ padding: '6px 8px', textAlign: 'right', color: s.pnl >= 0 ? '#4ade80' : '#f87171', fontWeight: 700 }}>
                     {s.pnl >= 0 ? '+' : ''}${Math.round(s.pnl).toLocaleString()}
                   </td>
-                  <td style={{ padding: '6px 8px', textAlign: 'right', color: parseFloat(s.stratRetPct) >= 0 ? '#4ade80' : '#f87171' }}>
-                    {parseFloat(s.stratRetPct) > 0 ? '+' : ''}{s.stratRetPct}%
+                  <td style={{ padding: '6px 8px', textAlign: 'right', color: s.stratRetPct >= 0 ? '#4ade80' : '#f87171' }}>
+                    {s.stratRetPct > 0 ? '+' : ''}{s.stratRetPct}%
+                  </td>
+                  <td style={{ padding: '6px 8px', textAlign: 'right', color: s.bhDollar >= 0 ? '#4ade80' : '#f87171', fontWeight: 600 }}>
+                    {s.bhDollar >= 0 ? '+' : ''}${Math.round(s.bhDollar).toLocaleString()}
                   </td>
                   <td style={{ padding: '6px 8px', textAlign: 'right', color: s.bhRetPct >= 0 ? '#4ade80' : '#f87171' }}>
                     {s.bhRetPct > 0 ? '+' : ''}{s.bhRetPct}%
@@ -333,6 +367,8 @@ export default function BreakoutV2Page() {
                   <th style={{ textAlign: 'left', padding: '6px' }}>Entry</th>
                   <th style={{ textAlign: 'left', padding: '6px' }}>Exit</th>
                   <th style={{ textAlign: 'left', padding: '6px' }}>Stock</th>
+                  <th style={{ textAlign: 'right', padding: '6px' }}>Shares</th>
+                  <th style={{ textAlign: 'right', padding: '6px' }}>Pos $</th>
                   <th style={{ textAlign: 'right', padding: '6px' }}>R</th>
                   <th style={{ textAlign: 'right', padding: '6px' }}>P/L</th>
                   <th style={{ textAlign: 'left', padding: '6px' }}>Why</th>
@@ -344,12 +380,20 @@ export default function BreakoutV2Page() {
                   const tradeNum = strat.results.length - i
                   const win = t.pnlScaled > 0
                   const isSkipped = t.status === 'skipped'
+                  const capped = t.positionValue >= t.capitalAtEntry * 0.99
                   return (
                     <tr key={i} style={{ borderBottom: '1px solid #2a2a3e', opacity: isSkipped ? 0.4 : 1, background: win ? '#071a0f' : 'transparent' }}>
                       <td style={{ padding: '5px 4px', textAlign: 'center', color: '#71717a', fontSize: 11 }}>{tradeNum}</td>
                       <td style={{ padding: '5px 6px', color: '#e4e4e7', fontFamily: 'monospace', fontSize: 11 }}>{t.entryDate}</td>
                       <td style={{ padding: '5px 6px', color: '#d4d4d8', fontFamily: 'monospace', fontSize: 11 }}>{t.exitDate}</td>
                       <td style={{ padding: '5px 6px', color: '#60a5fa', fontWeight: 600 }}>{t.stock}</td>
+                      <td style={{ padding: '5px 6px', textAlign: 'right', color: '#e4e4e7', fontSize: 11 }}>
+                        {isSkipped ? '—' : t.shares}
+                      </td>
+                      <td style={{ padding: '5px 6px', textAlign: 'right', color: capped ? '#fbbf24' : '#a1a1aa', fontSize: 11 }}>
+                        {isSkipped ? '—' : `$${Math.round(t.positionValue).toLocaleString()}`}
+                        {capped && ' ⚠️'}
+                      </td>
                       <td style={{ padding: '5px 6px', textAlign: 'right', color: win ? '#4ade80' : '#f87171', fontWeight: 700 }}>
                         {t.pnlR > 0 ? '+' : ''}{t.pnlR.toFixed(1)}R
                       </td>
