@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import { fmt$ } from '../utils'
+import { fetchJson, fmt$ } from '../utils'
 
 const PATTERN_COLORS = {
   '52-Week High Break': '#26c6da',
@@ -26,8 +26,8 @@ export default function RareScannerPage() {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}rare_scanner_data.json`)
-      .then(r => r.json()).then(setData).catch(console.error)
+    fetchJson(`${import.meta.env.BASE_URL}rare_scanner_data.json`)
+      .then(setData).catch(console.error)
   }, [])
 
   if (!data) return <div className="main"><p>Loading scanner…</p></div>

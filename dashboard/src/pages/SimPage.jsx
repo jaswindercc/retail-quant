@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { fetchJson } from '../utils'
 
 export default function SimPage() {
   const [data, setData] = useState(null)
@@ -9,8 +10,7 @@ export default function SimPage() {
 
   const fetchData = () => {
     const base = import.meta.env.BASE_URL
-    fetch(`${base}sim_data.json`)
-      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() })
+    fetchJson(`${base}sim_data.json`)
       .then(setData)
       .catch(e => setError(e.message))
   }

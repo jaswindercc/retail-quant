@@ -1,5 +1,26 @@
 /** Shared computation utilities for the dashboard */
 
+/**
+ * Fetch JSON with validation and retry.
+ * GitHub Pages CDN can transiently serve HTML (404 page) with 200 status.
+ * This detects that and retries once after a short delay.
+ */
+export async function fetchJson(url, { retries = 1, delay = 1500 } = {}) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const r = await fetch(url)
+    if (!r.ok) throw new Error(`HTTP ${r.status}`)
+    const ct = r.headers.get('content-type') || ''
+    if (ct.includes('html') || ct.includes('text/html')) {
+      if (attempt < retries) {
+        await new Promise(resolve => setTimeout(resolve, delay))
+        continue
+      }
+      throw new Error('Data temporarily unavailable — please refresh the page')
+    }
+    return r.json()
+  }
+}
+
 export function computeMetrics(trades) {
   if (!trades.length) return null
   const wins = trades.filter(t => t.pnlDollar > 0)

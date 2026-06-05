@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import { fetchJson } from '../utils'
 
 const STRAT_COLORS = {
   'put_spread_20d': '#4ade80',
@@ -22,8 +23,7 @@ export default function SpxSkipAnalysisPage() {
   const [skipMode, setSkipMode] = useState('skip_next') // 'skip_next' or 'wait_for_win'
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}spread_data_spx.json`)
-      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() })
+    fetchJson(`${import.meta.env.BASE_URL}spread_data_spx.json`)
       .then(d => {
         setData(d)
         const sorted = Object.entries(d?.strategies || {}).sort((a, b) => (b[1].stats?.annualReturnPct || 0) - (a[1].stats?.annualReturnPct || 0))

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import { buildEquityCurve, buildMonthlyReturns, buildDrawdownSeries, buildConsecutive, computeMetrics, fmt$ } from '../utils'
+import { fetchJson, buildEquityCurve, buildMonthlyReturns, buildDrawdownSeries, buildConsecutive, computeMetrics, fmt$ } from '../utils'
 import KpiCard from '../components/KpiCard'
 import EquityChart from '../components/EquityChart'
 import DrawdownChart from '../components/DrawdownChart'
@@ -13,8 +13,8 @@ export default function Strat2D12UPage() {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}strat_data.json`)
-      .then(r => r.json()).then(setData).catch(console.error)
+    fetchJson(`${import.meta.env.BASE_URL}strat_data.json`)
+      .then(setData).catch(console.error)
   }, [])
 
   if (!data) return <div className="main"><p>Loading...</p></div>

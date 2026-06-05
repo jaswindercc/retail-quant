@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import { fetchJson } from '../utils'
 
 export default function RotationTop3Page() {
   const [data, setData] = useState(null)
@@ -7,8 +8,7 @@ export default function RotationTop3Page() {
   const [riskPct, setRiskPct] = useState(100) // % of capital per position (equal weight = 33% each)
 
   useEffect(() => {
-    fetch(import.meta.env.BASE_URL + 'rotation_top3_data.json')
-      .then(r => r.json())
+    fetchJson(import.meta.env.BASE_URL + 'rotation_top3_data.json')
       .then(setData)
       .catch(() => {})
   }, [])

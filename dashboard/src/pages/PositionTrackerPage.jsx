@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import { fetchJson } from '../utils'
 
 const STRATEGIES = ['MA Bounce', 'Breakout', 'RSI Trend', 'Higher High', 'Other']
 const STRAT_COLORS = {
@@ -62,8 +63,7 @@ export default function PositionTrackerPage() {
 
   // Load scanner data for auto-fill
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}live_scanner_data.json`)
-      .then(r => r.ok ? r.json() : null)
+    fetchJson(`${import.meta.env.BASE_URL}live_scanner_data.json`)
       .then(setScannerData)
       .catch(() => {})
   }, [])

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { fetchJson } from '../utils'
 
 export default function SimBacktestSummaryPage() {
   const [bt5, setBt5] = useState(null)
@@ -7,8 +8,8 @@ export default function SimBacktestSummaryPage() {
 
   useEffect(() => {
     const base = import.meta.env.BASE_URL
-    fetch(`${base}sim_backtest5_data.json`).then(r => r.ok ? r.json() : null).then(setBt5).catch(() => {})
-    fetch(`${base}sim_backtest6_data.json`).then(r => r.ok ? r.json() : null).then(setBt6).catch(() => {})
+    fetchJson(`${base}sim_backtest5_data.json`).then(setBt5).catch(() => {})
+    fetchJson(`${base}sim_backtest6_data.json`).then(setBt6).catch(() => {})
   }, [])
 
   const linkStyle = { color: '#60a5fa', textDecoration: 'underline' }

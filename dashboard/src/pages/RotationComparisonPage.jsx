@@ -1,12 +1,12 @@
 import { useState, useEffect, useMemo } from 'react'
+import { fetchJson } from '../utils'
 
 export default function RotationComparisonPage() {
   const [data, setData] = useState(null)
   const [activeUniverse, setActiveUniverse] = useState('mega')
 
   useEffect(() => {
-    fetch(import.meta.env.BASE_URL + 'rotation_comparison_data.json')
-      .then(r => r.json())
+    fetchJson(import.meta.env.BASE_URL + 'rotation_comparison_data.json')
       .then(setData)
       .catch(() => {})
   }, [])

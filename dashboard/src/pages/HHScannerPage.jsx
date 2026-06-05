@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { fetchJson } from '../utils'
 
 const STRENGTH_COLORS = { STRONG: '#00e676', NORMAL: '#64b5f6' }
 
@@ -7,8 +8,8 @@ export default function HHScannerPage() {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}hh_scanner_results.json`)
-      .then(r => r.json()).then(setData).catch(console.error)
+    fetchJson(`${import.meta.env.BASE_URL}hh_scanner_results.json`)
+      .then(setData).catch(console.error)
   }, [])
 
   if (!data) return <div><p className="loading">Loading scanner…</p></div>

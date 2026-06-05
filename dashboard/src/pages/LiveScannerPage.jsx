@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import { fetchJson } from '../utils'
 
 const STRAT_META = {
   'MA Bounce': { icon: '🔵', color: '#2196f3', path: '/bounce', tag: 'WORKHORSE' },
@@ -44,8 +45,7 @@ export default function LiveScannerPage() {
   const [sortDir, setSortDir] = useState('asc')
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}live_scanner_data.json`)
-      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() })
+    fetchJson(`${import.meta.env.BASE_URL}live_scanner_data.json`)
       .then(setData)
       .catch(e => setData({ error: e.message }))
   }, [])

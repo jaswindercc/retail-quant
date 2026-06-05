@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route, NavLink, useLocation } from 'react-router-dom'
+import { fetchJson } from './utils'
 import StrategyPage from './pages/StrategyPage'
 import BouncePage from './pages/BouncePage'
 import BreakoutPage from './pages/BreakoutPage'
@@ -134,8 +135,7 @@ export default function App() {
 
   useEffect(() => {
     const base = import.meta.env.BASE_URL
-    const load = (file, setter) => fetch(`${base}${file}`)
-      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() })
+    const load = (file, setter) => fetchJson(`${base}${file}`)
       .then(setter)
       .catch(e => setLoadErrors(prev => [...prev, `${file}: ${e.message}`]))
     load('data.json', setTrData)

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { fetchJson } from '../utils'
 
 const TABS = [
   { key: 'mega', label: '🏛️ Mega-Cap', color: '#4ade80' },
@@ -30,13 +31,13 @@ export default function RotationPage() {
       LOOKBACKS.forEach(lb => {
         const file = `rotation_${tab.key}${lb.suffix}_data.json`
         const mapKey = `${tab.key}_${lb.key}`
-        fetch(`${base}${file}`).then(r => r.ok ? r.json() : null).then(d => {
+        fetchJson(`${base}${file}`).then(d => {
           if (d) setDataMap(prev => ({ ...prev, [mapKey]: d }))
         }).catch(() => {})
       })
     })
     // Load live scanner data
-    fetch(`${base}rotation_live_data.json`).then(r => r.ok ? r.json() : null).then(setLiveData).catch(() => {})
+    fetchJson(`${base}rotation_live_data.json`).then(setLiveData).catch(() => {})
   }, [])
 
   const dataKey = `${activeTab}_${activeLookback}`

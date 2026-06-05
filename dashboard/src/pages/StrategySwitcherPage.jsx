@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { fetchJson } from '../utils'
 
 export default function StrategySwitcherPage() {
   const [data, setData] = useState(null)
@@ -7,7 +8,7 @@ export default function StrategySwitcherPage() {
 
   useEffect(() => {
     const base = import.meta.env.BASE_URL
-    fetch(`${base}strategy_switcher_data.json`).then(r => r.ok ? r.json() : null).then(setData).catch(() => {})
+    fetchJson(`${base}strategy_switcher_data.json`).then(setData).catch(() => {})
   }, [])
 
   if (!data) return <div style={{ padding: '2rem', color: '#71717a' }}>Loading...</div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, NavLink } from 'react-router-dom'
-import { computeMetrics, buildEquityCurve, buildDrawdownSeries, buildConsecutive, buildMonthlyReturns, fmt$ } from '../utils'
+import { fetchJson, computeMetrics, buildEquityCurve, buildDrawdownSeries, buildConsecutive, buildMonthlyReturns, fmt$ } from '../utils'
 import KpiCard from '../components/KpiCard'
 import EquityChart from '../components/EquityChart'
 import DrawdownChart from '../components/DrawdownChart'
@@ -46,8 +46,7 @@ export default function StratComboDetailPage() {
   const [selectedVar, setSelectedVar] = useState('all')
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}strat_data.json`)
-      .then(r => r.json())
+    fetchJson(`${import.meta.env.BASE_URL}strat_data.json`)
       .then(setData)
   }, [])
 

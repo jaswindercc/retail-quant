@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { fmt$ } from '../utils'
+import { fetchJson, fmt$ } from '../utils'
 
 const METRIC_LABELS = {
   totalPnl: 'Total P&L',
@@ -145,7 +145,7 @@ export default function TrailStudyPage() {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}trail_study_data.json`).then(r => r.json()).then(setData)
+    fetchJson(`${import.meta.env.BASE_URL}trail_study_data.json`).then(setData)
   }, [])
 
   if (!data) return <div className="loading">Loading trail study…</div>

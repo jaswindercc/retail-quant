@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import { fetchJson } from '../utils'
 
 const OTM_COLORS = { '3.0pct': '#ef4444', '5.0pct': '#fbbf24', '7.0pct': '#4ade80', '10.0pct': '#64b5f6' }
 const OTM_LABELS = { '3.0pct': '3% OTM', '5.0pct': '5% OTM', '7.0pct': '7% OTM', '10.0pct': '10% OTM' }
@@ -13,8 +14,7 @@ export default function SpreadBacktestPage({ dataFile, findings }) {
   const [selectedOtm, setSelectedOtm] = useState('7.0pct')
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}${dataFile}`)
-      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() })
+    fetchJson(`${import.meta.env.BASE_URL}${dataFile}`)
       .then(setData)
       .catch(e => setData({ error: e.message }))
   }, [dataFile])

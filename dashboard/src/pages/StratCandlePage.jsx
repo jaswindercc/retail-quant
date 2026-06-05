@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { fmt$ } from '../utils'
+import { fetchJson, fmt$ } from '../utils'
 
 const COMBO_INFO = {
   '2D-1-2U': { name: '2D-1-2U Reversal', type: 'Reversal', dir: 'LONG', desc: 'Down move → inside bar → break up (classic bullish reversal)' },
@@ -38,8 +38,7 @@ export default function StratCandlePage() {
   const [activeVar, setActiveVar] = useState(null)
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}strat_data.json`)
-      .then(r => r.json())
+    fetchJson(`${import.meta.env.BASE_URL}strat_data.json`)
       .then(d => {
         setData(d)
         if (d.variationSummary?.length) setActiveVar(d.variationSummary[0].variation)

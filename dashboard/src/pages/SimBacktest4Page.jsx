@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { fetchJson } from '../utils'
 
 export default function SimBacktest4Page() {
   const [data, setData] = useState(null)
@@ -8,8 +9,7 @@ export default function SimBacktest4Page() {
 
   useEffect(() => {
     const base = import.meta.env.BASE_URL
-    fetch(`${base}sim_backtest4_data.json`)
-      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() })
+    fetchJson(`${base}sim_backtest4_data.json`)
       .then(d => {
         setData(d)
         // Default to the universe with lowest streak

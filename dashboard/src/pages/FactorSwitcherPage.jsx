@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
+import { fetchJson } from '../utils'
 
 export default function FactorSwitcherPage() {
   const [data, setData] = useState(null)
 
   useEffect(() => {
     const base = import.meta.env.BASE_URL
-    fetch(`${base}overnight_data.json`).then(r => r.ok ? r.json() : null).then(setData).catch(() => {})
+    fetchJson(`${base}overnight_data.json`).then(setData).catch(() => {})
   }, [])
 
   if (!data) return <div style={{ padding: '2rem', color: '#71717a' }}>Loading overnight data…</div>

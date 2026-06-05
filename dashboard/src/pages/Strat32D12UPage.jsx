@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import { fmt$ } from '../utils'
+import { fetchJson, fmt$ } from '../utils'
 
 const EXCLUDE = ['TLT', 'IEF', 'BND', 'USTTENT', 'VIX']
 
@@ -8,8 +8,8 @@ export default function Strat32D12UPage() {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}strat_data.json`)
-      .then(r => r.json()).then(setData).catch(console.error)
+    fetchJson(`${import.meta.env.BASE_URL}strat_data.json`)
+      .then(setData).catch(console.error)
   }, [])
 
   if (!data) return <div className="main"><p>Loading...</p></div>

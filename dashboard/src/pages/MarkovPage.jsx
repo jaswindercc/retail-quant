@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { ResponsiveContainer, ComposedChart, Area, Line, XAxis, YAxis, Tooltip, CartesianGrid, ReferenceLine } from 'recharts'
+import { fetchJson } from '../utils'
 
 export default function MarkovPage() {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}markov_data.json`)
-      .then(r => r.json())
+    fetchJson(`${import.meta.env.BASE_URL}markov_data.json`)
       .then(setData)
       .catch(() => setData({ error: true }))
   }, [])

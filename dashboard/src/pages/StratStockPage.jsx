@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, NavLink } from 'react-router-dom'
-import { fmt$ } from '../utils'
+import { fetchJson, fmt$ } from '../utils'
 
 const COMBO_INFO = {
   '2D-1-2U': { name: '2D-1-2U Reversal', type: 'Reversal', dir: 'LONG' },
@@ -72,8 +72,7 @@ export default function StratStockPage() {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}strat_data.json`)
-      .then(r => r.json())
+    fetchJson(`${import.meta.env.BASE_URL}strat_data.json`)
       .then(setData)
   }, [])
 

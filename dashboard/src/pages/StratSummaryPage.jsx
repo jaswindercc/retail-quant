@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import { buildEquityCurve, buildMonthlyReturns, fmt$ } from '../utils'
+import { fetchJson, buildEquityCurve, buildMonthlyReturns, fmt$ } from '../utils'
 import EquityChart from '../components/EquityChart'
 import MonthlyChart from '../components/MonthlyChart'
 
@@ -50,8 +50,7 @@ export default function StratSummaryPage() {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}strat_data.json`)
-      .then(r => r.json())
+    fetchJson(`${import.meta.env.BASE_URL}strat_data.json`)
       .then(setData)
   }, [])
 

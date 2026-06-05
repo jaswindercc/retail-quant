@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { fetchJson } from '../utils'
 
 export default function SimBacktest6Page() {
   const [data, setData] = useState(null)
@@ -8,7 +9,7 @@ export default function SimBacktest6Page() {
 
   useEffect(() => {
     const base = import.meta.env.BASE_URL
-    fetch(`${base}sim_backtest6_data.json`).then(r => r.ok ? r.json() : null).then(setData).catch(() => {})
+    fetchJson(`${base}sim_backtest6_data.json`).then(setData).catch(() => {})
   }, [])
 
   const trades = data?.trades || []
