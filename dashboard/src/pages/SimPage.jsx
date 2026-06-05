@@ -17,7 +17,10 @@ export default function SimPage() {
 
   useEffect(() => { fetchData() }, [])
 
+  const isDev = import.meta.env.DEV
+
   const handleRefresh = async () => {
+    if (!isDev) { setRefreshMsg('❌ Refresh only works in local dev mode'); return }
     setRefreshing(true)
     setRefreshMsg(null)
     try {
@@ -30,7 +33,7 @@ export default function SimPage() {
         setRefreshMsg(`❌ ${json.error}`)
       }
     } catch (e) {
-      setRefreshMsg(`❌ ${e.message} (only works in dev)`)
+      setRefreshMsg(`❌ ${e.message}`)
     }
     setRefreshing(false)
   }
@@ -56,13 +59,13 @@ export default function SimPage() {
 
       {/* Refresh button + last updated */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-        <button
+        {isDev && <button
           onClick={handleRefresh}
           disabled={refreshing}
           style={{ background: '#2563eb', color: '#fff', border: 'none', borderRadius: 6, padding: '8px 16px', cursor: refreshing ? 'wait' : 'pointer', fontWeight: 600, fontSize: '0.85rem', opacity: refreshing ? 0.6 : 1 }}
         >
           {refreshing ? '⏳ Syncing...' : '🔄 Sync from Google Sheet'}
-        </button>
+        </button>}
         <span style={{ fontSize: '0.8rem', color: '#888' }}>Last updated: {lastUpdated}</span>
         {refreshMsg && <span style={{ fontSize: '0.8rem', color: refreshMsg.startsWith('✅') ? '#4ade80' : '#f87171' }}>{refreshMsg}</span>}
       </div>
