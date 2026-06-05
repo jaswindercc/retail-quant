@@ -287,13 +287,30 @@ per_stock = {}
 for t in trades:
     per_stock.setdefault(t['stock'], []).append(t)
 
+# Compute buy & hold for each stock over backtest period
+first_trade_date = trades[0]['entryDate'] if trades else None
+last_trade_date = trades[-1]['exitDate'] if trades else None
+buy_hold = {}
+if first_trade_date and last_trade_date:
+    for name, df in stock_dfs.items():
+        df_ind = add_indicators(df)
+        df_ind['date_str'] = df_ind['Date'].dt.strftime('%Y-%m-%d')
+        mask = (df_ind['date_str'] >= first_trade_date) & (df_ind['date_str'] <= last_trade_date)
+        sub = df_ind.loc[mask]
+        if len(sub) >= 2:
+            start_price = sub.iloc[0]['Close']
+            end_price = sub.iloc[-1]['Close']
+            ret_pct = ((end_price - start_price) / start_price) * 100
+            buy_hold[name] = {'startPrice': round(start_price, 2), 'endPrice': round(end_price, 2), 'returnPct': round(ret_pct, 1)}
+
 stocks_out = {}
 for name in stock_dfs:
-    stocks_out[name] = {'trades': per_stock.get(name, []), 'prices': stock_prices.get(name, [])}
+    stocks_out[name] = {'trades': per_stock.get(name, []), 'prices': stock_prices.get(name, []), 'buyHold': buy_hold.get(name, {})}
 
 all_data = {
     'stocks': stocks_out,
     'allTrades': trades,
+    'buyHold': buy_hold,
     'settings': {
         'channel': 'Donchian 20', 'trendMA': 'SMA 50',
         'slAtrMult': SL_ATR, 'trailEmaLen': 20, 'trailAtrBuf': TRAIL_ATR_BUF,
