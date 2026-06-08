@@ -143,13 +143,20 @@ export default function BreakoutV2Page() {
       stockMap[t.stock].pnlFlat += flatPnl
     }
   }
+  // Compute actual invested amount per stock from taken trades (sum of positionValue)
+  const investedMap = {}
+  if (strat) {
+    for (const r of strat.results.filter(r => r.status === 'taken')) {
+      if (!investedMap[r.stock]) investedMap[r.stock] = 0
+      investedMap[r.stock] += (r.positionValue || 0)
+    }
+  }
+
   const stockRows = Object.entries(stockMap).map(([s, v]) => {
     const bh = buyHold[s] || {}
     const mcap = marketCaps[s] || bh.marketCap || 0
-    // B&H $: equal-weight across entire universe
-    const totalUniverse = universe.total || Object.keys(buyHold).length || 1
-    const perStockAlloc = capital / totalUniverse
-    const bhDollar = bh.returnPct ? perStockAlloc * (bh.returnPct / 100) : 0
+    const invested = investedMap[s] || 0
+    const bhDollar = bh.returnPct ? invested * (bh.returnPct / 100) : 0
     return {
       symbol: s, trades: v.trades, wins: v.wins,
       wr: Math.round((v.wins / v.trades) * 100),
@@ -363,7 +370,7 @@ export default function BreakoutV2Page() {
       <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 10, padding: '1.25rem', marginBottom: '1.5rem' }}>
         <h2 style={{ color: '#e4e4e7', fontSize: 16, marginBottom: '0.5rem' }}>All Stocks — Strategy vs Buy & Hold</h2>
         <p style={{ color: '#71717a', fontSize: 12, marginBottom: '1rem' }}>
-          Fixed ${fixedRisk.toLocaleString(undefined, {maximumFractionDigits: 0})} risk/trade (no compounding). B&H = ${Math.round(capital / (universe.total || 126)).toLocaleString()} per stock held entire period.
+          Fixed ${fixedRisk.toLocaleString(undefined, {maximumFractionDigits: 0})} risk/trade (no compounding). B&H shown uses the actual amount invested in each stock across all taken trades (sum of position sizes), not an equal-weight assumption.
         </p>
         <div style={{ overflowX: 'auto', maxHeight: 500, overflowY: 'auto' }}>
           <table style={{ width: '100%', fontSize: 13, borderCollapse: 'collapse' }}>
