@@ -21,9 +21,9 @@ export default function SimPage() {
 
   const handleRefresh = async () => {
     if (!isDev) {
-      const url = 'https://github.com/jaswindercc/retail-quant/issues/new?title=Regenerate%20sim%20data&body=Triggered%20from%20site%20Sim%20page'
+      const url = 'https://github.com/jaswindercc/retail-quant/actions/workflows/regenerate_sim.yml/run?ref=main'
       window.open(url, '_blank')
-      setRefreshMsg('🔁 Opened GitHub to request regeneration (create issue to trigger).')
+      setRefreshMsg('🔁 Opened GitHub Actions — click "Run workflow" to regenerate and deploy.')
       return
     }
     setRefreshing(true)
