@@ -143,12 +143,27 @@ export default function BreakoutV2Page() {
       stockMap[t.stock].pnlFlat += flatPnl
     }
   }
-  // Compute actual invested amount per stock from taken trades (sum of positionValue)
+  // Compute peak concurrent invested amount per stock (max exposure at any time), capped at 20% of portfolio
   const investedMap = {}
+  const maxPositionPct = 0.2
   if (strat) {
-    for (const r of strat.results.filter(r => r.status === 'taken')) {
-      if (!investedMap[r.stock]) investedMap[r.stock] = 0
-      investedMap[r.stock] += (r.positionValue || 0)
+    const taken = strat.results.filter(r => r.status === 'taken')
+    const byStock = {}
+    for (const r of taken) {
+      if (!byStock[r.stock]) byStock[r.stock] = []
+      byStock[r.stock].push(r)
+    }
+    for (const [stock, trs] of Object.entries(byStock)) {
+      trs.sort((a, b) => (a.entryDate || '').localeCompare(b.entryDate || ''))
+      let active = []
+      let peak = 0
+      for (const t of trs) {
+        active = active.filter(p => p.exitDate > t.entryDate)
+        active.push(t)
+        const current = active.reduce((s, p) => s + (p.positionValue || 0), 0)
+        if (current > peak) peak = current
+      }
+      investedMap[stock] = Math.min(peak, capital * maxPositionPct)
     }
   }
 
