@@ -429,6 +429,8 @@ export default function BreakoutV2Page() {
                   <th style={{ textAlign: 'left', padding: '6px' }}>Entry</th>
                   <th style={{ textAlign: 'left', padding: '6px' }}>Exit</th>
                   <th style={{ textAlign: 'left', padding: '6px' }}>Stock</th>
+                  <th style={{ textAlign: 'right', padding: '6px' }}>Entry $</th>
+                  <th style={{ textAlign: 'right', padding: '6px' }}>Stop $</th>
                   <th style={{ textAlign: 'right', padding: '6px' }}>Shares</th>
                   <th style={{ textAlign: 'right', padding: '6px' }}>Pos $</th>
                   <th style={{ textAlign: 'right', padding: '6px' }}>R</th>
@@ -449,6 +451,8 @@ export default function BreakoutV2Page() {
                       <td style={{ padding: '5px 6px', color: '#e4e4e7', fontFamily: 'monospace', fontSize: 11 }}>{t.entryDate}</td>
                       <td style={{ padding: '5px 6px', color: '#d4d4d8', fontFamily: 'monospace', fontSize: 11 }}>{t.exitDate}</td>
                       <td style={{ padding: '5px 6px', color: '#60a5fa', fontWeight: 600 }}>{t.stock}</td>
+                      <td style={{ padding: '5px 6px', textAlign: 'right', color: '#e4e4e7' }}>${t.entryPrice.toFixed(2)}</td>
+                      <td style={{ padding: '5px 6px', textAlign: 'right', color: '#f87171' }}>${t.sl.toFixed(2)}</td>
                       <td style={{ padding: '5px 6px', textAlign: 'right', color: '#e4e4e7', fontSize: 11 }}>
                         {isSkipped ? '—' : t.shares}
                       </td>
