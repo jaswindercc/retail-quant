@@ -50,7 +50,7 @@ export default function BreakoutV2Page() {
       const maxSharesByCapital = Math.floor(currentCapital / t.entryPrice)
       if (shares > maxSharesByCapital) shares = maxSharesByCapital
       // CAP: never allocate more than maxPositionPct of current capital to one stock
-      const capSharesByPct = Math.floor((currentCapital * maxPositionPct) / t.entryPrice)
+      const capSharesByPct = Math.floor((startCapital * maxPositionPct) / t.entryPrice)
       if (shares > capSharesByPct) shares = capSharesByPct
       const positionValue = shares * t.entryPrice
       const pnlScaled = shares > 0 ? shares * t.risk * t.pnlR : 0
