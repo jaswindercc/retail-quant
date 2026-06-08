@@ -30,11 +30,24 @@ export default function BreakoutV2SP100Page() {
     let consecutiveLosses = 0, skipNext = false
     const results = []
     const equityCurve = [{ capital: startCapital, date: trades[0]?.entryDate || '' }]
+    const maxPositions = 5
+    const maxPositionPct = 0.2
+    let activePositions = []
 
     for (const t of trades) {
       if (t.exitReason === 'Open') continue
+      activePositions = activePositions.filter(p => p.exitDate > t.entryDate)
+      if (activePositions.length >= maxPositions) {
+        results.push({ ...t, status: 'skipped', shares: 0, pnlScaled: 0, capitalAtEntry: currentCapital, riskDollars: 0 })
+        equityCurve.push({ capital: currentCapital, date: t.exitDate })
+        continue
+      }
       const riskDollars = currentCapital * (riskPctVal / 100)
-      const shares = Math.floor(riskDollars / t.risk)
+      let shares = Math.floor(riskDollars / t.risk)
+      const maxSharesByCapital = Math.floor(currentCapital / t.entryPrice)
+      if (shares > maxSharesByCapital) shares = maxSharesByCapital
+      const capSharesByPct = Math.floor((currentCapital * maxPositionPct) / t.entryPrice)
+      if (shares > capSharesByPct) shares = capSharesByPct
       const pnlScaled = shares > 0 ? t.pnlR * riskDollars : 0
 
       if (skipNext) {
@@ -45,8 +58,8 @@ export default function BreakoutV2SP100Page() {
         continue
       }
 
-      results.push({ ...t, status: 'taken', shares, pnlScaled, capitalAtEntry: currentCapital, riskDollars })
-      if (shares > 0) currentCapital += pnlScaled
+      results.push({ ...t, status: 'taken', shares, pnlScaled, capitalAtEntry: currentCapital, riskDollars, exitDate: t.exitDate })
+      if (shares > 0) { currentCapital += pnlScaled; activePositions.push({ stock: t.stock, exitDate: t.exitDate }) }
       if (currentCapital > peakCapital) peakCapital = currentCapital
       const dd = peakCapital - currentCapital
       if (dd > maxDD) maxDD = dd
@@ -112,11 +125,15 @@ export default function BreakoutV2SP100Page() {
   const stockRows = Object.entries(stockMap).map(([s, v]) => {
     const bh = buyHold[s] || {}
     const mcap = marketCaps[s] || bh.marketCap || 0
+    const maxPositionPct = 0.2
+    const perStockAlloc = capital * maxPositionPct
+    const bhDollar = bh.returnPct ? perStockAlloc * (bh.returnPct / 100) : 0
     return {
       symbol: s, trades: v.trades, wins: v.wins,
       wr: ((v.wins / v.trades) * 100).toFixed(0),
       pnl: v.pnl,
       stratRetPct: capital > 0 ? ((v.pnl / capital) * 100).toFixed(1) : '0',
+      bhDollar,
       bhRetPct: bh.returnPct || 0,
       mcap,
       category: categories[s] || 'unknown',

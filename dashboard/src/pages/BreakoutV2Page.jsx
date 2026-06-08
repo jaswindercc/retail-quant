@@ -32,14 +32,26 @@ export default function BreakoutV2Page() {
     let consecutiveLosses = 0, skipNext = false
     const results = []
     const equityCurve = [{ capital: startCapital, date: trades[0]?.entryDate || '' }]
+    const maxPositions = 5
+    const maxPositionPct = 0.2 // never hold more than 20% in one stock
+    let activePositions = [] // track open positions by exitDate
 
     for (const t of trades) {
       if (t.exitReason === 'Open') continue
+      // remove closed positions relative to this trade's entry date
+      activePositions = activePositions.filter(p => p.exitDate > t.entryDate)
+      if (activePositions.length >= maxPositions) {
+        results.push({ ...t, status: 'skipped', shares: 0, pnlScaled: 0, capitalAtEntry: currentCapital, riskDollars: 0, positionValue: 0 })
+        continue
+      }
       const riskDollars = currentCapital * (riskPctVal / 100)
       let shares = Math.floor(riskDollars / t.risk)
       // CAP: position value must never exceed current capital
       const maxSharesByCapital = Math.floor(currentCapital / t.entryPrice)
       if (shares > maxSharesByCapital) shares = maxSharesByCapital
+      // CAP: never allocate more than maxPositionPct of current capital to one stock
+      const capSharesByPct = Math.floor((currentCapital * maxPositionPct) / t.entryPrice)
+      if (shares > capSharesByPct) shares = capSharesByPct
       const positionValue = shares * t.entryPrice
       const pnlScaled = shares > 0 ? shares * t.risk * t.pnlR : 0
 
@@ -51,8 +63,11 @@ export default function BreakoutV2Page() {
         continue
       }
 
-      results.push({ ...t, status: 'taken', shares, pnlScaled, capitalAtEntry: currentCapital, riskDollars, positionValue })
-      if (shares > 0) currentCapital += pnlScaled
+      results.push({ ...t, status: 'taken', shares, pnlScaled, capitalAtEntry: currentCapital, riskDollars, positionValue, exitDate: t.exitDate })
+      if (shares > 0) {
+        currentCapital += pnlScaled
+        activePositions.push({ stock: t.stock, exitDate: t.exitDate })
+      }
       if (currentCapital > peakCapital) peakCapital = currentCapital
       const dd = peakCapital - currentCapital
       if (dd > maxDD) maxDD = dd
@@ -80,12 +95,23 @@ export default function BreakoutV2Page() {
     const results = []
     const equityCurve = [{ capital: startCapital, date: trades[0]?.entryDate || '' }]
     const fixedRisk = startCapital * (riskPctVal / 100)
+    const maxPositions = 5
+    const maxPositionPct = 0.2
+    let activePositions = []
     for (const t of trades) {
       if (t.exitReason === 'Open') continue
+      activePositions = activePositions.filter(p => p.exitDate > t.entryDate)
+      if (activePositions.length >= maxPositions) {
+        results.push({ ...t, status: 'skipped', shares: 0, pnlScaled: 0, capitalAtEntry: startCapital, riskDollars: 0, positionValue: 0 })
+        continue
+      }
       const shares = Math.floor(fixedRisk / t.risk)
-      const positionValue = shares * t.entryPrice
-      const pnlScaled = shares > 0 ? shares * t.risk * t.pnlR : 0
-      results.push({ ...t, status: 'taken', shares, pnlScaled, capitalAtEntry: startCapital, riskDollars: fixedRisk, positionValue })
+      const capSharesByPct = Math.floor((startCapital * maxPositionPct) / t.entryPrice)
+      const actualShares = Math.min(shares, capSharesByPct)
+      const positionValue = actualShares * t.entryPrice
+      const pnlScaled = actualShares > 0 ? actualShares * t.risk * t.pnlR : 0
+      results.push({ ...t, status: 'taken', shares: actualShares, pnlScaled, capitalAtEntry: startCapital, riskDollars: fixedRisk, positionValue, exitDate: t.exitDate })
+      if (actualShares > 0) activePositions.push({ stock: t.stock, exitDate: t.exitDate })
       equityCurve.push({ capital: startCapital, date: t.exitDate })
     }
     const taken = results.filter(r => r.status === 'taken')
