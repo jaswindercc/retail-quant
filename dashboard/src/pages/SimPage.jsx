@@ -21,7 +21,9 @@ export default function SimPage() {
 
   const handleRefresh = async () => {
     if (!isDev) {
-      setRefreshMsg('🔁 Sim data is regenerated automatically during each Pages deploy. To refresh the live site, re-run the "Deploy Dashboard to GitHub Pages" workflow or push to main.')
+      const url = 'https://github.com/jaswindercc/retail-quant/issues/new?title=Regenerate%20sim%20data&body=Triggered%20from%20site%20Sim%20page'
+      window.open(url, '_blank')
+      setRefreshMsg('🔁 Opened GitHub to request regeneration (create issue to trigger).')
       return
     }
     setRefreshing(true)
