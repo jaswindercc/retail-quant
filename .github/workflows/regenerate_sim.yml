@@ -3,6 +3,7 @@ name: Regenerate sim data and deploy
 on:
   issues:
     types: [opened]
+  workflow_dispatch:
 
 permissions:
   contents: read
