@@ -413,7 +413,7 @@ export default function BreakoutV2Page() {
           <h2 style={{ color: '#e4e4e7', fontSize: 16, marginBottom: '1rem' }}>
             📝 Trade Log — newest first ({strat.taken.length} taken, {strat.skipped.length} skipped)
           </h2>
-          <div style={{ marginBottom: '0.75rem', display: 'flex', gap: 8, alignItems: 'center' }}>
+            <div style={{ marginBottom: '0.75rem', display: 'flex', gap: 8, alignItems: 'center' }}>
             <input placeholder="Filter by stock (e.g. AAPL)" value={tradeFilter}
               onChange={e => setTradeFilter(e.target.value)}
               style={{ background: '#0f0f1a', border: '1px solid #333', borderRadius: 6, padding: '8px 10px', color: '#e4e4e7', fontSize: 13, width: 180 }} />
@@ -421,6 +421,7 @@ export default function BreakoutV2Page() {
               style={{ padding: '8px 10px', borderRadius: 6, border: '1px solid #555', background: '#0f2a1a', color: '#e4e4e7', cursor: 'pointer' }}>Clear</button>
             <div style={{ color: '#71717a', fontSize: 13 }}>Filtering trades by symbol (case-insensitive)</div>
           </div>
+            <div style={{ color: '#71717a', fontSize: 12, marginBottom: '0.75rem' }}>Note: "Stop $" shows the initial stop price at entry (not a trailing stop).</div>
           <div style={{ overflowX: 'auto', maxHeight: 500, overflowY: 'auto' }}>
             <table style={{ width: '100%', fontSize: 12, borderCollapse: 'collapse' }}>
               <thead style={{ position: 'sticky', top: 0, background: '#1e1e2e' }}>
