@@ -20,7 +20,10 @@ export default function SimPage() {
   const isDev = import.meta.env.DEV
 
   const handleRefresh = async () => {
-    if (!isDev) { setRefreshMsg('❌ Refresh only works in local dev mode'); return }
+    if (!isDev) {
+      setRefreshMsg('🔁 Sim data is regenerated automatically during each Pages deploy. To refresh the live site, re-run the "Deploy Dashboard to GitHub Pages" workflow or push to main.')
+      return
+    }
     setRefreshing(true)
     setRefreshMsg(null)
     try {
@@ -59,13 +62,13 @@ export default function SimPage() {
 
       {/* Refresh button + last updated */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-        {isDev && <button
+        <button
           onClick={handleRefresh}
           disabled={refreshing}
           style={{ background: '#2563eb', color: '#fff', border: 'none', borderRadius: 6, padding: '8px 16px', cursor: refreshing ? 'wait' : 'pointer', fontWeight: 600, fontSize: '0.85rem', opacity: refreshing ? 0.6 : 1 }}
         >
-          {refreshing ? '⏳ Syncing...' : '🔄 Sync from Google Sheet'}
-        </button>}
+          {refreshing ? '⏳ Syncing...' : (isDev ? '🔄 Sync from Google Sheet' : '🔄 Regenerate sim data (deploy)')}
+        </button>
         <span style={{ fontSize: '0.8rem', color: '#888' }}>Last updated: {lastUpdated}</span>
         {refreshMsg && <span style={{ fontSize: '0.8rem', color: refreshMsg.startsWith('✅') ? '#4ade80' : '#f87171' }}>{refreshMsg}</span>}
       </div>

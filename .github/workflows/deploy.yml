@@ -35,6 +35,9 @@ jobs:
       - name: Generate live scanner data
         run: python scripts/scan_live.py --universe universe --lookback 3 --hh-lookback 30
 
+      - name: Generate sim data
+        run: python scripts/generate_sim_data.py || true
+
       - name: Copy data to dashboard public
         run: cp data/*.json dashboard/public/ 2>/dev/null || true
 
