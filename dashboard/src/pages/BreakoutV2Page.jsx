@@ -5,7 +5,7 @@ export default function BreakoutV2Page() {
   const [data, setData] = useState(null)
   const [capital, setCapital] = useState(40000)
   const [riskPct, setRiskPct] = useState(1)
-  const [useCompounding, setUseCompounding] = useState(true)
+  // Breakout v2: fixed-risk (no compounding)
   const [sortCol, setSortCol] = useState('pnl')
   const [sortDir, setSortDir] = useState('desc')
   const [tradeFilter, setTradeFilter] = useState('')
@@ -126,7 +126,7 @@ export default function BreakoutV2Page() {
     return { results, taken, skipped, equityCurve, finalCapital: startCapital + totalPnl, totalPnl, wins, wr: taken.length > 0 ? (wins / taken.length * 100) : 0, pf, maxDD: 0, maxDDPct: 0, maxStreak }
   }
 
-  const strat = allTrades.length > 0 ? (useCompounding ? runStrategy(allTrades, capital, riskPct) : runStrategyFlat(allTrades, capital, riskPct)) : null
+  const strat = allTrades.length > 0 ? runStrategyFlat(allTrades, capital, riskPct) : null
   const openPositions = allTrades.filter(t => t.exitReason === 'Open')
   const riskDollars = capital * riskPct / 100
 
@@ -279,10 +279,7 @@ export default function BreakoutV2Page() {
               style={{ background: '#0f0f1a', border: '1px solid #555', borderRadius: 6, padding: '10px 14px', color: '#e4e4e7', width: '100%', fontSize: 16 }} />
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <label style={{ color: '#a1a1aa', fontSize: 13, display: 'flex', alignItems: 'center', gap: 8 }}>
-              <input type="checkbox" checked={!useCompounding ? true : false} onChange={() => setUseCompounding(prev => !prev)} />
-              <span style={{ fontSize: 13, color: '#e4e4e7' }}>No compounding (fixed risk per trade)</span>
-            </label>
+            <div style={{ color: '#a1a1aa', fontSize: 13 }}>Mode: <strong style={{ color: '#e4e4e7', marginLeft: 8 }}>No compounding (fixed risk per trade)</strong></div>
           </div>
           <div>
             <label style={{ color: '#a1a1aa', fontSize: 13, display: 'block', marginBottom: 6 }}>Risk per Trade</label>
@@ -321,7 +318,7 @@ export default function BreakoutV2Page() {
       {/* ═══ EQUITY CURVE ═══ */}
       {strat && strat.equityCurve.length > 1 && (
         <div style={{ background: '#1e1e2e', border: '1px solid #333', borderRadius: 10, padding: '1.25rem', marginBottom: '1.5rem' }}>
-          <h2 style={{ color: '#e4e4e7', fontSize: 16, marginBottom: '1rem' }}>📈 Equity Curve {useCompounding ? `(compounding at ${riskPct}%)` : '(no compounding)'}</h2>
+          <h2 style={{ color: '#e4e4e7', fontSize: 16, marginBottom: '1rem' }}>📈 Equity Curve (no compounding)</h2>
           <div style={{ height: 220, position: 'relative' }}>
             <EquityMini data={strat.equityCurve} startCapital={capital} />
           </div>
