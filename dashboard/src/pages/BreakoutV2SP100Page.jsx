@@ -344,7 +344,6 @@ export default function BreakoutV2SP100Page() {
               style={{ padding: '8px 10px', borderRadius: 6, border: '1px solid #555', background: '#0f2a1a', color: '#e4e4e7', cursor: 'pointer' }}>Clear</button>
             <div style={{ color: '#71717a', fontSize: 13 }}>Filtering trades by symbol (case-insensitive)</div>
           </div>
-          <div style={{ color: '#71717a', fontSize: 12, marginBottom: '0.75rem' }}>Note: "Stop $" shows the initial stop price at entry (not a trailing stop).</div>
           <div style={{ overflowX: 'auto', maxHeight: 600, overflowY: 'auto' }}>
             <table style={{ width: '100%', fontSize: 12, borderCollapse: 'collapse' }}>
               <thead style={{ position: 'sticky', top: 0, background: '#1e1e2e' }}>
@@ -354,7 +353,7 @@ export default function BreakoutV2SP100Page() {
                   <th style={{ textAlign: 'left', padding: '6px' }}>Exit</th>
                   <th style={{ textAlign: 'left', padding: '6px' }}>Stock</th>
                   <th style={{ textAlign: 'right', padding: '6px' }}>Entry $</th>
-                  <th style={{ textAlign: 'right', padding: '6px' }}>Stop $</th>
+                  <th style={{ textAlign: 'right', padding: '6px' }}>Initial Stop $</th>
                   <th style={{ textAlign: 'right', padding: '6px' }}>R</th>
                   <th style={{ textAlign: 'right', padding: '6px' }}>P/L</th>
                   <th style={{ textAlign: 'left', padding: '6px' }}>Why</th>
