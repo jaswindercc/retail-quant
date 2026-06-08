@@ -26,6 +26,9 @@ python scripts/generate_data.py
 # Run dashboard locally
 cd dashboard && npm install && npm run dev
 
+# Restart local dashboard server
+cd dashboard && npm run dev
+
 # Run scanner (fetches live data)
 python scripts/refresh_scanner.py
 ```
