@@ -325,6 +325,37 @@ export default function BreakoutV4Page() {
         </div>
       </div>
 
+      {/* STRATEGY TRADES */}
+      {strat && (
+        <div style={{ background: '#0f1724', border: '1px solid #333', borderRadius: 10, padding: '1.25rem', marginBottom: '1.5rem' }}>
+          <h2 style={{ color: '#e4e4e7', fontSize: 16, marginBottom: '0.5rem' }}>Strategy Trades (v4) — Taken / Skipped</h2>
+          <p style={{ color: '#71717a', fontSize: 12, marginBottom: '0.75rem' }}>This table shows the actual decisions made by the ranking engine: status, score, allocated shares and scaled P/L.</p>
+          <div style={{ overflowX: 'auto', maxHeight: 420, overflowY: 'auto' }}>
+            <table style={{ width: '100%', fontSize: 13, borderCollapse: 'collapse' }}>
+              <thead style={{ position: 'sticky', top: 0, background: '#0b1220', zIndex: 1 }}>
+                <tr style={{ color: '#a1a1aa', borderBottom: '2px solid #444' }}>
+                  {['Status','Stock','Entry','Entry $','Shares','Score','Strat $'].map(h => (
+                    <th key={h} style={{ textAlign: 'left', padding: '8px', whiteSpace: 'nowrap' }}>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {strat.results.map((r, i) => (
+                  <tr key={i} style={{ borderBottom: '1px solid #172033', background: r.status === 'taken' ? '#071a0f' : '#0b0b12' }}>
+                    <td style={{ padding: '6px 8px', color: r.status === 'taken' ? '#4ade80' : '#fbbf24', fontWeight: 700 }}>{r.status}</td>
+                    <td style={{ padding: '6px 8px', color: '#e4e4e7', fontWeight: 600 }}>{r.stock}</td>
+                    <td style={{ padding: '6px 8px', color: '#9ca3af', fontFamily: 'monospace' }}>{r.entryDate}</td>
+                    <td style={{ padding: '6px 8px', textAlign: 'right', color: '#e4e4e7' }}>${(r.entryPrice || 0).toFixed(2)}</td>
+                    <td style={{ padding: '6px 8px', textAlign: 'right', color: '#e4e4e7' }}>{r.shares}</td>
+                    <td style={{ padding: '6px 8px', textAlign: 'right', color: '#60a5fa' }}>{r.score ? r.score.toFixed(4) : ''}</td>
+                    <td style={{ padding: '6px 8px', textAlign: 'right', color: r.pnlScaled >= 0 ? '#4ade80' : '#f87171', fontWeight: 700 }}>{r.pnlScaled >= 0 ? '+' : ''}${Math.round(r.pnlScaled)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
