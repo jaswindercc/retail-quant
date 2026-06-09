@@ -59,6 +59,7 @@ import RotationComparisonPage from './pages/RotationComparisonPage'
 import RotationTop3Page from './pages/RotationTop3Page'
 import BreakoutV2Page from './pages/BreakoutV2Page'
 import BreakoutV3Page from './pages/BreakoutV3Page'
+import BreakoutV4Page from './pages/BreakoutV4Page'
 // LiveStrategyPage removed — merged into SimBacktest5Page
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
@@ -385,6 +386,9 @@ export default function App() {
             <NavLink to="/breakout-v3" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: '#60a5fa', fontWeight: 600 })}>
               🚀 Breakout v3 (Compounding)
             </NavLink>
+            <NavLink to="/breakout-v4" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: '#ec4899', fontWeight: 600 })}>
+              🚀 Breakout v4 (Ranking Switcher)
+            </NavLink>
           </NavGroup>
         </div>
       </nav>
@@ -463,6 +467,7 @@ export default function App() {
           <Route path="/rotation-comparison" element={<RotationComparisonPage />} />
           <Route path="/breakout-v2" element={<BreakoutV2Page />} />
           <Route path="/breakout-v3" element={<BreakoutV3Page />} />
+          <Route path="/breakout-v4" element={<BreakoutV4Page />} />
         </Routes>
       </div>
     </div>
