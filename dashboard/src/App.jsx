@@ -59,7 +59,7 @@ import RotationComparisonPage from './pages/RotationComparisonPage'
 import RotationTop3Page from './pages/RotationTop3Page'
 import BreakoutV2Page from './pages/BreakoutV2Page'
 import BreakoutV3Page from './pages/BreakoutV3Page'
-import BreakoutV4Page from './pages/BreakoutV4Page'
+import BreakoutV5Page from './pages/BreakoutV5Page'
 // LiveStrategyPage removed — merged into SimBacktest5Page
 
 const STOCKS = ['SPY','AAPL','ADBE','AMD','BA','CRM','GOOGL','META','MSFT','NVDA','SNOW','TSLA']
@@ -194,7 +194,7 @@ export default function App() {
   const isSimRoute = location.pathname.startsWith('/sim')
   const isSwitcherRoute = location.pathname.startsWith('/strategy-switcher')
   const isResearchRoute = ['/trail-study', '/skip-analysis'].some(p => location.pathname.startsWith(p))
-  const isBreakoutsRoute = ['/breakout', '/breakout-v2'].some(p => location.pathname === p)
+  const isBreakoutsRoute = ['/breakout', '/breakout-v2', '/breakout-v3', '/breakout-v5'].some(p => location.pathname === p)
 
   return (
     <div className="app">
@@ -386,8 +386,8 @@ export default function App() {
             <NavLink to="/breakout-v3" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: '#60a5fa', fontWeight: 600 })}>
               🚀 Breakout v3 (Compounding)
             </NavLink>
-            <NavLink to="/breakout-v4" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: '#ec4899', fontWeight: 600 })}>
-              🚀 Breakout v4 (Ranking Switcher)
+            <NavLink to="/breakout-v5" end className={({isActive}) => `strategy-link sub-link ${isActive ? 'active' : ''}`} style={({isActive}) => ({ color: '#38bdf8', fontWeight: 600 })}>
+              🚀 Breakout v5 (Streak Aware)
             </NavLink>
           </NavGroup>
         </div>
@@ -467,7 +467,7 @@ export default function App() {
           <Route path="/rotation-comparison" element={<RotationComparisonPage />} />
           <Route path="/breakout-v2" element={<BreakoutV2Page />} />
           <Route path="/breakout-v3" element={<BreakoutV3Page />} />
-          <Route path="/breakout-v4" element={<BreakoutV4Page />} />
+          <Route path="/breakout-v5" element={<BreakoutV5Page />} />
         </Routes>
       </div>
     </div>
