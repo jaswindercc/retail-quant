@@ -1,1 +1,4 @@
- 
+Based on the strategy defined in this page /retail-quant/#/breakout-v2 . We need to build a matrix, 
+for each 100 stocks (top stocks in S&P 500 ) as defined on this page, we need to run this strategy and it 
+should include all the trades took in these 5 years ( since 2021 jan to today ). We need to include all the trades. 
+tell me how many total trades.  
