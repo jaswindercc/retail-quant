@@ -1,4 +1,4 @@
-Based on the strategy defined in this page /retail-quant/#/breakout-v2 . We need to build a matrix, 
-for each 100 stocks (top stocks in S&P 500 ) as defined on this page, we need to run this strategy and it 
-should include all the trades took in these 5 years ( since 2021 jan to today ). We need to include all the trades. 
-tell me how many total trades.  
+make a seperate study call it switcher-Breakdown. we use same Breakout strategy that we build so far but with a twist. So the idea is that we use all these trades but we group them in a matrix format. idea is that before taking any new trade on single day, we first check whats
+the drawdown streak and winning steak. we use point base system. for drawdown streak, we penalize the point for that stock. if the stock on that particular breakout strategy is on losing streak then we 
+penalize it. Then we pick the stock that have higher points and take that trade for that day. another rule : only 5 trades at one time. risk management 20% max allocation in one trade. initial capital (configurable) $40,000 . Make all these 
+variables configurable. Show me the metric format of how each stock got picked. The idea is to reduce dradown by picking up the best stock for this strategy.  
