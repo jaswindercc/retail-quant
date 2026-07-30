@@ -2,21 +2,16 @@
   "instruments": {
     "SPX": {
       "today": {
-        "date": "2026-07-27",
-        "close": 7413.18,
-        "sma50": 7112.74,
-        "atr": 78.22,
-        "rsi5": 33.2,
-        "vix": 18.67,
-        "score": 3,
+        "date": "2026-07-28",
+        "close": 7428.78,
+        "sma50": 7113.08,
+        "atr": 77.16,
+        "rsi5": 37.0,
+        "vix": 18.21,
+        "score": 2,
         "signals": [
           {
             "name": "VIX > SMA20",
-            "points": 1,
-            "type": "bull"
-          },
-          {
-            "name": "RSI(5) < 35",
             "points": 1,
             "type": "bull"
           },
@@ -27,34 +22,24 @@
           }
         ],
         "aboveSma50": true,
-        "entrySignal": true,
+        "entrySignal": false,
         "configs": {
           "vanilla": {
-            "status": "entered",
+            "status": "no_signal",
             "paused": false,
-            "position": {
-              "entryDate": "2026-07-27",
-              "entryPrice": 7413.18,
-              "daysHeld": 0,
-              "trailActive": false,
-              "highestClose": 7413.18,
-              "trailStop": null,
-              "currentR": 0.0,
-              "activationLevel": 7471.85
-            },
             "totalTrades": 266,
-            "totalPnl": 8196.07,
+            "totalPnl": 8239.27,
             "winRate": 56.4
           },
           "trail3d": {
-            "status": "blocked: Paused (2 losses)",
+            "status": "no_signal",
             "paused": true,
             "totalTrades": 2,
             "totalPnl": -394.47,
             "winRate": 0.0
           },
           "forever": {
-            "status": "blocked: Paused (2 losses)",
+            "status": "no_signal",
             "paused": true,
             "totalTrades": 17,
             "totalPnl": 3610.53,
@@ -3072,12 +3057,12 @@
           }
         },
         {
-          "date": "2026-07-24",
-          "close": 7411.98,
-          "sma50": 7096.1,
-          "atr": 77.3,
-          "rsi5": 32.9,
-          "vix": 18.58,
+          "date": "2026-07-27",
+          "close": 7413.18,
+          "sma50": 7096.12,
+          "atr": 78.28,
+          "rsi5": 33.0,
+          "vix": 18.67,
           "score": 7,
           "signals": [
             {
@@ -3113,14 +3098,14 @@
               "status": "entered",
               "paused": false,
               "position": {
-                "entryDate": "2026-07-24",
-                "entryPrice": 7411.98,
+                "entryDate": "2026-07-27",
+                "entryPrice": 7413.18,
                 "daysHeld": 0,
                 "trailActive": false,
-                "highestClose": 7411.98,
+                "highestClose": 7413.18,
                 "trailStop": null,
                 "currentR": 0.0,
-                "activationLevel": 7469.95
+                "activationLevel": 7471.89
               },
               "totalTrades": 265,
               "totalPnl": 8192.47,
@@ -3143,21 +3128,16 @@
           }
         },
         {
-          "date": "2026-07-27",
-          "close": 7413.18,
-          "sma50": 7112.74,
-          "atr": 78.22,
-          "rsi5": 33.2,
-          "vix": 18.67,
-          "score": 3,
+          "date": "2026-07-28",
+          "close": 7428.78,
+          "sma50": 7113.08,
+          "atr": 77.16,
+          "rsi5": 37.0,
+          "vix": 18.21,
+          "score": 2,
           "signals": [
             {
               "name": "VIX > SMA20",
-              "points": 1,
-              "type": "bull"
-            },
-            {
-              "name": "RSI(5) < 35",
               "points": 1,
               "type": "bull"
             },
@@ -3168,34 +3148,24 @@
             }
           ],
           "aboveSma50": true,
-          "entrySignal": true,
+          "entrySignal": false,
           "configs": {
             "vanilla": {
-              "status": "entered",
+              "status": "no_signal",
               "paused": false,
-              "position": {
-                "entryDate": "2026-07-27",
-                "entryPrice": 7413.18,
-                "daysHeld": 0,
-                "trailActive": false,
-                "highestClose": 7413.18,
-                "trailStop": null,
-                "currentR": 0.0,
-                "activationLevel": 7471.85
-              },
               "totalTrades": 266,
-              "totalPnl": 8196.07,
+              "totalPnl": 8239.27,
               "winRate": 56.4
             },
             "trail3d": {
-              "status": "blocked: Paused (2 losses)",
+              "status": "no_signal",
               "paused": true,
               "totalTrades": 2,
               "totalPnl": -394.47,
               "winRate": 0.0
             },
             "forever": {
-              "status": "blocked: Paused (2 losses)",
+              "status": "no_signal",
               "paused": true,
               "totalTrades": 17,
               "totalPnl": 3610.53,
@@ -3208,14 +3178,14 @@
         "vanilla": {
           "totalTrades": 266,
           "winRate": 56.4,
-          "totalPnl": 8196.07,
+          "totalPnl": 8239.27,
           "lastTrade": {
-            "entryDate": "2026-07-24",
-            "exitDate": "2026-07-27",
-            "entryPrice": 7411.98,
-            "exitPrice": 7413.18,
-            "pnl": 3.6,
-            "pnlR": 0.04,
+            "entryDate": "2026-07-27",
+            "exitDate": "2026-07-28",
+            "entryPrice": 7413.18,
+            "exitPrice": 7428.78,
+            "pnl": 46.8,
+            "pnlR": 0.47,
             "daysHeld": 1,
             "exitReason": "max_1d"
           }
@@ -3255,12 +3225,12 @@
     },
     "SPY": {
       "today": {
-        "date": "2026-07-27",
-        "close": 739.09,
-        "sma50": 699.17,
-        "atr": 8.73,
-        "rsi5": 38.6,
-        "vix": 18.67,
+        "date": "2026-07-28",
+        "close": 740.86,
+        "sma50": 699.21,
+        "atr": 8.63,
+        "rsi5": 41.9,
+        "vix": 18.21,
         "score": 2,
         "signals": [
           {
@@ -3281,7 +3251,7 @@
             "status": "no_signal",
             "paused": false,
             "totalTrades": 261,
-            "totalPnl": 7510.33,
+            "totalPnl": 7547.36,
             "winRate": 55.6
           },
           "trail3d": {
@@ -6355,12 +6325,12 @@
           }
         },
         {
-          "date": "2026-07-24",
-          "close": 738.93,
+          "date": "2026-07-27",
+          "close": 739.09,
           "sma50": 697.64,
-          "atr": 8.54,
-          "rsi5": 38.2,
-          "vix": 18.58,
+          "atr": 8.64,
+          "rsi5": 38.4,
+          "vix": 18.67,
           "score": 6,
           "signals": [
             {
@@ -6391,14 +6361,14 @@
               "status": "entered",
               "paused": false,
               "position": {
-                "entryDate": "2026-07-24",
-                "entryPrice": 738.93,
+                "entryDate": "2026-07-27",
+                "entryPrice": 739.09,
                 "daysHeld": 0,
                 "trailActive": false,
-                "highestClose": 738.93,
+                "highestClose": 739.09,
                 "trailStop": null,
                 "currentR": 0.0,
-                "activationLevel": 745.34
+                "activationLevel": 745.57
               },
               "totalTrades": 260,
               "totalPnl": 7506.65,
@@ -6421,12 +6391,12 @@
           }
         },
         {
-          "date": "2026-07-27",
-          "close": 739.09,
-          "sma50": 699.17,
-          "atr": 8.73,
-          "rsi5": 38.6,
-          "vix": 18.67,
+          "date": "2026-07-28",
+          "close": 740.86,
+          "sma50": 699.21,
+          "atr": 8.63,
+          "rsi5": 41.9,
+          "vix": 18.21,
           "score": 2,
           "signals": [
             {
@@ -6447,7 +6417,7 @@
               "status": "no_signal",
               "paused": false,
               "totalTrades": 261,
-              "totalPnl": 7510.33,
+              "totalPnl": 7547.36,
               "winRate": 55.6
             },
             "trail3d": {
@@ -6471,14 +6441,14 @@
         "vanilla": {
           "totalTrades": 261,
           "winRate": 55.6,
-          "totalPnl": 7510.33,
+          "totalPnl": 7547.36,
           "lastTrade": {
-            "entryDate": "2026-07-24",
-            "exitDate": "2026-07-27",
-            "entryPrice": 738.93,
-            "exitPrice": 739.09,
-            "pnl": 3.68,
-            "pnlR": 0.04,
+            "entryDate": "2026-07-27",
+            "exitDate": "2026-07-28",
+            "entryPrice": 739.09,
+            "exitPrice": 740.86,
+            "pnl": 40.71,
+            "pnlR": 0.41,
             "daysHeld": 1,
             "exitReason": "max_1d"
           }
@@ -6518,12 +6488,12 @@
     },
     "QQQ": {
       "today": {
-        "date": "2026-07-27",
-        "close": 682.12,
-        "sma50": 649.84,
-        "atr": 16.81,
-        "rsi5": 26.7,
-        "vix": 18.67,
+        "date": "2026-07-28",
+        "close": 675.49,
+        "sma50": 649.66,
+        "atr": 17.12,
+        "rsi5": 24.7,
+        "vix": 18.21,
         "score": 3,
         "signals": [
           {
@@ -6549,17 +6519,17 @@
             "status": "entered",
             "paused": false,
             "position": {
-              "entryDate": "2026-07-27",
-              "entryPrice": 682.12,
+              "entryDate": "2026-07-28",
+              "entryPrice": 675.49,
               "daysHeld": 0,
               "trailActive": false,
-              "highestClose": 682.12,
+              "highestClose": 675.49,
               "trailStop": null,
               "currentR": 0.0,
-              "activationLevel": 694.73
+              "activationLevel": 688.33
             },
             "totalTrades": 282,
-            "totalPnl": 8534.77,
+            "totalPnl": 8480.53,
             "winRate": 57.4
           },
           "trail3d": {
@@ -9698,13 +9668,13 @@
           }
         },
         {
-          "date": "2026-07-24",
-          "close": 684.23,
-          "sma50": 648.26,
-          "atr": 16.32,
-          "rsi5": 27.5,
-          "vix": 18.58,
-          "score": 8,
+          "date": "2026-07-27",
+          "close": 682.12,
+          "sma50": 648.22,
+          "atr": 16.78,
+          "rsi5": 26.9,
+          "vix": 18.67,
+          "score": 7,
           "signals": [
             {
               "name": "VIX Panic",
@@ -9716,72 +9686,6 @@
               "points": 2,
               "type": "bull"
             },
-            {
-              "name": "VIX > SMA20",
-              "points": 1,
-              "type": "bull"
-            },
-            {
-              "name": "RSI(5) < 35",
-              "points": 1,
-              "type": "bull"
-            },
-            {
-              "name": "Close Near Low",
-              "points": 1,
-              "type": "bull"
-            },
-            {
-              "name": "Above SMA200",
-              "points": 1,
-              "type": "bull"
-            }
-          ],
-          "aboveSma50": true,
-          "entrySignal": true,
-          "configs": {
-            "vanilla": {
-              "status": "entered",
-              "paused": false,
-              "position": {
-                "entryDate": "2026-07-24",
-                "entryPrice": 684.23,
-                "daysHeld": 0,
-                "trailActive": false,
-                "highestClose": 684.23,
-                "trailStop": null,
-                "currentR": 0.0,
-                "activationLevel": 696.47
-              },
-              "totalTrades": 281,
-              "totalPnl": 8560.09,
-              "winRate": 57.7
-            },
-            "trail3d": {
-              "status": "blocked: Paused (2 losses)",
-              "paused": true,
-              "totalTrades": 10,
-              "totalPnl": 1945.66,
-              "winRate": 80.0
-            },
-            "forever": {
-              "status": "blocked: Paused (2 losses)",
-              "paused": true,
-              "totalTrades": 11,
-              "totalPnl": 1781.79,
-              "winRate": 54.5
-            }
-          }
-        },
-        {
-          "date": "2026-07-27",
-          "close": 682.12,
-          "sma50": 649.84,
-          "atr": 16.81,
-          "rsi5": 26.7,
-          "vix": 18.67,
-          "score": 3,
-          "signals": [
             {
               "name": "VIX > SMA20",
               "points": 1,
@@ -9812,10 +9716,71 @@
                 "highestClose": 682.12,
                 "trailStop": null,
                 "currentR": 0.0,
-                "activationLevel": 694.73
+                "activationLevel": 694.71
+              },
+              "totalTrades": 281,
+              "totalPnl": 8560.09,
+              "winRate": 57.7
+            },
+            "trail3d": {
+              "status": "blocked: Paused (2 losses)",
+              "paused": true,
+              "totalTrades": 10,
+              "totalPnl": 1945.66,
+              "winRate": 80.0
+            },
+            "forever": {
+              "status": "blocked: Paused (2 losses)",
+              "paused": true,
+              "totalTrades": 11,
+              "totalPnl": 1781.79,
+              "winRate": 54.5
+            }
+          }
+        },
+        {
+          "date": "2026-07-28",
+          "close": 675.49,
+          "sma50": 649.66,
+          "atr": 17.12,
+          "rsi5": 24.7,
+          "vix": 18.21,
+          "score": 3,
+          "signals": [
+            {
+              "name": "VIX > SMA20",
+              "points": 1,
+              "type": "bull"
+            },
+            {
+              "name": "RSI(5) < 35",
+              "points": 1,
+              "type": "bull"
+            },
+            {
+              "name": "Above SMA200",
+              "points": 1,
+              "type": "bull"
+            }
+          ],
+          "aboveSma50": true,
+          "entrySignal": true,
+          "configs": {
+            "vanilla": {
+              "status": "entered",
+              "paused": false,
+              "position": {
+                "entryDate": "2026-07-28",
+                "entryPrice": 675.49,
+                "daysHeld": 0,
+                "trailActive": false,
+                "highestClose": 675.49,
+                "trailStop": null,
+                "currentR": 0.0,
+                "activationLevel": 688.33
               },
               "totalTrades": 282,
-              "totalPnl": 8534.77,
+              "totalPnl": 8480.53,
               "winRate": 57.4
             },
             "trail3d": {
@@ -9839,14 +9804,14 @@
         "vanilla": {
           "totalTrades": 282,
           "winRate": 57.4,
-          "totalPnl": 8534.77,
+          "totalPnl": 8480.53,
           "lastTrade": {
-            "entryDate": "2026-07-24",
-            "exitDate": "2026-07-27",
-            "entryPrice": 684.23,
-            "exitPrice": 682.12,
-            "pnl": -25.32,
-            "pnlR": -0.25,
+            "entryDate": "2026-07-27",
+            "exitDate": "2026-07-28",
+            "entryPrice": 682.12,
+            "exitPrice": 675.49,
+            "pnl": -79.56,
+            "pnlR": -0.8,
             "daysHeld": 1,
             "exitReason": "max_1d"
           }
@@ -9885,7 +9850,7 @@
       "label": "QQQ ETF"
     }
   },
-  "lastFetched": "2026-07-29 05:10 PM ET",
+  "lastFetched": "2026-07-30 05:20 PM ET",
   "nextRefresh": "3:20 PM ET (Mon-Fri)",
   "fetchSuccess": true
 }
