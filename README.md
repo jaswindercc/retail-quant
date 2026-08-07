@@ -1,4 +1,4 @@
-# 📈 retail-quant
+# 📈 retail-quant.
 
 **Open-source quantitative trading system built by a retail trader, for retail traders.**
 
